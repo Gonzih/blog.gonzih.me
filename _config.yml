@@ -15,17 +15,16 @@ permalink:   /:categories/:title
 paginate:    20
 #limit_posts: 20
 
-title:         Your Site's Title Here
-description:   You Site's Description Here
-base:          http://www.domain.com
-author:        Your Name Here
-email:         me@domain.com
+title:         Gonzih's Blog
+description:   Ruby/Rails/Linux
+base:          http://gonzih.github.com
+author:        Max Gonzih
+email:         iam@gonzih.org
 
-disqus_id:     disqus
+disqus_id:     gonzihsblog
 google_analytics:  UA-XXXXXX-1
 redirects:   true
 
-exclude:    
+exclude:
 - ./tasks
 - README.textile
-

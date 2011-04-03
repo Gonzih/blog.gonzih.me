@@ -9,7 +9,7 @@ title: The Home Page
       {% for post in paginator.posts %}
 
       <div class="teaser clearfix">
-        {% if (post.image) %}<div class="image"><a href="{{ post.url }}" title="{{ post.title }}"><img src="{{ post.image }}" /></a></div>{% endif %}
+        {% if (post.image) %}<div class="image"><a href="{{ post.url }}" title="{{ post.title }}"><img src="{{ post.thumb }}" /></a></div>{% endif %}
         <h2><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
         <div class="meta"><span class="timeago">{{ post.date | time_ago }}</span>{{ post.tags | tag_links }}</div>
         <div class="description">{{ post.description }}</div>
@@ -22,9 +22,4 @@ title: The Home Page
   </section>
 </article>
 
-<aside>
-  <div class="inside">
-    <h3>Tag Cloud</h3>
-    <div class="text tag-cloud">{{ site.tags | tag_cloud }}</div>
-  </div>
-</aside>
+{% include tags.html %}

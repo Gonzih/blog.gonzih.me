@@ -21,8 +21,14 @@ p       { margin: 4px 0 12px; }
 /* HEADER */
 
 header          { position: relative; }
-header .description { margin: 8px 0 12px; font-size: 1.2em; }
+header .description { margin: 8px 2px 12px; font-size: 1.2em; }
 header .left      { width: 600px; }
+header .left img {
+  float: left;
+  padding-right: 10px;
+  position: relative;
+  top: -15px;
+}
 header .right     { position: absolute; bottom: 12px; right: 0; }
 
 nav a           { font-size: 1.6em; text-decoration: none; margin-left: 12px; }
