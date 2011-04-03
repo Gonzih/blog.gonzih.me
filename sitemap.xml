@@ -1,20 +1,53 @@
----
-layout: nil
----
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	{% for page in site.pages %}{% if page.refresh_to_post_id == null %}
+	
 		<url>
-			<loc>{{ site.base }}{{ page.url }}</loc>
-			<lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+			<loc>http://gonzih.github.com/index.html</loc>
+			<lastmod>2011-04-03T22:30:31+03:00</lastmod>
 			<changefreq>weekly</changefreq>
 		</url>
-	{% endif %}{% endfor %}
-	{% for post in site.posts %}
+	
+		<url>
+			<loc>http://gonzih.github.com/atom.xml</loc>
+			<lastmod>2011-04-03T22:30:31+03:00</lastmod>
+			<changefreq>weekly</changefreq>
+		</url>
+	
+		<url>
+			<loc>http://gonzih.github.com/sitemap.xml</loc>
+			<lastmod>2011-04-03T22:30:31+03:00</lastmod>
+			<changefreq>weekly</changefreq>
+		</url>
+	
+		<url>
+			<loc>http://gonzih.github.com/404.html</loc>
+			<lastmod>2011-04-03T22:30:31+03:00</lastmod>
+			<changefreq>weekly</changefreq>
+		</url>
+	
+		<url>
+			<loc>http://gonzih.github.com/tags/jekyll/index.html</loc>
+			<lastmod>2011-04-03T22:30:31+03:00</lastmod>
+			<changefreq>weekly</changefreq>
+		</url>
+	
+		<url>
+			<loc>http://gonzih.github.com/tags/index.html</loc>
+			<lastmod>2011-04-03T22:30:31+03:00</lastmod>
+			<changefreq>weekly</changefreq>
+		</url>
+	
+	
 	<url>
-		<loc>{{ site.base }}{{ post.url }}</loc>
-		<lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+		<loc>http://gonzih.github.com/testing</loc>
+		<lastmod>2011-04-03T00:00:00+03:00</lastmod>
 		<changefreq>monthly</changefreq>
 	</url>
-	{% endfor %}
+	
+	<url>
+		<loc>http://gonzih.github.com/first-post</loc>
+		<lastmod>2011-01-02T00:00:00+02:00</lastmod>
+		<changefreq>monthly</changefreq>
+	</url>
+	
 </urlset>
