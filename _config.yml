@@ -1,0 +1,30 @@
+safe:        false
+auto:        true
+server:      false
+server_port: 4000
+
+source:      .
+destination: ./_site
+plugins:     ./_plugins
+
+future:      true
+lsi:         true
+pygments:    false
+markdown:    engine
+permalink:   /:categories/:title
+paginate:    20
+#limit_posts: 20
+
+title:         Gonzih's Blog
+description:   Ruby/Rails/Linux
+base:          http://gonzih.github.com
+author:        Max Gonzih
+email:         iam@gonzih.org
+
+disqus_id:     gonzihsblog
+google_analytics:  UA-XXXXXX-1
+redirects:   true
+
+exclude:
+- ./tasks
+- README.textile

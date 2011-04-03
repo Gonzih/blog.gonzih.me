@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
 
-    <title>Everything tagged with: блог | Gonzih's Blog</title>
+    <title>{{ page.title }} | {{ site.title }}</title>
 
     <meta charset="utf-8">
 
-    <meta property="og:site_name" content="Gonzih's Blog"/>
-    <meta property="og:title" content="Everything tagged with: блог"/>
-    <meta property="og:description" content="Tag: блог"/>
-    
+    <meta property="og:site_name" content="{{ site.title }}"/>
+    <meta property="og:title" content="{{ page.title }}"/>
+    {% if (page.description) %}<meta property="og:description" content="{{ page.description }}"/>{% endif %}
+    {% if (page.images) %}<meta property="og:image" content="{{ page.images[0] | format_teaser_image }}"/>{% endif %}
 
     <link rel="Shortcut Icon" type="image/ico" href="/images/favicon.png">
     <link rel="stylesheet" href="/css/reset.css" type="text/css" media="screen">
@@ -23,13 +23,13 @@
     <!--[if IE 7]><link rel="stylesheet" href="css/ie/ie7.css" type="text/css" media="screen"><![endif]-->
     <!--[if lt IE 7]><link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen"><![endif]-->
 
-    <link href="/atom.xml" rel="alternate" title="Gonzih's Blog" type="application/atom+xml" />
+    <link href="/atom.xml" rel="alternate" title="{{ site.title }}" type="application/atom+xml" />
 
-    
+    {% if (site.google_analytics) %}
     <script type="text/javascript">
 
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-XXXXXX-1']);
+      _gaq.push(['_setAccount', '{{ site.google_analytics }}']);
       _gaq.push(['_trackPageview']);
 
       (function() {
@@ -39,7 +39,7 @@
       })();
 
     </script>
-    
+    {% endif %}
 
   </head>
   <body>
@@ -50,8 +50,8 @@
           <!--
             <img width="40px" src="https://secure.gravatar.com/avatar/d0fce0d0c982f0ed2301ce51f7715153" >
           -->
-            <h1>Gonzih's Blog</h1>
-            <div class="description">Ruby/Rails/Linux</div>
+            <h1>{{ site.title }}</h1>
+            <div class="description">{{ site.description }}</div>
           </div>
           <div class="right">
             <nav>
@@ -60,36 +60,10 @@
           </div>
         </div>
       </header>
-      <article>
-  <section>
-    <div class="inside">
-
-      
-
-      <div class="teaser clearfix">
-        <div class="image"><a href="/first-post" title="Первый пост"><img src="http://farm6.static.flickr.com/5060/5430839165_8f8df50f0a.jpg" /></a></div>
-        <h2><a href="/first-post" title="Первый пост">Первый пост</a></h2>
-        <div class="meta"><span class="timeago">13 weeks ago</span> <a href="/tags/jekyll/" class="tag-link">#jekyll</a>  <a href="/tags//" class="tag-link">#блог</a> </div>
-        <div class="description">Пур пур пур</div>
-        <div class="read-more"><a href="/first-post" title="Первый пост">Read more... »</a></div>
-      </div>
-
-      
-
-    </div>
-  </section>
-</article>
-
-<aside>
-  <div class="inside">
-    <h3>Tag Cloud</h3>
-    <div class="text tag-cloud"><a href="/tags/jekyll/" title="Pages tagged jekyll" style="font-size: 200%" rel=\"tag\">jekyll</a> <a href="/tags//" title="Pages tagged блог" style="font-size: 100%" rel=\"tag\">блог</a> </div>
-  </div>
-</aside>
-
+      {{ content }}
       <footer>
         <div class="inside">
-          © 2011 Gonzih's Blog
+          © {{ site.time | date:'%Y' }} {{ site.title }}
         </div>
       </footer>
     </div>

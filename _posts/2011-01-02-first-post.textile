@@ -1,0 +1,11 @@
+---
+layout: post
+title: Первый пост
+description: Пур пур пур
+tags:
+- jekyll
+- блог
+image: http://farm6.static.flickr.com/5060/5430839165_8f8df50f0a.jpg
+thumb: http://farm6.static.flickr.com/5060/5430839165_8f8df50f0a.jpg
+---
+Блог собран на основе Jekyll
