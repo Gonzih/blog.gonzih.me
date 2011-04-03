@@ -39,26 +39,22 @@ layout: default
 </article>
 
 <aside>
-
   {% if site.related_posts.length != 0 %}
-
-  <div class="inside">
-    <h3>Similar Posts</h3>
-
-    {% for post in site.related_posts limit:3 %}
-      <div class="related-post">
-        <h4 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h4>
-        <div class="meta"><span class="timeago">{{ post.date | time_ago }}</span>{{ post.tags | tag_links }}</div>
-      </div>
-    {% endfor %}
-
-  </div>
-
+    <div class="inside">
+      <h3>Similar Posts</h3>
+        {% for post in site.related_posts limit:5 %}
+          {% if post.url != page.url %}
+            <div class="related-post">
+              <h4 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h4>
+              <div class="meta">
+                <span class="timeago">{{ post.date | time_ago }}</span>
+                {{ post.tags | tag_links }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+    </div>
   {% endif %}
 
-  <div class="inside">
-    <h3>Tag Cloud</h3>
-    <div class="text tag-cloud">{{ site.tags | tag_cloud }}</div>
-  </div>
-
+  {% include tags.html %}
 </aside>

@@ -1,0 +1,8 @@
+---
+layout: post
+title: Второй пост
+description: Пур
+tags:
+- jekyll
+---
+Блог собран на основе Jekyll rrr
