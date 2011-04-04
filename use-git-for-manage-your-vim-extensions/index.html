@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
 
-    <title>Первый пост | Gonzih's Blog</title>
+    <title>Использование git для управление vim плагинами | Gonzih's Blog</title>
 
     <meta charset="utf-8">
 
     <meta property="og:site_name" content="Gonzih's Blog"/>
-    <meta property="og:title" content="Первый пост"/>
-    <meta property="og:description" content="Первый постег."/>
+    <meta property="og:title" content="Использование git для управление vim плагинами"/>
+    <meta property="og:description" content="git submodule && vim pathogen"/>
     
 
     <link rel="Shortcut Icon" type="image/ico" href="/images/favicon.png">
@@ -67,15 +67,82 @@
   <section>
     <div class="inside">
 
-      <h2>Первый пост</h2>
+      <h2>Использование git для управление vim плагинами</h2>
 
-      <div class="post-image"><img src="/images/blog/first-post/jekyll.png" /></div>
+      <div class="post-image"><img src="/images/blog/git-submodule-and-vim-pathogen/main.png" /></div>
 
-      <div class="text"><p>Блог собран на основе Jekyll. Вообще впечатлиния от использования Jekyll очень положительные. Тут вам и куча языков разметки, использование Liqiud, расширяемость, тэги, пейнджинг, sitemap, atom, а в итоге получаем простой набор html страничек которые можно хостить где угодно.<br />
-Этот блог к примеру висит на гитхабе. Гитхаб умеет сразу собирать ваш сайт на своей стороне из jekyll&#8217;а после каждого git push, только вот плагины он не подхватывает к сожалению. Поэтому репо исходников отдельно, рейк таск для деплоя и вперёд и с песнями.<br />
-Писать с нуля все было лень, за основу взял такую клевую штуку как <a href="https://github.com/pelosi/jekylls-first-potion">Jekyll First Potion</a> (там есть неплохой плагин для тэгов).</p>
-<p><a href="https://github.com/Gonzih/blog-source">Source</a><br />
-<a href="https://github.com/Gonzih/gonzih.github.com">Blog Repo</a></p></div>
+      <div class="text"><p>
+Пост о том как держать свои плагины в актуальной версии, обновлять их с комфортом и все это с чудесными git && github.
+<br />
+<br />
+Нам понадобятся:
+  <ul>
+    <li>
+      vim с установленым плагином <a href="https://github.com/tpope/vim-pathogen">pathogen</a>
+    </li>
+    <li>
+      git
+    </li>
+    <li>
+      github или другой git хостинг аккаунт
+    </li>
+    <li>
+      руки 2 шт
+    </li>
+    <li>
+      голова > 1 шт
+    </li>
+  </ul>
+<br />
+Приступим.
+<br />
+<br />
+Что такое pathogen? Pathogen позволяет устанавливать плагины в bundle/ директорию.
+<br />В vimrc добавляем
+<div class="highlight"><pre><code class="vim">  <span class="k">call</span> pathogen#runtime_append_all_bundles<span class="p">()</span>
+</code></pre>
+</div>
+<br />
+Всё, pathogen готов к использованию. Теперь при запуске vim/gvim pathogen будет рекурсивно подгружать содержимое bundle как плагины.
+<br />
+<br />
+Каджый плагин будем устанавливать в виде <a href="https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial" />git submodule</a>. Субмодули в гит по сути хранят в себе адрес репозитория и указатель на комит на котором на данный момент находиться субмодуль.
+После выпонения git submodule init исходные коды всех субмодулей будут инициализированы и вытянуты из репозиториев.
+git submodule update - обновляет вершину субрепозитория.
+<br />
+<br />
+Добавление нового плагина
+<div class="highlight"><pre><code class="sh">  git submodule add https://github.com/foo.git bundle/foo
+  git ci -m <span class="s1">&#39;added new plugin&#39;</span>
+  git push
+  git submodule init
+</code></pre>
+</div>
+<br />
+Для обновления плагинов я использую следующий скрипт
+<div class="highlight"><pre><code class="sh">  <span class="c">#!/bin/bash</span>
+  git pull
+  git submodule init
+  git submodule update
+  git submodule foreach git pull origin master
+  git submodule foreach git checkout master
+  git ci -a -m <span class="s1">&#39;Update submodules to latest versions&#39;</span>
+  git push
+</code></pre>
+</div>
+<br />
+С удалением плагинов дела обстоят труднее.
+<br />
+Сначала следует удалить всю информацию о субмодуле из .gitmodules && .git/config
+<div class="highlight"><pre><code class="sh">  <span class="c"># а затем удалить директорию с плагином из git</span>
+  git rm --cached bundle/foo <span class="c">#обязательно без закрывающего слеша</span>
+  git ci -a -m <span class="s1">&#39;remove foo&#39;</span>
+  rm bundle/foo
+</code></pre>
+</div>
+<br />
+Вот и все! Теперь ложим все это дело в гит и радуемся!
+</div>
 
       
 
@@ -85,8 +152,8 @@
            var disqus_shortname = 'gonzihsblog'; // required: replace example with your forum shortname
 
            // The following are highly recommended additional parameters. Remove the slashes in front to use.
-           var disqus_identifier = '/first-post';
-           var disqus_url = 'http://gonzih.github.com/first-post/index.html';
+           var disqus_identifier = '/use-git-for-manage-your-vim-extensions';
+           var disqus_url = 'http://gonzih.github.com/use-git-for-manage-your-vim-extensions/index.html';
 
            (function() {
               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -111,10 +178,10 @@
         
           
             <div class="related-post">
-              <h4 class="title"><a href="/use-git-for-manage-your-vim-extensions">Использование git для управление vim плагинами</a></h4>
+              <h4 class="title"><a href="/first-post">Первый пост</a></h4>
               <div class="meta">
                 <span class="timeago">14 hours ago</span>
-                 <a href="/tags/git/" class="tag-link">#git</a>  <a href="/tags/github/" class="tag-link">#github</a>  <a href="/tags/pathogen/" class="tag-link">#pathogen</a>  <a href="/tags/submodule/" class="tag-link">#submodule</a>  <a href="/tags/vim/" class="tag-link">#vim</a> 
+                 <a href="/tags/blog/" class="tag-link">#blog</a>  <a href="/tags/github/" class="tag-link">#github</a>  <a href="/tags/github-pages/" class="tag-link">#github pages</a>  <a href="/tags/jekyll/" class="tag-link">#jekyll</a> 
               </div>
             </div>
           

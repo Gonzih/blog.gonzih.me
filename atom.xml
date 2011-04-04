@@ -4,13 +4,92 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T12:37:31+03:00</updated>
+ <updated>2011-04-04T14:32:30+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
    <email>iam@gonzih.org</email>
  </author>
 
+ 
+ <entry>
+   <title>Использование git для управление vim плагинами</title>
+   <link href="http://gonzih.github.com/use-git-for-manage-your-vim-extensions"/>
+   <updated>2011-04-04T00:00:00+03:00</updated>
+   <id>http://gonzih.github.com/use-git-for-manage-your-vim-extensions</id>
+   <content type="html">&lt;p&gt;
+Пост о том как держать свои плагины в актуальной версии, обновлять их с комфортом и все это с чудесными git &amp;&amp; github.
+&lt;br /&gt;
+&lt;br /&gt;
+Нам понадобятся:
+  &lt;ul&gt;
+    &lt;li&gt;
+      vim с установленым плагином &lt;a href=&quot;https://github.com/tpope/vim-pathogen&quot;&gt;pathogen&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      git
+    &lt;/li&gt;
+    &lt;li&gt;
+      github или другой git хостинг аккаунт
+    &lt;/li&gt;
+    &lt;li&gt;
+      руки 2 шт
+    &lt;/li&gt;
+    &lt;li&gt;
+      голова &gt; 1 шт
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;br /&gt;
+Приступим.
+&lt;br /&gt;
+&lt;br /&gt;
+Что такое pathogen? Pathogen позволяет устанавливать плагины в bundle/ директорию.
+&lt;br /&gt;В vimrc добавляем
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;vim&quot;&gt;  &lt;span class=&quot;k&quot;&gt;call&lt;/span&gt; pathogen#runtime_append_all_bundles&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+Всё, pathogen готов к использованию. Теперь при запуске vim/gvim pathogen будет рекурсивно подгружать содержимое bundle как плагины.
+&lt;br /&gt;
+&lt;br /&gt;
+Каджый плагин будем устанавливать в виде &lt;a href=&quot;https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial&quot; /&gt;git submodule&lt;/a&gt;. Субмодули в гит по сути хранят в себе адрес репозитория и указатель на комит на котором на данный момент находиться субмодуль.
+После выпонения git submodule init исходные коды всех субмодулей будут инициализированы и вытянуты из репозиториев.
+git submodule update - обновляет вершину субрепозитория.
+&lt;br /&gt;
+&lt;br /&gt;
+Добавление нового плагина
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  git submodule add https://github.com/foo.git bundle/foo
+  git ci -m &lt;span class=&quot;s1&quot;&gt;&amp;#39;added new plugin&amp;#39;&lt;/span&gt;
+  git push
+  git submodule init
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+Для обновления плагинов я использую следующий скрипт
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+  git pull
+  git submodule init
+  git submodule update
+  git submodule foreach git pull origin master
+  git submodule foreach git checkout master
+  git ci -a -m &lt;span class=&quot;s1&quot;&gt;&amp;#39;Update submodules to latest versions&amp;#39;&lt;/span&gt;
+  git push
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+С удалением плагинов дела обстоят труднее.
+&lt;br /&gt;
+Сначала следует удалить всю информацию о субмодуле из .gitmodules &amp;&amp; .git/config
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;c&quot;&gt;# а затем удалить директорию с плагином из git&lt;/span&gt;
+  git rm --cached bundle/foo &lt;span class=&quot;c&quot;&gt;#обязательно без закрывающего слеша&lt;/span&gt;
+  git ci -a -m &lt;span class=&quot;s1&quot;&gt;&amp;#39;remove foo&amp;#39;&lt;/span&gt;
+  rm bundle/foo
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;br /&gt;
+Вот и все! Теперь ложим все это дело в гит и радуемся!
+</content>
+ </entry>
  
  <entry>
    <title>Первый пост</title>
