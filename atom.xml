@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T10:53:53+03:00</updated>
+ <updated>2011-04-04T12:37:31+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Первый пост</title>
    <link href="http://gonzih.github.com/first-post"/>
-   <updated>2011-01-02T00:00:00+02:00</updated>
+   <updated>2011-04-04T00:00:00+03:00</updated>
    <id>http://gonzih.github.com/first-post</id>
    <content type="html">&lt;p&gt;Блог собран на основе Jekyll. Вообще впечатлиния от использования Jekyll очень положительные. Тут вам и куча языков разметки, использование Liqiud, расширяемость, тэги, пейнджинг, sitemap, atom, а в итоге получаем простой набор html страничек которые можно хостить где угодно.&lt;br /&gt;
 Этот блог к примеру висит на гитхабе. Гитхаб умеет сразу собирать ваш сайт на своей стороне из jekyll&amp;#8217;а после каждого git push, только вот плагины он не подхватывает к сожалению. Поэтому репо исходников отдельно, рейк таск для деплоя и вперёд и с песнями.&lt;br /&gt;
