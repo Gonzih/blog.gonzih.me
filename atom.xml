@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T14:36:14+03:00</updated>
+ <updated>2011-04-04T15:27:48+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -87,7 +87,7 @@ git submodule update - обновляет вершину субрепозито�
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;br /&gt;
-Вот и все! Теперь ложим все это дело в гит и радуемся!
+Вот и все! Теперь пушим все это дело на github и радуемся!
 </content>
  </entry>
  
