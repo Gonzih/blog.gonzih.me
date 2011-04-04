@@ -4,7 +4,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 
 /* Site-wide properties ======================================================== */
 body {
-  font: normal normal 10px/10px Tahoma, Arial, Helvetica, Verdana, sans-serif;
+  font: normal normal 10px/20px Tahoma, Arial, Helvetica, Verdana, sans-serif;
   background: black;
   color: white;
 }

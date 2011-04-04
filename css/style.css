@@ -10,7 +10,7 @@ aside     {
   border-top: 1px solid #505050;
   -moz-border-radius: 5px;
   background: -webkit-gradient(linear, left top, left bottom, from(#242424), to(#939393));
-  background: -moz-linear-gradient(top, #242424, #2d2d2d); }
+  background: -moz-linear-gradient(top, #242424, #939393); }
 
 a,
 a:hover,
