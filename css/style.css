@@ -67,3 +67,6 @@ nav a           { font-size: 1.6em; text-decoration: none; margin-left: 12px; }
 
 h1 a    { text-decoration: none; color: #000; }
 aside h3    { background: #000; padding: 8px; -moz-border-radius: 0em 1em 1em 0em; border-radius: 0em 1em 1em 0em; }
+a.header-link {
+  color: white;
+}
