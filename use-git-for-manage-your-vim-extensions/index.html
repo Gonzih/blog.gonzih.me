@@ -143,6 +143,19 @@ git submodule update - обновляет вершину субрепозито�
 </div>
 <br />
 Вот и все! Теперь пушим все это дело на github и радуемся!
+<br />
+<br />
+З.Ы. .vimrc и .gvimrc лучше хранить следующим образом
+<div class="highlight"><pre><code class="sh">  <span class="nb">cd</span> ~
+  mv .gvimrc .vim/gvimrc
+  mv .vimrc .vim/vimrc
+  ln -s ~/.vim/vimrc ~/.vimrc
+  ln -s ~/.vim/gvimrc ~/.gvimrc
+  <span class="nb">cd</span> ~/.vim
+  git add .
+  git ci -m <span class="s1">&#39;vim dotfiles added&#39;</span>
+</code></pre>
+</div>
 </div>
 
       

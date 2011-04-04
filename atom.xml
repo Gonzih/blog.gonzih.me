@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T15:34:39+03:00</updated>
+ <updated>2011-04-04T15:42:41+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -89,6 +89,19 @@ git submodule update - обновляет вершину субрепозито�
 &lt;/div&gt;
 &lt;br /&gt;
 Вот и все! Теперь пушим все это дело на github и радуемся!
+&lt;br /&gt;
+&lt;br /&gt;
+З.Ы. .vimrc и .gvimrc лучше хранить следующим образом
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
+  mv .gvimrc .vim/gvimrc
+  mv .vimrc .vim/vimrc
+  ln -s ~/.vim/vimrc ~/.vimrc
+  ln -s ~/.vim/gvimrc ~/.gvimrc
+  &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/.vim
+  git add .
+  git ci -m &lt;span class=&quot;s1&quot;&gt;&amp;#39;vim dotfiles added&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 </content>
  </entry>
  
