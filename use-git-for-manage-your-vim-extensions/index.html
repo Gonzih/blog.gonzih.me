@@ -138,7 +138,7 @@ git submodule update - обновляет субрепозитории.
 <div class="highlight"><pre><code class="sh">  <span class="c"># а затем удалить директорию с плагином из git</span>
   git rm --cached bundle/foo <span class="c">#обязательно без закрывающего слеша</span>
   git ci -a -m <span class="s1">&#39;remove foo&#39;</span>
-  rm bundle/foo
+  rm -rf bundle/foo
 </code></pre>
 </div>
 <br />

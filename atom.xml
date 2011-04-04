@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T15:50:37+03:00</updated>
+ <updated>2011-04-04T15:51:12+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -84,7 +84,7 @@ git submodule update - обновляет субрепозитории.
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;c&quot;&gt;# а затем удалить директорию с плагином из git&lt;/span&gt;
   git rm --cached bundle/foo &lt;span class=&quot;c&quot;&gt;#обязательно без закрывающего слеша&lt;/span&gt;
   git ci -a -m &lt;span class=&quot;s1&quot;&gt;&amp;#39;remove foo&amp;#39;&lt;/span&gt;
-  rm bundle/foo
+  rm -rf bundle/foo
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;br /&gt;
