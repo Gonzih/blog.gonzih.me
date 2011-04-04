@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T14:32:30+03:00</updated>
+ <updated>2011-04-04T14:36:14+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -52,7 +52,7 @@
 Всё, pathogen готов к использованию. Теперь при запуске vim/gvim pathogen будет рекурсивно подгружать содержимое bundle как плагины.
 &lt;br /&gt;
 &lt;br /&gt;
-Каджый плагин будем устанавливать в виде &lt;a href=&quot;https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial&quot; /&gt;git submodule&lt;/a&gt;. Субмодули в гит по сути хранят в себе адрес репозитория и указатель на комит на котором на данный момент находиться субмодуль.
+Каджый плагин будем устанавливать в виде &lt;a href=&quot;https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial&quot; /&gt;git submodule&lt;/a&gt;. Субмодули в гит по сути хранят в себе адрес репозитория и хэш коммита HEAD.
 После выпонения git submodule init исходные коды всех субмодулей будут инициализированы и вытянуты из репозиториев.
 git submodule update - обновляет вершину субрепозитория.
 &lt;br /&gt;
