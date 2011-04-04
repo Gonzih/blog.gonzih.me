@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T15:27:48+03:00</updated>
+ <updated>2011-04-04T15:30:12+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -59,6 +59,7 @@ git submodule update - обновляет вершину субрепозито�
 &lt;br /&gt;
 Добавление нового плагина
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  git submodule add https://github.com/foo.git bundle/foo
+  git add .
   git ci -m &lt;span class=&quot;s1&quot;&gt;&amp;#39;added new plugin&amp;#39;&lt;/span&gt;
   git push
   git submodule init
