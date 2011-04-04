@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T15:45:04+03:00</updated>
+ <updated>2011-04-04T15:50:37+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -54,7 +54,7 @@
 &lt;br /&gt;
 Каджый плагин будем устанавливать в виде &lt;a href=&quot;https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial&quot; /&gt;git submodule&lt;/a&gt;. Субмодули в гит по сути хранят в себе адрес репозитория и хэш коммита HEAD.
 После выпонения git submodule init исходные коды всех субмодулей будут инициализированы и вытянуты из репозиториев.
-git submodule update - обновляет вершину субрепозитория.
+git submodule update - обновляет субрепозитории.
 &lt;br /&gt;
 &lt;br /&gt;
 Добавление нового плагина
