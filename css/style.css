@@ -59,7 +59,7 @@ nav a           { font-size: 1.6em; text-decoration: none; margin-left: 12px; }
 
 /* POSTS */
 
-.post-image img   { width: 600px; height: auto; margin: 12px 0; }
+.post-image img   { height: auto; margin: 12px 0; }
 #disqus_thread      { font-size: 1.4em; margin: 12px 0; padding: 12px 0; border-top: 1px solid #666; }
 
 
