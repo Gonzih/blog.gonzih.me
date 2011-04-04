@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T09:49:15+03:00</updated>
+ <updated>2011-04-04T10:18:34+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -17,8 +17,11 @@
    <link href="http://gonzih.github.com/first-post"/>
    <updated>2011-01-02T00:00:00+02:00</updated>
    <id>http://gonzih.github.com/first-post</id>
-   <content type="html">&lt;p&gt;Блог собран на основе Jekyll&lt;br /&gt;
-github pages не повзоляет использовать плагины, увы и ах&lt;/p&gt;</content>
+   <content type="html">&lt;p&gt;Блог собран на основе Jekyll. Вообще впечатлиния от использования Jekyll очень положительные. Тут вам и куча языков разметки, использование Liqiud, расширяемость, тэги, пейнджинг, sitemap, atom, а в итоге получаем простой набор html страничек которые можно хостить где угодно.&lt;br /&gt;
+Этот блог к примеру висит на гитхабе. Гитхаб умеет сразу собирать ваш сайт их jekyll&amp;#8217;а, только вот плагины он не подхватывает к сожалению. Поэтому репо исходников отдельно, рейк таск для деплоя и вперёд и с песнями.&lt;br /&gt;
+Писать с нуля все было лень, за основу взял такую клевую штуку как &lt;a href=&quot;https://github.com/pelosi/jekylls-first-potion&quot;&gt;Jekyll First Potion&lt;/a&gt; (там есть неплохой плагин для тэгов).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/Gonzih/blog-source&quot;&gt;Source&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/Gonzih/gonzih.github.com&quot;&gt;Blog Repo&lt;/a&gt;&lt;/p&gt;</content>
  </entry>
  
  
