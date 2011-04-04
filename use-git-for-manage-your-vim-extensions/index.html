@@ -73,8 +73,9 @@
 
       <div class="text"><p>
 Пост о том как держать свои плагины в актуальной версии, обновлять их с комфортом и все это с чудесными git && github.
+</p>
 <br />
-<br />
+<p>
 Нам понадобятся:
   <ul>
     <li>
@@ -93,23 +94,24 @@
       голова > 1 шт
     </li>
   </ul>
+</p>
 <br />
+<p>
 Приступим.
-<br />
-<br />
 Что такое pathogen? Pathogen позволяет устанавливать плагины в bundle/ директорию.
-<br />В vimrc добавляем
+В vimrc добавляем
+</p>
 <div class="highlight"><pre><code class="vim">  <span class="k">call</span> pathogen#runtime_append_all_bundles<span class="p">()</span>
 </code></pre>
 </div>
-<br />
+<p>
 Всё, pathogen готов к использованию. Теперь при запуске vim/gvim pathogen будет рекурсивно подгружать содержимое bundle как плагины.
-<br />
-<br />
+</p>
+<p>
 Каджый плагин будем устанавливать в виде <a href="https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial" />git submodule</a>. Субмодули в гит по сути хранят в себе адрес репозитория и хэш коммита HEAD.
 После выпонения git submodule init исходные коды всех субмодулей будут инициализированы и вытянуты из репозиториев.
 git submodule update - обновляет субрепозитории.
-<br />
+</p>
 <br />
 Добавление нового плагина
 <div class="highlight"><pre><code class="sh">  git submodule add https://github.com/foo.git bundle/foo
@@ -194,7 +196,7 @@ P.S. .vimrc и .gvimrc лучше хранить следующим образо
             <div class="related-post">
               <h4 class="title"><a href="/first-post">Первый пост</a></h4>
               <div class="meta">
-                <span class="timeago">15 hours ago</span>
+                <span class="timeago">18 hours ago</span>
                  <a href="/tags/blog/" class="tag-link">#blog</a>  <a href="/tags/github/" class="tag-link">#github</a>  <a href="/tags/github-pages/" class="tag-link">#github pages</a>  <a href="/tags/jekyll/" class="tag-link">#jekyll</a> 
               </div>
             </div>

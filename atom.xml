@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T15:51:12+03:00</updated>
+ <updated>2011-04-04T18:36:57+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -19,8 +19,9 @@
    <id>http://gonzih.github.com/use-git-for-manage-your-vim-extensions</id>
    <content type="html">&lt;p&gt;
 Пост о том как держать свои плагины в актуальной версии, обновлять их с комфортом и все это с чудесными git &amp;&amp; github.
+&lt;/p&gt;
 &lt;br /&gt;
-&lt;br /&gt;
+&lt;p&gt;
 Нам понадобятся:
   &lt;ul&gt;
     &lt;li&gt;
@@ -39,23 +40,24 @@
       голова &gt; 1 шт
     &lt;/li&gt;
   &lt;/ul&gt;
+&lt;/p&gt;
 &lt;br /&gt;
+&lt;p&gt;
 Приступим.
-&lt;br /&gt;
-&lt;br /&gt;
 Что такое pathogen? Pathogen позволяет устанавливать плагины в bundle/ директорию.
-&lt;br /&gt;В vimrc добавляем
+В vimrc добавляем
+&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;vim&quot;&gt;  &lt;span class=&quot;k&quot;&gt;call&lt;/span&gt; pathogen#runtime_append_all_bundles&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;br /&gt;
+&lt;p&gt;
 Всё, pathogen готов к использованию. Теперь при запуске vim/gvim pathogen будет рекурсивно подгружать содержимое bundle как плагины.
-&lt;br /&gt;
-&lt;br /&gt;
+&lt;/p&gt;
+&lt;p&gt;
 Каджый плагин будем устанавливать в виде &lt;a href=&quot;https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial&quot; /&gt;git submodule&lt;/a&gt;. Субмодули в гит по сути хранят в себе адрес репозитория и хэш коммита HEAD.
 После выпонения git submodule init исходные коды всех субмодулей будут инициализированы и вытянуты из репозиториев.
 git submodule update - обновляет субрепозитории.
-&lt;br /&gt;
+&lt;/p&gt;
 &lt;br /&gt;
 Добавление нового плагина
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  git submodule add https://github.com/foo.git bundle/foo
@@ -110,11 +112,11 @@ P.S. .vimrc и .gvimrc лучше хранить следующим образо
    <link href="http://gonzih.github.com/first-post"/>
    <updated>2011-04-04T00:00:00+03:00</updated>
    <id>http://gonzih.github.com/first-post</id>
-   <content type="html">&lt;p&gt;Блог собран на основе Jekyll. Вообще впечатлиния от использования Jekyll очень положительные. Тут вам и куча языков разметки, использование Liqiud, расширяемость, тэги, пейнджинг, sitemap, atom, а в итоге получаем простой набор html страничек которые можно хостить где угодно.&lt;br /&gt;
-Этот блог к примеру висит на гитхабе. Гитхаб умеет сразу собирать ваш сайт на своей стороне из jekyll&amp;#8217;а после каждого git push, только вот плагины он не подхватывает к сожалению. Поэтому репо исходников отдельно, рейк таск для деплоя и вперёд и с песнями.&lt;br /&gt;
-Писать с нуля все было лень, за основу взял такую клевую штуку как &lt;a href=&quot;https://github.com/pelosi/jekylls-first-potion&quot;&gt;Jekyll First Potion&lt;/a&gt; (там есть неплохой плагин для тэгов).&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/Gonzih/blog-source&quot;&gt;Source&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/Gonzih/gonzih.github.com&quot;&gt;Blog Repo&lt;/a&gt;&lt;/p&gt;</content>
+   <content type="html">&lt;p&gt;Блог собран на основе Jekyll. Вообще впечатлиния от использования Jekyll очень положительные. Тут вам и куча языков разметки, использование Liqiud, расширяемость, тэги, пейнджинг, sitemap, atom, а в итоге получаем простой набор html страничек которые можно хостить где угодно.&lt;/p&gt;
+&lt;p&gt;Этот блог к примеру висит на гитхабе. Гитхаб умеет сразу собирать ваш сайт на своей стороне из jekyll&amp;#8217;а после каждого git push, только вот плагины он не подхватывает к сожалению. Поэтому репо исходников отдельно, рейк таск для деплоя и вперёд и с песнями.&lt;/p&gt;
+&lt;p&gt;Писать с нуля все было лень, за основу взял такую клевую штуку как &lt;a href=&quot;https://github.com/pelosi/jekylls-first-potion&quot;&gt;Jekyll First Potion&lt;/a&gt; (там есть неплохой плагин для тэгов).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/Gonzih/blog-source&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/Gonzih/gonzih.github.com&quot;&gt;Blog Repo&lt;/a&gt;&lt;/p&gt;</content>
  </entry>
  
  
