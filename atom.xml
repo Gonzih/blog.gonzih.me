@@ -4,7 +4,7 @@
  <title>Gonzih's Blog</title>
  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
  <link href="http://gonzih.github.com/"/>
- <updated>2011-04-04T01:06:55+03:00</updated>
+ <updated>2011-04-04T09:27:29+03:00</updated>
  <id>http://gonzih.github.com/</id>
  <author>
    <name>Max Gonzih</name>
@@ -17,7 +17,8 @@
    <link href="http://gonzih.github.com/first-post"/>
    <updated>2011-01-02T00:00:00+02:00</updated>
    <id>http://gonzih.github.com/first-post</id>
-   <content type="html">&lt;p&gt;Блог собран на основе Jekyll&lt;/p&gt;</content>
+   <content type="html">&lt;p&gt;Блог собран на основе Jekyll&lt;br /&gt;
+github pages не повзоляет использовать плагины, увы и ах&lt;/p&gt;</content>
  </entry>
  
  
