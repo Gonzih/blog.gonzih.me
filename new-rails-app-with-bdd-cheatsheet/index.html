@@ -159,7 +159,8 @@
   Настройка Capybara
 <br />
 <br />
-<div class="highlight"><pre><code class="ruby">  <span class="no">Capybara</span><span class="o">.</span><span class="n">register_driver</span> <span class="ss">:selenium</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+<div class="highlight"><pre><code class="ruby">  <span class="c1">#env.rb for Cucumber</span>
+  <span class="no">Capybara</span><span class="o">.</span><span class="n">register_driver</span> <span class="ss">:selenium</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
     <span class="no">Capybara</span><span class="o">::</span><span class="no">Driver</span><span class="o">::</span><span class="no">Selenium</span><span class="o">.</span><span class="n">new</span> <span class="n">app</span><span class="p">,</span> <span class="ss">:browser</span> <span class="o">=&gt;</span> <span class="ss">:chrome</span>
   <span class="k">end</span>
 </code></pre>
