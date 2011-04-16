@@ -72,7 +72,15 @@
       
 
       <div class="text"><br />
-Содержимое Gemfile
+  Новое приложение
+<br />
+<br />
+<div class="highlight"><pre><code class="ruby">  <span class="n">rails</span> <span class="kp">new</span> <span class="n">bdd_app</span>
+</code></pre>
+</div>
+
+<br />
+  Содержимое Gemfile
 <br />
 <br />
 <div class="highlight"><pre><code class="ruby">  <span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
@@ -103,11 +111,12 @@
     <span class="n">gem</span> <span class="s1">&#39;gherkin&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://github.com/aslakhellesoy/gherkin.git&#39;</span>
     <span class="n">gem</span> <span class="s1">&#39;launchy&#39;</span>
     <span class="n">gem</span> <span class="s1">&#39;email_spec&#39;</span>
-    <span class="n">gem</span> <span class="s1">&#39;factory_girl_rails&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;fabrication&#39;</span> <span class="c1">#or factory_girl_rails</span>
     <span class="n">gem</span> <span class="s1">&#39;timecop&#39;</span>
   <span class="k">end</span>
 </code></pre>
 </div>
+
 <br />
   Установка
 <br />
@@ -115,8 +124,10 @@
 <div class="highlight"><pre><code class="sh">  bundle install
   rails g rspec:install
   rails g cucumber:install --rspec --capybara
+  rails g email_spec:steps
 </code></pre>
 </div>
+
 <br />
   Включение autotest/growl
 <br />
@@ -124,6 +135,7 @@
 <div class="highlight"><pre><code class="sh">  <span class="nb">echo</span> <span class="s2">&quot;require &#39;autotest/growl&#39;&quot;</span> &gt;&gt; .autotest
 </code></pre>
 </div>
+
 <br />
   Игнорим лишнее
 <br />
@@ -131,6 +143,28 @@
 <div class="highlight"><pre><code class="sh">  <span class="nb">echo</span> <span class="s1">&#39;.DS_Store&#39;</span> &gt;&gt; .gitignore <span class="c">#для Cappuccino</span>
 </code></pre>
 </div>
+
+<br />
+  Настройка Email Spec
+<br />
+<br />
+<div class="highlight"><pre><code class="ruby">  <span class="c1">#env.rb for cucumber</span>
+  <span class="nb">require</span> <span class="s1">&#39;email_spec/cucumber&#39;</span>
+  <span class="c1">#spec_helper.rb</span>
+  <span class="nb">require</span> <span class="s2">&quot;email_spec&quot;</span>
+</code></pre>
+</div>
+
+<br />
+  Настройка Capybara
+<br />
+<br />
+<div class="highlight"><pre><code class="ruby">  <span class="no">Capybara</span><span class="o">.</span><span class="n">register_driver</span> <span class="ss">:selenium</span> <span class="k">do</span> <span class="o">|</span><span class="n">app</span><span class="o">|</span>
+    <span class="no">Capybara</span><span class="o">::</span><span class="no">Driver</span><span class="o">::</span><span class="no">Selenium</span><span class="o">.</span><span class="n">new</span> <span class="n">app</span><span class="p">,</span> <span class="ss">:browser</span> <span class="o">=&gt;</span> <span class="ss">:chrome</span>
+  <span class="k">end</span>
+</code></pre>
+</div>
+
 <br />
   Запуск autotest
 <br />
@@ -142,6 +176,11 @@
 <br />
   Все, можно приступать к работе
 <br />
+<br />
+
+
+<br />
+  <a href="http://habrahabr.ru/blogs/webdev/111480/">Полный пост с хабры</a>
 <br />
 </div>
 
@@ -176,8 +215,6 @@
   
     <div class="inside">
       <h3>Similar Posts</h3>
-        
-          
         
           
             <div class="related-post">
