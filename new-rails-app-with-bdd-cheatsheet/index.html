@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
 
-    <title>Использование git для управление vim плагинами | Gonzih's Blog</title>
+    <title>Rails BDD Cheatsheet | Gonzih's Blog</title>
 
     <meta charset="utf-8">
 
     <meta property="og:site_name" content="Gonzih's Blog"/>
-    <meta property="og:title" content="Использование git для управление vim плагинами"/>
-    <meta property="og:description" content="git submodule && vim pathogen"/>
+    <meta property="og:title" content="Rails BDD Cheatsheet"/>
+    <meta property="og:description" content="Создание нового рельс приложения с Cucumber, Rspec, Autotest"/>
     
 
     <link rel="Shortcut Icon" type="image/ico" href="/images/favicon.png">
@@ -67,97 +67,82 @@
   <section>
     <div class="inside">
 
-      <h2>Использование git для управление vim плагинами</h2>
+      <h2>Rails BDD Cheatsheet</h2>
 
-      <div class="post-image"><img src="/images/blog/git-submodule-and-vim-pathogen/main.png" /></div>
+      <div class="post-image"><img src="/images/blog/new-rails-app-with-bdd-cheatsheet/main.png" /></div>
 
-      <div class="text"><p>
-Пост о том как держать свои плагины в актуальной версии, обновлять их с комфортом и все это с чудесными git && github.
-</p>
+      <div class="text"><br />
+Содержимое Gemfile
 <br />
-<p>
-Нам понадобятся:
-  <ul>
-    <li>
-      vim с установленым плагином <a href="https://github.com/tpope/vim-pathogen">pathogen</a>
-    </li>
-    <li>
-      git
-    </li>
-    <li>
-      github или другой git хостинг аккаунт
-    </li>
-    <li>
-      руки 2 шт
-    </li>
-    <li>
-      голова > 1 шт
-    </li>
-  </ul>
-</p>
 <br />
-<p>
-Приступим.
-Что такое pathogen? Pathogen позволяет устанавливать плагины в bundle/ директорию.
-В vimrc добавляем
-</p>
-<div class="highlight"><pre><code class="vim">  <span class="k">call</span> pathogen#runtime_append_all_bundles<span class="p">()</span>
-</code></pre>
-</div>
-<p>
-Всё, pathogen готов к использованию. Теперь при запуске vim/gvim pathogen будет рекурсивно подгружать содержимое bundle как плагины.
-</p>
-<p>
-Каджый плагин будем устанавливать в виде <a href="https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial" />git submodule</a>. Субмодули в гит по сути хранят в себе адрес репозитория и хэш коммита HEAD.
-После выпонения git submodule init исходные коды всех субмодулей будут инициализированы и вытянуты из репозиториев.
-git submodule update - обновляет субрепозитории.
-</p>
-<br />
-Добавление нового плагина
-<div class="highlight"><pre><code class="sh">  git submodule add https://github.com/foo.git bundle/foo
-  git add .
-  git ci -m <span class="s1">&#39;added new plugin&#39;</span>
-  git push
-  git submodule init
+<div class="highlight"><pre><code class="ruby">  <span class="n">source</span> <span class="s1">&#39;http://rubygems.org&#39;</span>
+
+  <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span>
+
+  <span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
+  <span class="k">end</span>
+
+  <span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
+    <span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;capistrano&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;ruby-debug19&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="s1">&#39;ruby-debug&#39;</span>
+  <span class="k">end</span>
+
+  <span class="n">group</span> <span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span> <span class="k">do</span>
+    <span class="n">gem</span> <span class="s1">&#39;rspec-rails&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;cucumber-rails&#39;</span>
+  <span class="k">end</span>
+
+  <span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
+    <span class="c1">#autotest stuff</span>
+    <span class="n">gem</span> <span class="s1">&#39;autotest-rails&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;autotest-growl&#39;</span>
+
+    <span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;database_cleaner&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;gherkin&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://github.com/aslakhellesoy/gherkin.git&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;launchy&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;email_spec&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;factory_girl_rails&#39;</span>
+    <span class="n">gem</span> <span class="s1">&#39;timecop&#39;</span>
+  <span class="k">end</span>
 </code></pre>
 </div>
 <br />
-Для обновления плагинов я использую следующий скрипт
-<div class="highlight"><pre><code class="sh">  <span class="c">#!/bin/bash</span>
-  git pull
-  git submodule init
-  git submodule update
-  git submodule foreach git pull origin master
-  git submodule foreach git checkout master
-  git ci -a -m <span class="s1">&#39;Update submodules to latest versions&#39;</span>
-  git push
+  Установка
+<br />
+<br />
+<div class="highlight"><pre><code class="sh">  bundle install
+  rails g rspec:install
+  rails g cucumber:install --rspec --capybara
 </code></pre>
 </div>
 <br />
-С удалением плагинов дела обстоят труднее.
+  Включение autotest/growl
 <br />
-Сначала следует удалить всю информацию о субмодуле из .gitmodules && .git/config
-<div class="highlight"><pre><code class="sh">  <span class="c"># а затем удалить директорию с плагином из git</span>
-  git rm --cached bundle/foo <span class="c">#обязательно без закрывающего слеша</span>
-  git ci -a -m <span class="s1">&#39;remove foo&#39;</span>
-  rm -rf bundle/foo
+<br />
+<div class="highlight"><pre><code class="sh">  <span class="nb">echo</span> <span class="s2">&quot;require &#39;autotest/growl&#39;&quot;</span> &gt;&gt; .autotest
 </code></pre>
 </div>
 <br />
-Вот и все! Теперь пушим все это дело на github и радуемся!
+  Игнорим лишнее
 <br />
 <br />
-P.S. .vimrc и .gvimrc лучше хранить следующим образом
-<div class="highlight"><pre><code class="sh">  <span class="nb">cd</span> ~
-  mv .gvimrc .vim/gvimrc
-  mv .vimrc .vim/vimrc
-  ln -s ~/.vim/vimrc ~/.vimrc
-  ln -s ~/.vim/gvimrc ~/.gvimrc
-  <span class="nb">cd</span> ~/.vim
-  git add .
-  git ci -m <span class="s1">&#39;vim dotfiles added&#39;</span>
+<div class="highlight"><pre><code class="sh">  <span class="nb">echo</span> <span class="s1">&#39;.DS_Store&#39;</span> &gt;&gt; .gitignore <span class="c">#для Cappuccino</span>
 </code></pre>
 </div>
+<br />
+  Запуск autotest
+<br />
+<br />
+<div class="highlight"><pre><code class="sh">  bundle <span class="nb">exec </span>autotest
+</code></pre>
+</div>
+
+<br />
+  Все, можно приступать к работе
+<br />
+<br />
 </div>
 
       
@@ -168,8 +153,8 @@ P.S. .vimrc и .gvimrc лучше хранить следующим образо
            var disqus_shortname = 'gonzihsblog'; // required: replace example with your forum shortname
 
            // The following are highly recommended additional parameters. Remove the slashes in front to use.
-           var disqus_identifier = '/use-git-for-manage-your-vim-extensions';
-           var disqus_url = 'http://gonzih.github.com/use-git-for-manage-your-vim-extensions/index.html';
+           var disqus_identifier = '/new-rails-app-with-bdd-cheatsheet';
+           var disqus_url = 'http://gonzih.github.com/new-rails-app-with-bdd-cheatsheet/index.html';
 
            (function() {
               var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -196,10 +181,10 @@ P.S. .vimrc и .gvimrc лучше хранить следующим образо
         
           
             <div class="related-post">
-              <h4 class="title"><a href="/new-rails-app-with-bdd-cheatsheet">Rails BDD Cheatsheet</a></h4>
+              <h4 class="title"><a href="/use-git-for-manage-your-vim-extensions">Использование git для управление vim плагинами</a></h4>
               <div class="meta">
-                <span class="timeago">11 hours ago</span>
-                 <a href="/tags/autotest/" class="tag-link">#autotest</a>  <a href="/tags/bdd/" class="tag-link">#bdd</a>  <a href="/tags/cucumber/" class="tag-link">#cucumber</a>  <a href="/tags/rails/" class="tag-link">#rails</a>  <a href="/tags/rspec/" class="tag-link">#rspec</a>  <a href="/tags/ruby/" class="tag-link">#ruby</a> 
+                <span class="timeago">2 weeks ago</span>
+                 <a href="/tags/git/" class="tag-link">#git</a>  <a href="/tags/github/" class="tag-link">#github</a>  <a href="/tags/pathogen/" class="tag-link">#pathogen</a>  <a href="/tags/submodule/" class="tag-link">#submodule</a>  <a href="/tags/vim/" class="tag-link">#vim</a> 
               </div>
             </div>
           
