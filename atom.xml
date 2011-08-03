@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-08-03T10:42:24+03:00</updated>
+  <updated>2011-08-03T13:39:23+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,5 +13,125 @@
     
   </author>
 
+  
+  <entry>
+    <title>My Rails Apps Template</title>
+    <link href="http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/"/>
+    <updated>2011-08-03T13:29:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template</id>
+    <content type="html">&lt;p&gt;Here is my rails template that i use for my projects. With BDD gems, optional resque for deloyed jobs, kaminari for pagination, carriervawe as paperclip replacement.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+
+
+
+&lt;div&gt;&lt;script src='https://gist.github.com/940407.js?file='&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;# for 3.0 rails
+
+# create rvmrc file
+create_file &amp;quot;.rvmrc&amp;quot;, &amp;quot;rvm 1.9.2&amp;quot;
+
+gem &amp;quot;jquery-rails&amp;quot;
+gem &amp;quot;postgres&amp;quot;
+#gem &amp;quot;kaminari&amp;quot;
+#gem &amp;quot;carrierwave&amp;quot;
+#gem &amp;quot;resque&amp;quot;
+gem &amp;quot;yaml_db&amp;quot;, :require =&amp;gt; false
+
+#group :development
+gem &amp;quot;nifty-generators&amp;quot;,  :group =&amp;gt; :development
+gem &amp;quot;annotate&amp;quot;,          :group =&amp;gt; :development, :require =&amp;gt; false
+gem &amp;quot;capistrano&amp;quot;,        :group =&amp;gt; :development, :require =&amp;gt; false
+gem &amp;quot;capistrano_colors&amp;quot;, :group =&amp;gt; :development, :require =&amp;gt; false
+
+#group :test
+gem &amp;quot;capybara&amp;quot;,         :group =&amp;gt; :test
+gem &amp;quot;fabrication&amp;quot;,      :group =&amp;gt; :test
+gem &amp;quot;ffaker&amp;quot;,           :group =&amp;gt; :test
+gem &amp;quot;launchy&amp;quot;,          :group =&amp;gt; :test
+gem &amp;quot;database_cleaner&amp;quot;, :group =&amp;gt; :test
+gem &amp;quot;fakeweb&amp;quot;,          :group =&amp;gt; :test
+gem &amp;quot;timecop&amp;quot;,          :group =&amp;gt; :test
+gem &amp;quot;email_spec&amp;quot;,       :group =&amp;gt; :test
+gem &amp;quot;guard-rspec&amp;quot;,      :group =&amp;gt; :test
+
+gem &amp;quot;rspec-rails&amp;quot;, :group =&amp;gt; [ :development, :test ]
+
+gem &amp;quot;whenever&amp;quot;,   :group =&amp;gt; [ :development, :production ], :require =&amp;gt; false
+gem &amp;quot;capistrano&amp;quot;, :group =&amp;gt; [ :development, :production ], :require =&amp;gt; false
+
+run &amp;quot;bundle install --path vendor/bundle&amp;quot;
+
+generate &amp;quot;rspec:install&amp;quot;
+run &amp;quot;bundle exec guard init rspec&amp;quot;
+remove_file &amp;quot;public/javascripts/rails.js&amp;quot; # jquery-rails replaces this
+generate &amp;quot;jquery:install --ui&amp;quot;
+run &amp;quot;echo '--format documentation' &amp;gt;&amp;gt; .rspec&amp;quot;
+# clean up rails defaults
+remove_file &amp;quot;public/index.html&amp;quot;
+remove_file &amp;quot;rm public/images/rails.png&amp;quot;
+
+
+#files injections
+inject_into_file &amp;quot;config/application.rb&amp;quot;, :after =&amp;gt; &amp;quot;config.filter_parameters += [:password]&amp;quot; do
+  &amp;lt;&amp;lt;-eos
+    # Customize generators
+    config.generators do |g|
+      g.stylesheets false
+      g.test_framework      :rspec, :fixture =&amp;gt; true
+      g.fixture_replacement :fabrication
+    end
+  eos
+end
+
+inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;RSpec.configure do |config|&amp;quot; do
+  &amp;lt;&amp;lt;-eos
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.clean
+    end
+
+  eos
+end
+
+inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;require 'rspec/rails'&amp;quot; do
+  &amp;lt;&amp;lt;-eos
+    require &amp;quot;email_spec&amp;quot;
+  eos
+end
+
+inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;RSpec.configure do |config|&amp;quot; do
+  &amp;lt;&amp;lt;-eos
+    Spec::Runner.configure do |config|
+      config.include(EmailSpec::Helpers)
+      config.include(EmailSpec::Matchers)
+    end
+
+  eos
+end
+
+rake &amp;quot;db:create&amp;quot;, :env =&amp;gt; &amp;quot;development&amp;quot;
+rake &amp;quot;db:create&amp;quot;, :env =&amp;gt; &amp;quot;test&amp;quot;
+rake &amp;quot;db:migrate&amp;quot;
+
+# commit to git
+git :init
+git :add =&amp;gt; &amp;quot;.&amp;quot;
+git :commit =&amp;gt; &amp;quot;-a -m 'create initial bdd application'&amp;quot;
+
+say &amp;lt;&amp;lt;-eos
+  All done!
+eos
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+
+
+
+</content>
+  </entry>
   
 </feed>
