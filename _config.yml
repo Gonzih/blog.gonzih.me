@@ -2,17 +2,17 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://gonzih.github.com
+title: Gonzih's dev blog
+subtitle: Blog about ruby/ror, linux and other stuff
+author: Max Gonzih
 simple_search: http://google.com/search
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: iam@gonzih.org
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -48,7 +48,7 @@ default_asides: [asides/recent_posts.html, asides/twitter.html, asides/delicious
 # ----------------------- #
 
 # Twitter
-twitter_user:
+twitter_user: Gonzih
 twitter_tweet_count: 4
 twitter_show_replies: false
 twitter_follow_button: true
@@ -68,7 +68,8 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
+disqus_short_name: gonzihsblog
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-22494353-1
+
