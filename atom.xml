@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-08-04T14:19:20+03:00</updated>
+  <updated>2011-08-04T14:29:07+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -19,7 +19,7 @@
     <link href="http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins/"/>
     <updated>2011-08-03T21:03:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
-    <content type="html">&lt;p&gt;Plugins that makes your vim better.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Plugins that make your vim better.&lt;/p&gt;
 
 &lt;!-- more --&gt;
 
@@ -28,10 +28,10 @@
  - Manage your vim plugins in bundler style.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/The-NERD-tree&quot;&gt;The NERD Tree&lt;/a&gt;
- - Show directory files tree in the left tab, allow make file operations.&lt;/p&gt;
+ - Shows directory files tree in the left tab, allows make file operations.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/The-NERD-Commenter&quot;&gt;The NERD Commenter&lt;/a&gt;
- - Allow easy comment code in different languages.&lt;/p&gt;
+ - Allows easy comment code in different languages.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/mrtazz/molokai.vim&quot;&gt;Molokai theme&lt;/a&gt;
  - TextMate monokai theme for vim.&lt;/p&gt;
@@ -40,10 +40,10 @@
  - Collection of plugins for ruby development in vim.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/AutoComplPop&quot;&gt;AutoComplPop&lt;/a&gt;
- - Automaticaly open completions popup.&lt;/p&gt;
+ - Automaticaly opens completions popup.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/tpope/vim-haml&quot;&gt;Vim Haml&lt;/a&gt;
- - Add HAML support to vim.&lt;/p&gt;
+ - Adds HAML support to vim.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/msanders/snipmate.vim&quot;&gt;Snipmate&lt;/a&gt;
  - TextMate snippets in vim.&lt;/p&gt;
@@ -67,7 +67,7 @@
  - Cucumber scenarios highlighting.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/tpope/vim-endwise&quot;&gt;Endwise&lt;/a&gt;
- - Automaticaly add end in ruby.&lt;/p&gt;
+ - Automaticaly adds end in ruby.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;Fugitive&lt;/a&gt;
  - Awesome git wrapper for vim.&lt;/p&gt;
