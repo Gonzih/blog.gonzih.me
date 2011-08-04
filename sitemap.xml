@@ -2,14 +2,18 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/</loc>
-        <lastmod>2011-08-03T13:39:23+03:00</lastmod>
+        <lastmod>2011-08-03T14:28:10+03:00</lastmod>
+    </url>
+    <url>
+        <loc>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins/</loc>
+        <lastmod>2011-08-04T14:10:22+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/</loc>
-        <lastmod>2011-08-03T13:39:23+03:00</lastmod>
+        <lastmod>2011-08-04T14:10:22+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/archives/</loc>
-        <lastmod>2011-08-03T13:39:23+03:00</lastmod>
+        <lastmod>2011-08-04T14:10:22+03:00</lastmod>
     </url>
 </urlset>
