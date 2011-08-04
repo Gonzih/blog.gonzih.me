@@ -5,6 +5,8 @@ date: 2011-08-03 21:03
 comments: true
 categories: [vim, plugins, ror, ruby, git, plugins]
 ---
+Plugins that makes your vim better.
+<!-- more -->
 
 [Vundle](https://github.com/gmarik/vundle)
  - Manage your vim plugins in bundler style.
