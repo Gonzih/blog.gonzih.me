@@ -5,17 +5,17 @@ date: 2011-08-03 21:03
 comments: true
 categories: [vim, plugins, ror, ruby, git, plugins]
 ---
-Plugins that makes your vim better.
+Plugins that make your vim better.
 <!-- more -->
 
 [Vundle](https://github.com/gmarik/vundle)
  - Manage your vim plugins in bundler style.
 
 [The NERD Tree](https://github.com/vim-scripts/The-NERD-tree)
- - Show directory files tree in the left tab, allow make file operations.
+ - Shows directory files tree in the left tab, allows make file operations.
 
 [The NERD Commenter](https://github.com/vim-scripts/The-NERD-Commenter)
- - Allow easy comment code in different languages.
+ - Allows easy comment code in different languages.
 
 [Molokai theme](https://github.com/mrtazz/molokai.vim)
  - TextMate monokai theme for vim.
@@ -24,10 +24,10 @@ Plugins that makes your vim better.
  - Collection of plugins for ruby development in vim.
 
 [AutoComplPop](https://github.com/vim-scripts/AutoComplPop)
- - Automaticaly open completions popup.
+ - Automaticaly opens completions popup.
 
 [Vim Haml](https://github.com/tpope/vim-haml)
- - Add HAML support to vim.
+ - Adds HAML support to vim.
 
 [Snipmate](https://github.com/msanders/snipmate.vim)
  - TextMate snippets in vim.
@@ -51,7 +51,7 @@ Plugins that makes your vim better.
  - Cucumber scenarios highlighting.
 
 [Endwise](https://github.com/tpope/vim-endwise)
- - Automaticaly add end in ruby.
+ - Automaticaly adds end in ruby.
 
 [Fugitive](https://github.com/tpope/vim-fugitive)
  - Awesome git wrapper for vim.
