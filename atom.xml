@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-08-04T14:10:23+03:00</updated>
+  <updated>2011-08-04T14:19:20+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -19,7 +19,12 @@
     <link href="http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins/"/>
     <updated>2011-08-03T21:03:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
-    <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/gmarik/vundle&quot;&gt;Vundle&lt;/a&gt;
+    <content type="html">&lt;p&gt;Plugins that makes your vim better.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/gmarik/vundle&quot;&gt;Vundle&lt;/a&gt;
  - Manage your vim plugins in bundler style.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/The-NERD-tree&quot;&gt;The NERD Tree&lt;/a&gt;
