@@ -1,0 +1,14 @@
+{% if site.github_user %}
+<section>
+  <div id="github-badge"></div>
+  <script type="text/javascript" charset="utf-8">
+    GITHUB_USERNAME="{{ site.github_user }}";
+    GITHUB_LIST_LENGTH=10;
+    GITHUB_HEAD="h2"; // e.g. change to "h2" for wordpress sidebars
+    GITHUB_THEME="white"; // try 'black'
+    GITHUB_TITLE = "Github projects"
+    GITHUB_SHOW_ALL = "Show all"
+  </script>
+  <script src="http://drnic.github.com/github-badges/dist/github-badge-launcher.js" type="text/javascript"></script>
+</section>
+{% endif %}
