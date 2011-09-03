@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-08-11T10:48:57+03:00</updated>
+  <updated>2011-09-03T10:50:49+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,6 +13,31 @@
     
   </author>
 
+  
+  <entry>
+    <title>Backbone.js + Ruby on Rails Tips</title>
+    <link href="http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/"/>
+    <updated>2011-09-03T10:05:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips</id>
+    <content type="html">&lt;!-- more --&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Add initializer that disable sending data in namespaces in json.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div&gt;&lt;script src='https://gist.github.com/1190795.js?file='&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;ActiveRecord::Base.include_root_in_json = false&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Use attr_accessible for filtering attributes in mass assigments from backbone. In rails &gt; 3.1 you can use attr_accessible with :as =&gt; role.&lt;/li&gt;
+&lt;li&gt;Use &lt;a href=&quot;https://github.com/josevalim/inherited_resources&quot;&gt;inherited resources&lt;/a&gt; for faster development.&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+  </entry>
   
   <entry>
     <title>My Collection of Usefull Vim Plugins</title>
