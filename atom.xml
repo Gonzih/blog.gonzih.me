@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-09-08T12:47:09+03:00</updated>
+  <updated>2011-09-15T14:55:47+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,6 +13,15 @@
     
   </author>
 
+  
+  <entry>
+    <title>Tmux + Rvm + Zsh Fix</title>
+    <link href="http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
+    <updated>2011-09-15T14:52:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix</id>
+    <content type="html">&lt;p&gt;If your have throuble with tmux and rvm default simple add &quot;[[ $TERM = &quot;screen&quot; ]] &amp;amp;&amp;amp; rvm use default&quot; to end of your .zshrc file.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Backbone.js + Ruby on Rails Tips</title>
