@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title></title>
+  <title>Gonzih&#8217;s dev blog</title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-09-15T14:57:27+03:00</updated>
+  <updated>2011-09-16T13:51:26+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -18,8 +18,8 @@
     <title>Tmux + Rvm + Zsh Fix</title>
     <link href="http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
     <updated>2011-09-15T14:52:00+03:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix</id>
-    <content type="html">&lt;p&gt;If you have throuble with tmux and rvm default simple add &quot;[[ $TERM = &quot;screen&quot; ]] &amp;amp;&amp;amp; rvm use default&quot; to end of your .zshrc file.&lt;/p&gt;
+    <id>http://gonzih.github.com/blog/2011/09/15/tmux&#8212;rvm&#8212;zsh-fix</id>
+    <content type="html">&lt;p&gt;If you have throuble with tmux and rvm default simple add &amp;#8220;[[ $TERM = &amp;#8220;screen&amp;#8221; ]] &amp;amp;&amp;amp; rvm use default&amp;#8221; to end of your .zshrc file.&lt;/p&gt;
 </content>
   </entry>
   
@@ -27,8 +27,8 @@
     <title>Backbone.js + Ruby on Rails Tips</title>
     <link href="http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/"/>
     <updated>2011-09-03T10:05:00+03:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips</id>
-    <content type="html">&lt;!-- more --&gt;
+    <id>http://gonzih.github.com/blog/2011/09/03/backbone-js&#8212;ruby-on-rails-tips</id>
+    <content type="html">&lt;!&#8211; more &#8211;&gt;
 
 
 &lt;ul&gt;
@@ -36,7 +36,7 @@
 &lt;/ul&gt;
 
 
-&lt;div&gt;&lt;script src='https://gist.github.com/1190795.js?file='&gt;&lt;/script&gt;
+&lt;div&gt;&lt;script src=&#8217;https://gist.github.com/1190795.js?file=&#8217;&gt;&lt;/script&gt;
 &lt;noscript&gt;&lt;pre&gt;&lt;code&gt;ActiveRecord::Base.include_root_in_json = false&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
 
 
@@ -55,7 +55,7 @@
     <id>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
     <content type="html">&lt;p&gt;Plugins that make your vim better.&lt;/p&gt;
 
-&lt;!-- more --&gt;
+&lt;!&#8211; more &#8211;&gt;
 
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/gmarik/vundle&quot;&gt;Vundle&lt;/a&gt;
@@ -118,12 +118,12 @@
     <id>http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template</id>
     <content type="html">&lt;p&gt;Here is my rails template that i use for my projects. With BDD gems, optional resque for deloyed jobs, kaminari for pagination, carriervawe as paperclip replacement.&lt;/p&gt;
 
-&lt;!-- more --&gt;
+&lt;!&#8211; more &#8211;&gt;
 
 
 
 
-&lt;div&gt;&lt;script src='https://gist.github.com/940407.js?file='&gt;&lt;/script&gt;
+&lt;div&gt;&lt;script src=&#8217;https://gist.github.com/940407.js?file=&#8217;&gt;&lt;/script&gt;
 &lt;noscript&gt;&lt;pre&gt;&lt;code&gt;# for 3.0 rails
 
 # create rvmrc file
@@ -158,13 +158,13 @@ gem &amp;quot;rspec-rails&amp;quot;, :group =&amp;gt; [ :development, :test ]
 gem &amp;quot;whenever&amp;quot;,   :group =&amp;gt; [ :development, :production ], :require =&amp;gt; false
 gem &amp;quot;capistrano&amp;quot;, :group =&amp;gt; [ :development, :production ], :require =&amp;gt; false
 
-run &amp;quot;bundle install --path vendor/bundle&amp;quot;
+run &amp;quot;bundle install &#8211;path vendor/bundle&amp;quot;
 
 generate &amp;quot;rspec:install&amp;quot;
 run &amp;quot;bundle exec guard init rspec&amp;quot;
 remove_file &amp;quot;public/javascripts/rails.js&amp;quot; # jquery-rails replaces this
-generate &amp;quot;jquery:install --ui&amp;quot;
-run &amp;quot;echo '--format documentation' &amp;gt;&amp;gt; .rspec&amp;quot;
+generate &amp;quot;jquery:install &#8211;ui&amp;quot;
+run &amp;quot;echo &#8216;&#8211;format documentation&#8217; &amp;gt;&amp;gt; .rspec&amp;quot;
 # clean up rails defaults
 remove_file &amp;quot;public/index.html&amp;quot;
 remove_file &amp;quot;rm public/images/rails.png&amp;quot;
@@ -195,7 +195,7 @@ inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;
   eos
 end
 
-inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;require 'rspec/rails'&amp;quot; do
+inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;require &#8216;rspec/rails&#8217;&amp;quot; do
   &amp;lt;&amp;lt;-eos
     require &amp;quot;email_spec&amp;quot;
   eos
@@ -218,7 +218,7 @@ rake &amp;quot;db:migrate&amp;quot;
 # commit to git
 git :init
 git :add =&amp;gt; &amp;quot;.&amp;quot;
-git :commit =&amp;gt; &amp;quot;-a -m 'create initial bdd application'&amp;quot;
+git :commit =&amp;gt; &amp;quot;-a -m &#8216;create initial bdd application&#8217;&amp;quot;
 
 say &amp;lt;&amp;lt;-eos
   All done!
