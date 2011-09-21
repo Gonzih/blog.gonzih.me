@@ -4,7 +4,7 @@
   <title>Gonzih&#8217;s dev blog</title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-09-18T00:06:14+03:00</updated>
+  <updated>2011-09-21T12:42:07+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,6 +13,112 @@
     
   </author>
 
+  
+  <entry>
+    <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</title>
+    <link href="http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/"/>
+    <updated>2011-09-19T17:54:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc</id>
+    <content type="html">&lt;!&#8211; more &#8211;&gt;
+
+
+&lt;h2&gt;Install adb&lt;/h2&gt;
+
+&lt;h3&gt;Installing adb on arch linux&lt;/h3&gt;
+
+&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;yaourt -S adb
+&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;h2&gt;Running adb&lt;/h2&gt;
+
+&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;adb &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;-server
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;sudo adb start-server
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;adb shell
+&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;h2&gt;Installing opkg&lt;/h2&gt;
+
+&lt;p&gt;Now run in adb shell following:&lt;/p&gt;
+
+&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;6&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;7&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;8&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;9&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;10&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;11&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;12&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;13&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;14&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;15&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;16&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /sdcard
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# for non cyanogen users&lt;/span&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# for cyanogen users&lt;/span&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# add /data/xbin to your path&lt;/span&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/data/xbin:$PATH&amp;quot;&lt;/span&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# make /system writable&lt;/span&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;mount -o remount,rw /system
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg -f /data/local/opkg.conf update
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg install opkg
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;mount -o remount,ro /system
+&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;h2&gt;Opkg usage&lt;/h2&gt;
+
+&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;6&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;opkg install rsync
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg remove rsync
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# list installed packages&lt;/span&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg list_installed
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# list files belonging to package&lt;/span&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg files rsync
+&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;h2&gt;Available packages&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;rsync - Lightweight package management system.&lt;/li&gt;
+&lt;li&gt;htop - Interactive processes viewer.&lt;/li&gt;
+&lt;li&gt;mc - Midnight Commander - a powerful file manager.&lt;/li&gt;
+&lt;li&gt;zip - Archiver for .zip files.&lt;/li&gt;
+&lt;li&gt;tree - Tree is a recursive directory listing program.&lt;/li&gt;
+&lt;li&gt;busybox - Tiny utilities for small and embedded systems.&lt;/li&gt;
+&lt;li&gt;dropbear - Lightweight SSH2 server and client.&lt;/li&gt;
+&lt;li&gt;nano - Free Pico clone with some new features.&lt;/li&gt;
+&lt;li&gt;opkg - Lightweight package management system.&lt;/li&gt;
+&lt;li&gt;screen - Terminal multiplexor with VT100/ANSI terminal emulation.&lt;/li&gt;
+&lt;li&gt;terminfo - Basic terminal type definitions.&lt;/li&gt;
+&lt;li&gt;zip - Archiver for .zip files.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;a href=&quot;http://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/&quot;&gt;via&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Tmux + Rvm + Zsh Fix</title>
