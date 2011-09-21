@@ -87,8 +87,17 @@
 </ul>
 
 
-<div><script src='https://gist.github.com/1190795.js?file='></script>
-<noscript><pre><code>ActiveRecord::Base.include_root_in_json = false</code></pre></noscript></div>
+<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">include_root_in_json</span> <span class="o">=</span> <span class="kp">false</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># {&quot;post&quot;: {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content&quot;}}</span>
+</div><div class='line'><span class="c1"># will be</span>
+</div><div class='line'><span class="c1"># {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content}</span>
+</div></code></pre></td></tr></table></div></figure>
 
 
 <ul>
