@@ -13,7 +13,7 @@ Building site: source -> public
                         ^
 SyntaxError: invalid syntax
 ```
-It's happens because RubyPython use Puthon version 2 by calling "python" command. By default python equal to python3 in Arch Linux.
+It's happens because RubyPython use Python version 2 by calling "python" command. By default python equal to python3 in Arch Linux.
 
 For fix simple add ruby file to plugins directory with next code.
 ``` ruby ruby_python_arch_linux_fix.rb
