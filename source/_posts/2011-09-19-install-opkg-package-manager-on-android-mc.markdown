@@ -31,9 +31,10 @@ tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
 wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
 # for cyanogen users
 wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
-mount -o remount,rw /system
 # add /data/xbin to your path
 export PATH="/data/xbin:$PATH"
+# make /system writable
+mount -o remount,rw /system
 opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
 opkg -f /data/local/opkg.conf update
 opkg install opkg
