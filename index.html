@@ -64,6 +64,60 @@
     
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linux</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-09-21T18:28:00+03:00" pubdate  data-updated="true" >Sep 21<span>st</span>, 2011</time></p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If your get following pygments error using octopress with arch linux.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>Building site: source -&gt; public
+</div><div class='line'>  File "&lt;string&gt;", line 1
+</div><div class='line'>    import sys; print sys.executable
+</div><div class='line'>                        ^
+</div><div class='line'>SyntaxError: invalid syntax</div></code></pre></td></tr></table></div></figure>
+
+
+<p>It&#8217;s happens because RubyPython use Puthon version 2 by calling &#8220;python&#8221; command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with next code.</p>
+
+<figure role=code><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+</div>
+  
+  
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2011/09/19/install-opkg-package-manager-on-android-mc/">Installing Opkg Package Manager on Android (Mc, Rsync, Screen, Htop, Zip, Busybox, Tree)</a></h1>
     
     
@@ -261,6 +315,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How To Fix Octopress Pygments Error on Arch Linux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2011/09/19/install-opkg-package-manager-on-android-mc/">Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</a>
       </li>
     
@@ -274,10 +332,6 @@
     
       <li class="post">
         <a href="/blog/2011/08/03/collection-of-usefull-vim-plugins/">My Collection of Usefull Vim Plugins</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/08/03/my-rails-apps-template/">My Rails Apps Template</a>
       </li>
     
   </ul>

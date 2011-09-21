@@ -4,7 +4,7 @@
   <title>Gonzih&#8217;s dev blog</title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-09-21T13:06:57+03:00</updated>
+  <updated>2011-09-21T18:46:53+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,6 +13,38 @@
     
   </author>
 
+  
+  <entry>
+    <title>How To Fix Octopress Pygments Error on Arch Linux</title>
+    <link href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
+    <updated>2011-09-21T18:28:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
+    <content type="html">&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
+
+&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8221;&gt;&lt;div class=&#8217;line&#8217;&gt;Building site: source -&amp;gt; public
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;  File &quot;&amp;lt;string&amp;gt;&quot;, line 1
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;    import sys; print sys.executable
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;                        ^
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;SyntaxError: invalid syntax&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;It&amp;#8217;s happens because RubyPython use Puthon version 2 by calling &amp;#8220;python&amp;#8221; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
+
+&lt;p&gt;For fix simple add ruby file to plugins directory with next code.&lt;/p&gt;
+
+&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;ruby_python_arch_linux_fix.rb&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;ruby&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;no&quot;&gt;RubyPython&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configure&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:python_exe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;python2.7&amp;#39;&lt;/span&gt;
+&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024&quot;&gt;via&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</title>

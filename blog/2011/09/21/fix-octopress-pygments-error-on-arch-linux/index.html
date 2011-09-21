@@ -5,10 +5,8 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: packages manager - Gonzih's dev blog</title>
+  <title>How To Fix Octopress Pygments Error on Arch Linux - Gonzih's dev blog</title>
   <meta name="author" content="Max Gonzih">
-  
-    <meta name="description" content="Category: packages manager"/>
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +16,7 @@
 
   
 
-  <link rel="canonical" href="http://gonzih.github.comblog/categories/packages-manager/index.html"/>
+  <link rel="canonical" href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -59,36 +57,114 @@
   <div id="main">
     <div id="content">
       <div>
-<article>
+<article class="hentry">
   
   <header>
-    <h1 class="entry-title">Category: Packages Manager</h1>
+    
+      <h1 class="entry-title">How to Fix Octopress Pygments Error on Arch Linux</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-09-21T18:28:00+03:00" pubdate  data-updated="true" >Sep 21<span>st</span>, 2011</time></p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>If your get following pygments error using octopress with arch linux.</p>
 
-  
-  <h2>2011</h2>
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>Building site: source -&gt; public
+</div><div class='line'>  File "&lt;string&gt;", line 1
+</div><div class='line'>    import sys; print sys.executable
+</div><div class='line'>                        ^
+</div><div class='line'>SyntaxError: invalid syntax</div></code></pre></td></tr></table></div></figure>
 
-<article>
-  
-<h1><a href="/blog/2011/09/19/install-opkg-package-manager-on-android-mc/">Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</a></h1>
-<time datetime="2011-09-19T17:54:00+03:00" pubdate><span class='month'>Sep</span> <span class='day'>19</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/busybox/'>busybox</a>, <a class='category' href='/blog/categories/htop/'>htop</a>, <a class='category' href='/blog/categories/mc/'>mc</a>, <a class='category' href='/blog/categories/opkg/'>opkg</a>, <a class='category' href='/blog/categories/packages-manager/'>packages manager</a>, <a class='category' href='/blog/categories/rsync/'>rsync</a>, <a class='category' href='/blog/categories/screen/'>screen</a>, <a class='category' href='/blog/categories/tree/'>tree</a>, <a class='category' href='/blog/categories/zip/'>zip</a></span>
-</footer>
+<p>It&#8217;s happens because RubyPython use Puthon version 2 by calling &#8220;python&#8221; command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with next code.</p>
+
+<figure role=code><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
+</div></code></pre></td></tr></table></div></figure>
 
 
-</article>
-
+<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Max Gonzih</span></span>
+
+      
+
+
+
+
+
+  
+
+
+
+<time datetime="2011-09-21T18:28:00+03:00" pubdate  data-updated="true" >Sep 21<span>st</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/arch-linux/'>arch linux</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/pygments/'>pygments</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/" data-via="Gonzih" data-counturl="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+</div>
+
+    
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'gonzihsblog';
+  var disqus_identifier = 'http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/';
+  var disqus_url = 'http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
