@@ -8,6 +8,12 @@ categories: [ror, rails, backbone.js]
 <!-- more -->
 
 * Add initializer that disable sending data in namespaces in json.
-{% gist 1190795 %}
+``` ruby
+ActiveRecord::Base.include_root_in_json = false
+
+# {"post": {"title": "some title", "content": "some content"}}
+# will be
+# {"title": "some title", "content": "some content}
+```
 * Use attr_accessible for filtering attributes in mass assigments from backbone. In rails > 3.1 you can use attr_accessible with :as => role.
 * Use [inherited resources](https://github.com/josevalim/inherited_resources) for faster development.
