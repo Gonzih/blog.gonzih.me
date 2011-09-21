@@ -6,7 +6,6 @@ comments: true
 categories: [ror, rails, backbone.js]
 ---
 <!-- more -->
-
 * Add initializer that disable sending data in namespaces in json.
 ``` ruby
 ActiveRecord::Base.include_root_in_json = false

@@ -7,7 +7,6 @@ categories: [vim, plugins, ror, ruby, git, plugins]
 ---
 Plugins that make your vim better.
 <!-- more -->
-
 [Vundle](https://github.com/gmarik/vundle)
  - Manage your vim plugins in bundler style.
 
