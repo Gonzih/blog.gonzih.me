@@ -4,7 +4,7 @@
   <title>Gonzih&#8217;s dev blog</title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-09-21T19:47:35+03:00</updated>
+  <updated>2011-09-22T21:28:36+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,6 +13,452 @@
     
   </author>
 
+  
+  <entry>
+    <title>Nice Rspec 2 Syntax Cheat Sheet</title>
+    <link href="http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
+    <updated>2011-09-22T21:26:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
+    <content type="html">&lt;!&#8211; more &#8211;&gt;
+
+
+&lt;div&gt;&lt;script src=&#8217;https://gist.github.com/663876.js?file=&#8217;&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;# RSpec 2.0 syntax Cheet Sheet by http://ApproachE.com
+
+# defining spec within a module will automatically pick Player::MovieList as a &#8216;subject&#8217; (see below)
+module Player
+    describe MovieList, &amp;quot;with optional description&amp;quot; do
+          
+      it &amp;quot;is pending example, so that you can write ones quickly&amp;quot;
+      
+      it &amp;quot;is already working example that we want to suspend from failing temporarily&amp;quot; do
+        pending(&amp;quot;working on another feature that temporarily breaks this one&amp;quot;)
+        # actual test code is here, will never be reached
+      end
+      
+      it &amp;quot;is pending when failing&amp;quot; do
+          pending &amp;quot;This will be marked as pending when the block will fail, otherwise (on success) will fail telling &#8216;Why am I pending if I pass?&#8217;&amp;quot; do
+              1.should == 2 # will mark example as pending
+              2.should == 2 # will fail asking to remove pending status of example
+          end
+      end
+      
+      # this will automatically generate name of the example based on the expectations inside it ~ &#8216;it&#8217; with no description
+      specify { [1,2,3].should have(3).items }
+      
+      #any helper methods, before/after, modules etc declared in the outer group are available in the inner group.
+      describe &amp;quot;outer&amp;quot; do
+          before(:each) { puts &amp;quot;first&amp;quot; }
+          describe &amp;quot;inner&amp;quot; do
+            before(:each) { puts &amp;quot;second&amp;quot; }
+            it { puts &amp;quot;third&amp;quot;}
+            after(:each) { puts &amp;quot;fourth&amp;quot; }
+          end
+          after(:each) { puts &amp;quot;fifth&amp;quot; }
+      end
+
+      # &#8216;describe&#8217; and &#8216;context&#8217; are equivalent
+      # I prefer to use &#8216;context&#8217; for defining an &#8216;environment&#8217;
+      context &amp;quot;when first created&amp;quot; do
+        it &amp;quot;is empty&amp;quot; do
+          movie_list = MovieList.new
+          movie_list.should be_empty
+        end
+      end
+
+      # I prefer to use &#8216;describe&#8217; for nouns, verbs; defining a nested set of specifications
+      describe &amp;quot;forward&amp;quot; do
+        it &amp;quot;should jump to a next movie&amp;quot; do
+          next_movie = MovieList.new(2).forward
+          next_movie.track_number.should == 2
+        end
+      end
+    end
+    
+    it &amp;quot;will have default subject that corresponds to the instance of first parameter in &#8216;describe&#8217;&amp;quot; do
+        subject.class.should be == MovieList
+    end
+    # unless subject is set explicitly
+    subject { MovieList.new(10) } # approximately similar to &#8216;before(:each)&#8217;
+    # no need to use &#8216;subject.should&#8217;, use &#8216;should&#8217;
+    specify { should have(10).items } # same as below
+    specify { subject.should have(10).items }
+    
+
+    # similar to specify { subject.track_number.should == 1}
+    its(:track_number) { should == 1 }
+
+    context &amp;quot;specs set-up&amp;quot; do
+        # we can run setup before each examle, or all of them
+        before(:each) do        
+            @new_on_each_example = YourObject.new
+        end
+        before do
+            @new_on_each_spec_less_verbose = YourObject.new
+        end
+        before(:all) do
+            # Avoid using it as it will bring the &#8216;shared state&#8217; into unit tests
+            @same_instance_for_all_examples_within_the_context = YourObject.new
+        end     
+        it &amp;quot;can access attributes defined in &#8216;before&#8217;&amp;quot; do
+            @new_on_each_example.should_not be_nil
+            @same_instance_for_all_examples_within_the_context.should_not be_nil
+        end
+        
+        # cleanup code can be run the same way using &#8216;after&#8217; instead of &#8216;before&#8217;
+        # Avoid using &#8216;after&#8217;       
+        # we can wrap examples: before + after + manual handling
+        # In most cases &#8216;before&#8217; + &#8216;after&#8217; will work better.
+        around do |example|         
+            DB.transaction { example.run }
+            # should handle errors manually, so do not do something like:
+            # DB.start_transaction
+            # example.run
+            # DB.rollback_transaction
+        end
+        it &amp;quot;should run within a transaction&amp;quot; do
+            MovieList.new.save!
+        end     
+        
+        let(:new_on_each_example) { ObjectPerExample.new }
+        it &amp;quot;can use method defined by &#8216;let&#8217;&amp;quot; do
+            new_on_each_example.should_not be_nil
+            # the object is memoized, so
+            new_on_each_example.should == new_on_each_example
+        end
+        
+        # defining helper methods within context may be more useful than setup
+        def forward(times) do
+            list = MoviewList.new(10)
+            list.forward(times).track_number
+        end
+        it &amp;quot;can use it multiple times&amp;quot; do
+            forward(1).should == 1
+            forward(2).should == 2
+            forward(10).should == 1
+        end
+        
+        # using &#8216;yield&#8217; with helper methods
+        def given_thing_with(options)
+            yield Thing.new do |thing|
+                thing.set_status(options[:status])
+            end
+        end
+        it &amp;quot;should do something when ok&amp;quot; do
+            given_thing_with(:status =&amp;gt; &#8216;ok&#8217;) do |thing|
+                thing.do_fancy_stuff(1, true, :move =&amp;gt; &#8216;left&#8217;, :obstacles =&amp;gt; nil)
+            end
+        end
+        
+        
+        # helpers can come from modules
+        module Helpers
+            def shared_help
+                [1,2,3]
+            end
+        end
+        include Helpers
+        it &amp;quot;can use helpers from Module&amp;quot; do
+            shared_help.should == [1,2,3]
+        end
+        # or this module can be included for ALL example groups automatically during configuration:
+        # RSpec.configure do |config|
+        #   config.include Helpers
+        # end
+    end
+    
+    
+    context &amp;quot;built-it stubbing, faking, mocking&amp;quot; do
+        it &amp;quot;can stub&amp;quot; do
+            source = double(&#8216;source&#8217;)           
+            source.stub(:fetch) { [1,2,3,4,5] }         
+            source.stub(:fetch_from).and_return([1,2]) # other way          
+            MovieList.stub(:find).and_return(MovieList.new) # stub class method
+            
+            implementing = double(&#8216;source&#8217;)
+            implementing.stub(:fetch) do |count|
+                count == 5 ? [1,2,3] : [4,5,6,7] # provide stub logic here, easy to use for Fakes
+            end         
+            # easily stub chains of calls
+            Blog.stub_chain(:posts, :published, :recent).and_return([1,2,3])
+            Blog.posts.published.recent.should == [1,2,3]
+        end
+        it &amp;quot;can ignore non-expected method calls (NullObject pattern)&amp;quot; do
+            source = double(&#8216;source&#8217;, :url =&amp;gt; &#8216;http://example.com&#8217;).as_null_object           
+            source.any_method_call_onwill_return_nil.should be_nil
+            # the source mock object will record the &#8216;any_method_call_onwill_return_nil&#8217; message internally though          
+        end
+        it &amp;quot;can set expectations&amp;quot; do
+            source = double(&#8216;source&#8217;)
+            # arguments
+            source.should_receive(:fetch).with(10, &amp;quot;abc&amp;quot;).and_return([1,2]) # expecting arguments (10, &amp;quot;abc&amp;quot;) otherwise failing
+            source.should_receive(:fetch).with(instance_of(Integer), &amp;quot;abc&amp;quot;).and_return([1,2]) # don&#8217;t care about 1st argument as long as it is Integer
+            source.should_receive(:fetch).with(10, anything).and_return([1,2]) # don&#8217;t care about 2nd argument at all
+            source.should_receive(:fetch).with(any_args) # same as not using &#8216;with&#8217; - don&#8217;t care about arguments
+            source.should_receive(:fetch).with(no_args) # 0 arguments, otherwise fail
+            source.should_receive(:fetch).with(hash_including(:count =&amp;gt; 10, :url =&amp;gt; &#8216;abc&#8217;)) # arg should be Hash with all the values mentioned
+            source.should_receive(:fetch).with(hash_not_including(:timeout =&amp;gt; 5)) # arg should be Hash that contains no &#8216;:timout=&amp;gt;5&#8217;
+            source.should_receive(:fetch).with(anything, /example/) # 2nd arg shuold match RegEx
+            source.should_receive(:fetch).and_return([1], [1,2], [1,2,3]) # 1st call - [1], 2nd - [1,2], 3rd - [1,2,3], 4th - [1] and so on &#8230;
+            # expectation overrides stub
+            source.stub(:fetch).and_return([1,2]) # will return [1,2] when called
+            source.should_recieve(:fetch).and_return([3,4]) # prev been overriden and will return [3,4]
+            # raising/throwing
+            source.should_receive(:fetch).and_raise # raise Exception
+            source.should_receive(:fetch).and_raise(ZeroDivisionError) # raise ZeroDivisionError
+            source.should_receive(:fetch).and_raise(Exception.new(&#8216;instance of aexception&#8217;)) # raise given exception
+            source.should_receive(:fetch).and_throw(:zero) # thro :zero                 
+            # order
+            source.should_receive(:first).ordered # order matters in relation to others marked as ordered
+            source.should_receive(:dosnt_matter) # don&#8217;t care about order as long as it is called
+            source.should_receive(:second).ordered # must be called after &#8216;first&#8217;
+            # order is not enforced across different objects:
+            double(&#8216;a&#8217;).should_receive(:a).ordered # not related to the next one
+            double(&#8216;b&#8217;).should_receive(:b).ordered # not related to the prev one
+            # how many times?
+            source.should_recieve(:fetch).exactly(1)times
+            source.should_recieve(:fetch).at_most(5)times
+            source.should_recieve(:fetch).at_least(2)times
+            source.should_recieve(:fetch).twice
+            source.should_recieve(:fetch).once
+            # negative expectations
+            source.should_recieve(:fetch).never
+            source.should_recieve(:fetch).exactly(0)times
+            source.should_not_recieve(:fetch)           
+            
+            
+            list = MovieList.new(source)
+            # if source.fetch has not been called, then example will fail
+        end
+        
+        context &amp;quot;custom expectations&amp;quot; do
+            # define custom expection class somewhere
+            class GreaterThanMatcher
+                def initialize(expected)
+                    @expected = expected
+                end
+                def description
+                    # will generate proper failure message and name of the example
+                    &amp;quot;a number greater than #{@expected}&amp;quot;
+                end
+                def ==(actual)
+                    # this will be called from
+                    actual &amp;gt; @expected
+                end
+            end
+            
+            # add this method to the RSpec (see set-up for global configuration)
+            def greater_than(floor)
+                GreaterThanMatcher.new(floor)
+            end
+            
+            it &amp;quot;can be used in expectations&amp;quot; do
+                subject.should_recieve(:forward).with(greater_than 3)
+                subject.forward(5)
+            end
+        end # custom matchers
+    end # mocking
+    
+
+    
+    
+    
+    # set of same examples shared accross multiple specs
+    # shared_examples_for should be in a separate file and defined outside of &#8216;describe&#8217;/&#8217;context&#8217;
+    shared_examples_for &amp;quot;any pizza&amp;quot; do
+        it &amp;quot;tastes really good&amp;quot; do
+            @pizza.should taste_really_good
+        end
+    end
+    
+    # to include the shared examples, into example groups:
+    # it will assume @pizza instance variable is available here
+    it_behaves_like &amp;quot;any pizza&amp;quot;
+    
+    context &#8216;defining examples dynamically - everybody knows that :)&#8217; do
+        {2 =&amp;gt; 4, 3 =&amp;gt; 6, 10 =&amp;gt; 20}.each do |input, output|
+            it &amp;quot;#{input} * 2 should be equal to #{output}&amp;quot; do
+                (input * 2).should == output
+                # will produce examples:
+                # - 2 * 2 should be equal to 4
+                # - 3 * 2 should be equal to 6
+                # - 10 * 2 should be equal to 20
+            end
+        end
+    end
+    
+    
+    context &amp;quot;matchers&amp;quot; do
+        it &amp;quot;shows built-in matchers&amp;quot; do
+            # TODO: describe ===, eql, equal
+            1.should == 1
+            1.should_not == 2 # NOT 1.should != 2
+            1.should_not equal(2) # same as above
+            1.should_not == 2
+            5.should be &amp;gt; 3
+            5.should be &amp;lt;= 5
+            (1.251).should be_close(1.25, 0.005)
+            (1.251).should be_within(0.005).of 1.25 # &amp;gt;= RSpec 2.1
+            &amp;quot;reg exp&amp;quot;.should =~ /exp/
+            [1,2].should include(1)
+            1.should respond_to(:to_s)
+            
+            true.should be_true
+            0.should be_true
+            &amp;quot;this&amp;quot;.should be_true
+            
+            lambda { Object.new.explodde! }.should raise_error(NameError)
+            
+            # nothing fits
+            5.should satisfy { |it| it == 5 }
+        end
+        
+        it &amp;quot;shows cool things&amp;quot; do
+            count = 1
+            expect {
+                count = 3
+            }.to change { count }.by(2)
+
+            expect {
+                # not changing
+            }.to_not change { count }
+            
+            count = 1
+            expect {
+                count = 3
+            }.to change { count }.to(3)
+            
+            count = 1
+            expect {
+                count = 3
+            }.to change { count }from(1).to(3)
+            
+            # raise-rescue - exception handling
+            expect {2 / 0}.to raise_error(&amp;quot;divided by 0&amp;quot;)
+            expect {2 / 0}.to raise_error(/by 0/)
+            expect {2 / 0}.to raise_error(ZeroDivisionError)
+            
+            # try-catch - expected circumstance handling
+            lambda {  throw :room_is_full }.should throw_symbol(:room_is_full)
+            
+            # predicates
+            nil.should be_nil #call nil.nil?
+            [].should be_empty # calls [].empty?
+            [1,2,3].should_not be_empty # calls [1,2,3].empty
+            
+            # convert anything that begins with have_ to a predicate on the target object beginning with has_
+            {:id =&amp;gt; 1}.has_key?(:id).should == true
+            # can be written as
+            {:id =&amp;gt; 1}.should have_key(:id) # calls {:id =&amp;gt; 1}.has_key?(:id)
+            
+            # collections           
+            obj = {}
+            def obj.numbers
+             [1,2,3,4]
+            end
+            
+            obj.should have(4).numbers # calls obj.numbers.length
+            [1,2,3,4].should have(4).items # &#8216;items&#8217; is &#8216;reserved&#8217; to say &amp;quot;ensure number of items on the collection&amp;quot;
+            [1,2,3,4].should be_any {|n| n % 2 == 0} # [1,2,3,4].any? {|n| n %% 2 == 0}.should be_true
+            &amp;quot;stringy&amp;quot;.should have(7).charaters # same as items, just syntactic sugar
+            [1,2,3,4].should have_exactly(24).items # same as &#8216;have&#8217;
+            obj.should have_at_least(3).numbers
+            
+            
+        end
+    end # built-in matchers
+    
+    
+    
+    
+    
+    context &amp;quot;custom matchers&amp;quot; do
+        # TODO: describe multiple ways
+        
+        #define class
+        class SimilarTo
+            # mandatory - link to the object under test
+            def initialize(it)
+                # object under test
+                @it = it
+            end         
+            # mandatory - check the positive condition
+            def matches?(that)
+                @that = that # save to use it in messages
+                @that.to_s.downcase.should == @it.to_s.downcase
+            end
+            # optional - opoosite to mathch?
+            def does_not_matche?(that)
+                result = !matches?(that)
+                @that, @it = @it, @that # swap for negative condition or additionally cusomtize messages
+                result # don&#8217;t forget to return
+            end
+            # mandatory
+            def failure_message_for_should
+                &amp;quot;expected #{@it} to be similar to #{@that}&amp;quot;
+            end
+            # optional
+            def failure_message_for_should_not
+                &amp;quot;expected #{@it} to be different from #{@that}&amp;quot;
+            end
+            #optional
+            def description
+                &amp;quot;#{@it} should be similar to #{@that}&amp;quot;
+            end
+        end
+        
+        #define method on example (see set-up to incude in all examples)
+        def similar_to(that)
+            SimilarTo.new(that)
+        end
+    end # custom matchers
+    
+    
+    
+    
+    context &amp;quot;macros&amp;quot; do
+        module ControllerMacros     
+          def should_render(template)
+            it &amp;quot;should render the #{template} template&amp;quot; do
+              do_request
+              response.should render_template(template)
+            end
+          end
+
+          def should_assign(hash)
+            variable_name = hash.keys.first
+            model, method = hash[variable_name]
+            model_access_method = [model, method].join(&#8216;.&#8217;)
+            it &amp;quot;should assign @#{variable_name} =&amp;gt; #{model_access_method}&amp;quot; do
+              expected = &amp;quot;the value returned by #{model_access_method}&amp;quot;
+              model.should_receive(method).and_return(expected)
+              do_request
+              assigns[variable_name].should == expected
+            end
+          end
+
+          def get(action)
+            define_method :do_request do
+              get action
+            end
+            yield
+          end
+        end
+
+        RSpec.configure do |config|
+          config.use_transactional_fixtures = true
+          config.use_instantiated_fixtures  = false
+          config.fixture_path = RAILS_ROOT + &#8216;/spec/fixtures/&#8217;
+          config.extend(ControllerMacros, :type =&amp;gt; :controller)
+        end     
+    end # macros
+    
+end # module&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+
+
+
+</content>
+  </entry>
   
   <entry>
     <title>How To Fix Octopress Pygments Error on Arch Linux</title>
