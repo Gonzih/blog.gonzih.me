@@ -4,7 +4,7 @@
   <title>Gonzih&#8217;s dev blog</title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-09-22T21:28:36+03:00</updated>
+  <updated>2011-09-30T10:46:45+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,6 +13,41 @@
     
   </author>
 
+  
+  <entry>
+    <title>Set New PostgreSQL Databases Encoding to Unicode</title>
+    <link href="http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/"/>
+    <updated>2011-09-30T10:42:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode</id>
+    <content type="html">&lt;p&gt;You must change encoding for template1. For do that run following.&lt;/p&gt;
+
+&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;6&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;7&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;8&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;9&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;10&lt;/span&gt;
+&lt;span class=&#8217;line&#8217;&gt;11&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8221;&gt;&lt;div class=&#8217;line&#8217;&gt;su - postgres
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;psql
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;UPDATE pg_database SET datistemplate = FALSE WHERE datname = &#8216;template1&#8217;;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;DROP DATABASE template1;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = &#8216;UNICODE&#8217;;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;UPDATE pg_database SET datistemplate = TRUE WHERE datname = &#8216;template1&#8217;;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;#recomended
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;\c template1
+&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;VACUUM FREEZE;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;a href=&quot;http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&quot;&gt;via&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Nice Rspec 2 Syntax Cheat Sheet</title>
