@@ -4,7 +4,7 @@
   <title>Gonzih&#8217;s dev blog</title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-09-30T10:46:45+03:00</updated>
+  <updated>2011-10-18T20:12:48+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name>Max Gonzih</name>
@@ -13,6 +13,17 @@
     
   </author>
 
+  
+  <entry>
+    <title>Nice Vim Keys Map</title>
+    <link href="http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map/"/>
+    <updated>2011-10-18T20:05:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map</id>
+    <content type="html">&lt;p&gt;Large &lt;a href=&quot;https://github.com/Gonzih/vim-keymap/raw/master/new/new.png&quot;&gt;image&lt;/a&gt; (2.4 Megabytes).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Gonzih/vim-keymap/&quot;&gt;Source on github&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Set New PostgreSQL Databases Encoding to Unicode</title>
