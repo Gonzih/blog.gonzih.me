@@ -1,0 +1,100 @@
+# for 3.0 rails
+
+# create rvmrc file
+create_file ".rvmrc", "rvm 1.9.2"
+
+gem "jquery-rails"
+gem "postgres"
+#gem "kaminari"
+#gem "carrierwave"
+#gem "resque"
+gem "yaml_db", :require => false
+
+#group :development
+gem "nifty-generators",  :group => :development
+gem "annotate",          :group => :development, :require => false
+gem "capistrano",        :group => :development, :require => false
+gem "capistrano_colors", :group => :development, :require => false
+
+#group :test
+gem "capybara",         :group => :test
+gem "fabrication",      :group => :test
+gem "ffaker",           :group => :test
+gem "launchy",          :group => :test
+gem "database_cleaner", :group => :test
+gem "fakeweb",          :group => :test
+gem "timecop",          :group => :test
+gem "email_spec",       :group => :test
+gem "guard-rspec",      :group => :test
+
+gem "rspec-rails", :group => [ :development, :test ]
+
+gem "whenever",   :group => [ :development, :production ], :require => false
+gem "capistrano", :group => [ :development, :production ], :require => false
+
+run "bundle install --path vendor/bundle"
+
+generate "rspec:install"
+run "bundle exec guard init rspec"
+remove_file "public/javascripts/rails.js" # jquery-rails replaces this
+generate "jquery:install --ui"
+run "echo '--format documentation' >> .rspec"
+# clean up rails defaults
+remove_file "public/index.html"
+remove_file "rm public/images/rails.png"
+
+
+#files injections
+inject_into_file "config/application.rb", :after => "config.filter_parameters += [:password]" do
+  <<-eos
+    # Customize generators
+    config.generators do |g|
+      g.stylesheets false
+      g.test_framework      :rspec, :fixture => true
+      g.fixture_replacement :fabrication
+    end
+  eos
+end
+
+inject_into_file "spes/spec_helper.rb", :after => "RSpec.configure do |config|" do
+  <<-eos
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.clean
+    end
+
+  eos
+end
+
+inject_into_file "spes/spec_helper.rb", :after => "require 'rspec/rails'" do
+  <<-eos
+    require "email_spec"
+  eos
+end
+
+inject_into_file "spes/spec_helper.rb", :after => "RSpec.configure do |config|" do
+  <<-eos
+    Spec::Runner.configure do |config|
+      config.include(EmailSpec::Helpers)
+      config.include(EmailSpec::Matchers)
+    end
+
+  eos
+end
+
+rake "db:create", :env => "development"
+rake "db:create", :env => "test"
+rake "db:migrate"
+
+# commit to git
+git :init
+git :add => "."
+git :commit => "-a -m 'create initial bdd application'"
+
+say <<-eos
+  All done!
+eos
+
