@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="nb">cd</span> /sdcard
+wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
+<span class="nb">cd</span> /
+tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
+<span class="c"># for non cyanogen users</span>
+wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
+<span class="c"># for cyanogen users</span>
+wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+<span class="c"># add /data/xbin to your path</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/xbin:$PATH&quot;</span>
+<span class="c"># make /system writable</span>
+mount -o remount,rw /system
+opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
+opkg -f /data/local/opkg.conf update
+opkg install opkg
+mount -o remount,ro /system
+</pre>
+</div>
