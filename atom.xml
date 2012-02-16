@@ -1,132 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title>Gonzih&#8217;s dev blog</title>
+  <title><![CDATA[Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2011-10-18T20:12:48+03:00</updated>
+  <updated>2012-02-16T10:59:24+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
-    <name>Max Gonzih</name>
-    
-      <email>iam@gonzih.org</email>
-    
+    <name><![CDATA[Max Gonzih]]></name>
+    <email><![CDATA[iam@gonzih.org]]></email>
   </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title>Nice Vim Keys Map</title>
+    <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
     <link href="http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map/"/>
     <updated>2011-10-18T20:05:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map</id>
-    <content type="html">&lt;p&gt;Large &lt;a href=&quot;https://github.com/Gonzih/vim-keymap/raw/master/new/new.png&quot;&gt;image&lt;/a&gt; (2.4 Megabytes).&lt;/p&gt;
+    <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/Gonzih/vim-keymap/&quot;&gt;Source on github&lt;/a&gt;.&lt;/p&gt;
-</content>
+<p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
+]]></content>
   </entry>
   
   <entry>
-    <title>Set New PostgreSQL Databases Encoding to Unicode</title>
+    <title type="html"><![CDATA[Set New PostgreSQL Databases Encoding to Unicode]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/"/>
     <updated>2011-09-30T10:42:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode</id>
-    <content type="html">&lt;p&gt;You must change encoding for template1. For do that run following.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>You must change encoding for template1. For do that run following.</p>
 
-&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;6&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;7&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;8&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;9&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;10&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;11&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8221;&gt;&lt;div class=&#8217;line&#8217;&gt;su - postgres
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;psql
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;UPDATE pg_database SET datistemplate = FALSE WHERE datname = &#8216;template1&#8217;;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;DROP DATABASE template1;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = &#8216;UNICODE&#8217;;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;UPDATE pg_database SET datistemplate = TRUE WHERE datname = &#8216;template1&#8217;;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;#recomended
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;\c template1
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;VACUUM FREEZE;&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>su - postgres
+</span><span class='line'>psql
+</span><span class='line'>
+</span><span class='line'>UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+</span><span class='line'>DROP DATABASE template1;
+</span><span class='line'>CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+</span><span class='line'>UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+</span><span class='line'>
+</span><span class='line'>#recomended
+</span><span class='line'>\c template1
+</span><span class='line'>VACUUM FREEZE;</span></code></pre></td></tr></table></div></figure>
 
 
-&lt;p&gt;&lt;a href=&quot;http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&quot;&gt;via&lt;/a&gt;&lt;/p&gt;
-</content>
+<p><a href="http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+]]></content>
   </entry>
   
   <entry>
-    <title>Nice Rspec 2 Syntax Cheat Sheet</title>
+    <title type="html"><![CDATA[Nice Rspec 2 Syntax Cheat Sheet]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
     <updated>2011-09-22T21:26:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
-    <content type="html">&lt;!&#8211; more &#8211;&gt;
+    <content type="html"><![CDATA[<!-- more -->
 
 
-&lt;div&gt;&lt;script src=&#8217;https://gist.github.com/663876.js?file=&#8217;&gt;&lt;/script&gt;
-&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;# RSpec 2.0 syntax Cheet Sheet by http://ApproachE.com
+<div><script src='https://gist.github.com/663876.js?file='></script>
+<noscript><pre><code># RSpec 2.0 syntax Cheet Sheet by http://ApproachE.com
 
-# defining spec within a module will automatically pick Player::MovieList as a &#8216;subject&#8217; (see below)
+# defining spec within a module will automatically pick Player::MovieList as a 'subject' (see below)
 module Player
-    describe MovieList, &amp;quot;with optional description&amp;quot; do
+    describe MovieList, &quot;with optional description&quot; do
           
-      it &amp;quot;is pending example, so that you can write ones quickly&amp;quot;
+      it &quot;is pending example, so that you can write ones quickly&quot;
       
-      it &amp;quot;is already working example that we want to suspend from failing temporarily&amp;quot; do
-        pending(&amp;quot;working on another feature that temporarily breaks this one&amp;quot;)
+      it &quot;is already working example that we want to suspend from failing temporarily&quot; do
+        pending(&quot;working on another feature that temporarily breaks this one&quot;)
         # actual test code is here, will never be reached
       end
       
-      it &amp;quot;is pending when failing&amp;quot; do
-          pending &amp;quot;This will be marked as pending when the block will fail, otherwise (on success) will fail telling &#8216;Why am I pending if I pass?&#8217;&amp;quot; do
+      it &quot;is pending when failing&quot; do
+          pending &quot;This will be marked as pending when the block will fail, otherwise (on success) will fail telling 'Why am I pending if I pass?'&quot; do
               1.should == 2 # will mark example as pending
               2.should == 2 # will fail asking to remove pending status of example
           end
       end
       
-      # this will automatically generate name of the example based on the expectations inside it ~ &#8216;it&#8217; with no description
+      # this will automatically generate name of the example based on the expectations inside it ~ 'it' with no description
       specify { [1,2,3].should have(3).items }
       
       #any helper methods, before/after, modules etc declared in the outer group are available in the inner group.
-      describe &amp;quot;outer&amp;quot; do
-          before(:each) { puts &amp;quot;first&amp;quot; }
-          describe &amp;quot;inner&amp;quot; do
-            before(:each) { puts &amp;quot;second&amp;quot; }
-            it { puts &amp;quot;third&amp;quot;}
-            after(:each) { puts &amp;quot;fourth&amp;quot; }
+      describe &quot;outer&quot; do
+          before(:each) { puts &quot;first&quot; }
+          describe &quot;inner&quot; do
+            before(:each) { puts &quot;second&quot; }
+            it { puts &quot;third&quot;}
+            after(:each) { puts &quot;fourth&quot; }
           end
-          after(:each) { puts &amp;quot;fifth&amp;quot; }
+          after(:each) { puts &quot;fifth&quot; }
       end
 
-      # &#8216;describe&#8217; and &#8216;context&#8217; are equivalent
-      # I prefer to use &#8216;context&#8217; for defining an &#8216;environment&#8217;
-      context &amp;quot;when first created&amp;quot; do
-        it &amp;quot;is empty&amp;quot; do
+      # 'describe' and 'context' are equivalent
+      # I prefer to use 'context' for defining an 'environment'
+      context &quot;when first created&quot; do
+        it &quot;is empty&quot; do
           movie_list = MovieList.new
           movie_list.should be_empty
         end
       end
 
-      # I prefer to use &#8216;describe&#8217; for nouns, verbs; defining a nested set of specifications
-      describe &amp;quot;forward&amp;quot; do
-        it &amp;quot;should jump to a next movie&amp;quot; do
+      # I prefer to use 'describe' for nouns, verbs; defining a nested set of specifications
+      describe &quot;forward&quot; do
+        it &quot;should jump to a next movie&quot; do
           next_movie = MovieList.new(2).forward
           next_movie.track_number.should == 2
         end
       end
     end
     
-    it &amp;quot;will have default subject that corresponds to the instance of first parameter in &#8216;describe&#8217;&amp;quot; do
+    it &quot;will have default subject that corresponds to the instance of first parameter in 'describe'&quot; do
         subject.class.should be == MovieList
     end
     # unless subject is set explicitly
-    subject { MovieList.new(10) } # approximately similar to &#8216;before(:each)&#8217;
-    # no need to use &#8216;subject.should&#8217;, use &#8216;should&#8217;
+    subject { MovieList.new(10) } # approximately similar to 'before(:each)'
+    # no need to use 'subject.should', use 'should'
     specify { should have(10).items } # same as below
     specify { subject.should have(10).items }
     
@@ -134,7 +133,7 @@ module Player
     # similar to specify { subject.track_number.should == 1}
     its(:track_number) { should == 1 }
 
-    context &amp;quot;specs set-up&amp;quot; do
+    context &quot;specs set-up&quot; do
         # we can run setup before each examle, or all of them
         before(:each) do        
             @new_on_each_example = YourObject.new
@@ -143,18 +142,18 @@ module Player
             @new_on_each_spec_less_verbose = YourObject.new
         end
         before(:all) do
-            # Avoid using it as it will bring the &#8216;shared state&#8217; into unit tests
+            # Avoid using it as it will bring the 'shared state' into unit tests
             @same_instance_for_all_examples_within_the_context = YourObject.new
         end     
-        it &amp;quot;can access attributes defined in &#8216;before&#8217;&amp;quot; do
+        it &quot;can access attributes defined in 'before'&quot; do
             @new_on_each_example.should_not be_nil
             @same_instance_for_all_examples_within_the_context.should_not be_nil
         end
         
-        # cleanup code can be run the same way using &#8216;after&#8217; instead of &#8216;before&#8217;
-        # Avoid using &#8216;after&#8217;       
+        # cleanup code can be run the same way using 'after' instead of 'before'
+        # Avoid using 'after'       
         # we can wrap examples: before + after + manual handling
-        # In most cases &#8216;before&#8217; + &#8216;after&#8217; will work better.
+        # In most cases 'before' + 'after' will work better.
         around do |example|         
             DB.transaction { example.run }
             # should handle errors manually, so do not do something like:
@@ -162,12 +161,12 @@ module Player
             # example.run
             # DB.rollback_transaction
         end
-        it &amp;quot;should run within a transaction&amp;quot; do
+        it &quot;should run within a transaction&quot; do
             MovieList.new.save!
         end     
         
         let(:new_on_each_example) { ObjectPerExample.new }
-        it &amp;quot;can use method defined by &#8216;let&#8217;&amp;quot; do
+        it &quot;can use method defined by 'let'&quot; do
             new_on_each_example.should_not be_nil
             # the object is memoized, so
             new_on_each_example.should == new_on_each_example
@@ -178,21 +177,21 @@ module Player
             list = MoviewList.new(10)
             list.forward(times).track_number
         end
-        it &amp;quot;can use it multiple times&amp;quot; do
+        it &quot;can use it multiple times&quot; do
             forward(1).should == 1
             forward(2).should == 2
             forward(10).should == 1
         end
         
-        # using &#8216;yield&#8217; with helper methods
+        # using 'yield' with helper methods
         def given_thing_with(options)
             yield Thing.new do |thing|
                 thing.set_status(options[:status])
             end
         end
-        it &amp;quot;should do something when ok&amp;quot; do
-            given_thing_with(:status =&amp;gt; &#8216;ok&#8217;) do |thing|
-                thing.do_fancy_stuff(1, true, :move =&amp;gt; &#8216;left&#8217;, :obstacles =&amp;gt; nil)
+        it &quot;should do something when ok&quot; do
+            given_thing_with(:status =&gt; 'ok') do |thing|
+                thing.do_fancy_stuff(1, true, :move =&gt; 'left', :obstacles =&gt; nil)
             end
         end
         
@@ -204,7 +203,7 @@ module Player
             end
         end
         include Helpers
-        it &amp;quot;can use helpers from Module&amp;quot; do
+        it &quot;can use helpers from Module&quot; do
             shared_help.should == [1,2,3]
         end
         # or this module can be included for ALL example groups automatically during configuration:
@@ -214,14 +213,14 @@ module Player
     end
     
     
-    context &amp;quot;built-it stubbing, faking, mocking&amp;quot; do
-        it &amp;quot;can stub&amp;quot; do
-            source = double(&#8216;source&#8217;)           
+    context &quot;built-it stubbing, faking, mocking&quot; do
+        it &quot;can stub&quot; do
+            source = double('source')           
             source.stub(:fetch) { [1,2,3,4,5] }         
             source.stub(:fetch_from).and_return([1,2]) # other way          
             MovieList.stub(:find).and_return(MovieList.new) # stub class method
             
-            implementing = double(&#8216;source&#8217;)
+            implementing = double('source')
             implementing.stub(:fetch) do |count|
                 count == 5 ? [1,2,3] : [4,5,6,7] # provide stub logic here, easy to use for Fakes
             end         
@@ -229,38 +228,38 @@ module Player
             Blog.stub_chain(:posts, :published, :recent).and_return([1,2,3])
             Blog.posts.published.recent.should == [1,2,3]
         end
-        it &amp;quot;can ignore non-expected method calls (NullObject pattern)&amp;quot; do
-            source = double(&#8216;source&#8217;, :url =&amp;gt; &#8216;http://example.com&#8217;).as_null_object           
+        it &quot;can ignore non-expected method calls (NullObject pattern)&quot; do
+            source = double('source', :url =&gt; 'http://example.com').as_null_object           
             source.any_method_call_onwill_return_nil.should be_nil
-            # the source mock object will record the &#8216;any_method_call_onwill_return_nil&#8217; message internally though          
+            # the source mock object will record the 'any_method_call_onwill_return_nil' message internally though          
         end
-        it &amp;quot;can set expectations&amp;quot; do
-            source = double(&#8216;source&#8217;)
+        it &quot;can set expectations&quot; do
+            source = double('source')
             # arguments
-            source.should_receive(:fetch).with(10, &amp;quot;abc&amp;quot;).and_return([1,2]) # expecting arguments (10, &amp;quot;abc&amp;quot;) otherwise failing
-            source.should_receive(:fetch).with(instance_of(Integer), &amp;quot;abc&amp;quot;).and_return([1,2]) # don&#8217;t care about 1st argument as long as it is Integer
-            source.should_receive(:fetch).with(10, anything).and_return([1,2]) # don&#8217;t care about 2nd argument at all
-            source.should_receive(:fetch).with(any_args) # same as not using &#8216;with&#8217; - don&#8217;t care about arguments
+            source.should_receive(:fetch).with(10, &quot;abc&quot;).and_return([1,2]) # expecting arguments (10, &quot;abc&quot;) otherwise failing
+            source.should_receive(:fetch).with(instance_of(Integer), &quot;abc&quot;).and_return([1,2]) # don't care about 1st argument as long as it is Integer
+            source.should_receive(:fetch).with(10, anything).and_return([1,2]) # don't care about 2nd argument at all
+            source.should_receive(:fetch).with(any_args) # same as not using 'with' - don't care about arguments
             source.should_receive(:fetch).with(no_args) # 0 arguments, otherwise fail
-            source.should_receive(:fetch).with(hash_including(:count =&amp;gt; 10, :url =&amp;gt; &#8216;abc&#8217;)) # arg should be Hash with all the values mentioned
-            source.should_receive(:fetch).with(hash_not_including(:timeout =&amp;gt; 5)) # arg should be Hash that contains no &#8216;:timout=&amp;gt;5&#8217;
+            source.should_receive(:fetch).with(hash_including(:count =&gt; 10, :url =&gt; 'abc')) # arg should be Hash with all the values mentioned
+            source.should_receive(:fetch).with(hash_not_including(:timeout =&gt; 5)) # arg should be Hash that contains no ':timout=&gt;5'
             source.should_receive(:fetch).with(anything, /example/) # 2nd arg shuold match RegEx
-            source.should_receive(:fetch).and_return([1], [1,2], [1,2,3]) # 1st call - [1], 2nd - [1,2], 3rd - [1,2,3], 4th - [1] and so on &#8230;
+            source.should_receive(:fetch).and_return([1], [1,2], [1,2,3]) # 1st call - [1], 2nd - [1,2], 3rd - [1,2,3], 4th - [1] and so on ...
             # expectation overrides stub
             source.stub(:fetch).and_return([1,2]) # will return [1,2] when called
             source.should_recieve(:fetch).and_return([3,4]) # prev been overriden and will return [3,4]
             # raising/throwing
             source.should_receive(:fetch).and_raise # raise Exception
             source.should_receive(:fetch).and_raise(ZeroDivisionError) # raise ZeroDivisionError
-            source.should_receive(:fetch).and_raise(Exception.new(&#8216;instance of aexception&#8217;)) # raise given exception
+            source.should_receive(:fetch).and_raise(Exception.new('instance of aexception')) # raise given exception
             source.should_receive(:fetch).and_throw(:zero) # thro :zero                 
             # order
             source.should_receive(:first).ordered # order matters in relation to others marked as ordered
-            source.should_receive(:dosnt_matter) # don&#8217;t care about order as long as it is called
-            source.should_receive(:second).ordered # must be called after &#8216;first&#8217;
+            source.should_receive(:dosnt_matter) # don't care about order as long as it is called
+            source.should_receive(:second).ordered # must be called after 'first'
             # order is not enforced across different objects:
-            double(&#8216;a&#8217;).should_receive(:a).ordered # not related to the next one
-            double(&#8216;b&#8217;).should_receive(:b).ordered # not related to the prev one
+            double('a').should_receive(:a).ordered # not related to the next one
+            double('b').should_receive(:b).ordered # not related to the prev one
             # how many times?
             source.should_recieve(:fetch).exactly(1)times
             source.should_recieve(:fetch).at_most(5)times
@@ -277,7 +276,7 @@ module Player
             # if source.fetch has not been called, then example will fail
         end
         
-        context &amp;quot;custom expectations&amp;quot; do
+        context &quot;custom expectations&quot; do
             # define custom expection class somewhere
             class GreaterThanMatcher
                 def initialize(expected)
@@ -285,11 +284,11 @@ module Player
                 end
                 def description
                     # will generate proper failure message and name of the example
-                    &amp;quot;a number greater than #{@expected}&amp;quot;
+                    &quot;a number greater than #{@expected}&quot;
                 end
                 def ==(actual)
                     # this will be called from
-                    actual &amp;gt; @expected
+                    actual &gt; @expected
                 end
             end
             
@@ -298,7 +297,7 @@ module Player
                 GreaterThanMatcher.new(floor)
             end
             
-            it &amp;quot;can be used in expectations&amp;quot; do
+            it &quot;can be used in expectations&quot; do
                 subject.should_recieve(:forward).with(greater_than 3)
                 subject.forward(5)
             end
@@ -310,20 +309,20 @@ module Player
     
     
     # set of same examples shared accross multiple specs
-    # shared_examples_for should be in a separate file and defined outside of &#8216;describe&#8217;/&#8217;context&#8217;
-    shared_examples_for &amp;quot;any pizza&amp;quot; do
-        it &amp;quot;tastes really good&amp;quot; do
+    # shared_examples_for should be in a separate file and defined outside of 'describe'/'context'
+    shared_examples_for &quot;any pizza&quot; do
+        it &quot;tastes really good&quot; do
             @pizza.should taste_really_good
         end
     end
     
     # to include the shared examples, into example groups:
     # it will assume @pizza instance variable is available here
-    it_behaves_like &amp;quot;any pizza&amp;quot;
+    it_behaves_like &quot;any pizza&quot;
     
-    context &#8216;defining examples dynamically - everybody knows that :)&#8217; do
-        {2 =&amp;gt; 4, 3 =&amp;gt; 6, 10 =&amp;gt; 20}.each do |input, output|
-            it &amp;quot;#{input} * 2 should be equal to #{output}&amp;quot; do
+    context 'defining examples dynamically - everybody knows that :)' do
+        {2 =&gt; 4, 3 =&gt; 6, 10 =&gt; 20}.each do |input, output|
+            it &quot;#{input} * 2 should be equal to #{output}&quot; do
                 (input * 2).should == output
                 # will produce examples:
                 # - 2 * 2 should be equal to 4
@@ -334,24 +333,24 @@ module Player
     end
     
     
-    context &amp;quot;matchers&amp;quot; do
-        it &amp;quot;shows built-in matchers&amp;quot; do
+    context &quot;matchers&quot; do
+        it &quot;shows built-in matchers&quot; do
             # TODO: describe ===, eql, equal
             1.should == 1
             1.should_not == 2 # NOT 1.should != 2
             1.should_not equal(2) # same as above
             1.should_not == 2
-            5.should be &amp;gt; 3
-            5.should be &amp;lt;= 5
+            5.should be &gt; 3
+            5.should be &lt;= 5
             (1.251).should be_close(1.25, 0.005)
-            (1.251).should be_within(0.005).of 1.25 # &amp;gt;= RSpec 2.1
-            &amp;quot;reg exp&amp;quot;.should =~ /exp/
+            (1.251).should be_within(0.005).of 1.25 # &gt;= RSpec 2.1
+            &quot;reg exp&quot;.should =~ /exp/
             [1,2].should include(1)
             1.should respond_to(:to_s)
             
             true.should be_true
             0.should be_true
-            &amp;quot;this&amp;quot;.should be_true
+            &quot;this&quot;.should be_true
             
             lambda { Object.new.explodde! }.should raise_error(NameError)
             
@@ -359,7 +358,7 @@ module Player
             5.should satisfy { |it| it == 5 }
         end
         
-        it &amp;quot;shows cool things&amp;quot; do
+        it &quot;shows cool things&quot; do
             count = 1
             expect {
                 count = 3
@@ -380,7 +379,7 @@ module Player
             }.to change { count }from(1).to(3)
             
             # raise-rescue - exception handling
-            expect {2 / 0}.to raise_error(&amp;quot;divided by 0&amp;quot;)
+            expect {2 / 0}.to raise_error(&quot;divided by 0&quot;)
             expect {2 / 0}.to raise_error(/by 0/)
             expect {2 / 0}.to raise_error(ZeroDivisionError)
             
@@ -393,9 +392,9 @@ module Player
             [1,2,3].should_not be_empty # calls [1,2,3].empty
             
             # convert anything that begins with have_ to a predicate on the target object beginning with has_
-            {:id =&amp;gt; 1}.has_key?(:id).should == true
+            {:id =&gt; 1}.has_key?(:id).should == true
             # can be written as
-            {:id =&amp;gt; 1}.should have_key(:id) # calls {:id =&amp;gt; 1}.has_key?(:id)
+            {:id =&gt; 1}.should have_key(:id) # calls {:id =&gt; 1}.has_key?(:id)
             
             # collections           
             obj = {}
@@ -404,10 +403,10 @@ module Player
             end
             
             obj.should have(4).numbers # calls obj.numbers.length
-            [1,2,3,4].should have(4).items # &#8216;items&#8217; is &#8216;reserved&#8217; to say &amp;quot;ensure number of items on the collection&amp;quot;
+            [1,2,3,4].should have(4).items # 'items' is 'reserved' to say &quot;ensure number of items on the collection&quot;
             [1,2,3,4].should be_any {|n| n % 2 == 0} # [1,2,3,4].any? {|n| n %% 2 == 0}.should be_true
-            &amp;quot;stringy&amp;quot;.should have(7).charaters # same as items, just syntactic sugar
-            [1,2,3,4].should have_exactly(24).items # same as &#8216;have&#8217;
+            &quot;stringy&quot;.should have(7).charaters # same as items, just syntactic sugar
+            [1,2,3,4].should have_exactly(24).items # same as 'have'
             obj.should have_at_least(3).numbers
             
             
@@ -418,7 +417,7 @@ module Player
     
     
     
-    context &amp;quot;custom matchers&amp;quot; do
+    context &quot;custom matchers&quot; do
         # TODO: describe multiple ways
         
         #define class
@@ -437,19 +436,19 @@ module Player
             def does_not_matche?(that)
                 result = !matches?(that)
                 @that, @it = @it, @that # swap for negative condition or additionally cusomtize messages
-                result # don&#8217;t forget to return
+                result # don't forget to return
             end
             # mandatory
             def failure_message_for_should
-                &amp;quot;expected #{@it} to be similar to #{@that}&amp;quot;
+                &quot;expected #{@it} to be similar to #{@that}&quot;
             end
             # optional
             def failure_message_for_should_not
-                &amp;quot;expected #{@it} to be different from #{@that}&amp;quot;
+                &quot;expected #{@it} to be different from #{@that}&quot;
             end
             #optional
             def description
-                &amp;quot;#{@it} should be similar to #{@that}&amp;quot;
+                &quot;#{@it} should be similar to #{@that}&quot;
             end
         end
         
@@ -462,10 +461,10 @@ module Player
     
     
     
-    context &amp;quot;macros&amp;quot; do
+    context &quot;macros&quot; do
         module ControllerMacros     
           def should_render(template)
-            it &amp;quot;should render the #{template} template&amp;quot; do
+            it &quot;should render the #{template} template&quot; do
               do_request
               response.should render_template(template)
             end
@@ -474,9 +473,9 @@ module Player
           def should_assign(hash)
             variable_name = hash.keys.first
             model, method = hash[variable_name]
-            model_access_method = [model, method].join(&#8216;.&#8217;)
-            it &amp;quot;should assign @#{variable_name} =&amp;gt; #{model_access_method}&amp;quot; do
-              expected = &amp;quot;the value returned by #{model_access_method}&amp;quot;
+            model_access_method = [model, method].join('.')
+            it &quot;should assign @#{variable_name} =&gt; #{model_access_method}&quot; do
+              expected = &quot;the value returned by #{model_access_method}&quot;
               model.should_receive(method).and_return(expected)
               do_request
               assigns[variable_name].should == expected
@@ -494,338 +493,348 @@ module Player
         RSpec.configure do |config|
           config.use_transactional_fixtures = true
           config.use_instantiated_fixtures  = false
-          config.fixture_path = RAILS_ROOT + &#8216;/spec/fixtures/&#8217;
-          config.extend(ControllerMacros, :type =&amp;gt; :controller)
+          config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+          config.extend(ControllerMacros, :type =&gt; :controller)
         end     
     end # macros
     
-end # module&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+end # module</code></pre></noscript></div>
 
 
 
-</content>
+]]></content>
   </entry>
   
   <entry>
-    <title>How To Fix Octopress Pygments Error on Arch Linux</title>
+    <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
     <updated>2011-09-21T18:28:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
-    <content type="html">&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.</p>
 
-&lt;figure role=code&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8221;&gt;&lt;div class=&#8217;line&#8217;&gt;Building site: source -&amp;gt; public
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;  File &quot;&amp;lt;string&amp;gt;&quot;, line 1
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;    import sys; print sys.executable
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;                        ^
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;SyntaxError: invalid syntax&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
-
-
-&lt;p&gt;It&amp;#8217;s happens because RubyPython use Python version 2 by calling &amp;#8220;python&amp;#8221; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
-
-&lt;p&gt;For fix simple add ruby file to plugins directory with next code.&lt;/p&gt;
-
-&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;ruby_python_arch_linux_fix.rb&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;ruby&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;no&quot;&gt;RubyPython&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;configure&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:python_exe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;python2.7&amp;#39;&lt;/span&gt;
-&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Building site: source -&gt; public
+</span><span class='line'>  File &quot;&lt;string&gt;&quot;, line 1
+</span><span class='line'>    import sys; print sys.executable
+</span><span class='line'>                        ^
+</span><span class='line'>SyntaxError: invalid syntax
+</span></code></pre></td></tr></table></div></figure>
 
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024&quot;&gt;via&lt;/a&gt;&lt;/p&gt;
-</content>
+<p>It&#8217;s happens because RubyPython use Python version 2 by calling &#8220;python&#8221; command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with following code.</p>
+
+<figure class='code'><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also if you get following lib.so related error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
+
+<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+]]></content>
   </entry>
   
   <entry>
-    <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</title>
+    <title type="html"><![CDATA[Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/"/>
     <updated>2011-09-19T17:54:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc</id>
-    <content type="html">&lt;!&#8211; more &#8211;&gt;
+    <content type="html"><![CDATA[<!-- more -->
 
 
-&lt;h2&gt;Install adb&lt;/h2&gt;
+<h2>Install adb</h2>
 
-&lt;h3&gt;Installing adb on arch linux&lt;/h3&gt;
+<h3>Installing adb on arch linux</h3>
 
-&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;yaourt -S adb
-&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
-
-
-&lt;h2&gt;Running adb&lt;/h2&gt;
-
-&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;adb &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;-server
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;sudo adb start-server
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;adb shell
-&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>yaourt -S adb
+</span></code></pre></td></tr></table></div></figure>
 
 
-&lt;h2&gt;Installing opkg&lt;/h2&gt;
+<h2>Running adb</h2>
 
-&lt;p&gt;Now run in adb shell following:&lt;/p&gt;
-
-&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;6&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;7&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;8&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;9&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;10&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;11&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;12&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;13&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;14&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;15&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;16&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /sdcard
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# for non cyanogen users&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# for cyanogen users&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# add /data/xbin to your path&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/data/xbin:$PATH&amp;quot;&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# make /system writable&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;mount -o remount,rw /system
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg -f /data/local/opkg.conf update
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg install opkg
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;mount -o remount,ro /system
-&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>adb <span class="nb">kill</span>-server
+</span><span class='line'>sudo adb start-server
+</span><span class='line'>adb shell
+</span></code></pre></td></tr></table></div></figure>
 
 
-&lt;h2&gt;Opkg usage&lt;/h2&gt;
+<h2>Installing opkg</h2>
 
-&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;6&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;opkg install rsync
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg remove rsync
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# list installed packages&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg list_installed
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c&quot;&gt;# list files belonging to package&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;opkg files rsync
-&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+<p>Now run in adb shell following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /sdcard
+</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
+</span><span class='line'><span class="nb">cd</span> /
+</span><span class='line'>tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
+</span><span class='line'><span class="c"># for non cyanogen users</span>
+</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
+</span><span class='line'><span class="c"># for cyanogen users</span>
+</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+</span><span class='line'><span class="c"># add /data/xbin to your path</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/xbin:$PATH&quot;</span>
+</span><span class='line'><span class="c"># make /system writable</span>
+</span><span class='line'>mount -o remount,rw /system
+</span><span class='line'>opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
+</span><span class='line'>opkg -f /data/local/opkg.conf update
+</span><span class='line'>opkg install opkg
+</span><span class='line'>mount -o remount,ro /system
+</span></code></pre></td></tr></table></div></figure>
 
 
-&lt;h2&gt;Available packages&lt;/h2&gt;
+<h2>Opkg usage</h2>
 
-&lt;ul&gt;
-&lt;li&gt;rsync - Lightweight package management system.&lt;/li&gt;
-&lt;li&gt;htop - Interactive processes viewer.&lt;/li&gt;
-&lt;li&gt;mc - Midnight Commander - a powerful file manager.&lt;/li&gt;
-&lt;li&gt;zip - Archiver for .zip files.&lt;/li&gt;
-&lt;li&gt;tree - Tree is a recursive directory listing program.&lt;/li&gt;
-&lt;li&gt;busybox - Tiny utilities for small and embedded systems.&lt;/li&gt;
-&lt;li&gt;dropbear - Lightweight SSH2 server and client.&lt;/li&gt;
-&lt;li&gt;nano - Free Pico clone with some new features.&lt;/li&gt;
-&lt;li&gt;opkg - Lightweight package management system.&lt;/li&gt;
-&lt;li&gt;screen - Terminal multiplexor with VT100/ANSI terminal emulation.&lt;/li&gt;
-&lt;li&gt;terminfo - Basic terminal type definitions.&lt;/li&gt;
-&lt;li&gt;zip - Archiver for .zip files.&lt;/li&gt;
-&lt;/ul&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>opkg install rsync
+</span><span class='line'>opkg remove rsync
+</span><span class='line'><span class="c"># list installed packages</span>
+</span><span class='line'>opkg list_installed
+</span><span class='line'><span class="c"># list files belonging to package</span>
+</span><span class='line'>opkg files rsync
+</span></code></pre></td></tr></table></div></figure>
 
 
-&lt;p&gt;&lt;a href=&quot;http://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/&quot;&gt;via&lt;/a&gt;&lt;/p&gt;
-</content>
+<h2>Available packages</h2>
+
+<ul>
+<li>rsync - Lightweight package management system.</li>
+<li>htop - Interactive processes viewer.</li>
+<li>mc - Midnight Commander - a powerful file manager.</li>
+<li>zip - Archiver for .zip files.</li>
+<li>tree - Tree is a recursive directory listing program.</li>
+<li>busybox - Tiny utilities for small and embedded systems.</li>
+<li>dropbear - Lightweight SSH2 server and client.</li>
+<li>nano - Free Pico clone with some new features.</li>
+<li>opkg - Lightweight package management system.</li>
+<li>screen - Terminal multiplexor with VT100/ANSI terminal emulation.</li>
+<li>terminfo - Basic terminal type definitions.</li>
+<li>zip - Archiver for .zip files.</li>
+</ul>
+
+
+<p><a href="http://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/">via</a></p>
+]]></content>
   </entry>
   
   <entry>
-    <title>Tmux + Rvm + Zsh Fix</title>
+    <title type="html"><![CDATA[Tmux + Rvm + Zsh Fix]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
     <updated>2011-09-15T14:52:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/15/tmux&#8212;rvm&#8212;zsh-fix</id>
-    <content type="html">&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
 
-&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$TERM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;screen&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rvm use default
-&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span> <span class="nv">$TERM</span> <span class="o">=</span> <span class="s2">&quot;screen&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> rvm use default
+</span></code></pre></td></tr></table></div></figure>
 
-</content>
+]]></content>
   </entry>
   
   <entry>
-    <title>Backbone.js + Ruby on Rails Tips</title>
+    <title type="html"><![CDATA[Backbone.js + Ruby on Rails Tips]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/"/>
     <updated>2011-09-03T10:05:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/03/backbone-js&#8212;ruby-on-rails-tips</id>
-    <content type="html">&lt;!&#8211; more &#8211;&gt;
+    <content type="html"><![CDATA[<!-- more -->
 
 
-&lt;ul&gt;
-&lt;li&gt;Add initializer that disable sending data in namespaces in json.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+<li>Add initializer that disable sending data in namespaces in json.</li>
+</ul>
 
 
-&lt;figure role=code&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line&#8217;&gt;1&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;2&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;3&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;4&lt;/span&gt;
-&lt;span class=&#8217;line&#8217;&gt;5&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217; width=&#8217;100%&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;ruby&#8217;&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;include_root_in_json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c1&quot;&gt;# {&amp;quot;post&amp;quot;: {&amp;quot;title&amp;quot;: &amp;quot;some title&amp;quot;, &amp;quot;content&amp;quot;: &amp;quot;some content&amp;quot;}}&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c1&quot;&gt;# will be&lt;/span&gt;
-&lt;/div&gt;&lt;div class=&#8217;line&#8217;&gt;&lt;span class=&quot;c1&quot;&gt;# {&amp;quot;title&amp;quot;: &amp;quot;some title&amp;quot;, &amp;quot;content&amp;quot;: &amp;quot;some content}&lt;/span&gt;
-&lt;/div&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">include_root_in_json</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># {&quot;post&quot;: {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content&quot;}}</span>
+</span><span class='line'><span class="c1"># will be</span>
+</span><span class='line'><span class="c1"># {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-&lt;ul&gt;
-&lt;li&gt;Use attr_accessible for filtering attributes in mass assigments from backbone. In rails &gt; 3.1 you can use attr_accessible with :as =&gt; role.&lt;/li&gt;
-&lt;li&gt;Use &lt;a href=&quot;https://github.com/josevalim/inherited_resources&quot;&gt;inherited resources&lt;/a&gt; for faster development.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+<li>Use attr_accessible for filtering attributes in mass assigments from backbone. In rails > 3.1 you can use attr_accessible with :as => role.</li>
+<li>Use <a href="https://github.com/josevalim/inherited_resources">inherited resources</a> for faster development.</li>
+</ul>
 
-</content>
+]]></content>
   </entry>
   
   <entry>
-    <title>My Collection of Usefull Vim Plugins</title>
+    <title type="html"><![CDATA[My Collection of Usefull Vim Plugins]]></title>
     <link href="http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins/"/>
     <updated>2011-08-03T21:03:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
-    <content type="html">&lt;p&gt;Plugins that make your vim better.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>Plugins that make your vim better.</p>
 
-&lt;!&#8211; more &#8211;&gt;
+<!-- more -->
 
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/gmarik/vundle&quot;&gt;Vundle&lt;/a&gt;
- - Manage your vim plugins in bundler style.&lt;/p&gt;
+<p><a href="https://github.com/gmarik/vundle">Vundle</a>
+ - Manage your vim plugins in bundler style.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/The-NERD-tree&quot;&gt;The NERD Tree&lt;/a&gt;
- - Shows directory files tree in the left tab, allows make file operations.&lt;/p&gt;
+<p><a href="https://github.com/vim-scripts/The-NERD-tree">The NERD Tree</a>
+ - Shows directory files tree in the left tab, allows make file operations.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/The-NERD-Commenter&quot;&gt;The NERD Commenter&lt;/a&gt;
- - Allows easy comment code in different languages.&lt;/p&gt;
+<p><a href="https://github.com/vim-scripts/The-NERD-Commenter">The NERD Commenter</a>
+ - Allows easy comment code in different languages.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/mrtazz/molokai.vim&quot;&gt;Molokai theme&lt;/a&gt;
- - TextMate monokai theme for vim.&lt;/p&gt;
+<p><a href="https://github.com/mrtazz/molokai.vim">Molokai theme</a>
+ - TextMate monokai theme for vim.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/vim-ruby/vim-ruby&quot;&gt;Vim Ruby&lt;/a&gt;
- - Collection of plugins for ruby development in vim.&lt;/p&gt;
+<p><a href="https://github.com/vim-ruby/vim-ruby">Vim Ruby</a>
+ - Collection of plugins for ruby development in vim.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/AutoComplPop&quot;&gt;AutoComplPop&lt;/a&gt;
- - Automaticaly opens completions popup.&lt;/p&gt;
+<p><a href="https://github.com/vim-scripts/AutoComplPop">AutoComplPop</a>
+ - Automaticaly opens completions popup.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/tpope/vim-haml&quot;&gt;Vim Haml&lt;/a&gt;
- - Adds HAML support to vim.&lt;/p&gt;
+<p><a href="https://github.com/tpope/vim-haml">Vim Haml</a>
+ - Adds HAML support to vim.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/msanders/snipmate.vim&quot;&gt;Snipmate&lt;/a&gt;
- - TextMate snippets in vim.&lt;/p&gt;
+<p><a href="https://github.com/msanders/snipmate.vim">Snipmate</a>
+ - TextMate snippets in vim.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/Gonzih/vim-snipmate-ruby-snippets&quot;&gt;Snipmate ruby snippets&lt;/a&gt;
- - Additional ruby snippets for snipmate that not duplicate default snipmate snippets.&lt;/p&gt;
+<p><a href="https://github.com/Gonzih/vim-snipmate-ruby-snippets">Snipmate ruby snippets</a>
+ - Additional ruby snippets for snipmate that not duplicate default snipmate snippets.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/ervandew/supertab&quot;&gt;Supertab&lt;/a&gt;
- - Perform all your vim insert mode completions with Tab.&lt;/p&gt;
+<p><a href="https://github.com/ervandew/supertab">Supertab</a>
+ - Perform all your vim insert mode completions with Tab.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/trapd00r/neverland-vim-theme&quot;&gt;Neverland theme&lt;/a&gt;
- - My favorite gvim theme.&lt;/p&gt;
+<p><a href="https://github.com/trapd00r/neverland-vim-theme">Neverland theme</a>
+ - My favorite gvim theme.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/vim-scripts/simplefold&quot;&gt;Simplefold&lt;/a&gt;
- - Optimized, configurable folds that support ruby, perl, java, php.&lt;/p&gt;
+<p><a href="https://github.com/vim-scripts/simplefold">Simplefold</a>
+ - Optimized, configurable folds that support ruby, perl, java, php.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/kchmck/vim-coffee-script&quot;&gt;Vim Coffeescript&lt;/a&gt;
- - Coffeescript support.&lt;/p&gt;
+<p><a href="https://github.com/kchmck/vim-coffee-script">Vim Coffeescript</a>
+ - Coffeescript support.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/tpope/vim-cucumber&quot;&gt;Vim Cucumber&lt;/a&gt;
- - Cucumber scenarios highlighting.&lt;/p&gt;
+<p><a href="https://github.com/tpope/vim-cucumber">Vim Cucumber</a>
+ - Cucumber scenarios highlighting.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/tpope/vim-endwise&quot;&gt;Endwise&lt;/a&gt;
- - Automaticaly adds end in ruby.&lt;/p&gt;
+<p><a href="https://github.com/tpope/vim-endwise">Endwise</a>
+ - Automaticaly adds end in ruby.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;Fugitive&lt;/a&gt;
- - Awesome git wrapper for vim.&lt;/p&gt;
+<p><a href="https://github.com/tpope/vim-fugitive">Fugitive</a>
+ - Awesome git wrapper for vim.</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/Bogdanp/rbrepl.vim&quot;&gt;rbrepl&lt;/a&gt;
- - Run irb in vim session.&lt;/p&gt;
-</content>
+<p><a href="https://github.com/Bogdanp/rbrepl.vim">rbrepl</a>
+ - Run irb in vim session.</p>
+]]></content>
   </entry>
   
   <entry>
-    <title>My Rails Apps Template</title>
+    <title type="html"><![CDATA[My Rails Apps Template]]></title>
     <link href="http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/"/>
     <updated>2011-08-03T13:29:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template</id>
-    <content type="html">&lt;p&gt;Here is my rails template that i use for my projects. With BDD gems, optional resque for deloyed jobs, kaminari for pagination, carriervawe as paperclip replacement.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>Here is my rails template that i use for my projects. With BDD gems, optional resque for deloyed jobs, kaminari for pagination, carriervawe as paperclip replacement.</p>
 
-&lt;!&#8211; more &#8211;&gt;
+<!-- more -->
 
 
-&lt;div&gt;&lt;script src=&#8217;https://gist.github.com/940407.js?file=&#8217;&gt;&lt;/script&gt;
-&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;# for 3.0 rails
+<div><script src='https://gist.github.com/940407.js?file='></script>
+<noscript><pre><code># for 3.0 rails
 
 # create rvmrc file
-create_file &amp;quot;.rvmrc&amp;quot;, &amp;quot;rvm 1.9.2&amp;quot;
+create_file &quot;.rvmrc&quot;, &quot;rvm 1.9.2&quot;
 
-gem &amp;quot;jquery-rails&amp;quot;
-gem &amp;quot;postgres&amp;quot;
-#gem &amp;quot;kaminari&amp;quot;
-#gem &amp;quot;carrierwave&amp;quot;
-#gem &amp;quot;resque&amp;quot;
-gem &amp;quot;yaml_db&amp;quot;, :require =&amp;gt; false
+gem &quot;jquery-rails&quot;
+gem &quot;postgres&quot;
+#gem &quot;kaminari&quot;
+#gem &quot;carrierwave&quot;
+#gem &quot;resque&quot;
+gem &quot;yaml_db&quot;, :require =&gt; false
 
 #group :development
-gem &amp;quot;nifty-generators&amp;quot;,  :group =&amp;gt; :development
-gem &amp;quot;annotate&amp;quot;,          :group =&amp;gt; :development, :require =&amp;gt; false
-gem &amp;quot;capistrano&amp;quot;,        :group =&amp;gt; :development, :require =&amp;gt; false
-gem &amp;quot;capistrano_colors&amp;quot;, :group =&amp;gt; :development, :require =&amp;gt; false
+gem &quot;nifty-generators&quot;,  :group =&gt; :development
+gem &quot;annotate&quot;,          :group =&gt; :development, :require =&gt; false
+gem &quot;capistrano&quot;,        :group =&gt; :development, :require =&gt; false
+gem &quot;capistrano_colors&quot;, :group =&gt; :development, :require =&gt; false
 
 #group :test
-gem &amp;quot;capybara&amp;quot;,         :group =&amp;gt; :test
-gem &amp;quot;fabrication&amp;quot;,      :group =&amp;gt; :test
-gem &amp;quot;ffaker&amp;quot;,           :group =&amp;gt; :test
-gem &amp;quot;launchy&amp;quot;,          :group =&amp;gt; :test
-gem &amp;quot;database_cleaner&amp;quot;, :group =&amp;gt; :test
-gem &amp;quot;fakeweb&amp;quot;,          :group =&amp;gt; :test
-gem &amp;quot;timecop&amp;quot;,          :group =&amp;gt; :test
-gem &amp;quot;email_spec&amp;quot;,       :group =&amp;gt; :test
-gem &amp;quot;guard-rspec&amp;quot;,      :group =&amp;gt; :test
+gem &quot;capybara&quot;,         :group =&gt; :test
+gem &quot;fabrication&quot;,      :group =&gt; :test
+gem &quot;ffaker&quot;,           :group =&gt; :test
+gem &quot;launchy&quot;,          :group =&gt; :test
+gem &quot;database_cleaner&quot;, :group =&gt; :test
+gem &quot;fakeweb&quot;,          :group =&gt; :test
+gem &quot;timecop&quot;,          :group =&gt; :test
+gem &quot;email_spec&quot;,       :group =&gt; :test
+gem &quot;guard-rspec&quot;,      :group =&gt; :test
 
-gem &amp;quot;rspec-rails&amp;quot;, :group =&amp;gt; [ :development, :test ]
+gem &quot;rspec-rails&quot;, :group =&gt; [ :development, :test ]
 
-gem &amp;quot;whenever&amp;quot;,   :group =&amp;gt; [ :development, :production ], :require =&amp;gt; false
-gem &amp;quot;capistrano&amp;quot;, :group =&amp;gt; [ :development, :production ], :require =&amp;gt; false
+gem &quot;whenever&quot;,   :group =&gt; [ :development, :production ], :require =&gt; false
+gem &quot;capistrano&quot;, :group =&gt; [ :development, :production ], :require =&gt; false
 
-run &amp;quot;bundle install &#8211;path vendor/bundle&amp;quot;
+run &quot;bundle install --path vendor/bundle&quot;
 
-generate &amp;quot;rspec:install&amp;quot;
-run &amp;quot;bundle exec guard init rspec&amp;quot;
-remove_file &amp;quot;public/javascripts/rails.js&amp;quot; # jquery-rails replaces this
-generate &amp;quot;jquery:install &#8211;ui&amp;quot;
-run &amp;quot;echo &#8216;&#8211;format documentation&#8217; &amp;gt;&amp;gt; .rspec&amp;quot;
+generate &quot;rspec:install&quot;
+run &quot;bundle exec guard init rspec&quot;
+remove_file &quot;public/javascripts/rails.js&quot; # jquery-rails replaces this
+generate &quot;jquery:install --ui&quot;
+run &quot;echo '--format documentation' &gt;&gt; .rspec&quot;
 # clean up rails defaults
-remove_file &amp;quot;public/index.html&amp;quot;
-remove_file &amp;quot;rm public/images/rails.png&amp;quot;
+remove_file &quot;public/index.html&quot;
+remove_file &quot;rm public/images/rails.png&quot;
 
 
 #files injections
-inject_into_file &amp;quot;config/application.rb&amp;quot;, :after =&amp;gt; &amp;quot;config.filter_parameters += [:password]&amp;quot; do
-  &amp;lt;&amp;lt;-eos
+inject_into_file &quot;config/application.rb&quot;, :after =&gt; &quot;config.filter_parameters += [:password]&quot; do
+  &lt;&lt;-eos
     # Customize generators
     config.generators do |g|
       g.stylesheets false
-      g.test_framework      :rspec, :fixture =&amp;gt; true
+      g.test_framework      :rspec, :fixture =&gt; true
       g.fixture_replacement :fabrication
     end
   eos
 end
 
-inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;RSpec.configure do |config|&amp;quot; do
-  &amp;lt;&amp;lt;-eos
+inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
+  &lt;&lt;-eos
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
     end
@@ -837,14 +846,14 @@ inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;
   eos
 end
 
-inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;require &#8216;rspec/rails&#8217;&amp;quot; do
-  &amp;lt;&amp;lt;-eos
-    require &amp;quot;email_spec&amp;quot;
+inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;require 'rspec/rails'&quot; do
+  &lt;&lt;-eos
+    require &quot;email_spec&quot;
   eos
 end
 
-inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;quot;RSpec.configure do |config|&amp;quot; do
-  &amp;lt;&amp;lt;-eos
+inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
+  &lt;&lt;-eos
     Spec::Runner.configure do |config|
       config.include(EmailSpec::Helpers)
       config.include(EmailSpec::Matchers)
@@ -853,24 +862,24 @@ inject_into_file &amp;quot;spes/spec_helper.rb&amp;quot;, :after =&amp;gt; &amp;
   eos
 end
 
-rake &amp;quot;db:create&amp;quot;, :env =&amp;gt; &amp;quot;development&amp;quot;
-rake &amp;quot;db:create&amp;quot;, :env =&amp;gt; &amp;quot;test&amp;quot;
-rake &amp;quot;db:migrate&amp;quot;
+rake &quot;db:create&quot;, :env =&gt; &quot;development&quot;
+rake &quot;db:create&quot;, :env =&gt; &quot;test&quot;
+rake &quot;db:migrate&quot;
 
 # commit to git
 git :init
-git :add =&amp;gt; &amp;quot;.&amp;quot;
-git :commit =&amp;gt; &amp;quot;-a -m &#8216;create initial bdd application&#8217;&amp;quot;
+git :add =&gt; &quot;.&quot;
+git :commit =&gt; &quot;-a -m 'create initial bdd application'&quot;
 
-say &amp;lt;&amp;lt;-eos
+say &lt;&lt;-eos
   All done!
 eos
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+</code></pre></noscript></div>
 
 
 
-</content>
+]]></content>
   </entry>
   
 </feed>

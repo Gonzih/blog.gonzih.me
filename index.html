@@ -7,6 +7,10 @@
   <meta charset="utf-8">
   <title>Gonzih's dev blog</title>
   <meta name="author" content="Max Gonzih">
+
+  
+  <meta name="description" content="Large image (2.4 Megabytes). Source on github.
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -15,22 +19,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://gonzih.github.com/index.html"/>
-  <link href="/favicon.png" rel="shortcut icon" />
+  <link rel="canonical" href="http://gonzih.github.com">
+  <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Gonzih's dev blog" type="application/atom+xml"/>
+  <link href="/atom.xml" rel="alternate" title="Gonzih's dev blog" type="application/atom+xml">
   <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
 <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
 
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-22494353-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
 </head>
 
-<body  >
-  <header><hgroup>
+<body   >
+  <header role="banner"><hgroup>
   <h1><a href="/">Gonzih's dev blog</a></h1>
   
     <h2>Blog about ruby/ror, linux and other stuff</h2>
@@ -38,16 +55,18 @@
 </hgroup>
 
 </header>
-  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
+  
 <form action="http://google.com/search" method="get">
-  <fieldset role="site-search">
+  <fieldset role="search">
     <input type="hidden" name="q" value="site:gonzih.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
+  
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
@@ -57,17 +76,21 @@
   <div id="main">
     <div id="content">
       <div class="blog-index">
-
-
-
-  <article>
-    
+  
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/10/18/nice-vim-keys-map/">Nice Vim Keys Map</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -76,8 +99,11 @@
   
 
 
-
-<time datetime="2011-10-18T20:05:00+03:00" pubdate  data-updated="true" >Oct 18<span>th</span>, 2011</time></p>
+<time datetime="2011-10-18T20:05:00+03:00" pubdate data-updated="true">Oct 18<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/10/18/nice-vim-keys-map/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
@@ -90,17 +116,21 @@
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/">Set New PostgreSQL Databases Encoding to Unicode</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -109,36 +139,39 @@
   
 
 
-
-<time datetime="2011-09-30T10:42:00+03:00" pubdate  data-updated="true" >Sep 30<span>th</span>, 2011</time></p>
+<time datetime="2011-09-30T10:42:00+03:00" pubdate data-updated="true">Sep 30<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
 
   <div class="entry-content"><p>You must change encoding for template1. For do that run following.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>su - postgres
-</div><div class='line'>psql
-</div><div class='line'>
-</div><div class='line'>UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
-</div><div class='line'>DROP DATABASE template1;
-</div><div class='line'>CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
-</div><div class='line'>UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
-</div><div class='line'>
-</div><div class='line'>#recomended
-</div><div class='line'>\c template1
-</div><div class='line'>VACUUM FREEZE;</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>su - postgres
+</span><span class='line'>psql
+</span><span class='line'>
+</span><span class='line'>UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+</span><span class='line'>DROP DATABASE template1;
+</span><span class='line'>CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+</span><span class='line'>UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+</span><span class='line'>
+</span><span class='line'>#recomended
+</span><span class='line'>\c template1
+</span><span class='line'>VACUUM FREEZE;</span></code></pre></td></tr></table></div></figure>
 
 
 <p><a href="http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
@@ -147,17 +180,21 @@
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/">Nice Rspec 2 Syntax Cheat Sheet</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -166,8 +203,11 @@
   
 
 
-
-<time datetime="2011-09-22T21:26:00+03:00" pubdate  data-updated="true" >Sep 22<span>nd</span>, 2011</time></p>
+<time datetime="2011-09-22T21:26:00+03:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
@@ -181,17 +221,21 @@
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linux</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -200,34 +244,47 @@
   
 
 
-
-<time datetime="2011-09-21T18:28:00+03:00" pubdate  data-updated="true" >Sep 21<span>st</span>, 2011</time></p>
+<time datetime="2011-09-21T18:28:00+03:00" pubdate data-updated="true">Sep 21<span>st</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
 
   <div class="entry-content"><p>If your get following pygments error using octopress with arch linux.</p>
 
-<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'>Building site: source -&gt; public
-</div><div class='line'>  File "&lt;string&gt;", line 1
-</div><div class='line'>    import sys; print sys.executable
-</div><div class='line'>                        ^
-</div><div class='line'>SyntaxError: invalid syntax</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Building site: source -&gt; public
+</span><span class='line'>  File &quot;&lt;string&gt;&quot;, line 1
+</span><span class='line'>    import sys; print sys.executable
+</span><span class='line'>                        ^
+</span><span class='line'>SyntaxError: invalid syntax
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>It&#8217;s happens because RubyPython use Python version 2 by calling &#8220;python&#8221; command. By default python equal to python3 in Arch Linux.</p>
 
-<p>For fix simple add ruby file to plugins directory with next code.</p>
+<p>For fix simple add ruby file to plugins directory with following code.</p>
 
-<figure role=code><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
+
+<p>Also if you get following lib.so related error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
 
 <p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
 </div>
@@ -235,17 +292,21 @@
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/09/19/install-opkg-package-manager-on-android-mc/">Installing Opkg Package Manager on Android (Mc, Rsync, Screen, Htop, Zip, Busybox, Tree)</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -254,8 +315,11 @@
   
 
 
-
-<time datetime="2011-09-19T17:54:00+03:00" pubdate  data-updated="true" >Sep 19<span>th</span>, 2011</time></p>
+<time datetime="2011-09-19T17:54:00+03:00" pubdate data-updated="true">Sep 19<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/19/install-opkg-package-manager-on-android-mc/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
@@ -269,17 +333,21 @@
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/09/15/tmux---rvm---zsh-fix/">Tmux + Rvm + Zsh Fix</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -288,34 +356,41 @@
   
 
 
-
-<time datetime="2011-09-15T14:52:00+03:00" pubdate  data-updated="true" >Sep 15<span>th</span>, 2011</time></p>
+<time datetime="2011-09-15T14:52:00+03:00" pubdate data-updated="true">Sep 15<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/15/tmux---rvm---zsh-fix/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
 
   <div class="entry-content"><p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'><span class="o">[[</span> <span class="nv">$TERM</span> <span class="o">=</span> <span class="s2">&quot;screen&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> rvm use default
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span> <span class="nv">$TERM</span> <span class="o">=</span> <span class="s2">&quot;screen&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> rvm use default
+</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/">Backbone.js + Ruby on Rails Tips</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -324,8 +399,11 @@
   
 
 
-
-<time datetime="2011-09-03T10:05:00+03:00" pubdate  data-updated="true" >Sep 3<span>rd</span>, 2011</time></p>
+<time datetime="2011-09-03T10:05:00+03:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
@@ -339,17 +417,21 @@
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/08/03/collection-of-usefull-vim-plugins/">My Collection of Usefull Vim Plugins</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -358,8 +440,11 @@
   
 
 
-
-<time datetime="2011-08-03T21:03:00+03:00" pubdate  data-updated="true" >Aug 3<span>rd</span>, 2011</time></p>
+<time datetime="2011-08-03T21:03:00+03:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2011</time>
+        
+         | <a href="/blog/2011/08/03/collection-of-usefull-vim-plugins/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
@@ -375,17 +460,21 @@
   
 
 
-  </article>
-
-
-  <article>
-    
+    </article>
+  
+  
+    <article>
+      
   <header>
     
       <h1 class="entry-title"><a href="/blog/2011/08/03/my-rails-apps-template/">My Rails Apps Template</a></h1>
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -394,8 +483,11 @@
   
 
 
-
-<time datetime="2011-08-03T13:29:00+03:00" pubdate  data-updated="true" >Aug 3<span>rd</span>, 2011</time></p>
+<time datetime="2011-08-03T13:29:00+03:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2011</time>
+        
+         | <a href="/blog/2011/08/03/my-rails-apps-template/#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
@@ -411,28 +503,15 @@
   
 
 
-  </article>
-
-<nav role="pagination">
-  <div>
+    </article>
+  
+  <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
     
   </div>
-</nav>
-
-<script type="text/javascript">
-    var disqus_shortname = 'gonzihsblog';
-    (function () {
-      var s = document.createElement('script'); s.async = true;
-      s.type = 'text/javascript';
-      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
-
 </div>
-<aside role=sidebar>
+<aside class="sidebar">
   
     <section>
   <h1>Recent Posts</h1>
@@ -496,27 +575,40 @@
 
     </div>
   </div>
-  <footer><p>
-  Copyright &copy; 2011 - Max Gonzih -
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Max Gonzih -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-22494353-1']);
-    _gaq.push(['_trackPageview']);
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
-  
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
   <script type="text/javascript">
     (function() {
       var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
@@ -526,7 +618,7 @@
   </script>
 
 
-  
+
   <script type="text/javascript">
     (function(){
       var twitterWidgets = document.createElement('script');
@@ -536,6 +628,9 @@
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
 
 
 </body>

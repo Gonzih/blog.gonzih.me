@@ -7,6 +7,15 @@
   <meta charset="utf-8">
   <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree) - Gonzih's dev blog</title>
   <meta name="author" content="Max Gonzih">
+
+  
+  <meta name="description" content="Install adb Installing adb on arch linux 1
+yaourt -S adb Running adb 1
+2
+3
+adb kill-server
+sudo adb start-server
+adb shell Installing opkg Now run &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -15,22 +24,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/"/>
-  <link href="/favicon.png" rel="shortcut icon" />
+  <link rel="canonical" href="http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc">
+  <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Gonzih's dev blog" type="application/atom+xml"/>
+  <link href="/atom.xml" rel="alternate" title="Gonzih's dev blog" type="application/atom+xml">
   <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
 <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
 
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-22494353-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
 </head>
 
-<body  >
-  <header><hgroup>
+<body   >
+  <header role="banner"><hgroup>
   <h1><a href="/">Gonzih's dev blog</a></h1>
   
     <h2>Blog about ruby/ror, linux and other stuff</h2>
@@ -38,16 +60,18 @@
 </hgroup>
 
 </header>
-  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
+  
 <form action="http://google.com/search" method="get">
-  <fieldset role="site-search">
+  <fieldset role="search">
     <input type="hidden" name="q" value="site:gonzih.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
+  
 <ul role=main-navigation>
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
@@ -57,7 +81,7 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry">
+<article class="hentry" role="article">
   
   <header>
     
@@ -65,6 +89,10 @@
     
     
       <p class="meta">
+        
+
+
+
 
 
 
@@ -73,8 +101,11 @@
   
 
 
-
-<time datetime="2011-09-19T17:54:00+03:00" pubdate  data-updated="true" >Sep 19<span>th</span>, 2011</time></p>
+<time datetime="2011-09-19T17:54:00+03:00" pubdate data-updated="true">Sep 19<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
 
@@ -86,76 +117,76 @@
 
 <h3>Installing adb on arch linux</h3>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'>yaourt -S adb
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>yaourt -S adb
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Running adb</h2>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'>adb <span class="nb">kill</span>-server
-</div><div class='line'>sudo adb start-server
-</div><div class='line'>adb shell
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>adb <span class="nb">kill</span>-server
+</span><span class='line'>sudo adb start-server
+</span><span class='line'>adb shell
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Installing opkg</h2>
 
 <p>Now run in adb shell following:</p>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-<span class='line'>7</span>
-<span class='line'>8</span>
-<span class='line'>9</span>
-<span class='line'>10</span>
-<span class='line'>11</span>
-<span class='line'>12</span>
-<span class='line'>13</span>
-<span class='line'>14</span>
-<span class='line'>15</span>
-<span class='line'>16</span>
-</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'><span class="nb">cd</span> /sdcard
-</div><div class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
-</div><div class='line'><span class="nb">cd</span> /
-</div><div class='line'>tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
-</div><div class='line'><span class="c"># for non cyanogen users</span>
-</div><div class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
-</div><div class='line'><span class="c"># for cyanogen users</span>
-</div><div class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
-</div><div class='line'><span class="c"># add /data/xbin to your path</span>
-</div><div class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/xbin:$PATH&quot;</span>
-</div><div class='line'><span class="c"># make /system writable</span>
-</div><div class='line'>mount -o remount,rw /system
-</div><div class='line'>opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
-</div><div class='line'>opkg -f /data/local/opkg.conf update
-</div><div class='line'>opkg install opkg
-</div><div class='line'>mount -o remount,ro /system
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /sdcard
+</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
+</span><span class='line'><span class="nb">cd</span> /
+</span><span class='line'>tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
+</span><span class='line'><span class="c"># for non cyanogen users</span>
+</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
+</span><span class='line'><span class="c"># for cyanogen users</span>
+</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+</span><span class='line'><span class="c"># add /data/xbin to your path</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/xbin:$PATH&quot;</span>
+</span><span class='line'><span class="c"># make /system writable</span>
+</span><span class='line'>mount -o remount,rw /system
+</span><span class='line'>opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
+</span><span class='line'>opkg -f /data/local/opkg.conf update
+</span><span class='line'>opkg install opkg
+</span><span class='line'>mount -o remount,ro /system
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Opkg usage</h2>
 
-<figure role=code><figcaption><span></span></figcaption><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-<span class='line'>6</span>
-</pre></td><td class='code' width='100%'><pre><code class='bash'><div class='line'>opkg install rsync
-</div><div class='line'>opkg remove rsync
-</div><div class='line'><span class="c"># list installed packages</span>
-</div><div class='line'>opkg list_installed
-</div><div class='line'><span class="c"># list files belonging to package</span>
-</div><div class='line'>opkg files rsync
-</div></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>opkg install rsync
+</span><span class='line'>opkg remove rsync
+</span><span class='line'><span class="c"># list installed packages</span>
+</span><span class='line'>opkg list_installed
+</span><span class='line'><span class="c"># list files belonging to package</span>
+</span><span class='line'>opkg files rsync
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Available packages</h2>
@@ -193,11 +224,13 @@
 
 
 
+
+
+
   
 
 
-
-<time datetime="2011-09-19T17:54:00+03:00" pubdate  data-updated="true" >Sep 19<span>th</span>, 2011</time>
+<time datetime="2011-09-19T17:54:00+03:00" pubdate data-updated="true">Sep 19<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -216,33 +249,32 @@
   
   <div class="g-plusone" data-size="medium"></div>
   
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
 
     
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/09/15/tmux---rvm---zsh-fix/" title="Previous Post: Tmux + Rvm + Zsh Fix">&laquo; Tmux + Rvm + Zsh Fix</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/" title="next Post: How To Fix Octopress Pygments Error on Arch Linux">How To Fix Octopress Pygments Error on Arch Linux &raquo;</a>
+      
+    </p>
   </footer>
 </article>
 
   <section>
     <h1>Comments</h1>
-    <div id="disqus_thread"><div id="disqus_thread"></div>
-<script type="text/javascript">
-  var disqus_shortname = 'gonzihsblog';
-  var disqus_identifier = 'http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/';
-  var disqus_url = 'http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/';
-  //var disqus_developer = 1;
-  (function() {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
   </section>
 
 </div>
 
-<aside role=sidebar>
+<aside class="sidebar">
   
     <section>
   <h1>Recent Posts</h1>
@@ -307,27 +339,43 @@
 
     </div>
   </div>
-  <footer><p>
-  Copyright &copy; 2011 - Max Gonzih -
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Max Gonzih -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-22494353-1']);
-    _gaq.push(['_trackPageview']);
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/';
+        var disqus_url = 'http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
-  
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
   <script type="text/javascript">
     (function() {
       var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
@@ -337,7 +385,7 @@
   </script>
 
 
-  
+
   <script type="text/javascript">
     (function(){
       var twitterWidgets = document.createElement('script');
@@ -347,6 +395,9 @@
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
 
 
 </body>

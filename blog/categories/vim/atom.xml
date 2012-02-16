@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vim | Gonzih's dev blog]]></title>
+  <link href="http://gonzih.github.com/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://gonzih.github.com/"/>
+  <updated>2012-02-16T10:59:24+03:00</updated>
+  <id>http://gonzih.github.com/</id>
+  <author>
+    <name><![CDATA[Max Gonzih]]></name>
+    <email><![CDATA[iam@gonzih.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
+    <link href="http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map/"/>
+    <updated>2011-10-18T20:05:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map</id>
+    <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
+
+<p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My Collection of Usefull Vim Plugins]]></title>
+    <link href="http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins/"/>
+    <updated>2011-08-03T21:03:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
+    <content type="html"><![CDATA[<p>Plugins that make your vim better.</p>
+
+<!-- more -->
+
+
+<p><a href="https://github.com/gmarik/vundle">Vundle</a>
+ - Manage your vim plugins in bundler style.</p>
+
+<p><a href="https://github.com/vim-scripts/The-NERD-tree">The NERD Tree</a>
+ - Shows directory files tree in the left tab, allows make file operations.</p>
+
+<p><a href="https://github.com/vim-scripts/The-NERD-Commenter">The NERD Commenter</a>
+ - Allows easy comment code in different languages.</p>
+
+<p><a href="https://github.com/mrtazz/molokai.vim">Molokai theme</a>
+ - TextMate monokai theme for vim.</p>
+
+<p><a href="https://github.com/vim-ruby/vim-ruby">Vim Ruby</a>
+ - Collection of plugins for ruby development in vim.</p>
+
+<p><a href="https://github.com/vim-scripts/AutoComplPop">AutoComplPop</a>
+ - Automaticaly opens completions popup.</p>
+
+<p><a href="https://github.com/tpope/vim-haml">Vim Haml</a>
+ - Adds HAML support to vim.</p>
+
+<p><a href="https://github.com/msanders/snipmate.vim">Snipmate</a>
+ - TextMate snippets in vim.</p>
+
+<p><a href="https://github.com/Gonzih/vim-snipmate-ruby-snippets">Snipmate ruby snippets</a>
+ - Additional ruby snippets for snipmate that not duplicate default snipmate snippets.</p>
+
+<p><a href="https://github.com/ervandew/supertab">Supertab</a>
+ - Perform all your vim insert mode completions with Tab.</p>
+
+<p><a href="https://github.com/trapd00r/neverland-vim-theme">Neverland theme</a>
+ - My favorite gvim theme.</p>
+
+<p><a href="https://github.com/vim-scripts/simplefold">Simplefold</a>
+ - Optimized, configurable folds that support ruby, perl, java, php.</p>
+
+<p><a href="https://github.com/kchmck/vim-coffee-script">Vim Coffeescript</a>
+ - Coffeescript support.</p>
+
+<p><a href="https://github.com/tpope/vim-cucumber">Vim Cucumber</a>
+ - Cucumber scenarios highlighting.</p>
+
+<p><a href="https://github.com/tpope/vim-endwise">Endwise</a>
+ - Automaticaly adds end in ruby.</p>
+
+<p><a href="https://github.com/tpope/vim-fugitive">Fugitive</a>
+ - Awesome git wrapper for vim.</p>
+
+<p><a href="https://github.com/Bogdanp/rbrepl.vim">rbrepl</a>
+ - Run irb in vim session.</p>
+]]></content>
+  </entry>
+  
+</feed>

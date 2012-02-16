@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: arch linux | Gonzih's dev blog]]></title>
+  <link href="http://gonzih.github.com/blog/categories/arch-linux/atom.xml" rel="self"/>
+  <link href="http://gonzih.github.com/"/>
+  <updated>2012-02-16T10:59:24+03:00</updated>
+  <id>http://gonzih.github.com/</id>
+  <author>
+    <name><![CDATA[Max Gonzih]]></name>
+    <email><![CDATA[iam@gonzih.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
+    <link href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
+    <updated>2011-09-21T18:28:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
+    <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.
+``` text
+Building site: source -> public
+  File "<string>", line 1</p>
+
+<pre><code>import sys; print sys.executable
+                    ^
+</code></pre>
+
+<p>SyntaxError: invalid syntax
+```
+It's happens because RubyPython use Python version 2 by calling "python" command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with following code.
+<code>ruby ruby_python_arch_linux_fix.rb
+RubyPython.configure :python_exe =&gt; 'python2.7'
+</code></p>
+
+<p>Also if you get following lib.so related error:
+<code>text
+LoadError: Could not open library 'lib.so': lib.so: cannot open shared object file: No such file or directory
+</code>
+You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
+
+<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+]]></content>
+  </entry>
+  
+</feed>
