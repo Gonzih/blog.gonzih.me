@@ -4,7 +4,7 @@
   <title><![CDATA[Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-02-16T10:59:24+03:00</updated>
+  <updated>2012-02-17T18:07:57+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to use Magnet Links with RTorrent]]></title>
+    <link href="http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
+    <updated>2012-02-17T18:04:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
+    <content type="html"><![CDATA[<p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">cd</span> ~/watch    <span class="c"># set your watch directory here</span>
+</span><span class='line'><span class="o">[[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">=</span>~ <span class="nv">xt</span><span class="o">=</span>urn:btih:<span class="o">([</span>^&amp;/<span class="o">]</span>+<span class="o">)</span> <span class="o">]]</span> <span class="o">||</span> <span class="nb">exit</span>;
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;d10:magnet-uri${#1}:${1}e&quot;</span> &gt; <span class="s2">&quot;meta-${BASH_REMATCH[1]}.torrent&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://libtorrent.rakshasa.no/ticket/2100">via</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
