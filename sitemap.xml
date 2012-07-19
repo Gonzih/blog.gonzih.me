@@ -2,60 +2,60 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/
         </loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/
         </loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/
         </loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/archives/</loc>
-        <lastmod>2012-07-19T15:55:22+03:00</lastmod>
+        <lastmod>2012-07-19T16:19:47+03:00</lastmod>
     </url>
 </urlset>
