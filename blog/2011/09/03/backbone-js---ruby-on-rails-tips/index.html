@@ -23,7 +23,7 @@ ActiveRecord::Base.include_root_in_json = false # {&quot;post&quot;: {& &hellip;
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips">
+  <link rel="canonical" href="http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -187,7 +187,7 @@ ActiveRecord::Base.include_root_in_json = false # {&quot;post&quot;: {& &hellip;
         <a class="basic-alignment left" href="/blog/2011/08/03/collection-of-usefull-vim-plugins/" title="Previous Post: My Collection of Usefull Vim Plugins">&laquo; My Collection of Usefull Vim Plugins</a>
       
       
-        <a class="basic-alignment right" href="/blog/2011/09/15/tmux---rvm---zsh-fix/" title="next Post: Tmux + Rvm + Zsh Fix">Tmux + Rvm + Zsh Fix &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2011/09/15/tmux---rvm---zsh-fix/" title="Next Post: Tmux + Rvm + Zsh Fix">Tmux + Rvm + Zsh Fix &raquo;</a>
       
     </p>
   </footer>
@@ -204,6 +204,9 @@ ActiveRecord::Base.include_root_in_json = false # {&quot;post&quot;: {& &hellip;
 <aside class="sidebar">
   
     <section>
+<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/super_badge.png" alt="Member of The Internet Defense League" /></a>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -231,12 +234,12 @@ ActiveRecord::Base.include_root_in_json = false # {&quot;post&quot;: {& &hellip;
 </section>
 
 <section>
-  <h1>Github Repos</h1>
+  <h1>GitHub Repos</h1>
   <ul id="gh_repos">
     <li class="loading">Status updating...</li>
   </ul>
   
-  <a href="https://github.com/Gonzih">@Gonzih</a> on Github
+  <a href="https://github.com/Gonzih">@Gonzih</a> on GitHub
   
   <script type="text/javascript">
     $.domReady(function(){
@@ -257,6 +260,23 @@ ActiveRecord::Base.include_root_in_json = false # {&quot;post&quot;: {& &hellip;
     });
   </script>
   <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("Gonzih", 3, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/Gonzih" class="twitter-follow-button" data-show-count="false">Follow @Gonzih</a>
+  
 </section>
 
 

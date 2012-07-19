@@ -4,7 +4,7 @@
   <title><![CDATA[Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-02-17T18:07:57+03:00</updated>
+  <updated>2012-07-19T14:26:06+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -568,6 +568,24 @@ end # module</code></pre></noscript></div>
 <p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
 
 <p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+
+<h3>Update</h3>
+
+<p>Another Workaround:
+edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&#8221; file (path might be different for you)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">--</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="n">find_python_lib</span>
+</span><span class='line'><span class="o">++</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="s2">&quot;/usr/lib/libpython2.7.so&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">--</span> <span class="mi">126</span> <span class="sx">%x(</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c &quot;</span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
+</span><span class='line'><span class="o">++</span> <span class="mi">126</span> <span class="sx">%x(&quot;</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c </span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   

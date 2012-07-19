@@ -23,7 +23,7 @@ Building site: source -&gt; public File &quot;&lt;string&gt;&quot;, &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux">
+  <link rel="canonical" href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -143,6 +143,24 @@ Building site: source -&gt; public File &quot;&lt;string&gt;&quot;, &hellip;">
 <p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
 
 <p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+
+<h3>Update</h3>
+
+<p>Another Workaround:
+edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&#8221; file (path might be different for you)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">--</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="n">find_python_lib</span>
+</span><span class='line'><span class="o">++</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="s2">&quot;/usr/lib/libpython2.7.so&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">--</span> <span class="mi">126</span> <span class="sx">%x(</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c &quot;</span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
+</span><span class='line'><span class="o">++</span> <span class="mi">126</span> <span class="sx">%x(&quot;</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c </span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -195,7 +213,7 @@ Building site: source -&gt; public File &quot;&lt;string&gt;&quot;, &hellip;">
         <a class="basic-alignment left" href="/blog/2011/09/19/install-opkg-package-manager-on-android-mc/" title="Previous Post: Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)">&laquo; Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</a>
       
       
-        <a class="basic-alignment right" href="/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/" title="next Post: Nice Rspec 2 Syntax Cheat Sheet">Nice Rspec 2 Syntax Cheat Sheet &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/" title="Next Post: Nice Rspec 2 Syntax Cheat Sheet">Nice Rspec 2 Syntax Cheat Sheet &raquo;</a>
       
     </p>
   </footer>
@@ -212,6 +230,9 @@ Building site: source -&gt; public File &quot;&lt;string&gt;&quot;, &hellip;">
 <aside class="sidebar">
   
     <section>
+<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/super_badge.png" alt="Member of The Internet Defense League" /></a>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -239,12 +260,12 @@ Building site: source -&gt; public File &quot;&lt;string&gt;&quot;, &hellip;">
 </section>
 
 <section>
-  <h1>Github Repos</h1>
+  <h1>GitHub Repos</h1>
   <ul id="gh_repos">
     <li class="loading">Status updating...</li>
   </ul>
   
-  <a href="https://github.com/Gonzih">@Gonzih</a> on Github
+  <a href="https://github.com/Gonzih">@Gonzih</a> on GitHub
   
   <script type="text/javascript">
     $.domReady(function(){
@@ -265,6 +286,23 @@ Building site: source -&gt; public File &quot;&lt;string&gt;&quot;, &hellip;">
     });
   </script>
   <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("Gonzih", 3, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/Gonzih" class="twitter-follow-button" data-show-count="false">Follow @Gonzih</a>
+  
 </section>
 
 
