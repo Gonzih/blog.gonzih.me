@@ -27,3 +27,14 @@ LoadError: Could not open library 'lib.so': lib.so: cannot open shared object fi
 You can find solution [here](https://github.com/tmm1/pygments.rb/issues/10).
 
 [via](https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024)
+
+### Update
+Another Workaround:
+edit "vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb" file (path might be different for you)
+```ruby
+-- 31 @library = find_python_lib
+++ 31 @library = "/usr/lib/libpython2.7.so"
+
+-- 126 %x(#{@python} -c "#{command}").chomp if @python
+++ 126 %x("#{@python} -c #{command}").chomp if @python
+```
