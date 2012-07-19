@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sopa | Gonzih's dev blog]]></title>
+  <link href="http://gonzih.github.com/blog/categories/sopa/atom.xml" rel="self"/>
+  <link href="http://gonzih.github.com/"/>
+  <updated>2012-07-19T14:43:57+03:00</updated>
+  <id>http://gonzih.github.com/</id>
+  <author>
+    <name><![CDATA[Max Gonzih]]></name>
+    <email><![CDATA[iam@gonzih.org]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Internet Defense League]]></title>
+    <link href="http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league/"/>
+    <updated>2012-07-19T14:34:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league</id>
+    <content type="html"><![CDATA[<p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
+
+<blockquote><p>The <a href="http://sopastrike.com/">Internet Blackout</a> was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p></blockquote>
+
+<p>Join <em>Internet Defence League</em> at <a href="http://internetdefenseleague.org/">internetdefenseleague.org</a></p>
+]]></content>
+  </entry>
+  
+</feed>
