@@ -64,7 +64,7 @@ OpenJDK Zero VM (build 22.0-b10, mixed mode)
 
 > ps -eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-96.9 16.3 267932 41172 pts/1    Sl+  09:07   9:28 java
+96.9 16.3 267932 41172 pts/1  Sl+  09:07  9:28 java
 
 > lein run
 (factorial 5000) Avg:  1681.9940255249999
