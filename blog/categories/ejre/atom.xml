@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ejre | Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/blog/categories/ejre/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-09-07T23:26:09+03:00</updated>
+  <updated>2012-09-08T00:38:49+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -19,6 +19,9 @@
     <updated>2012-09-07T16:20:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
+
+<!-- more -->
+
 
 <p>BeagleBone is running Ubuntu 12.04.
 ```</p>
