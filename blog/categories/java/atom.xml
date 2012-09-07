@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-09-07T19:01:00+03:00</updated>
+  <updated>2012-09-07T19:02:10+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -110,7 +110,7 @@ Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)</p>
 (sort-seq)       Avg:  1729.9035516600002
 ```</p></blockquote>
 
-<p>So here you are. Better performance and memory usage.
+<p>Here you are. Better performance and memory usage.
 Good Job, Embedded Java Team :)
 Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
 ]]></content>
