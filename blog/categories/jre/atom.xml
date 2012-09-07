@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jre | Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/blog/categories/jre/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-09-07T17:47:33+03:00</updated>
+  <updated>2012-09-07T19:01:00+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -39,7 +39,7 @@ current CPU frequency is 500 MHz.
 
 <p>Clojure version is 1.4.0.</p>
 
-<p>Benchmarks code is from <a href="http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya's post</a>:
+<p>Benchmark code is from <a href="http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya's post</a>:
 ```clojure
 (ns benchmark.core)</p>
 
