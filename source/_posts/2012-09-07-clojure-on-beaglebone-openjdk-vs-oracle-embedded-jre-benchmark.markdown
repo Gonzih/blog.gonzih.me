@@ -6,7 +6,7 @@ comments: true
 categories: [clojure, java, jre, bealbebone, ejre, openjdk]
 ---
 After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
-
+<!-- more -->
 BeagleBone is running Ubuntu 12.04.
 ```
 > cat /etc/*-release
