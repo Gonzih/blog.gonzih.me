@@ -51,7 +51,7 @@ Benchmark code is from [nakkaya's post](http://nakkaya.com/2011/03/15/clojure-on
   (println "(sort-seq) \t Avg: " (time-it #(sort-seq))))
 ```
 
-So here are numbers:
+So here the numbers:
 
 OpenJDK:
 ```
