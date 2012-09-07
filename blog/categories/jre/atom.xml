@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jre | Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/blog/categories/jre/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-09-07T19:02:56+03:00</updated>
+  <updated>2012-09-07T23:26:09+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -84,7 +84,7 @@ OpenJDK Zero VM (build 22.0-b10, mixed mode)</p>
 
 <p>ps -eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-96.9 16.3 267932 41172 pts/1    Sl+  09:07   9:28 java</p>
+96.9 16.3 267932 41172 pts/1  Sl+  09:07  9:28 java</p>
 
 <p>lein run
 (factorial 5000) Avg:  1681.9940255249999
