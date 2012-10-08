@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-10-08T16:39:26+03:00</updated>
+  <updated>2012-10-08T16:42:10+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -35,7 +35,7 @@
 
 <p>```</p>
 
-<p>But after some research I found that I can detect key symobl using xev command. Here is my latest solution:</p>
+<p>But after some research I found that I can detect key symbol using xev command. Here is my latest solution:</p>
 
 <p>```haskell</p>
 
