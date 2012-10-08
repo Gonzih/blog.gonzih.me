@@ -21,7 +21,7 @@ Recently I migarted from awesome to xmonad. I'm Programmer Dvorak freak, so I st
 ```
 
 
-But after some research I found that I can detect key symobl using xev command. Here is my latest solution:
+But after some research I found that I can detect key symbol using xev command. Here is my latest solution:
 
 ```haskell
     -- Programmer Dvorak
