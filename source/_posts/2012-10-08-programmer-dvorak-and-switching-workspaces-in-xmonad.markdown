@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Programmer Dvorak and switching workspaces in Xmonad"
+title: "Programmer Dvorak and switching workspaces in XMonad"
 date: 2012-10-08 16:31
 comments: true
 categories: [haskell, xmonad, wm, linux]
