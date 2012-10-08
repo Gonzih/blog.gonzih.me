@@ -4,7 +4,7 @@
   <title><![CDATA[Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-09-08T00:38:49+03:00</updated>
+  <updated>2012-10-08T16:38:02+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in Xmonad]]></title>
+    <link href="http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
+    <updated>2012-10-08T16:31:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
+    <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I&#8217;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">--</span>
+</span><span class='line'><span class="c1">-- mod-[F1..F12], Switch to workspace N</span>
+</span><span class='line'><span class="c1">--</span>
+</span><span class='line'><span class="c1">-- mod-[F1..F12], Switch to workspace N</span>
+</span><span class='line'><span class="c1">-- mod-shift-[F1..F12], Move client to workspace N</span>
+</span><span class='line'><span class="c1">--</span>
+</span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_F1</span> <span class="o">..</span> <span class="n">xK_F12</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="p">[(</span><span class="kt">W</span><span class="o">.</span><span class="n">greedyView</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="kt">W</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">shiftMask</span><span class="p">)]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But after some research I found that I can detect key symobl using xev command. Here is my latest solution:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Programmer Dvorak</span>
+</span><span class='line'><span class="c1">-- mod-[1..0], Switch to workspace N</span>
+</span><span class='line'><span class="c1">--</span>
+</span><span class='line'><span class="c1">-- mod-[1..0], Switch to workspace N</span>
+</span><span class='line'><span class="c1">-- mod-shift-[1..0], Move client to workspace N</span>
+</span><span class='line'><span class="c1">--</span>
+</span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_ampersand</span><span class="p">,</span> <span class="n">xK_bracketleft</span><span class="p">,</span> <span class="n">xK_braceleft</span><span class="p">,</span> <span class="n">xK_braceright</span><span class="p">,</span> <span class="n">xK_parenleft</span>
+</span><span class='line'>                                             <span class="p">,</span><span class="n">xK_equal</span><span class="p">,</span> <span class="n">xK_asterisk</span><span class="p">,</span> <span class="n">xK_parenright</span><span class="p">,</span> <span class="n">xK_plus</span><span class="p">,</span> <span class="n">xK_bracketright</span><span class="p">,</span> <span class="n">xK_exclam</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="p">[(</span><span class="kt">W</span><span class="o">.</span><span class="n">greedyView</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="kt">W</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">shiftMask</span><span class="p">)]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hooray! It works!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
