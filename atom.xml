@@ -4,7 +4,7 @@
   <title><![CDATA[Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-10-08T16:42:10+03:00</updated>
+  <updated>2012-10-08T16:42:51+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in Xmonad]]></title>
+    <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
     <link href="http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
     <updated>2012-10-08T16:31:00+03:00</updated>
     <id>http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
