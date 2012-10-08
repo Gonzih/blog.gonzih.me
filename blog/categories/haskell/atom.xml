@@ -4,7 +4,7 @@
   <title><![CDATA[Category: haskell | Gonzih's dev blog]]></title>
   <link href="http://gonzih.github.com/blog/categories/haskell/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-10-08T16:42:51+03:00</updated>
+  <updated>2012-10-08T19:10:35+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih]]></name>
@@ -22,11 +22,8 @@
 
 <p>```haskell</p>
 
-<pre><code>--
--- mod-[F1..F12], Switch to workspace N
---
--- mod-[F1..F12], Switch to workspace N
--- mod-shift-[F1..F12], Move client to workspace N
+<pre><code>-- mod-[F1..F12]       Switch to workspace N
+-- mod-shift-[F1..F12] Move client to workspace N
 --
 [((m .|. modm, k), windows $ f i)
     | (i, k) &lt;- zip (XMonad.workspaces conf) [xK_F1 .. xK_F12]
@@ -40,10 +37,8 @@
 <p>```haskell</p>
 
 <pre><code>-- Programmer Dvorak
--- mod-[1..0], Switch to workspace N
---
--- mod-[1..0], Switch to workspace N
--- mod-shift-[1..0], Move client to workspace N
+-- mod-[1..9]       Switch to workspace N
+-- mod-shift-[1..9] Move client to workspace N
 --
 [((m .|. modm, k), windows $ f i)
     | (i, k) &lt;- zip (XMonad.workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright, xK_parenleft

@@ -112,14 +112,8 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">--</span>
-</span><span class='line'><span class="c1">-- mod-[F1..F12], Switch to workspace N</span>
-</span><span class='line'><span class="c1">--</span>
-</span><span class='line'><span class="c1">-- mod-[F1..F12], Switch to workspace N</span>
-</span><span class='line'><span class="c1">-- mod-shift-[F1..F12], Move client to workspace N</span>
+</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- mod-[F1..F12]       Switch to workspace N</span>
+</span><span class='line'><span class="c1">-- mod-shift-[F1..F12] Move client to workspace N</span>
 </span><span class='line'><span class="c1">--</span>
 </span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
 </span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_F1</span> <span class="o">..</span> <span class="n">xK_F12</span><span class="p">]</span>
@@ -137,13 +131,9 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
 </pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Programmer Dvorak</span>
-</span><span class='line'><span class="c1">-- mod-[1..0], Switch to workspace N</span>
-</span><span class='line'><span class="c1">--</span>
-</span><span class='line'><span class="c1">-- mod-[1..0], Switch to workspace N</span>
-</span><span class='line'><span class="c1">-- mod-shift-[1..0], Move client to workspace N</span>
+</span><span class='line'><span class="c1">-- mod-[1..9]       Switch to workspace N</span>
+</span><span class='line'><span class="c1">-- mod-shift-[1..9] Move client to workspace N</span>
 </span><span class='line'><span class="c1">--</span>
 </span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
 </span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_ampersand</span><span class="p">,</span> <span class="n">xK_bracketleft</span><span class="p">,</span> <span class="n">xK_braceleft</span><span class="p">,</span> <span class="n">xK_braceright</span><span class="p">,</span> <span class="n">xK_parenleft</span>
