@@ -4,8 +4,8 @@
 
 url: http://gonzih.github.com
 title: Gonzih's dev blog
-subtitle: Blog about ruby/ror, Clojure, linux, hacking and other stuff
-author: Max Gonzih
+subtitle: KEEP CALM and CODE ON
+author: Max Gonzih <gonzih@gmail.com>
 simple_search: http://google.com/search
 description:
 
@@ -19,7 +19,7 @@ date_format: "ordinal"
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email: iam@gonzih.org
+email: gonzih@gmail.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
