@@ -1,0 +1,37 @@
+<section class="contacts">
+  {% if site.twitter_user %}
+  <h1 class="contact">
+      <a href="https://twitter.com/{{ site.twitter_user }}" class="link">
+        <img src="/images/icons/twitter.png" class="icon">
+        @{{ site.twitter_user }}
+      </a>
+  </h1>
+  {% endif %}
+
+  {% if site.googleplus_user %}
+  <h1 class="contact">
+      <a href="https://plus.google.com/{{ site.googleplus_user }}" class="link">
+        <img src="/images/icons/googleplus.png" class="icon">
+        {{ site.googleplus_username }}
+      </a>
+  </h1>
+  {% endif %}
+
+  {% if site.email %}
+  <h1 class="contact">
+      <a href="mailto:{{ site.email }}" class="link">
+        <img src="/images/icons/mail.png" class="icon">
+        {{ site.email }}
+      </a>
+  </h1>
+  {% endif %}
+
+  {% if site.github_user %}
+  <h1 class="contact">
+      <a href="https://github.com/{{ site.github_user }}" class="link">
+        <img src="/images/icons/github.png" class="icon">
+        {{ site.github_user }}
+      </a>
+  </h1>
+  {% endif %}
+</section>
