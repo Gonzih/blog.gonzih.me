@@ -4,7 +4,7 @@
   <title><![CDATA[Category: validation | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/validation/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-12-29T13:37:51+03:00</updated>
+  <updated>2012-12-29T17:37:52+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -25,9 +25,9 @@ You will need three things for that.</p>
 
 <p>Second is <a href="http://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it's awesome and how to use it.</p>
 
-<p>Third is <a href="http://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides mechanism of form validation based on input classes.</p>
+<p>Third is <a href="http://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides mechanism for form validation based on input classes.</p>
 
-<p>So now only thing you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="http://coffeescript.org/">CoffeeScript</a> snippet:</p>
+<p>So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="http://coffeescript.org/">CoffeeScript</a> snippet:</p>
 
 <p>```coffeescript</p>
 
