@@ -6,6 +6,10 @@ section.contacts {
     font-size: 20px;
     box-shadow: none !important;
     border-bottom: none;
+    -webkit-box-shadow: none !important;
+    -webkit-border-bottom: none;
+    -moz-box-shadow: none !important;
+    -moz-border-bottom: none;
   }
 
   a.link {
