@@ -13,9 +13,9 @@ First is [Modernizr](http://modernizr.com/) javascript library. It allows you to
 
 Second is [JQuery](http://jquery.com/). I think you are already familiar with it, so there is no need to tell you why it's awesome and how to use it.
 
-Third is [JQuery Validation Plugin](http://docs.jquery.com/Plugins/Validation). It provides mechanism of form validation based on input classes.
+Third is [JQuery Validation Plugin](http://docs.jquery.com/Plugins/Validation). It provides mechanism for form validation based on input classes.
 
-So now only thing you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small [CoffeeScript](http://coffeescript.org/) snippet:
+So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small [CoffeeScript](http://coffeescript.org/) snippet:
 
 ```coffeescript
 # initialize plugin on page ready
