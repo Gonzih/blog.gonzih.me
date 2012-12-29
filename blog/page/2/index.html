@@ -9,7 +9,19 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="You must change encoding for template1. For do that run following. 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+su - postgres
+psql UPDATE pg_database SET datistemplate = &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +77,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/">Set New PostgreSQL Databases Encoding to Unicode</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-30T10:42:00+03:00" pubdate data-updated="true">Sep 30<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>You must change encoding for template1. For do that run following.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>su - postgres
+</span><span class='line'>psql
+</span><span class='line'>
+</span><span class='line'>UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+</span><span class='line'>DROP DATABASE template1;
+</span><span class='line'>CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+</span><span class='line'>UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+</span><span class='line'>
+</span><span class='line'>#recomended
+</span><span class='line'>\c template1
+</span><span class='line'>VACUUM FREEZE;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -425,6 +501,10 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/">Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/12/12/note-on-privacy-number-1/">Note on privacy #1</a>
       </li>
     
@@ -438,10 +518,6 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
     
       <li class="post">
         <a href="/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/">Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/20/arch-linux-migrated-to-grub2/">Arch Linux migrated to GRUB2</a>
       </li>
     
   </ul>

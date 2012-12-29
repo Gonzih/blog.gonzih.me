@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ie | Max Gonzih]]></title>
+  <link href="http://gonzih.github.com/blog/categories/ie/atom.xml" rel="self"/>
+  <link href="http://gonzih.github.com/"/>
+  <updated>2012-12-29T13:36:33+03:00</updated>
+  <id>http://gonzih.github.com/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin]]></title>
+    <link href="http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
+    <updated>2012-12-29T12:15:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
+    <content type="html"><![CDATA[<p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
+You will need three things for that.</p>
+
+<p>First is <a href="http://modernizr.com/">Modernizr</a> javascript library. It allows you to detect which features are supported by your browser and which aren't.</p>
+
+<p>Second is <a href="http://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it's awesome and how to use it.</p>
+
+<p>Third is <a href="http://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides you mechanis of form validation based on input classes.</p>
+
+<p>So now only thing you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="http://coffeescript.org/">CoffeeScript</a> snippet:</p>
+
+<p>```coffeescript</p>
+
+<h1>initialize plugin on page ready</h1>
+
+<p>$ ->
+  unless (Modernizr.input.required)</p>
+
+<pre><code>$('form').find('input[required]').each -&gt;
+  $(this).attr('class', 'required ' + this.getAttribute('type')).removeAttr('required')
+
+$('form').each -&gt;
+  $(this).validate()
+</code></pre>
+
+<h1>check if form is valid by hand</h1>
+
+<p>$('form').valid()
+```</p>
+
+<p>And as always, Have a nice day! :)</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2012-12-28T17:11:17+03:00</updated>
+  <updated>2012-12-29T13:36:33+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin]]></title>
+    <link href="http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
+    <updated>2012-12-29T12:15:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
+    <content type="html"><![CDATA[<p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
+You will need three things for that.</p>
+
+<p>First is <a href="http://modernizr.com/">Modernizr</a> javascript library. It allows you to detect which features are supported by your browser and which aren&#8217;t.</p>
+
+<p>Second is <a href="http://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it&#8217;s awesome and how to use it.</p>
+
+<p>Third is <a href="http://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides you mechanis of form validation based on input classes.</p>
+
+<p>So now only thing you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="http://coffeescript.org/">CoffeeScript</a> snippet:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># initialize plugin on page ready</span>
+</span><span class='line'><span class="nx">$</span> <span class="o">-&gt;</span>
+</span><span class='line'>  <span class="nx">unless</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">required</span><span class="p">)</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s">&#39;input[required]&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="o">-&gt;</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s">&#39;class&#39;</span><span class="p">,</span> <span class="s">&#39;required &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)).</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s">&#39;required&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="o">-&gt;</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">validate</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># check if form is valid by hand</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">valid</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And as always, Have a nice day! :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Note on privacy #1]]></title>
