@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bealbebone | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/bealbebone/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-01-23T17:44:15+03:00</updated>
+  <updated>2013-01-23T17:48:06+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -72,18 +72,18 @@ result))
 <blockquote><p>node --version
 v0.6.12</p></blockquote>
 
-<h1>advanced compiler optimization</h1>
+<h1>simple compiler optimization</h1>
 
 <blockquote><p>ps eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js</p>
+91.4 20.3 90816  51292 pts/1  Rl+  08:46  0:54 node clojurescript-benchmark-optimization-simple.js</p>
 
-<p>node clojurescript-benchmark-optimization-advanced.js
+<p>node clojurescript-benchmark-optimization-simple.js
 (factorial 5000) Avg: 64.345
 (fib 20)         Avg: 5.575
 (sort-seq)       Avg: 7281.975</p></blockquote>
 
-<h1>simple compiler optimization</h1>
+<h1>advanced compiler optimization</h1>
 
 <blockquote><p>ps eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND

@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-01-23T17:44:15+03:00</updated>
+  <updated>2013-01-23T17:48:06+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -118,17 +118,17 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; node </span><span class="nv">--version</span>
 </span><span class='line'><span class="nv">v0.6.12</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">#</span> <span class="nv">advanced</span> <span class="nv">compiler</span> <span class="nv">optimization</span>
+</span><span class='line'><span class="o">#</span> <span class="nv">simple</span> <span class="nv">compiler</span> <span class="nv">optimization</span>
 </span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
 </span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span> <span class="nv">VSZ</span>    <span class="nv">RSS</span>   <span class="nv">TTY</span>    <span class="nv">STAT</span> <span class="nv">START</span>  <span class="nv">TIME</span> <span class="nv">COMMAND</span>
-</span><span class='line'><span class="mf">99.0</span> <span class="mf">20.9</span> <span class="mi">92200</span>  <span class="mi">52776</span> <span class="nv">pts/0</span>  <span class="nv">Rl+</span>  <span class="mi">07</span><span class="ss">:14</span>  <span class="mi">0</span><span class="ss">:44</span> <span class="nb">node </span><span class="nv">clojurescript-benchmark-optimization-advanced.js</span>
+</span><span class='line'><span class="mf">91.4</span> <span class="mf">20.3</span> <span class="mi">90816</span>  <span class="mi">51292</span> <span class="nv">pts/1</span>  <span class="nv">Rl+</span>  <span class="mi">08</span><span class="ss">:46</span>  <span class="mi">0</span><span class="ss">:54</span> <span class="nb">node </span><span class="nv">clojurescript-benchmark-optimization-simple.js</span>
 </span><span class='line'>
-</span><span class='line'><span class="nb">&gt; node </span><span class="nv">clojurescript-benchmark-optimization-advanced.js</span>
+</span><span class='line'><span class="nb">&gt; node </span><span class="nv">clojurescript-benchmark-optimization-simple.js</span>
 </span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">64.345</span>
 </span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">5.575</span>
 </span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">7281.975</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">#</span> <span class="nv">simple</span> <span class="nv">compiler</span> <span class="nv">optimization</span>
+</span><span class='line'><span class="o">#</span> <span class="nv">advanced</span> <span class="nv">compiler</span> <span class="nv">optimization</span>
 </span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
 </span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span> <span class="nv">VSZ</span>    <span class="nv">RSS</span>   <span class="nv">TTY</span>    <span class="nv">STAT</span> <span class="nv">START</span>  <span class="nv">TIME</span> <span class="nv">COMMAND</span>
 </span><span class='line'><span class="mf">99.0</span> <span class="mf">20.9</span> <span class="mi">92200</span>  <span class="mi">52776</span> <span class="nv">pts/0</span>  <span class="nv">Rl+</span>  <span class="mi">07</span><span class="ss">:14</span>  <span class="mi">0</span><span class="ss">:44</span> <span class="nb">node </span><span class="nv">clojurescript-benchmark-optimization-advanced.js</span>
