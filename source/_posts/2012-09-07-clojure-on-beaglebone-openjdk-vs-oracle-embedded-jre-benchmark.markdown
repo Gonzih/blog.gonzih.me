@@ -89,6 +89,6 @@ Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)
 (sort-seq)       Avg:  1729.9035516600002
 ```
 
-Here you are. Better performance and memory usage.
+Here you are. Better performance and slightly better memory usage.
 Good Job, Embedded Java Team :)
 Looking forward for hardfloat ABI version to test it on Raspberry Pi.
