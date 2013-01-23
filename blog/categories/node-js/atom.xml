@@ -4,7 +4,7 @@
   <title><![CDATA[Category: node.js | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/node-js/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-01-23T17:43:02+03:00</updated>
+  <updated>2013-01-23T17:44:15+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -42,26 +42,25 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
   (sort (repeat 100000 (rand-int 2000000))))</p>
 
 <p>(defn time-fun [fun]
-  (let [start (.getTime (js/Date.))</p>
+  (let [start  (.getTime (js/Date.))</p>
 
-<pre><code>    _ (fun)
-    end (.getTime (js/Date.))
+<pre><code>    _      (fun)
+    end    (.getTime (js/Date.))
     result (- end start)]
 result))
 </code></pre>
 
 <p>(defn time-it [fun]
-  (let [values  (for [i (range 200)] (time-fun fun))</p>
+  (let [values  (for [i (range 200)] (time-fun fun))]</p>
 
-<pre><code>    doubles  values]
-(/ (apply + doubles)
-   (count doubles))))
+<pre><code>(/ (apply + values)
+   (count values))))
 </code></pre>
 
 <p>(defn -main []
   (println "(factorial 5000) \t Avg: " (time-it #(factorial 5000)))
-  (println "(fib 20) \t Avg: " (time-it #(fib 20)))
-  (println "(sort-seq) \t Avg: " (time-it #(sort-seq))))</p>
+  (println "(fib 20) \t Avg: "         (time-it #(fib 20)))
+  (println "(sort-seq) \t Avg: "       (time-it #(sort-seq))))</p>
 
 <p>(set! <em>main-cli-fn</em> -main)
 ```</p>
