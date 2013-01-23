@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-01-23T17:38:41+03:00</updated>
+  <updated>2013-01-23T17:43:02+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -44,10 +44,8 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
 <p>(defn time-fun [fun]
   (let [start (.getTime (js/Date.))</p>
 
-<pre><code>    ;_ (println start)
-    _ (fun)
+<pre><code>    _ (fun)
     end (.getTime (js/Date.))
-    ;_ (println end)
     result (- end start)]
 result))
 </code></pre>
