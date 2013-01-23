@@ -2,96 +2,96 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/08/03/collection-of-usefull-vim-plugins/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/
         </loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/
         </loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/
         </loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2012/07/19/fix-broken-comments-count-for-disqus/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2/</loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/
         </loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/
         </loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-23T16:24:44+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/
         </loc>
-        <lastmod>2012-12-01T12:56:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/2012/12/12/note-on-privacy-number-1/</loc>
-        <lastmod>2012-12-12T10:57:56+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/
         </loc>
-        <lastmod>2012-12-29T17:35:54+03:00</lastmod>
+        <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/</loc>
-        <lastmod>2012-12-29T17:35:54+03:00</lastmod>
+        <lastmod>2013-01-23T16:24:44+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/archives/</loc>
-        <lastmod>2012-12-29T17:35:54+03:00</lastmod>
+        <lastmod>2013-01-23T16:24:44+03:00</lastmod>
     </url>
 </urlset>
