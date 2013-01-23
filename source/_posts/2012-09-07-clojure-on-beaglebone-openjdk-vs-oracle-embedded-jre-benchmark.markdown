@@ -62,7 +62,7 @@ java version "1.7.0_03"
 OpenJDK Runtime Environment (IcedTea7 2.1.1pre) (7~u3-2.1.1~pre1-1ubuntu3)
 OpenJDK Zero VM (build 22.0-b10, mixed mode)
 
-> ps -eu
+> ps eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
 96.9 16.3 267932 41172 pts/1  Sl+  09:07  9:28 java
 
@@ -79,7 +79,7 @@ java version "1.7.0_06"
 Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)
 Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)
 
-> ps -eu
+> ps eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
 91.2 16.4 221740 41372 pts/1  Sl+  08:28  5:16 java
 
