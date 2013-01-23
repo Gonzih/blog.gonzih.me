@@ -87,11 +87,17 @@
         <lastmod>2013-01-20T17:13:47+03:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://gonzih.github.com/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/
+        </loc>
+        <lastmod>2013-01-23T17:38:21+03:00</lastmod>
+    </url>
+    <url>
         <loc>http://gonzih.github.com/</loc>
-        <lastmod>2013-01-23T16:24:44+03:00</lastmod>
+        <lastmod>2013-01-23T17:38:21+03:00</lastmod>
     </url>
     <url>
         <loc>http://gonzih.github.com/blog/archives/</loc>
-        <lastmod>2013-01-23T16:24:44+03:00</lastmod>
+        <lastmod>2013-01-23T17:38:21+03:00</lastmod>
     </url>
 </urlset>
