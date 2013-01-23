@@ -25,22 +25,21 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
   (sort (repeat 100000 (rand-int 2000000))))
 
 (defn time-fun [fun] 
-  (let [start (.getTime (js/Date.))
-        _ (fun)
-        end (.getTime (js/Date.))
+  (let [start  (.getTime (js/Date.))
+        _      (fun)
+        end    (.getTime (js/Date.))
         result (- end start)]
     result))
 
 (defn time-it [fun]
-  (let [values  (for [i (range 200)] (time-fun fun))
-        doubles  values]
-    (/ (apply + doubles)
-       (count doubles))))
+  (let [values  (for [i (range 200)] (time-fun fun))]
+    (/ (apply + values)
+       (count values))))
 
 (defn -main []
   (println "(factorial 5000) \t Avg: " (time-it #(factorial 5000)))
-  (println "(fib 20) \t Avg: " (time-it #(fib 20)))
-  (println "(sort-seq) \t Avg: " (time-it #(sort-seq))))
+  (println "(fib 20) \t Avg: "         (time-it #(fib 20)))
+  (println "(sort-seq) \t Avg: "       (time-it #(sort-seq))))
 
 (set! *main-cli-fn* -main)
 ```
