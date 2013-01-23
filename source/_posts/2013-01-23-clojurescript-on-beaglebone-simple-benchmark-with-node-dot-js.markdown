@@ -50,17 +50,17 @@ Benchmark results:
 > node --version
 v0.6.12
 
-# advanced compiler optimization
+# simple compiler optimization
 > ps eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js
+91.4 20.3 90816  51292 pts/1  Rl+  08:46  0:54 node clojurescript-benchmark-optimization-simple.js
 
-> node clojurescript-benchmark-optimization-advanced.js
+> node clojurescript-benchmark-optimization-simple.js
 (factorial 5000) Avg: 64.345
 (fib 20)         Avg: 5.575
 (sort-seq)       Avg: 7281.975
 
-# simple compiler optimization
+# advanced compiler optimization
 > ps eu
 %CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
 99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js
