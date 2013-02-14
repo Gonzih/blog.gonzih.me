@@ -4,7 +4,7 @@
   <title><![CDATA[Category: terminal | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/terminal/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-01-23T17:48:06+03:00</updated>
+  <updated>2013-02-14T21:39:51+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
+    <link href="http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
+    <updated>2013-02-14T21:22:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
+    <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
+
+<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
+
+<p><code>ini .config/mc/ini
+[Colors]
+base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:
+</code></p>
+
+<p>For more information take look at <a href="http://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
+Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (of course you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tmux + Rvm + Zsh Fix]]></title>

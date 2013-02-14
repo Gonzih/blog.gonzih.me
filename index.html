@@ -9,7 +9,9 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Benchmark is based on my previous experiments with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on &hellip;">
+  <meta name="description" content="I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :) .config/mc/ini1
+2
+[ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +67,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/">Blue Midnight Commander Color Scheme</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-14T21:22:00+03:00" pubdate data-updated="true">Feb 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
+
+<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
+
+<figure class='code'><figcaption><span>.config/mc/ini</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="k">[Colors]</span>
+</span><span class='line'><span class="na">base_color</span><span class="o">=</span><span class="s">lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more information take look at <a href="http://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
+Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (of course you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -526,59 +578,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/">How to Use Magnet Links With RTorrent</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-17T18:04:00+03:00" pubdate data-updated="true">Feb 17<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">cd</span> ~/watch    <span class="c"># set your watch directory here</span>
-</span><span class='line'><span class="o">[[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">=</span>~ <span class="nv">xt</span><span class="o">=</span>urn:btih:<span class="o">([</span>^&amp;/<span class="o">]</span>+<span class="o">)</span> <span class="o">]]</span> <span class="o">||</span> <span class="nb">exit</span>;
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;d10:magnet-uri${#1}:${1}e&quot;</span> &gt; <span class="s2">&quot;meta-${BASH_REMATCH[1]}.torrent&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://libtorrent.rakshasa.no/ticket/2100">via</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -597,6 +596,10 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/">Blue Midnight Commander color scheme</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/">ClojureScript on BeagleBone: simple benchmark with Node.js</a>
       </li>
     
@@ -610,10 +613,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
     
       <li class="post">
         <a href="/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/">Programmer Dvorak and switching workspaces in XMonad</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark</a>
       </li>
     
   </ul>
