@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-02-14T21:39:51+03:00</updated>
+  <updated>2013-02-14T21:47:39+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -28,7 +28,7 @@ base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,l
 </code></p>
 
 <p>For more information take look at <a href="http://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
-Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (of course you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
+Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
 ]]></content>
   </entry>
   
