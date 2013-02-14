@@ -16,4 +16,4 @@ base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,l
 ```
 
 For more information take look at [mc wiki](http://www.midnight-commander.org/wiki/doc/common/skins) and run `mc --help-color` to see available color variables in your mc version.
-Format of color configuration is `what=foreground,background:`. All configuration shoud be in one line (of course you can write it in multiple lines and then use vim (or other cool editor) magic).
+Format of color configuration is `what=foreground,background:`. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).
