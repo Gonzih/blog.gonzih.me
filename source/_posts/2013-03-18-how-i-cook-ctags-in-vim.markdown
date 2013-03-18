@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Now I cook Ctags in Vim"
+title: "How I cook Ctags in Vim"
 date: 2013-03-18 20:50
 comments: true
 categories: [vim, viml, ctags]
