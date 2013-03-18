@@ -71,7 +71,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/18/now-i-cook-ctags-in-vim/">Now I Cook Ctags in Vim</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I Cook Ctags in Vim</a></h1>
     
     
       <p class="meta">
@@ -89,7 +89,7 @@
 
 <time datetime="2013-03-18T20:50:00+03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/03/18/now-i-cook-ctags-in-vim/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/#disqus_thread">Comments</a>
         
       </p>
     
@@ -234,82 +234,6 @@
 
 
 <p>Enjoy :)</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/04/building-rc-toy-with-clojure/">Building RC Toy With Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-04T11:09:00+03:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/03/04/building-rc-toy-with-clojure/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Bored and have free time? Lets build something.
-Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).
-First of all we need some parts.</p>
-
-<ul>
-<li>Tamiya Universal Plate Set (TAM70157) (better to order 2 pcs)</li>
-<li>Tamiya Track and Wheel Set (TAM70100)</li>
-<li>Tamiya Twin Motor Gearbox  (TAM70097)</li>
-<li>Arduino (I have UNO and Leonardo, UNO was choosen since I don&#8217;t need to make lot of modifications in Firmata code for it)</li>
-<li>HBridge IC L293</li>
-<li>Bluetooth module (you can buy arduino ready module, I will be using cheapest possible module)</li>
-<li>Bluetooth in PC</li>
-<li>Wires</li>
-<li>Batteries or Accumulator (I have 9v battery so I will be using it)</li>
-</ul>
-
-
-<h1>Putting Tamiya together</h1>
-
-<p>First lets build gearbox. You can use it if few different models of gear ratio. I selected</p>
-
-<h1>Raspberry Pi</h1>
-
-<h2>Native dependencies issue</h2>
-
-<p>Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#INFO: Failed to load library: no jinput-linux64 in java.library.path
-</span><span class='line'>sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so`</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Gamepad configuration</h2>
-
-<p>add <code>joydev</code> to <code>/etc/modules</code>
-to see my gamepad in /etc/input I switched it to direct input mode (X -> D switch at the back of gamepad)</p>
-
-<p>Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0</p>
 </div>
   
   
@@ -745,6 +669,46 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/19/fix-broken-comments-count-for-disqus/">Fix Broken Comments Count for Disqus</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T18:16:00+03:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/19/fix-broken-comments-count-for-disqus/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
+That is why comments count was equal to 0 for every post on my index page.
+To fix that go to admin ui in disqus and use domain migration tool.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -763,11 +727,7 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/03/18/now-i-cook-ctags-in-vim/">Now I cook Ctags in Vim</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/04/building-rc-toy-with-clojure/">Building RC Toy with Clojure</a>
+        <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I cook Ctags in Vim</a>
       </li>
     
       <li class="post">
@@ -780,6 +740,10 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
     
       <li class="post">
         <a href="/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/">Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/12/note-on-privacy-number-1/">Note on privacy #1</a>
       </li>
     
   </ul>

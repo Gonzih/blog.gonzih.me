@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-03-18T21:19:56+03:00</updated>
+  <updated>2013-03-18T21:27:17+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Now I cook Ctags in Vim]]></title>
-    <link href="http://gonzih.github.com/blog/2013/03/18/now-i-cook-ctags-in-vim/"/>
+    <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
+    <link href="http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
     <updated>2013-03-18T20:50:00+03:00</updated>
-    <id>http://gonzih.github.com/blog/2013/03/18/now-i-cook-ctags-in-vim</id>
+    <id>http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
     <content type="html"><![CDATA[<p>Ctags is great piece of software. And it tooke me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
 <p>Functions do following:</p>
