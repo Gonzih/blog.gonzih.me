@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: zip - Max Gonzih</title>
+  <title>Building RC Toy with Clojure - Max Gonzih</title>
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Category: zip">
+  <meta name="description" content="Bored and have free time? Lets build something.
+Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).
+First of all we &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gonzih.github.comblog/categories/zip/">
+  <link rel="canonical" href="http://gonzih.github.com/blog/2013/03/04/building-rc-toy-with-clojure/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/contacts.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -64,36 +66,125 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Zip</h1>
+    
+      <h1 class="entry-title">Building RC Toy With Clojure</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-04T11:09:00+03:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Bored and have free time? Lets build something.
+Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).
+First of all we need some parts.</p>
 
-  
-  <h2>2011</h2>
+<ul>
+<li>Tamiya Universal Plate Set (TAM70157) (better to order 2 pcs)</li>
+<li>Tamiya Track and Wheel Set (TAM70100)</li>
+<li>Tamiya Twin Motor Gearbox  (TAM70097)</li>
+<li>Arduino (I have UNO and Leonardo, UNO was choosen since I don&#8217;t need to make lot of modifications in Firmata code for it)</li>
+<li>HBridge IC L293</li>
+<li>Bluetooth module (you can buy arduino ready module, I will be using cheapest possible module)</li>
+<li>Bluetooth in PC</li>
+<li>Wires</li>
+<li>Batteries or Accumulator (I have 9v battery so I will be using it)</li>
+</ul>
 
-<article>
-  
-<h1><a href="/blog/2011/09/19/install-opkg-package-manager-on-android-mc/">Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</a></h1>
-<time datetime="2011-09-19T17:54:00+03:00" pubdate><span class='month'>Sep</span> <span class='day'>19</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/busybox/'>busybox</a>, <a class='category' href='/blog/categories/htop/'>htop</a>, <a class='category' href='/blog/categories/mc/'>mc</a>, <a class='category' href='/blog/categories/opkg/'>opkg</a>, <a class='category' href='/blog/categories/packages-manager/'>packages manager</a>, <a class='category' href='/blog/categories/rsync/'>rsync</a>, <a class='category' href='/blog/categories/screen/'>screen</a>, <a class='category' href='/blog/categories/tree/'>tree</a>, <a class='category' href='/blog/categories/zip/'>zip</a></span>
-</footer>
+<h1>Putting Tamiya together</h1>
+
+<p>First lets build gearbox. You can use it if few different models of gear ratio. I selected</p>
+
+<h1>Raspberry Pi</h1>
+
+<h2>Native dependencies issue</h2>
+
+<p>Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#INFO: Failed to load library: no jinput-linux64 in java.library.path
+</span><span class='line'>sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so`</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<h2>Gamepad configuration</h2>
 
+<p>add <code>joydev</code> to <code>/etc/modules</code>
+to see my gamepad in /etc/input I switched it to direct input mode (X -> D switch at the back of gamepad)</p>
+
+<p>Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Max Gonzih <gonzih@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-04T11:09:00+03:00" pubdate data-updated="true">Mar 4<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/14/blue-midnight-commander-color-scheme/" title="Previous Post: Blue Midnight Commander color scheme">&laquo; Blue Midnight Commander color scheme</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/03/18/now-i-cook-ctags-in-vim/" title="Next Post: Now I cook Ctags in Vim">Now I cook Ctags in Vim &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -184,7 +275,10 @@
       var disqus_shortname = 'gonzihsblog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gonzih.github.com/blog/2013/03/04/building-rc-toy-with-clojure/';
+        var disqus_url = 'http://gonzih.github.com/blog/2013/03/04/building-rc-toy-with-clojure/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
