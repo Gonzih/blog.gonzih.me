@@ -5,7 +5,7 @@ date: 2013-03-18 20:50
 comments: true
 categories: [vim, viml, ctags]
 ---
-Ctags is great piece of software. And it tooke me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.
+Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.
 
 Functions do following:
 
