@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-02-14T21:47:39+03:00</updated>
+  <updated>2013-03-18T21:18:39+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,152 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Now I cook Ctags in Vim]]></title>
+    <link href="http://gonzih.github.com/blog/2013/03/18/now-i-cook-ctags-in-vim/"/>
+    <updated>2013-03-18T20:50:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2013/03/18/now-i-cook-ctags-in-vim</id>
+    <content type="html"><![CDATA[<p>Ctags is great piece of software. And it tooke me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
+
+<p>Functions do following:</p>
+
+<ul>
+<li>Initialize tags file with symlink to /tmp (tmpfs) with uuid in name if no symlink was found</li>
+<li>Touch tags file</li>
+<li>If file is empty (wc -l return 0 lines) then populate it with <code>ctags -R</code> command</li>
+<li>Remove all lines from tags file related to current file</li>
+<li>Update tags file with new content of current file with <code>ctags -a</code></li>
+</ul>
+
+
+<p>Why I use symlinks for tags file?</p>
+
+<ul>
+<li>Writes are slow</li>
+<li>Writes are bad for my SSD</li>
+<li>Memory is blazingly fast</li>
+</ul>
+
+
+<p>Here is my code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; If tags file does not exist initializes it with symlink to tmp with UUID in</span>
+</span><span class='line'><span class="c">&quot; filename</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> InitTagsFileWithSymlink<span class="p">(</span><span class="k">f</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> filepath <span class="p">=</span> <span class="k">a</span>:<span class="k">f</span>
+</span><span class='line'>  <span class="k">let</span> issymlink <span class="p">=</span> system<span class="p">(</span><span class="s2">&quot;find &#39;&quot;</span> . filepath . <span class="s2">&quot;&#39; -type l | wc -l&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> issymlink <span class="p">==</span> <span class="m">0</span>
+</span><span class='line'>    <span class="k">let</span> uuid <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;uuidgen&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ln -s &quot;/tmp/ctags-for-vim-&#39;</span> . uuid . <span class="s1">&#39;&quot; &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> substitute<span class="p">(</span>cmd<span class="p">,</span> <span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'>  <span class="k">endif</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Populates tags file if lines count is equal to 0</span>
+</span><span class='line'><span class="c">&quot; with `ctags -R .`</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> PopulateTagsFile<span class="p">(</span><span class="k">f</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> filepath <span class="p">=</span> <span class="k">a</span>:<span class="k">f</span>
+</span><span class='line'>  <span class="k">let</span> resp     <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;touch &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nb">lines</span>    <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;wc -l &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> linescnt <span class="p">=</span> substitute<span class="p">(</span><span class="nb">lines</span><span class="p">,</span> <span class="s1">&#39;\D&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> linescnt <span class="p">==</span> <span class="m">0</span>
+</span><span class='line'>    <span class="k">let</span> cwd  <span class="p">=</span> getcwd<span class="p">()</span>
+</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ctags -Rf &quot;&#39;</span>. filepath . <span class="s1">&#39;&quot; &quot;&#39;</span> . cwd . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>    <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'>  <span class="k">endif</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Remove tags for saved file from tags file</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> DelTagOfFile<span class="p">(</span><span class="k">file</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> fullpath    <span class="p">=</span> <span class="k">a</span>:<span class="k">file</span>
+</span><span class='line'>  <span class="k">let</span> cwd         <span class="p">=</span> getcwd<span class="p">()</span>
+</span><span class='line'>  <span class="k">let</span> tagfilename <span class="p">=</span> cwd . <span class="s2">&quot;/tags&quot;</span>
+</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> substitute<span class="p">(</span>fullpath<span class="p">,</span> cwd . <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> escape<span class="p">(</span><span class="k">f</span><span class="p">,</span> <span class="s1">&#39;./&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> cmd         <span class="p">=</span> <span class="s1">&#39;sed --follow-symlinks -i &quot;/&#39;</span> . <span class="k">f</span> . <span class="s1">&#39;/d&quot; &quot;&#39;</span> . tagfilename . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>  <span class="k">let</span> resp        <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Init tags file</span>
+</span><span class='line'><span class="c">&quot; Populate it</span>
+</span><span class='line'><span class="c">&quot; Remove data related to saved file</span>
+</span><span class='line'><span class="c">&quot; Append it with data for saved file</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> UpdateTags<span class="p">()</span>
+</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> expand<span class="p">(</span><span class="s2">&quot;%:p&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> cwd         <span class="p">=</span> getcwd<span class="p">()</span>
+</span><span class='line'>  <span class="k">let</span> tagfilename <span class="p">=</span> cwd . <span class="s2">&quot;/tags&quot;</span>
+</span><span class='line'>  <span class="k">call</span> InitTagsFileWithSymlink<span class="p">(</span>tagfilename<span class="p">)</span>
+</span><span class='line'>  <span class="k">call</span> PopulateTagsFile<span class="p">(</span>tagfilename<span class="p">)</span>
+</span><span class='line'>  <span class="k">call</span> DelTagOfFile<span class="p">(</span><span class="k">f</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ctags -a -f &#39;</span> . tagfilename . <span class="s1">&#39; &quot;&#39;</span> . <span class="k">f</span> . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>  <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'>command UpdateTags <span class="k">call</span> UpdateTags<span class="p">()</span>
+</span><span class='line'>autocmd <span class="nb">BufWritePost</span> *.rb<span class="p">,</span>*.<span class="nb">js</span><span class="p">,</span>*.coffee<span class="p">,</span>*.clj <span class="k">call</span> UpdateTags<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enjoy :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
@@ -1285,124 +1431,6 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
 
 <p><a href="https://github.com/Bogdanp/rbrepl.vim">rbrepl</a>
  - Run irb in vim session.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My Rails Apps Template]]></title>
-    <link href="http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/"/>
-    <updated>2011-08-03T13:29:00+03:00</updated>
-    <id>http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template</id>
-    <content type="html"><![CDATA[<p>Here is my rails template that i use for my projects. With BDD gems, optional resque for deloyed jobs, kaminari for pagination, carriervawe as paperclip replacement.</p>
-
-<!-- more -->
-
-
-<div><script src='https://gist.github.com/940407.js?file='></script>
-<noscript><pre><code># for 3.0 rails
-
-# create rvmrc file
-create_file &quot;.rvmrc&quot;, &quot;rvm 1.9.2&quot;
-
-gem &quot;jquery-rails&quot;
-gem &quot;postgres&quot;
-#gem &quot;kaminari&quot;
-#gem &quot;carrierwave&quot;
-#gem &quot;resque&quot;
-gem &quot;yaml_db&quot;, :require =&gt; false
-
-#group :development
-gem &quot;nifty-generators&quot;,  :group =&gt; :development
-gem &quot;annotate&quot;,          :group =&gt; :development, :require =&gt; false
-gem &quot;capistrano&quot;,        :group =&gt; :development, :require =&gt; false
-gem &quot;capistrano_colors&quot;, :group =&gt; :development, :require =&gt; false
-
-#group :test
-gem &quot;capybara&quot;,         :group =&gt; :test
-gem &quot;fabrication&quot;,      :group =&gt; :test
-gem &quot;ffaker&quot;,           :group =&gt; :test
-gem &quot;launchy&quot;,          :group =&gt; :test
-gem &quot;database_cleaner&quot;, :group =&gt; :test
-gem &quot;fakeweb&quot;,          :group =&gt; :test
-gem &quot;timecop&quot;,          :group =&gt; :test
-gem &quot;email_spec&quot;,       :group =&gt; :test
-gem &quot;guard-rspec&quot;,      :group =&gt; :test
-
-gem &quot;rspec-rails&quot;, :group =&gt; [ :development, :test ]
-
-gem &quot;whenever&quot;,   :group =&gt; [ :development, :production ], :require =&gt; false
-gem &quot;capistrano&quot;, :group =&gt; [ :development, :production ], :require =&gt; false
-
-run &quot;bundle install --path vendor/bundle&quot;
-
-generate &quot;rspec:install&quot;
-run &quot;bundle exec guard init rspec&quot;
-remove_file &quot;public/javascripts/rails.js&quot; # jquery-rails replaces this
-generate &quot;jquery:install --ui&quot;
-run &quot;echo '--format documentation' &gt;&gt; .rspec&quot;
-# clean up rails defaults
-remove_file &quot;public/index.html&quot;
-remove_file &quot;rm public/images/rails.png&quot;
-
-
-#files injections
-inject_into_file &quot;config/application.rb&quot;, :after =&gt; &quot;config.filter_parameters += [:password]&quot; do
-  &lt;&lt;-eos
-    # Customize generators
-    config.generators do |g|
-      g.stylesheets false
-      g.test_framework      :rspec, :fixture =&gt; true
-      g.fixture_replacement :fabrication
-    end
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
-  &lt;&lt;-eos
-    config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
-    end
-
-    config.before(:each) do
-      DatabaseCleaner.clean
-    end
-
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;require 'rspec/rails'&quot; do
-  &lt;&lt;-eos
-    require &quot;email_spec&quot;
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
-  &lt;&lt;-eos
-    Spec::Runner.configure do |config|
-      config.include(EmailSpec::Helpers)
-      config.include(EmailSpec::Matchers)
-    end
-
-  eos
-end
-
-rake &quot;db:create&quot;, :env =&gt; &quot;development&quot;
-rake &quot;db:create&quot;, :env =&gt; &quot;test&quot;
-rake &quot;db:migrate&quot;
-
-# commit to git
-git :init
-git :add =&gt; &quot;.&quot;
-git :commit =&gt; &quot;-a -m 'create initial bdd application'&quot;
-
-say &lt;&lt;-eos
-  All done!
-eos
-
-</code></pre></noscript></div>
-
-
-
 ]]></content>
   </entry>
   

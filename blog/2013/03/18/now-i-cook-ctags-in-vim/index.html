@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Now I cook Ctags in Vim - Max Gonzih</title>
+  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+
+  
+  <meta name="description" content="Ctags is great piece of software. And it tooke me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://gonzih.github.com/blog/2013/03/18/now-i-cook-ctags-in-vim/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/contacts.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Max Gonzih</a></h1>
+  
+    <h2>KEEP CALM and CODE ON</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:gonzih.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Now I Cook Ctags in Vim</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-18T20:50:00+03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Ctags is great piece of software. And it tooke me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
+
+<p>Functions do following:</p>
+
+<ul>
+<li>Initialize tags file with symlink to /tmp (tmpfs) with uuid in name if no symlink was found</li>
+<li>Touch tags file</li>
+<li>If file is empty (wc -l return 0 lines) then populate it with <code>ctags -R</code> command</li>
+<li>Remove all lines from tags file related to current file</li>
+<li>Update tags file with new content of current file with <code>ctags -a</code></li>
+</ul>
+
+
+<p>Why I use symlinks for tags file?</p>
+
+<ul>
+<li>Writes are slow</li>
+<li>Writes are bad for my SSD</li>
+<li>Memory is blazingly fast</li>
+</ul>
+
+
+<p>Here is my code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; If tags file does not exist initializes it with symlink to tmp with UUID in</span>
+</span><span class='line'><span class="c">&quot; filename</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> InitTagsFileWithSymlink<span class="p">(</span><span class="k">f</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> filepath <span class="p">=</span> <span class="k">a</span>:<span class="k">f</span>
+</span><span class='line'>  <span class="k">let</span> issymlink <span class="p">=</span> system<span class="p">(</span><span class="s2">&quot;find &#39;&quot;</span> . filepath . <span class="s2">&quot;&#39; -type l | wc -l&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> issymlink <span class="p">==</span> <span class="m">0</span>
+</span><span class='line'>    <span class="k">let</span> uuid <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;uuidgen&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ln -s &quot;/tmp/ctags-for-vim-&#39;</span> . uuid . <span class="s1">&#39;&quot; &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> substitute<span class="p">(</span>cmd<span class="p">,</span> <span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'>  <span class="k">endif</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Populates tags file if lines count is equal to 0</span>
+</span><span class='line'><span class="c">&quot; with `ctags -R .`</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> PopulateTagsFile<span class="p">(</span><span class="k">f</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> filepath <span class="p">=</span> <span class="k">a</span>:<span class="k">f</span>
+</span><span class='line'>  <span class="k">let</span> resp     <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;touch &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> <span class="nb">lines</span>    <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;wc -l &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> linescnt <span class="p">=</span> substitute<span class="p">(</span><span class="nb">lines</span><span class="p">,</span> <span class="s1">&#39;\D&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> linescnt <span class="p">==</span> <span class="m">0</span>
+</span><span class='line'>    <span class="k">let</span> cwd  <span class="p">=</span> getcwd<span class="p">()</span>
+</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ctags -Rf &quot;&#39;</span>. filepath . <span class="s1">&#39;&quot; &quot;&#39;</span> . cwd . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>    <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'>  <span class="k">endif</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Remove tags for saved file from tags file</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> DelTagOfFile<span class="p">(</span><span class="k">file</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> fullpath    <span class="p">=</span> <span class="k">a</span>:<span class="k">file</span>
+</span><span class='line'>  <span class="k">let</span> cwd         <span class="p">=</span> getcwd<span class="p">()</span>
+</span><span class='line'>  <span class="k">let</span> tagfilename <span class="p">=</span> cwd . <span class="s2">&quot;/tags&quot;</span>
+</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> substitute<span class="p">(</span>fullpath<span class="p">,</span> cwd . <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> escape<span class="p">(</span><span class="k">f</span><span class="p">,</span> <span class="s1">&#39;./&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> cmd         <span class="p">=</span> <span class="s1">&#39;sed --follow-symlinks -i &quot;/&#39;</span> . <span class="k">f</span> . <span class="s1">&#39;/d&quot; &quot;&#39;</span> . tagfilename . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>  <span class="k">let</span> resp        <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&quot; Init tags file</span>
+</span><span class='line'><span class="c">&quot; Populate it</span>
+</span><span class='line'><span class="c">&quot; Remove data related to saved file</span>
+</span><span class='line'><span class="c">&quot; Append it with data for saved file</span>
+</span><span class='line'><span class="k">function</span><span class="p">!</span> UpdateTags<span class="p">()</span>
+</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> expand<span class="p">(</span><span class="s2">&quot;%:p&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> cwd         <span class="p">=</span> getcwd<span class="p">()</span>
+</span><span class='line'>  <span class="k">let</span> tagfilename <span class="p">=</span> cwd . <span class="s2">&quot;/tags&quot;</span>
+</span><span class='line'>  <span class="k">call</span> InitTagsFileWithSymlink<span class="p">(</span>tagfilename<span class="p">)</span>
+</span><span class='line'>  <span class="k">call</span> PopulateTagsFile<span class="p">(</span>tagfilename<span class="p">)</span>
+</span><span class='line'>  <span class="k">call</span> DelTagOfFile<span class="p">(</span><span class="k">f</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ctags -a -f &#39;</span> . tagfilename . <span class="s1">&#39; &quot;&#39;</span> . <span class="k">f</span> . <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'>  <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
+</span><span class='line'><span class="k">endfunction</span>
+</span><span class='line'>
+</span><span class='line'>command UpdateTags <span class="k">call</span> UpdateTags<span class="p">()</span>
+</span><span class='line'>autocmd <span class="nb">BufWritePost</span> *.rb<span class="p">,</span>*.<span class="nb">js</span><span class="p">,</span>*.coffee<span class="p">,</span>*.clj <span class="k">call</span> UpdateTags<span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enjoy :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Max Gonzih <gonzih@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-18T20:50:00+03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ctags/'>ctags</a>, <a class='category' href='/blog/categories/vim/'>vim</a>, <a class='category' href='/blog/categories/viml/'>viml</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/14/blue-midnight-commander-color-scheme/" title="Previous Post: Blue Midnight Commander color scheme">&laquo; Blue Midnight Commander color scheme</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/super_badge.png" alt="Member of The Internet Defense League" style="margin-top: 1.5em;"/></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/03/18/now-i-cook-ctags-in-vim/">Now I cook Ctags in Vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/">Blue Midnight Commander color scheme</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/">ClojureScript on BeagleBone: simple benchmark with Node.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/">Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/12/note-on-privacy-number-1/">Note on privacy #1</a>
+      </li>
+    
+  </ul>
+</section>
+<section class="contacts">
+  
+  <h1 class="contact">
+      <a href="https://twitter.com/Gonzih" class="link" target="_blank">
+        <img src="/images/icons/twitter.png" class="icon">
+        @Gonzih
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">
+        <img src="/images/icons/googleplus.png" class="icon">
+        Max Gonzih
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="mailto:gonzih@gmail.com" class="link">
+        <img src="/images/icons/mail.png" class="icon">
+        gonzih@gmail.com
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="https://github.com/Gonzih" class="link" target="_blank">
+        <img src="/images/icons/github.png" class="icon">
+        Gonzih
+      </a>
+  </h1>
+  
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Max Gonzih <gonzih@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://gonzih.github.com/blog/2013/03/18/now-i-cook-ctags-in-vim/';
+        var disqus_url = 'http://gonzih.github.com/blog/2013/03/18/now-i-cook-ctags-in-vim/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    window._idl = {};
+    _idl.variant = "banner";
+    (function() {
+        var idl = document.createElement('script');
+        idl.type = 'text/javascript';
+        idl.async = true;
+        idl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'members.internetdefenseleague.org/include/?url=' + (_idl.url || '') + '&campaign=' + (_idl.campaign || '') + '&variant=' + (_idl.variant || 'banner');
+        document.getElementsByTagName('body')[0].appendChild(idl);
+    })();
+</script>
+
+</body>
+</html>
