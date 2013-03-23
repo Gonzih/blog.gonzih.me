@@ -46,15 +46,15 @@ It is Firmata protocol implementation for Clojure. Why Firmata? Because it's eas
 
 So I wrote some code, uploaded Firmata to Arduino. And... it's not working.
 
-So after some digging in Firmata and Clodiuno code I wrote 2 pull request to Clodiuno.
+After some digging in Firmata and Clodiuno code I wrote 2 pull request to Clodiuno.
 
 First issue was that bluetooth uses 9600 baudrate for communications. Fix? [pull.](https://github.com/nakkaya/clodiuno/pull/5)
 
 * Update standart Firmata example code in Arduino IDE. Change baudrate to 9600.
 * Change Clodiuno baudrate to 9600.
 
-Second was that Clodiuno waits for version response from Firmata. It's ok for wired UNO since it will be restarted when serial connection is established.
-But boards like Leonardo or if you use bluetooth don't support that behavior.
+Second was that Clodiuno waits for version response from Firmata on startup. It's ok for wired UNO since it will be restarted when serial connection is established.
+But boards like Leonardo or if you are using bluetooth miss that behavior.
 
 Fix? [pull.](https://github.com/nakkaya/clodiuno/pull/6) Manually ask firmware version on Clodiuno initialization.
 
