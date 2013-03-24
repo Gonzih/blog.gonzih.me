@@ -28,8 +28,8 @@ First of all we need some parts.
 First lets build gearbox. You can use it in few different modes of gear ratio. I selected 114.7:1 gear ratio (lucky guess).
 Read instructions, take your time. I had 2 9v motors, so since I will be using 9v batteries I decided to replace default motors with 9v ones.
 
-Next assemble tracks. Pretty easy, right? Next is time to put it all together. Since I han only 1 plate I made second one from peace of plexiglass.
-I made something like 2 floor chassis. First floor is for motor and wheels (and maybe batteries) and second is for Arduino (and maybe batterries).
+Next assemble tracks. Pretty easy, right? Next is time to put it all together. Since I had only 1 plate I made second one from peace of plexiglass.
+I made something like 2 floored chassis. First floor is for motor and wheels (and maybe batteries) and second is for Arduino (and maybe batterries).
 
 ## Bluetooth
 We need to do 2 thing with our cheap bluetooth module:
@@ -37,11 +37,11 @@ We need to do 2 thing with our cheap bluetooth module:
 Solder legs to it
 ![Soldered bluetooth module](https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.jpg)
 
-Use voltage divider (module is working on 3.3v, Arduino is working on 5v)
+Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
 ![Voltage devider](https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg)
 
 ## Gearbox and HBridge Driver
-To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I'm afraid it will be messy.
+To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I'm afraid it would be messy.
 To understand how HBridge works you should read [Adafruit post](http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview).
 
 HBridge -> Arduino Schematics:
@@ -62,9 +62,7 @@ HBridge -> Arduino Schematics:
 ![rc-toy-010](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-010.jpg)
 ![rc-toy-011](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-011.jpg)
 ![rc-toy-012](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-012.jpg)
-![rc-toy-013](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-013.jpg)
 ![rc-toy-014](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-014.jpg)
-![rc-toy-015](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-015.jpg)
 ![rc-toy-016](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-016.jpg)
 ![rc-toy-017](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-017.jpg)
 ![rc-toy-018](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-018.jpg)
@@ -85,7 +83,7 @@ After module is loaded you should see new device in `/dev/input`.
 
 ## Clojure code
 I stuck with [Clojure](http://clojure.org/) as main language for controlling Arduino. I took [Clodiuno](https://github.com/nakkaya/clodiuno) library.
-It is Firmata protocol implementation for Clojure. Why Firmata? Because it's easy, fast and provide great way to extend your project in future.
+It is Firmata protocol implementation for Clojure. Why Firmata? Because it's easy, fast and provides great way to extend your project in future.
 
 So I wrote some code, uploaded Firmata to Arduino. And... it's not working.
 
