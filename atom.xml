@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-03-28T16:35:03+03:00</updated>
+  <updated>2013-03-28T16:40:24+03:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Moved my blog to blog.gonzih.me]]></title>
+    <link href="http://gonzih.github.com/blog/2013/03/28/moved-my-blog-to-blog-dot-gonzih-dot-me/"/>
+    <updated>2013-03-28T16:36:00+03:00</updated>
+    <id>http://gonzih.github.com/blog/2013/03/28/moved-my-blog-to-blog-dot-gonzih-dot-me</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.gonzih.me">blog.gonzih.me</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
@@ -1515,40 +1524,6 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span> <span class="nv">$TERM</span> <span class="o">=</span> <span class="s2">&quot;screen&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> rvm use default
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Backbone.js + Ruby on Rails Tips]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/"/>
-    <updated>2011-09-03T10:05:00+03:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/03/backbone-js&#8212;ruby-on-rails-tips</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<ul>
-<li>Add initializer that disable sending data in namespaces in json.</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">include_root_in_json</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># {&quot;post&quot;: {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content&quot;}}</span>
-</span><span class='line'><span class="c1"># will be</span>
-</span><span class='line'><span class="c1"># {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Use attr_accessible for filtering attributes in mass assigments from backbone. In rails > 3.1 you can use attr_accessible with :as => role.</li>
-<li>Use <a href="https://github.com/josevalim/inherited_resources">inherited resources</a> for faster development.</li>
-</ul>
 
 ]]></content>
   </entry>
