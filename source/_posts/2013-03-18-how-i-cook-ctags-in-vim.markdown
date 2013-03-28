@@ -7,6 +7,8 @@ categories: [vim, viml, ctags]
 ---
 Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.
 
+<!--more-->
+
 Functions do following:
 
 * Initialize tags file with symlink to /tmp (tmpfs) with uuid in name if no symlink was found
