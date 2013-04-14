@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jre | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/jre/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-14T04:31:14-07:00</updated>
+  <updated>2013-04-14T05:26:39-07:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -73,7 +73,7 @@ current CPU frequency is 700 MHz.
   (println "(sort-seq) \t Avg: " (time-it #(sort-seq))))
 ```</p>
 
-<p>This time I was a little bit smarter to run all code with lein trampoline run to eliminate overhead.</p>
+<p>This time I was a little bit smarter to run all code with <code>lein trampoline run</code> to eliminate overhead.</p>
 
 <p>Numbers:</p>
 
@@ -109,7 +109,7 @@ Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)</p>
 %CPU %MEM
 87.9 18.9</p>
 
-<p>lein run
+<p>lein trampoline run
 (factorial 5000) Avg: 685.5312071299996
 (fib 20)         Avg: 29.505588125000017
 (sort-seq)       Avg: 1137.3281607850001

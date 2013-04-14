@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-14T04:31:14-07:00</updated>
+  <updated>2013-04-14T05:26:39-07:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -98,7 +98,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This time I was a little bit smarter to run all code with lein trampoline run to eliminate overhead.</p>
+<p>This time I was a little bit smarter to run all code with <code>lein trampoline run</code> to eliminate overhead.</p>
 
 <p>Numbers:</p>
 
@@ -161,7 +161,7 @@
 </span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span>
 </span><span class='line'><span class="mf">87.9</span> <span class="mf">18.9</span>
 </span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">run</span>
+</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>
 </span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">685.5312071299996</span>
 </span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">29.505588125000017</span>
 </span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">1137.3281607850001</span>
