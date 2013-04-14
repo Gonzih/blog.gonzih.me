@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Clojure on Raspberry Pi: OpenJDK vs Oracle Embedded JRE (Java 8 armhf beta) benchmark"
-date: 2012-09-07 16:20
+title: "Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark"
+date: 2013-04-14 12:00
 comments: true
-categories: [clojure, java, jre, raspberry pi, ejre, openjdk, java 8, armhf]
+categories: [clojure, java, jre, raspberry pi, openjdk, java 8, armhf]
 ---
 [Here](http://jdk8.java.net/fxarmpreview/) you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
 <!-- more -->
@@ -51,7 +51,7 @@ Benchmark code is from [nakkaya's post](http://nakkaya.com/2011/03/15/clojure-on
   (println "(sort-seq) \t Avg: " (time-it #(sort-seq))))
 ```
 
-That time I was little bit smarter and run all code with lein trampoline run to eliminate overhead.
+This time I was a little bit smarter to run all code with lein trampoline run to eliminate overhead.
 
 Numbers:
 
