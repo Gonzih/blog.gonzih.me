@@ -3,7 +3,7 @@ layout: post
 title: "Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark"
 date: 2012-09-07 16:20
 comments: true
-categories: [clojure, java, jre, bealbebone, ejre, openjdk]
+categories: [clojure, java, jre, bealbebone, ejre, openjdk, armsf]
 ---
 After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
 <!-- more -->

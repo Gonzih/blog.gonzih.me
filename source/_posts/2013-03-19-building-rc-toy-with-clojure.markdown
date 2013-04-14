@@ -3,7 +3,7 @@ layout: post
 title: "Building RC Toy with Clojure"
 date: 2013-03-19 11:09
 comments: true
-categories:
+categories: [clojure, arduino, raspberry pi, embed, remote controll]
 ---
 Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).
