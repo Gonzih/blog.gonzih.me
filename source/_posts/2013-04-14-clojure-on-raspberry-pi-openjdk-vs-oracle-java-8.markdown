@@ -51,7 +51,7 @@ Benchmark code is from [nakkaya's post](http://nakkaya.com/2011/03/15/clojure-on
   (println "(sort-seq) \t Avg: " (time-it #(sort-seq))))
 ```
 
-This time I was a little bit smarter to run all code with lein trampoline run to eliminate overhead.
+This time I was a little bit smarter to run all code with `lein trampoline run` to eliminate overhead.
 
 Numbers:
 
@@ -85,7 +85,7 @@ Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
 %CPU %MEM
 87.9 18.9
 
-> lein run
+> lein trampoline run
 (factorial 5000) Avg: 685.5312071299996
 (fib 20)         Avg: 29.505588125000017
 (sort-seq)       Avg: 1137.3281607850001
