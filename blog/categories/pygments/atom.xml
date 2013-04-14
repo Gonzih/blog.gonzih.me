@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pygments | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/pygments/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-04T23:21:49+03:00</updated>
+  <updated>2013-04-14T02:11:50-07:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
-    <updated>2011-09-21T18:28:00+03:00</updated>
+    <updated>2011-09-21T18:28:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
     <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.
 ``` text

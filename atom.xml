@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-04T23:21:49+03:00</updated>
+  <updated>2013-04-14T02:11:50-07:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -14,9 +14,168 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
+    <link href="http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
+    <updated>2013-04-14T12:00:00-07:00</updated>
+    <id>http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
+    <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
+
+<!-- more -->
+
+
+<p>Pi is running Raspbian.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cat /etc/*-release
+</span><span class='line'>PRETTY_NAME="Debian GNU/Linux 7.0 (wheezy)"
+</span><span class='line'>NAME="Debian GNU/Linux"
+</span><span class='line'>VERSION_ID="7.0"
+</span><span class='line'>VERSION="7.0 (wheezy)"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pi CPU is running on 700Mhz.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cpufreq-info | grep 'current CPU'
+</span><span class='line'>current CPU frequency is 700 MHz.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clojure version is 1.5.1.</p>
+
+<p>Benchmark code is from <a href="http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya&#8217;s post</a>, also used for my BeagleBone Clojure/ClojureScript benchmarks:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">benchmark.core</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">factorial</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">reduce * </span><span class="p">(</span><span class="nb">range </span><span class="mi">1</span><span class="nv">N</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">x</span><span class="p">))))</span>
+</span><span class='line'><span class="c1">;                   ^ integerOverflow fix</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt;= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>    <span class="mi">1</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">sort-seq</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">sort </span><span class="p">(</span><span class="nb">repeat </span><span class="mi">100000</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">2000000</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">time-it</span> <span class="p">[</span><span class="nv">fn</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">values</span>  <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">i</span> <span class="p">(</span><span class="nb">range </span><span class="mi">200</span><span class="p">)]</span> <span class="p">(</span><span class="nb">with-out-str </span><span class="p">(</span><span class="nb">time </span><span class="p">(</span><span class="nf">fn</span><span class="p">))))</span>
+</span><span class='line'>        <span class="nv">doubles</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="p">(</span><span class="nf">.split</span> <span class="nv">%</span> <span class="s">&quot; &quot;</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> <span class="nv">values</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">apply + </span><span class="nv">doubles</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">doubles</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(factorial 5000) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(fib 20) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(sort-seq) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">sort-seq</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This time I was a little bit smarter to run all code with lein trampoline run to eliminate overhead.</p>
+
+<p>Numbers:</p>
+
+<p>OpenJDK:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; </span><span class="nv">sudo</span> <span class="nv">apt-get</span> <span class="nv">install</span> <span class="nv">openjdk-7-jre-headless</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">&gt; </span><span class="nv">java</span> <span class="nv">-version</span>
+</span><span class='line'><span class="nv">java</span> <span class="nv">version</span> <span class="s">&quot;1.7.0_07&quot;</span>
+</span><span class='line'><span class="nv">OpenJDK</span> <span class="nv">Runtime</span> <span class="nv">Environment</span> <span class="p">(</span><span class="nf">IcedTea7</span> <span class="mf">2.3</span><span class="nv">.2</span><span class="p">)</span> <span class="p">(</span><span class="mi">7</span><span class="nv">u7-2.3.2a-1+rpi1</span><span class="p">)</span>
+</span><span class='line'><span class="nv">OpenJDK</span> <span class="nv">Zero</span> <span class="nv">VM</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">22.0</span><span class="nv">-b10</span>, <span class="nv">mixed</span> <span class="nv">mode</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
+</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span>
+</span><span class='line'><span class="mf">90.5</span> <span class="mf">15.7</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>
+</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">5956.007845080006</span>
+</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">713.6807171</span>
+</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">9633.873322030007</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Oracle JRE:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; </span><span class="nv">java</span> <span class="nv">-version</span>
+</span><span class='line'><span class="nv">java</span> <span class="nv">version</span> <span class="s">&quot;1.8.0-ea&quot;</span>
+</span><span class='line'><span class="nv">Java</span><span class="p">(</span><span class="nf">TM</span><span class="p">)</span> <span class="nv">SE</span> <span class="nv">Runtime</span> <span class="nv">Environment</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">1.8</span><span class="nv">.0-ea-b36e</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Java</span> <span class="nv">HotSpot</span><span class="p">(</span><span class="nf">TM</span><span class="p">)</span> <span class="nv">Client</span> <span class="nv">VM</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">25.0</span><span class="nv">-b04</span>, <span class="nv">mixed</span> <span class="nv">mode</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
+</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span>
+</span><span class='line'><span class="mf">87.9</span> <span class="mf">18.9</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">run</span>
+</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">685.5312071299996</span>
+</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">29.505588125000017</span>
+</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">1137.3281607850001</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Looks promising for clojure on small arm devices :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
     <link href="http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+03:00</updated>
+    <updated>2013-03-19T11:09:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
@@ -195,7 +354,7 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   <entry>
     <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
     <link href="http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
-    <updated>2013-03-18T20:50:00+03:00</updated>
+    <updated>2013-03-18T20:50:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
     <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
@@ -344,7 +503,7 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   <entry>
     <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
     <link href="http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
-    <updated>2013-02-14T21:22:00+03:00</updated>
+    <updated>2013-02-14T21:22:00-08:00</updated>
     <id>http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
     <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 
@@ -365,7 +524,7 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
   <entry>
     <title type="html"><![CDATA[ClojureScript on BeagleBone: simple benchmark with Node.js]]></title>
     <link href="http://gonzih.github.com/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
-    <updated>2013-01-23T17:16:00+03:00</updated>
+    <updated>2013-01-23T17:16:00-08:00</updated>
     <id>http://gonzih.github.com/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
     <content type="html"><![CDATA[<p>Benchmark is based on my <a href="http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
@@ -497,7 +656,7 @@ Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :
   <entry>
     <title type="html"><![CDATA[Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin]]></title>
     <link href="http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
-    <updated>2012-12-29T12:15:00+03:00</updated>
+    <updated>2012-12-29T12:15:00-08:00</updated>
     <id>http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
     <content type="html"><![CDATA[<p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
 You will need three things for that.</p>
@@ -542,7 +701,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Note on privacy #1]]></title>
     <link href="http://gonzih.github.com/blog/2012/12/12/note-on-privacy-number-1/"/>
-    <updated>2012-12-12T10:03:00+03:00</updated>
+    <updated>2012-12-12T10:03:00-08:00</updated>
     <id>http://gonzih.github.com/blog/2012/12/12/note-on-privacy-number-1</id>
     <content type="html"><![CDATA[<p>Today I removed from my blog all staff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.</p>
 
@@ -553,7 +712,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
     <link href="http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+03:00</updated>
+    <updated>2012-10-08T16:31:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I&#8217;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 
@@ -600,7 +759,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
     <link href="http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+03:00</updated>
+    <updated>2012-09-07T16:20:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 
@@ -759,7 +918,7 @@ Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
   <entry>
     <title type="html"><![CDATA[Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue]]></title>
     <link href="http://gonzih.github.com/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/"/>
-    <updated>2012-09-03T20:58:00+03:00</updated>
+    <updated>2012-09-03T20:58:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue</id>
     <content type="html"><![CDATA[<p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&#8217;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
@@ -783,7 +942,7 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   <entry>
     <title type="html"><![CDATA[Arch Linux migrated to GRUB2]]></title>
     <link href="http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
-    <updated>2012-07-20T22:13:00+03:00</updated>
+    <updated>2012-07-20T22:13:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
     <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
 
@@ -802,7 +961,7 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   <entry>
     <title type="html"><![CDATA[Fix Broken Comments Count for Disqus]]></title>
     <link href="http://gonzih.github.com/blog/2012/07/19/fix-broken-comments-count-for-disqus/"/>
-    <updated>2012-07-19T18:16:00+03:00</updated>
+    <updated>2012-07-19T18:16:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2012/07/19/fix-broken-comments-count-for-disqus</id>
     <content type="html"><![CDATA[<p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
 That is why comments count was equal to 0 for every post on my index page.
@@ -813,7 +972,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <entry>
     <title type="html"><![CDATA[The Internet Defense League]]></title>
     <link href="http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league/"/>
-    <updated>2012-07-19T14:34:00+03:00</updated>
+    <updated>2012-07-19T14:34:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league</id>
     <content type="html"><![CDATA[<p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
 
@@ -826,7 +985,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <entry>
     <title type="html"><![CDATA[How to use Magnet Links with RTorrent]]></title>
     <link href="http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
-    <updated>2012-02-17T18:04:00+03:00</updated>
+    <updated>2012-02-17T18:04:00-08:00</updated>
     <id>http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
     <content type="html"><![CDATA[<p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
 
@@ -850,7 +1009,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <entry>
     <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
     <link href="http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map/"/>
-    <updated>2011-10-18T20:05:00+03:00</updated>
+    <updated>2011-10-18T20:05:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map</id>
     <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
 
@@ -861,7 +1020,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <entry>
     <title type="html"><![CDATA[Set New PostgreSQL Databases Encoding to Unicode]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/"/>
-    <updated>2011-09-30T10:42:00+03:00</updated>
+    <updated>2011-09-30T10:42:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode</id>
     <content type="html"><![CDATA[<p>You must change encoding for template1. For do that run following.</p>
 
@@ -896,7 +1055,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <entry>
     <title type="html"><![CDATA[Nice Rspec 2 Syntax Cheat Sheet]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
-    <updated>2011-09-22T21:26:00+03:00</updated>
+    <updated>2011-09-22T21:26:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
     <content type="html"><![CDATA[<!-- more -->
 
@@ -1342,7 +1501,7 @@ end # module</code></pre></noscript></div>
   <entry>
     <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
-    <updated>2011-09-21T18:28:00+03:00</updated>
+    <updated>2011-09-21T18:28:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
     <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.</p>
 
@@ -1402,7 +1561,7 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
   <entry>
     <title type="html"><![CDATA[Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/"/>
-    <updated>2011-09-19T17:54:00+03:00</updated>
+    <updated>2011-09-19T17:54:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc</id>
     <content type="html"><![CDATA[<!-- more -->
 
@@ -1508,47 +1667,13 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
   <entry>
     <title type="html"><![CDATA[Tmux + Rvm + Zsh Fix]]></title>
     <link href="http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
-    <updated>2011-09-15T14:52:00+03:00</updated>
+    <updated>2011-09-15T14:52:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2011/09/15/tmux&#8212;rvm&#8212;zsh-fix</id>
     <content type="html"><![CDATA[<p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span> <span class="nv">$TERM</span> <span class="o">=</span> <span class="s2">&quot;screen&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> rvm use default
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Backbone.js + Ruby on Rails Tips]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/03/backbone-js---ruby-on-rails-tips/"/>
-    <updated>2011-09-03T10:05:00+03:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/03/backbone-js&#8212;ruby-on-rails-tips</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<ul>
-<li>Add initializer that disable sending data in namespaces in json.</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">include_root_in_json</span> <span class="o">=</span> <span class="kp">false</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># {&quot;post&quot;: {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content&quot;}}</span>
-</span><span class='line'><span class="c1"># will be</span>
-</span><span class='line'><span class="c1"># {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Use attr_accessible for filtering attributes in mass assigments from backbone. In rails > 3.1 you can use attr_accessible with :as => role.</li>
-<li>Use <a href="https://github.com/josevalim/inherited_resources">inherited resources</a> for faster development.</li>
-</ul>
 
 ]]></content>
   </entry>

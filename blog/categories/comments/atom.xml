@@ -4,7 +4,7 @@
   <title><![CDATA[Category: comments | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/comments/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-04T23:21:49+03:00</updated>
+  <updated>2013-04-14T02:11:50-07:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Fix Broken Comments Count for Disqus]]></title>
     <link href="http://gonzih.github.com/blog/2012/07/19/fix-broken-comments-count-for-disqus/"/>
-    <updated>2012-07-19T18:16:00+03:00</updated>
+    <updated>2012-07-19T18:16:00-07:00</updated>
     <id>http://gonzih.github.com/blog/2012/07/19/fix-broken-comments-count-for-disqus</id>
     <content type="html"><![CDATA[<p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
 That is why comments count was equal to 0 for every post on my index page.
