@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberry pi | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/raspberry-pi/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-14T05:26:39-07:00</updated>
+  <updated>2013-04-15T12:39:14+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
     <link href="http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00-07:00</updated>
+    <updated>2013-04-14T12:00:00+00:00</updated>
     <id>http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
@@ -115,6 +115,28 @@ Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)</p>
 (sort-seq)       Avg: 1137.3281607850001
 ```</p></blockquote>
 
+<p>Startup time for "Hello, World!":
+```</p>
+
+<h1>OpenJDK</h1>
+
+<blockquote><p>time lein run
+Hello, World!
+lein run  56.51s user 1.58s system 87% cpu 1:06.16 total
+time lein trampoline run
+Hello, World!
+lein trampoline run  57.73s user 0.96s system 96% cpu 1:00.57 total</p></blockquote>
+
+<h1>Oracle JRE</h1>
+
+<blockquote><p>time lein run
+Hello, World!
+lein run  31.47s user 1.43s system 95% cpu 34.298 total
+time lein trampoline run
+Hello, World!
+lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
+```</p></blockquote>
+
 <p>Looks promising for clojure on small arm devices :)</p>
 ]]></content>
   </entry>
@@ -122,7 +144,7 @@ Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)</p>
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
     <link href="http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00-07:00</updated>
+    <updated>2013-03-19T11:09:00+00:00</updated>
     <id>http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
