@@ -91,4 +91,23 @@ Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
 (sort-seq)       Avg: 1137.3281607850001
 ```
 
+Startup time for "Hello, World!":
+```
+# OpenJDK
+> time lein run
+Hello, World!
+lein run  56.51s user 1.58s system 87% cpu 1:06.16 total
+> time lein trampoline run
+Hello, World!
+lein trampoline run  57.73s user 0.96s system 96% cpu 1:00.57 total
+
+# Oracle JRE
+> time lein run
+Hello, World!
+lein run  31.47s user 1.43s system 95% cpu 34.298 total
+> time lein trampoline run
+Hello, World!
+lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
+```
+
 Looks promising for clojure on small arm devices :)
