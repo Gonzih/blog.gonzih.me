@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-15T12:39:14+00:00</updated>
+  <updated>2013-04-15T18:12:52+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -50,109 +50,7 @@ ActiveRecord::Base.include_root_in_json = false</li>
 <!-- more -->
 
 
-<p><div><script src='https://gist.github.com/940407.js?file='></script>
-<noscript><pre><code># for 3.0 rails
-
-# create rvmrc file
-create_file &quot;.rvmrc&quot;, &quot;rvm 1.9.2&quot;
-
-gem &quot;jquery-rails&quot;
-gem &quot;postgres&quot;
-#gem &quot;kaminari&quot;
-#gem &quot;carrierwave&quot;
-#gem &quot;resque&quot;
-gem &quot;yaml_db&quot;, :require =&gt; false
-
-#group :development
-gem &quot;nifty-generators&quot;,  :group =&gt; :development
-gem &quot;annotate&quot;,          :group =&gt; :development, :require =&gt; false
-gem &quot;capistrano&quot;,        :group =&gt; :development, :require =&gt; false
-gem &quot;capistrano_colors&quot;, :group =&gt; :development, :require =&gt; false
-
-#group :test
-gem &quot;capybara&quot;,         :group =&gt; :test
-gem &quot;fabrication&quot;,      :group =&gt; :test
-gem &quot;ffaker&quot;,           :group =&gt; :test
-gem &quot;launchy&quot;,          :group =&gt; :test
-gem &quot;database_cleaner&quot;, :group =&gt; :test
-gem &quot;fakeweb&quot;,          :group =&gt; :test
-gem &quot;timecop&quot;,          :group =&gt; :test
-gem &quot;email_spec&quot;,       :group =&gt; :test
-gem &quot;guard-rspec&quot;,      :group =&gt; :test
-
-gem &quot;rspec-rails&quot;, :group =&gt; [ :development, :test ]
-
-gem &quot;whenever&quot;,   :group =&gt; [ :development, :production ], :require =&gt; false
-gem &quot;capistrano&quot;, :group =&gt; [ :development, :production ], :require =&gt; false
-
-run &quot;bundle install --path vendor/bundle&quot;
-
-generate &quot;rspec:install&quot;
-run &quot;bundle exec guard init rspec&quot;
-remove_file &quot;public/javascripts/rails.js&quot; # jquery-rails replaces this
-generate &quot;jquery:install --ui&quot;
-run &quot;echo '--format documentation' &gt;&gt; .rspec&quot;
-# clean up rails defaults
-remove_file &quot;public/index.html&quot;
-remove_file &quot;rm public/images/rails.png&quot;
-
-
-#files injections
-inject_into_file &quot;config/application.rb&quot;, :after =&gt; &quot;config.filter_parameters += [:password]&quot; do
-  &lt;&lt;-eos
-    # Customize generators
-    config.generators do |g|
-      g.stylesheets false
-      g.test_framework      :rspec, :fixture =&gt; true
-      g.fixture_replacement :fabrication
-    end
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
-  &lt;&lt;-eos
-    config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
-    end
-
-    config.before(:each) do
-      DatabaseCleaner.clean
-    end
-
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;require 'rspec/rails'&quot; do
-  &lt;&lt;-eos
-    require &quot;email_spec&quot;
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
-  &lt;&lt;-eos
-    Spec::Runner.configure do |config|
-      config.include(EmailSpec::Helpers)
-      config.include(EmailSpec::Matchers)
-    end
-
-  eos
-end
-
-rake &quot;db:create&quot;, :env =&gt; &quot;development&quot;
-rake &quot;db:create&quot;, :env =&gt; &quot;test&quot;
-rake &quot;db:migrate&quot;
-
-# commit to git
-git :init
-git :add =&gt; &quot;.&quot;
-git :commit =&gt; &quot;-a -m 'create initial bdd application'&quot;
-
-say &lt;&lt;-eos
-  All done!
-eos
-
-</code></pre></noscript></div>
-</p>
+<p>{% gist 940407 %}</p>
 ]]></content>
   </entry>
   
