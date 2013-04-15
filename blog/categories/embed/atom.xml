@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embed | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/embed/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-15T18:12:52+00:00</updated>
+  <updated>2013-04-15T18:15:40+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -94,7 +94,7 @@ To understand how HBridge works you should read <a href="http://learn.adafruit.c
 
 <h3>Video</h3>
 
-<p>{% video https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv 640 480 https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg %}</p>
+<p><video width='640' height='480' preload='none' controls poster=' https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg'><source src='https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
 
 <h1>Writing some code</h1>
 
