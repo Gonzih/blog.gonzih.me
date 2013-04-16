@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:13:56+00:00</updated>
+  <updated>2013-04-16T09:17:58+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Fast LXC configuration with netctl nat]]></title>
+    <title type="html"><![CDATA[Simple LXC configuration with netctl nat]]></title>
     <link href="http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
     <updated>2013-04-16T07:42:00+00:00</updated>
     <id>http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
