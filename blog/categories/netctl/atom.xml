@@ -4,7 +4,7 @@
   <title><![CDATA[Category: netctl | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/netctl/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T08:09:39+00:00</updated>
+  <updated>2013-04-16T08:22:25+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -39,7 +39,7 @@ Address=192.168.100.1/24
 FwdDelay=0
 </code></p>
 
-<p>Make sure you have <code>dnsmasq</code> insatlled.
+<p>Make sure you have <code>dnsmasq</code> installed.
 <code>sh
 pacman -S dnsmasq
 </code></p>
