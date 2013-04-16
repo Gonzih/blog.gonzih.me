@@ -4,7 +4,7 @@
   <title><![CDATA[Category: arch linux | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/arch-linux/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T08:22:25+00:00</updated>
+  <updated>2013-04-16T09:05:33+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -66,7 +66,11 @@ iptables-save &gt; /etc/iptables/iptables.rules
 
 <p>Enable ip_forward (as superuser):
 <code>
-echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+sudo sysctl net.ipv4.ip_forward=1
+</code>
+Or to save forwarding persisent add following line:
+<code>text /etc/sysctl.conf
+net.ipv4.ip_forward=1
 </code></p>
 
 <p>Create new Ubuntu container:
