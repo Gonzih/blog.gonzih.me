@@ -53,7 +53,11 @@ iptables-save > /etc/iptables/iptables.rules
 
 Enable ip_forward (as superuser):
 ```
-echo 1 > /proc/sys/net/ipv4/ip_forward
+sudo sysctl net.ipv4.ip_forward=1
+```
+Or to save forwarding persisent add following line:
+```text /etc/sysctl.conf
+net.ipv4.ip_forward=1
 ```
 
 Create new Ubuntu container:
