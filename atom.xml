@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://gonzih.github.com/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-15T18:15:40+00:00</updated>
+  <updated>2013-04-16T08:09:39+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fast LXC configuration with netctl nat]]></title>
+    <link href="http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
+    <updated>2013-04-16T07:42:00+00:00</updated>
+    <id>http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
+    <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
+
+<!--more-->
+
+
+<p>Install <code>lxc</code> first.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo pacman -S lxc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next is bridge device for nat. I&#8217;m already migrated to netctl in arch linux so my configuration is for netctl.</p>
+
+<figure class='code'><figcaption><span>/etc/netctl/lxcbridge</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="na">Description</span><span class="o">=</span><span class="s">&quot;LXC Bridge connection&quot;</span>
+</span><span class='line'><span class="na">Interface</span><span class="o">=</span><span class="s">lxcbr0</span>
+</span><span class='line'><span class="na">Connection</span><span class="o">=</span><span class="s">bridge</span>
+</span><span class='line'><span class="na">BindsToInterfaces</span><span class="o">=</span><span class="s">()</span>
+</span><span class='line'><span class="na">IP</span><span class="o">=</span><span class="s">static</span>
+</span><span class='line'><span class="na">Address</span><span class="o">=</span><span class="s">192.168.100.1/24</span>
+</span><span class='line'><span class="na">FwdDelay</span><span class="o">=</span><span class="s">0</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Make sure you have <code>dnsmasq</code> insatlled.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pacman -S dnsmasq
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run interface.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo netctl start lxcbridge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And enable it for startup</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo netctl <span class="nb">enable </span>lxcbridge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add iptables rule:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo iptables -t nat -A POSTROUTING -o &lt;you-main-ethernet-device-here&gt; -j MASQUERADE
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save iptables (as superuser):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>iptables-save &gt; /etc/iptables/iptables.rules
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enable ip_forward (as superuser):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo </span>1 &gt; /proc/sys/net/ipv4/ip_forward
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create new Ubuntu container:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo lxc-create -n playtime -t ubuntu
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will create new root filesystem with new configuration. Lets now change conatiner&#8217;s configuration:</p>
+
+<figure class='code'><figcaption><span>/var/lib/lxc/playtime/config</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="na">lxc.network.type</span> <span class="o">=</span> <span class="s">veth</span>
+</span><span class='line'><span class="na">lxc.network.flags</span> <span class="o">=</span> <span class="s">up</span>
+</span><span class='line'><span class="na">lxc.network.link</span> <span class="o">=</span> <span class="s">lxcbr0</span>
+</span><span class='line'><span class="na">lxc.network.hwaddr</span> <span class="o">=</span> <span class="s">00:FF:AA:00:00:01</span>
+</span><span class='line'><span class="na">lxc.network.ipv4</span> <span class="o">=</span> <span class="s">192.168.100.10/24</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets boot our conatiner. Better use screen or tmux for it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo lxc-start -n playtime
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Default user and password for ubuntu template is <code>ubuntu</code>.</p>
+
+<p>Login to container and add default gateway configuration on network up:</p>
+
+<figure class='code'><figcaption><span>/etc/network/if-up.d/routes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#! /bin/sh</span>
+</span><span class='line'>
+</span><span class='line'>route add default gw 192.168.100.1
+</span><span class='line'>
+</span><span class='line'><span class="nb">exit </span>0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reboot container with <code>sudo reboot</code> in it.</p>
+
+<p>Now you can ssh to your container <code>ssh ubuntu@192.168.100.10</code>.
+You can also run container as daemon <code>sudo lxc-start -n playtime -d</code>.
+And you can shutdown container with <code>sudo shutdown</code> inside container.</p>
+
+<p>Thanks for reading. Let me know if I miss something or you know better way of configuring all this stuff.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
@@ -1696,20 +1830,6 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
 
 
 <p><a href="http://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/">via</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tmux + Rvm + Zsh Fix]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
-    <updated>2011-09-15T14:52:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/15/tmux&#8212;rvm&#8212;zsh-fix</id>
-    <content type="html"><![CDATA[<p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[[</span> <span class="nv">$TERM</span> <span class="o">=</span> <span class="s2">&quot;screen&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> rvm use default
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   
