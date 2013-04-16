@@ -26,7 +26,7 @@ Address=192.168.100.1/24
 FwdDelay=0
 ```
 
-Make sure you have `dnsmasq` insatlled.
+Make sure you have `dnsmasq` installed.
 ```sh
 pacman -S dnsmasq
 ```
