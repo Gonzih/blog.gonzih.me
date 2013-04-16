@@ -51,7 +51,7 @@ Save iptables (as superuser):
 iptables-save > /etc/iptables/iptables.rules
 ```
 
-Enable ip_forward (as superuser):
+Enable ip_forward:
 ```
 sudo sysctl net.ipv4.ip_forward=1
 ```
