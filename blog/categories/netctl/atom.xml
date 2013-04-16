@@ -4,7 +4,7 @@
   <title><![CDATA[Category: netctl | Max Gonzih]]></title>
   <link href="http://gonzih.github.com/blog/categories/netctl/atom.xml" rel="self"/>
   <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:06:52+00:00</updated>
+  <updated>2013-04-16T09:13:56+00:00</updated>
   <id>http://gonzih.github.com/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -64,7 +64,7 @@ sudo iptables -t nat -A POSTROUTING -o &lt;you-main-ethernet-device-here&gt; -j 
 iptables-save &gt; /etc/iptables/iptables.rules
 </code></p>
 
-<p>Enable ip_forward (as superuser):
+<p>Enable ip_forward:
 <code>
 sudo sysctl net.ipv4.ip_forward=1
 </code>
