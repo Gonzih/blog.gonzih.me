@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: linux | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/linux/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:05+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
-    <link href="http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
-    <updated>2013-02-14T21:22:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
+    <link href="http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
+    <updated>2013-02-14T21:22:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
     <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 
 <p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
@@ -34,9 +34,9 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
   
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
-    <link href="http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
+    <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
+    <updated>2012-10-08T16:31:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I'm Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 
 <p>```haskell</p>
@@ -73,9 +73,9 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
   
   <entry>
     <title type="html"><![CDATA[Arch Linux migrated to GRUB2]]></title>
-    <link href="http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
-    <updated>2012-07-20T22:13:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
+    <link href="http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
+    <updated>2012-07-20T22:13:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
     <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
 
 <p>Great news everyone! Today Arch Linux officially switched to GRUB2!</p>

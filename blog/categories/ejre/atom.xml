@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ejre | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/ejre/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/ejre/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:01+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
-    <link href="http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
+    <link href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
+    <updated>2012-09-07T16:20:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 
 <!-- more -->

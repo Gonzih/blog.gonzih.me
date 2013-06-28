@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>RSS/Atom reader in Clojure via IMAP - Max Gonzih</title>
+  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+
+  
+  <meta name="description" content="Motivation Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/contacts.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Max Gonzih</a></h1>
+  
+    <h2>KEEP CALM and CODE ON</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://duckduckgo.com/" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.gonzih.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">RSS/Atom Reader in Clojure via IMAP</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-28T10:15:00+03:00" pubdate data-updated="true">Jun 28<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>Motivation</h3>
+
+<p>Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.</p>
+
+<!-- more -->
+
+
+<h3>Idea</h3>
+
+<p>Then I found post in the Racket community about storing your feeds in the IMAP folders using &#8220;APPEND&#8221; command by <a href="http://www.greghendershott.com/2013/05/feeds2gmail.html">Greg Hendershott</a>.
+That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.</p>
+
+<h3>Clojure version</h3>
+
+<p>First I implemented my <a href="https://github.com/Gonzih/feeds2imap.rb">prototype in Ruby</a> in few hours. I picked up Ruby because of built-in rss/atom and imap libraries.
+I used it for few days and liked it. Simple, reliable solution.
+So then I decided to rewrite it in Clojure.
+Why Clojure?
+Because it&#8217;s pure fun to use.
+I decided to use java.mail framework for message storing and folder manipulations, feedparser-clj to fetch and parse rss/atom feeds and hiccup for templating.
+I was really pleased with feedparser-clj in comparison with Ruby built-in library.
+java.mail framework was not so bad as I was expecting at first.</p>
+
+<h3>How it works?</h3>
+
+<p>Here is project logic:</p>
+
+<ul>
+<li>Fetch folders and urls from feeds file.</li>
+<li>Fetch and parse RSS/Atom data from urls.</li>
+<li>Select only new items using cache file.</li>
+<li>Create required imap folders.</li>
+<li>Store new items as email messages.</li>
+<li>Mark items as read (put md5 hashes in to the clj file with set of old hashes).</li>
+</ul>
+
+
+<p>It&#8217;s running now by cron (every hour) on my BeagleBone (using latest ejre version).</p>
+
+<p>Source code is hosted on github <a href="https://github.com/Gonzih/feeds2imap.clj">here</a>. Take a look at project README for usage.</p>
+
+<h3>More implementations</h3>
+
+<ul>
+<li><a href="https://github.com/Gonzih/feeds2imap.rb">My Ruby prototype</a></li>
+<li><a href="https://github.com/Gonzih/feeds2imap.clj">My Clojure implementation</a></li>
+<li><a href="https://github.com/greghendershott/feeds2gmail">Racket implementation</a></li>
+<li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Max Gonzih <gonzih@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-28T10:15:00+03:00" pubdate data-updated="true">Jun 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/atom/'>atom</a>, <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/google/'>google</a>, <a class='category' href='/blog/categories/racket/'>racket</a>, <a class='category' href='/blog/categories/rss/'>rss</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/" title="Previous Post: Fast LXC configuration with netctl nat">&laquo; Fast LXC configuration with netctl nat</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/super_badge.png" alt="Member of The Internet Defense League" style="margin-top: 1.5em;"/></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom reader in Clojure via IMAP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Fast LXC configuration with netctl nat</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/">Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/19/building-rc-toy-with-clojure/">Building RC Toy with Clojure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I cook Ctags in Vim</a>
+      </li>
+    
+  </ul>
+</section>
+<section class="contacts">
+  
+  <h1 class="contact">
+      <a href="https://twitter.com/Gonzih" class="link" target="_blank">
+        <img src="/images/icons/twitter.png" class="icon">
+        @Gonzih
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">
+        <img src="/images/icons/googleplus.png" class="icon">
+        Max Gonzih
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="mailto:gonzih@gmail.com" class="link">
+        <img src="/images/icons/mail.png" class="icon">
+        gonzih@gmail.com
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="https://github.com/Gonzih" class="link" target="_blank">
+        <img src="/images/icons/github.png" class="icon">
+        Gonzih
+      </a>
+  </h1>
+  
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Max Gonzih <gonzih@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+  <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
+</a>
+<br />All materials are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/';
+        var disqus_url = 'http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    window._idl = {};
+    _idl.variant = "banner";
+    (function() {
+        var idl = document.createElement('script');
+        idl.type = 'text/javascript';
+        idl.async = true;
+        idl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'members.internetdefenseleague.org/include/?url=' + (_idl.url || '') + '&campaign=' + (_idl.campaign || '') + '&variant=' + (_idl.variant || 'banner');
+        document.getElementsByTagName('body')[0].appendChild(idl);
+    })();
+</script>
+
+</body>
+</html>

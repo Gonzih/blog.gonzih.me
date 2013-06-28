@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/">
+  <link rel="canonical" href="http://blog.gonzih.me/blog/2011/08/03/my-rails-apps-template/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/contacts.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -48,9 +48,9 @@
   
 </ul>
   
-<form action="http://google.com/search" method="get">
+<form action="https://duckduckgo.com/" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:gonzih.github.com" />
+    <input type="hidden" name="q" value="site:blog.gonzih.me" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-08-03T13:29:00+00:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2011</time>
+<time datetime="2011-08-03T13:29:00+03:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -99,107 +99,7 @@
 
 
 <div><script src='https://gist.github.com/940407.js?file='></script>
-<noscript><pre><code># for 3.0 rails
-
-# create rvmrc file
-create_file &quot;.rvmrc&quot;, &quot;rvm 1.9.2&quot;
-
-gem &quot;jquery-rails&quot;
-gem &quot;postgres&quot;
-#gem &quot;kaminari&quot;
-#gem &quot;carrierwave&quot;
-#gem &quot;resque&quot;
-gem &quot;yaml_db&quot;, :require =&gt; false
-
-#group :development
-gem &quot;nifty-generators&quot;,  :group =&gt; :development
-gem &quot;annotate&quot;,          :group =&gt; :development, :require =&gt; false
-gem &quot;capistrano&quot;,        :group =&gt; :development, :require =&gt; false
-gem &quot;capistrano_colors&quot;, :group =&gt; :development, :require =&gt; false
-
-#group :test
-gem &quot;capybara&quot;,         :group =&gt; :test
-gem &quot;fabrication&quot;,      :group =&gt; :test
-gem &quot;ffaker&quot;,           :group =&gt; :test
-gem &quot;launchy&quot;,          :group =&gt; :test
-gem &quot;database_cleaner&quot;, :group =&gt; :test
-gem &quot;fakeweb&quot;,          :group =&gt; :test
-gem &quot;timecop&quot;,          :group =&gt; :test
-gem &quot;email_spec&quot;,       :group =&gt; :test
-gem &quot;guard-rspec&quot;,      :group =&gt; :test
-
-gem &quot;rspec-rails&quot;, :group =&gt; [ :development, :test ]
-
-gem &quot;whenever&quot;,   :group =&gt; [ :development, :production ], :require =&gt; false
-gem &quot;capistrano&quot;, :group =&gt; [ :development, :production ], :require =&gt; false
-
-run &quot;bundle install --path vendor/bundle&quot;
-
-generate &quot;rspec:install&quot;
-run &quot;bundle exec guard init rspec&quot;
-remove_file &quot;public/javascripts/rails.js&quot; # jquery-rails replaces this
-generate &quot;jquery:install --ui&quot;
-run &quot;echo '--format documentation' &gt;&gt; .rspec&quot;
-# clean up rails defaults
-remove_file &quot;public/index.html&quot;
-remove_file &quot;rm public/images/rails.png&quot;
-
-
-#files injections
-inject_into_file &quot;config/application.rb&quot;, :after =&gt; &quot;config.filter_parameters += [:password]&quot; do
-  &lt;&lt;-eos
-    # Customize generators
-    config.generators do |g|
-      g.stylesheets false
-      g.test_framework      :rspec, :fixture =&gt; true
-      g.fixture_replacement :fabrication
-    end
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
-  &lt;&lt;-eos
-    config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
-    end
-
-    config.before(:each) do
-      DatabaseCleaner.clean
-    end
-
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;require 'rspec/rails'&quot; do
-  &lt;&lt;-eos
-    require &quot;email_spec&quot;
-  eos
-end
-
-inject_into_file &quot;spes/spec_helper.rb&quot;, :after =&gt; &quot;RSpec.configure do |config|&quot; do
-  &lt;&lt;-eos
-    Spec::Runner.configure do |config|
-      config.include(EmailSpec::Helpers)
-      config.include(EmailSpec::Matchers)
-    end
-
-  eos
-end
-
-rake &quot;db:create&quot;, :env =&gt; &quot;development&quot;
-rake &quot;db:create&quot;, :env =&gt; &quot;test&quot;
-rake &quot;db:migrate&quot;
-
-# commit to git
-git :init
-git :add =&gt; &quot;.&quot;
-git :commit =&gt; &quot;-a -m 'create initial bdd application'&quot;
-
-say &lt;&lt;-eos
-  All done!
-eos
-
-</code></pre></noscript></div>
+<noscript><pre><code></code></pre></noscript></div>
 
 
 
@@ -225,7 +125,7 @@ eos
   
 
 
-<time datetime="2011-08-03T13:29:00+00:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2011</time>
+<time datetime="2011-08-03T13:29:00+03:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2011</time>
       
 
 <span class="categories">
@@ -271,7 +171,11 @@ eos
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Simple LXC configuration with netctl nat</a>
+        <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom reader in Clojure via IMAP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Fast LXC configuration with netctl nat</a>
       </li>
     
       <li class="post">
@@ -284,10 +188,6 @@ eos
     
       <li class="post">
         <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I cook Ctags in Vim</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/">Blue Midnight Commander color scheme</a>
       </li>
     
   </ul>
@@ -353,8 +253,8 @@ eos
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/';
-        var disqus_url = 'http://gonzih.github.com/blog/2011/08/03/my-rails-apps-template/';
+        var disqus_identifier = 'http://blog.gonzih.me/blog/2011/08/03/my-rails-apps-template/';
+        var disqus_url = 'http://blog.gonzih.me/blog/2011/08/03/my-rails-apps-template/';
         var disqus_script = 'embed.js';
       
     (function () {

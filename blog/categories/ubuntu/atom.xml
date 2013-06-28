@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ubuntu | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/ubuntu/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:01+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Simple LXC configuration with netctl nat]]></title>
-    <link href="http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
-    <updated>2013-04-16T07:42:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
+    <title type="html"><![CDATA[Fast LXC configuration with netctl nat]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
+    <updated>2013-04-16T07:42:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
     <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
 
 <!--more-->

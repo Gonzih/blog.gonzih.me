@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: analytics | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/analytics/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/analytics/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:05+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Note on privacy #1]]></title>
-    <link href="http://gonzih.github.com/blog/2012/12/12/note-on-privacy-number-1/"/>
-    <updated>2012-12-12T10:03:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/12/12/note-on-privacy-number-1</id>
+    <link href="http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/"/>
+    <updated>2012-12-12T10:03:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1</id>
     <content type="html"><![CDATA[<p>Today I removed from my blog all staff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.</p>
 
 <p>Why? Because it's just unfair. Why would you provide any information about yourself by just being curious? I actually not interested in how many people are reading my blog, anything about traffic sources. Only thing that I am interested in is feedback from users. That is why I left Disqus unchanged. Maybe later I will find something more open and replace Disqus with it. But for now if privacy is issue for you check out <a href="https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij">Ghostery exstension for Google Chrome (Chromium)</a>.</p>

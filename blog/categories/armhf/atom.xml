@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: armhf | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/armhf/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/armhf/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:05+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
-    <link href="http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
+    <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
+    <updated>2013-04-14T12:00:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
 <!-- more -->

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: remote controll | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/remote-controll/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/remote-controll/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:01+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
-    <link href="http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure</id>
+    <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
+    <updated>2013-03-19T11:09:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
 

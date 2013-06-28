@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: xmonad | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/xmonad/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/xmonad/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:01+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
-    <link href="http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
+    <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
+    <updated>2012-10-08T16:31:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I'm Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 
 <p>```haskell</p>

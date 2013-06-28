@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: arch | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/arch/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/arch/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:05+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Arch Linux migrated to GRUB2]]></title>
-    <link href="http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
-    <updated>2012-07-20T22:13:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
+    <link href="http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
+    <updated>2012-07-20T22:13:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
     <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
 
 <p>Great news everyone! Today Arch Linux officially switched to GRUB2!</p>

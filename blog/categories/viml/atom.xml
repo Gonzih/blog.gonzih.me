@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: viml | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/viml/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/viml/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:05+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
-    <link href="http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
-    <updated>2013-03-18T20:50:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
+    <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
+    <updated>2013-03-18T20:50:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
     <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
 <!--more-->

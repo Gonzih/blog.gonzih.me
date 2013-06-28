@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:01+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -14,10 +14,71 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Simple LXC configuration with netctl nat]]></title>
-    <link href="http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
-    <updated>2013-04-16T07:42:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
+    <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
+    <updated>2013-06-28T10:15:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
+    <content type="html"><![CDATA[<h3>Motivation</h3>
+
+<p>Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.</p>
+
+<!-- more -->
+
+
+<h3>Idea</h3>
+
+<p>Then I found post in the Racket community about storing your feeds in the IMAP folders using &#8220;APPEND&#8221; command by <a href="http://www.greghendershott.com/2013/05/feeds2gmail.html">Greg Hendershott</a>.
+That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.</p>
+
+<h3>Clojure version</h3>
+
+<p>First I implemented my <a href="https://github.com/Gonzih/feeds2imap.rb">prototype in Ruby</a> in few hours. I picked up Ruby because of built-in rss/atom and imap libraries.
+I used it for few days and liked it. Simple, reliable solution.
+So then I decided to rewrite it in Clojure.
+Why Clojure?
+Because it&#8217;s pure fun to use.
+I decided to use java.mail framework for message storing and folder manipulations, feedparser-clj to fetch and parse rss/atom feeds and hiccup for templating.
+I was really pleased with feedparser-clj in comparison with Ruby built-in library.
+java.mail framework was not so bad as I was expecting at first.</p>
+
+<h3>How it works?</h3>
+
+<p>Here is project logic:</p>
+
+<ul>
+<li>Fetch folders and urls from feeds file.</li>
+<li>Fetch and parse RSS/Atom data from urls.</li>
+<li>Select only new items using cache file.</li>
+<li>Create required imap folders.</li>
+<li>Store new items as email messages.</li>
+<li>Mark items as read (put md5 hashes in to the clj file with set of old hashes).</li>
+</ul>
+
+
+<p>It&#8217;s running now by cron (every hour) on my BeagleBone (using latest ejre version).</p>
+
+<p>Source code is hosted on github <a href="https://github.com/Gonzih/feeds2imap.clj">here</a>. Take a look at project README for usage.</p>
+
+<h3>More implementations</h3>
+
+<ul>
+<li><a href="https://github.com/Gonzih/feeds2imap.rb">My Ruby prototype</a></li>
+<li><a href="https://github.com/Gonzih/feeds2imap.clj">My Clojure implementation</a></li>
+<li><a href="https://github.com/greghendershott/feeds2gmail">Racket implementation</a></li>
+<li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fast LXC configuration with netctl nat]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
+    <updated>2013-04-16T07:42:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
     <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
 
 <!--more-->
@@ -156,9 +217,9 @@ And you can shutdown container with <code>sudo shutdown</code> inside container.
   
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
-    <link href="http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
+    <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
+    <updated>2013-04-14T12:00:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
 <!-- more -->
@@ -350,9 +411,9 @@ And you can shutdown container with <code>sudo shutdown</code> inside container.
   
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
-    <link href="http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure</id>
+    <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
+    <updated>2013-03-19T11:09:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
 
@@ -529,9 +590,9 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   
   <entry>
     <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
-    <link href="http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
-    <updated>2013-03-18T20:50:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
+    <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
+    <updated>2013-03-18T20:50:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
     <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
 <!--more-->
@@ -678,9 +739,9 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   
   <entry>
     <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
-    <link href="http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
-    <updated>2013-02-14T21:22:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
+    <link href="http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
+    <updated>2013-02-14T21:22:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
     <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 
 <p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
@@ -699,10 +760,10 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
   
   <entry>
     <title type="html"><![CDATA[ClojureScript on BeagleBone: simple benchmark with Node.js]]></title>
-    <link href="http://gonzih.github.com/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
-    <updated>2013-01-23T17:16:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
-    <content type="html"><![CDATA[<p>Benchmark is based on my <a href="http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
+    <link href="http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
+    <updated>2013-01-23T17:16:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
+    <content type="html"><![CDATA[<p>Benchmark is based on my <a href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
 
 <!-- more -->
@@ -831,9 +892,9 @@ Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :
   
   <entry>
     <title type="html"><![CDATA[Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin]]></title>
-    <link href="http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
-    <updated>2012-12-29T12:15:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
+    <link href="http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
+    <updated>2012-12-29T12:15:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
     <content type="html"><![CDATA[<p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
 You will need three things for that.</p>
 
@@ -857,12 +918,12 @@ You will need three things for that.</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 </pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># initialize plugin on page ready</span>
-</span><span class='line'><span class="nx">$</span> <span class="o">-&gt;</span>
-</span><span class='line'>  <span class="nx">unless</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">required</span><span class="p">)</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s">&#39;input[required]&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="o">-&gt;</span>
+</span><span class='line'><span class="nx">$</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="k">unless</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">required</span><span class="p">)</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s">&#39;input[required]&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="nf">-&gt;</span>
 </span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s">&#39;class&#39;</span><span class="p">,</span> <span class="s">&#39;required &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)).</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s">&#39;required&#39;</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="o">-&gt;</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="nf">-&gt;</span>
 </span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">validate</span><span class="p">()</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1"># check if form is valid by hand</span>
@@ -876,9 +937,9 @@ You will need three things for that.</p>
   
   <entry>
     <title type="html"><![CDATA[Note on privacy #1]]></title>
-    <link href="http://gonzih.github.com/blog/2012/12/12/note-on-privacy-number-1/"/>
-    <updated>2012-12-12T10:03:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/12/12/note-on-privacy-number-1</id>
+    <link href="http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/"/>
+    <updated>2012-12-12T10:03:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1</id>
     <content type="html"><![CDATA[<p>Today I removed from my blog all staff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.</p>
 
 <p>Why? Because it&#8217;s just unfair. Why would you provide any information about yourself by just being curious? I actually not interested in how many people are reading my blog, anything about traffic sources. Only thing that I am interested in is feedback from users. That is why I left Disqus unchanged. Maybe later I will find something more open and replace Disqus with it. But for now if privacy is issue for you check out <a href="https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij">Ghostery exstension for Google Chrome (Chromium)</a>.</p>
@@ -887,9 +948,9 @@ You will need three things for that.</p>
   
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
-    <link href="http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
+    <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
+    <updated>2012-10-08T16:31:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I&#8217;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -934,9 +995,9 @@ You will need three things for that.</p>
   
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
-    <link href="http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
+    <link href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
+    <updated>2012-09-07T16:20:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 
 <!-- more -->
@@ -1093,9 +1154,9 @@ Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
   
   <entry>
     <title type="html"><![CDATA[Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue]]></title>
-    <link href="http://gonzih.github.com/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/"/>
-    <updated>2012-09-03T20:58:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue</id>
+    <link href="http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/"/>
+    <updated>2012-09-03T20:58:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue</id>
     <content type="html"><![CDATA[<p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&#8217;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
 
@@ -1117,9 +1178,9 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   
   <entry>
     <title type="html"><![CDATA[Arch Linux migrated to GRUB2]]></title>
-    <link href="http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
-    <updated>2012-07-20T22:13:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
+    <link href="http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
+    <updated>2012-07-20T22:13:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
     <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
 
 <p>Great news everyone! Today Arch Linux officially switched to GRUB2!</p>
@@ -1136,9 +1197,9 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   
   <entry>
     <title type="html"><![CDATA[Fix Broken Comments Count for Disqus]]></title>
-    <link href="http://gonzih.github.com/blog/2012/07/19/fix-broken-comments-count-for-disqus/"/>
-    <updated>2012-07-19T18:16:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/07/19/fix-broken-comments-count-for-disqus</id>
+    <link href="http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/"/>
+    <updated>2012-07-19T18:16:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus</id>
     <content type="html"><![CDATA[<p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
 That is why comments count was equal to 0 for every post on my index page.
 To fix that go to admin ui in disqus and use domain migration tool.</p>
@@ -1147,9 +1208,9 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   
   <entry>
     <title type="html"><![CDATA[The Internet Defense League]]></title>
-    <link href="http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league/"/>
-    <updated>2012-07-19T14:34:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/07/19/the-internet-defense-league</id>
+    <link href="http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/"/>
+    <updated>2012-07-19T14:34:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league</id>
     <content type="html"><![CDATA[<p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
 
 <blockquote><p>The <a href="http://sopastrike.com/">Internet Blackout</a> was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p></blockquote>
@@ -1160,9 +1221,9 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   
   <entry>
     <title type="html"><![CDATA[How to use Magnet Links with RTorrent]]></title>
-    <link href="http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
-    <updated>2012-02-17T18:04:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
+    <link href="http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
+    <updated>2012-02-17T18:04:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
     <content type="html"><![CDATA[<p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1184,9 +1245,9 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   
   <entry>
     <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
-    <link href="http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map/"/>
-    <updated>2011-10-18T20:05:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2011/10/18/nice-vim-keys-map</id>
+    <link href="http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/"/>
+    <updated>2011-10-18T20:05:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map</id>
     <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
 
 <p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
@@ -1195,9 +1256,9 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   
   <entry>
     <title type="html"><![CDATA[Set New PostgreSQL Databases Encoding to Unicode]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/"/>
-    <updated>2011-09-30T10:42:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode</id>
+    <link href="http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/"/>
+    <updated>2011-09-30T10:42:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode</id>
     <content type="html"><![CDATA[<p>You must change encoding for template1. For do that run following.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1230,444 +1291,14 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   
   <entry>
     <title type="html"><![CDATA[Nice Rspec 2 Syntax Cheat Sheet]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
-    <updated>2011-09-22T21:26:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
+    <link href="http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
+    <updated>2011-09-22T21:26:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
     <content type="html"><![CDATA[<!-- more -->
 
 
 <div><script src='https://gist.github.com/663876.js?file='></script>
-<noscript><pre><code># RSpec 2.0 syntax Cheet Sheet by http://ApproachE.com
-
-# defining spec within a module will automatically pick Player::MovieList as a 'subject' (see below)
-module Player
-    describe MovieList, &quot;with optional description&quot; do
-          
-      it &quot;is pending example, so that you can write ones quickly&quot;
-      
-      it &quot;is already working example that we want to suspend from failing temporarily&quot; do
-        pending(&quot;working on another feature that temporarily breaks this one&quot;)
-        # actual test code is here, will never be reached
-      end
-      
-      it &quot;is pending when failing&quot; do
-          pending &quot;This will be marked as pending when the block will fail, otherwise (on success) will fail telling 'Why am I pending if I pass?'&quot; do
-              1.should == 2 # will mark example as pending
-              2.should == 2 # will fail asking to remove pending status of example
-          end
-      end
-      
-      # this will automatically generate name of the example based on the expectations inside it ~ 'it' with no description
-      specify { [1,2,3].should have(3).items }
-      
-      #any helper methods, before/after, modules etc declared in the outer group are available in the inner group.
-      describe &quot;outer&quot; do
-          before(:each) { puts &quot;first&quot; }
-          describe &quot;inner&quot; do
-            before(:each) { puts &quot;second&quot; }
-            it { puts &quot;third&quot;}
-            after(:each) { puts &quot;fourth&quot; }
-          end
-          after(:each) { puts &quot;fifth&quot; }
-      end
-
-      # 'describe' and 'context' are equivalent
-      # I prefer to use 'context' for defining an 'environment'
-      context &quot;when first created&quot; do
-        it &quot;is empty&quot; do
-          movie_list = MovieList.new
-          movie_list.should be_empty
-        end
-      end
-
-      # I prefer to use 'describe' for nouns, verbs; defining a nested set of specifications
-      describe &quot;forward&quot; do
-        it &quot;should jump to a next movie&quot; do
-          next_movie = MovieList.new(2).forward
-          next_movie.track_number.should == 2
-        end
-      end
-    end
-    
-    it &quot;will have default subject that corresponds to the instance of first parameter in 'describe'&quot; do
-        subject.class.should be == MovieList
-    end
-    # unless subject is set explicitly
-    subject { MovieList.new(10) } # approximately similar to 'before(:each)'
-    # no need to use 'subject.should', use 'should'
-    specify { should have(10).items } # same as below
-    specify { subject.should have(10).items }
-    
-
-    # similar to specify { subject.track_number.should == 1}
-    its(:track_number) { should == 1 }
-
-    context &quot;specs set-up&quot; do
-        # we can run setup before each examle, or all of them
-        before(:each) do        
-            @new_on_each_example = YourObject.new
-        end
-        before do
-            @new_on_each_spec_less_verbose = YourObject.new
-        end
-        before(:all) do
-            # Avoid using it as it will bring the 'shared state' into unit tests
-            @same_instance_for_all_examples_within_the_context = YourObject.new
-        end     
-        it &quot;can access attributes defined in 'before'&quot; do
-            @new_on_each_example.should_not be_nil
-            @same_instance_for_all_examples_within_the_context.should_not be_nil
-        end
-        
-        # cleanup code can be run the same way using 'after' instead of 'before'
-        # Avoid using 'after'       
-        # we can wrap examples: before + after + manual handling
-        # In most cases 'before' + 'after' will work better.
-        around do |example|         
-            DB.transaction { example.run }
-            # should handle errors manually, so do not do something like:
-            # DB.start_transaction
-            # example.run
-            # DB.rollback_transaction
-        end
-        it &quot;should run within a transaction&quot; do
-            MovieList.new.save!
-        end     
-        
-        let(:new_on_each_example) { ObjectPerExample.new }
-        it &quot;can use method defined by 'let'&quot; do
-            new_on_each_example.should_not be_nil
-            # the object is memoized, so
-            new_on_each_example.should == new_on_each_example
-        end
-        
-        # defining helper methods within context may be more useful than setup
-        def forward(times) do
-            list = MoviewList.new(10)
-            list.forward(times).track_number
-        end
-        it &quot;can use it multiple times&quot; do
-            forward(1).should == 1
-            forward(2).should == 2
-            forward(10).should == 1
-        end
-        
-        # using 'yield' with helper methods
-        def given_thing_with(options)
-            yield Thing.new do |thing|
-                thing.set_status(options[:status])
-            end
-        end
-        it &quot;should do something when ok&quot; do
-            given_thing_with(:status =&gt; 'ok') do |thing|
-                thing.do_fancy_stuff(1, true, :move =&gt; 'left', :obstacles =&gt; nil)
-            end
-        end
-        
-        
-        # helpers can come from modules
-        module Helpers
-            def shared_help
-                [1,2,3]
-            end
-        end
-        include Helpers
-        it &quot;can use helpers from Module&quot; do
-            shared_help.should == [1,2,3]
-        end
-        # or this module can be included for ALL example groups automatically during configuration:
-        # RSpec.configure do |config|
-        #   config.include Helpers
-        # end
-    end
-    
-    
-    context &quot;built-it stubbing, faking, mocking&quot; do
-        it &quot;can stub&quot; do
-            source = double('source')           
-            source.stub(:fetch) { [1,2,3,4,5] }         
-            source.stub(:fetch_from).and_return([1,2]) # other way          
-            MovieList.stub(:find).and_return(MovieList.new) # stub class method
-            
-            implementing = double('source')
-            implementing.stub(:fetch) do |count|
-                count == 5 ? [1,2,3] : [4,5,6,7] # provide stub logic here, easy to use for Fakes
-            end         
-            # easily stub chains of calls
-            Blog.stub_chain(:posts, :published, :recent).and_return([1,2,3])
-            Blog.posts.published.recent.should == [1,2,3]
-        end
-        it &quot;can ignore non-expected method calls (NullObject pattern)&quot; do
-            source = double('source', :url =&gt; 'http://example.com').as_null_object           
-            source.any_method_call_onwill_return_nil.should be_nil
-            # the source mock object will record the 'any_method_call_onwill_return_nil' message internally though          
-        end
-        it &quot;can set expectations&quot; do
-            source = double('source')
-            # arguments
-            source.should_receive(:fetch).with(10, &quot;abc&quot;).and_return([1,2]) # expecting arguments (10, &quot;abc&quot;) otherwise failing
-            source.should_receive(:fetch).with(instance_of(Integer), &quot;abc&quot;).and_return([1,2]) # don't care about 1st argument as long as it is Integer
-            source.should_receive(:fetch).with(10, anything).and_return([1,2]) # don't care about 2nd argument at all
-            source.should_receive(:fetch).with(any_args) # same as not using 'with' - don't care about arguments
-            source.should_receive(:fetch).with(no_args) # 0 arguments, otherwise fail
-            source.should_receive(:fetch).with(hash_including(:count =&gt; 10, :url =&gt; 'abc')) # arg should be Hash with all the values mentioned
-            source.should_receive(:fetch).with(hash_not_including(:timeout =&gt; 5)) # arg should be Hash that contains no ':timout=&gt;5'
-            source.should_receive(:fetch).with(anything, /example/) # 2nd arg shuold match RegEx
-            source.should_receive(:fetch).and_return([1], [1,2], [1,2,3]) # 1st call - [1], 2nd - [1,2], 3rd - [1,2,3], 4th - [1] and so on ...
-            # expectation overrides stub
-            source.stub(:fetch).and_return([1,2]) # will return [1,2] when called
-            source.should_recieve(:fetch).and_return([3,4]) # prev been overriden and will return [3,4]
-            # raising/throwing
-            source.should_receive(:fetch).and_raise # raise Exception
-            source.should_receive(:fetch).and_raise(ZeroDivisionError) # raise ZeroDivisionError
-            source.should_receive(:fetch).and_raise(Exception.new('instance of aexception')) # raise given exception
-            source.should_receive(:fetch).and_throw(:zero) # thro :zero                 
-            # order
-            source.should_receive(:first).ordered # order matters in relation to others marked as ordered
-            source.should_receive(:dosnt_matter) # don't care about order as long as it is called
-            source.should_receive(:second).ordered # must be called after 'first'
-            # order is not enforced across different objects:
-            double('a').should_receive(:a).ordered # not related to the next one
-            double('b').should_receive(:b).ordered # not related to the prev one
-            # how many times?
-            source.should_recieve(:fetch).exactly(1)times
-            source.should_recieve(:fetch).at_most(5)times
-            source.should_recieve(:fetch).at_least(2)times
-            source.should_recieve(:fetch).twice
-            source.should_recieve(:fetch).once
-            # negative expectations
-            source.should_recieve(:fetch).never
-            source.should_recieve(:fetch).exactly(0)times
-            source.should_not_recieve(:fetch)           
-            
-            
-            list = MovieList.new(source)
-            # if source.fetch has not been called, then example will fail
-        end
-        
-        context &quot;custom expectations&quot; do
-            # define custom expection class somewhere
-            class GreaterThanMatcher
-                def initialize(expected)
-                    @expected = expected
-                end
-                def description
-                    # will generate proper failure message and name of the example
-                    &quot;a number greater than #{@expected}&quot;
-                end
-                def ==(actual)
-                    # this will be called from
-                    actual &gt; @expected
-                end
-            end
-            
-            # add this method to the RSpec (see set-up for global configuration)
-            def greater_than(floor)
-                GreaterThanMatcher.new(floor)
-            end
-            
-            it &quot;can be used in expectations&quot; do
-                subject.should_recieve(:forward).with(greater_than 3)
-                subject.forward(5)
-            end
-        end # custom matchers
-    end # mocking
-    
-
-    
-    
-    
-    # set of same examples shared accross multiple specs
-    # shared_examples_for should be in a separate file and defined outside of 'describe'/'context'
-    shared_examples_for &quot;any pizza&quot; do
-        it &quot;tastes really good&quot; do
-            @pizza.should taste_really_good
-        end
-    end
-    
-    # to include the shared examples, into example groups:
-    # it will assume @pizza instance variable is available here
-    it_behaves_like &quot;any pizza&quot;
-    
-    context 'defining examples dynamically - everybody knows that :)' do
-        {2 =&gt; 4, 3 =&gt; 6, 10 =&gt; 20}.each do |input, output|
-            it &quot;#{input} * 2 should be equal to #{output}&quot; do
-                (input * 2).should == output
-                # will produce examples:
-                # - 2 * 2 should be equal to 4
-                # - 3 * 2 should be equal to 6
-                # - 10 * 2 should be equal to 20
-            end
-        end
-    end
-    
-    
-    context &quot;matchers&quot; do
-        it &quot;shows built-in matchers&quot; do
-            # TODO: describe ===, eql, equal
-            1.should == 1
-            1.should_not == 2 # NOT 1.should != 2
-            1.should_not equal(2) # same as above
-            1.should_not == 2
-            5.should be &gt; 3
-            5.should be &lt;= 5
-            (1.251).should be_close(1.25, 0.005)
-            (1.251).should be_within(0.005).of 1.25 # &gt;= RSpec 2.1
-            &quot;reg exp&quot;.should =~ /exp/
-            [1,2].should include(1)
-            1.should respond_to(:to_s)
-            
-            true.should be_true
-            0.should be_true
-            &quot;this&quot;.should be_true
-            
-            lambda { Object.new.explodde! }.should raise_error(NameError)
-            
-            # nothing fits
-            5.should satisfy { |it| it == 5 }
-        end
-        
-        it &quot;shows cool things&quot; do
-            count = 1
-            expect {
-                count = 3
-            }.to change { count }.by(2)
-
-            expect {
-                # not changing
-            }.to_not change { count }
-            
-            count = 1
-            expect {
-                count = 3
-            }.to change { count }.to(3)
-            
-            count = 1
-            expect {
-                count = 3
-            }.to change { count }from(1).to(3)
-            
-            # raise-rescue - exception handling
-            expect {2 / 0}.to raise_error(&quot;divided by 0&quot;)
-            expect {2 / 0}.to raise_error(/by 0/)
-            expect {2 / 0}.to raise_error(ZeroDivisionError)
-            
-            # try-catch - expected circumstance handling
-            lambda {  throw :room_is_full }.should throw_symbol(:room_is_full)
-            
-            # predicates
-            nil.should be_nil #call nil.nil?
-            [].should be_empty # calls [].empty?
-            [1,2,3].should_not be_empty # calls [1,2,3].empty
-            
-            # convert anything that begins with have_ to a predicate on the target object beginning with has_
-            {:id =&gt; 1}.has_key?(:id).should == true
-            # can be written as
-            {:id =&gt; 1}.should have_key(:id) # calls {:id =&gt; 1}.has_key?(:id)
-            
-            # collections           
-            obj = {}
-            def obj.numbers
-             [1,2,3,4]
-            end
-            
-            obj.should have(4).numbers # calls obj.numbers.length
-            [1,2,3,4].should have(4).items # 'items' is 'reserved' to say &quot;ensure number of items on the collection&quot;
-            [1,2,3,4].should be_any {|n| n % 2 == 0} # [1,2,3,4].any? {|n| n %% 2 == 0}.should be_true
-            &quot;stringy&quot;.should have(7).charaters # same as items, just syntactic sugar
-            [1,2,3,4].should have_exactly(24).items # same as 'have'
-            obj.should have_at_least(3).numbers
-            
-            
-        end
-    end # built-in matchers
-    
-    
-    
-    
-    
-    context &quot;custom matchers&quot; do
-        # TODO: describe multiple ways
-        
-        #define class
-        class SimilarTo
-            # mandatory - link to the object under test
-            def initialize(it)
-                # object under test
-                @it = it
-            end         
-            # mandatory - check the positive condition
-            def matches?(that)
-                @that = that # save to use it in messages
-                @that.to_s.downcase.should == @it.to_s.downcase
-            end
-            # optional - opoosite to mathch?
-            def does_not_matche?(that)
-                result = !matches?(that)
-                @that, @it = @it, @that # swap for negative condition or additionally cusomtize messages
-                result # don't forget to return
-            end
-            # mandatory
-            def failure_message_for_should
-                &quot;expected #{@it} to be similar to #{@that}&quot;
-            end
-            # optional
-            def failure_message_for_should_not
-                &quot;expected #{@it} to be different from #{@that}&quot;
-            end
-            #optional
-            def description
-                &quot;#{@it} should be similar to #{@that}&quot;
-            end
-        end
-        
-        #define method on example (see set-up to incude in all examples)
-        def similar_to(that)
-            SimilarTo.new(that)
-        end
-    end # custom matchers
-    
-    
-    
-    
-    context &quot;macros&quot; do
-        module ControllerMacros     
-          def should_render(template)
-            it &quot;should render the #{template} template&quot; do
-              do_request
-              response.should render_template(template)
-            end
-          end
-
-          def should_assign(hash)
-            variable_name = hash.keys.first
-            model, method = hash[variable_name]
-            model_access_method = [model, method].join('.')
-            it &quot;should assign @#{variable_name} =&gt; #{model_access_method}&quot; do
-              expected = &quot;the value returned by #{model_access_method}&quot;
-              model.should_receive(method).and_return(expected)
-              do_request
-              assigns[variable_name].should == expected
-            end
-          end
-
-          def get(action)
-            define_method :do_request do
-              get action
-            end
-            yield
-          end
-        end
-
-        RSpec.configure do |config|
-          config.use_transactional_fixtures = true
-          config.use_instantiated_fixtures  = false
-          config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-          config.extend(ControllerMacros, :type =&gt; :controller)
-        end     
-    end # macros
-    
-end # module</code></pre></noscript></div>
+<noscript><pre><code></code></pre></noscript></div>
 
 
 
@@ -1676,9 +1307,9 @@ end # module</code></pre></noscript></div>
   
   <entry>
     <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
-    <updated>2011-09-21T18:28:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
+    <link href="http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
+    <updated>2011-09-21T18:28:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
     <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1731,112 +1362,6 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
 </span><span class='line'><span class="o">++</span> <span class="mi">126</span> <span class="sx">%x(&quot;</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c </span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc/"/>
-    <updated>2011-09-19T17:54:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/19/install-opkg-package-manager-on-android-mc</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<h2>Install adb</h2>
-
-<h3>Installing adb on arch linux</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>yaourt -S adb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Running adb</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>adb <span class="nb">kill</span>-server
-</span><span class='line'>sudo adb start-server
-</span><span class='line'>adb shell
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Installing opkg</h2>
-
-<p>Now run in adb shell following:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /sdcard
-</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
-</span><span class='line'><span class="nb">cd</span> /
-</span><span class='line'>tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
-</span><span class='line'><span class="c"># for non cyanogen users</span>
-</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
-</span><span class='line'><span class="c"># for cyanogen users</span>
-</span><span class='line'>wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
-</span><span class='line'><span class="c"># add /data/xbin to your path</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/data/xbin:$PATH&quot;</span>
-</span><span class='line'><span class="c"># make /system writable</span>
-</span><span class='line'>mount -o remount,rw /system
-</span><span class='line'>opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
-</span><span class='line'>opkg -f /data/local/opkg.conf update
-</span><span class='line'>opkg install opkg
-</span><span class='line'>mount -o remount,ro /system
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Opkg usage</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>opkg install rsync
-</span><span class='line'>opkg remove rsync
-</span><span class='line'><span class="c"># list installed packages</span>
-</span><span class='line'>opkg list_installed
-</span><span class='line'><span class="c"># list files belonging to package</span>
-</span><span class='line'>opkg files rsync
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Available packages</h2>
-
-<ul>
-<li>rsync - Lightweight package management system.</li>
-<li>htop - Interactive processes viewer.</li>
-<li>mc - Midnight Commander - a powerful file manager.</li>
-<li>zip - Archiver for .zip files.</li>
-<li>tree - Tree is a recursive directory listing program.</li>
-<li>busybox - Tiny utilities for small and embedded systems.</li>
-<li>dropbear - Lightweight SSH2 server and client.</li>
-<li>nano - Free Pico clone with some new features.</li>
-<li>opkg - Lightweight package management system.</li>
-<li>screen - Terminal multiplexor with VT100/ANSI terminal emulation.</li>
-<li>terminfo - Basic terminal type definitions.</li>
-<li>zip - Archiver for .zip files.</li>
-</ul>
-
-
-<p><a href="http://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/">via</a></p>
 ]]></content>
   </entry>
   

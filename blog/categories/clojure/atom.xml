@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: clojure | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/clojure/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:05+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -14,10 +14,71 @@
 
   
   <entry>
+    <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
+    <updated>2013-06-28T10:15:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
+    <content type="html"><![CDATA[<h3>Motivation</h3>
+
+<p>Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.</p>
+
+<!-- more -->
+
+
+<h3>Idea</h3>
+
+<p>Then I found post in the Racket community about storing your feeds in the IMAP folders using "APPEND" command by <a href="http://www.greghendershott.com/2013/05/feeds2gmail.html">Greg Hendershott</a>.
+That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.</p>
+
+<h3>Clojure version</h3>
+
+<p>First I implemented my <a href="https://github.com/Gonzih/feeds2imap.rb">prototype in Ruby</a> in few hours. I picked up Ruby because of built-in rss/atom and imap libraries.
+I used it for few days and liked it. Simple, reliable solution.
+So then I decided to rewrite it in Clojure.
+Why Clojure?
+Because it's pure fun to use.
+I decided to use java.mail framework for message storing and folder manipulations, feedparser-clj to fetch and parse rss/atom feeds and hiccup for templating.
+I was really pleased with feedparser-clj in comparison with Ruby built-in library.
+java.mail framework was not so bad as I was expecting at first.</p>
+
+<h3>How it works?</h3>
+
+<p>Here is project logic:</p>
+
+<ul>
+<li>Fetch folders and urls from feeds file.</li>
+<li>Fetch and parse RSS/Atom data from urls.</li>
+<li>Select only new items using cache file.</li>
+<li>Create required imap folders.</li>
+<li>Store new items as email messages.</li>
+<li>Mark items as read (put md5 hashes in to the clj file with set of old hashes).</li>
+</ul>
+
+
+<p>It's running now by cron (every hour) on my BeagleBone (using latest ejre version).</p>
+
+<p>Source code is hosted on github <a href="https://github.com/Gonzih/feeds2imap.clj">here</a>. Take a look at project README for usage.</p>
+
+<h3>More implementations</h3>
+
+<ul>
+<li><a href="https://github.com/Gonzih/feeds2imap.rb">My Ruby prototype</a></li>
+<li><a href="https://github.com/Gonzih/feeds2imap.clj">My Clojure implementation</a></li>
+<li><a href="https://github.com/greghendershott/feeds2gmail">Racket implementation</a></li>
+<li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
-    <link href="http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
+    <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
+    <updated>2013-04-14T12:00:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
 <!-- more -->
@@ -143,9 +204,9 @@ lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
   
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
-    <link href="http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/03/19/building-rc-toy-with-clojure</id>
+    <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
+    <updated>2013-03-19T11:09:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
 
@@ -222,7 +283,7 @@ To understand how HBridge works you should read <a href="http://learn.adafruit.c
 
 <h3>Video</h3>
 
-<p><video width='640' height='480' preload='none' controls poster=' https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg'><source src='https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+<p>{% video https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv 640 480 https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg %}</p>
 
 <h1>Writing some code</h1>
 
@@ -317,9 +378,9 @@ Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
   
   <entry>
     <title type="html"><![CDATA[ClojureScript on BeagleBone: simple benchmark with Node.js]]></title>
-    <link href="http://gonzih.github.com/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
-    <updated>2013-01-23T17:16:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
+    <link href="http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
+    <updated>2013-01-23T17:16:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
     <content type="html"><![CDATA[<p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
 
@@ -404,9 +465,9 @@ Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :
   
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
-    <link href="http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
+    <link href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
+    <updated>2012-09-07T16:20:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 
 <!-- more -->

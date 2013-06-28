@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rvm | Max Gonzih]]></title>
-  <link href="http://gonzih.github.com/blog/categories/rvm/atom.xml" rel="self"/>
-  <link href="http://gonzih.github.com/"/>
-  <updated>2013-04-16T09:17:58+00:00</updated>
-  <id>http://gonzih.github.com/</id>
+  <link href="http://blog.gonzih.me/blog/categories/rvm/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-06-28T11:39:01+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
     <email><![CDATA[gonzih@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tmux + Rvm + Zsh Fix]]></title>
-    <link href="http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
-    <updated>2011-09-15T14:52:00+00:00</updated>
-    <id>http://gonzih.github.com/blog/2011/09/15/tmux---rvm---zsh-fix</id>
+    <link href="http://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
+    <updated>2011-09-15T14:52:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix</id>
     <content type="html"><![CDATA[<p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.
 <code>bash
 [[ $TERM = "screen" ]] &amp;&amp; rvm use default
