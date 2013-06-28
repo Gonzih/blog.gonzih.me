@@ -5,11 +5,6 @@
   {% endif %}
 </ul>
   {% if site.simple_search %}
-<form action="{{ site.simple_search }}" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
+    <iframe src="{{ site.simple_search }}?site={{ site.url | shorthand_url }}&prefill=Search&bgcolor=F2F2F2" style="float:right;overflow:hidden;margin:0;padding:0;width:250px;height:40px;" frameborder="0"></iframe>
   {% endif %}
 {% include custom/navigation.html %}
