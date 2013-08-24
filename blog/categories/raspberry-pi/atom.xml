@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberry pi | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/raspberry-pi/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-08-24T16:55:15+03:00</updated>
+  <updated>2013-08-25T00:02:15+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -154,6 +154,9 @@ lein run /tmp/.speedtest-fixed.csv /tmp/.pingtest-fixed.csv
 
 <p>I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
 And now we can see some visualization.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/speed.png" alt="Speed Graph" />
+<img src="https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/ping.png" alt="Ping Graph" /></p>
 ]]></content>
   </entry>
   
