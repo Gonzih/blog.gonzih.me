@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberry pi | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/raspberry-pi/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-08-24T15:59:08+03:00</updated>
+  <updated>2013-08-24T16:02:09+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -39,7 +39,7 @@ yum -y install python-argparse python-lxml
 </code></p>
 
 <p>Script is hosted on <a href="https://github.com/Janhouse/tespeed">github</a>.
-Let's get script.</p>
+Let's get the script.</p>
 
 <p><code>sh
 mkdir ~/scripts
@@ -54,7 +54,7 @@ python ~/scripts/speedtest.py
 
 <p>Now let's wrap python script into additional shell script to store time of data collection in csv.
 I'm not sure if I need time for now, but let's keep it anyway.
-We will silence stderr from the script and output result as csv.</p>
+We will silence stderr from the script and output results as csv.</p>
 
 <p>```sh ~/bin/speedtest.zsh</p>
 
