@@ -9,8 +9,9 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Motivation Google Reader was shut down and I started looking for alternatives.
-And sadly I did not found anything close to Google Reader experience. &hellip;">
+  <meta name="description" content="I&#8217;m often complaining about my ISP quality.
+Sometimes pings are high, sometimes download speed goes down.
+So I decided to make sure it&#8217;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -61,6 +62,53 @@ And sadly I did not found anything close to Google Reader experience. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping Test Graphs With Clojure and Raspberry Pi</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-24T14:02:00+03:00" pubdate data-updated="true">Aug 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m often complaining about my ISP quality.
+Sometimes pings are high, sometimes download speed goes down.
+So I decided to make sure it&#8217;s my ISP fault and not just my opinion based on my hate to them.</p>
+
+<p>How to do so? Lets collect data about download speed and pings over time, and show some graphs based on that data.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -491,82 +539,6 @@ You will need three things for that.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/">Programmer Dvorak and Switching Workspaces in XMonad</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-08T16:31:00+03:00" pubdate data-updated="true">Oct 8<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recently I migarted from awesome to xmonad. I&#8217;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- mod-[F1..F12]       Switch to workspace N</span>
-</span><span class='line'><span class="c1">-- mod-shift-[F1..F12] Move client to workspace N</span>
-</span><span class='line'><span class="c1">--</span>
-</span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
-</span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_F1</span> <span class="o">..</span> <span class="n">xK_F12</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="p">[(</span><span class="kt">W</span><span class="o">.</span><span class="n">greedyView</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="kt">W</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">shiftMask</span><span class="p">)]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But after some research I found that I can detect key symbol using xev command. Here is my latest solution:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Programmer Dvorak</span>
-</span><span class='line'><span class="c1">-- mod-[1..9]       Switch to workspace N</span>
-</span><span class='line'><span class="c1">-- mod-shift-[1..9] Move client to workspace N</span>
-</span><span class='line'><span class="c1">--</span>
-</span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
-</span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_ampersand</span><span class="p">,</span> <span class="n">xK_bracketleft</span><span class="p">,</span> <span class="n">xK_braceleft</span><span class="p">,</span> <span class="n">xK_braceright</span><span class="p">,</span> <span class="n">xK_parenleft</span>
-</span><span class='line'>                                             <span class="p">,</span><span class="n">xK_equal</span><span class="p">,</span> <span class="n">xK_asterisk</span><span class="p">,</span> <span class="n">xK_parenright</span><span class="p">,</span> <span class="n">xK_plus</span><span class="p">,</span> <span class="n">xK_bracketright</span><span class="p">,</span> <span class="n">xK_exclam</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="p">[(</span><span class="kt">W</span><span class="o">.</span><span class="n">greedyView</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="kt">W</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">shiftMask</span><span class="p">)]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hooray! It works!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -585,6 +557,10 @@ You will need three things for that.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping test graphs with Clojure and Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom reader in Clojure via IMAP</a>
       </li>
     
@@ -598,10 +574,6 @@ You will need three things for that.</p>
     
       <li class="post">
         <a href="/blog/2013/03/19/building-rc-toy-with-clojure/">Building RC Toy with Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I cook Ctags in Vim</a>
       </li>
     
   </ul>

@@ -9,7 +9,12 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="If your get following pygments error using octopress with arch linux. 1
+2
+3
+4
+5
+Building site: source -&gt; public File &quot;&lt;string&gt;&quot;, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -60,6 +65,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-21T18:28:00+03:00" pubdate data-updated="true">Sep 21<span>st</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If your get following pygments error using octopress with arch linux.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Building site: source -&gt; public
+</span><span class='line'>  File &quot;&lt;string&gt;&quot;, line 1
+</span><span class='line'>    import sys; print sys.executable
+</span><span class='line'>                        ^
+</span><span class='line'>SyntaxError: invalid syntax
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&#8217;s happens because RubyPython use Python version 2 by calling &#8220;python&#8221; command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with following code.</p>
+
+<figure class='code'><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also if you get following lib.so related error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
+
+<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+
+<h3>Update</h3>
+
+<p>Another Workaround:
+edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&#8221; file (path might be different for you)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">--</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="n">find_python_lib</span>
+</span><span class='line'><span class="o">++</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="s2">&quot;/usr/lib/libpython2.7.so&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">--</span> <span class="mi">126</span> <span class="sx">%x(</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c &quot;</span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
+</span><span class='line'><span class="o">++</span> <span class="mi">126</span> <span class="sx">%x(&quot;</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c </span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -290,6 +384,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping test graphs with Clojure and Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom reader in Clojure via IMAP</a>
       </li>
     
@@ -303,10 +401,6 @@
     
       <li class="post">
         <a href="/blog/2013/03/19/building-rc-toy-with-clojure/">Building RC Toy with Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I cook Ctags in Vim</a>
       </li>
     
   </ul>

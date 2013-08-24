@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-06-28T20:06:19+03:00</updated>
+  <updated>2013-08-24T14:51:30+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,194 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speed/Ping test graphs with Clojure and Raspberry Pi]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/"/>
+    <updated>2013-08-24T14:02:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>I&#8217;m often complaining about my ISP quality.
+Sometimes pings are high, sometimes download speed goes down.
+So I decided to make sure it&#8217;s my ISP fault and not just my opinion based on my hate to them.</p>
+
+<p>How to do so? Lets collect data about download speed and pings over time, and show some graphs based on that data.</p>
+
+<!-- more -->
+
+
+<p>I have unused Raspberry Pi right now, so it will be used to collect data.</p>
+
+<h2>Speedtest data</h2>
+
+<p>For speedtest I will be using python script that uses speedtest.net servers.
+Pi is running Pidora right now, so lets install script dependencies.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>yum -y install python-argparse python-lxml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Script is hosted on <a href="https://github.com/Janhouse/tespeed">github</a>.
+Lets get script.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>mkdir ~/scripts
+</span><span class='line'>wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/speedtest.py
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can test script running it with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>python ~/scripts/speedtest.py
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now lets wrap python script into additional shell script to store time of data collection in csv.
+I&#8217;m not sure if I need time for now, but lets keep it anyway.
+We will silence stderr from the script and output result as csv.</p>
+
+<figure class='code'><figcaption><span>~/bin/speedtest.zsh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/zsh</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;\&quot;$(date -R)\&quot;,$(python ~/scripts/tespeed.py --csv -s)&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets put script into crontab to run every 5 minutes, also lets redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.</p>
+
+<figure class='code'><figcaption><span>crontab</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>*/5 * * * * ~/bin/speedtest.zsh 2&gt;/dev/null &gt;&gt; ~/.speedtest.csv
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ping data</h2>
+
+<p>For ping data we will be running <code>ping</code> command with 100 packets (<code>ping -c 100</code>) with google dns as target (8.8.8.8) and storing avg value with time to csv file.</p>
+
+<figure class='code'><figcaption><span>~/bin/pingtest.zsh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/zsh</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">AVG</span><span class="o">=</span><span class="k">$(</span>ping -c 100 8.8.8.8 | grep rtt | sed -r <span class="s1">&#39;s#.*\=\s.+/(.+)/.+/.+#\1#&#39;</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;\&quot;$(date -R)\&quot;,$AVG&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>crontab</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>*/5 * * * * ~/bin/pingtest.zsh 2&gt;/dev/null &gt;&gt; ~/.pingtest.csv
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Graphs</h2>
+
+<p>For data visualization let&#8217;s use Clojure with Incanter. Here is clojure code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">incanter-temp-graphs.core</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">incanter.core</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">incanter.stats</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">incanter.charts</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">clojure-csv.core</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:gen-class</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">to-f</span> <span class="p">[</span><span class="nv">is</span><span class="p">]</span> <span class="p">(</span><span class="nf">Float/parseFloat</span> <span class="nv">is</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">get-f-col</span> <span class="p">[</span><span class="nv">data</span> <span class="nv">col</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">map </span><span class="nv">to-f</span> <span class="p">(</span><span class="nf">sel</span> <span class="nv">data</span> <span class="ss">:cols</span> <span class="nv">col</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">init-chart</span> <span class="p">[</span><span class="nv">data</span> <span class="nv">rng</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">x-label</span> <span class="nv">y-label</span><span class="p">]}]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">line-chart</span> <span class="nv">rng</span> <span class="nv">data</span> <span class="ss">:x-label</span> <span class="nv">x-label</span>
+</span><span class='line'>                       <span class="ss">:y-label</span> <span class="nv">y-label</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-to-chart</span> <span class="p">[</span><span class="nv">chart</span> <span class="nv">data</span> <span class="nv">rng</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">if-not </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">data</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nf">add-categories</span> <span class="nv">chart</span> <span class="nv">rng</span> <span class="p">(</span><span class="nb">first </span><span class="nv">data</span><span class="p">))</span>
+</span><span class='line'>           <span class="p">(</span><span class="nb">rest </span><span class="nv">data</span><span class="p">)</span>
+</span><span class='line'>           <span class="nv">rng</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">chart</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">draw-file</span> <span class="p">[</span><span class="nv">filename</span> <span class="nv">cols</span> <span class="o">&amp;</span> <span class="p">{</span><span class="ss">:as</span> <span class="nv">opts</span><span class="p">}]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">data</span> <span class="p">(</span><span class="nb">slurp </span><span class="nv">filename</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">csv</span> <span class="p">(</span><span class="nf">parse-csv</span> <span class="nv">data</span> <span class="ss">:delimiter</span> <span class="sc">\,</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">rng</span> <span class="p">(</span><span class="nb">range </span><span class="mi">0</span> <span class="p">(</span><span class="nb">count </span><span class="nv">csv</span><span class="p">))</span>
+</span><span class='line'>        <span class="nv">data</span> <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="nb">partial </span><span class="nv">get-f-col</span> <span class="nv">csv</span><span class="p">)</span> <span class="nv">cols</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">chart</span> <span class="p">(</span><span class="nf">init-chart</span> <span class="p">(</span><span class="nb">first </span><span class="nv">data</span><span class="p">)</span> <span class="nv">rng</span> <span class="nv">opts</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">chart-to-show</span> <span class="p">(</span><span class="nf">add-to-chart</span> <span class="nv">chart</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">data</span><span class="p">)</span> <span class="nv">rng</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">view</span> <span class="nv">chart-to-show</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="nv">speedfile</span> <span class="nv">pingfile</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">draw-file</span> <span class="nv">speedfile</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="ss">:x-label</span> <span class="s">&quot;Time&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;Speed&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">draw-file</span> <span class="nv">pingfile</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ss">:x-label</span> <span class="s">&quot;Time&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;Ping time&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lets put all launch process to Makefile:</p>
+
+<figure class='code'><figcaption><span>Makefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='makefile'><span class='line'><span class="nf">default</span><span class="o">:</span>
+</span><span class='line'>  scp raspberry-pi.local:.speedtest.csv /tmp/
+</span><span class='line'>  scp raspberry-pi.local:.pingtest.csv /tmp/
+</span><span class='line'><span class="c">  #Remove lines with only time (script failure)</span>
+</span><span class='line'>  grep <span class="s2">&quot;[^,]$$&quot;</span> /tmp/.speedtest.csv &gt; /tmp/.speedtest-fixed.csv
+</span><span class='line'>  grep <span class="s2">&quot;[^,]$$&quot;</span> /tmp/.pingtest.csv &gt; /tmp/.pingtest-fixed.csv
+</span><span class='line'>  lein run /tmp/.speedtest-fixed.csv /tmp/.pingtest-fixed.csv
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
+And now we can see some visualization.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
@@ -1301,66 +1489,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
 <noscript><pre><code></code></pre></noscript></div>
 
 
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
-    <link href="http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
-    <updated>2011-09-21T18:28:00+03:00</updated>
-    <id>http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
-    <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Building site: source -&gt; public
-</span><span class='line'>  File &quot;&lt;string&gt;&quot;, line 1
-</span><span class='line'>    import sys; print sys.executable
-</span><span class='line'>                        ^
-</span><span class='line'>SyntaxError: invalid syntax
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It&#8217;s happens because RubyPython use Python version 2 by calling &#8220;python&#8221; command. By default python equal to python3 in Arch Linux.</p>
-
-<p>For fix simple add ruby file to plugins directory with following code.</p>
-
-<figure class='code'><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Also if you get following lib.so related error:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
-
-<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
-
-<h3>Update</h3>
-
-<p>Another Workaround:
-edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&#8221; file (path might be different for you)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">--</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="n">find_python_lib</span>
-</span><span class='line'><span class="o">++</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="s2">&quot;/usr/lib/libpython2.7.so&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">--</span> <span class="mi">126</span> <span class="sx">%x(</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c &quot;</span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
-</span><span class='line'><span class="o">++</span> <span class="mi">126</span> <span class="sx">%x(&quot;</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c </span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
-</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
