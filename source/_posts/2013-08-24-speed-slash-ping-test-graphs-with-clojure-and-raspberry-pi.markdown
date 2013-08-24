@@ -10,7 +10,7 @@ I'm often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it's my ISP fault and not just my opinion based on my hate to them.
 
-How to do so? Lets collect data about download speed and pings over time, and show some graphs based on that data.
+How to do so? Let's collect data about download speed and pings over time, and show some graphs based on that data.
 
 <!-- more -->
 
@@ -18,14 +18,14 @@ I have unused Raspberry Pi right now, so it will be used to collect data.
 
 ## Speedtest data
 For speedtest I will be using python script that uses speedtest.net servers.
-Pi is running Pidora right now, so lets install script dependencies.
+Pi is running Pidora right now, so let's install script dependencies.
 
 ```sh
 yum -y install python-argparse python-lxml
 ```
 
 Script is hosted on [github](https://github.com/Janhouse/tespeed).
-Lets get script.
+Let's get script.
 
 ```sh
 mkdir ~/scripts
@@ -38,8 +38,8 @@ You can test script running it with:
 python ~/scripts/speedtest.py
 ```
 
-Now lets wrap python script into additional shell script to store time of data collection in csv.
-I'm not sure if I need time for now, but lets keep it anyway.
+Now let's wrap python script into additional shell script to store time of data collection in csv.
+I'm not sure if I need time for now, but let's keep it anyway.
 We will silence stderr from the script and output result as csv.
 
 ```sh ~/bin/speedtest.zsh
@@ -48,7 +48,7 @@ We will silence stderr from the script and output result as csv.
 echo "\"$(date -R)\",$(python ~/scripts/tespeed.py --csv -s)"
 ```
 
-Lets put script into crontab to run every 5 minutes, also lets redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.
+Let's put script into crontab to run every 5 minutes, also let's redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.
 
 ```sh crontab
 */5 * * * * ~/bin/speedtest.zsh 2>/dev/null >> ~/.speedtest.csv
@@ -112,7 +112,7 @@ For data visualization let's use Clojure with Incanter. Here is clojure code:
   (draw-file pingfile [1] :x-label "Time" :y-label "Ping time"))
 ```
 
-Lets put all launch process to Makefile:
+Let's put all launch process to Makefile:
 
 ```makefile Makefile
 default:
