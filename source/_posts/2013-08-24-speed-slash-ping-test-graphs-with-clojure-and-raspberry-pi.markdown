@@ -25,7 +25,7 @@ yum -y install python-argparse python-lxml
 ```
 
 Script is hosted on [github](https://github.com/Janhouse/tespeed).
-Let's get script.
+Let's get the script.
 
 ```sh
 mkdir ~/scripts
@@ -40,7 +40,7 @@ python ~/scripts/speedtest.py
 
 Now let's wrap python script into additional shell script to store time of data collection in csv.
 I'm not sure if I need time for now, but let's keep it anyway.
-We will silence stderr from the script and output result as csv.
+We will silence stderr from the script and output results as csv.
 
 ```sh ~/bin/speedtest.zsh
 #!/usr/bin/zsh
