@@ -75,7 +75,7 @@ echo "\"$(date -R)\",$AVG"
 For data visualization let's use Clojure with Incanter. Here is clojure code:
 
 ```clojure
-(ns incanter-temp-graphs.core
+(ns incanter-graphs.core
   (:require [incanter.core :refer :all]
             [incanter.stats :refer :all]
             [incanter.charts :refer :all]
