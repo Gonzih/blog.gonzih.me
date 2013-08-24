@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberry pi | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/raspberry-pi/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-08-24T14:51:51+03:00</updated>
+  <updated>2013-08-24T15:59:08+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -22,7 +22,7 @@
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it's my ISP fault and not just my opinion based on my hate to them.</p>
 
-<p>How to do so? Lets collect data about download speed and pings over time, and show some graphs based on that data.</p>
+<p>How to do so? Let's collect data about download speed and pings over time, and show some graphs based on that data.</p>
 
 <!-- more -->
 
@@ -32,14 +32,14 @@ So I decided to make sure it's my ISP fault and not just my opinion based on my 
 <h2>Speedtest data</h2>
 
 <p>For speedtest I will be using python script that uses speedtest.net servers.
-Pi is running Pidora right now, so lets install script dependencies.</p>
+Pi is running Pidora right now, so let's install script dependencies.</p>
 
 <p><code>sh
 yum -y install python-argparse python-lxml
 </code></p>
 
 <p>Script is hosted on <a href="https://github.com/Janhouse/tespeed">github</a>.
-Lets get script.</p>
+Let's get script.</p>
 
 <p><code>sh
 mkdir ~/scripts
@@ -52,8 +52,8 @@ wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/spee
 python ~/scripts/speedtest.py
 </code></p>
 
-<p>Now lets wrap python script into additional shell script to store time of data collection in csv.
-I'm not sure if I need time for now, but lets keep it anyway.
+<p>Now let's wrap python script into additional shell script to store time of data collection in csv.
+I'm not sure if I need time for now, but let's keep it anyway.
 We will silence stderr from the script and output result as csv.</p>
 
 <p>```sh ~/bin/speedtest.zsh</p>
@@ -63,7 +63,7 @@ We will silence stderr from the script and output result as csv.</p>
 <p>echo "\"$(date -R)\",$(python ~/scripts/tespeed.py --csv -s)"
 ```</p>
 
-<p>Lets put script into crontab to run every 5 minutes, also lets redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.</p>
+<p>Let's put script into crontab to run every 5 minutes, also let's redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.</p>
 
 <p><code>sh crontab
 */5 * * * * ~/bin/speedtest.zsh 2&gt;/dev/null &gt;&gt; ~/.speedtest.csv
@@ -137,7 +137,7 @@ chart))
   (draw-file pingfile [1] :x-label "Time" :y-label "Ping time"))
 ```</p>
 
-<p>Lets put all launch process to Makefile:</p>
+<p>Let's put all launch process to Makefile:</p>
 
 <p>```makefile Makefile
 default:</p>
