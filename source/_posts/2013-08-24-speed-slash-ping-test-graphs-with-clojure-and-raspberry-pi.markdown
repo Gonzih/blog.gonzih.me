@@ -92,11 +92,7 @@ For data visualization let's use Clojure with Incanter. Here is clojure code:
                        :y-label y-label))
 
 (defn add-to-chart [chart data rng]
-  (if-not (empty? data)
-    (recur (add-categories chart rng (first data))
-           (rest data)
-           rng)
-    chart))
+  (reduce #(add-categories %1 rng %2) chart data))
 
 (defn draw-file [filename cols & {:as opts}]
   (let [data (slurp filename)
