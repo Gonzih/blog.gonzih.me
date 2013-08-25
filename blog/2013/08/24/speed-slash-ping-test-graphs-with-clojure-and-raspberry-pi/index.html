@@ -207,10 +207,6 @@ We will silence stderr from the script and output results as csv.</p>
 <span class='line-number'>29</span>
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
 </pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">incanter-graphs.core</span>
 </span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">incanter.core</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
 </span><span class='line'>            <span class="p">[</span><span class="nv">incanter.stats</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
@@ -228,11 +224,7 @@ We will silence stderr from the script and output results as csv.</p>
 </span><span class='line'>                       <span class="ss">:y-label</span> <span class="nv">y-label</span><span class="p">))</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-to-chart</span> <span class="p">[</span><span class="nv">chart</span> <span class="nv">data</span> <span class="nv">rng</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">if-not </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">data</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nf">add-categories</span> <span class="nv">chart</span> <span class="nv">rng</span> <span class="p">(</span><span class="nb">first </span><span class="nv">data</span><span class="p">))</span>
-</span><span class='line'>           <span class="p">(</span><span class="nb">rest </span><span class="nv">data</span><span class="p">)</span>
-</span><span class='line'>           <span class="nv">rng</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">chart</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nf">add-categories</span> <span class="nv">%1</span> <span class="nv">rng</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">chart</span> <span class="nv">data</span><span class="p">))</span>
 </span><span class='line'>
 </span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">draw-file</span> <span class="p">[</span><span class="nv">filename</span> <span class="nv">cols</span> <span class="o">&amp;</span> <span class="p">{</span><span class="ss">:as</span> <span class="nv">opts</span><span class="p">}]</span>
 </span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">data</span> <span class="p">(</span><span class="nb">slurp </span><span class="nv">filename</span><span class="p">)</span>

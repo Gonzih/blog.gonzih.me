@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-08-25T12:40:01+03:00</updated>
+  <updated>2013-08-25T21:27:06+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -113,13 +113,7 @@ We will silence stderr from the script and output results as csv.</p>
 </code></pre>
 
 <p>(defn add-to-chart [chart data rng]
-  (if-not (empty? data)</p>
-
-<pre><code>(recur (add-categories chart rng (first data))
-       (rest data)
-       rng)
-chart))
-</code></pre>
+  (reduce #(add-categories %1 rng %2) chart data))</p>
 
 <p>(defn draw-file [filename cols &amp; {:as opts}]
   (let [data (slurp filename)</p>
