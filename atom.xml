@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-08-25T00:04:15+03:00</updated>
+  <updated>2013-08-25T12:40:01+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cheap standing desk]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/"/>
+    <updated>2013-08-25T12:16:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk</id>
+    <content type="html"><![CDATA[<p>I love idea of standing desks.
+I feel myself much more productive behind standing desk.
+But commercial desks suffer from high price and complicated design.</p>
+
+<p>Solution? Build your own standing desk!</p>
+
+<!--more-->
+
+
+<p>I started using standing desk by making small stand on top of my ordinary desk, so I can remove it when I&#8217;m to lazy to stand. It was one year ago.
+After a while with that solution I decided to build my proper standing desk.
+But how and what to use as materials? Plain wood is too heavy, expensive and build will take more time (if you want a nice looking desk).
+And then I saw joints and pipes used in furniture.
+I took unused small door from my desk, some metal pipes (25mm in diameter) and joints.
+And best thing is that height is adjustable.
+You can build it with 2 shelfs and make bottom one wider for keyboard and mouse and put display on the top shelf.
+Easy to put together and take a part. Nice looking.
+Cheap. Total cost of materials was ~35$.
+For nice and clean cuts some old pipe cutter is perfect.</p>
+
+<h2>Photos</h2>
+
+<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/standing-desk/1.jpeg" alt="Standing Desk #1" />
+<img src="https://dl.dropboxusercontent.com/u/4109351/octopress/standing-desk/2.jpeg" alt="Standing Desk #2" />
+<img src="https://dl.dropboxusercontent.com/u/4109351/octopress/standing-desk/3.jpeg" alt="Standing Desk #3" />
+<img src="https://dl.dropboxusercontent.com/u/4109351/octopress/standing-desk/4.jpeg" alt="Standing Desk #4" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Speed/Ping test graphs with Clojure and Raspberry Pi]]></title>
@@ -1477,22 +1511,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
 
 
 <p><a href="http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nice Rspec 2 Syntax Cheat Sheet]]></title>
-    <link href="http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
-    <updated>2011-09-22T21:26:00+03:00</updated>
-    <id>http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<div><script src='https://gist.github.com/663876.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-
-
-
 ]]></content>
   </entry>
   
