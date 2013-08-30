@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My first experience with core.typed - Max Gonzih</title>
+  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+
+  
+  <meta name="description" content="Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so that post is something like collection of tips &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/contacts.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Max Gonzih</a></h1>
+  
+    <h2>KEEP CALM and CODE ON</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+    <iframe src="http://duckduckgo.com/search.html?site=blog.gonzih.me&prefill=Search&bgcolor=F2F2F2" style="float:right;overflow:hidden;margin:0;padding:0;width:250px;height:40px;" frameborder="0"></iframe>
+  
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">My First Experience With core.typed</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-30T12:30:00+03:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so that post is something like collection of tips how to solve issues with core.typed based on my experience.
+I couldn&#8217;t find answers on my issues in wiki or documentation.
+But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
+Thank you for you patience, man!
+And keep doing what you are doing, core.typed is just amazing thing!</p>
+
+<!--more-->
+
+
+<h3>Unresolved constructor invocation</h3>
+
+<p>Core.typed can&#8217;t match constructor based on arguments type,
+you should provide type hints to help core.typed with that.</p>
+
+<h3>By default core.typed assumes that all java methods can return nil</h3>
+
+<p>Use <code>(non-nil-return ClassOrObject/methodName :all)</code> to tell core.typed that method won&#8217;t return nil.
+Core.typed will trust you and will skip further checks.</p>
+
+<p>Or for example if you are expecting String as a result you can convert result to String with str before returning it.</p>
+
+<h3>Core.typed doesn&#8217;t understand inner class syntax inside non-nil-return</h3>
+
+<p>So something like that would not work:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">non-nil-return</span> <span class="nv">javax.mail.Message$RecipientType/TO</span> <span class="ss">:all</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">ann</span> <span class="nv">recipient-type-to</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="nv">Message$RecipientType</span> <span class="nv">recipient-type-to</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Message$RecipientType/TO</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">comment</span>
+</span><span class='line'>  <span class="nv">Type</span> <span class="nv">mismatch</span><span class="err">:</span>
+</span><span class='line'>  <span class="nv">Expected</span><span class="err">:</span>       <span class="p">(</span><span class="nf">Fn</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'>  <span class="nv">Actual</span><span class="err">:</span>         <span class="p">(</span><span class="nf">Fn</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">U</span> <span class="nv">Message$RecipientType</span> <span class="nv">nil</span><span class="p">)]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Solution:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">non-nil-return</span> <span class="nv">javax.mail.Message$RecipientType/TO</span> <span class="ss">:all</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">ann</span> <span class="nv">recipient-type-to</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="nv">Message$RecipientType</span> <span class="nv">recipient-type-to</span>
+</span><span class='line'>  <span class="p">[]</span>
+</span><span class='line'>  <span class="p">{</span><span class="ss">:post</span> <span class="p">[</span><span class="nv">%</span><span class="p">]}</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Message$RecipientType/TO</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which is the same as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">non-nil-return</span> <span class="nv">javax.mail.Message$RecipientType/TO</span> <span class="ss">:all</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">ann</span> <span class="nv">recipient-type-to</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="nv">Message$RecipientType</span> <span class="nv">recipient-type-to</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">temp</span> <span class="p">(</span><span class="nf">Message$RecipientType/TO</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">assert </span><span class="nv">temp</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">temp</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So unless assert evaluates temp to logical true exception will be raised,
+so function will always return non nil value, which makes core.typed happy.</p>
+
+<h3>Defining Parameterized alias type</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">def-alias</span> <span class="nv">Folder</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">TFn</span> <span class="p">[[</span><span class="nv">x</span> <span class="ss">:variance</span> <span class="ss">:covariant</span><span class="p">]]</span> <span class="p">(</span><span class="nf">Map</span> <span class="nv">Keyword</span> <span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">comment</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Folder</span> <span class="nv">Items</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Folder</span> <span class="nv">Urls</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114">Here is</a> commit with changes related to core.typed.
+I must say writing type annotations for code that you wrote few months ago is tricky.
+But still I enjoyed process and results and I&#8217;m still a little bit amazed about all core.typed thing.
+Power of lisp combined with really smart people :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Max Gonzih <gonzih@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-30T12:30:00+03:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/core-typed/'>core.typed</a>, <a class='category' href='/blog/categories/rss/'>rss</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/08/25/cheap-standing-desk/" title="Previous Post: Cheap standing desk">&laquo; Cheap standing desk</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/super_badge.png" alt="Member of The Internet Defense League" style="margin-top: 1.5em;"/></a>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My first experience with core.typed</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/25/cheap-standing-desk/">Cheap standing desk</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping test graphs with Clojure and Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom reader in Clojure via IMAP</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Fast LXC configuration with netctl nat</a>
+      </li>
+    
+  </ul>
+</section>
+<section class="contacts">
+  
+  <h1 class="contact">
+      <a href="https://twitter.com/Gonzih" class="link" target="_blank">
+        <img src="/images/icons/twitter.png" class="icon">
+        @Gonzih
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">
+        <img src="/images/icons/googleplus.png" class="icon">
+        Max Gonzih
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="mailto:gonzih@gmail.com" class="link">
+        <img src="/images/icons/mail.png" class="icon">
+        gonzih@gmail.com
+      </a>
+  </h1>
+  
+
+  
+  <h1 class="contact">
+      <a href="https://github.com/Gonzih" class="link" target="_blank">
+        <img src="/images/icons/github.png" class="icon">
+        Gonzih
+      </a>
+  </h1>
+  
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Max Gonzih <gonzih@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+  <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
+</a>
+<br />All materials are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/';
+        var disqus_url = 'http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    window._idl = {};
+    _idl.variant = "banner";
+    (function() {
+        var idl = document.createElement('script');
+        idl.type = 'text/javascript';
+        idl.async = true;
+        idl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'members.internetdefenseleague.org/include/?url=' + (_idl.url || '') + '&campaign=' + (_idl.campaign || '') + '&variant=' + (_idl.variant || 'banner');
+        document.getElementsByTagName('body')[0].appendChild(idl);
+    })();
+</script>
+
+</body>
+</html>

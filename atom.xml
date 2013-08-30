@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-08-25T21:27:06+03:00</updated>
+  <updated>2013-08-30T17:47:02+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,125 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My first experience with core.typed]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
+    <updated>2013-08-30T12:30:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
+    <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so that post is something like collection of tips how to solve issues with core.typed based on my experience.
+I couldn&#8217;t find answers on my issues in wiki or documentation.
+But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
+Thank you for you patience, man!
+And keep doing what you are doing, core.typed is just amazing thing!</p>
+
+<!--more-->
+
+
+<h3>Unresolved constructor invocation</h3>
+
+<p>Core.typed can&#8217;t match constructor based on arguments type,
+you should provide type hints to help core.typed with that.</p>
+
+<h3>By default core.typed assumes that all java methods can return nil</h3>
+
+<p>Use <code>(non-nil-return ClassOrObject/methodName :all)</code> to tell core.typed that method won&#8217;t return nil.
+Core.typed will trust you and will skip further checks.</p>
+
+<p>Or for example if you are expecting String as a result you can convert result to String with str before returning it.</p>
+
+<h3>Core.typed doesn&#8217;t understand inner class syntax inside non-nil-return</h3>
+
+<p>So something like that would not work:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">non-nil-return</span> <span class="nv">javax.mail.Message$RecipientType/TO</span> <span class="ss">:all</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">ann</span> <span class="nv">recipient-type-to</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="nv">Message$RecipientType</span> <span class="nv">recipient-type-to</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Message$RecipientType/TO</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">comment</span>
+</span><span class='line'>  <span class="nv">Type</span> <span class="nv">mismatch</span><span class="err">:</span>
+</span><span class='line'>  <span class="nv">Expected</span><span class="err">:</span>       <span class="p">(</span><span class="nf">Fn</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'>  <span class="nv">Actual</span><span class="err">:</span>         <span class="p">(</span><span class="nf">Fn</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">U</span> <span class="nv">Message$RecipientType</span> <span class="nv">nil</span><span class="p">)]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Solution:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">non-nil-return</span> <span class="nv">javax.mail.Message$RecipientType/TO</span> <span class="ss">:all</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">ann</span> <span class="nv">recipient-type-to</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="nv">Message$RecipientType</span> <span class="nv">recipient-type-to</span>
+</span><span class='line'>  <span class="p">[]</span>
+</span><span class='line'>  <span class="p">{</span><span class="ss">:post</span> <span class="p">[</span><span class="nv">%</span><span class="p">]}</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Message$RecipientType/TO</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which is the same as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">non-nil-return</span> <span class="nv">javax.mail.Message$RecipientType/TO</span> <span class="ss">:all</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">ann</span> <span class="nv">recipient-type-to</span> <span class="p">[</span><span class="nb">-&gt; </span><span class="nv">Message$RecipientType</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="nv">Message$RecipientType</span> <span class="nv">recipient-type-to</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">temp</span> <span class="p">(</span><span class="nf">Message$RecipientType/TO</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">assert </span><span class="nv">temp</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">temp</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So unless assert evaluates temp to logical true exception will be raised,
+so function will always return non nil value, which makes core.typed happy.</p>
+
+<h3>Defining Parameterized alias type</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">def-alias</span> <span class="nv">Folder</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">TFn</span> <span class="p">[[</span><span class="nv">x</span> <span class="ss">:variance</span> <span class="ss">:covariant</span><span class="p">]]</span> <span class="p">(</span><span class="nf">Map</span> <span class="nv">Keyword</span> <span class="nv">x</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">comment</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Folder</span> <span class="nv">Items</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">Folder</span> <span class="nv">Urls</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114">Here is</a> commit with changes related to core.typed.
+I must say writing type annotations for code that you wrote few months ago is tricky.
+But still I enjoyed process and results and I&#8217;m still a little bit amazed about all core.typed thing.
+Power of lisp combined with really smart people :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cheap standing desk]]></title>
@@ -1468,41 +1587,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
     <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
 
 <p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Set New PostgreSQL Databases Encoding to Unicode]]></title>
-    <link href="http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/"/>
-    <updated>2011-09-30T10:42:00+03:00</updated>
-    <id>http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode</id>
-    <content type="html"><![CDATA[<p>You must change encoding for template1. For do that run following.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>su - postgres
-</span><span class='line'>psql
-</span><span class='line'>
-</span><span class='line'>UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
-</span><span class='line'>DROP DATABASE template1;
-</span><span class='line'>CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
-</span><span class='line'>UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
-</span><span class='line'>
-</span><span class='line'>#recomended
-</span><span class='line'>\c template1
-</span><span class='line'>VACUUM FREEZE;</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
 ]]></content>
   </entry>
   

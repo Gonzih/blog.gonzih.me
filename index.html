@@ -9,9 +9,8 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="I love idea of standing desks.
-I feel myself much more productive behind standing desk.
-But commercial desks suffer from high price and complicated &hellip;">
+  <meta name="description" content="Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so that post is something like collection of tips &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -62,6 +61,54 @@ But commercial desks suffer from high price and complicated &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My First Experience With core.typed</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-30T12:30:00+03:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so that post is something like collection of tips how to solve issues with core.typed based on my experience.
+I couldn&#8217;t find answers on my issues in wiki or documentation.
+But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
+Thank you for you patience, man!
+And keep doing what you are doing, core.typed is just amazing thing!</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -472,80 +519,6 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/">Easy HTML5 Validation Fallback for Older Browsers Using Modernizr and JQuery Validation Plugin</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-29T12:15:00+03:00" pubdate data-updated="true">Dec 29<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
-You will need three things for that.</p>
-
-<p>First is <a href="http://modernizr.com/">Modernizr</a> javascript library. It allows you to detect which features are supported by your browser and which aren&#8217;t.</p>
-
-<p>Second is <a href="http://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it&#8217;s awesome and how to use it.</p>
-
-<p>Third is <a href="http://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides mechanism for form validation based on input classes.</p>
-
-<p>So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="http://coffeescript.org/">CoffeeScript</a> snippet:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># initialize plugin on page ready</span>
-</span><span class='line'><span class="nx">$</span> <span class="nf">-&gt;</span>
-</span><span class='line'>  <span class="k">unless</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">required</span><span class="p">)</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s">&#39;input[required]&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s">&#39;class&#39;</span><span class="p">,</span> <span class="s">&#39;required &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)).</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s">&#39;required&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">validate</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># check if form is valid by hand</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">valid</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And as always, Have a nice day! :)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -564,6 +537,10 @@ You will need three things for that.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My first experience with core.typed</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/25/cheap-standing-desk/">Cheap standing desk</a>
       </li>
     
@@ -577,10 +554,6 @@ You will need three things for that.</p>
     
       <li class="post">
         <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Fast LXC configuration with netctl nat</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/">Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark</a>
       </li>
     
   </ul>

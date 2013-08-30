@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: core.typed | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/core-typed/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-08-30T17:47:02+03:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My first experience with core.typed]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
+    <updated>2013-08-30T12:30:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
+    <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so that post is something like collection of tips how to solve issues with core.typed based on my experience.
+I couldn't find answers on my issues in wiki or documentation.
+But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
+Thank you for you patience, man!
+And keep doing what you are doing, core.typed is just amazing thing!</p>
+
+<!--more-->
+
+
+<h3>Unresolved constructor invocation</h3>
+
+<p>Core.typed can't match constructor based on arguments type,
+you should provide type hints to help core.typed with that.</p>
+
+<h3>By default core.typed assumes that all java methods can return nil</h3>
+
+<p>Use <code>(non-nil-return ClassOrObject/methodName :all)</code> to tell core.typed that method won't return nil.
+Core.typed will trust you and will skip further checks.</p>
+
+<p>Or for example if you are expecting String as a result you can convert result to String with str before returning it.</p>
+
+<h3>Core.typed doesn't understand inner class syntax inside non-nil-return</h3>
+
+<p>So something like that would not work:</p>
+
+<p>```clojure
+(non-nil-return javax.mail.Message$RecipientType/TO :all)</p>
+
+<p>(ann recipient-type-to [-> Message$RecipientType])
+(defn ^Message$RecipientType recipient-type-to []
+  (Message$RecipientType/TO))</p>
+
+<p>(comment
+  Type mismatch:
+  Expected:       (Fn [-> Message$RecipientType])
+  Actual:         (Fn [-> (U Message$RecipientType nil)]))
+```</p>
+
+<p>Solution:</p>
+
+<p>```clojure
+(non-nil-return javax.mail.Message$RecipientType/TO :all)</p>
+
+<p>(ann recipient-type-to [-> Message$RecipientType])
+(defn ^Message$RecipientType recipient-type-to
+  []
+  {:post [%]}
+  (Message$RecipientType/TO))
+```</p>
+
+<p>Which is the same as:</p>
+
+<p>```clojure
+(non-nil-return javax.mail.Message$RecipientType/TO :all)</p>
+
+<p>(ann recipient-type-to [-> Message$RecipientType])
+(defn ^Message$RecipientType recipient-type-to []
+  (let [temp (Message$RecipientType/TO)]</p>
+
+<pre><code>(assert temp)
+temp)
+</code></pre>
+
+<p>```</p>
+
+<p>So unless assert evaluates temp to logical true exception will be raised,
+so function will always return non nil value, which makes core.typed happy.</p>
+
+<h3>Defining Parameterized alias type</h3>
+
+<p>```clojure
+(def-alias Folder
+  (TFn [[x :variance :covariant]] (Map Keyword x)))</p>
+
+<p>(comment
+  (Folder Items)
+  (Folder Urls))
+```</p>
+
+<p><a href="https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114">Here is</a> commit with changes related to core.typed.
+I must say writing type annotations for code that you wrote few months ago is tricky.
+But still I enjoyed process and results and I'm still a little bit amazed about all core.typed thing.
+Power of lisp combined with really smart people :)</p>
+]]></content>
+  </entry>
+  
+</feed>
