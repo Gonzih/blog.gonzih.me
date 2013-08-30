@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-08-30T17:47:02+03:00</updated>
+  <updated>2013-08-30T17:51:25+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -19,7 +19,7 @@
     <updated>2013-08-30T12:30:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
     <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
-And already hit few issues, so that post is something like collection of tips how to solve issues with core.typed based on my experience.
+And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
 I couldn't find answers on my issues in wiki or documentation.
 But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
 Thank you for you patience, man!
