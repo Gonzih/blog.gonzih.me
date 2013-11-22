@@ -51,9 +51,41 @@ If you have Gnome 3 installed make sure that gnome-settings daemon is not runnin
 
 Enjoy!
 
-Btw I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
-Also `caja -n` which is responsible for displaying icons on desktop loves to hide my xmobar. Killing it helps.
+By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
+Also `caja -n` which is responsible for displaying icons on desktop loves to hide my xmobar.
 
 If you have any tips feel free to comment!
 
-**UPDATE** issues with rendering was caused by `setWMName "LG3D"` in `startupHook`. Removed it for now (probably will cause issues with some Java(AWT) applications).
+**UPDATE 0** issues with rendering was caused by `setWMName "LG3D"` in `startupHook`.
+Removed it for now (probably will cause issues with some Java(AWT) applications).
+
+**UPDATE 1** If you want to disable desktop add following file:
+
+```text /usr/share/applications/caja-no-desktop.home
+[Desktop Entry]
+Name=Caja
+Exec=caja -n --no-desktop
+Icon=system-file-manager
+Terminal=false
+Type=Application
+StartupNotify=true
+NoDisplay=true
+OnlyShowIn=MATE;
+X-MATE-Bugzilla-Bugzilla=MATE
+X-MATE-Bugzilla-Product=caja
+X-MATE-Bugzilla-Component=general
+X-MATE-Bugzilla-Version=1.6.2
+X-MATE-Autostart-Phase=Desktop
+X-MATE-Autostart-Notify=true
+X-MATE-AutoRestart=true
+X-MATE-Provides=filemanager
+```
+
+And now set it as default file manager for mate:
+
+```sh
+# Mate 1.6
+gsettings set org.mate.session.required-components filemanager 'caja-no-destop'
+```
+
+Also you can store all `*.desktop` files in `$HOME/.local/share/applications`.
