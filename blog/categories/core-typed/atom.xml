@@ -4,7 +4,7 @@
   <title><![CDATA[Category: core.typed | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/core-typed/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-22T11:44:29+01:00</updated>
+  <updated>2013-11-22T18:59:52+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -40,9 +40,9 @@ Core.typed will trust you and will skip further checks.</p>
 
 <p>Or for example if you are expecting String as a result you can convert result to String with str before returning it.</p>
 
-<h3>Core.typed doesn't understand inner class syntax inside non-nil-return</h3>
+<h3>non-nil-return in core.typed works only on methods</h3>
 
-<p>So something like that would not work:</p>
+<p>And if you have static method then something like that would not work:</p>
 
 <p>```clojure
 (non-nil-return javax.mail.Message$RecipientType/TO :all)</p>
@@ -84,8 +84,8 @@ temp)
 
 <p>```</p>
 
-<p>So unless assert evaluates temp to logical true exception will be raised,
-so function will always return non nil value, which makes core.typed happy.</p>
+<p>So unless assert evaluates temp to logical true exception will be raised
+and function will always return non nil value, which makes core.typed happy.</p>
 
 <h3>Defining Parameterized alias type</h3>
 
