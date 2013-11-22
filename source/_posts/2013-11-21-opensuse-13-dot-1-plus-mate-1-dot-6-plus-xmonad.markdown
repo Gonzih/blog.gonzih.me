@@ -53,6 +53,7 @@ Enjoy!
 
 By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
 Also `caja -n` which is responsible for displaying icons on desktop loves to hide my xmobar.
+You can kill caja and mate will restore it (temporary fix).
 
 If you have any tips feel free to comment!
 
