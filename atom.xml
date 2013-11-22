@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-22T10:54:23+01:00</updated>
+  <updated>2013-11-22T11:16:02+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -19,8 +19,13 @@
     <updated>2013-11-21T22:46:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
     <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
-Since gnome 3.9 support for custom window managers was broken.
+Since gnome 3.9 support for custom window managers become broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
+
+<p><img src="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png" alt="preview" /></p>
+
+<!-- more -->
+
 
 <p>Patterns for installing mate in OpenSUSE can be found here <a href="http://en.opensuse.org/Portal:MATE">http://en.opensuse.org/Portal:MATE</a></p>
 
@@ -62,16 +67,13 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.4</span>
 </span><span class='line'>mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.6</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Mate 1.6</span>
 </span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components windowmanager xmonad
 </span></code></pre></td></tr></table></div></figure>
 
@@ -80,7 +82,7 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 
 <p>Enjoy!</p>
 
-<p>Btw I have some weird issues with gnome 3 applications rendering, no idea how to fix this for now.</p>
+<p>Btw I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.</p>
 
 <p>If you have any tips feel free to comment!</p>
 ]]></content>

@@ -10,8 +10,8 @@
 
   
   <meta name="description" content="So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
-Since gnome 3.9 support for custom window managers was broken.
-How to restore sanity &hellip;">
+Since gnome 3.9 support for custom window managers become broken.
+How to restore &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,72 +94,17 @@ How to restore sanity &hellip;">
 
 
   <div class="entry-content"><p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
-Since gnome 3.9 support for custom window managers was broken.
+Since gnome 3.9 support for custom window managers become broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 
-<p>Patterns for installing mate in OpenSUSE can be found here <a href="http://en.opensuse.org/Portal:MATE">http://en.opensuse.org/Portal:MATE</a></p>
+<p><img src="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png" alt="preview" /></p>
 
-<p>Xmonad can be installed using cabal install or using packages from OBS.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>cabal install xmonad         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
-</span><span class='line'>cabal install xmonad-contrib --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
-</span><span class='line'>cabal install xmobar         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Create following file:</p>
-
-<figure class='code'><figcaption><span>/usr/share/applications/xmonad.desktop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>[Desktop Entry]
-</span><span class='line'>Type=Application
-</span><span class='line'>Name=Xmonad
-</span><span class='line'># Replace it with your xmonad launcher
-</span><span class='line'>Exec=xmonad
-</span><span class='line'>NoDisplay=true
-</span><span class='line'>Terminal=false
-</span><span class='line'>StartupNotify=false
-</span><span class='line'>Categories=
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Set xmonad as window manager for Mate:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.4</span>
-</span><span class='line'>mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.6</span>
-</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components windowmanager xmonad
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you have Gnome 3 installed make sure that gnome-settings daemon is not running in mate (can cause gsettings error).</p>
-
-<p>Enjoy!</p>
-
-<p>Btw I have some weird issues with gnome 3 applications rendering, no idea how to fix this for now.</p>
-
-<p>If you have any tips feel free to comment!</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">Read on &rarr;</a>
+    </footer>
   
 
 
