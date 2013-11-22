@@ -24,8 +24,8 @@ Core.typed will trust you and will skip further checks.
 
 Or for example if you are expecting String as a result you can convert result to String with str before returning it.
 
-### Core.typed doesn't understand inner class syntax inside non-nil-return
-So something like that would not work:
+### non-nil-return in core.typed works only on methods
+And if you have static method then something like that would not work:
 
 ```clojure
 (non-nil-return javax.mail.Message$RecipientType/TO :all)
@@ -64,8 +64,8 @@ Which is the same as:
     temp)
 ```
 
-So unless assert evaluates temp to logical true exception will be raised,
-so function will always return non nil value, which makes core.typed happy.
+So unless assert evaluates temp to logical true exception will be raised
+and function will always return non nil value, which makes core.typed happy.
 
 ### Defining Parameterized alias type
 ```clojure

@@ -52,5 +52,8 @@ If you have Gnome 3 installed make sure that gnome-settings daemon is not runnin
 Enjoy!
 
 Btw I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
+Also `caja -n` which is responsible for displaying icons on desktop loves to hide my xmobar. Killing it helps.
 
 If you have any tips feel free to comment!
+
+**UPDATE** issues with rendering was caused by `setWMName "LG3D"` in `startupHook`. Removed it for now (probably will cause issues with some Java(AWT) applications).
