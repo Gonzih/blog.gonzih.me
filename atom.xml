@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-09-05T11:48:00+03:00</updated>
+  <updated>2013-11-22T10:54:23+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -14,9 +14,82 @@
 
   
   <entry>
+    <title type="html"><![CDATA[OpenSUSE 13.1 + Mate 1.6 + Xmonad]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/"/>
+    <updated>2013-11-21T22:46:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
+    <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
+Since gnome 3.9 support for custom window managers was broken.
+How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
+
+<p>Patterns for installing mate in OpenSUSE can be found here <a href="http://en.opensuse.org/Portal:MATE">http://en.opensuse.org/Portal:MATE</a></p>
+
+<p>Xmonad can be installed using cabal install or using packages from OBS.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>cabal install xmonad         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
+</span><span class='line'>cabal install xmonad-contrib --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
+</span><span class='line'>cabal install xmobar         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create following file:</p>
+
+<figure class='code'><figcaption><span>/usr/share/applications/xmonad.desktop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>[Desktop Entry]
+</span><span class='line'>Type=Application
+</span><span class='line'>Name=Xmonad
+</span><span class='line'># Replace it with your xmonad launcher
+</span><span class='line'>Exec=xmonad
+</span><span class='line'>NoDisplay=true
+</span><span class='line'>Terminal=false
+</span><span class='line'>StartupNotify=false
+</span><span class='line'>Categories=
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Set xmonad as window manager for Mate:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.4</span>
+</span><span class='line'>mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.6</span>
+</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components windowmanager xmonad
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have Gnome 3 installed make sure that gnome-settings daemon is not running in mate (can cause gsettings error).</p>
+
+<p>Enjoy!</p>
+
+<p>Btw I have some weird issues with gnome 3 applications rendering, no idea how to fix this for now.</p>
+
+<p>If you have any tips feel free to comment!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[My first experience with core.typed]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
-    <updated>2013-08-30T12:30:00+03:00</updated>
+    <updated>2013-08-30T12:30:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
     <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
@@ -135,7 +208,7 @@ Power of lisp combined with really smart people :)</p>
   <entry>
     <title type="html"><![CDATA[Cheap standing desk]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/"/>
-    <updated>2013-08-25T12:16:00+03:00</updated>
+    <updated>2013-08-25T12:16:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk</id>
     <content type="html"><![CDATA[<p>I love idea of standing desks.
 I feel myself much more productive behind standing desk.
@@ -169,7 +242,7 @@ For nice and clean cuts some old pipe cutter is perfect.</p>
   <entry>
     <title type="html"><![CDATA[Speed/Ping test graphs with Clojure and Raspberry Pi]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/"/>
-    <updated>2013-08-24T14:02:00+03:00</updated>
+    <updated>2013-08-24T14:02:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi</id>
     <content type="html"><![CDATA[<p>I&#8217;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
@@ -352,7 +425,7 @@ And now we can see some visualization.</p>
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+03:00</updated>
+    <updated>2013-06-28T10:15:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 
@@ -413,7 +486,7 @@ java.mail framework was not so bad as I was expecting at first.</p>
   <entry>
     <title type="html"><![CDATA[Fast LXC configuration with netctl nat]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
-    <updated>2013-04-16T07:42:00+03:00</updated>
+    <updated>2013-04-16T07:42:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
     <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
 
@@ -554,7 +627,7 @@ And you can shutdown container with <code>sudo shutdown</code> inside container.
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+03:00</updated>
+    <updated>2013-04-14T12:00:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
@@ -748,7 +821,7 @@ And you can shutdown container with <code>sudo shutdown</code> inside container.
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+03:00</updated>
+    <updated>2013-03-19T11:09:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
@@ -927,7 +1000,7 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   <entry>
     <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
-    <updated>2013-03-18T20:50:00+03:00</updated>
+    <updated>2013-03-18T20:50:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
     <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
@@ -1076,7 +1149,7 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   <entry>
     <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
     <link href="http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
-    <updated>2013-02-14T21:22:00+03:00</updated>
+    <updated>2013-02-14T21:22:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
     <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 
@@ -1097,7 +1170,7 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
   <entry>
     <title type="html"><![CDATA[ClojureScript on BeagleBone: simple benchmark with Node.js]]></title>
     <link href="http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
-    <updated>2013-01-23T17:16:00+03:00</updated>
+    <updated>2013-01-23T17:16:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
     <content type="html"><![CDATA[<p>Benchmark is based on my <a href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
@@ -1229,7 +1302,7 @@ Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :
   <entry>
     <title type="html"><![CDATA[Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin]]></title>
     <link href="http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
-    <updated>2012-12-29T12:15:00+03:00</updated>
+    <updated>2012-12-29T12:15:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
     <content type="html"><![CDATA[<p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
 You will need three things for that.</p>
@@ -1274,7 +1347,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Note on privacy #1]]></title>
     <link href="http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/"/>
-    <updated>2012-12-12T10:03:00+03:00</updated>
+    <updated>2012-12-12T10:03:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1</id>
     <content type="html"><![CDATA[<p>Today I removed from my blog all staff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.</p>
 
@@ -1285,7 +1358,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
     <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+03:00</updated>
+    <updated>2012-10-08T16:31:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I&#8217;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 
@@ -1332,7 +1405,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
     <link href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+03:00</updated>
+    <updated>2012-09-07T16:20:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 
@@ -1491,7 +1564,7 @@ Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
   <entry>
     <title type="html"><![CDATA[Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue]]></title>
     <link href="http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/"/>
-    <updated>2012-09-03T20:58:00+03:00</updated>
+    <updated>2012-09-03T20:58:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue</id>
     <content type="html"><![CDATA[<p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&#8217;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
@@ -1515,7 +1588,7 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   <entry>
     <title type="html"><![CDATA[Arch Linux migrated to GRUB2]]></title>
     <link href="http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
-    <updated>2012-07-20T22:13:00+03:00</updated>
+    <updated>2012-07-20T22:13:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
     <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
 
@@ -1534,7 +1607,7 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   <entry>
     <title type="html"><![CDATA[Fix Broken Comments Count for Disqus]]></title>
     <link href="http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/"/>
-    <updated>2012-07-19T18:16:00+03:00</updated>
+    <updated>2012-07-19T18:16:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus</id>
     <content type="html"><![CDATA[<p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
 That is why comments count was equal to 0 for every post on my index page.
@@ -1545,7 +1618,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <entry>
     <title type="html"><![CDATA[The Internet Defense League]]></title>
     <link href="http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/"/>
-    <updated>2012-07-19T14:34:00+03:00</updated>
+    <updated>2012-07-19T14:34:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league</id>
     <content type="html"><![CDATA[<p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
 
@@ -1558,7 +1631,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
   <entry>
     <title type="html"><![CDATA[How to use Magnet Links with RTorrent]]></title>
     <link href="http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
-    <updated>2012-02-17T18:04:00+03:00</updated>
+    <updated>2012-02-17T18:04:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
     <content type="html"><![CDATA[<p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
 
@@ -1576,17 +1649,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
 
 
 <p><a href="http://libtorrent.rakshasa.no/ticket/2100">via</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
-    <link href="http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/"/>
-    <updated>2011-10-18T20:05:00+03:00</updated>
-    <id>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map</id>
-    <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
-
-<p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-09-05T11:48:00+03:00</updated>
+  <updated>2013-11-22T10:54:23+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
-    <updated>2013-03-18T20:50:00+03:00</updated>
+    <updated>2013-03-18T20:50:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
     <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
@@ -116,7 +116,7 @@ autocmd BufWritePost <em>.rb,</em>.js,<em>.coffee,</em>.clj call UpdateTags()
   <entry>
     <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
     <link href="http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/"/>
-    <updated>2011-10-18T20:05:00+03:00</updated>
+    <updated>2011-10-18T20:05:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map</id>
     <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
 
@@ -127,7 +127,7 @@ autocmd BufWritePost <em>.rb,</em>.js,<em>.coffee,</em>.clj call UpdateTags()
   <entry>
     <title type="html"><![CDATA[My Collection of Usefull Vim Plugins]]></title>
     <link href="http://blog.gonzih.me/blog/2011/08/03/collection-of-usefull-vim-plugins/"/>
-    <updated>2011-08-03T21:03:00+03:00</updated>
+    <updated>2011-08-03T21:03:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
     <content type="html"><![CDATA[<p>Plugins that make your vim better.</p>
 

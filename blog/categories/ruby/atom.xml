@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-09-05T11:48:00+03:00</updated>
+  <updated>2013-11-22T10:54:23+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+03:00</updated>
+    <updated>2013-06-28T10:15:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 
@@ -77,7 +77,7 @@ java.mail framework was not so bad as I was expecting at first.</p>
   <entry>
     <title type="html"><![CDATA[Nice Rspec 2 Syntax Cheat Sheet]]></title>
     <link href="http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
-    <updated>2011-09-22T21:26:00+03:00</updated>
+    <updated>2011-09-22T21:26:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
     <content type="html"><![CDATA[<!-- more -->
 
@@ -91,7 +91,7 @@ java.mail framework was not so bad as I was expecting at first.</p>
   <entry>
     <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
     <link href="http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
-    <updated>2011-09-21T18:28:00+03:00</updated>
+    <updated>2011-09-21T18:28:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
     <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.
 ``` text
@@ -136,7 +136,7 @@ edit "vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.r
   <entry>
     <title type="html"><![CDATA[Tmux + Rvm + Zsh Fix]]></title>
     <link href="http://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/"/>
-    <updated>2011-09-15T14:52:00+03:00</updated>
+    <updated>2011-09-15T14:52:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix</id>
     <content type="html"><![CDATA[<p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.
 <code>bash
@@ -148,7 +148,7 @@ edit "vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.r
   <entry>
     <title type="html"><![CDATA[My Collection of Usefull Vim Plugins]]></title>
     <link href="http://blog.gonzih.me/blog/2011/08/03/collection-of-usefull-vim-plugins/"/>
-    <updated>2011-08-03T21:03:00+03:00</updated>
+    <updated>2011-08-03T21:03:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
     <content type="html"><![CDATA[<p>Plugins that make your vim better.</p>
 

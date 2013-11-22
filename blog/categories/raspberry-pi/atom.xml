@@ -4,7 +4,7 @@
   <title><![CDATA[Category: raspberry pi | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/raspberry-pi/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-09-05T11:48:00+03:00</updated>
+  <updated>2013-11-22T10:54:23+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Speed/Ping test graphs with Clojure and Raspberry Pi]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/"/>
-    <updated>2013-08-24T14:02:00+03:00</updated>
+    <updated>2013-08-24T14:02:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi</id>
     <content type="html"><![CDATA[<p>I'm often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
@@ -157,7 +157,7 @@ And now we can see some visualization.</p>
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+03:00</updated>
+    <updated>2013-04-14T12:00:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
@@ -285,7 +285,7 @@ lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+03:00</updated>
+    <updated>2013-03-19T11:09:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>

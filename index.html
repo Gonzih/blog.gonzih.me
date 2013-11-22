@@ -9,8 +9,9 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Today I started improving my feeds2imap.clj project with core.typed.
-And already hit few issues, so this post is something like collection of tips &hellip;">
+  <meta name="description" content="So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
+Since gnome 3.9 support for custom window managers was broken.
+How to restore sanity &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,108 @@ And already hit few issues, so this post is something like collection of tips &h
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">OpenSUSE 13.1 + Mate 1.6 + Xmonad</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-21T22:46:00+01:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
+Since gnome 3.9 support for custom window managers was broken.
+How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
+
+<p>Patterns for installing mate in OpenSUSE can be found here <a href="http://en.opensuse.org/Portal:MATE">http://en.opensuse.org/Portal:MATE</a></p>
+
+<p>Xmonad can be installed using cabal install or using packages from OBS.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>cabal install xmonad         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
+</span><span class='line'>cabal install xmonad-contrib --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
+</span><span class='line'>cabal install xmobar         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create following file:</p>
+
+<figure class='code'><figcaption><span>/usr/share/applications/xmonad.desktop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>[Desktop Entry]
+</span><span class='line'>Type=Application
+</span><span class='line'>Name=Xmonad
+</span><span class='line'># Replace it with your xmonad launcher
+</span><span class='line'>Exec=xmonad
+</span><span class='line'>NoDisplay=true
+</span><span class='line'>Terminal=false
+</span><span class='line'>StartupNotify=false
+</span><span class='line'>Categories=
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Set xmonad as window manager for Mate:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.4</span>
+</span><span class='line'>mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.6</span>
+</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components windowmanager xmonad
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have Gnome 3 installed make sure that gnome-settings daemon is not running in mate (can cause gsettings error).</p>
+
+<p>Enjoy!</p>
+
+<p>Btw I have some weird issues with gnome 3 applications rendering, no idea how to fix this for now.</p>
+
+<p>If you have any tips feel free to comment!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My First Experience With core.typed</a></h1>
     
     
@@ -83,7 +186,7 @@ And already hit few issues, so this post is something like collection of tips &h
   
 
 
-<time datetime="2013-08-30T12:30:00+03:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
+<time datetime="2013-08-30T12:30:00+02:00" pubdate data-updated="true">Aug 30<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/#disqus_thread">Comments</a>
         
@@ -131,7 +234,7 @@ And keep doing what you are doing, core.typed is just amazing thing!</p>
   
 
 
-<time datetime="2013-08-25T12:16:00+03:00" pubdate data-updated="true">Aug 25<span>th</span>, 2013</time>
+<time datetime="2013-08-25T12:16:00+02:00" pubdate data-updated="true">Aug 25<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/08/25/cheap-standing-desk/#disqus_thread">Comments</a>
         
@@ -178,7 +281,7 @@ But commercial desks suffer from high price and complicated design.</p>
   
 
 
-<time datetime="2013-08-24T14:02:00+03:00" pubdate data-updated="true">Aug 24<span>th</span>, 2013</time>
+<time datetime="2013-08-24T14:02:00+02:00" pubdate data-updated="true">Aug 24<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/#disqus_thread">Comments</a>
         
@@ -225,7 +328,7 @@ So I decided to make sure it&#8217;s my ISP fault and not just my opinion based 
   
 
 
-<time datetime="2013-06-28T10:15:00+03:00" pubdate data-updated="true">Jun 28<span>th</span>, 2013</time>
+<time datetime="2013-06-28T10:15:00+02:00" pubdate data-updated="true">Jun 28<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/#disqus_thread">Comments</a>
         
@@ -273,7 +376,7 @@ All I wanted was simple to use news reader.</p>
   
 
 
-<time datetime="2013-04-16T07:42:00+03:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time>
+<time datetime="2013-04-16T07:42:00+02:00" pubdate data-updated="true">Apr 16<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/#disqus_thread">Comments</a>
         
@@ -316,7 +419,7 @@ All I wanted was simple to use news reader.</p>
   
 
 
-<time datetime="2013-04-14T12:00:00+03:00" pubdate data-updated="true">Apr 14<span>th</span>, 2013</time>
+<time datetime="2013-04-14T12:00:00+02:00" pubdate data-updated="true">Apr 14<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/#disqus_thread">Comments</a>
         
@@ -359,7 +462,7 @@ All I wanted was simple to use news reader.</p>
   
 
 
-<time datetime="2013-03-19T11:09:00+03:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
+<time datetime="2013-03-19T11:09:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/03/19/building-rc-toy-with-clojure/#disqus_thread">Comments</a>
         
@@ -403,7 +506,7 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
   
 
 
-<time datetime="2013-03-18T20:50:00+03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+<time datetime="2013-03-18T20:50:00+01:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/#disqus_thread">Comments</a>
         
@@ -446,7 +549,7 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
   
 
 
-<time datetime="2013-02-14T21:22:00+03:00" pubdate data-updated="true">Feb 14<span>th</span>, 2013</time>
+<time datetime="2013-02-14T21:22:00+01:00" pubdate data-updated="true">Feb 14<span>th</span>, 2013</time>
         
          | <a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/#disqus_thread">Comments</a>
         
@@ -475,50 +578,6 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/">ClojureScript on BeagleBone: Simple Benchmark With Node.js</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-23T17:16:00+03:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
-Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -537,6 +596,10 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">OpenSUSE 13.1 + Mate 1.6 + Xmonad</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My first experience with core.typed</a>
       </li>
     
@@ -550,10 +613,6 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
     
       <li class="post">
         <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom reader in Clojure via IMAP</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Fast LXC configuration with netctl nat</a>
       </li>
     
   </ul>

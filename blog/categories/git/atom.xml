@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-09-05T11:48:00+03:00</updated>
+  <updated>2013-11-22T10:54:23+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[My Collection of Usefull Vim Plugins]]></title>
     <link href="http://blog.gonzih.me/blog/2011/08/03/collection-of-usefull-vim-plugins/"/>
-    <updated>2011-08-03T21:03:00+03:00</updated>
+    <updated>2011-08-03T21:03:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2011/08/03/collection-of-usefull-vim-plugins</id>
     <content type="html"><![CDATA[<p>Plugins that make your vim better.</p>
 
