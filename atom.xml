@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-22T11:32:31+01:00</updated>
+  <updated>2013-11-22T11:44:29+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -19,7 +19,7 @@
     <updated>2013-11-21T22:46:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
     <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
-Since gnome 3.9 support for custom window managers become broken.
+Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 
 <p><a href="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png"><img src="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/re_1.png" alt="preview" /></a></p>
