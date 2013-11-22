@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opensuse | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/opensuse/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-22T22:11:49+01:00</updated>
+  <updated>2013-11-22T22:50:24+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -71,7 +71,8 @@ Categories=
 <p>Enjoy!</p>
 
 <p>By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
-Also <code>caja -n</code> which is responsible for displaying icons on desktop loves to hide my xmobar.</p>
+Also <code>caja -n</code> which is responsible for displaying icons on desktop loves to hide my xmobar.
+You can kill caja and mate will restore it (temporary fix).</p>
 
 <p>If you have any tips feel free to comment!</p>
 
