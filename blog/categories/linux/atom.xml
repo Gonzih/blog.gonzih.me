@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-22T18:59:52+01:00</updated>
+  <updated>2013-11-22T22:11:49+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -70,9 +70,46 @@ Categories=
 
 <p>Enjoy!</p>
 
-<p>Btw I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.</p>
+<p>By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
+Also <code>caja -n</code> which is responsible for displaying icons on desktop loves to hide my xmobar.</p>
 
 <p>If you have any tips feel free to comment!</p>
+
+<p><strong>UPDATE 0</strong> issues with rendering was caused by <code>setWMName "LG3D"</code> in <code>startupHook</code>.
+Removed it for now (probably will cause issues with some Java(AWT) applications).</p>
+
+<p><strong>UPDATE 1</strong> If you want to disable desktop add following file:</p>
+
+<p><code>text /usr/share/applications/caja-no-desktop.home
+[Desktop Entry]
+Name=Caja
+Exec=caja -n --no-desktop
+Icon=system-file-manager
+Terminal=false
+Type=Application
+StartupNotify=true
+NoDisplay=true
+OnlyShowIn=MATE;
+X-MATE-Bugzilla-Bugzilla=MATE
+X-MATE-Bugzilla-Product=caja
+X-MATE-Bugzilla-Component=general
+X-MATE-Bugzilla-Version=1.6.2
+X-MATE-Autostart-Phase=Desktop
+X-MATE-Autostart-Notify=true
+X-MATE-AutoRestart=true
+X-MATE-Provides=filemanager
+</code></p>
+
+<p>And now set it as default file manager for mate:</p>
+
+<p>```sh</p>
+
+<h1>Mate 1.6</h1>
+
+<p>gsettings set org.mate.session.required-components filemanager 'caja-no-destop'
+```</p>
+
+<p>Also you can store all <code>*.desktop</code> files in <code>$HOME/.local/share/applications</code>.</p>
 ]]></content>
   </entry>
   

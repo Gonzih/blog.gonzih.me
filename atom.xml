@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-22T18:59:52+01:00</updated>
+  <updated>2013-11-22T22:11:49+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -82,9 +82,63 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 
 <p>Enjoy!</p>
 
-<p>Btw I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.</p>
+<p>By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
+Also <code>caja -n</code> which is responsible for displaying icons on desktop loves to hide my xmobar.</p>
 
 <p>If you have any tips feel free to comment!</p>
+
+<p><strong>UPDATE 0</strong> issues with rendering was caused by <code>setWMName "LG3D"</code> in <code>startupHook</code>.
+Removed it for now (probably will cause issues with some Java(AWT) applications).</p>
+
+<p><strong>UPDATE 1</strong> If you want to disable desktop add following file:</p>
+
+<figure class='code'><figcaption><span>/usr/share/applications/caja-no-desktop.home</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>[Desktop Entry]
+</span><span class='line'>Name=Caja
+</span><span class='line'>Exec=caja -n --no-desktop
+</span><span class='line'>Icon=system-file-manager
+</span><span class='line'>Terminal=false
+</span><span class='line'>Type=Application
+</span><span class='line'>StartupNotify=true
+</span><span class='line'>NoDisplay=true
+</span><span class='line'>OnlyShowIn=MATE;
+</span><span class='line'>X-MATE-Bugzilla-Bugzilla=MATE
+</span><span class='line'>X-MATE-Bugzilla-Product=caja
+</span><span class='line'>X-MATE-Bugzilla-Component=general
+</span><span class='line'>X-MATE-Bugzilla-Version=1.6.2
+</span><span class='line'>X-MATE-Autostart-Phase=Desktop
+</span><span class='line'>X-MATE-Autostart-Notify=true
+</span><span class='line'>X-MATE-AutoRestart=true
+</span><span class='line'>X-MATE-Provides=filemanager
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now set it as default file manager for mate:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.6</span>
+</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components filemanager <span class="s1">&#39;caja-no-destop&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also you can store all <code>*.desktop</code> files in <code>$HOME/.local/share/applications</code>.</p>
 ]]></content>
   </entry>
   
