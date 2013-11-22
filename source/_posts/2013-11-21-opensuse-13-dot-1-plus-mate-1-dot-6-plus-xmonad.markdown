@@ -9,7 +9,7 @@ So OpenSUSE 13.1 was released. And it's great. But...
 Since gnome 3.9 support for custom window managers become broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.
 
-![preview](https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png)
+[![preview](https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png)](https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png)
 
 <!-- more -->
 
