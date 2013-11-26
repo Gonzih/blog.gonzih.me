@@ -9,12 +9,7 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Digging deeper in to the call/cc land I found interesting puzzle called yin-yang. Here is Scheme implementation: 1
-2
-3
-4
-5
-(let* ((yin ((lambda (cc &hellip;">
+  <meta name="description" content="Yin-Yang Call/cc Puzzle in Ruby Nov 26th, 2013 | Comments Digging deeper in to the call/cc land I found interesting puzzle called yin-yang. Here is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,52 +21,107 @@
   <link rel="canonical" href="http://blog.gonzih.me/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/contacts.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
-  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
-<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Max Gonzih</a></h1>
-  
-    <h2>KEEP CALM and CODE ON</h2>
-  
-</hgroup>
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Max Gonzih</a>
+  </div>
+</aside>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-    <iframe src="http://duckduckgo.com/search.html?site=blog.gonzih.me&prefill=Search&bgcolor=F2F2F2" style="float:right;overflow:hidden;margin:0;padding:0;width:250px;height:40px;" frameborder="0"></iframe>
-  
-<ul role=main-navigation>
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Max Gonzih</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="mailto:gonzih@gmail.com">gonzih@gmail.com</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/Gonzih/">github</a>
+  </li>
+
+
+  <li class="link">
+      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://twitter.com/Gonzih/">twitter</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.gonzih.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+      
+  
+  
+    <article class="post">
+      <div class="sharing-box">
   
   
   
-    <article>
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/">Yin-Yang Call/cc Puzzle in Ruby</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/">Yin-Yang Call/cc Puzzle in Ruby</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -96,7 +146,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
+  <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 
 <p>Here is Scheme implementation:</p>
 
@@ -115,7 +165,7 @@
 
 <p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
 
-</div>
+
   
   
     <footer>
@@ -127,11 +177,21 @@
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">OpenSUSE 13.1 + Mate 1.6 + Xmonad</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">OpenSUSE 13.1 + Mate 1.6 + Xmonad</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -156,13 +216,13 @@
   </header>
 
 
-  <div class="entry-content"><p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
+  <p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 
 <p><a href="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png"><img src="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/re_1.png" alt="preview" /></a></p>
 
-</div>
+
   
   
     <footer>
@@ -174,11 +234,21 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My First Experience With core.typed</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My First Experience With core.typed</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -203,14 +273,14 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
   </header>
 
 
-  <div class="entry-content"><p>Today I started improving my feeds2imap.clj project with core.typed.
+  <p>Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
 I couldn&#8217;t find answers on my issues in wiki or documentation.
 But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
 Thank you for your patience, man!
 And keep doing what you are doing, core.typed is just amazing thing!</p>
 
-</div>
+
   
   
     <footer>
@@ -222,11 +292,21 @@ And keep doing what you are doing, core.typed is just amazing thing!</p>
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/25/cheap-standing-desk/">Cheap Standing Desk</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/08/25/cheap-standing-desk/">Cheap Standing Desk</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -251,13 +331,13 @@ And keep doing what you are doing, core.typed is just amazing thing!</p>
   </header>
 
 
-  <div class="entry-content"><p>I love idea of standing desks.
+  <p>I love idea of standing desks.
 I feel myself much more productive behind standing desk.
 But commercial desks suffer from high price and complicated design.</p>
 
 <p>Solution? Build your own standing desk!</p>
 
-</div>
+
   
   
     <footer>
@@ -269,11 +349,21 @@ But commercial desks suffer from high price and complicated design.</p>
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping Test Graphs With Clojure and Raspberry Pi</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping Test Graphs With Clojure and Raspberry Pi</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -298,13 +388,13 @@ But commercial desks suffer from high price and complicated design.</p>
   </header>
 
 
-  <div class="entry-content"><p>I&#8217;m often complaining about my ISP quality.
+  <p>I&#8217;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it&#8217;s my ISP fault and not just my opinion based on my hate to them.</p>
 
 <p>How to do so? Let&#8217;s collect data about download speed and pings over time, and show some graphs based on that data.</p>
 
-</div>
+
   
   
     <footer>
@@ -316,11 +406,21 @@ So I decided to make sure it&#8217;s my ISP fault and not just my opinion based 
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom Reader in Clojure via IMAP</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom Reader in Clojure via IMAP</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -345,14 +445,14 @@ So I decided to make sure it&#8217;s my ISP fault and not just my opinion based 
   </header>
 
 
-  <div class="entry-content"><h3>Motivation</h3>
+  <h3>Motivation</h3>
 
 <p>Google Reader was shut down and I started looking for alternatives.
 And sadly I did not found anything close to Google Reader experience.
 There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
 All I wanted was simple to use news reader.</p>
 
-</div>
+
   
   
     <footer>
@@ -364,11 +464,21 @@ All I wanted was simple to use news reader.</p>
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Fast LXC Configuration With Netctl Nat</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/">Fast LXC Configuration With Netctl Nat</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -393,9 +503,9 @@ All I wanted was simple to use news reader.</p>
   </header>
 
 
-  <div class="entry-content"><p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
+  <p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
 
-</div>
+
   
   
     <footer>
@@ -407,11 +517,21 @@ All I wanted was simple to use news reader.</p>
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/">Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 Armhf Beta) Benchmark</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/">Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 Armhf Beta) Benchmark</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -436,9 +556,9 @@ All I wanted was simple to use news reader.</p>
   </header>
 
 
-  <div class="entry-content"><p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
+  <p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
-</div>
+
   
   
     <footer>
@@ -450,11 +570,21 @@ All I wanted was simple to use news reader.</p>
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/19/building-rc-toy-with-clojure/">Building RC Toy With Clojure</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/03/19/building-rc-toy-with-clojure/">Building RC Toy With Clojure</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -479,10 +609,10 @@ All I wanted was simple to use news reader.</p>
   </header>
 
 
-  <div class="entry-content"><p>Bored and have free time? Lets build something.
+  <p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
 
-</div>
+
   
   
     <footer>
@@ -494,11 +624,21 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I Cook Ctags in Vim</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/03/18/how-i-cook-ctags-in-vim/">How I Cook Ctags in Vim</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -523,9 +663,9 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
   </header>
 
 
-  <div class="entry-content"><p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
+  <p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
-</div>
+
   
   
     <footer>
@@ -536,98 +676,17 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
 
     </article>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/super_badge.png" alt="Member of The Internet Defense League" style="margin-top: 1.5em;"/></a>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/">Yin-Yang Call/cc puzzle in Ruby</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">OpenSUSE 13.1 + Mate 1.6 + Xmonad</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/30/my-first-experience-with-core-dot-typed/">My first experience with core.typed</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/25/cheap-standing-desk/">Cheap standing desk</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping test graphs with Clojure and Raspberry Pi</a>
-      </li>
-    
-  </ul>
-</section>
-<section class="contacts">
-  
-  <h1 class="contact">
-      <a href="https://twitter.com/Gonzih" class="link" target="_blank">
-        <img src="/images/icons/twitter.png" class="icon">
-        @Gonzih
-      </a>
-  </h1>
+
+    <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/blog/page/2/" rel="next">Continue &rarr;</a>
+  </span>
+
+
+</nav>
+  </section>
   
 
-  
-  <h1 class="contact">
-      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">
-        <img src="/images/icons/googleplus.png" class="icon">
-        Max Gonzih
-      </a>
-  </h1>
-  
-
-  
-  <h1 class="contact">
-      <a href="mailto:gonzih@gmail.com" class="link">
-        <img src="/images/icons/mail.png" class="icon">
-        gonzih@gmail.com
-      </a>
-  </h1>
-  
-
-  
-  <h1 class="contact">
-      <a href="https://github.com/Gonzih" class="link" target="_blank">
-        <img src="/images/icons/github.png" class="icon">
-        Gonzih
-      </a>
-  </h1>
-  
-</section>
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Max Gonzih <gonzih@gmail.com> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-<a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
-  <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
-</a>
-<br />All materials are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
-
-</footer>
   
 
 <script type="text/javascript">
@@ -651,19 +710,6 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
 
 
 
-
-
-  <script type="text/javascript">
-    window._idl = {};
-    _idl.variant = "banner";
-    (function() {
-        var idl = document.createElement('script');
-        idl.type = 'text/javascript';
-        idl.async = true;
-        idl.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'members.internetdefenseleague.org/include/?url=' + (_idl.url || '') + '&campaign=' + (_idl.campaign || '') + '&variant=' + (_idl.variant || 'banner');
-        document.getElementsByTagName('body')[0].appendChild(idl);
-    })();
-</script>
 
 </body>
 </html>
