@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mc | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/mc/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:48:42+01:00</updated>
+  <updated>2013-11-26T22:52:21+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
     <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 
-<p><a href="https://dl.dropbox.com/u/4109351/octopress/midnight-commander-theme/theme.png"><img src="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
+<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://dl.dropbox.com/u/4109351/octopress/midnight-commander-theme/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
 
 <p><code>ini .config/mc/ini
 [Colors]
