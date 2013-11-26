@@ -86,7 +86,7 @@ And now set it as default file manager for mate:
 
 ```sh
 # Mate 1.6
-gsettings set org.mate.session.required-components filemanager 'caja-no-destop'
+gsettings set org.mate.session.required-components filemanager 'caja-no-desktop'
 ```
 
 Also you can store all `*.desktop` files in `$HOME/.local/share/applications`.
