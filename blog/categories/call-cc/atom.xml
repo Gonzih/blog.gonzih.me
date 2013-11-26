@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: call/cc | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/call-cc/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2013-11-26T09:40:45+01:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Yin-Yang callcc puzzle in Ruby]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/"/>
+    <updated>2013-11-26T11:23:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby</id>
+    <content type="html"><![CDATA[<p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
+
+<p>Here is Scheme implementation:</p>
+
+<p>```scheme
+(let* ((yin</p>
+
+<pre><code>    ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
+   (yang
+    ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
+</code></pre>
+
+<p>(yin yang))
+```</p>
+
+<p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+
+<!-- more -->
+
+
+<p><a href="http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/">Here</a> you can find good explanation,
+also few of explanations can be found on <a href="http://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work">StackOverflow</a>.</p>
+
+<p>After I understand how it works I got all that excited and implemented given puzzle in ruby:</p>
+
+<p>```ruby
+require "continuation"</p>
+
+<p>yin  = ->(cc) { print "@"; cc }.call(callcc { |cc| cc })
+yang = ->(cc) { print "*"; cc }.call(callcc { |cc| cc })</p>
+
+<p>yin.call(yang)
+```</p>
+
+<p>And it doesn't work. It prints <code>@*@*********...</code> forever.</p>
+
+<p>No idea why. Maybe there are some limitations of <a href="http://www.ruby-doc.org/core-2.0.0/Continuation.html">ruby's call/cc</a>.
+I will research futher, but if you have any information about that feel free to comment or email me.</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
+  
+</feed>

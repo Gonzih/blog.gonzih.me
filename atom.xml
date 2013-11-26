@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-22T22:50:24+01:00</updated>
+  <updated>2013-11-26T09:40:45+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Yin-Yang callcc puzzle in Ruby]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/"/>
+    <updated>2013-11-26T11:23:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby</id>
+    <content type="html"><![CDATA[<p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
+
+<p>Here is Scheme implementation:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="k">let* </span><span class="p">((</span><span class="nf">yin</span>
+</span><span class='line'>        <span class="p">((</span><span class="k">lambda </span><span class="p">(</span><span class="nf">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">display </span><span class="o">#</span><span class="err">\</span><span class="nv">@</span><span class="p">)</span> <span class="nv">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">call-with-current-continuation </span><span class="p">(</span><span class="k">lambda </span><span class="p">(</span><span class="nf">c</span><span class="p">)</span> <span class="nv">c</span><span class="p">))))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">yang</span>
+</span><span class='line'>        <span class="p">((</span><span class="k">lambda </span><span class="p">(</span><span class="nf">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">display </span><span class="o">#</span><span class="err">\</span><span class="nv">*</span><span class="p">)</span> <span class="nv">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">call-with-current-continuation </span><span class="p">(</span><span class="k">lambda </span><span class="p">(</span><span class="nf">c</span><span class="p">)</span> <span class="nv">c</span><span class="p">)))))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">yin</span> <span class="nv">yang</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+
+<!-- more -->
+
+
+<p><a href="http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/">Here</a> you can find good explanation,
+also few of explanations can be found on <a href="http://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work">StackOverflow</a>.</p>
+
+<p>After I understand how it works I got all that excited and implemented given puzzle in ruby:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;continuation&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">yin</span>  <span class="o">=</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span> <span class="p">{</span> <span class="nb">print</span> <span class="s2">&quot;@&quot;</span><span class="p">;</span> <span class="n">cc</span> <span class="p">}</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="nb">callcc</span> <span class="p">{</span> <span class="o">|</span><span class="n">cc</span><span class="o">|</span> <span class="n">cc</span> <span class="p">})</span>
+</span><span class='line'><span class="n">yang</span> <span class="o">=</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span> <span class="p">{</span> <span class="nb">print</span> <span class="s2">&quot;*&quot;</span><span class="p">;</span> <span class="n">cc</span> <span class="p">}</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="nb">callcc</span> <span class="p">{</span> <span class="o">|</span><span class="n">cc</span><span class="o">|</span> <span class="n">cc</span> <span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">yin</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">yang</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And it doesn&#8217;t work. It prints <code>@*@*********...</code> forever.</p>
+
+<p>No idea why. Maybe there are some limitations of <a href="http://www.ruby-doc.org/core-2.0.0/Continuation.html">ruby&#8217;s call/cc</a>.
+I will research futher, but if you have any information about that feel free to comment or email me.</p>
+
+<p>Cheers!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OpenSUSE 13.1 + Mate 1.6 + Xmonad]]></title>
@@ -1682,30 +1738,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
 <blockquote><p>The <a href="http://sopastrike.com/">Internet Blackout</a> was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p></blockquote>
 
 <p>Join <strong>Internet Defence League</strong> at <a href="http://internetdefenseleague.org/">internetdefenseleague.org</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to use Magnet Links with RTorrent]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
-    <updated>2012-02-17T18:04:00+01:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
-    <content type="html"><![CDATA[<p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">cd</span> ~/watch    <span class="c"># set your watch directory here</span>
-</span><span class='line'><span class="o">[[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">=</span>~ <span class="nv">xt</span><span class="o">=</span>urn:btih:<span class="o">([</span>^&amp;/<span class="o">]</span>+<span class="o">)</span> <span class="o">]]</span> <span class="o">||</span> <span class="nb">exit</span>;
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;d10:magnet-uri${#1}:${1}e&quot;</span> &gt; <span class="s2">&quot;meta-${BASH_REMATCH[1]}.torrent&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://libtorrent.rakshasa.no/ticket/2100">via</a></p>
 ]]></content>
   </entry>
   

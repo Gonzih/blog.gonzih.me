@@ -9,9 +9,12 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
-Since gnome 3.9 support for custom window managers was broken.
-How to restore sanity &hellip;">
+  <meta name="description" content="Digging deeper in to the call/cc land I found interesting puzzle called yin-yang. Here is Scheme implementation: 1
+2
+3
+4
+5
+(let* ((yin ((lambda (cc &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -62,6 +65,66 @@ How to restore sanity &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/">Yin-Yang Callcc Puzzle in Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-26T11:23:00+01:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
+
+<p>Here is Scheme implementation:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="k">let* </span><span class="p">((</span><span class="nf">yin</span>
+</span><span class='line'>        <span class="p">((</span><span class="k">lambda </span><span class="p">(</span><span class="nf">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">display </span><span class="o">#</span><span class="err">\</span><span class="nv">@</span><span class="p">)</span> <span class="nv">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">call-with-current-continuation </span><span class="p">(</span><span class="k">lambda </span><span class="p">(</span><span class="nf">c</span><span class="p">)</span> <span class="nv">c</span><span class="p">))))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">yang</span>
+</span><span class='line'>        <span class="p">((</span><span class="k">lambda </span><span class="p">(</span><span class="nf">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">display </span><span class="o">#</span><span class="err">\</span><span class="nv">*</span><span class="p">)</span> <span class="nv">cc</span><span class="p">)</span> <span class="p">(</span><span class="nb">call-with-current-continuation </span><span class="p">(</span><span class="k">lambda </span><span class="p">(</span><span class="nf">c</span><span class="p">)</span> <span class="nv">c</span><span class="p">)))))</span>
+</span><span class='line'><span class="p">(</span><span class="nf">yin</span> <span class="nv">yang</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -473,56 +536,6 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/">Blue Midnight Commander Color Scheme</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-14T21:22:00+01:00" pubdate data-updated="true">Feb 14<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/02/14/blue-midnight-commander-color-scheme/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
-
-<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
-
-<figure class='code'><figcaption><span>.config/mc/ini</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="k">[Colors]</span>
-</span><span class='line'><span class="na">base_color</span><span class="o">=</span><span class="s">lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For more information take look at <a href="http://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
-Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -541,6 +554,10 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/">Yin-Yang callcc puzzle in Ruby</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">OpenSUSE 13.1 + Mate 1.6 + Xmonad</a>
       </li>
     
@@ -554,10 +571,6 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
     
       <li class="post">
         <a href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Speed/Ping test graphs with Clojure and Raspberry Pi</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom reader in Clojure via IMAP</a>
       </li>
     
   </ul>
