@@ -62,7 +62,7 @@ Removed it for now (probably will cause issues with some Java(AWT) applications)
 
 **UPDATE 1** If you want to disable desktop add following file:
 
-```text /usr/share/applications/caja-no-desktop.home
+```text /usr/share/applications/caja-no-desktop.desktop
 [Desktop Entry]
 Name=Caja
 Exec=caja -n --no-desktop
@@ -86,7 +86,7 @@ And now set it as default file manager for mate:
 
 ```sh
 # Mate 1.6
-gsettings set org.mate.session.required-components filemanager 'caja-no-destop'
+gsettings set org.mate.session.required-components filemanager "caja-no-desktop"
 ```
 
 Also you can store all `*.desktop` files in `$HOME/.local/share/applications`.
