@@ -4,7 +4,7 @@
   <title><![CDATA[Category: armsf | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/armsf/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
     <link href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+02:00</updated>
+    <updated>2012-09-07T16:20:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 

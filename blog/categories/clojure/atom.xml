@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[My first experience with core.typed]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
-    <updated>2013-08-30T12:30:00+02:00</updated>
+    <updated>2013-08-30T12:30:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
     <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
@@ -108,7 +108,7 @@ Power of lisp combined with really smart people :)</p>
   <entry>
     <title type="html"><![CDATA[Speed/Ping test graphs with Clojure and Raspberry Pi]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/"/>
-    <updated>2013-08-24T14:02:00+02:00</updated>
+    <updated>2013-08-24T14:02:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi</id>
     <content type="html"><![CDATA[<p>I'm often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
@@ -249,7 +249,7 @@ And now we can see some visualization.</p>
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+02:00</updated>
+    <updated>2013-06-28T10:15:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 
@@ -310,7 +310,7 @@ java.mail framework was not so bad as I was expecting at first.</p>
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+02:00</updated>
+    <updated>2013-04-14T12:00:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
@@ -438,7 +438,7 @@ lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+01:00</updated>
+    <updated>2013-03-19T11:09:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>

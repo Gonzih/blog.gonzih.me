@@ -4,7 +4,7 @@
   <title><![CDATA[Category: google | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/google/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+02:00</updated>
+    <updated>2013-06-28T10:15:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 

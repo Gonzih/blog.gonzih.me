@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rss | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/rss/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[My first experience with core.typed]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
-    <updated>2013-08-30T12:30:00+02:00</updated>
+    <updated>2013-08-30T12:30:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
     <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
@@ -108,7 +108,7 @@ Power of lisp combined with really smart people :)</p>
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+02:00</updated>
+    <updated>2013-06-28T10:15:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 

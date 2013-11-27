@@ -4,7 +4,7 @@
   <title><![CDATA[Category: scheme | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/scheme/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Yin-Yang Call/cc puzzle in Ruby]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/"/>
-    <updated>2013-11-26T11:23:00+01:00</updated>
+    <updated>2013-11-26T11:23:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby</id>
     <content type="html"><![CDATA[<p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 

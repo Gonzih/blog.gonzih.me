@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Yin-Yang Call/cc puzzle in Ruby]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/"/>
-    <updated>2013-11-26T11:23:00+01:00</updated>
+    <updated>2013-11-26T11:23:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby</id>
     <content type="html"><![CDATA[<p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 
@@ -72,7 +72,7 @@ I will research futher, but if you have any information about that feel free to 
   <entry>
     <title type="html"><![CDATA[OpenSUSE 13.1 + Mate 1.6 + Xmonad]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/"/>
-    <updated>2013-11-21T22:46:00+01:00</updated>
+    <updated>2013-11-21T22:46:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
     <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
 Since gnome 3.9 support for custom window managers was broken.
@@ -149,7 +149,7 @@ Removed it for now (probably will cause issues with some Java(AWT) applications)
 
 <p><strong>UPDATE 1</strong> If you want to disable desktop add following file:</p>
 
-<figure class='code'><figcaption><span>/usr/share/applications/caja-no-desktop.home</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>/usr/share/applications/caja-no-desktop.desktop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -191,7 +191,7 @@ Removed it for now (probably will cause issues with some Java(AWT) applications)
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.6</span>
-</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components filemanager <span class="s1">&#39;caja-no-desktop&#39;</span>
+</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components filemanager <span class="s2">&quot;caja-no-desktop&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -202,7 +202,7 @@ Removed it for now (probably will cause issues with some Java(AWT) applications)
   <entry>
     <title type="html"><![CDATA[My first experience with core.typed]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
-    <updated>2013-08-30T12:30:00+02:00</updated>
+    <updated>2013-08-30T12:30:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
     <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
@@ -321,7 +321,7 @@ Power of lisp combined with really smart people :)</p>
   <entry>
     <title type="html"><![CDATA[Cheap standing desk]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/"/>
-    <updated>2013-08-25T12:16:00+02:00</updated>
+    <updated>2013-08-25T12:16:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk</id>
     <content type="html"><![CDATA[<p>I love idea of standing desks.
 I feel myself much more productive behind standing desk.
@@ -355,7 +355,7 @@ For nice and clean cuts some old pipe cutter is perfect.</p>
   <entry>
     <title type="html"><![CDATA[Speed/Ping test graphs with Clojure and Raspberry Pi]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/"/>
-    <updated>2013-08-24T14:02:00+02:00</updated>
+    <updated>2013-08-24T14:02:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi</id>
     <content type="html"><![CDATA[<p>I&#8217;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
@@ -538,7 +538,7 @@ And now we can see some visualization.</p>
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+02:00</updated>
+    <updated>2013-06-28T10:15:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 
@@ -599,7 +599,7 @@ java.mail framework was not so bad as I was expecting at first.</p>
   <entry>
     <title type="html"><![CDATA[Fast LXC configuration with netctl nat]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
-    <updated>2013-04-16T07:42:00+02:00</updated>
+    <updated>2013-04-16T07:42:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
     <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
 
@@ -740,7 +740,7 @@ And you can shutdown container with <code>sudo shutdown</code> inside container.
   <entry>
     <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+02:00</updated>
+    <updated>2013-04-14T12:00:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
     <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 
@@ -934,7 +934,7 @@ And you can shutdown container with <code>sudo shutdown</code> inside container.
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+01:00</updated>
+    <updated>2013-03-19T11:09:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
@@ -1113,7 +1113,7 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   <entry>
     <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
-    <updated>2013-03-18T20:50:00+01:00</updated>
+    <updated>2013-03-18T20:50:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
     <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
 
@@ -1262,7 +1262,7 @@ Also you need to switch gamepad to direct input mode (X -> D switch on the back 
   <entry>
     <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
     <link href="http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
-    <updated>2013-02-14T21:22:00+01:00</updated>
+    <updated>2013-02-14T21:22:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
     <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 
@@ -1283,7 +1283,7 @@ Format of color configuration is <code>what=foreground,background:</code>. All c
   <entry>
     <title type="html"><![CDATA[ClojureScript on BeagleBone: simple benchmark with Node.js]]></title>
     <link href="http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
-    <updated>2013-01-23T17:16:00+01:00</updated>
+    <updated>2013-01-23T17:16:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
     <content type="html"><![CDATA[<p>Benchmark is based on my <a href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
@@ -1415,7 +1415,7 @@ Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :
   <entry>
     <title type="html"><![CDATA[Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin]]></title>
     <link href="http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
-    <updated>2012-12-29T12:15:00+01:00</updated>
+    <updated>2012-12-29T12:15:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
     <content type="html"><![CDATA[<p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
 You will need three things for that.</p>
@@ -1460,7 +1460,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Note on privacy #1]]></title>
     <link href="http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/"/>
-    <updated>2012-12-12T10:03:00+01:00</updated>
+    <updated>2012-12-12T10:03:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1</id>
     <content type="html"><![CDATA[<p>Today I removed from my blog all staff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.</p>
 
@@ -1471,7 +1471,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
     <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+02:00</updated>
+    <updated>2012-10-08T16:31:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I&#8217;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 
@@ -1518,7 +1518,7 @@ You will need three things for that.</p>
   <entry>
     <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
     <link href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+02:00</updated>
+    <updated>2012-09-07T16:20:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
     <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 
@@ -1677,7 +1677,7 @@ Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
   <entry>
     <title type="html"><![CDATA[Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue]]></title>
     <link href="http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/"/>
-    <updated>2012-09-03T20:58:00+02:00</updated>
+    <updated>2012-09-03T20:58:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue</id>
     <content type="html"><![CDATA[<p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&#8217;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
@@ -1699,60 +1699,9 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[The problem with Pingdom]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/07/22/the-problem-with-pingdom/"/>
-    <updated>2012-07-22T19:13:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/07/22/the-problem-with-pingdom</id>
-    <content type="html"><![CDATA[
-
-<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://www.pingdom.com%20Pingdom">The problem with pingdom.</a></p>
-
-<p>My money&#8217;s in that office, right? If she start giving me some bullshit about it ain&#8217;t there, and we got to go someplace else and get it, I&#8217;m gonna shoot you in the head then and there. Then I&#8217;m gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I&#8217;m talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?</p>
-
-<blockquote><p>Blockquote is what goes
-inside this block here
-would you believe that
-bullshit?</p></blockquote>
-
-<p>Well, the way they make shows is, they make one show. That show&#8217;s called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#8217;re going to make more shows. Some pilots get picked and become television programs. Some don&#8217;t, become nothing. She starred in one of the ones that became nothing.</p>
-
-<p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother&#8217;s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>
-
-<p>Your bones don&#8217;t break, mine do. That&#8217;s clear. Your cells react to bacteria and viruses differently than mine. You don&#8217;t get sick, I do. That&#8217;s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We&#8217;re on the same curve, just on opposite ends.</p>
-
-<p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that&#8217;s what you see at a toy store. And you must think you&#8217;re in a toy store, because you&#8217;re here shopping for an infant named Jeb.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Intro]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/07/22/intro/"/>
-    <updated>2012-07-22T08:23:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/07/22/intro</id>
-    <content type="html"><![CDATA[<p>Testing!</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
-
-<p>Integer ut sapien eget nisl auctor faucibus ut fermentum arcu. Nunc rutrum urna non risus congue et tristique felis eleifend. Maecenas blandit est eu mauris aliquam aliquet. Quisque porttitor enim eget risus blandit in mollis orci eleifend. Nam malesuada nulla sed lacus elementum placerat accumsan arcu rhoncus. Phasellus feugiat cursus turpis nec facilisis. Duis eget metus arcu, eget commodo velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer cursus vulputate enim, vel gravida velit faucibus et. Ut a urna vitae tellus cursus rhoncus. Maecenas at odio eget quam cursus elementum. Aliquam vitae eros quis tellus laoreet accumsan sed id lorem. Suspendisse et rutrum leo. Integer scelerisque vestibulum adipiscing. In posuere, libero ac accumsan suscipit, nulla ligula gravida erat, ut tempor odio erat nec sem. Quisque justo ipsum, adipiscing volutpat varius vitae, blandit eget nisi.</p>
-
-<p>Nullam adipiscing neque ac lacus commodo vitae imperdiet dui sollicitudin. Ut ac nunc augue. Nam at sem ut quam commodo aliquet vitae vitae dui. Vivamus scelerisque felis eget dolor cursus feugiat. Phasellus at dui sed lectus scelerisque pretium. Etiam nec massa ut justo vestibulum fringilla ac vitae urna. Morbi tortor erat, tempus sed consectetur at, elementum nec eros. Vivamus mattis arcu a sapien semper non lacinia eros pretium.</p>
-
-<p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
-
-<p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Arch Linux migrated to GRUB2]]></title>
     <link href="http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
-    <updated>2012-07-20T22:13:00+02:00</updated>
+    <updated>2012-07-20T22:13:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
     <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
 
@@ -1765,6 +1714,30 @@ bullshit?</p></blockquote>
 <li><a href="http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;action=contents">More GRUB2 themes</a></li>
 </ul>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fix Broken Comments Count for Disqus]]></title>
+    <link href="http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/"/>
+    <updated>2012-07-19T18:16:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus</id>
+    <content type="html"><![CDATA[<p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
+That is why comments count was equal to 0 for every post on my index page.
+To fix that go to admin ui in disqus and use domain migration tool.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Internet Defense League]]></title>
+    <link href="http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/"/>
+    <updated>2012-07-19T14:34:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league</id>
+    <content type="html"><![CDATA[<p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
+
+<blockquote><p>The <a href="http://sopastrike.com/">Internet Blackout</a> was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p></blockquote>
+
+<p>Join <strong>Internet Defence League</strong> at <a href="http://internetdefenseleague.org/">internetdefenseleague.org</a></p>
 ]]></content>
   </entry>
   

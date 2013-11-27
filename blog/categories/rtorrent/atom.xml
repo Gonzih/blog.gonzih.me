@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rtorrent | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/rtorrent/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How to use Magnet Links with RTorrent]]></title>
     <link href="http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
-    <updated>2012-02-17T18:04:00+01:00</updated>
+    <updated>2012-02-17T18:04:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
     <content type="html"><![CDATA[<p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
 

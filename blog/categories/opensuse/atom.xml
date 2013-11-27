@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opensuse | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/opensuse/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-26T22:52:21+01:00</updated>
+  <updated>2013-11-27T20:10:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[OpenSUSE 13.1 + Mate 1.6 + Xmonad]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/"/>
-    <updated>2013-11-21T22:46:00+01:00</updated>
+    <updated>2013-11-21T22:46:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
     <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it's great. But...
 Since gnome 3.9 support for custom window managers was broken.
@@ -81,7 +81,7 @@ Removed it for now (probably will cause issues with some Java(AWT) applications)
 
 <p><strong>UPDATE 1</strong> If you want to disable desktop add following file:</p>
 
-<p><code>text /usr/share/applications/caja-no-desktop.home
+<p><code>text /usr/share/applications/caja-no-desktop.desktop
 [Desktop Entry]
 Name=Caja
 Exec=caja -n --no-desktop
@@ -107,7 +107,7 @@ X-MATE-Provides=filemanager
 
 <h1>Mate 1.6</h1>
 
-<p>gsettings set org.mate.session.required-components filemanager 'caja-no-desktop'
+<p>gsettings set org.mate.session.required-components filemanager "caja-no-desktop"
 ```</p>
 
 <p>Also you can store all <code>*.desktop</code> files in <code>$HOME/.local/share/applications</code>.</p>
