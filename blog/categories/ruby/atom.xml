@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-29T20:06:12+03:00</updated>
+  <updated>2013-11-29T20:09:26+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -119,20 +119,6 @@ java.mail framework was not so bad as I was expecting at first.</p>
 <li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nice Rspec 2 Syntax Cheat Sheet]]></title>
-    <link href="http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet/"/>
-    <updated>2011-09-22T21:26:00+03:00</updated>
-    <id>http://blog.gonzih.me/blog/2011/09/22/nice-rspec-2-syntax-cheat-sheet</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<p><div><script src='https://gist.github.com/663876.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-</p>
 ]]></content>
   </entry>
   

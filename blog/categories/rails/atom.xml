@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-29T20:06:12+03:00</updated>
+  <updated>2013-11-29T20:09:26+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -37,22 +37,6 @@ ActiveRecord::Base.include_root_in_json = false</li>
 <p>```
 * Use attr_accessible for filtering attributes in mass assigments from backbone. In rails > 3.1 you can use attr_accessible with :as => role.
 * Use <a href="https://github.com/josevalim/inherited_resources">inherited resources</a> for faster development.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My Rails Apps Template]]></title>
-    <link href="http://blog.gonzih.me/blog/2011/08/03/my-rails-apps-template/"/>
-    <updated>2011-08-03T13:29:00+03:00</updated>
-    <id>http://blog.gonzih.me/blog/2011/08/03/my-rails-apps-template</id>
-    <content type="html"><![CDATA[<p>Here is my rails template that i use for my projects. With BDD gems, optional resque for deloyed jobs, kaminari for pagination, carriervawe as paperclip replacement.</p>
-
-<!-- more -->
-
-
-<p><div><script src='https://gist.github.com/940407.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-</p>
 ]]></content>
   </entry>
   
