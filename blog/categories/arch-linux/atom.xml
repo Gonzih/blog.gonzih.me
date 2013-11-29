@@ -4,7 +4,7 @@
   <title><![CDATA[Category: arch linux | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/arch-linux/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-29T20:03:06+03:00</updated>
+  <updated>2013-11-29T20:04:58+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Fast LXC configuration with netctl nat]]></title>
+    <title type="html"><![CDATA[Quick LXC configuration with netctl nat]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
     <updated>2013-04-16T07:42:00+03:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
