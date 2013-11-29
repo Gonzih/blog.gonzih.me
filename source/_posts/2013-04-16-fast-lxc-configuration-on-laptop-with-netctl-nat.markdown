@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Fast LXC configuration with netctl nat"
+title: "Quick LXC configuration with netctl nat"
 date: 2013-04-16 07:42
 comments: true
 categories: [linux containers, netctl, nat, ubuntu, arch linux]
