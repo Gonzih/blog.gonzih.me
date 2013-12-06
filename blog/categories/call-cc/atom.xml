@@ -4,7 +4,7 @@
   <title><![CDATA[Category: call/cc | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/call-cc/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-12-06T10:53:41+03:00</updated>
+  <updated>2013-12-06T11:00:35+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -46,8 +46,8 @@ also few of explanations can be found on <a href="http://stackoverflow.com/quest
 <p>```ruby
 require "continuation"</p>
 
-<p>yin  = ->(cc) { print "@"; cc }.call(callcc { |cc| cc })
-yang = ->(cc) { print "*"; cc }.call(callcc { |cc| cc })</p>
+<p>yin  = ->(cc) { print "@"; cc }.call(callcc { |c| c })
+yang = ->(cc) { print "*"; cc }.call(callcc { |c| c })</p>
 
 <p>yin.call(yang)
 ```</p>
@@ -67,9 +67,9 @@ require "continuation"</p>
 
 <p>lambda do |yin, yang|
   yin.call yang
-  end.call(lambda {|cc| print "@"; cc }.call(callcc { |c| c }),</p>
+  end.call(lambda { |cc| print "@"; cc }.call(callcc { |c| c }),</p>
 
-<pre><code>       lambda {|cc| print "*"; cc }.call(callcc { |c| c }))
+<pre><code>       lambda { |cc| print "*"; cc }.call(callcc { |c| c }))
 </code></pre>
 
 <p>```</p>
