@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-29T20:09:26+03:00</updated>
+  <updated>2013-12-06T10:50:26+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -63,9 +63,27 @@ also few of explanations can be found on <a href="http://stackoverflow.com/quest
 <p>And it doesn&#8217;t work. It prints <code>@*@*********...</code> forever.</p>
 
 <p>No idea why. Maybe there are some limitations of <a href="http://www.ruby-doc.org/core-2.0.0/Continuation.html">ruby&#8217;s call/cc</a>.
-I will research futher, but if you have any information about that feel free to comment or email me.</p>
+I will research further, but if you have any information about that feel free to comment or email me.</p>
 
 <p>Cheers!</p>
+
+<p><em>UPDATE</em> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
+So here is his fixed version:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;continuation&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">yin</span><span class="p">,</span> <span class="n">yang</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">yin</span><span class="o">.</span><span class="n">call</span> <span class="n">yang</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">cc</span><span class="o">|</span> <span class="nb">print</span> <span class="s2">&quot;@&quot;</span><span class="p">;</span> <span class="n">cc</span> <span class="p">}</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="nb">callcc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span> <span class="p">}),</span>
+</span><span class='line'>           <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">cc</span><span class="o">|</span> <span class="nb">print</span> <span class="s2">&quot;*&quot;</span><span class="p">;</span> <span class="n">cc</span> <span class="p">}</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="nb">callcc</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span> <span class="p">}))</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   

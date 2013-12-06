@@ -4,7 +4,7 @@
   <title><![CDATA[Category: call/cc | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/call-cc/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-11-29T20:09:26+03:00</updated>
+  <updated>2013-12-06T10:50:26+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -55,9 +55,24 @@ yang = ->(cc) { print "*"; cc }.call(callcc { |cc| cc })</p>
 <p>And it doesn't work. It prints <code>@*@*********...</code> forever.</p>
 
 <p>No idea why. Maybe there are some limitations of <a href="http://www.ruby-doc.org/core-2.0.0/Continuation.html">ruby's call/cc</a>.
-I will research futher, but if you have any information about that feel free to comment or email me.</p>
+I will research further, but if you have any information about that feel free to comment or email me.</p>
 
 <p>Cheers!</p>
+
+<p><em>UPDATE</em> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
+So here is his fixed version:</p>
+
+<p>```ruby
+require "continuation"</p>
+
+<p>lambda do |yin, yang|
+  yin.call yang
+  end.call(lambda {|cc| print "@"; cc }.call(callcc { |c| c }),</p>
+
+<pre><code>       lambda {|cc| print "*"; cc }.call(callcc { |c| c }))
+</code></pre>
+
+<p>```</p>
 ]]></content>
   </entry>
   
