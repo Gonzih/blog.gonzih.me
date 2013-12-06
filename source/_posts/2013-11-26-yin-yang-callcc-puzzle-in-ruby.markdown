@@ -49,7 +49,7 @@ So here is his fixed version:
 require "continuation"
 
 lambda do |yin, yang|
-  yin.call yang
-  end.call(lambda { |cc| print "@"; cc }.call(callcc { |c| c }),
-           lambda { |cc| print "*"; cc }.call(callcc { |c| c }))
+  yin.call(yang)
+end.call(lambda { |cc| print "@"; cc }.call(callcc { |c| c }),
+         lambda { |cc| print "*"; cc }.call(callcc { |c| c }))
 ```
