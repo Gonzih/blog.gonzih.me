@@ -29,8 +29,8 @@ After I understand how it works I got all that excited and implemented given puz
 ```ruby
 require "continuation"
 
-yin  = ->(cc) { print "@"; cc }.call(callcc { |cc| cc })
-yang = ->(cc) { print "*"; cc }.call(callcc { |cc| cc })
+yin  = ->(cc) { print "@"; cc }.call(callcc { |c| c })
+yang = ->(cc) { print "*"; cc }.call(callcc { |c| c })
 
 yin.call(yang)
 ```
@@ -38,6 +38,18 @@ yin.call(yang)
 And it doesn't work. It prints `@*@*********...` forever.
 
 No idea why. Maybe there are some limitations of [ruby's call/cc](http://www.ruby-doc.org/core-2.0.0/Continuation.html).
-I will research futher, but if you have any information about that feel free to comment or email me.
+I will research further, but if you have any information about that feel free to comment or email me.
 
 Cheers!
+
+**UPDATE** Abinoam Praxedes Marques Junio [figured](https://www.ruby-forum.com/topic/4418860#1129811) out that let (which is basically lambda application underneath) is crucial here.
+So here is his fixed version:
+
+```ruby
+require "continuation"
+
+lambda do |yin, yang|
+  yin.call yang
+  end.call(lambda { |cc| print "@"; cc }.call(callcc { |c| c }),
+           lambda { |cc| print "*"; cc }.call(callcc { |c| c }))
+```
