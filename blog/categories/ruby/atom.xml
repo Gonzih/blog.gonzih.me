@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-12-06T10:50:26+03:00</updated>
+  <updated>2013-12-06T10:53:41+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -59,7 +59,7 @@ I will research further, but if you have any information about that feel free to
 
 <p>Cheers!</p>
 
-<p><em>UPDATE</em> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
+<p><strong>UPDATE</strong> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
 So here is his fixed version:</p>
 
 <p>```ruby
