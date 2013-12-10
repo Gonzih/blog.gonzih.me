@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embed | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/embed/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-12-06T11:01:37+03:00</updated>
+  <updated>2013-12-10T12:37:02+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -109,7 +109,7 @@ After module is loaded you should see new device in <code>/dev/input</code>.</p>
 
 <h2>Clojure code</h2>
 
-<p>I stuck with <a href="http://clojure.org/">Clojure</a> as main language for controlling Arduino. I took <a href="https://github.com/nakkaya/clodiuno">Clodiuno</a> library.
+<p>I used <a href="http://clojure.org/">Clojure</a> as main language for controlling Arduino. I took <a href="https://github.com/nakkaya/clodiuno">Clodiuno</a> library.
 It is Firmata protocol implementation for Clojure. Why Firmata? Because it's easy, fast and provides great way to extend your project in future.</p>
 
 <p>So I wrote some code, uploaded Firmata to Arduino. And... it's not working.</p>
