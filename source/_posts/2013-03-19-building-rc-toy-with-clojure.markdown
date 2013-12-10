@@ -82,7 +82,7 @@ You need to find kernel module for your gamepad. For my gamepad module `joydev` 
 After module is loaded you should see new device in `/dev/input`.
 
 ## Clojure code
-I stuck with [Clojure](http://clojure.org/) as main language for controlling Arduino. I took [Clodiuno](https://github.com/nakkaya/clodiuno) library.
+I used [Clojure](http://clojure.org/) as main language for controlling Arduino. I took [Clodiuno](https://github.com/nakkaya/clodiuno) library.
 It is Firmata protocol implementation for Clojure. Why Firmata? Because it's easy, fast and provides great way to extend your project in future.
 
 So I wrote some code, uploaded Firmata to Arduino. And... it's not working.
