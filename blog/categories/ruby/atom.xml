@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-12-10T12:37:02+03:00</updated>
+  <updated>2013-12-13T10:47:33+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[VisualRuby gem on OpenSUSE 13.1]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/"/>
+    <updated>2013-12-13T10:10:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1</id>
+    <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.jpg" alt="visualruby" /></p>
+
+<p>I found out about ruby gem called <a href="http://visualruby.net/">visualruby</a> and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
+So to save my (or maybe your's if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
+I bet you can figure out similar packages for different distribution.</p>
+
+<!-- more -->
+
+
+<p><code>sh
+sudo zypper -n in glib2 glib2-branding-openSUSE glib2-devel atk-devel cairo-devel pango-devel gdk-pixbuf-devel gtk2-devel gtksourceview2-devel glade
+</code></p>
+
+<p>Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
+It's not working very well (at least in examples) since most of stuff in suse 13.1 is based on gtk3+.
+But I'm still in process of figuring things out.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Yin-Yang Call/cc puzzle in Ruby]]></title>
