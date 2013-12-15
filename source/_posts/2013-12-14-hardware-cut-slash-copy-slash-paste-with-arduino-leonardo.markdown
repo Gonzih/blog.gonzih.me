@@ -70,3 +70,96 @@ void paste() {
   Keyboard.releaseAll();
 }
 ```
+
+It works! But... for example in my terminal I use Ctrl+Shift+C to copy selection.
+Of course I can press Shift+Copy combination. But maybe there is better solution.
+
+## Automatic detection of key combination.
+
+Idea is simple. We have serial port open on Leonardo and our Linux PC.
+When I'm pressing copy on Leonardo it will ask through serial port PC about required combination.
+On PC there will be running ruby script that will detect currently focused window and look up at the configuration file for
+keys combination. If there is no combination will be found or reply from script will be timed out we will use default combination.
+
+## Detecting WM_CLASS from Ruby.
+
+From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
+Here is Window class for the job:
+
+```ruby
+class Window
+  def self.current
+    Window.new(`xprop -root`)
+  end
+
+  def initialize(data)
+    @root_data = data
+  end
+
+  def id
+    matches = @root_data.lines.grep(/_NET_ACTIVE_WINDOW\(WINDOW\)/)
+
+    if matches
+      match_data = matches.first.match(/_NET_ACTIVE_WINDOW\(WINDOW\):.*#\s(.*)\n/)
+      match_data[1]
+    else
+      raise 'No Window id was found'
+    end
+  end
+
+  def wm_class
+    out = `xprop -id '#{id}'`
+    matches = out.lines.grep(/WM_CLASS\(STRING\)/)
+
+    if matches
+      match_data = matches.first.match(/WM_CLASS\(STRING\)[^"]*(".*")\n/)
+      match_data[1].gsub(/"/,'').split(', ')
+    else
+      raise 'No Window class was found'
+    end
+  end
+
+  def is_a?(class_string)
+    wm_class.any? { |s| s == class_string }
+  end
+end
+```
+
+Usage examples:
+
+```ruby
+Window.current.wm_class
+=> ["gvim", "Gvim"]
+
+Window.current.is_a?("gvim")
+=> true
+```
+
+## Keys configuration.
+
+For now lets implement simplest class for that and store all configuration in constant.
+
+```ruby
+class Keys
+  CONFIG = {
+    'terminology' => {
+      copy: 'ctrl-shift-c',
+      paste: 'ctrl-shift-v',
+      cut: nil
+    }
+  }
+
+  def [](key)
+    CONFIG[key]
+  end
+end
+```
+
+Usage:
+
+```ruby
+Keys.new['terminology'][:copy]
+=> 'ctrl-shift-c'
+```
+
+## Communicating with Arduino via SerialPort.
