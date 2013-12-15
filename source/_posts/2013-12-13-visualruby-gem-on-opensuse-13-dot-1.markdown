@@ -14,7 +14,10 @@ I bet you can figure out similar packages for different distribution.
 <!-- more -->
 
 ```sh
-sudo zypper -n in glib2 glib2-branding-openSUSE glib2-devel atk-devel cairo-devel pango-devel gdk-pixbuf-devel gtk2-devel gtksourceview2-devel glade
+sudo zypper -n in \
+glib2 glib2-branding-openSUSE glib2-devel \
+atk-devel cairo-devel pango-devel gdk-pixbuf-devel \
+gtk2-devel gtksourceview2-devel glade
 ```
 
 Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
