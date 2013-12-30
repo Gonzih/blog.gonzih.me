@@ -1,6 +1,6 @@
 $min-width: 895px;
-$logo-height: 110px;
-$logo-width: 110px;
+$logo-height: 160px;
+$logo-width: 160px;
 $logo-radius: 10px;
 $logo-inner-height: 90px;
 $logo-inner-width: 90px;
@@ -24,34 +24,20 @@ body {
 aside#logo {
   position: relative;
   display: block;
-  width: $logo-width;
-  height: $logo-height;
-  border-radius: $logo-radius;
-  -moz-border-radius: $logo-radius;
-  -webkit-border-radius: $logo-radius;
   margin-left: 30px;
   margin-top: 40px;
 }
 
 aside#logo div {
-  border-radius: $logo-inner-radius;
-  -moz-border-radius: $logo-inner-radius;
-  -webkit-border-radius: $logo-inner-radius;
-  width: $logo-inner-width;
-  height: $logo-inner-height;
-  text-indent: -9999px;
-  margin: 0 auto;
-  margin-top: 10px;
-  clear: both;
+  width: $logo-width;
+  height: $logo-height;
+  border-radius: 150px;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+  background: url(/logo.jpg) no-repeat;
 }
 
 aside#logo div a {
-  display: block;
-  clear: both;
-  width: 78px;
-  height: 78px;
-  margin: 0 auto;
-  margin-top: 6px;
 }
 
 ul#menu {
@@ -158,8 +144,8 @@ header#sidebar h2#subtitle {
   }
 
   aside#logo div {
-    width: 135px;
-    height: 135px;
+    width: 160px;
+    height: 160px;
     margin-top: 15px;
   }
 
