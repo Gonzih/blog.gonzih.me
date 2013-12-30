@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2013-12-13T10:55:27+03:00</updated>
+  <updated>2013-12-30T17:15:18+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -28,7 +28,10 @@ I bet you can figure out similar packages for different distribution.</p>
 
 
 <p><code>sh
-sudo zypper -n in glib2 glib2-branding-openSUSE glib2-devel atk-devel cairo-devel pango-devel gdk-pixbuf-devel gtk2-devel gtksourceview2-devel glade
+sudo zypper -n in \
+glib2 glib2-branding-openSUSE glib2-devel \
+atk-devel cairo-devel pango-devel gdk-pixbuf-devel \
+gtk2-devel gtksourceview2-devel glade
 </code></p>
 
 <p>Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
