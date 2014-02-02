@@ -4,6 +4,7 @@ title: "Hardware Cut/Copy/Paste with Arduino Leonardo"
 date: 2013-12-14 20:02
 comments: true
 categories: [arduino, leonardo, keyboard, ruby]
+published: false
 ---
 Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
