@@ -296,6 +296,11 @@ article.post figure {
   max-width: 771px;
 }
 
+article.post img {
+  max-width: 771px;
+  width: 100% !important;
+}
+
 // Anchor
 h2.entry-title a.anchor {
   font-size: 0.9em;
