@@ -9,7 +9,7 @@ published: false
 Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
 I always wondered why there is no hardware support for that on various keyboard that out there. And then I saw (keyboard.io)[keyboard.io].
-Project about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
+Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
 Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.
 
 <!-- more -->
