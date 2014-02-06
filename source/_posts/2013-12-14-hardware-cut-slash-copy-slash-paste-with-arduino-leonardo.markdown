@@ -224,7 +224,9 @@ void pressKeys(String key) {
       pressShift();
       break;
     default:
-      Keyboard.write(key);
+      char[] arr = key.toCharArray();
+      char k = arr[0];
+      Keyboard.write(k);
   }
 }
 ```
