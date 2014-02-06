@@ -53,6 +53,10 @@ void pressCtrl() {
   Keyboard.press(KEY_LEFT_CTRL);
 }
 
+void pressShift() {
+  Keyboard.press(KEY_LEFT_SHIFT);
+}
+
 void cut() {
   pressCtrl();
   Keyboard.write('x');
@@ -164,3 +168,67 @@ Keys.new['terminology'][:copy]
 ```
 
 ## Communicating with Arduino via SerialPort.
+
+```cpp
+String stringIn;
+// Let's assume than combination aren't longer than 4 keys
+String collectedStrings[4];
+int counter, inByte, i;
+
+void setup(){
+  Serial.begin(9600);
+  counter = 0;
+  stringIn = String("");
+}
+
+void resetReader() {
+  counter = 0
+  stringIn = String("")
+  for (i = 0; i <= 4; i++) {
+    collectedStrings[i] = String("")
+  }
+}
+
+void readLine() {
+  while(Serial.available()){
+    inByte = Serial.read();
+    stringIn += inByte;
+
+    if (inByte == '-'){  // Handle delimiter
+      collectedStrings[counter] = String(stringIn);
+      stringIn = String("");
+      counter = counter + 1;
+    }
+
+    if(inByte ==  '\r'){  // end of line
+      resetReader();
+      return;
+    }
+  }
+}
+
+void executeCombination() {
+  for(i = 0; i <= 4; i++) {
+    pressKey(collectedstrings[i]);
+  }
+
+  Keyboard.releaseAll();
+}
+
+void pressKeys(String key) {
+  switch(key) {
+    case "ctrl":
+      pressCtrl();
+      break;
+    case "shift":
+      pressShift();
+      break;
+    default:
+      Keyboard.write(key);
+  }
+}
+```
+
+<!--
+vim: ts=2:sts=2:sw=2:expandtab
+-->
