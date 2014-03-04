@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hardware Cut/Copy/Paste with Arduino Leonardo - Max Gonzih</title>
+  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+
+  
+  <meta name="description" content="Hardware Cut/Copy/Paste With Arduino Leonardo Jan 4th, 2014 | Comments Since I switched to Programmed Dvorak layout default keybindings for &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.gonzih.me/blog/2014/01/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+    <a href="/">
+        <div class="clearfix">
+        </div>
+    </a>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Max Gonzih</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="mailto:gonzih@gmail.com">email</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/Gonzih/">github</a>
+  </li>
+
+
+  <li class="link">
+      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://twitter.com/Gonzih/">twitter</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+  <li>
+    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+  </li>
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.gonzih.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  
+  
+</div>
+
+  
+  <header>
+    
+      <h2 class="entry-title">Hardware Cut/Copy/Paste With Arduino Leonardo</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-04T10:02:00+03:00" pubdate data-updated="true">Jan 4<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
+I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw <a href="keyboard.io">keyboard.io</a>.
+Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
+Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.</p>
+
+<!-- more -->
+
+
+<h2>Emulating keyboard on Leonardo.</h2>
+
+<p>With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
+Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the <a href="http://arduino.cc/en/Reference/MouseKeyboard">documentation</a>.</p>
+
+<h2>Arduino wiring.</h2>
+
+<p>Wiring will be very simple. We will have 3 buttons on pins 2, 3 and 4 with pull down resistors.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/hardware-cut-copy-paste/schematics1.png" alt="schematics1" /></p>
+
+<h2>Hardware Cut/Copy/Paste.</h2>
+
+<p>So this will be our simplest solution to the my original idea. Here is Arduino sketch:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">// version 0.0.1</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">cutPin</span>   <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">copyPin</span>  <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">pastePin</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">cutPin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">copyPin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">pinMode</span><span class="p">(</span><span class="n">pastePin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Keboard</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">cutpin</span><span class="p">)</span>   <span class="o">==</span> <span class="n">HIGH</span><span class="p">)</span> <span class="p">{</span> <span class="n">cut</span><span class="p">();</span>   <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">copypin</span><span class="p">)</span>  <span class="o">==</span> <span class="n">HIGH</span><span class="p">)</span> <span class="p">{</span> <span class="n">copy</span><span class="p">();</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">pastepin</span><span class="p">)</span> <span class="o">==</span> <span class="n">HIGH</span><span class="p">)</span> <span class="p">{</span> <span class="n">paste</span><span class="p">();</span> <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">pressCtrl</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">press</span><span class="p">(</span><span class="n">KEY_LEFT_CTRL</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">pressShift</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">press</span><span class="p">(</span><span class="n">KEY_LEFT_SHIFT</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">cut</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">pressCtrl</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sc">&#39;x&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">releaseAll</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">copy</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">pressCtrl</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sc">&#39;c&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">releaseAll</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">paste</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">pressCtrl</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sc">&#39;v&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">releaseAll</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It works! But&#8230; for example in my terminal I use Ctrl+Shift+C to copy selection.
+Of course I can press Shift+Copy combination. But maybe there is a better solution.</p>
+
+<h2>Automatic detection of key combination.</h2>
+
+<p>Idea is simple. We have serial port open on Leonardo and our Linux PC.
+When I&#8217;m pressing copy on Leonardo it will ask through serial port PC about required combination.
+On PC there will be running ruby script that will detect currently focused window and look up at the configuration file for
+keys combination. If there is no combination will be found or reply from script will be timed out we will use default combination.</p>
+
+<h2>Detecting WM_CLASS from Ruby (2.0.0+).</h2>
+
+<p>From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
+Here is Window class for the job:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Window</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">current</span>
+</span><span class='line'>    <span class="no">Window</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="sb">`xprop -root`</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@root_data</span> <span class="o">=</span> <span class="n">data</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">id</span>
+</span><span class='line'>    <span class="n">matches</span> <span class="o">=</span> <span class="vi">@root_data</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/_NET_ACTIVE_WINDOW\(WINDOW\)/</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">matches</span>
+</span><span class='line'>      <span class="n">match_data</span> <span class="o">=</span> <span class="n">matches</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/_NET_ACTIVE_WINDOW\(WINDOW\):.*#\s(.*)\n/</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">match_data</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="k">raise</span> <span class="s1">&#39;No Window id was found&#39;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">wm_class</span>
+</span><span class='line'>    <span class="n">out</span> <span class="o">=</span> <span class="sb">`xprop -id &#39;</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="sb">&#39;`</span>
+</span><span class='line'>    <span class="n">matches</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">grep</span><span class="p">(</span><span class="sr">/WM_CLASS\(STRING\)/</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">matches</span>
+</span><span class='line'>      <span class="n">match_data</span> <span class="o">=</span> <span class="n">matches</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/WM_CLASS\(STRING\)[^&quot;]*(&quot;.*&quot;)\n/</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">match_data</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/&quot;/</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="k">raise</span> <span class="s1">&#39;No Window class was found&#39;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">is_a?</span><span class="p">(</span><span class="n">class_string</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">wm_class</span><span class="o">.</span><span class="n">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span> <span class="o">==</span> <span class="n">class_string</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage examples:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Window</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">wm_class</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;gvim&quot;</span><span class="p">,</span> <span class="s2">&quot;Gvim&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Window</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="s2">&quot;gvim&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Keys configuration.</h2>
+
+<p>For now lets implement simplest class for that and store all configuration in constant.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Keys</span>
+</span><span class='line'>  <span class="no">CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s1">&#39;terminology&#39;</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="s1">&#39;copy&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;ctrl-shift-c&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="s1">&#39;cut&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;ctrl-shift-c&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="s1">&#39;paste&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ctrl-shift-v&#39;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">[]</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">CONFIG</span><span class="o">[</span><span class="n">key</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">for</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">window</span><span class="o">.</span><span class="n">wm_class</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="o">|</span>
+</span><span class='line'>      <span class="no">CONFIG</span><span class="o">[</span><span class="n">k</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Keys</span><span class="o">[</span><span class="s1">&#39;terminology&#39;</span><span class="o">][</span><span class="s1">&#39;copy&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s1">&#39;ctrl-shift-c&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># When current window is terminology</span>
+</span><span class='line'><span class="no">Keys</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="no">Window</span><span class="o">.</span><span class="n">current</span><span class="p">)</span><span class="o">[</span><span class="s1">&#39;copy&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="s1">&#39;ctrl-shift-c&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Communicating with Arduino via SerialPort.</h2>
+
+<p>Code below uses sketch described above with redefined copy/paste/cut functions.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">String</span> <span class="n">stringIn</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// Let&#39;s assume than combination aren&#39;t longer than 4 keys</span>
+</span><span class='line'><span class="n">String</span> <span class="n">collectedStrings</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">counter</span><span class="p">,</span> <span class="n">inByte</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">setup</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">stringIn</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">cut</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;cut&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">copy</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;copy&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">paste</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;paste&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">resetReader</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">stringIn</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">collectedStrings</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">readLine</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()){</span>
+</span><span class='line'>    <span class="n">inByte</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">stringIn</span> <span class="o">+=</span> <span class="n">inByte</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">inByte</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="p">){</span>  <span class="c1">// Handle delimiter</span>
+</span><span class='line'>      <span class="n">collectedStrings</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">stringIn</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">stringIn</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">inByte</span> <span class="o">==</span>  <span class="sc">&#39;\r&#39;</span><span class="p">){</span>  <span class="c1">// end of line</span>
+</span><span class='line'>      <span class="n">resetReader</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">executeCombination</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">pressKey</span><span class="p">(</span><span class="n">collectedstrings</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">Keyboard</span><span class="p">.</span><span class="n">releaseAll</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">void</span> <span class="n">pressKeys</span><span class="p">(</span><span class="n">String</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">switch</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">case</span> <span class="s">&quot;ctrl&quot;</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">pressCtrl</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">case</span> <span class="s">&quot;shift&quot;</span><span class="o">:</span>
+</span><span class='line'>      <span class="n">pressShift</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>      <span class="kt">char</span><span class="p">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="n">toCharArray</span><span class="p">();</span>
+</span><span class='line'>      <span class="kt">char</span> <span class="n">k</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>      <span class="n">Keyboard</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More information on ruby-serialport is <a href="http://ruby-serialport.rubyforge.org/">here</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;serialport&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Connection</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="ss">port</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">unless</span> <span class="n">port</span>
+</span><span class='line'>      <span class="n">port</span> <span class="o">=</span> <span class="sb">`ls /dev/ttyACM*`</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@connection</span> <span class="o">=</span> <span class="no">SerialPort</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="mi">9600</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">loop</span>
+</span><span class='line'>    <span class="kp">loop</span> <span class="k">do</span>
+</span><span class='line'>      <span class="k">begin</span>
+</span><span class='line'>        <span class="n">action</span> <span class="o">=</span> <span class="vi">@connection</span><span class="o">.</span><span class="n">readline</span>
+</span><span class='line'>        <span class="vi">@connection</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">Keys</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="no">Window</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">wm_class</span><span class="p">)</span><span class="o">[</span><span class="n">action</span><span class="o">]</span><span class="si">}</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>        <span class="nb">p</span> <span class="n">e</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Connection</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">loop</span> <span class="c1"># starts infinite loop</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PS. This post is more like collection of theoretical pices of code.
+I have no time (and probably enthusiasm) to put all this together (at least right now).
+So this implementation can be broken and inaccurate in many ways.
+Feel free to point out any errors and mistakes and I will fix them.</p>
+
+<!--
+vim: ts=2:sts=2:sw=2:expandtab
+-->
+
+
+
+
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
+  
+
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.gonzih.me/blog/2014/01/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/';
+        var disqus_url = 'http://blog.gonzih.me/blog/2014/01/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
