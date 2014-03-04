@@ -4,7 +4,7 @@
   <title><![CDATA[Category: arduino | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/arduino/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-03-04T12:33:20+03:00</updated>
+  <updated>2014-03-04T12:35:04+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hardware Cut/Copy/Paste with Arduino Leonardo]]></title>
-    <link href="http://blog.gonzih.me/blog/2014/01/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/"/>
-    <updated>2014-01-04T10:02:00+03:00</updated>
-    <id>http://blog.gonzih.me/blog/2014/01/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo</id>
+    <link href="http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/"/>
+    <updated>2014-03-04T10:02:00+03:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo</id>
     <content type="html"><![CDATA[<p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
 I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw <a href="keyboard.io">keyboard.io</a>.
