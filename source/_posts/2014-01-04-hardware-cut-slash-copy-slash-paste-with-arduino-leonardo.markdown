@@ -1,14 +1,13 @@
 ---
 layout: post
 title: "Hardware Cut/Copy/Paste with Arduino Leonardo"
-date: 2013-12-14 20:02
+date: 2014-01-04 10:02
 comments: true
 categories: [arduino, leonardo, keyboard, ruby]
-published: false
 ---
 Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
-I always wondered why there is no hardware support for that on various keyboard that out there. And then I saw (keyboard.io)[keyboard.io].
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw [keyboard.io](keyboard.io).
 Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
 Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.
 
@@ -16,14 +15,14 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
 
 ## Emulating keyboard on Leonardo.
 
-Since first boards based on ATmega32u4 (as far as I know first one was Leonardo) Keyboard and Mouse libraries where introduced.
-Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the (documentation)[http://arduino.cc/en/Reference/MouseKeyboard].
+With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
+Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the [documentation](http://arduino.cc/en/Reference/MouseKeyboard).
 
 ## Arduino wiring.
 
 Wiring will be very simple. We will have 3 buttons on pins 2, 3 and 4 with pull down resistors.
 
-![visualruby](https://dl.dropboxusercontent.com/u/4109351/octopress/hardware-cut-copy-paste/schematics1.png)
+![schematics1](https://dl.dropboxusercontent.com/u/4109351/octopress/hardware-cut-copy-paste/schematics1.png)
 
 ## Hardware Cut/Copy/Paste.
 
@@ -44,9 +43,9 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(cutpin)   == high) { cut();   }
-  if (digitalRead(copypin)  == high) { copy();  }
-  if (digitalRead(pastepin) == high) { paste(); }
+  if (digitalRead(cutpin)   == HIGH) { cut();   }
+  if (digitalRead(copypin)  == HIGH) { copy();  }
+  if (digitalRead(pastepin) == HIGH) { paste(); }
 }
 
 void pressCtrl() {
@@ -77,7 +76,7 @@ void paste() {
 ```
 
 It works! But... for example in my terminal I use Ctrl+Shift+C to copy selection.
-Of course I can press Shift+Copy combination. But maybe there is better solution.
+Of course I can press Shift+Copy combination. But maybe there is a better solution.
 
 ## Automatic detection of key combination.
 
@@ -86,7 +85,7 @@ When I'm pressing copy on Leonardo it will ask through serial port PC about requ
 On PC there will be running ruby script that will detect currently focused window and look up at the configuration file for
 keys combination. If there is no combination will be found or reply from script will be timed out we will use default combination.
 
-## Detecting WM_CLASS from Ruby.
+## Detecting WM_CLASS from Ruby (2.0.0+).
 
 From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
 Here is Window class for the job:
@@ -148,14 +147,20 @@ For now lets implement simplest class for that and store all configuration in co
 class Keys
   CONFIG = {
     'terminology' => {
-      copy: 'ctrl-shift-c',
-      paste: 'ctrl-shift-v',
-      cut: nil
+      'copy'  => 'ctrl-shift-c',
+      'cut'   => 'ctrl-shift-c',
+      'paste' => 'ctrl-shift-v'
     }
   }
 
-  def [](key)
+  def self.[](key)
     CONFIG[key]
+  end
+
+  def self.for(window)
+    window.wm_class.map do |k|
+      CONFIG[k]
+    end.compact.first
   end
 end
 ```
@@ -163,11 +168,17 @@ end
 Usage:
 
 ```ruby
-Keys.new['terminology'][:copy]
+Keys['terminology']['copy']
+=> 'ctrl-shift-c'
+
+# When current window is terminology
+Keys.for(Window.current)['copy']
 => 'ctrl-shift-c'
 ```
 
 ## Communicating with Arduino via SerialPort.
+
+Code below uses sketch described above with redefined copy/paste/cut functions.
 
 ```cpp
 String stringIn;
@@ -179,6 +190,18 @@ void setup(){
   Serial.begin(9600);
   counter = 0;
   stringIn = String("");
+}
+
+void cut() {
+  Serial.println("cut");
+}
+
+void copy() {
+  Serial.println("copy");
+}
+
+void paste() {
+  Serial.println("paste");
 }
 
 void resetReader() {
@@ -230,6 +253,44 @@ void pressKeys(String key) {
   }
 }
 ```
+
+More information on ruby-serialport is [here](http://ruby-serialport.rubyforge.org/).
+
+```ruby
+require 'serialport'
+
+class Connection
+  def initialize(port: nil)
+    unless port
+      port = `ls /dev/ttyACM*`.lines.first
+    end
+
+    @connection = SerialPort.new(port, 9600)
+  end
+
+  def loop
+    loop do
+      begin
+        action = @connection.readline
+        @connection.write("#{Keys.for(Window.current.wm_class)[action]}\r")
+      rescue Exception => e
+        p e
+      end
+    end
+  end
+end
+```
+
+Usage:
+
+```ruby
+Connection.new.loop # starts infinite loop
+```
+
+PS. This post is more like collection of theoretical pices of code.
+I have no time (and probably enthusiasm) to put all this together (at least right now).
+So this implementation can be broken and inaccurate in many ways.
+Feel free to point out any errors and mistakes and I will fix them.
 
 <!--
 vim: ts=2:sts=2:sw=2:expandtab
