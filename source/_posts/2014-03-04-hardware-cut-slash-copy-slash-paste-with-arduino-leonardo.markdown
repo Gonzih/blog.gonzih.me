@@ -287,7 +287,7 @@ Usage:
 Connection.new.loop # starts infinite loop
 ```
 
-PS. This post is more like collection of theoretical pices of code.
+**PS.** This post is more like collection of theoretical pices of code.
 I have no time (and probably enthusiasm) to put all this together (at least right now).
 So this implementation can be broken and inaccurate in many ways.
 Feel free to point out any errors and mistakes and I will fix them.
