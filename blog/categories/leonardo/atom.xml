@@ -4,7 +4,7 @@
   <title><![CDATA[Category: leonardo | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/leonardo/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-03-04T15:19:20+03:00</updated>
+  <updated>2014-03-06T12:06:16+03:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -344,7 +344,7 @@ end
 Connection.new.loop # starts infinite loop
 </code></p>
 
-<p>PS. This post is more like collection of theoretical pices of code.
+<p><strong>PS.</strong> This post is more like collection of theoretical pices of code.
 I have no time (and probably enthusiasm) to put all this together (at least right now).
 So this implementation can be broken and inaccurate in many ways.
 Feel free to point out any errors and mistakes and I will fix them.</p>
