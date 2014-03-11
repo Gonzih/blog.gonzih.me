@@ -18,6 +18,8 @@ Patterns for installing mate in OpenSUSE can be found here [http://en.opensuse.o
 Xmonad can be installed using cabal install or using packages from OBS.
 
 ```sh
+sudo zypper -n in xorg-x11-devel
+
 cabal install xmonad         --flags="with_utf8 with_xft"
 cabal install xmonad-contrib --flags="with_utf8 with_xft"
 cabal install xmobar         --flags="with_utf8 with_xft"
