@@ -135,7 +135,7 @@ Since gnome 3.9 support &hellip;">
   
 
 
-<time datetime="2013-11-21T22:46:00+03:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
+<time datetime="2013-11-21T22:46:00+01:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -160,7 +160,11 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>cabal install xmonad         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo zypper -n in xorg-x11-devel
+</span><span class='line'>
+</span><span class='line'>cabal install xmonad         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
 </span><span class='line'>cabal install xmonad-contrib --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
 </span><span class='line'>cabal install xmobar         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
 </span></code></pre></td></tr></table></div></figure>

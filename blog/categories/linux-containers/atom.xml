@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux containers | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/linux-containers/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-03-06T12:06:16+03:00</updated>
+  <updated>2014-03-11T17:52:57+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Quick LXC configuration with netctl nat]]></title>
     <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
-    <updated>2013-04-16T07:42:00+03:00</updated>
+    <updated>2013-04-16T07:42:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
     <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
 

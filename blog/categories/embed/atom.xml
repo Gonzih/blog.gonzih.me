@@ -4,7 +4,7 @@
   <title><![CDATA[Category: embed | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/embed/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-03-06T12:06:16+03:00</updated>
+  <updated>2014-03-11T17:52:57+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
     <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+03:00</updated>
+    <updated>2013-03-19T11:09:00+01:00</updated>
     <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
     <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: beaglebone | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/beaglebone/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-03-06T12:06:16+03:00</updated>
+  <updated>2014-03-11T17:52:57+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue]]></title>
     <link href="http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/"/>
-    <updated>2012-09-03T20:58:00+03:00</updated>
+    <updated>2012-09-03T20:58:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue</id>
     <content type="html"><![CDATA[<p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle's new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:
