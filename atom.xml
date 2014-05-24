@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-03-11T17:52:57+01:00</updated>
+  <updated>2014-05-24T22:12:17+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,136 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HN Tray icon in 50 lines of Clojure]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/"/>
+    <updated>2014-05-24T22:03:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure</id>
+    <content type="html"><![CDATA[<p>Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
+Result is tray app that shows stories from HN front page.
+Just in ~50 lines of Clojure code.
+Enjoy!</p>
+
+<p><a href="https://github.com/Gonzih/hn-tray.clj">Github Project.</a></p>
+
+<p>Source code is below:</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">hn.core</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">cheshire.core</span> <span class="ss">:as</span> <span class="nv">json</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">clojure.java.browse</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">browse-url</span><span class="p">]]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">clojure.java.io</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">resource</span><span class="p">]])</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:import</span> <span class="p">[</span><span class="nv">java.awt</span> <span class="nv">SystemTray</span> <span class="nv">TrayIcon</span> <span class="nv">PopupMenu</span> <span class="nv">MenuItem</span> <span class="nv">Toolkit</span><span class="p">]</span>
+</span><span class='line'>           <span class="p">[</span><span class="nv">java.awt.event</span> <span class="nv">ActionListener</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:gen-class</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">menu-item</span> <span class="p">[</span><span class="nv">label</span> <span class="nv">callback</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">menu</span> <span class="p">(</span><span class="nf">MenuItem.</span> <span class="nv">label</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">listener</span> <span class="p">(</span><span class="nb">proxy </span><span class="p">[</span><span class="nv">ActionListener</span><span class="p">]</span> <span class="p">[]</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nf">actionPerformed</span> <span class="p">[</span><span class="nv">event</span><span class="p">]</span> <span class="p">(</span><span class="nf">callback</span><span class="p">)))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">.addActionListener</span> <span class="nv">menu</span> <span class="nv">listener</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">menu</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">hn-api-url</span> <span class="s">&quot;http://api.ihackernews.com/page&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">hn-items</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">hn-api-url</span>
+</span><span class='line'>      <span class="nv">slurp</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">json/parse-string</span> <span class="nv">true</span><span class="p">)</span>
+</span><span class='line'>      <span class="ss">:items</span>
+</span><span class='line'>      <span class="p">(</span><span class="o">#</span><span class="p">(</span><span class="nb">sort-by </span><span class="ss">:points</span> <span class="nv">%</span><span class="p">))</span>
+</span><span class='line'>      <span class="nv">reverse</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-hn-to-menu!</span> <span class="p">[</span><span class="nv">menu</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">mapfn</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">title</span> <span class="nv">url</span> <span class="nv">commentCount</span> <span class="nv">points</span><span class="p">]}]</span>
+</span><span class='line'>            <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">full-title</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%-4s (%-4s) - %s&quot;</span> <span class="nv">points</span> <span class="nv">commentCount</span> <span class="nv">title</span><span class="p">)</span>
+</span><span class='line'>                  <span class="nv">menu-item</span> <span class="p">(</span><span class="nf">menu-item</span> <span class="nv">full-title</span> <span class="o">#</span><span class="p">(</span><span class="nf">browse-url</span> <span class="nv">url</span><span class="p">))]</span>
+</span><span class='line'>              <span class="p">(</span><span class="nb">println </span><span class="nv">full-title</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">(</span><span class="nf">.add</span> <span class="nv">menu</span> <span class="nv">menu-item</span><span class="p">)))]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">doall </span><span class="p">(</span><span class="nb">map </span><span class="nv">mapfn</span> <span class="p">(</span><span class="nf">hn-items</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">exit</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">shutdown-agents</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">System/exit</span> <span class="mi">0</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">tray</span> <span class="p">(</span><span class="nf">SystemTray/getSystemTray</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">image</span> <span class="p">(</span><span class="nf">.getImage</span> <span class="p">(</span><span class="nf">Toolkit/getDefaultToolkit</span><span class="p">)</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nf">resource</span> <span class="s">&quot;icon.png&quot;</span><span class="p">))</span>
+</span><span class='line'>        <span class="nv">icon</span> <span class="p">(</span><span class="nf">TrayIcon.</span> <span class="nv">image</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">exit</span> <span class="p">(</span><span class="nf">menu-item</span> <span class="s">&quot;Exit&quot;</span> <span class="nv">exit</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">.setImageAutoSize</span> <span class="nv">icon</span> <span class="nv">true</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">.add</span> <span class="nv">tray</span> <span class="nv">icon</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">loop </span><span class="p">[]</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">popup</span> <span class="p">(</span><span class="nf">PopupMenu.</span><span class="p">)]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Updating items&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">add-hn-to-menu!</span> <span class="nv">popup</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">.add</span> <span class="nv">popup</span> <span class="nv">exit</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">.setPopupMenu</span> <span class="nv">icon</span> <span class="nv">popup</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">Thread/sleep</span> <span class="p">(</span><span class="nb">* </span><span class="mi">5</span> <span class="mi">60</span> <span class="mi">1000</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">recur</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hardware Cut/Copy/Paste with Arduino Leonardo]]></title>
@@ -2254,25 +2384,6 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
 
 
 <p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Arch Linux migrated to GRUB2]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/"/>
-    <updated>2012-07-20T22:13:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2</id>
-    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
-
-<p>Great news everyone! Today Arch Linux officially switched to GRUB2!</p>
-
-<ul>
-<li><a href="http://www.archlinux.org/news/grub-legacy-no-longer-supported/">Post on Arch News</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file">Migration information is here</a></li>
-<li><a href="http://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/">My current GRUB2 theme</a></li>
-<li><a href="http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;action=contents">More GRUB2 themes</a></li>
-</ul>
-
 ]]></content>
   </entry>
   
