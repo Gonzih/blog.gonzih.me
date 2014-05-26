@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: privacy | Max Gonzih]]></title>
-  <link href="http://blog.gonzih.me/blog/categories/privacy/atom.xml" rel="self"/>
+  <title><![CDATA[Category: vpn | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/vpn/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
   <updated>2014-05-26T21:33:26+02:00</updated>
   <id>http://blog.gonzih.me/</id>
@@ -77,19 +77,6 @@ password=MY-VPN-PASSWORD</p>
 <p>```</p>
 
 <p>And now everything should work like a charm!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Internet Defense League]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/"/>
-    <updated>2012-07-19T14:34:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league</id>
-    <content type="html"><![CDATA[<p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
-
-<blockquote><p>The <a href="http://sopastrike.com/">Internet Blackout</a> was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p></blockquote>
-
-<p>Join <strong>Internet Defence League</strong> at <a href="http://internetdefenseleague.org/">internetdefenseleague.org</a></p>
 ]]></content>
   </entry>
   

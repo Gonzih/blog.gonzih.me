@@ -9,7 +9,7 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Arch Linux Migrated to GRUB2 Jul 20th, 2012 | Comments Great news everyone! Today Arch Linux officially switched to GRUB2! Post on Arch News &hellip;">
+  <meta name="description" content="Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue Sep 3rd, 2012 | Comments Recently I was playing with Clojure on Beaglebone and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,69 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/">Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T20:58:00+02:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&#8217;s new Embedded JRE.
+But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>java: no such file or directory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So here is fix:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo apt-get install -y libc6-armel libsfgcc1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -660,59 +723,12 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
 
     </article>
   
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/">Backbone.js + Ruby on Rails Tips</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-03T10:05:00+02:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2011</time>
-        
-         | <a href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
 
     <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/blog/page/4/" rel="next">Continue &rarr;</a>
+  </span>
+
 
   <span class="prev">
     <a href="/blog/page/2/" rel="prev">Newer &larr;</a>

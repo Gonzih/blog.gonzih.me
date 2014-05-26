@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-05-24T22:12:17+02:00</updated>
+  <updated>2014-05-26T21:33:26+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Autoconnect to NetworkManager VPN on systemd based system]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/"/>
+    <updated>2014-05-26T21:17:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system</id>
+    <content type="html"><![CDATA[<p>Here is small post with instructions how to setup auto connect to VPN.
+Of course you can probably figure out all this yourself, but what if you are lazy?</p>
+
+<!-- more -->
+
+
+<p>Following was tested on OpenSuse 13.1.</p>
+
+<ul>
+<li><p>First create new VPN connection in NetworkManager.</p></li>
+<li><p>Create dispatcher file that will connect your VPN.</p></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>/etc/NetworkManager/dispatcher.d/vpn-up</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>#!/bin/sh
+</span><span class='line'>
+</span><span class='line'>CONN=&quot;MY-CONNECTION-NAME&quot;
+</span><span class='line'>
+</span><span class='line'>nmcli con status id $CONN &gt; /dev/null
+</span><span class='line'>
+</span><span class='line'>rc=$?
+</span><span class='line'>if [[ $rc != 0 ]] ; then
+</span><span class='line'>    nmcli con up id $CONN
+</span><span class='line'>fi
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Make file executable <code>chmod +x /etc/NetworkManager/dispatcher.d/vpn-up</code></li>
+<li>Make sure that dispatcher is running by running <code>journalctl -b -u NetworkManager</code> and looking for the line that looks like:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>journalctl -b -u NetworkManager</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>If you see line about dispatcher service - enable it manually by running <code>systemctl enable NetworkManager-dispatcher.service</code>.</li>
+<li>By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>/etc/NetworkManager/system-connections/MY-CONNECTION-NAME</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>...
+</span><span class='line'>[vpn]
+</span><span class='line'>password-flags=0
+</span><span class='line'>...
+</span><span class='line'>[vpn-secrets]
+</span><span class='line'>password=MY-VPN-PASSWORD
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now everything should work like a charm!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HN Tray icon in 50 lines of Clojure]]></title>
@@ -2360,30 +2438,6 @@ You will need three things for that.</p>
 <p>Here you are. Better performance and slightly better memory usage.
 Good Job, Embedded Java Team :)
 Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/"/>
-    <updated>2012-09-03T20:58:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue</id>
-    <content type="html"><![CDATA[<p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&#8217;s new Embedded JRE.
-But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>java: no such file or directory
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So here is fix:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo apt-get install -y libc6-armel libsfgcc1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
 ]]></content>
   </entry>
   
