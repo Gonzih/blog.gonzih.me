@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vpn | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/vpn/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-05-26T21:33:26+02:00</updated>
+  <updated>2014-05-26T23:04:29+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -44,6 +44,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
 if [[ $rc != 0 ]] ; then</p>
 
 <pre><code>nmcli con up id $CONN
+sleep 5 # optional wait time
 </code></pre>
 
 <p>fi</p>

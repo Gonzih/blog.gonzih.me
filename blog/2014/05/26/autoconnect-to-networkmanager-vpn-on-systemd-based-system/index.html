@@ -167,6 +167,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
+<span class='line-number'>11</span>
 </pre></td><td class='code'><pre><code class='text'><span class='line'>#!/bin/sh
 </span><span class='line'>
 </span><span class='line'>CONN=&quot;MY-CONNECTION-NAME&quot;
@@ -176,6 +177,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
 </span><span class='line'>rc=$?
 </span><span class='line'>if [[ $rc != 0 ]] ; then
 </span><span class='line'>    nmcli con up id $CONN
+</span><span class='line'>    sleep 5 # optional wait time
 </span><span class='line'>fi
 </span></code></pre></td></tr></table></div></figure>
 
