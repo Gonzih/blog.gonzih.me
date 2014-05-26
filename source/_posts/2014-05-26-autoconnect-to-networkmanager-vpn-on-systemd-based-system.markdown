@@ -27,6 +27,7 @@ nmcli con status id $CONN > /dev/null
 rc=$?
 if [[ $rc != 0 ]] ; then
     nmcli con up id $CONN
+    sleep 5 # optional wait time
 fi
 
 ```
