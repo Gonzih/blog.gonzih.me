@@ -9,7 +9,7 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Autoconnect to NetworkManager VPN on Systemd Based System May 26th, 2014 | Comments Here is small post with instructions how to setup auto connect &hellip;">
+  <meta name="description" content="Installing Spotify Linux Beta on OpenSUSE 13.1 May 27th, 2014 | Comments Very small post (more like insruction for myself for the future) on how to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,67 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/">Installing Spotify Linux Beta on OpenSUSE 13.1</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-27T13:31:00+02:00" pubdate data-updated="true">May 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
+Solution can be applied to any rpm based system (I think so).</p>
+
+<ul>
+<li>Install <a href="http://software.opensuse.org/package/alien">alien</a> (perl scripts for converting packages).</li>
+<li>Download deb from <a href="http://repository.spotify.com/pool/non-free/s/spotify/">spotify repository</a>, pay attention to architecture.</li>
+<li>Convert deb -> rpm by running <code>sudo alien -r spotify*.deb</code>.</li>
+<li>Install rpm <code>sudo zyppen in spotify*.rpm</code>.</li>
+<li>Run <code>spotify</code>.</li>
+</ul>
+
+
+<p>And it should work.
+I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -631,64 +692,6 @@ So I decided to make sure it&#8217;s my ISP fault and not just my opinion based 
   
     <footer>
       <a rel="full-article" href="/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">RSS/Atom Reader in Clojure via IMAP</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-28T10:15:00+02:00" pubdate data-updated="true">Jun 28<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <h3>Motivation</h3>
-
-<p>Google Reader was shut down and I started looking for alternatives.
-And sadly I did not found anything close to Google Reader experience.
-There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
-All I wanted was simple to use news reader.</p>
-
-
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/">Read on &rarr;</a>
     </footer>
   
 

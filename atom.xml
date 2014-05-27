@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-05-26T23:04:29+02:00</updated>
+  <updated>2014-05-27T13:52:17+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Spotify Linux beta on OpenSUSE 13.1]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/"/>
+    <updated>2014-05-27T13:31:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1</id>
+    <content type="html"><![CDATA[<p>Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
+Solution can be applied to any rpm based system (I think so).</p>
+
+<ul>
+<li>Install <a href="http://software.opensuse.org/package/alien">alien</a> (perl scripts for converting packages).</li>
+<li>Download deb from <a href="http://repository.spotify.com/pool/non-free/s/spotify/">spotify repository</a>, pay attention to architecture.</li>
+<li>Convert deb -> rpm by running <code>sudo alien -r spotify*.deb</code>.</li>
+<li>Install rpm <code>sudo zyppen in spotify*.rpm</code>.</li>
+<li>Run <code>spotify</code>.</li>
+</ul>
+
+
+<p>And it should work.
+I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Autoconnect to NetworkManager VPN on systemd based system]]></title>
@@ -2281,165 +2303,6 @@ You will need three things for that.</p>
 
 
 <p>Hooray! It works!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/"/>
-    <updated>2012-09-07T16:20:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark</id>
-    <content type="html"><![CDATA[<p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
-
-<!-- more -->
-
-
-<p>BeagleBone is running Ubuntu 12.04.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cat /etc/*-release
-</span><span class='line'>DISTRIB_ID=Ubuntu
-</span><span class='line'>DISTRIB_RELEASE=12.04
-</span><span class='line'>DISTRIB_CODENAME=precise
-</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.04 LTS"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>BeagleBone CPU is running on 500Mhz.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cpufreq-info | grep 'current CPU'
-</span><span class='line'>current CPU frequency is 500 MHz.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Clojure version is 1.4.0.</p>
-
-<p>Benchmark code is from <a href="http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya&#8217;s post</a>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">benchmark.core</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">factorial</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">reduce * </span><span class="p">(</span><span class="nb">range </span><span class="mi">1</span><span class="nv">N</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">x</span><span class="p">))))</span>
-</span><span class='line'><span class="c1">;                   ^ integerOverflow fix</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt;= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="mi">1</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">sort-seq</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">sort </span><span class="p">(</span><span class="nb">repeat </span><span class="mi">100000</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">2000000</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">time-it</span> <span class="p">[</span><span class="nv">fn</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">values</span>  <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">i</span> <span class="p">(</span><span class="nb">range </span><span class="mi">200</span><span class="p">)]</span> <span class="p">(</span><span class="nb">with-out-str </span><span class="p">(</span><span class="nb">time </span><span class="p">(</span><span class="nf">fn</span><span class="p">))))</span>
-</span><span class='line'>        <span class="nv">doubles</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="p">(</span><span class="nf">.split</span> <span class="nv">%</span> <span class="s">&quot; &quot;</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> <span class="nv">values</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">apply + </span><span class="nv">doubles</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">doubles</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(factorial 5000) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(fib 20) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(sort-seq) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">sort-seq</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So here the numbers:</p>
-
-<p>OpenJDK:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; </span><span class="nv">sudo</span> <span class="nv">apt-get</span> <span class="nv">install</span> <span class="nv">openjdk-7-jre-headless</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">java</span> <span class="nv">-version</span>
-</span><span class='line'><span class="nv">java</span> <span class="nv">version</span> <span class="s">&quot;1.7.0_03&quot;</span>
-</span><span class='line'><span class="nv">OpenJDK</span> <span class="nv">Runtime</span> <span class="nv">Environment</span> <span class="p">(</span><span class="nf">IcedTea7</span> <span class="mf">2.1</span><span class="nv">.1pre</span><span class="p">)</span> <span class="p">(</span><span class="mi">7</span><span class="o">~</span><span class="nv">u3-2.1.1</span><span class="o">~</span><span class="nv">pre1-1ubuntu3</span><span class="p">)</span>
-</span><span class='line'><span class="nv">OpenJDK</span> <span class="nv">Zero</span> <span class="nv">VM</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">22.0</span><span class="nv">-b10</span>, <span class="nv">mixed</span> <span class="nv">mode</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
-</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span> <span class="nv">VSZ</span>    <span class="nv">RSS</span>   <span class="nv">TTY</span>    <span class="nv">STAT</span> <span class="nv">START</span>  <span class="nv">TIME</span> <span class="nv">COMMAND</span>
-</span><span class='line'><span class="mf">96.9</span> <span class="mf">16.3</span> <span class="mi">267932</span> <span class="mi">41172</span> <span class="nv">pts/1</span>  <span class="nv">Sl+</span>  <span class="mi">09</span><span class="ss">:07</span>  <span class="mi">9</span><span class="ss">:28</span> <span class="nv">java</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">run</span>
-</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span>  <span class="mf">1681.9940255249999</span>
-</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span>  <span class="mf">490.16940197000025</span>
-</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span>  <span class="mf">7129.159457125003</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Embedded JRE:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; </span><span class="nv">java</span> <span class="nv">-version</span>
-</span><span class='line'><span class="nv">java</span> <span class="nv">version</span> <span class="s">&quot;1.7.0_06&quot;</span>
-</span><span class='line'><span class="nv">Java</span><span class="p">(</span><span class="nf">TM</span><span class="p">)</span> <span class="nv">SE</span> <span class="nv">Embedded</span> <span class="nv">Runtime</span> <span class="nv">Environment</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">1.7</span><span class="nv">.0_06-b24</span>, <span class="nv">headless</span><span class="p">)</span>
-</span><span class='line'><span class="nv">Java</span> <span class="nv">HotSpot</span><span class="p">(</span><span class="nf">TM</span><span class="p">)</span> <span class="nv">Embedded</span> <span class="nv">Client</span> <span class="nv">VM</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">23.2</span><span class="nv">-b09</span>, <span class="nv">mixed</span> <span class="nv">mode</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
-</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span> <span class="nv">VSZ</span>    <span class="nv">RSS</span>   <span class="nv">TTY</span>    <span class="nv">STAT</span> <span class="nv">START</span>  <span class="nv">TIME</span> <span class="nv">COMMAND</span>
-</span><span class='line'><span class="mf">91.2</span> <span class="mf">16.4</span> <span class="mi">221740</span> <span class="mi">41372</span> <span class="nv">pts/1</span>  <span class="nv">Sl+</span>  <span class="mi">08</span><span class="ss">:28</span>  <span class="mi">5</span><span class="ss">:16</span> <span class="nv">java</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">run</span>
-</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span>  <span class="mf">1061.0568413899998</span>
-</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span>  <span class="mf">30.877820054999983</span>
-</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span>  <span class="mf">1729.9035516600002</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here you are. Better performance and slightly better memory usage.
-Good Job, Embedded Java Team :)
-Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
 ]]></content>
   </entry>
   
