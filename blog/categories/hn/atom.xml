@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hn | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/hn/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-08-13T21:57:25+02:00</updated>
+  <updated>2014-08-13T21:58:37+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell</id>
     <content type="html"><![CDATA[<p>Small announce post.</p>
 
-<p>Today I launched small scotty server that serves json for Hacker News front page.
+<p>Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on <a href="https://github.com/Gonzih/HNApi">github</a>.
 You can access api <a href="http://hn.gonzih.me/">here</a>.</p>
 
