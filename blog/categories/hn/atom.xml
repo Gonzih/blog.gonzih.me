@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hn | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/hn/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-08-13T22:03:52+02:00</updated>
+  <updated>2014-08-13T22:05:37+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -26,7 +26,8 @@ You can access api <a href="http://hn.gonzih.me/">here</a>.</p>
 
 <p>Hacker news parser is implemented using <a href="http://hackage.haskell.org/package/hxt-8.5.2">HXT</a>
 and <a href="http://egonschiele.github.io/HandsomeSoup/">HandsomeSoup</a>.
-Json is served with help of <a href="https://github.com/scotty-web/scotty/">Scotty</a> web framework.</p>
+Json is served with help of <a href="https://github.com/scotty-web/scotty/">Scotty</a> web framework.
+Currently it's running on Heroku using <a href="https://github.com/begriffs/heroku-buildpack-ghc">this ghc-7.8 buildpack</a>.</p>
 
 <p>I use don't use RSS since I'm also interested in points and amount of comments.
 For me HN is more about interesting links than community and conversations behind the posts.
