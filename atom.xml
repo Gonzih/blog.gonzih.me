@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-06-01T12:47:06+02:00</updated>
+  <updated>2014-08-13T21:57:25+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hacker News json api with Haskell]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell/"/>
+    <updated>2014-08-13T21:43:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell</id>
+    <content type="html"><![CDATA[<p>Small announce post.</p>
+
+<p>Today I launched small scotty server that serves json for Hacker News front page.
+Project source code is located on <a href="https://github.com/Gonzih/HNApi">github</a>.
+You can access api <a href="http://hn.gonzih.me/">here</a>.</p>
+
+<p>Hacker news parser implemented using <a href="http://hackage.haskell.org/package/hxt-8.5.2">HXT</a>
+and <a href="http://egonschiele.github.io/HandsomeSoup/">HandsomeSoup</a>.
+Json is served with help of <a href="https://github.com/scotty-web/scotty/">Scotty</a> framework.</p>
+
+<p>I use don&#8217;t use RSS since I&#8217;m also interested in points and amount of comments.
+For me HN is more about interesting links than community and conversations behind the posts.
+So I don&#8217;t really care about anything except front page.</p>
+
+<p>Originally I started this project was started as Haskell learning exercise.
+I hope someone will find it useful.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Installing Spotify Linux beta on OpenSUSE 13.1]]></title>
@@ -2256,53 +2280,6 @@ You will need three things for that.</p>
     <content type="html"><![CDATA[<p>Today I removed from my blog all stuff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.</p>
 
 <p>Why? Because it&#8217;s just unfair. Why would you provide any information about yourself by just being curious? I actually not interested in how many people are reading my blog, anything about traffic sources. Only thing that I am interested in is feedback from users. That is why I left Disqus unchanged. Maybe later I will find something more open and replace Disqus with it. But for now if privacy is issue for you check out <a href="https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij">Ghostery exstension for Google Chrome (Chromium)</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
-    <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I&#8217;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- mod-[F1..F12]       Switch to workspace N</span>
-</span><span class='line'><span class="c1">-- mod-shift-[F1..F12] Move client to workspace N</span>
-</span><span class='line'><span class="c1">--</span>
-</span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
-</span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_F1</span> <span class="o">..</span> <span class="n">xK_F12</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="p">[(</span><span class="kt">W</span><span class="o">.</span><span class="n">greedyView</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="kt">W</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">shiftMask</span><span class="p">)]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But after some research I found that I can detect key symbol using xev command. Here is my latest solution:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='haskell'><span class='line'><span class="c1">-- Programmer Dvorak</span>
-</span><span class='line'><span class="c1">-- mod-[1..9]       Switch to workspace N</span>
-</span><span class='line'><span class="c1">-- mod-shift-[1..9] Move client to workspace N</span>
-</span><span class='line'><span class="c1">--</span>
-</span><span class='line'><span class="p">[((</span><span class="n">m</span> <span class="o">.|.</span> <span class="n">modm</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">windows</span> <span class="o">$</span> <span class="n">f</span> <span class="n">i</span><span class="p">)</span>
-</span><span class='line'>    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">zip</span> <span class="p">(</span><span class="kt">XMonad</span><span class="o">.</span><span class="n">workspaces</span> <span class="n">conf</span><span class="p">)</span> <span class="p">[</span><span class="n">xK_ampersand</span><span class="p">,</span> <span class="n">xK_bracketleft</span><span class="p">,</span> <span class="n">xK_braceleft</span><span class="p">,</span> <span class="n">xK_braceright</span><span class="p">,</span> <span class="n">xK_parenleft</span>
-</span><span class='line'>                                             <span class="p">,</span><span class="n">xK_equal</span><span class="p">,</span> <span class="n">xK_asterisk</span><span class="p">,</span> <span class="n">xK_parenright</span><span class="p">,</span> <span class="n">xK_plus</span><span class="p">,</span> <span class="n">xK_bracketright</span><span class="p">,</span> <span class="n">xK_exclam</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="p">[(</span><span class="kt">W</span><span class="o">.</span><span class="n">greedyView</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="kt">W</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span> <span class="n">shiftMask</span><span class="p">)]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hooray! It works!</p>
 ]]></content>
   </entry>
   
