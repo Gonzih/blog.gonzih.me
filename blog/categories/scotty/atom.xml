@@ -4,7 +4,7 @@
   <title><![CDATA[Category: scotty | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/scotty/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-08-13T21:58:37+02:00</updated>
+  <updated>2014-08-13T22:03:52+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -24,15 +24,15 @@
 Project source code is located on <a href="https://github.com/Gonzih/HNApi">github</a>.
 You can access api <a href="http://hn.gonzih.me/">here</a>.</p>
 
-<p>Hacker news parser implemented using <a href="http://hackage.haskell.org/package/hxt-8.5.2">HXT</a>
+<p>Hacker news parser is implemented using <a href="http://hackage.haskell.org/package/hxt-8.5.2">HXT</a>
 and <a href="http://egonschiele.github.io/HandsomeSoup/">HandsomeSoup</a>.
-Json is served with help of <a href="https://github.com/scotty-web/scotty/">Scotty</a> framework.</p>
+Json is served with help of <a href="https://github.com/scotty-web/scotty/">Scotty</a> web framework.</p>
 
 <p>I use don't use RSS since I'm also interested in points and amount of comments.
 For me HN is more about interesting links than community and conversations behind the posts.
 So I don't really care about anything except front page.</p>
 
-<p>Originally I started this project was started as Haskell learning exercise.
+<p>Originally I started this project as a Haskell learning exercise.
 I hope someone will find it useful.</p>
 ]]></content>
   </entry>
