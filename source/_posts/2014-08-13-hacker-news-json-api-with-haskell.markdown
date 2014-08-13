@@ -7,7 +7,7 @@ categories: [haskell, hxt, scotty, heroku, hn]
 ---
 Small announce post.
 
-Today I launched small scotty server that serves json for Hacker News front page.
+Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on [github](https://github.com/Gonzih/HNApi).
 You can access api [here](http://hn.gonzih.me/).
 
