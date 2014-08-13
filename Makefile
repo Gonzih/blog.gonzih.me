@@ -3,5 +3,5 @@ default:
 
 push:
 	git push
-	rake generate
-	rake push
+	bundle exec rake generate
+	bundle exec rake push
