@@ -11,13 +11,13 @@ Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on [github](https://github.com/Gonzih/HNApi).
 You can access api [here](http://hn.gonzih.me/).
 
-Hacker news parser implemented using [HXT](http://hackage.haskell.org/package/hxt-8.5.2)
+Hacker news parser is implemented using [HXT](http://hackage.haskell.org/package/hxt-8.5.2)
 and [HandsomeSoup](http://egonschiele.github.io/HandsomeSoup/).
-Json is served with help of [Scotty](https://github.com/scotty-web/scotty/) framework.
+Json is served with help of [Scotty](https://github.com/scotty-web/scotty/) web framework.
 
 I use don't use RSS since I'm also interested in points and amount of comments.
 For me HN is more about interesting links than community and conversations behind the posts.
 So I don't really care about anything except front page.
 
-Originally I started this project was started as Haskell learning exercise.
+Originally I started this project as a Haskell learning exercise.
 I hope someone will find it useful.
