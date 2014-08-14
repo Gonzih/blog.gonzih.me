@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hxt | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/hxt/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-08-13T22:08:29+02:00</updated>
+  <updated>2014-08-14T08:31:30+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hacker News json api with Haskell]]></title>
+    <title type="html"><![CDATA[Building Hacker News json api with Haskell]]></title>
     <link href="http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell/"/>
     <updated>2014-08-13T21:43:00+02:00</updated>
     <id>http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell</id>
