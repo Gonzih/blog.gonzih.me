@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hacker News json api with Haskell"
+title: "Building Hacker News json api with Haskell"
 date: 2014-08-13 21:43
 comments: true
 categories: [haskell, hxt, scotty, heroku, hn]
