@@ -99,9 +99,9 @@ You will need to use -jamvm option to java command to run it with small overhead
 Let's update our clojure executable:
 
 ```bash /usr/bin/clojure
-#!/bin/bash
+#!/bin/sh
 
-java -jamvm -jar /opt/clojure.jar $@
+exec java -jamvm -jar /opt/clojure.jar "$@"
 ```
 
 Let's try it out:
