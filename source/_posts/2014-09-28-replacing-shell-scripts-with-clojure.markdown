@@ -6,23 +6,23 @@ comments: true
 categories: [clojure, jvm, jamvm, linux]
 ---
 Everyone hates bash and shell scripting in general.
-They are annoyingly hard to debug, test and verify.
+Scripts are annoyingly hard to debug, test and verify.
 Would be lovely, to use some kind of lisp for scripting, right?
-Nice predictable language that you also enjoy. But sometimes it's impossible
-to add some external dependency to production system.
-What if you have only JVM on production system,
-will we be able to pull it off only with JVM and clojure.jar?
+Nice predictable language that you also can enjoy.
+But sometimes it's impossible to add some external dependencies to the system.
+What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?
 
 <!--more-->
 
 # Basic setup
-First what we will need is to get clojure jar file.
+
+First what we will need is to get clojure jar file:
 
 ```
 wget -O /opt/clojure.jar 'http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'
 ```
 
-Next lets create executable that will live in `/usr/bin` (or `/opt/bin`).
+Next lets create executable that will live in `/usr/bin` (or `/opt/bin` or `/home/youruser/bin`):
 
 ```bash /usr/bin/clojure
 #!/bin/bash
@@ -30,7 +30,7 @@ Next lets create executable that will live in `/usr/bin` (or `/opt/bin`).
 java -jar /opt/clojure.jar $@
 ```
 
-And now it's time for our hello world script.
+And now it's time for our hello world script:
 
 ```clojure /opt/test.clj
 #!/usr/bin/clojure
@@ -38,20 +38,20 @@ And now it's time for our hello world script.
 (println "hello world")
 ```
 
-Make it executable.
+Make it executable:
 
 ```bash
 chmod +x /opt/test.clj
 ```
 
-And run it.
+And run it:
 
 ```bash
 $ /opt/test.clj
 hello world
 ```
 
-Yay! But it feels kind of slow.
+Yay! But it feels kind of slow:
 
 ```bash
 time /opt/test.clj
@@ -62,17 +62,17 @@ user  0m2.239s
 sys   0m0.186s
 ```
 
-2 seconds startup time, not really scripting, right?
-Can we improve that? What if there would be JVM with fast startup.
-We don't really care about execution performance here, right?
+2 seconds startup time, not really suitable for scripting, right?
+Can we improve that? What if there would be JVM with fast startup and low memory usage.
 
 # Introducing JamVM.
 
 *"But but you told us that there is only JVM available on production system without ability to add external dependencies."*
 
-I lied.
+I lied, sorry.
 
 Compiling JamVM with OpenJDK support:
+
 ```bash
 # Fetching required dependencies and source
 apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
@@ -134,7 +134,7 @@ OpenJDK:
 (sort-seq)       Avg: 11.553695560000001
 ```
 
-Much slower, but if you think about it,
+Much slower, but if you think about it
 shell scripting most of the time is about executing external commands,
 IO and data filtering. Might be as well not so bad.
 Also memory usage of JamVM makes it perfect for embedded systems.
@@ -144,3 +144,4 @@ Also memory usage of JamVM makes it perfect for embedded systems.
 Lein exec is nice. But it adds overhead.
 If you need external dependencies you can solve it (in theory)
 with classpath manipulations in java command (`java -cp dep.jar:dep2.jar:.`).
+Still you can plug lein exec to JamVM if you want.
