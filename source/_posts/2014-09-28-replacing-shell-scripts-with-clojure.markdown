@@ -5,10 +5,11 @@ date: 2014-09-28 11:04
 comments: true
 categories: [clojure, jvm, jamvm, linux]
 ---
-Everyone hates bash and shell scripting in general.
+We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.
 Would be lovely, to use some kind of lisp for scripting, right?
-Nice predictable language that you also can enjoy.
+To do interactive development with repl in your favorite editor.
+To write it in a nice predictable language that you also enjoy.
 But sometimes it's impossible to add some external dependencies to the system.
 What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?
 
@@ -84,7 +85,7 @@ tar -xvzf jamvm-2.0.0.tar.gz
 cd /opt/jamvm-2.0.0
 ./configure --with-java-runtime-library=openjdk7 && make check && make && make install
 
-# Installing in to openjdk
+# Installing in to the openjdk installation
 mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
 cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
 
