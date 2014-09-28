@@ -68,7 +68,7 @@ Can we improve that? What if there would be JVM with fast startup and low memory
 
 # Introducing JamVM.
 
-*"But but you told us that there is only JVM available on production system without ability to add external dependencies."*
+*"But... but you told us that there is only JVM available on production system without ability to add external dependencies."*
 
 I lied, sorry.
 
