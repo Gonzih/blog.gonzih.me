@@ -9,7 +9,7 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="Programmer Dvorak and Switching Workspaces in XMonad Oct 8th, 2012 | Comments Recently I migarted from awesome to xmonad. I&#8217;m Programmer &hellip;">
+  <meta name="description" content="Note on Privacy #1 Dec 12th, 2012 | Comments Today I removed from my blog all stuff that can track users. I removed Twitter follow and tweet buttons &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,56 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/12/12/note-on-privacy-number-1/">Note on Privacy #1</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T10:03:00+01:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/12/12/note-on-privacy-number-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Today I removed from my blog all stuff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.</p>
+
+<p>Why? Because it&#8217;s just unfair. Why would you provide any information about yourself by just being curious? I actually not interested in how many people are reading my blog, anything about traffic sources. Only thing that I am interested in is feedback from users. That is why I left Disqus unchanged. Maybe later I will find something more open and replace Disqus with it. But for now if privacy is issue for you check out <a href="https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij">Ghostery exstension for Google Chrome (Chromium)</a>.</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -652,105 +702,6 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
 
 
 <p><a href="http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
-
-  
-  
-
-
-    </article>
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/">How to Fix Octopress Pygments Error on Arch Linux</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-21T18:28:00+02:00" pubdate data-updated="true">Sep 21<span>st</span>, 2011</time>
-        
-         | <a href="/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <p>If your get following pygments error using octopress with arch linux.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Building site: source -&gt; public
-</span><span class='line'>  File &quot;&lt;string&gt;&quot;, line 1
-</span><span class='line'>    import sys; print sys.executable
-</span><span class='line'>                        ^
-</span><span class='line'>SyntaxError: invalid syntax
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It&#8217;s happens because RubyPython use Python version 2 by calling &#8220;python&#8221; command. By default python equal to python3 in Arch Linux.</p>
-
-<p>For fix simple add ruby file to plugins directory with following code.</p>
-
-<figure class='code'><figcaption><span>ruby_python_arch_linux_fix.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">configure</span> <span class="ss">:python_exe</span> <span class="o">=&gt;</span> <span class="s1">&#39;python2.7&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Also if you get following lib.so related error:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
-
-<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
-
-<h3>Update</h3>
-
-<p>Another Workaround:
-edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&#8221; file (path might be different for you)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">--</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="n">find_python_lib</span>
-</span><span class='line'><span class="o">++</span> <span class="mi">31</span> <span class="vi">@library</span> <span class="o">=</span> <span class="s2">&quot;/usr/lib/libpython2.7.so&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">--</span> <span class="mi">126</span> <span class="sx">%x(</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c &quot;</span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
-</span><span class='line'><span class="o">++</span> <span class="mi">126</span> <span class="sx">%x(&quot;</span><span class="si">#{</span><span class="vi">@python</span><span class="si">}</span><span class="sx"> -c </span><span class="si">#{</span><span class="n">command</span><span class="si">}</span><span class="sx">&quot;)</span><span class="o">.</span><span class="n">chomp</span> <span class="k">if</span> <span class="vi">@python</span>
-</span></code></pre></td></tr></table></div></figure>
-
 
   
   

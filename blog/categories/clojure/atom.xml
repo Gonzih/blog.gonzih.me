@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-09-23T21:25:50+02:00</updated>
+  <updated>2014-09-28T17:31:32+02:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,164 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Replacing shell scripts with Clojure+JamVM]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/"/>
+    <updated>2014-09-28T11:04:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure</id>
+    <content type="html"><![CDATA[<p>We all hate shell scripting.
+Scripts are annoyingly hard to debug, test and verify.
+Would be lovely, to use some kind of lisp for scripting, right?
+To do interactive development with repl in your favorite editor.
+To write it in a nice predictable language that you also enjoy.
+But sometimes it's impossible to add some external dependencies to the system.
+What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?</p>
+
+<!--more-->
+
+
+<h1>Basic setup</h1>
+
+<p>First what we will need is to get clojure jar file:</p>
+
+<p><code>
+wget -O /opt/clojure.jar 'http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'
+</code></p>
+
+<p>Next lets create executable that will live in <code>/usr/bin</code> (or <code>/opt/bin</code> or <code>/home/youruser/bin</code>):</p>
+
+<p>```bash /usr/bin/clojure</p>
+
+<h1>!/bin/bash</h1>
+
+<p>java -jar /opt/clojure.jar $@
+```</p>
+
+<p>And now it's time for our hello world script:</p>
+
+<p>```clojure /opt/test.clj</p>
+
+<h1>!/usr/bin/clojure</h1>
+
+<p>(println "hello world")
+```</p>
+
+<p>Make it executable:</p>
+
+<p><code>bash
+chmod +x /opt/test.clj
+</code></p>
+
+<p>And run it:</p>
+
+<p><code>bash
+$ /opt/test.clj
+hello world
+</code></p>
+
+<p>Yay! But it feels kind of slow:</p>
+
+<p>```bash
+time /opt/test.clj
+hello world</p>
+
+<p>real  0m2.684s
+user  0m2.239s
+sys   0m0.186s
+```</p>
+
+<p>2 seconds startup time, not really suitable for scripting, right?
+Can we improve that? What if there would be JVM with fast startup and low memory usage.</p>
+
+<h1>Introducing JamVM.</h1>
+
+<p><em>"But but you told us that there is only JVM available on production system without ability to add external dependencies."</em></p>
+
+<p>I lied, sorry.</p>
+
+<p>Compiling JamVM with OpenJDK support:</p>
+
+<p>```bash</p>
+
+<h1>Fetching required dependencies and source</h1>
+
+<p>apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
+cd /opt
+wget -O jamvm-2.0.0.tar.gz 'http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz'
+tar -xvzf jamvm-2.0.0.tar.gz</p>
+
+<h1>Building</h1>
+
+<p>cd /opt/jamvm-2.0.0
+./configure --with-java-runtime-library=openjdk7 &amp;&amp; make check &amp;&amp; make &amp;&amp; make install</p>
+
+<h1>Installing in to the openjdk installation</h1>
+
+<p>mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
+cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so</p>
+
+<h1>Trying it out</h1>
+
+<p>java -jamvm -version
+```</p>
+
+<p>JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
+You will need to use -jamvm option to java command to run it with small overhead vm.</p>
+
+<p>Let's update our clojure executable:</p>
+
+<p>```bash /usr/bin/clojure</p>
+
+<h1>!/bin/bash</h1>
+
+<p>java -jamvm -jar /opt/clojure.jar $@
+```</p>
+
+<p>Let's try it out:</p>
+
+<p>```bash
+time /opt/test.clj
+hello world</p>
+
+<p>real  0m0.866s
+user  0m0.764s
+sys   0m0.076s
+```</p>
+
+<p>Better, right?</p>
+
+<h2>How slow is JamVM? Some benchmarks:</h2>
+
+<p>```text
+Clojure 1.6</p>
+
+<p>JamVM:</p>
+
+<p>(factorial 5000) Avg: 248.65890986500017
+(fib 20)         Avg: 35.33471996000001
+(sort-seq)       Avg: 405.7438969800002</p>
+
+<p>OpenJDK:</p>
+
+<p>(factorial 5000) Avg: 25.016900630000006
+(fib 20)         Avg: 0.69957772
+(sort-seq)       Avg: 11.553695560000001
+```</p>
+
+<p>Much slower, but if you think about it
+shell scripting most of the time is about executing external commands,
+IO and data filtering. Might be as well not so bad.
+Also memory usage of JamVM makes it perfect for embedded systems.</p>
+
+<h2>Why not use something like lein exec?</h2>
+
+<p>Lein exec is nice. But it adds overhead.
+If you need external dependencies you can solve it (in theory)
+with classpath manipulations in java command (<code>java -cp dep.jar:dep2.jar:.</code>).
+Still you can plug lein exec to JamVM if you want.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[HN Tray icon in 50 lines of Clojure]]></title>
@@ -395,134 +553,6 @@ java.mail framework was not so bad as I was expecting at first.</p>
 <li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
-    <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
-    <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
-
-<!-- more -->
-
-
-<p>Pi is running Raspbian.
-```</p>
-
-<blockquote><p>cat /etc/*-release
-PRETTY_NAME="Debian GNU/Linux 7.0 (wheezy)"
-NAME="Debian GNU/Linux"
-VERSION_ID="7.0"
-VERSION="7.0 (wheezy)"
-```</p></blockquote>
-
-<p>Pi CPU is running on 700Mhz.
-```</p>
-
-<blockquote><p>cpufreq-info | grep 'current CPU'
-current CPU frequency is 700 MHz.
-```</p></blockquote>
-
-<p>Clojure version is 1.5.1.</p>
-
-<p>Benchmark code is from <a href="http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya's post</a>, also used for my BeagleBone Clojure/ClojureScript benchmarks:
-```clojure
-(ns benchmark.core)</p>
-
-<p>(defn factorial [x]
-  (reduce * (range 1N (inc x))))
-;                   ^ integerOverflow fix</p>
-
-<p>(defn fib [n]
-  (if (&lt;= n 1)</p>
-
-<pre><code>1
-(+ (fib (- n 1)) (fib (- n 2)))))
-</code></pre>
-
-<p>(defn sort-seq []
-  (sort (repeat 100000 (rand-int 2000000))))</p>
-
-<p>(defn time-it [fn]
-  (let [values  (for [i (range 200)] (with-out-str (time (fn))))</p>
-
-<pre><code>    doubles (map #(Double. (nth (.split % " ") 2)) values)]
-(/ (apply + doubles) (count doubles))))
-</code></pre>
-
-<p>(defn -main []
-  (println "(factorial 5000) \t Avg: " (time-it #(factorial 5000)))
-  (println "(fib 20) \t Avg: " (time-it #(fib 20)))
-  (println "(sort-seq) \t Avg: " (time-it #(sort-seq))))
-```</p>
-
-<p>This time I was a little bit smarter to run all code with <code>lein trampoline run</code> to eliminate overhead.</p>
-
-<p>Numbers:</p>
-
-<p>OpenJDK:
-```</p>
-
-<blockquote><p>sudo apt-get install openjdk-7-jre-headless</p>
-
-<p>java -version
-java version "1.7.0_07"
-OpenJDK Runtime Environment (IcedTea7 2.3.2) (7u7-2.3.2a-1+rpi1)
-OpenJDK Zero VM (build 22.0-b10, mixed mode)</p>
-
-<p>ps eu
-%CPU %MEM
-90.5 15.7</p>
-
-<p>lein trampoline run
-(factorial 5000) Avg: 5956.007845080006
-(fib 20)         Avg: 713.6807171
-(sort-seq)       Avg: 9633.873322030007
-```</p></blockquote>
-
-<p>Oracle JRE:
-```</p>
-
-<blockquote><p>java -version
-java version "1.8.0-ea"
-Java(TM) SE Runtime Environment (build 1.8.0-ea-b36e)
-Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)</p>
-
-<p>ps eu
-%CPU %MEM
-87.9 18.9</p>
-
-<p>lein trampoline run
-(factorial 5000) Avg: 685.5312071299996
-(fib 20)         Avg: 29.505588125000017
-(sort-seq)       Avg: 1137.3281607850001
-```</p></blockquote>
-
-<p>Startup time for "Hello, World!":
-```</p>
-
-<h1>OpenJDK</h1>
-
-<blockquote><p>time lein run
-Hello, World!
-lein run  56.51s user 1.58s system 87% cpu 1:06.16 total
-time lein trampoline run
-Hello, World!
-lein trampoline run  57.73s user 0.96s system 96% cpu 1:00.57 total</p></blockquote>
-
-<h1>Oracle JRE</h1>
-
-<blockquote><p>time lein run
-Hello, World!
-lein run  31.47s user 1.43s system 95% cpu 34.298 total
-time lein trampoline run
-Hello, World!
-lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
-```</p></blockquote>
-
-<p>Looks promising for clojure on small arm devices :)</p>
 ]]></content>
   </entry>
   
