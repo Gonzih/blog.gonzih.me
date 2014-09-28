@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Replacing shell scripts with Clojure"
+title: "Replacing shell scripts with Clojure+JamVM"
 date: 2014-09-28 11:04
 comments: true
 categories: [clojure, jvm, jamvm, linux]
