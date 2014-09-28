@@ -272,9 +272,9 @@ You will need to use -jamvm option to java command to run it with small overhead
 <figure class='code'><figcaption><span>/usr/bin/clojure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
 </span><span class='line'>
-</span><span class='line'>java -jamvm -jar /opt/clojure.jar <span class="nv">$@</span>
+</span><span class='line'><span class="nb">exec </span>java -jamvm -jar /opt/clojure.jar <span class="s2">&quot;$@&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
