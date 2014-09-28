@@ -26,9 +26,9 @@ wget -O /opt/clojure.jar 'http://central.maven.org/maven2/org/clojure/clojure/1.
 Next lets create executable that will live in `/usr/bin` (or `/opt/bin` or `/home/youruser/bin`):
 
 ```bash /usr/bin/clojure
-#!/bin/bash
+#!/bin/sh
 
-java -jar /opt/clojure.jar $@
+exec java -jar /opt/clojure.jar "$@"
 ```
 
 And now it's time for our hello world script:
