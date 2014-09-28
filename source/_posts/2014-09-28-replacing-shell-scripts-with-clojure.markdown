@@ -68,7 +68,7 @@ We don't really care about execution performance here, right?
 
 # Introducing JamVM.
 
-`But but you told us that there is only JVM available on production system without ability to add external dependencies.`
+*"But but you told us that there is only JVM available on production system without ability to add external dependencies."*
 
 I lied.
 
@@ -116,7 +116,7 @@ sys   0m0.076s
 
 Better, right?
 
-How slow is JamVM? Some benchmarks:
+## How slow is JamVM? Some benchmarks:
 
 ```text
 Clojure 1.6
@@ -138,3 +138,9 @@ Much slower, but if you think about it,
 shell scripting most of the time is about executing external commands,
 IO and data filtering. Might be as well not so bad.
 Also memory usage of JamVM makes it perfect for embedded systems.
+
+## Why not use something like lein exec?
+
+Lein exec is nice. But it adds overhead.
+If you need external dependencies you can solve it (in theory)
+with classpath manipulations in java command (`java -cp dep.jar:dep2.jar:.`).
