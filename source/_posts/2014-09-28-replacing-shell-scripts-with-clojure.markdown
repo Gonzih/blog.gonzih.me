@@ -146,3 +146,8 @@ Lein exec is nice. But it adds overhead.
 If you need external dependencies you can solve it (in theory)
 with classpath manipulations in java command (`java -cp dep.jar:dep2.jar:.`).
 Still you can plug lein exec to JamVM if you want.
+
+### Update
+
+I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
+so you can just run `apt-get -y install icedtea-7-jre-jamvm` to install latest build.
