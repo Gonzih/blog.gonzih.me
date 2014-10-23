@@ -26,20 +26,20 @@ Also provides ability to apply transformation using transducers.
       (put! local-chan
             (.-value (.-target event))))))
 
-(defn bound-input [attrs form-atom form-key xform]
+(defn bound-input
   "Generate input,
    create two way data binding
    between input value and value under form-key in form-atom.
    Provides ability to implement transformation using transducers."
-  (fn []
-    [:input (merge attrs
-                   {:value (form-key @form-atom)
-                    :on-change (bind-input form-atom form-key xform)})]))
+  [attrs form-atom form-key xform]
+  [:input (merge attrs
+                 {:value (form-key @form-atom)
+                  :on-change (bind-input form-atom form-key xform)})])
 
 (defn main-component []
   [:div
    [:h3 (:name @form) " value"]
-   [bound-input {:type :text} form :name (map count)]])
+   [bound-input {:type :text} form :name (filter #(> 15 (count %)))]])
 
 (reagent/render-component [main-component]
                           (js/document.getElementById "content"))
