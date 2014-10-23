@@ -1,14 +1,13 @@
 ---
 layout: post
 title: "Two way data bindings in Reagent"
-date: 2014-10-12 17:29
+date: 2014-10-22 17:29
 comments: true
 categories: [clojure, clojurescript, core.async, react.js, reagent]
 ---
-Simple code snippet showing ability to generate 2 way data bindings in Reagent.
+Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it's all about core.async.
-Provides ability to apply transformation using transducers.
-Very fancy. Very simple.
+Also provides ability to apply transformation using transducers.
 
 ```clojure
 
