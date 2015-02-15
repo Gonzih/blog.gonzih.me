@@ -43,7 +43,7 @@ It's not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vi
 (Big shout outs to the author of idea plugin. It's so very impressive.)
 * Writing configuration in a language that I understand was a big relieve.
 * Helm surprised me in it's speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.
-* Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer.
+* Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. (inf-clojure in inferior lisp mode tuned to play well with clojure)
 * It's can do async stuff! If you used vim then you know what I mean. In emacs it's just there. Without required pythor/ruby support enabled during compilation.
 * Built-in package manager. Just run `package-install` and it's there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.
 * Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run `describe-key` and see what is going on. You can do something similar in vim, but in emacs it's much better.
@@ -64,7 +64,7 @@ Most configuration examples that I was able to find on github related to cider a
 That was big disappointment for me. I had high hopes for the cider. I'm realizing that I don't really need everything that cider provides.
 I'm very happy with just ability to evaluate code, without even debugger and nice stacktraces.
 But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
-After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on `run-lisp`.
+After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on (inf-clojure)[https://github.com/clojure-emacs/inf-clojure].
 
 Will I continue using emacs? Yes.
 
@@ -73,14 +73,14 @@ Vim feels more reliable because it provide modal editing experience out of the b
 In emacs it an option.
 I'm totally fine with giving away all that goodness that emacs provides to have proper editing experience *all the time*.
 In every buffer, in every menu.
+And I will continue slowly improving my emacs configuration.
 
 This experiment reminded me how many things are missing from my setup.
 It also reminded me that (neovim)[https://github.com/neovim/neovim] might be next big thing in my tool belt.
 I'm really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.
 
-Vim is not just editor, it's style of life, same as emacs. Just for people who love comfort :)
-
-
 *PS*
 
-(Here)[http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/] is very good tutorial to get vim users started in emacs.
+* (Here)[http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/] is very good tutorial to get vim users started in emacs.
+
+* My .emacs.d is (here)[https://github.com/Gonzih/.emacs.d]. I tried to keep it minimalistic.
