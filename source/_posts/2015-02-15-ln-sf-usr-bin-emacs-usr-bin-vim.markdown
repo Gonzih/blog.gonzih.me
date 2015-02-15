@@ -19,7 +19,7 @@ I tried to play with emacs few times couple of years ago.
 But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.
 
 I tried evil mode, but it went not so well.
-Problem is that I'm also using programmer dvorak layout, so I need to remap couple of keys for better comport.
+Problem is that I'm also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
 I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
 Also probably my lack of patience played against me.
 So I gave up and continued using vim (something like 5 years of hapiness).
@@ -44,10 +44,10 @@ Good:
 * Evil mode is good and it's very close. It's probably closest thing to vim that I ever tried.
 It's not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
 (Big shout outs to the author of idea plugin. It's very impressive.)
-* Writing configuration in a language that I understand was a big relieve.
+* Writing configuration in a language that I understand was a big relief.
 * Mapping configuration is simpler. You are mapping elisp function to the key. It's simpler and easier to understand than remapping mechanism in vim.
 * Helm surprised me in it's speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.
-* Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. ([inf-clojure](https://github in inferior lisp mode tuned to play well with clojure)
+* Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. [inf-clojure](https://github in inferior lisp mode tuned to play well with clojure) is enhanced clojure mode for the inf-lisp.
 * It can do async stuff! If you used vim then you know what I mean. In emacs it's just there. Without required pythor/ruby support enabled during compilation.
 * Built-in package manager. Just run `package-install` and it's there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.
 * Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run `describe-key` and see what is going on. You can do something similar in vim, but in emacs it's much better.
