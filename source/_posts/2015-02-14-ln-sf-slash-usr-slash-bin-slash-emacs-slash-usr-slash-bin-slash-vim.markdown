@@ -7,7 +7,7 @@ categories: [vim, emacs, clojure]
 ---
 
 Some time ago I actually did run `ln -sf /usr/bin/emacs /usr/bin/vim`.
-And left it like that for couple of days.
+And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.
 
@@ -25,11 +25,11 @@ Also probably my lack of patience played against me.
 So I gave up and continued using vim (something like 5 years of hapiness).
 
 Recently ClojureScript tool called [figwheel](https://github.com/bhauman/lein-figwheel) added repl support.
-So as a result you have repl that compiles your clojure code in to javascript and executes result in your browser session printing result back to you.
+So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
 Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
 Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim [vim-fireplace](https://github.com/tpope/vim-fireplace) relies on nrepl.
 I was using for some time [tslime2](https://github.com/sjl/tslime2.vim) in vim to work with ClojureScript.
-Idea is very simple - tslime allows you to send pieces of text from your vim in to some tmux panel.
+Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
 It works. You don't have out of the box tooling that will select your top most clojure form sadly.
 Once upon a time I had discussion on #clojurescript irc and [@martinklepsh](https://twitter.com/martinklepsch) mentioned that nowadays evil-mode is much better.
 I was bored and followed that track. I did run `rm -rf .emacs.d` and started from scratch.
@@ -45,9 +45,10 @@ Good:
 It's not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
 (Big shout outs to the author of idea plugin. It's very impressive.)
 * Writing configuration in a language that I understand was a big relieve.
+* Mapping configuration is simpler. You are mapping elisp function to the key. It's simpler and easier to understand than remapping mechanism in vim.
 * Helm surprised me in it's speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.
 * Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. ([inf-clojure](https://github in inferior lisp mode tuned to play well with clojure)
-* It's can do async stuff! If you used vim then you know what I mean. In emacs it's just there. Without required pythor/ruby support enabled during compilation.
+* It can do async stuff! If you used vim then you know what I mean. In emacs it's just there. Without required pythor/ruby support enabled during compilation.
 * Built-in package manager. Just run `package-install` and it's there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.
 * Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run `describe-key` and see what is going on. You can do something similar in vim, but in emacs it's much better.
 * Startup time is slow and it's solvable. Just run systemd user service with `emacs --daemon` and that is enough for most cases.
@@ -73,7 +74,7 @@ After few hours of grinding my teeth over emacs configuration I gave up and deci
 Will I continue using emacs? Yes.
 
 Will it be my default editor? Probably no.
-Vim feels more reliable because it provide modal editing experience out of the box.
+Vim feels more reliable because it provides modal editing experience out of the box.
 In emacs it an option.
 I'm totally fine with giving away all that goodness that emacs provides to have proper editing experience **all the time**.
 In every buffer, in every menu.
