@@ -8,21 +8,21 @@ categories: [vim, emacs, clojure]
 
 Some time ago I actually did run `ln -sf /usr/bin/emacs /usr/bin/vim`.
 And left it like that for couple of days.
-I must say that was surprisingly nice experience.
+I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.
 
-How did that happened?
+Of course interesting question is "How did I end up with this idea in my head?".
 
 <!--more-->
 
 I tried to play with emacs few times couple of years ago.
-But as a vim lover I was unable comprehend finger bending experience of default key bindings.
+But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.
 
 I tried evil mode, but it went not so well.
 Problem is that I'm also using programmer dvorak layout, so I need to remap couple of keys for better comport.
 I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
 Also probably my lack of patience played against me.
-So I gave up and continued using vim.
+So I gave up and continued using vim (something like 5 years of hapiness).
 
 Recently ClojureScript tool called [figwheel](https://github.com/bhauman/lein-figwheel) added repl support.
 So as a result you have repl that compiles your clojure code in to javascript and executes result in your browser session printing result back to you.
@@ -31,13 +31,13 @@ Problem here is that it does not support nrepl (network repl) protocol and best 
 I was using for some time [tslime2](https://github.com/sjl/tslime2.vim) in vim to work with ClojureScript.
 Idea is very simple - tslime allows you to send pieces of text from your vim in to some tmux panel.
 It works. You don't have out of the box tooling that will select your top most clojure form sadly.
-Once upon a time I had discussion on #clojurescript irc and [@martinklepsh](https://twitter.com/martinklepsch) (I hope my memory is not lying about source) mentioned that nowadays evil-mode is much better.
+Once upon a time I had discussion on #clojurescript irc and [@martinklepsh](https://twitter.com/martinklepsch) mentioned that nowadays evil-mode is much better.
 I was bored and followed that track. I did run `rm -rf .emacs.d` and started from scratch.
 As a result my workflow from vim was ported to emacs in a couple of hours.
 It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
 I set my default editor to emacs and continued doing my thing for a couple of days.
 
-Conclusions and thoughts?
+And here what I think so far.
 
 Good:
 
@@ -56,12 +56,12 @@ It's not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vi
 
 Not so good:
 
-* Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it's unnecessary. Of course this is related only to my habits.
+* Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it's unnecessary. Of course this is related only to my habits and muscle memory.
 * Evil is slower.
 Most of the time it's not a problem. But sometimes I'm mashing my keyboard too fast and mess happens.
 Good example is replace (`r`) key.
 Press `r:` too fast and you might end up in vim command line.
-* Evil is just a plugin. Sometimes you are just forced to use default emacs mode in some menus/buffers that don't play well with evil.
+* Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don't play well with evil.
 * Good example of painful evil integration is cider.
 It just does not work with evil mode.
 Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
