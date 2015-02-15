@@ -81,7 +81,7 @@ In every buffer, in every menu.
 And I will continue slowly improving my emacs configuration.
 
 This experiment reminded me how many things are missing from my setup.
-It also reminded me that [neovim](https://github.com/neovim/neovim) might be next big thing in my tool belt.
+It also reminded me that [neovim](https://neovim.org) might be next big thing in my tool belt.
 I'm really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.
 
 **PS**
