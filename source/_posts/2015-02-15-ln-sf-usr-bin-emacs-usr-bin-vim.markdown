@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ln -sf /usr/bin/emacs /usr/bin/vim ?"
-date: 2015-02-15 22:21
+date: 2015-02-15 19:21
 comments: true
 categories: [vim, emacs, clojure]
 ---
