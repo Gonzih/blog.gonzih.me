@@ -114,7 +114,7 @@ my.amazing_component.ns.mount_me(<%= init_state.to_json %>)
 </script>
 ```
 
-### Nashorn example
+### Nashorn example (result of my experiments in the REPL)
 
 ```clojure
 (import '[javax.script ScriptEngineManager])
