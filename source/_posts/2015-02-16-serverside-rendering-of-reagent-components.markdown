@@ -121,15 +121,13 @@ my.amazing_component.ns.mount_me(<%= init_state.to_json %>)
 (def nashorn (.getEngineByName (ScriptEngineManager.) "nashorn"))
 
 ; Same as in ruby version
-(def setup-script "...")
-
+(def setup-script (slurp "setup.js"))
 (def ss-script (slurp "resources/public/javascripts/server-side.js"))
-
 (def render-script (str "my.amazing_component.ns.render_me_to_s(" my-state-json-string ");"))
 
 (.eval nashorn setup-script)
 (.eval nashorn ss-script)
-(.eval nashorn render-script)
+(.eval nashorn render-script) ; our html markup
 ```
 
 Of course it's better to have some kind of "renderers pool" in JVM.
