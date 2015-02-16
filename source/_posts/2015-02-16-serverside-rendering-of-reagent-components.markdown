@@ -130,6 +130,11 @@ my.amazing_component.ns.mount_me(<%= init_state.to_json %>)
 (.eval nashorn render-script) ; our html markup
 ```
 
+I must admit that this example works on small reagent example.
+I'm unable to load production code from my current project in to Nashorn.
+
+Also it helps a lot if you started developing your project with server side rendering in mind.
+
 Of course it's better to have some kind of "renderers pool" in JVM.
 Good thing that clojure allows you to implement thing like that in few lines of code.
 In ruby it's not a problem since we have 1 context per worker.
