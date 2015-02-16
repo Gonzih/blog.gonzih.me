@@ -292,11 +292,11 @@ section.comments {
   overflow-x: hidden;
 }
 
-article.post h2, article.post p, article.post ul {
+article.post h2, article.post p, article.post ul, article.post figure {
   max-width: 771px;
 }
 
-article.post figure {
+#disqus_thread {
   max-width: 771px;
 }
 
