@@ -130,7 +130,7 @@ my.amazing_component.ns.mount_me(<%= init_state.to_json %>)
 (.eval nashorn render-script) ; our html markup
 ```
 
-I must admit that this example works on small reagent example.
+I must admit that this code works on small reagent example.
 I'm unable to load production code from my current project in to Nashorn.
 
 Also it helps a lot if you started developing your project with server side rendering in mind.
