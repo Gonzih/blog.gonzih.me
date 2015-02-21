@@ -16,6 +16,8 @@ Tricky part might be due to the fact that it's UEFI based system with LVM and fu
 
 So here is what you need to enable hibernate back:
 
+<!--more-->
+
 1. Enable recovery in `/etc/default/grub`:
 
 ```text /etc/default/grub
