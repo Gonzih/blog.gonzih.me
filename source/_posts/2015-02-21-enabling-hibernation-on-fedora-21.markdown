@@ -12,11 +12,11 @@ After intstallation of Fedora 21 I noticed that hibernation and suspend do not w
 Suspend is broken because of ATI graphics.
 It actually works. You just have black screen on resume.
 Hibernate was disabled. It took me quiet some time to figure out how to enable it and make it work.
-Tricky part might be due to the fact that it's UEFI based system with LVM and full disk encryption on top of it.
+Tricky part might be due to the fact that it's UEFI based system with LVM and full disk encryption on top of that.
 
 So here is what you need to enable hibernate back:
 
-1. Enable resume in `/etc/default/grub`:
+1. Enable recovery in `/etc/default/grub`:
 
 ```text /etc/default/grub
 
@@ -24,7 +24,7 @@ So here is what you need to enable hibernate back:
 GRUB_DISABLE_RECOVERY="false"
 ```
 
-2. If you have LVM make sure that disk is activated. You should see something like `rd.lvm.lv=my-lvm-group/swap-disk` in the `GRUB_CMDLINE_LINUX`.
+2. If you have LVM make sure that disk is activated. You should see something like `rd.lvm.lv=my-lvm-group/swap` in the `GRUB_CMDLINE_LINUX`.
 3. Add resume target based on `swapon -s` output to the `GRUB_CMDLINE_LINUX`. Example: `resume=/dev/dm-1`.
 
 Full `/etc/default/grub` file:
