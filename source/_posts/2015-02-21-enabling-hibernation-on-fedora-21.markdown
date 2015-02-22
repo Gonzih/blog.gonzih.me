@@ -18,7 +18,7 @@ So here is what you need to enable hibernate back:
 
 <!--more-->
 
-1. Enable recovery in `/etc/default/grub`:
+* Enable recovery in `/etc/default/grub`:
 
 ```text /etc/default/grub
 
@@ -26,8 +26,8 @@ So here is what you need to enable hibernate back:
 GRUB_DISABLE_RECOVERY="false"
 ```
 
-2. If you have LVM make sure that disk is activated. You should see something like `rd.lvm.lv=my-lvm-group/swap` in the `GRUB_CMDLINE_LINUX`.
-3. Add resume target based on `swapon -s` output to the `GRUB_CMDLINE_LINUX`. Example: `resume=/dev/dm-1`.
+* If you have LVM make sure that disk is activated. You should see something like `rd.lvm.lv=my-lvm-group/swap` in the `GRUB_CMDLINE_LINUX`.
+* Add resume target based on `swapon -s` output to the `GRUB_CMDLINE_LINUX`. Example: `resume=/dev/dm-1`.
 
 Full `/etc/default/grub` file:
 
@@ -41,13 +41,25 @@ GRUB_CMDLINE_LINUX="rd.lvm.lv=fedora_mylaptop/swap rd.luks.uuid=luks-numbers rd.
 GRUB_DISABLE_RECOVERY="false"
 ```
 
-4. Generate new grub configuration by running: `sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg`
+* Generate new grub configuration by running: `sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg`
 
-5. Make sure that hibernate method is set to shutdown:
+* Make sure that hibernate method is set to shutdown:
 
 ```text /etc/pm/config.d/defaults
 HIBERNATE_MODE="shutdown"
 ```
 
-6. Reboot.
-7. Enjoy!
+* Reboot.
+* Enjoy!
+
+**PS** For me sometimes hibernate recovery fails due to error that looks like that:
+
+```text
+kernel: PM: 0x87534000 in e820 nosave region: [mem 0x87534000-0x87534fff]
+kernel: PM: Read 3221640 kbytes in 0.19 seconds (16956.00 MB/s)
+kernel: PM: Error -14 resuming
+kernel: PM: Failed to load hibernation image, recovering.
+```
+
+No idea why, seems to be related to the apple EFI.
+If you have any information on that then please share it in the comments section!
