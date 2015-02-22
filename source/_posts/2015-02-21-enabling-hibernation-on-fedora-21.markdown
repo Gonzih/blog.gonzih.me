@@ -42,5 +42,12 @@ GRUB_DISABLE_RECOVERY="false"
 ```
 
 4. Generate new grub configuration by running: `sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg`
-5. Reboot.
-6. Enjoy!
+
+5. Make sure that hibernate method is set to shutdown:
+
+```text /etc/pm/config.d/defaults
+HIBERNATE_MODE="shutdown"
+```
+
+6. Reboot.
+7. Enjoy!
