@@ -17,3 +17,7 @@ Solution can be applied to any rpm based system (I think so).
 
 And it should work.
 I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).
+
+**PS**
+
+If you have issues with volume being too loud by default make sure that you changed `flat-volumes` from `yes` to `no` in `/etc/pulse/daemon.conf`
