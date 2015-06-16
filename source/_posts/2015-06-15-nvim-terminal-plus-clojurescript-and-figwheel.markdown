@@ -32,7 +32,7 @@ if has("nvim")
   " Evaluate anything from the visual mode in the next window
   vmap <buffer> ,e y<C-w>wpi<CR><C-\><C-n><C-w>p
   " Evaluate outer most form
-  nmap <buffer> ,e ^v,e
+  nmap <buffer> ,e ^v%,e
   " Evaluate buffer"
   nmap <buffer> ,b ggVG,e
 endif
