@@ -9,17 +9,17 @@ volume /var/blog
 
 expose 4000
 
-env USER gnzh
-
-run useradd $USER
-run mkdir -p /home/$USER
-run chown $USER:$USER /home/$USER
-
 # Set the locale
 run locale-gen en_US.UTF-8
 env LANG en_US.UTF-8
 env LANGUAGE en_US:en
 env LC_ALL en_US.UTF-8
+
+env USER gnzh
+
+run useradd $USER
+run mkdir -p /home/$USER
+run chown $USER:$USER /home/$USER
 
 user $USER
 env HOME /home/$USER/
