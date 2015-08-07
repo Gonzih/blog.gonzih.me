@@ -1,3 +1,6 @@
+default:
+		make deploy-using-docker
+
 push:
 	git push
 
