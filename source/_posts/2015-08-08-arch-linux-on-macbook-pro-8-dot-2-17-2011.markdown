@@ -12,7 +12,7 @@ Couple of tips from my experience of running Arch on Macbook 8.2.
 
 ## Installation
 
-<a href="https://wiki.archlinux.org/index.php/MacBookPro8,1/8,2/8,3_(2011)#Installation">Arch Wiki page</a> covers installation well enough in my opinion.
+<a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.
 
 ## Use broadcom-wl wireless module from AUR
 
