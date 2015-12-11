@@ -14,7 +14,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 * WIFI
 * Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)
 * Sound without subwoofer
-* Video (I used bumblebee to switch between intel/nvidia gpus)
+* Video (I used bumblebee to switch between intel/nvidia GPUs)
 * Brightness
 * Keyboard backlit
 * Powermanagment via laptop mode tools and systemd.
@@ -29,7 +29,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 # Installation
 
 ## Boot
-* Add nomodeset to the kernel options on live usb boot
+* Add nomodeset to the kernel options on Live USB boot
 * Make sure secure boot is disabled (to make your life easier)
 * Follow [arch linux installation instructions](https://wiki.archlinux.org/index.php/Installation_guide)
 
@@ -37,7 +37,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 
 ## Video
 
-* Make sure switchable gpus are enabled in BIOS
+* Make sure switchable GPUs are enabled in BIOS
 * Follow [insructions on the arch wiki](https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA)
 * To enable intel GPU add `i915.preliminary_hw_support=1` to `GRUB_CMDLINE_LINUX_DEFAULT` in the `/etc/default/grub` file. This should be solved after 4.3 kernel release.
 
