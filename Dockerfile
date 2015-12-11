@@ -1,29 +1,30 @@
-from gonzih/archlinux
-maintainer Max Gonzih <gonzih at gmail dot com>
+FROM gonzih/archlinux
+MAINTAINER Max Gonzih <gonzih at gmail dot com>
 
-run pacman -Suy --noconfirm
+RUN pacman -Suy --noconfirm
 
-run pacman -S ruby nodejs make base-devel --noconfirm
+RUN pacman -S python2 ruby nodejs make base-devel --noconfirm
 
-volume /var/blog
+VOLUME /var/blog
 
-expose 4000
+EXPOSE 4000
 
 # Set the locale
-run locale-gen en_US.UTF-8
-env LANG en_US.UTF-8
-env LANGUAGE en_US:en
-env LC_ALL en_US.UTF-8
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
-env USER gnzh
+ENV USER gnzh
 
-run useradd $USER
-run mkdir -p /home/$USER
-run chown $USER:$USER /home/$USER
+RUN useradd -m $USER
 
-user $USER
-env HOME /home/$USER/
-env PATH $PATH:/home/$USER/.gem/ruby/2.2.0/bin
-run gem install bundler
+USER $USER
+RUN mkdir $HOME/bin
+RUN ln -s /usr/bin/python2 $HOME/bin/python
+ENV HOME /home/$USER/
+ENV PATH $PATH:$HOME/bin
+ENV PATH $PATH:$HOME/.gem/ruby/2.2.0/bin
+RUN gem install bundler
 
-workdir /var/blog
+WORKDIR /var/blog

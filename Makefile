@@ -29,7 +29,7 @@ deploy-using-docker:
 	make push
 
 preview-using-docker: docker-image
-		docker run --rm=true -t -v $(shell pwd):/var/blog -p 4000:4000 --name blog-builder blog-builder make preview
+	docker run --rm=true -t -v $(shell pwd):/var/blog -p 4000:4000 --name blog-builder blog-builder make preview
 
 debug-using-docker: docker-image
-		docker run --rm=true -ti -v $(shell pwd):/var/blog -p 4000:4000 --name blog-builder blog-builder bash
+	docker run --rm=true -ti -v $(shell pwd):/var/blog -p 4000:4000 --name blog-builder blog-builder bash
