@@ -56,5 +56,5 @@ There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/l
 ## Audio clicking
 
 This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
-To do that appent `timeout=36000` to line `load-module module-suspend-on-idle` in the `/etc/pulse/default.pa` file.
+To do that append `timeout=36000` to line `load-module module-suspend-on-idle` in the `/etc/pulse/default.pa` config file.
 And now restart pulse by running `pulseaudio -k` and `pulseaudio -D`.
