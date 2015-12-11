@@ -52,3 +52,9 @@ There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/l
 * `sudo rfkill unblock wifi`
 * Works fine with `wicd`
 * Configuring networkmanager service to be run antefr rfkill service should also work
+
+## Audio clicking
+
+This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
+To do that appent `timeout=36000` to line `load-module module-suspend-on-idle` in the `/etc/pulse/default.pa` file.
+And now restart pulse by running `pulseaudio -k` and `pulseaudio -D`.
