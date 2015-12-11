@@ -18,6 +18,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 * Brightness
 * Keyboard backlit
 * Powermanagment via laptop mode tools and systemd.
+* Card reader
 
 # What does not work
 * Subwoofer
