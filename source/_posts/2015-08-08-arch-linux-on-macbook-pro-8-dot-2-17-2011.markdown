@@ -3,7 +3,7 @@ layout: post
 title: "Arch Linux on Macbook Pro 8.2 (17\" 2011)"
 date: 2015-08-08 09:53
 comments: true
-categories: [linux, archlinux, macbook]
+categories: [linux, archlinux, macbook, laptop]
 ---
 
 Couple of tips from my experience of running Arch on Macbook 8.2.
