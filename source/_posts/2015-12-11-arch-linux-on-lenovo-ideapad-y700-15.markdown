@@ -40,6 +40,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 * Make sure switchable GPUs are enabled in BIOS
 * Follow [insructions on the arch wiki](https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA)
 * To enable intel GPU add `i915.preliminary_hw_support=1` to `GRUB_CMDLINE_LINUX_DEFAULT` in the `/etc/default/grub` file. This should be solved after 4.3 kernel release.
+* Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).
 
 ## Wifi
 
