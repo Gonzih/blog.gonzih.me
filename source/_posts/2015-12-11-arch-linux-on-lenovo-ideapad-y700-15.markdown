@@ -17,8 +17,8 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 * Video (I used bumblebee to switch between intel/nvidia GPUs)
 * Brightness
 * Keyboard backlit
-* Powermanagment via laptop mode tools and systemd.
-* Card reader
+* Power managment via laptop mode tools and systemd.
+* Card reader (you might need to run `echo 1 | sudo tee /sys/bus/pci/rescan` so card reader becomes visible)
 
 # What does not work
 * Subwoofer
