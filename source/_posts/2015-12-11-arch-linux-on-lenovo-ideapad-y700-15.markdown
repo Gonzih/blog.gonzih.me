@@ -52,7 +52,7 @@ There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/l
 * `sudo systemctl enable rfkill-unblock@wifi.service`
 * `sudo rfkill unblock wifi`
 * Works fine with `wicd`
-* Configuring networkmanager service to be run antefr rfkill service should also work
+* Configuring networkmanager service to be run after rfkill service should also work
 
 ## Audio clicking
 
