@@ -56,7 +56,7 @@ There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/l
 
 ### Temporary solution 2:
 
-* `echo blacklist ideapad_laptop » /etc/modprobe.d/blacklist.conf` to disable acpi module
+* `echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf` to disable acpi module
 
 ## Audio clicking
 
