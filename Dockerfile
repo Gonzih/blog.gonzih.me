@@ -1,9 +1,10 @@
-FROM gonzih/archlinux
+FROM ubuntu:14.04
 MAINTAINER Max Gonzih <gonzih at gmail dot com>
 
-RUN pacman -Suy --noconfirm
+RUN apt-get update && apt-get -y upgrade
 
-RUN pacman -S python2 ruby nodejs make base-devel --noconfirm
+RUN apt-get -y install python2.7 ruby ruby-dev nodejs make build-essential
+RUN gem install bundler
 
 VOLUME /var/blog
 
@@ -23,8 +24,5 @@ USER $USER
 RUN mkdir $HOME/bin
 RUN ln -s /usr/bin/python2 $HOME/bin/python
 ENV HOME /home/$USER/
-ENV PATH $PATH:$HOME/bin
-ENV PATH $PATH:$HOME/.gem/ruby/2.2.0/bin
-RUN gem install bundler
 
 WORKDIR /var/blog
