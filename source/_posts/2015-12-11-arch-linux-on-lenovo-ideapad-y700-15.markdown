@@ -47,12 +47,16 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
 There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/lists/linux/kernel/2323659).
 
-### Temporary solution:
+### Temporary solution 1:
 
 * `sudo systemctl enable rfkill-unblock@wifi.service`
 * `sudo rfkill unblock wifi`
 * Works fine with `wicd`
 * Configuring NetworkManager service to be run after rfkill service should also work
+
+### Temporary solution 2:
+
+* `echo blacklist ideapad_laptop » /etc/modprobe.d/blacklist.conf` to disable acpi module
 
 ## Audio clicking
 
