@@ -20,9 +20,10 @@ ENV USER gnzh
 
 RUN useradd -m $USER
 
+RUN ln -s /usr/bin/python2 /usr/bin/python
+
 USER $USER
 RUN mkdir $HOME/bin
-RUN ln -s /usr/bin/python2 $HOME/bin/python
 ENV HOME /home/$USER/
 
 WORKDIR /var/blog
