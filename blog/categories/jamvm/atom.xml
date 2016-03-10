@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jamvm | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/jamvm/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-09-28T19:44:56+02:00</updated>
+  <updated>2016-03-10T10:19:49+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -168,6 +168,11 @@ Also memory usage of JamVM makes it perfect for embedded systems.</p>
 If you need external dependencies you can solve it (in theory)
 with classpath manipulations in java command (<code>java -cp dep.jar:dep2.jar:.</code>).
 Still you can plug lein exec to JamVM if you want.</p>
+
+<h3>Update</h3>
+
+<p>I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
+so you can just run <code>apt-get -y install icedtea-7-jre-jamvm</code> to install latest build.</p>
 ]]></content>
   </entry>
   

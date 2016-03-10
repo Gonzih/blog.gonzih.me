@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Two way data bindings in Reagent - Max Gonzih</title>
+  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+
+  
+  <meta name="description" content="Two Way Data Bindings in Reagent Oct 22nd, 2014 | Comments Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+    <a href="/">
+        <div class="clearfix">
+        </div>
+    </a>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Max Gonzih</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="mailto:gonzih@gmail.com">email</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/Gonzih/">github</a>
+  </li>
+
+
+  <li class="link">
+      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://twitter.com/Gonzih/">twitter</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+  <li>
+    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+  </li>
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.gonzih.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  
+  
+</div>
+
+  
+  <header>
+    
+      <h2 class="entry-title">Two Way Data Bindings in Reagent</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-22T17:29:00+02:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath it&#8217;s all about core.async.
+Also provides ability to apply transformation using transducers.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">form</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">{}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">bind-input</span>
+</span><span class='line'>  <span class="s">&quot;Generat on-change callback,</span>
+</span><span class='line'><span class="s">   bind value to form-key of form-atom.</span>
+</span><span class='line'><span class="s">   Provides ability to implement transformation using transducers.&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">form-atom</span> <span class="nv">form-key</span> <span class="nv">xform</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">local-chan</span> <span class="p">(</span><span class="nf">chan</span> <span class="mi">1</span> <span class="nv">xform</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">go-loop</span> <span class="p">[]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">swap!</span> <span class="nv">form-atom</span> <span class="nb">assoc </span><span class="nv">form-key</span> <span class="p">(</span><span class="nf">&lt;!</span> <span class="nv">local-chan</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">recur</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">event</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">put!</span> <span class="nv">local-chan</span>
+</span><span class='line'>            <span class="p">(</span><span class="nf">.-value</span> <span class="p">(</span><span class="nf">.-target</span> <span class="nv">event</span><span class="p">))))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">bound-input</span>
+</span><span class='line'>  <span class="s">&quot;Generate input,</span>
+</span><span class='line'><span class="s">   create two way data binding</span>
+</span><span class='line'><span class="s">   between input value and value under form-key in form-atom.</span>
+</span><span class='line'><span class="s">   Provides ability to implement transformation using transducers.&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">attrs</span> <span class="nv">form-atom</span> <span class="nv">form-key</span> <span class="nv">xform</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">[</span><span class="ss">:input</span> <span class="p">(</span><span class="nb">merge </span><span class="nv">attrs</span>
+</span><span class='line'>                 <span class="p">{</span><span class="ss">:value</span> <span class="p">(</span><span class="nf">form-key</span> <span class="o">@</span><span class="nv">form-atom</span><span class="p">)</span>
+</span><span class='line'>                  <span class="ss">:on-change</span> <span class="p">(</span><span class="nf">bind-input</span> <span class="nv">form-atom</span> <span class="nv">form-key</span> <span class="nv">xform</span><span class="p">)})])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">main-component</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">[</span><span class="ss">:div</span>
+</span><span class='line'>   <span class="p">[</span><span class="ss">:h3</span> <span class="p">(</span><span class="ss">:name</span> <span class="o">@</span><span class="nv">form</span><span class="p">)</span> <span class="s">&quot; value&quot;</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">[</span><span class="nv">bound-input</span> <span class="p">{</span><span class="ss">:type</span> <span class="ss">:text</span><span class="p">}</span> <span class="nv">form</span> <span class="ss">:name</span> <span class="p">(</span><span class="nb">filter </span><span class="o">#</span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">15</span> <span class="p">(</span><span class="nb">count </span><span class="nv">%</span><span class="p">)))]])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">reagent/render-component</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">]</span>
+</span><span class='line'>                          <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">&quot;content&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
+  
+
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/';
+        var disqus_url = 'http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

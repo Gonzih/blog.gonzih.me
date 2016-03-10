@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Arch Linux on Lenovo IdeaPad Y700 15" - Max Gonzih</title>
+  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+
+  
+  <meta name="description" content="Arch Linux on Lenovo IdeaPad Y700 15" Dec 11th, 2015 | Comments Collection of tweaks that I gathered after installing Arch Linux on to Lenovo &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+    <a href="/">
+        <div class="clearfix">
+        </div>
+    </a>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Max Gonzih</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+  <li class="link">
+    <a href="mailto:gonzih@gmail.com">email</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/Gonzih/">github</a>
+  </li>
+
+
+  <li class="link">
+      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://twitter.com/Gonzih/">twitter</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+  <li>
+    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+  </li>
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.gonzih.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  
+  
+</div>
+
+  
+  <header>
+    
+      <h2 class="entry-title">Arch Linux on Lenovo IdeaPad Y700 15"</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-12-11T13:20:00+01:00" pubdate data-updated="true">Dec 11<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<p>Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAd Y700.</p>
+
+<!-- more -->
+
+
+<h1>What works so far</h1>
+
+<ul>
+<li>WIFI</li>
+<li>Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)</li>
+<li>Sound without subwoofer</li>
+<li>Video (I used bumblebee to switch between intel/nvidia GPUs)</li>
+<li>Brightness</li>
+<li>Keyboard backlit</li>
+<li>Power managment via laptop mode tools and systemd.</li>
+<li>Card reader (you might need to run <code>echo 1 | sudo tee /sys/bus/pci/rescan</code> so card reader becomes visible)</li>
+<li>HDMI output</li>
+</ul>
+
+
+<h1>What does not work</h1>
+
+<ul>
+<li>Subwoofer</li>
+</ul>
+
+
+<h1>Installation</h1>
+
+<h2>Boot</h2>
+
+<ul>
+<li>Add nomodeset to the kernel options on Live USB boot</li>
+<li>Make sure secure boot is disabled (to make your life easier)</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Installation_guide">arch linux installation instructions</a></li>
+</ul>
+
+
+<h1>Extra tweaking</h1>
+
+<h2>Video</h2>
+
+<ul>
+<li>Make sure switchable GPUs are enabled in BIOS</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA">insructions on the arch wiki</a></li>
+<li>To enable intel GPU add <code>i915.preliminary_hw_support=1</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> in the <code>/etc/default/grub</code> file. This should be solved after 4.3 kernel release.</li>
+<li>Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).</li>
+</ul>
+
+
+<h2>Wifi</h2>
+
+<p>Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
+There was a patch for the 17 inch model <a href="http://www.gossamer-threads.com/lists/linux/kernel/2323659">here</a>.</p>
+
+<h3>Temporary solution 1:</h3>
+
+<ul>
+<li><code>sudo systemctl enable rfkill-unblock@wifi.service</code></li>
+<li><code>sudo rfkill unblock wifi</code></li>
+<li>Works fine with <code>wicd</code></li>
+<li>Configuring NetworkManager service to be run after rfkill service should also work</li>
+</ul>
+
+
+<h3>Temporary solution 2:</h3>
+
+<ul>
+<li><code>echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf</code> to disable acpi module</li>
+</ul>
+
+
+<h2>Audio clicking</h2>
+
+<p>This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
+To do that append <code>timeout=36000</code> to line <code>load-module module-suspend-on-idle</code> in the <code>/etc/pulse/default.pa</code> configuration file.
+And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulseaudio --start</code>.</p>
+
+
+
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
+  
+
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gonzihsblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/';
+        var disqus_url = 'http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

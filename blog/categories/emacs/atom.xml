@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: emacs | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-03-10T10:19:49+01:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ln -sf /usr/bin/emacs /usr/bin/vim ?]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/"/>
+    <updated>2015-02-15T19:21:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim</id>
+    <content type="html"><![CDATA[<p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
+And left it like that for a couple of days.
+I must say that it was surprisingly nice experience.
+Tinkering around with elisp, building editing environment from scratch.</p>
+
+<p>Of course interesting question is "How did I end up with this idea in my head?".</p>
+
+<!--more-->
+
+
+<p>I tried to play with emacs few times couple of years ago.
+But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.</p>
+
+<p>I tried evil mode, but it went not so well.
+Problem is that I'm also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
+I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
+Also probably my lack of patience played against me.
+So I gave up and continued using vim (something like 5 years of hapiness).</p>
+
+<p>Recently ClojureScript tool called <a href="https://github.com/bhauman/lein-figwheel">figwheel</a> added repl support.
+So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
+Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
+Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim <a href="https://github.com/tpope/vim-fireplace">vim-fireplace</a> relies on nrepl.
+I was using for some time <a href="https://github.com/sjl/tslime2.vim">tslime2</a> in vim to work with ClojureScript.
+Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
+It works. You don't have out of the box tooling that will select your top most clojure form sadly.
+Once upon a time I had discussion on #clojurescript irc and <a href="https://twitter.com/martinklepsch">@martinklepsh</a> mentioned that nowadays evil-mode is much better.
+I was bored and followed that track. I did run <code>rm -rf .emacs.d</code> and started from scratch.
+As a result my workflow from vim was ported to emacs in a couple of hours.
+It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
+I set my default editor to emacs and continued doing my thing for a couple of days.</p>
+
+<p>And here what I think so far.</p>
+
+<p>Good:</p>
+
+<ul>
+<li>Evil mode is good and it's very close. It's probably closest thing to vim that I ever tried.
+It's not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
+(Big shout outs to the author of idea plugin. It's very impressive.)</li>
+<li>Writing configuration in a language that I understand was a big relief.</li>
+<li>Mapping configuration is simpler. You are mapping elisp function to the key. It's simpler and easier to understand than remapping mechanism in vim.</li>
+<li>Helm surprised me in it's speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.</li>
+<li>Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. <a href="https://github%20in%20inferior%20lisp%20mode%20tuned%20to%20play%20well%20with%20clojure">inf-clojure</a> is enhanced clojure mode for the inf-lisp.</li>
+<li>It can do async stuff! If you used vim then you know what I mean. In emacs it's just there. Without required pythor/ruby support enabled during compilation.</li>
+<li>Built-in package manager. Just run <code>package-install</code> and it's there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.</li>
+<li>Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run <code>describe-key</code> and see what is going on. You can do something similar in vim, but in emacs it's much better.</li>
+<li>Startup time is slow and it's solvable. Just run systemd user service with <code>emacs --daemon</code> and that is enough for most cases.</li>
+<li>And you still have emacs operating system at your disposal!</li>
+<li>Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.</li>
+</ul>
+
+
+<p>Not so good:</p>
+
+<ul>
+<li>Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it's unnecessary. Of course this is related only to my habits and muscle memory.</li>
+<li>Evil is slower.
+Most of the time it's not a problem. But sometimes I'm mashing my keyboard too fast and mess happens.
+Good example is replace (<code>r</code>) key.
+Press <code>r:</code> too fast and you might end up in vim command line.</li>
+<li>Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don't play well with evil.</li>
+<li>Good example of painful evil integration is cider.
+It just does not work with evil mode.
+Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
+That was big disappointment for me. I had high hopes for the cider. I'm realizing that I don't really need everything that cider provides.
+I'm very happy with just ability to evaluate code, without even debugger and nice stacktraces.
+But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
+After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on <a href="https://github.com/clojure-emacs/inf-clojure">inf-clojure</a>.</li>
+</ul>
+
+
+<p>Will I continue using emacs? Yes.</p>
+
+<p>Will it be my default editor? Probably no.
+Vim feels more reliable because it provides modal editing experience out of the box.
+In emacs it an option.
+I'm totally fine with giving away all that goodness that emacs provides to have proper editing experience <strong>all the time</strong>.
+In every buffer, in every menu.
+And I will continue slowly improving my emacs configuration.</p>
+
+<p>This experiment reminded me how many things are missing from my setup.
+It also reminded me that <a href="https://neovim.org">neovim</a> might be next big thing in my tool belt.
+I'm really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.</p>
+
+<p><strong>PS</strong></p>
+
+<ul>
+<li><a href="http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/">Here</a> is very good tutorial to get vim users started in emacs.</li>
+<li>My .emacs.d is <a href="https://github.com/Gonzih/.emacs.d">here</a>. I tried to keep it minimalistic.</li>
+<li>My .vim is <a href="https://github.com/Gonzih/.vim">here</a>.</li>
+<li>If you are looking for the best vim like experience in emacs please take a look at the <a href="https://github.com/syl20bnr/spacemacs">spacemacs project</a>.</li>
+<li>Looking for the good color theme in emacs? Take a look at the port of <a href="https://github.com/morhetz/gruvbox">vim's gruvbox theme</a>.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

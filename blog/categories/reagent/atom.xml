@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: reagent | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/reagent/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-03-10T10:19:49+01:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ServerSide rendering of Reagent components]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/"/>
+    <updated>2015-02-16T10:12:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components</id>
+    <content type="html"><![CDATA[<p>Great thing about React is that you can write what people nowadays call "isomorphic JavaScript".
+In this post we will not discuss how wrong this term is in many ways,
+but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.</p>
+
+<!--more-->
+
+
+<p>In my experience simplest optimization to run in some js engine on server side is whitespace.
+It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
+So our compiler configuration should look something like that:</p>
+
+<p>```clojure
+{:id "server-side"
+ :source-paths ["src"]
+ :compiler {:output-to "resources/public/javascripts/server-side.js"</p>
+
+<pre><code>        :output-dir "resources/public/javascripts/out-server-side"
+        :preamble ["meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js"]
+        :pretty-print false
+        :warnings true
+        :optimizations :whitespace}}
+</code></pre>
+
+<p>```</p>
+
+<p>Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:</p>
+
+<p>```clojure
+(def main-component
+  (with-meta</p>
+
+<pre><code>(fn [] ...)
+{:component-did-mount (comp init-my-scroll-handler!
+                            also-init-my-go-loop!)}))
+</code></pre>
+
+<p>```</p>
+
+<p>Next let's create function that will do some rendering to the string.
+I like to keep this function in a component specific ns just for convenience.</p>
+
+<p><code>clojure
+(def ^:export render-me-to-s [initial-state]
+  (reset! my-main-state (js-&gt;clj initial-state))
+  ; Render component to markup without reactid
+  (reagent.core/render-to-static-markup [main-component])
+  ; Or render component to ready to-go react markup
+  (reagent.core/render-to-string [main-component]))
+</code></p>
+
+<p>Now server side bootstrapping, most of this code was taken from <a href="https://github.com/reactjs/react-rails">react-rails plugin</a>.</p>
+
+<p>First of all react expects to have global or window objects in your js engine:</p>
+
+<p>```javascript setup.js
+var global = global || this;
+var self = self || this;
+var window = window || this;
+var console = global.console || {};
+['error', 'log', 'info', 'warn'].forEach(function (fn) {
+  if (!(fn in console)) {</p>
+
+<pre><code>console[fn] = function () {};
+</code></pre>
+
+<p>  }
+});
+```</p>
+
+<p>Now let's try and use all this in our code (for now in Ruby):</p>
+
+<p><code>ruby
+cxt = V8::Context.new
+cxt.load('setup.js')
+cxt.load('resources/public/javascripts/server-side.js')
+html = cxt.eval("my.amazing_component.ns.render_me_to_s(#{init_state.to_json})")
+</code></p>
+
+<p>And that's it. As a way to pass data from ruby to clojurescript json works fine.
+Sometimes you might want to use <code>ActionController::Base.helpers.j</code> helper that will
+escape your data for usage inside json, but most of the time you should be alright without it.</p>
+
+<p>If you have issues with core.async there are 2 ways to solve it.
+I personally prefer to move core.async initialization into some lifecycle method.
+Another solution is to implement setTimeout function like that in your <code>setup.js</code> snippet:</p>
+
+<p>```javascript
+goog.global.setTimeout = function(cb, t) {</p>
+
+<pre><code>cb();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Now frontend part. First let's in-line generated html in to the container:</p>
+
+<p>```erb</p>
+
+<div id="content"><%= html %></div>
+
+
+<p>```</p>
+
+<p>Then let's write function that will render our component on frontend:</p>
+
+<p>```clojure
+(def ^:export mount-me [initial-state]
+  (reset! my-main-state (js->clj initial-state))
+  (reagent.core/render [main-component]</p>
+
+<pre><code>                   (js/document.getElementById "content")))
+</code></pre>
+
+<p>```</p>
+
+<p>As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
+Am I wrong on this one? Don't know yet.</p>
+
+<p>Inline javascript that you should use on frontend looks like that:</p>
+
+<p>```erb</p>
+
+<script>
+my.amazing_component.ns.mount_me(<%= init_state.to_json %>)
+</script>
+
+
+<p>```</p>
+
+<h3>Nashorn example (result of my experiments in the REPL)</h3>
+
+<p>```clojure
+(import '[javax.script ScriptEngineManager])
+(def nashorn (.getEngineByName (ScriptEngineManager.) "nashorn"))</p>
+
+<p>; Same as in ruby version
+(def setup-script (slurp "setup.js"))
+(def ss-script (slurp "resources/public/javascripts/server-side.js"))
+(def render-script (str "my.amazing_component.ns.render_me_to_s(" my-state-json-string ");"))</p>
+
+<p>(.eval nashorn setup-script)
+(.eval nashorn ss-script)
+(.eval nashorn render-script) ; our html markup
+```</p>
+
+<p>I must admit that this code works on small reagent example.
+I'm unable to load production code from my current project in to Nashorn.</p>
+
+<p>Also it helps a lot if you started developing your project with server side rendering in mind.</p>
+
+<p>Of course it's better to have some kind of "renderers pool" in JVM.
+Good thing that clojure allows you to implement thing like that in few lines of code.
+In ruby it's not a problem since we have 1 context per worker.</p>
+
+<p><strong>Useful Links:</strong></p>
+
+<ul>
+<li><a href="https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw">ClojureScript mailing list topic</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Two way data bindings in Reagent]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/"/>
+    <updated>2014-10-22T17:29:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent</id>
+    <content type="html"><![CDATA[<p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath it's all about core.async.
+Also provides ability to apply transformation using transducers.</p>
+
+<p>```clojure</p>
+
+<p>(defonce form (atom {}))</p>
+
+<p>(defn bind-input
+  "Generat on-change callback,
+   bind value to form-key of form-atom.
+   Provides ability to implement transformation using transducers."
+  [form-atom form-key xform]
+  (let [local-chan (chan 1 xform)]</p>
+
+<pre><code>(go-loop []
+  (swap! form-atom assoc form-key (&lt;! local-chan))
+  (recur))
+(fn [event]
+  (put! local-chan
+        (.-value (.-target event))))))
+</code></pre>
+
+<p>(defn bound-input
+  "Generate input,
+   create two way data binding
+   between input value and value under form-key in form-atom.
+   Provides ability to implement transformation using transducers."
+  [attrs form-atom form-key xform]
+  [:input (merge attrs</p>
+
+<pre><code>             {:value (form-key @form-atom)
+              :on-change (bind-input form-atom form-key xform)})])
+</code></pre>
+
+<p>(defn main-component []
+  [:div
+   [:h3 (:name @form) " value"]
+   [bound-input {:type :text} form :name (filter #(> 15 (count %)))]])</p>
+
+<p>(reagent/render-component [main-component]</p>
+
+<pre><code>                      (js/document.getElementById "content"))
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

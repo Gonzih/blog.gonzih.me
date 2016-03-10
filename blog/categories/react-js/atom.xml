@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: react.js | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/react-js/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-03-10T10:19:49+01:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Two way data bindings in Reagent]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/"/>
+    <updated>2014-10-22T17:29:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent</id>
+    <content type="html"><![CDATA[<p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath it's all about core.async.
+Also provides ability to apply transformation using transducers.</p>
+
+<p>```clojure</p>
+
+<p>(defonce form (atom {}))</p>
+
+<p>(defn bind-input
+  "Generat on-change callback,
+   bind value to form-key of form-atom.
+   Provides ability to implement transformation using transducers."
+  [form-atom form-key xform]
+  (let [local-chan (chan 1 xform)]</p>
+
+<pre><code>(go-loop []
+  (swap! form-atom assoc form-key (&lt;! local-chan))
+  (recur))
+(fn [event]
+  (put! local-chan
+        (.-value (.-target event))))))
+</code></pre>
+
+<p>(defn bound-input
+  "Generate input,
+   create two way data binding
+   between input value and value under form-key in form-atom.
+   Provides ability to implement transformation using transducers."
+  [attrs form-atom form-key xform]
+  [:input (merge attrs</p>
+
+<pre><code>             {:value (form-key @form-atom)
+              :on-change (bind-input form-atom form-key xform)})])
+</code></pre>
+
+<p>(defn main-component []
+  [:div
+   [:h3 (:name @form) " value"]
+   [bound-input {:type :text} form :name (filter #(> 15 (count %)))]])</p>
+
+<p>(reagent/render-component [main-component]</p>
+
+<pre><code>                      (js/document.getElementById "content"))
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2014-09-28T19:44:56+02:00</updated>
+  <updated>2016-03-10T10:19:49+01:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -12,6 +12,622 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Arch Linux on Lenovo IdeaPad Y700 15"]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/"/>
+    <updated>2015-12-11T13:20:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15</id>
+    <content type="html"><![CDATA[<p>Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAd Y700.</p>
+
+<!-- more -->
+
+
+<h1>What works so far</h1>
+
+<ul>
+<li>WIFI</li>
+<li>Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)</li>
+<li>Sound without subwoofer</li>
+<li>Video (I used bumblebee to switch between intel/nvidia GPUs)</li>
+<li>Brightness</li>
+<li>Keyboard backlit</li>
+<li>Power managment via laptop mode tools and systemd.</li>
+<li>Card reader (you might need to run <code>echo 1 | sudo tee /sys/bus/pci/rescan</code> so card reader becomes visible)</li>
+<li>HDMI output</li>
+</ul>
+
+
+<h1>What does not work</h1>
+
+<ul>
+<li>Subwoofer</li>
+</ul>
+
+
+<h1>Installation</h1>
+
+<h2>Boot</h2>
+
+<ul>
+<li>Add nomodeset to the kernel options on Live USB boot</li>
+<li>Make sure secure boot is disabled (to make your life easier)</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Installation_guide">arch linux installation instructions</a></li>
+</ul>
+
+
+<h1>Extra tweaking</h1>
+
+<h2>Video</h2>
+
+<ul>
+<li>Make sure switchable GPUs are enabled in BIOS</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA">insructions on the arch wiki</a></li>
+<li>To enable intel GPU add <code>i915.preliminary_hw_support=1</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> in the <code>/etc/default/grub</code> file. This should be solved after 4.3 kernel release.</li>
+<li>Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).</li>
+</ul>
+
+
+<h2>Wifi</h2>
+
+<p>Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
+There was a patch for the 17 inch model <a href="http://www.gossamer-threads.com/lists/linux/kernel/2323659">here</a>.</p>
+
+<h3>Temporary solution 1:</h3>
+
+<ul>
+<li><code>sudo systemctl enable rfkill-unblock@wifi.service</code></li>
+<li><code>sudo rfkill unblock wifi</code></li>
+<li>Works fine with <code>wicd</code></li>
+<li>Configuring NetworkManager service to be run after rfkill service should also work</li>
+</ul>
+
+
+<h3>Temporary solution 2:</h3>
+
+<ul>
+<li><code>echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf</code> to disable acpi module</li>
+</ul>
+
+
+<h2>Audio clicking</h2>
+
+<p>This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
+To do that append <code>timeout=36000</code> to line <code>load-module module-suspend-on-idle</code> in the <code>/etc/pulse/default.pa</code> configuration file.
+And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulseaudio --start</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Arch Linux on Macbook Pro 8.2 (17" 2011)]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/"/>
+    <updated>2015-08-08T09:53:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011</id>
+    <content type="html"><![CDATA[<p>Couple of tips from my experience of running Arch on Macbook 8.2.</p>
+
+<!--more-->
+
+
+<h2>Installation</h2>
+
+<p><a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.</p>
+
+<h2>Use broadcom-wl wireless module from AUR</h2>
+
+<p>This is proprietary broadcom driver. Works fine with BCM4331.
+Only thing that does not work - hidden SSID.</p>
+
+<p>OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.</p>
+
+<p>To make sure that correct module is used by hardwrare blacklist every other module and reboot:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#/etc/modprobe.d/wl.conf
+</span><span class='line'>blacklist b43
+</span><span class='line'>blacklist b43legacy
+</span><span class='line'>blacklist ssb
+</span><span class='line'>blacklist bcm43xx
+</span><span class='line'>blacklist brcm80211
+</span><span class='line'>blacklist brcmfmac
+</span><span class='line'>blacklist brcmsmac
+</span><span class='line'>blacklist bcma</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Disable Radeon GPU for better power consumption</h2>
+
+<p>This will reduce power usage dramatically but also will disable external screen support via display port.
+This laptop relies on the external gpu to work with display port.</p>
+
+<p>Edit <code>/etc/grub.d/00_header</code> and add outb lines in between <code>set gfxmode=${GRUB_GFXMODE}</code> and <code>load video</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...
+</span><span class='line'>set gfxmode=${GRUB_GFXMODE}
+</span><span class='line'>outb 0x728 1
+</span><span class='line'>outb 0x710 2
+</span><span class='line'>outb 0x740 2
+</span><span class='line'>outb 0x750 0
+</span><span class='line'>load video
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Generate new grub config:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># grub-mkconfig -o /boot/grub/grub.cfg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PS. This post will probably grow over time.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nvim terminal + ClojureScript and figwheel]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/"/>
+    <updated>2015-06-15T19:37:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel</id>
+    <content type="html"><![CDATA[<p>This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.</p>
+
+<!--more-->
+
+
+<p><a href="http://neovim.io/">NeoVim</a> nowadays is almost fully compatible with vim.
+It is able to reuse my <a href="https://github.com/Gonzih/.vim/blob/master/vimrc">.vimrc</a> file without any issues.
+And recently it got proper terminal emulator built-in.
+So how about reusing it for ClojureScript development?</p>
+
+<p>If you are lazy (like I am) and don&#8217;t want to setup piggieback support
+for fireplace.vim or don&#8217;t feel like tmux integration is good enough
+this solution should be your new starting point.</p>
+
+<p>Just open some clojure[script] file and create second split.
+Open terminal using <code>:terminal</code> command.</p>
+
+<p>Here are some keybindings that will help you to send code from
+your clojure buffer to the terminal buffer.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="k">if</span> has<span class="p">(</span><span class="s2">&quot;nvim&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c">  &quot; Open terminal and run lein figwheel</span>
+</span><span class='line'>  nmap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="nb">term</span> <span class="p">&lt;</span>C<span class="p">-</span><span class="k">w</span><span class="p">&gt;</span><span class="k">v</span>:terminal<span class="p">&lt;</span>CR<span class="p">&gt;</span>lein figwheel<span class="p">&lt;</span>CR<span class="p">&gt;&lt;</span>C<span class="p">-</span>\<span class="p">&gt;&lt;</span>C<span class="p">-</span><span class="k">n</span><span class="p">&gt;&lt;</span>C<span class="p">-</span><span class="k">w</span><span class="p">&gt;</span><span class="k">p</span>
+</span><span class='line'><span class="c">  &quot; Evaluate anything from the visual mode in the next window</span>
+</span><span class='line'>  vmap <span class="p">&lt;</span>buffer<span class="p">&gt;</span> <span class="p">,</span><span class="k">e</span> <span class="k">y</span><span class="p">&lt;</span>C<span class="p">-</span><span class="k">w</span><span class="p">&gt;</span>wpi<span class="p">&lt;</span>CR<span class="p">&gt;&lt;</span>C<span class="p">-</span>\<span class="p">&gt;&lt;</span>C<span class="p">-</span><span class="k">n</span><span class="p">&gt;&lt;</span>C<span class="p">-</span><span class="k">w</span><span class="p">&gt;</span><span class="k">p</span>
+</span><span class='line'><span class="c">  &quot; Evaluate outer most form</span>
+</span><span class='line'>  nmap <span class="p">&lt;</span>buffer<span class="p">&gt;</span> <span class="p">,</span><span class="k">e</span> ^<span class="k">v</span>%<span class="p">,</span><span class="k">e</span>
+</span><span class='line'><span class="c">  &quot; Evaluate buffer&quot;</span>
+</span><span class='line'>  nmap <span class="p">&lt;</span>buffer<span class="p">&gt;</span> <span class="p">,</span><span class="k">b</span> ggVG<span class="p">,</span><span class="k">e</span>
+</span><span class='line'><span class="k">endif</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hey! Now you can finally stop looking at the emacs land!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ServerSide rendering of Reagent components]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/"/>
+    <updated>2015-02-16T10:12:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components</id>
+    <content type="html"><![CDATA[<p>Great thing about React is that you can write what people nowadays call &#8220;isomorphic JavaScript&#8221;.
+In this post we will not discuss how wrong this term is in many ways,
+but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.</p>
+
+<!--more-->
+
+
+<p>In my experience simplest optimization to run in some js engine on server side is whitespace.
+It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
+So our compiler configuration should look something like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:id</span> <span class="s">&quot;server-side&quot;</span>
+</span><span class='line'> <span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src&quot;</span><span class="p">]</span>
+</span><span class='line'> <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span> <span class="s">&quot;resources/public/javascripts/server-side.js&quot;</span>
+</span><span class='line'>            <span class="ss">:output-dir</span> <span class="s">&quot;resources/public/javascripts/out-server-side&quot;</span>
+</span><span class='line'>            <span class="ss">:preamble</span> <span class="p">[</span><span class="s">&quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&quot;</span><span class="p">]</span>
+</span><span class='line'>            <span class="ss">:pretty-print</span> <span class="nv">false</span>
+</span><span class='line'>            <span class="ss">:warnings</span> <span class="nv">true</span>
+</span><span class='line'>            <span class="ss">:optimizations</span> <span class="ss">:whitespace</span><span class="p">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">main-component</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">with-meta</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">...</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span><span class="ss">:component-did-mount</span> <span class="p">(</span><span class="nb">comp </span><span class="nv">init-my-scroll-handler!</span>
+</span><span class='line'>                                <span class="nv">also-init-my-go-loop!</span><span class="p">)}))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next let&#8217;s create function that will do some rendering to the string.
+I like to keep this function in a component specific ns just for convenience.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">render-me-to-s</span> <span class="p">[</span><span class="nv">initial-state</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">reset!</span> <span class="nv">my-main-state</span> <span class="p">(</span><span class="nf">js-&gt;clj</span> <span class="nv">initial-state</span><span class="p">))</span>
+</span><span class='line'>  <span class="c1">; Render component to markup without reactid</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">reagent.core/render-to-static-markup</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">])</span>
+</span><span class='line'>  <span class="c1">; Or render component to ready to-go react markup</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">reagent.core/render-to-string</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now server side bootstrapping, most of this code was taken from <a href="https://github.com/reactjs/react-rails">react-rails plugin</a>.</p>
+
+<p>First of all react expects to have global or window objects in your js engine:</p>
+
+<figure class='code'><figcaption><span>setup.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">global</span> <span class="o">=</span> <span class="nx">global</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="nx">self</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nb">window</span> <span class="o">=</span> <span class="nb">window</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">console</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">console</span> <span class="o">||</span> <span class="p">{};</span>
+</span><span class='line'><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">fn</span> <span class="k">in</span> <span class="nx">console</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">[</span><span class="nx">fn</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now let&#8217;s try and use all this in our code (for now in Ruby):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cxt</span> <span class="o">=</span> <span class="ss">V8</span><span class="p">:</span><span class="ss">:Context</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">cxt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;setup.js&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">cxt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;resources/public/javascripts/server-side.js&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">html</span> <span class="o">=</span> <span class="n">cxt</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;my.amazing_component.ns.render_me_to_s(</span><span class="si">#{</span><span class="n">init_state</span><span class="o">.</span><span class="n">to_json</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that&#8217;s it. As a way to pass data from ruby to clojurescript json works fine.
+Sometimes you might want to use <code>ActionController::Base.helpers.j</code> helper that will
+escape your data for usage inside json, but most of the time you should be alright without it.</p>
+
+<p>If you have issues with core.async there are 2 ways to solve it.
+I personally prefer to move core.async initialization into some lifecycle method.
+Another solution is to implement setTimeout function like that in your <code>setup.js</code> snippet:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">goog</span><span class="p">.</span><span class="nx">global</span><span class="p">.</span><span class="nx">setTimeout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">cb</span><span class="p">();</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now frontend part. First let&#8217;s in-line generated html in to the container:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;div id=&quot;content&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">html</span> <span class="cp">%&gt;</span><span class="x">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then let&#8217;s write function that will render our component on frontend:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">mount-me</span> <span class="p">[</span><span class="nv">initial-state</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">reset!</span> <span class="nv">my-main-state</span> <span class="p">(</span><span class="nf">js-&gt;clj</span> <span class="nv">initial-state</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">reagent.core/render</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">]</span>
+</span><span class='line'>                       <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">&quot;content&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
+Am I wrong on this one? Don&#8217;t know yet.</p>
+
+<p>Inline javascript that you should use on frontend looks like that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;script&gt;</span>
+</span><span class='line'><span class="x">my.amazing_component.ns.mount_me(</span><span class="cp">&lt;%=</span> <span class="n">init_state</span><span class="o">.</span><span class="n">to_json</span> <span class="cp">%&gt;</span><span class="x">)</span>
+</span><span class='line'><span class="x">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Nashorn example (result of my experiments in the REPL)</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">import </span><span class="o">&#39;</span><span class="p">[</span><span class="nv">javax.script</span> <span class="nv">ScriptEngineManager</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">nashorn</span> <span class="p">(</span><span class="nf">.getEngineByName</span> <span class="p">(</span><span class="nf">ScriptEngineManager.</span><span class="p">)</span> <span class="s">&quot;nashorn&quot;</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">; Same as in ruby version</span>
+</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">setup-script</span> <span class="p">(</span><span class="nb">slurp </span><span class="s">&quot;setup.js&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">ss-script</span> <span class="p">(</span><span class="nb">slurp </span><span class="s">&quot;resources/public/javascripts/server-side.js&quot;</span><span class="p">))</span>
+</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">render-script</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;my.amazing_component.ns.render_me_to_s(&quot;</span> <span class="nv">my-state-json-string</span> <span class="s">&quot;);&quot;</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">.eval</span> <span class="nv">nashorn</span> <span class="nv">setup-script</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nf">.eval</span> <span class="nv">nashorn</span> <span class="nv">ss-script</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nf">.eval</span> <span class="nv">nashorn</span> <span class="nv">render-script</span><span class="p">)</span> <span class="c1">; our html markup</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I must admit that this code works on small reagent example.
+I&#8217;m unable to load production code from my current project in to Nashorn.</p>
+
+<p>Also it helps a lot if you started developing your project with server side rendering in mind.</p>
+
+<p>Of course it&#8217;s better to have some kind of &#8220;renderers pool&#8221; in JVM.
+Good thing that clojure allows you to implement thing like that in few lines of code.
+In ruby it&#8217;s not a problem since we have 1 context per worker.</p>
+
+<p><strong>Useful Links:</strong></p>
+
+<ul>
+<li><a href="https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw">ClojureScript mailing list topic</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ln -sf /usr/bin/emacs /usr/bin/vim ?]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/"/>
+    <updated>2015-02-15T19:21:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim</id>
+    <content type="html"><![CDATA[<p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
+And left it like that for a couple of days.
+I must say that it was surprisingly nice experience.
+Tinkering around with elisp, building editing environment from scratch.</p>
+
+<p>Of course interesting question is &#8220;How did I end up with this idea in my head?&#8221;.</p>
+
+<!--more-->
+
+
+<p>I tried to play with emacs few times couple of years ago.
+But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.</p>
+
+<p>I tried evil mode, but it went not so well.
+Problem is that I&#8217;m also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
+I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
+Also probably my lack of patience played against me.
+So I gave up and continued using vim (something like 5 years of hapiness).</p>
+
+<p>Recently ClojureScript tool called <a href="https://github.com/bhauman/lein-figwheel">figwheel</a> added repl support.
+So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
+Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
+Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim <a href="https://github.com/tpope/vim-fireplace">vim-fireplace</a> relies on nrepl.
+I was using for some time <a href="https://github.com/sjl/tslime2.vim">tslime2</a> in vim to work with ClojureScript.
+Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
+It works. You don&#8217;t have out of the box tooling that will select your top most clojure form sadly.
+Once upon a time I had discussion on #clojurescript irc and <a href="https://twitter.com/martinklepsch">@martinklepsh</a> mentioned that nowadays evil-mode is much better.
+I was bored and followed that track. I did run <code>rm -rf .emacs.d</code> and started from scratch.
+As a result my workflow from vim was ported to emacs in a couple of hours.
+It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
+I set my default editor to emacs and continued doing my thing for a couple of days.</p>
+
+<p>And here what I think so far.</p>
+
+<p>Good:</p>
+
+<ul>
+<li>Evil mode is good and it&#8217;s very close. It&#8217;s probably closest thing to vim that I ever tried.
+It&#8217;s not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
+(Big shout outs to the author of idea plugin. It&#8217;s very impressive.)</li>
+<li>Writing configuration in a language that I understand was a big relief.</li>
+<li>Mapping configuration is simpler. You are mapping elisp function to the key. It&#8217;s simpler and easier to understand than remapping mechanism in vim.</li>
+<li>Helm surprised me in it&#8217;s speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.</li>
+<li>Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. <a href="https://github%20in%20inferior%20lisp%20mode%20tuned%20to%20play%20well%20with%20clojure">inf-clojure</a> is enhanced clojure mode for the inf-lisp.</li>
+<li>It can do async stuff! If you used vim then you know what I mean. In emacs it&#8217;s just there. Without required pythor/ruby support enabled during compilation.</li>
+<li>Built-in package manager. Just run <code>package-install</code> and it&#8217;s there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.</li>
+<li>Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run <code>describe-key</code> and see what is going on. You can do something similar in vim, but in emacs it&#8217;s much better.</li>
+<li>Startup time is slow and it&#8217;s solvable. Just run systemd user service with <code>emacs --daemon</code> and that is enough for most cases.</li>
+<li>And you still have emacs operating system at your disposal!</li>
+<li>Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.</li>
+</ul>
+
+
+<p>Not so good:</p>
+
+<ul>
+<li>Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it&#8217;s unnecessary. Of course this is related only to my habits and muscle memory.</li>
+<li>Evil is slower.
+Most of the time it&#8217;s not a problem. But sometimes I&#8217;m mashing my keyboard too fast and mess happens.
+Good example is replace (<code>r</code>) key.
+Press <code>r:</code> too fast and you might end up in vim command line.</li>
+<li>Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don&#8217;t play well with evil.</li>
+<li>Good example of painful evil integration is cider.
+It just does not work with evil mode.
+Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
+That was big disappointment for me. I had high hopes for the cider. I&#8217;m realizing that I don&#8217;t really need everything that cider provides.
+I&#8217;m very happy with just ability to evaluate code, without even debugger and nice stacktraces.
+But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
+After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on <a href="https://github.com/clojure-emacs/inf-clojure">inf-clojure</a>.</li>
+</ul>
+
+
+<p>Will I continue using emacs? Yes.</p>
+
+<p>Will it be my default editor? Probably no.
+Vim feels more reliable because it provides modal editing experience out of the box.
+In emacs it an option.
+I&#8217;m totally fine with giving away all that goodness that emacs provides to have proper editing experience <strong>all the time</strong>.
+In every buffer, in every menu.
+And I will continue slowly improving my emacs configuration.</p>
+
+<p>This experiment reminded me how many things are missing from my setup.
+It also reminded me that <a href="https://neovim.org">neovim</a> might be next big thing in my tool belt.
+I&#8217;m really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.</p>
+
+<p><strong>PS</strong></p>
+
+<ul>
+<li><a href="http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/">Here</a> is very good tutorial to get vim users started in emacs.</li>
+<li>My .emacs.d is <a href="https://github.com/Gonzih/.emacs.d">here</a>. I tried to keep it minimalistic.</li>
+<li>My .vim is <a href="https://github.com/Gonzih/.vim">here</a>.</li>
+<li>If you are looking for the best vim like experience in emacs please take a look at the <a href="https://github.com/syl20bnr/spacemacs">spacemacs project</a>.</li>
+<li>Looking for the good color theme in emacs? Take a look at the port of <a href="https://github.com/morhetz/gruvbox">vim&#8217;s gruvbox theme</a>.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grench binary for OpenSUSE]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/"/>
+    <updated>2014-10-23T08:47:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse</id>
+    <content type="html"><![CDATA[<p><a href="http://leiningen.org/grench.html">Grenchman</a> is a small tool that runs leiningen tasks over nrepl.
+Helps with JVM startup time during development.
+Build in OCaml. If you are not in to the building binary on your own,
+there are pre-build binaries on the <a href="http://leiningen.org/grench.html">official website</a>.</p>
+
+<p>And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).</p>
+
+<p><a href="https://dl.dropboxusercontent.com/u/4109351/grenchman/grench-0.2.0-opensuse">grench-opensuse</a>
+[<a href="https://dl.dropboxusercontent.com/u/4109351/grenchman/grench-0.2.0-opensuse.sha1">sha1</a>
+| <a href="https://dl.dropboxusercontent.com/u/4109351/grenchman/grench-0.2.0-opensuse.asc">sig</a>]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Two way data bindings in Reagent]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/"/>
+    <updated>2014-10-22T17:29:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent</id>
+    <content type="html"><![CDATA[<p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath it&#8217;s all about core.async.
+Also provides ability to apply transformation using transducers.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">form</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">{}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">bind-input</span>
+</span><span class='line'>  <span class="s">&quot;Generat on-change callback,</span>
+</span><span class='line'><span class="s">   bind value to form-key of form-atom.</span>
+</span><span class='line'><span class="s">   Provides ability to implement transformation using transducers.&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">form-atom</span> <span class="nv">form-key</span> <span class="nv">xform</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">local-chan</span> <span class="p">(</span><span class="nf">chan</span> <span class="mi">1</span> <span class="nv">xform</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">go-loop</span> <span class="p">[]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">swap!</span> <span class="nv">form-atom</span> <span class="nb">assoc </span><span class="nv">form-key</span> <span class="p">(</span><span class="nf">&lt;!</span> <span class="nv">local-chan</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">recur</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">event</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">put!</span> <span class="nv">local-chan</span>
+</span><span class='line'>            <span class="p">(</span><span class="nf">.-value</span> <span class="p">(</span><span class="nf">.-target</span> <span class="nv">event</span><span class="p">))))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">bound-input</span>
+</span><span class='line'>  <span class="s">&quot;Generate input,</span>
+</span><span class='line'><span class="s">   create two way data binding</span>
+</span><span class='line'><span class="s">   between input value and value under form-key in form-atom.</span>
+</span><span class='line'><span class="s">   Provides ability to implement transformation using transducers.&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">attrs</span> <span class="nv">form-atom</span> <span class="nv">form-key</span> <span class="nv">xform</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">[</span><span class="ss">:input</span> <span class="p">(</span><span class="nb">merge </span><span class="nv">attrs</span>
+</span><span class='line'>                 <span class="p">{</span><span class="ss">:value</span> <span class="p">(</span><span class="nf">form-key</span> <span class="o">@</span><span class="nv">form-atom</span><span class="p">)</span>
+</span><span class='line'>                  <span class="ss">:on-change</span> <span class="p">(</span><span class="nf">bind-input</span> <span class="nv">form-atom</span> <span class="nv">form-key</span> <span class="nv">xform</span><span class="p">)})])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">main-component</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">[</span><span class="ss">:div</span>
+</span><span class='line'>   <span class="p">[</span><span class="ss">:h3</span> <span class="p">(</span><span class="ss">:name</span> <span class="o">@</span><span class="nv">form</span><span class="p">)</span> <span class="s">&quot; value&quot;</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">[</span><span class="nv">bound-input</span> <span class="p">{</span><span class="ss">:type</span> <span class="ss">:text</span><span class="p">}</span> <span class="nv">form</span> <span class="ss">:name</span> <span class="p">(</span><span class="nb">filter </span><span class="o">#</span><span class="p">(</span><span class="nb">&gt; </span><span class="mi">15</span> <span class="p">(</span><span class="nb">count </span><span class="nv">%</span><span class="p">)))]])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">reagent/render-component</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">]</span>
+</span><span class='line'>                          <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">&quot;content&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Replacing shell scripts with Clojure+JamVM]]></title>
@@ -213,6 +829,11 @@ Also memory usage of JamVM makes it perfect for embedded systems.</p>
 If you need external dependencies you can solve it (in theory)
 with classpath manipulations in java command (<code>java -cp dep.jar:dep2.jar:.</code>).
 Still you can plug lein exec to JamVM if you want.</p>
+
+<h3>Update</h3>
+
+<p>I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
+so you can just run <code>apt-get -y install icedtea-7-jre-jamvm</code> to install latest build.</p>
 ]]></content>
   </entry>
   
@@ -260,6 +881,10 @@ Solution can be applied to any rpm based system (I think so).</p>
 
 <p>And it should work.
 I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).</p>
+
+<p><strong>PS</strong></p>
+
+<p>If you have issues with volume being too loud by default make sure that you changed <code>flat-volumes</code> from <code>yes</code> to <code>no</code> in <code>/etc/pulse/daemon.conf</code></p>
 ]]></content>
   </entry>
   
@@ -1612,867 +2237,6 @@ java.mail framework was not so bad as I was expecting at first.</p>
 <li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Quick LXC configuration with netctl nat]]></title>
-    <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
-    <updated>2013-04-16T07:42:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
-    <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
-
-<!--more-->
-
-
-<p>Install <code>lxc</code> first.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo pacman -S lxc
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next is bridge device for nat. I&#8217;m already migrated to netctl in arch linux so my configuration is for netctl.</p>
-
-<figure class='code'><figcaption><span>/etc/netctl/lxcbridge</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="na">Description</span><span class="o">=</span><span class="s">&quot;LXC Bridge connection&quot;</span>
-</span><span class='line'><span class="na">Interface</span><span class="o">=</span><span class="s">lxcbr0</span>
-</span><span class='line'><span class="na">Connection</span><span class="o">=</span><span class="s">bridge</span>
-</span><span class='line'><span class="na">BindsToInterfaces</span><span class="o">=</span><span class="s">()</span>
-</span><span class='line'><span class="na">IP</span><span class="o">=</span><span class="s">static</span>
-</span><span class='line'><span class="na">Address</span><span class="o">=</span><span class="s">192.168.100.1/24</span>
-</span><span class='line'><span class="na">FwdDelay</span><span class="o">=</span><span class="s">0</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Make sure you have <code>dnsmasq</code> installed.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>pacman -S dnsmasq
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Run interface.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo netctl start lxcbridge
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And enable it for startup</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo netctl <span class="nb">enable </span>lxcbridge
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add iptables rule:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo iptables -t nat -A POSTROUTING -o &lt;you-main-ethernet-device-here&gt; -j MASQUERADE
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Save iptables (as superuser):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>iptables-save &gt; /etc/iptables/iptables.rules
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Enable ip_forward:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo sysctl net.ipv4.ip_forward<span class="o">=</span>1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or to save forwarding persisent add following line:</p>
-
-<figure class='code'><figcaption><span>/etc/sysctl.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>net.ipv4.ip_forward=1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Create new Ubuntu container:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo lxc-create -n playtime -t ubuntu
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It will create new root filesystem with new configuration. Lets now change conatiner&#8217;s configuration:</p>
-
-<figure class='code'><figcaption><span>/var/lib/lxc/playtime/config</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="na">lxc.network.type</span> <span class="o">=</span> <span class="s">veth</span>
-</span><span class='line'><span class="na">lxc.network.flags</span> <span class="o">=</span> <span class="s">up</span>
-</span><span class='line'><span class="na">lxc.network.link</span> <span class="o">=</span> <span class="s">lxcbr0</span>
-</span><span class='line'><span class="na">lxc.network.hwaddr</span> <span class="o">=</span> <span class="s">00:FF:AA:00:00:01</span>
-</span><span class='line'><span class="na">lxc.network.ipv4</span> <span class="o">=</span> <span class="s">192.168.100.10/24</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Lets boot our conatiner. Better use screen or tmux for it.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo lxc-start -n playtime
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Default user and password for ubuntu template is <code>ubuntu</code>.</p>
-
-<p>Login to container and add default gateway configuration on network up:</p>
-
-<figure class='code'><figcaption><span>/etc/network/if-up.d/routes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#! /bin/sh</span>
-</span><span class='line'>
-</span><span class='line'>route add default gw 192.168.100.1
-</span><span class='line'>
-</span><span class='line'><span class="nb">exit </span>0
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Reboot container with <code>sudo reboot</code> in it.</p>
-
-<p>Now you can ssh to your container <code>ssh ubuntu@192.168.100.10</code>.
-You can also run container as daemon <code>sudo lxc-start -n playtime -d</code>.
-And you can shutdown container with <code>sudo shutdown</code> inside container.</p>
-
-<p>Thanks for reading. Let me know if I miss something or you know better way of configuring all this stuff.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark]]></title>
-    <link href="http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8/"/>
-    <updated>2013-04-14T12:00:00+02:00</updated>
-    <id>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-java-8</id>
-    <content type="html"><![CDATA[<p><a href="http://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
-
-<!-- more -->
-
-
-<p>Pi is running Raspbian.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cat /etc/*-release
-</span><span class='line'>PRETTY_NAME="Debian GNU/Linux 7.0 (wheezy)"
-</span><span class='line'>NAME="Debian GNU/Linux"
-</span><span class='line'>VERSION_ID="7.0"
-</span><span class='line'>VERSION="7.0 (wheezy)"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pi CPU is running on 700Mhz.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&gt; cpufreq-info | grep 'current CPU'
-</span><span class='line'>current CPU frequency is 700 MHz.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Clojure version is 1.5.1.</p>
-
-<p>Benchmark code is from <a href="http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya&#8217;s post</a>, also used for my BeagleBone Clojure/ClojureScript benchmarks:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">benchmark.core</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">factorial</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">reduce * </span><span class="p">(</span><span class="nb">range </span><span class="mi">1</span><span class="nv">N</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">x</span><span class="p">))))</span>
-</span><span class='line'><span class="c1">;                   ^ integerOverflow fix</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt;= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="mi">1</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">sort-seq</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">sort </span><span class="p">(</span><span class="nb">repeat </span><span class="mi">100000</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">2000000</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">time-it</span> <span class="p">[</span><span class="nv">fn</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">values</span>  <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">i</span> <span class="p">(</span><span class="nb">range </span><span class="mi">200</span><span class="p">)]</span> <span class="p">(</span><span class="nb">with-out-str </span><span class="p">(</span><span class="nb">time </span><span class="p">(</span><span class="nf">fn</span><span class="p">))))</span>
-</span><span class='line'>        <span class="nv">doubles</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">Double.</span> <span class="p">(</span><span class="nb">nth </span><span class="p">(</span><span class="nf">.split</span> <span class="nv">%</span> <span class="s">&quot; &quot;</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> <span class="nv">values</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">apply + </span><span class="nv">doubles</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">doubles</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(factorial 5000) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(fib 20) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(sort-seq) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">sort-seq</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This time I was a little bit smarter to run all code with <code>lein trampoline run</code> to eliminate overhead.</p>
-
-<p>Numbers:</p>
-
-<p>OpenJDK:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; </span><span class="nv">sudo</span> <span class="nv">apt-get</span> <span class="nv">install</span> <span class="nv">openjdk-7-jre-headless</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">java</span> <span class="nv">-version</span>
-</span><span class='line'><span class="nv">java</span> <span class="nv">version</span> <span class="s">&quot;1.7.0_07&quot;</span>
-</span><span class='line'><span class="nv">OpenJDK</span> <span class="nv">Runtime</span> <span class="nv">Environment</span> <span class="p">(</span><span class="nf">IcedTea7</span> <span class="mf">2.3</span><span class="nv">.2</span><span class="p">)</span> <span class="p">(</span><span class="mi">7</span><span class="nv">u7-2.3.2a-1+rpi1</span><span class="p">)</span>
-</span><span class='line'><span class="nv">OpenJDK</span> <span class="nv">Zero</span> <span class="nv">VM</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">22.0</span><span class="nv">-b10</span>, <span class="nv">mixed</span> <span class="nv">mode</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
-</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span>
-</span><span class='line'><span class="mf">90.5</span> <span class="mf">15.7</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>
-</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">5956.007845080006</span>
-</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">713.6807171</span>
-</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">9633.873322030007</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Oracle JRE:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; </span><span class="nv">java</span> <span class="nv">-version</span>
-</span><span class='line'><span class="nv">java</span> <span class="nv">version</span> <span class="s">&quot;1.8.0-ea&quot;</span>
-</span><span class='line'><span class="nv">Java</span><span class="p">(</span><span class="nf">TM</span><span class="p">)</span> <span class="nv">SE</span> <span class="nv">Runtime</span> <span class="nv">Environment</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">1.8</span><span class="nv">.0-ea-b36e</span><span class="p">)</span>
-</span><span class='line'><span class="nv">Java</span> <span class="nv">HotSpot</span><span class="p">(</span><span class="nf">TM</span><span class="p">)</span> <span class="nv">Client</span> <span class="nv">VM</span> <span class="p">(</span><span class="nf">build</span> <span class="mf">25.0</span><span class="nv">-b04</span>, <span class="nv">mixed</span> <span class="nv">mode</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
-</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span>
-</span><span class='line'><span class="mf">87.9</span> <span class="mf">18.9</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>
-</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">685.5312071299996</span>
-</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">29.505588125000017</span>
-</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">1137.3281607850001</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Startup time for &#8220;Hello, World!&#8221;:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">#</span> <span class="nv">OpenJDK</span>
-</span><span class='line'><span class="nb">&gt; time </span><span class="nv">lein</span> <span class="nv">run</span>
-</span><span class='line'><span class="nv">Hello</span>, <span class="nv">World!</span>
-</span><span class='line'><span class="nv">lein</span> <span class="nv">run</span>  <span class="mf">56.51</span><span class="nv">s</span> <span class="nv">user</span> <span class="mf">1.58</span><span class="nv">s</span> <span class="nv">system</span> <span class="mi">87</span><span class="nv">%</span> <span class="nv">cpu</span> <span class="mi">1</span><span class="ss">:06.16</span> <span class="nv">total</span>
-</span><span class='line'><span class="nb">&gt; time </span><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>
-</span><span class='line'><span class="nv">Hello</span>, <span class="nv">World!</span>
-</span><span class='line'><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>  <span class="mf">57.73</span><span class="nv">s</span> <span class="nv">user</span> <span class="mf">0.96</span><span class="nv">s</span> <span class="nv">system</span> <span class="mi">96</span><span class="nv">%</span> <span class="nv">cpu</span> <span class="mi">1</span><span class="ss">:00.57</span> <span class="nv">total</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">#</span> <span class="nv">Oracle</span> <span class="nv">JRE</span>
-</span><span class='line'><span class="nb">&gt; time </span><span class="nv">lein</span> <span class="nv">run</span>
-</span><span class='line'><span class="nv">Hello</span>, <span class="nv">World!</span>
-</span><span class='line'><span class="nv">lein</span> <span class="nv">run</span>  <span class="mf">31.47</span><span class="nv">s</span> <span class="nv">user</span> <span class="mf">1.43</span><span class="nv">s</span> <span class="nv">system</span> <span class="mi">95</span><span class="nv">%</span> <span class="nv">cpu</span> <span class="mf">34.298</span> <span class="nv">total</span>
-</span><span class='line'><span class="nb">&gt; time </span><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>
-</span><span class='line'><span class="nv">Hello</span>, <span class="nv">World!</span>
-</span><span class='line'><span class="nv">lein</span> <span class="nv">trampoline</span> <span class="nv">run</span>  <span class="mf">32.11</span><span class="nv">s</span> <span class="nv">user</span> <span class="mf">1.18</span><span class="nv">s</span> <span class="nv">system</span> <span class="mi">94</span><span class="nv">%</span> <span class="nv">cpu</span> <span class="mf">35.070</span> <span class="nv">total</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Looks promising for clojure on small arm devices :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
-    <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
-    <updated>2013-03-19T11:09:00+01:00</updated>
-    <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
-    <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
-Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
-
-<!-- more -->
-
-
-<p>First of all we need some parts.</p>
-
-<ul>
-<li>Tamiya Universal Plate Set (TAM70157) (better to order 2 pcs)</li>
-<li>Tamiya Track and Wheel Set (TAM70100)</li>
-<li>Tamiya Twin Motor Gearbox  (TAM70097)</li>
-<li>Arduino (I have UNO and Leonardo, UNO was choosen since I don&#8217;t need to make modifications in Firmata code for it (except baudrate))</li>
-<li>HBridge IC L293 (L293B was used)</li>
-<li>Bluetooth module (you can buy Arduino ready module, I will be using cheapest possible module)</li>
-<li>Bluetooth in PC</li>
-<li>Wires</li>
-<li>Batteries or Accumulator (I have 9v batteries so I will use them)</li>
-<li>Gamepad (Logitech Rumble Gemapad F510 was used)</li>
-</ul>
-
-
-<h1>Putting things together</h1>
-
-<h2>Chassis</h2>
-
-<p>First lets build gearbox. You can use it in few different modes of gear ratio. I selected 114.7:1 gear ratio (lucky guess).
-Read instructions, take your time. I had 2 9v motors, so since I will be using 9v batteries I decided to replace default motors with 9v ones.</p>
-
-<p>Next assemble tracks. Pretty easy, right? Next is time to put it all together. Since I had only 1 plate I made second one from peace of plexiglass.
-I made something like 2 floored chassis. First floor is for motor and wheels (and maybe batteries) and second is for Arduino (and maybe batterries).</p>
-
-<h2>Bluetooth</h2>
-
-<p>We need to do 2 thing with our cheap bluetooth module:</p>
-
-<p>Solder legs to it
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.jpg" alt="Soldered bluetooth module" /></p>
-
-<p>Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg" alt="Voltage devider" /></p>
-
-<h2>Gearbox and HBridge Driver</h2>
-
-<p>To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I&#8217;m afraid it would be messy.
-To understand how HBridge works you should read <a href="http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview">Adafruit post</a>.</p>
-
-<p>HBridge -> Arduino Schematics:
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg" alt="Schematics" /></p>
-
-<h2>Final version</h2>
-
-<h3>Photos</h3>
-
-<p><img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-001.jpg" alt="rc-toy-001" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-002.jpg" alt="rc-toy-002" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-003.jpg" alt="rc-toy-003" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-004.jpg" alt="rc-toy-004" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-005.jpg" alt="rc-toy-005" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-006.jpg" alt="rc-toy-006" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-007.jpg" alt="rc-toy-007" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-008.jpg" alt="rc-toy-008" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-009.jpg" alt="rc-toy-009" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-010.jpg" alt="rc-toy-010" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-011.jpg" alt="rc-toy-011" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-012.jpg" alt="rc-toy-012" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-014.jpg" alt="rc-toy-014" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-016.jpg" alt="rc-toy-016" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-017.jpg" alt="rc-toy-017" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-018.jpg" alt="rc-toy-018" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-019.jpg" alt="rc-toy-019" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-020.jpg" alt="rc-toy-020" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg" alt="rc-toy-021" /></p>
-
-<h3>Video</h3>
-
-<p><video width='640' height='480' preload='none' controls poster=' https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg'><source src='https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
-
-<h1>Writing some code</h1>
-
-<h2>Bluetooth as Serial port</h2>
-
-<p>I used blueman on my Arch Laptop. Gui is straightforward and easy to use.</p>
-
-<h2>Gamepad and kernel</h2>
-
-<p>You need to find kernel module for your gamepad. For my gamepad module <code>joydev</code> was required.
-After module is loaded you should see new device in <code>/dev/input</code>.</p>
-
-<h2>Clojure code</h2>
-
-<p>I used <a href="http://clojure.org/">Clojure</a> as main language for controlling Arduino. I took <a href="https://github.com/nakkaya/clodiuno">Clodiuno</a> library.
-It is Firmata protocol implementation for Clojure. Why Firmata? Because it&#8217;s easy, fast and provides great way to extend your project in future.</p>
-
-<p>So I wrote some code, uploaded Firmata to Arduino. And&#8230; it&#8217;s not working.</p>
-
-<p>After some digging in Firmata and Clodiuno code I wrote 2 pull request to Clodiuno.</p>
-
-<p>First issue was that bluetooth uses 9600 baudrate for communications. Fix? <a href="https://github.com/nakkaya/clodiuno/pull/5">pull.</a></p>
-
-<ul>
-<li>Update standart Firmata example code in Arduino IDE. Change baudrate to 9600.</li>
-<li>Change Clodiuno baudrate to 9600.</li>
-</ul>
-
-
-<p>Second was that Clodiuno waits for version response from Firmata on startup. It&#8217;s ok for wired UNO since it will be restarted when serial connection is established.
-But boards like Leonardo or if you are using bluetooth miss that behavior.</p>
-
-<p>Fix? <a href="https://github.com/nakkaya/clodiuno/pull/6">pull.</a> Manually ask firmware version on Clodiuno initialization.</p>
-
-<p>Most of controller related logic was extracted from awesome library <a href="https://github.com/gavilancomun/jinput-overtone">overtone-jinput</a>.
-I just replaced overtone related events handling with my own code based on Clodiuno.</p>
-
-<p>Final version of code is on <a href="https://github.com/Gonzih/clj-arduino-rc-toy">GitHub</a></p>
-
-<p>You can run it with <code>./run.sh</code>.</p>
-
-<h1>Raspberry Pi</h1>
-
-<p>Currently work in progress on moving Clojure code to Rapberry Pi.</p>
-
-<h2>Fixed Issues</h2>
-
-<h3>Native dependencies issue</h3>
-
-<p>Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#INFO: Failed to load library: no jinput-linux64 in java.library.path</span>
-</span><span class='line'>sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so<span class="sb">`</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Gamepad configuration</h3>
-
-<p>Add <code>joydev</code> to <code>/etc/modules</code> to see gamepad in <code>/etc/input</code>.
-Also you need to switch gamepad to direct input mode (X -> D switch on the back of gamepad).</p>
-
-<h2>Unfixed Issues</h2>
-
-<h3>Bluetooth as Serial port</h3>
-
-<p>To scan for devices from command line use <code>hcitool scan</code>.</p>
-
-<p>To bind bluetooth to serial port on startup use following code (untested yet):</p>
-
-<figure class='code'><figcaption><span>/etc/bluetooth/rfcomm.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>rfcomm0 {
-</span><span class='line'>        bind yes;
-</span><span class='line'>        device mac-adress-of-bluetooth-on-arduino;
-</span><span class='line'>        channel 1;
-</span><span class='line'>        comment &quot;Arduino&quot;;
-</span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>JInput permissions</h3>
-
-<p>For now I have no idea how to fix that issue. Looks like something is wrong with permissions.</p>
-
-<figure class='code'><figcaption><span>/etc/bluetooth/rfcomm.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
-</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
-    <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
-    <updated>2013-03-18T20:50:00+01:00</updated>
-    <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
-    <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
-
-<!--more-->
-
-
-<p>Functions do following:</p>
-
-<ul>
-<li>Initialize tags file with symlink to /tmp (tmpfs) with uuid in name if no symlink was found</li>
-<li>Touch tags file</li>
-<li>If file is empty (wc -l return 0 lines) then populate it with <code>ctags -R</code> command</li>
-<li>Remove all lines from tags file related to current file</li>
-<li>Update tags file with new content of current file with <code>ctags -a</code></li>
-</ul>
-
-
-<p>Why I use symlinks for tags file?</p>
-
-<ul>
-<li>Writes are slow</li>
-<li>Writes are bad for my SSD</li>
-<li>Memory is blazingly fast</li>
-</ul>
-
-
-<p>Here is my code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-</pre></td><td class='code'><pre><code class='vim'><span class='line'><span class="c">&quot; If tags file does not exist initializes it with symlink to tmp with UUID in</span>
-</span><span class='line'><span class="c">&quot; filename</span>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> InitTagsFileWithSymlink<span class="p">(</span><span class="k">f</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> filepath <span class="p">=</span> <span class="k">a</span>:<span class="k">f</span>
-</span><span class='line'>  <span class="k">let</span> issymlink <span class="p">=</span> system<span class="p">(</span><span class="s2">&quot;find &#39;&quot;</span> . filepath . <span class="s2">&quot;&#39; -type l | wc -l&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> issymlink <span class="p">==</span> <span class="m">0</span>
-</span><span class='line'>    <span class="k">let</span> uuid <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;uuidgen&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ln -s &quot;/tmp/ctags-for-vim-&#39;</span> . uuid . <span class="s1">&#39;&quot; &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span>
-</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> substitute<span class="p">(</span>cmd<span class="p">,</span> <span class="s1">&#39;\n&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
-</span><span class='line'>  <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Populates tags file if lines count is equal to 0</span>
-</span><span class='line'><span class="c">&quot; with `ctags -R .`</span>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> PopulateTagsFile<span class="p">(</span><span class="k">f</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> filepath <span class="p">=</span> <span class="k">a</span>:<span class="k">f</span>
-</span><span class='line'>  <span class="k">let</span> resp     <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;touch &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> <span class="nb">lines</span>    <span class="p">=</span> system<span class="p">(</span><span class="s1">&#39;wc -l &quot;&#39;</span> . filepath . <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> linescnt <span class="p">=</span> substitute<span class="p">(</span><span class="nb">lines</span><span class="p">,</span> <span class="s1">&#39;\D&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">if</span> linescnt <span class="p">==</span> <span class="m">0</span>
-</span><span class='line'>    <span class="k">let</span> cwd  <span class="p">=</span> getcwd<span class="p">()</span>
-</span><span class='line'>    <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ctags -Rf &quot;&#39;</span>. filepath . <span class="s1">&#39;&quot; &quot;&#39;</span> . cwd . <span class="s1">&#39;&quot;&#39;</span>
-</span><span class='line'>    <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
-</span><span class='line'>  <span class="k">endif</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Remove tags for saved file from tags file</span>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> DelTagOfFile<span class="p">(</span><span class="k">file</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> fullpath    <span class="p">=</span> <span class="k">a</span>:<span class="k">file</span>
-</span><span class='line'>  <span class="k">let</span> cwd         <span class="p">=</span> getcwd<span class="p">()</span>
-</span><span class='line'>  <span class="k">let</span> tagfilename <span class="p">=</span> cwd . <span class="s2">&quot;/tags&quot;</span>
-</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> substitute<span class="p">(</span>fullpath<span class="p">,</span> cwd . <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> escape<span class="p">(</span><span class="k">f</span><span class="p">,</span> <span class="s1">&#39;./&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> cmd         <span class="p">=</span> <span class="s1">&#39;sed --follow-symlinks -i &quot;/&#39;</span> . <span class="k">f</span> . <span class="s1">&#39;/d&quot; &quot;&#39;</span> . tagfilename . <span class="s1">&#39;&quot;&#39;</span>
-</span><span class='line'>  <span class="k">let</span> resp        <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">&quot; Init tags file</span>
-</span><span class='line'><span class="c">&quot; Populate it</span>
-</span><span class='line'><span class="c">&quot; Remove data related to saved file</span>
-</span><span class='line'><span class="c">&quot; Append it with data for saved file</span>
-</span><span class='line'><span class="k">function</span><span class="p">!</span> UpdateTags<span class="p">()</span>
-</span><span class='line'>  <span class="k">let</span> <span class="k">f</span>           <span class="p">=</span> expand<span class="p">(</span><span class="s2">&quot;%:p&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> cwd         <span class="p">=</span> getcwd<span class="p">()</span>
-</span><span class='line'>  <span class="k">let</span> tagfilename <span class="p">=</span> cwd . <span class="s2">&quot;/tags&quot;</span>
-</span><span class='line'>  <span class="k">call</span> InitTagsFileWithSymlink<span class="p">(</span>tagfilename<span class="p">)</span>
-</span><span class='line'>  <span class="k">call</span> PopulateTagsFile<span class="p">(</span>tagfilename<span class="p">)</span>
-</span><span class='line'>  <span class="k">call</span> DelTagOfFile<span class="p">(</span><span class="k">f</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">let</span> cmd  <span class="p">=</span> <span class="s1">&#39;ctags -a -f &#39;</span> . tagfilename . <span class="s1">&#39; &quot;&#39;</span> . <span class="k">f</span> . <span class="s1">&#39;&quot;&#39;</span>
-</span><span class='line'>  <span class="k">let</span> resp <span class="p">=</span> system<span class="p">(</span>cmd<span class="p">)</span>
-</span><span class='line'><span class="k">endfunction</span>
-</span><span class='line'>
-</span><span class='line'>command UpdateTags <span class="k">call</span> UpdateTags<span class="p">()</span>
-</span><span class='line'>autocmd <span class="nb">BufWritePost</span> *.rb<span class="p">,</span>*.<span class="nb">js</span><span class="p">,</span>*.coffee<span class="p">,</span>*.clj <span class="k">call</span> UpdateTags<span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Enjoy :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Blue Midnight Commander color scheme]]></title>
-    <link href="http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/"/>
-    <updated>2013-02-14T21:22:00+01:00</updated>
-    <id>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme</id>
-    <content type="html"><![CDATA[<p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
-
-<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://dl.dropbox.com/u/4109351/octopress/midnight-commander-theme/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
-
-<figure class='code'><figcaption><span>.config/mc/ini</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="k">[Colors]</span>
-</span><span class='line'><span class="na">base_color</span><span class="o">=</span><span class="s">lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For more information take look at <a href="http://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
-Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ClojureScript on BeagleBone: simple benchmark with Node.js]]></title>
-    <link href="http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
-    <updated>2013-01-23T17:16:00+01:00</updated>
-    <id>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
-    <content type="html"><![CDATA[<p>Benchmark is based on my <a href="http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
-Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
-
-<!-- more -->
-
-
-<p><a href="https://github.com/Gonzih/clojurescript-small-benchmark-for-embed">Code</a> is modified to run on top of the JavaScript:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">benchmark.core</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">factorial</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">reduce * </span><span class="p">(</span><span class="nb">range </span><span class="mi">1</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">x</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">fib</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt;= </span><span class="nv">n</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>    <span class="mi">1</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">1</span><span class="p">))</span> <span class="p">(</span><span class="nf">fib</span> <span class="p">(</span><span class="nb">- </span><span class="nv">n</span> <span class="mi">2</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">sort-seq</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">sort </span><span class="p">(</span><span class="nb">repeat </span><span class="mi">100000</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">2000000</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">time-fun</span> <span class="p">[</span><span class="nv">fun</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">start</span>  <span class="p">(</span><span class="nf">.getTime</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">))</span>
-</span><span class='line'>        <span class="nv">_</span>      <span class="p">(</span><span class="nf">fun</span><span class="p">)</span>
-</span><span class='line'>        <span class="nv">end</span>    <span class="p">(</span><span class="nf">.getTime</span> <span class="p">(</span><span class="nf">js/Date.</span><span class="p">))</span>
-</span><span class='line'>        <span class="nv">result</span> <span class="p">(</span><span class="nb">- </span><span class="nv">end</span> <span class="nv">start</span><span class="p">)]</span>
-</span><span class='line'>    <span class="nv">result</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">time-it</span> <span class="p">[</span><span class="nv">fun</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">values</span>  <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">i</span> <span class="p">(</span><span class="nb">range </span><span class="mi">200</span><span class="p">)]</span> <span class="p">(</span><span class="nf">time-fun</span> <span class="nv">fun</span><span class="p">))]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">apply + </span><span class="nv">values</span><span class="p">)</span>
-</span><span class='line'>       <span class="p">(</span><span class="nb">count </span><span class="nv">values</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(factorial 5000) \t Avg: &quot;</span> <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(fib 20) \t Avg: &quot;</span>         <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">println </span><span class="s">&quot;(sort-seq) \t Avg: &quot;</span>       <span class="p">(</span><span class="nf">time-it</span> <span class="o">#</span><span class="p">(</span><span class="nf">sort-seq</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">set!</span> <span class="nv">*main-cli-fn*</span> <span class="nv">-main</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Benchmark results:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nb">&gt; node </span><span class="nv">--version</span>
-</span><span class='line'><span class="nv">v0.6.12</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">#</span> <span class="nv">simple</span> <span class="nv">compiler</span> <span class="nv">optimization</span>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
-</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span> <span class="nv">VSZ</span>    <span class="nv">RSS</span>   <span class="nv">TTY</span>    <span class="nv">STAT</span> <span class="nv">START</span>  <span class="nv">TIME</span> <span class="nv">COMMAND</span>
-</span><span class='line'><span class="mf">91.4</span> <span class="mf">20.3</span> <span class="mi">90816</span>  <span class="mi">51292</span> <span class="nv">pts/1</span>  <span class="nv">Rl+</span>  <span class="mi">08</span><span class="ss">:46</span>  <span class="mi">0</span><span class="ss">:54</span> <span class="nb">node </span><span class="nv">clojurescript-benchmark-optimization-simple.js</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; node </span><span class="nv">clojurescript-benchmark-optimization-simple.js</span>
-</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">64.345</span>
-</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">5.575</span>
-</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">7281.975</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">#</span> <span class="nv">advanced</span> <span class="nv">compiler</span> <span class="nv">optimization</span>
-</span><span class='line'><span class="nb">&gt; </span><span class="nv">ps</span> <span class="nv">eu</span>
-</span><span class='line'><span class="nv">%CPU</span> <span class="nv">%MEM</span> <span class="nv">VSZ</span>    <span class="nv">RSS</span>   <span class="nv">TTY</span>    <span class="nv">STAT</span> <span class="nv">START</span>  <span class="nv">TIME</span> <span class="nv">COMMAND</span>
-</span><span class='line'><span class="mf">99.0</span> <span class="mf">20.9</span> <span class="mi">92200</span>  <span class="mi">52776</span> <span class="nv">pts/0</span>  <span class="nv">Rl+</span>  <span class="mi">07</span><span class="ss">:14</span>  <span class="mi">0</span><span class="ss">:44</span> <span class="nb">node </span><span class="nv">clojurescript-benchmark-optimization-advanced.js</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">&gt; node </span><span class="nv">clojurescript-benchmark-optimization-advanced.js</span>
-</span><span class='line'><span class="p">(</span><span class="nf">factorial</span> <span class="mi">5000</span><span class="p">)</span> <span class="nv">Avg</span><span class="err">:</span> <span class="mf">54.775</span>
-</span><span class='line'><span class="p">(</span><span class="nf">fib</span> <span class="mi">20</span><span class="p">)</span>         <span class="nv">Avg</span><span class="err">:</span> <span class="mf">2.77</span>
-</span><span class='line'><span class="p">(</span><span class="nf">sort-seq</span><span class="p">)</span>       <span class="nv">Avg</span><span class="err">:</span> <span class="mf">6325.71</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
-Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin]]></title>
-    <link href="http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/"/>
-    <updated>2012-12-29T12:15:00+01:00</updated>
-    <id>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin</id>
-    <content type="html"><![CDATA[<p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers (or crappy ones, like IE).
-You will need three things for that.</p>
-
-<p>First is <a href="http://modernizr.com/">Modernizr</a> javascript library. It allows you to detect which features are supported by your browser and which aren&#8217;t.</p>
-
-<p>Second is <a href="http://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it&#8217;s awesome and how to use it.</p>
-
-<p>Third is <a href="http://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides mechanism for form validation based on input classes.</p>
-
-<p>So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="http://coffeescript.org/">CoffeeScript</a> snippet:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="c1"># initialize plugin on page ready</span>
-</span><span class='line'><span class="nx">$</span> <span class="nf">-&gt;</span>
-</span><span class='line'>  <span class="k">unless</span> <span class="p">(</span><span class="nx">Modernizr</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">required</span><span class="p">)</span>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s">&#39;input[required]&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s">&#39;class&#39;</span><span class="p">,</span> <span class="s">&#39;required &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)).</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s">&#39;required&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="nf">-&gt;</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">validate</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># check if form is valid by hand</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s">&#39;form&#39;</span><span class="p">).</span><span class="nx">valid</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And as always, Have a nice day! :)</p>
 ]]></content>
   </entry>
   

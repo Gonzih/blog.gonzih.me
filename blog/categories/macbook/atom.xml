@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: macbook | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/macbook/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-03-10T10:19:49+01:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Arch Linux on Macbook Pro 8.2 (17" 2011)]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/"/>
+    <updated>2015-08-08T09:53:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011</id>
+    <content type="html"><![CDATA[<p>Couple of tips from my experience of running Arch on Macbook 8.2.</p>
+
+<!--more-->
+
+
+<h2>Installation</h2>
+
+<p><a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.</p>
+
+<h2>Use broadcom-wl wireless module from AUR</h2>
+
+<p>This is proprietary broadcom driver. Works fine with BCM4331.
+Only thing that does not work - hidden SSID.</p>
+
+<p>OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.</p>
+
+<p>To make sure that correct module is used by hardwrare blacklist every other module and reboot:</p>
+
+<p>```</p>
+
+<h1>/etc/modprobe.d/wl.conf</h1>
+
+<p>blacklist b43
+blacklist b43legacy
+blacklist ssb
+blacklist bcm43xx
+blacklist brcm80211
+blacklist brcmfmac
+blacklist brcmsmac
+blacklist bcma
+```</p>
+
+<h2>Disable Radeon GPU for better power consumption</h2>
+
+<p>This will reduce power usage dramatically but also will disable external screen support via display port.
+This laptop relies on the external gpu to work with display port.</p>
+
+<p>Edit <code>/etc/grub.d/00_header</code> and add outb lines in between <code>set gfxmode=${GRUB_GFXMODE}</code> and <code>load video</code>:</p>
+
+<p><code>
+...
+set gfxmode=${GRUB_GFXMODE}
+outb 0x728 1
+outb 0x710 2
+outb 0x740 2
+outb 0x750 0
+load video
+...
+</code></p>
+
+<p>Generate new grub config:</p>
+
+<p>```</p>
+
+<h1>grub-mkconfig -o /boot/grub/grub.cfg</h1>
+
+<p>```</p>
+
+<p>PS. This post will probably grow over time.</p>
+]]></content>
+  </entry>
+  
+</feed>

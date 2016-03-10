@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: laptop | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/laptop/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-03-10T10:19:49+01:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Arch Linux on Lenovo IdeaPad Y700 15"]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/"/>
+    <updated>2015-12-11T13:20:00+01:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15</id>
+    <content type="html"><![CDATA[<p>Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAd Y700.</p>
+
+<!-- more -->
+
+
+<h1>What works so far</h1>
+
+<ul>
+<li>WIFI</li>
+<li>Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)</li>
+<li>Sound without subwoofer</li>
+<li>Video (I used bumblebee to switch between intel/nvidia GPUs)</li>
+<li>Brightness</li>
+<li>Keyboard backlit</li>
+<li>Power managment via laptop mode tools and systemd.</li>
+<li>Card reader (you might need to run <code>echo 1 | sudo tee /sys/bus/pci/rescan</code> so card reader becomes visible)</li>
+<li>HDMI output</li>
+</ul>
+
+
+<h1>What does not work</h1>
+
+<ul>
+<li>Subwoofer</li>
+</ul>
+
+
+<h1>Installation</h1>
+
+<h2>Boot</h2>
+
+<ul>
+<li>Add nomodeset to the kernel options on Live USB boot</li>
+<li>Make sure secure boot is disabled (to make your life easier)</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Installation_guide">arch linux installation instructions</a></li>
+</ul>
+
+
+<h1>Extra tweaking</h1>
+
+<h2>Video</h2>
+
+<ul>
+<li>Make sure switchable GPUs are enabled in BIOS</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA">insructions on the arch wiki</a></li>
+<li>To enable intel GPU add <code>i915.preliminary_hw_support=1</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> in the <code>/etc/default/grub</code> file. This should be solved after 4.3 kernel release.</li>
+<li>Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).</li>
+</ul>
+
+
+<h2>Wifi</h2>
+
+<p>Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
+There was a patch for the 17 inch model <a href="http://www.gossamer-threads.com/lists/linux/kernel/2323659">here</a>.</p>
+
+<h3>Temporary solution 1:</h3>
+
+<ul>
+<li><code>sudo systemctl enable rfkill-unblock@wifi.service</code></li>
+<li><code>sudo rfkill unblock wifi</code></li>
+<li>Works fine with <code>wicd</code></li>
+<li>Configuring NetworkManager service to be run after rfkill service should also work</li>
+</ul>
+
+
+<h3>Temporary solution 2:</h3>
+
+<ul>
+<li><code>echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf</code> to disable acpi module</li>
+</ul>
+
+
+<h2>Audio clicking</h2>
+
+<p>This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
+To do that append <code>timeout=36000</code> to line <code>load-module module-suspend-on-idle</code> in the <code>/etc/pulse/default.pa</code> configuration file.
+And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulseaudio --start</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Arch Linux on Macbook Pro 8.2 (17" 2011)]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/"/>
+    <updated>2015-08-08T09:53:00+02:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011</id>
+    <content type="html"><![CDATA[<p>Couple of tips from my experience of running Arch on Macbook 8.2.</p>
+
+<!--more-->
+
+
+<h2>Installation</h2>
+
+<p><a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.</p>
+
+<h2>Use broadcom-wl wireless module from AUR</h2>
+
+<p>This is proprietary broadcom driver. Works fine with BCM4331.
+Only thing that does not work - hidden SSID.</p>
+
+<p>OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.</p>
+
+<p>To make sure that correct module is used by hardwrare blacklist every other module and reboot:</p>
+
+<p>```</p>
+
+<h1>/etc/modprobe.d/wl.conf</h1>
+
+<p>blacklist b43
+blacklist b43legacy
+blacklist ssb
+blacklist bcm43xx
+blacklist brcm80211
+blacklist brcmfmac
+blacklist brcmsmac
+blacklist bcma
+```</p>
+
+<h2>Disable Radeon GPU for better power consumption</h2>
+
+<p>This will reduce power usage dramatically but also will disable external screen support via display port.
+This laptop relies on the external gpu to work with display port.</p>
+
+<p>Edit <code>/etc/grub.d/00_header</code> and add outb lines in between <code>set gfxmode=${GRUB_GFXMODE}</code> and <code>load video</code>:</p>
+
+<p><code>
+...
+set gfxmode=${GRUB_GFXMODE}
+outb 0x728 1
+outb 0x710 2
+outb 0x740 2
+outb 0x750 0
+load video
+...
+</code></p>
+
+<p>Generate new grub config:</p>
+
+<p>```</p>
+
+<h1>grub-mkconfig -o /boot/grub/grub.cfg</h1>
+
+<p>```</p>
+
+<p>PS. This post will probably grow over time.</p>
+]]></content>
+  </entry>
+  
+</feed>

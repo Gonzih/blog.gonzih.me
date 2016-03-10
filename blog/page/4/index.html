@@ -9,7 +9,7 @@
   <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
 
   
-  <meta name="description" content="How to Fix Octopress Pygments Error on Arch Linux Sep 21st, 2011 | Comments If your get following pygments error using octopress with arch linux. 1 &hellip;">
+  <meta name="description" content="Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue Sep 3rd, 2012 | Comments Recently I was playing with Clojure on Beaglebone and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,416 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/">Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-03T20:58:00+02:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/03/installing-java-on-beaglebone-and-ubuntu-issue/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&#8217;s new Embedded JRE.
+But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>java: no such file or directory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So here is fix:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo apt-get install -y libc6-armel libsfgcc1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/07/20/arch-linux-migrated-to-grub2/">Arch Linux Migrated to GRUB2</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-20T22:13:00+02:00" pubdate data-updated="true">Jul 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/20/arch-linux-migrated-to-grub2/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p><img src="http://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
+
+<p>Great news everyone! Today Arch Linux officially switched to GRUB2!</p>
+
+<ul>
+<li><a href="http://www.archlinux.org/news/grub-legacy-no-longer-supported/">Post on Arch News</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file">Migration information is here</a></li>
+<li><a href="http://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/">My current GRUB2 theme</a></li>
+<li><a href="http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;action=contents">More GRUB2 themes</a></li>
+</ul>
+
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/07/19/fix-broken-comments-count-for-disqus/">Fix Broken Comments Count for Disqus</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T18:16:00+02:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/19/fix-broken-comments-count-for-disqus/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
+That is why comments count was equal to 0 for every post on my index page.
+To fix that go to admin ui in disqus and use domain migration tool.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/07/19/the-internet-defense-league/">The Internet Defense League</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-19T14:34:00+02:00" pubdate data-updated="true">Jul 19<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/07/19/the-internet-defense-league/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
+
+<blockquote><p>The <a href="http://sopastrike.com/">Internet Blackout</a> was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p></blockquote>
+
+<p>Join <strong>Internet Defence League</strong> at <a href="http://internetdefenseleague.org/">internetdefenseleague.org</a></p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/">How to Use Magnet Links With RTorrent</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-17T18:04:00+01:00" pubdate data-updated="true">Feb 17<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">cd</span> ~/watch    <span class="c"># set your watch directory here</span>
+</span><span class='line'><span class="o">[[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">=</span>~ <span class="nv">xt</span><span class="o">=</span>urn:btih:<span class="o">([</span>^&amp;/<span class="o">]</span>+<span class="o">)</span> <span class="o">]]</span> <span class="o">||</span> <span class="nb">exit</span>;
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;d10:magnet-uri${#1}:${1}e&quot;</span> &gt; <span class="s2">&quot;meta-${BASH_REMATCH[1]}.torrent&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://libtorrent.rakshasa.no/ticket/2100">via</a></p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2011/10/18/nice-vim-keys-map/">Nice Vim Keys Map</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-18T20:05:00+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/10/18/nice-vim-keys-map/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
+
+<p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/">Set New PostgreSQL Databases Encoding to Unicode</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-30T10:42:00+02:00" pubdate data-updated="true">Sep 30<span>th</span>, 2011</time>
+        
+         | <a href="/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>You must change encoding for template1. For do that run following.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>su - postgres
+</span><span class='line'>psql
+</span><span class='line'>
+</span><span class='line'>UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+</span><span class='line'>DROP DATABASE template1;
+</span><span class='line'>CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+</span><span class='line'>UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+</span><span class='line'>
+</span><span class='line'>#recomended
+</span><span class='line'>\c template1
+</span><span class='line'>VACUUM FREEZE;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -313,59 +723,12 @@ edit &#8220;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/python
 
     </article>
   
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
-      
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/">Backbone.js + Ruby on Rails Tips</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-03T10:05:00+02:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2011</time>
-        
-         | <a href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/09/03/backbone-js---ruby-on-rails-tips/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
 
     <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/blog/page/5/" rel="next">Continue &rarr;</a>
+  </span>
+
 
   <span class="prev">
     <a href="/blog/page/3/" rel="prev">Newer &larr;</a>
