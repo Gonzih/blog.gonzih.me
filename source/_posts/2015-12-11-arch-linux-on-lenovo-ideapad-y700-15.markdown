@@ -19,12 +19,10 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 * Keyboard backlit
 * Power managment via laptop mode tools and systemd.
 * Card reader (you might need to run `echo 1 | sudo tee /sys/bus/pci/rescan` so card reader becomes visible)
+* HDMI output
 
 # What does not work
 * Subwoofer
-
-# Not tested yet
-* HDMI output
 
 # Installation
 
