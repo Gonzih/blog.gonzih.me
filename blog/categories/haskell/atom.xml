@@ -4,7 +4,7 @@
   <title><![CDATA[Category: haskell | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/haskell/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Building Hacker News json api with Haskell]]></title>
     <link href="http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell/"/>
-    <updated>2014-08-13T21:43:00+02:00</updated>
+    <updated>2014-08-13T21:43:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell</id>
     <content type="html"><![CDATA[<p>Small announcement post.</p>
 
@@ -41,7 +41,7 @@ I hope someone will find it useful.</p>
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
     <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+02:00</updated>
+    <updated>2012-10-08T16:31:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I'm Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: emacs | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/emacs/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[ln -sf /usr/bin/emacs /usr/bin/vim ?]]></title>
     <link href="http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/"/>
-    <updated>2015-02-15T19:21:00+01:00</updated>
+    <updated>2015-02-15T19:21:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim</id>
     <content type="html"><![CDATA[<p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
 And left it like that for a couple of days.

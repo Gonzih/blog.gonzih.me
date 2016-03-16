@@ -4,7 +4,7 @@
   <title><![CDATA[Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Arch Linux on Lenovo IdeaPad Y700 15"]]></title>
     <link href="http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/"/>
-    <updated>2015-12-11T13:20:00+01:00</updated>
+    <updated>2015-12-11T13:20:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15</id>
     <content type="html"><![CDATA[<p>Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAd Y700.</p>
 
@@ -101,7 +101,7 @@ And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulsea
   <entry>
     <title type="html"><![CDATA[Arch Linux on Macbook Pro 8.2 (17" 2011)]]></title>
     <link href="http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/"/>
-    <updated>2015-08-08T09:53:00+02:00</updated>
+    <updated>2015-08-08T09:53:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011</id>
     <content type="html"><![CDATA[<p>Couple of tips from my experience of running Arch on Macbook 8.2.</p>
 
@@ -179,7 +179,7 @@ This laptop relies on the external gpu to work with display port.</p>
   <entry>
     <title type="html"><![CDATA[Nvim terminal + ClojureScript and figwheel]]></title>
     <link href="http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/"/>
-    <updated>2015-06-15T19:37:00+02:00</updated>
+    <updated>2015-06-15T19:37:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel</id>
     <content type="html"><![CDATA[<p>This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.</p>
 
@@ -231,7 +231,7 @@ your clojure buffer to the terminal buffer.</p>
   <entry>
     <title type="html"><![CDATA[ServerSide rendering of Reagent components]]></title>
     <link href="http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/"/>
-    <updated>2015-02-16T10:12:00+01:00</updated>
+    <updated>2015-02-16T10:12:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components</id>
     <content type="html"><![CDATA[<p>Great thing about React is that you can write what people nowadays call &#8220;isomorphic JavaScript&#8221;.
 In this post we will not discuss how wrong this term is in many ways,
@@ -433,7 +433,7 @@ In ruby it&#8217;s not a problem since we have 1 context per worker.</p>
   <entry>
     <title type="html"><![CDATA[ln -sf /usr/bin/emacs /usr/bin/vim ?]]></title>
     <link href="http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/"/>
-    <updated>2015-02-15T19:21:00+01:00</updated>
+    <updated>2015-02-15T19:21:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim</id>
     <content type="html"><![CDATA[<p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
 And left it like that for a couple of days.
@@ -536,7 +536,7 @@ I&#8217;m really hoping to see big movement around neovim once project becomes m
   <entry>
     <title type="html"><![CDATA[Grench binary for OpenSUSE]]></title>
     <link href="http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/"/>
-    <updated>2014-10-23T08:47:00+02:00</updated>
+    <updated>2014-10-23T08:47:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse</id>
     <content type="html"><![CDATA[<p><a href="http://leiningen.org/grench.html">Grenchman</a> is a small tool that runs leiningen tasks over nrepl.
 Helps with JVM startup time during development.
@@ -554,7 +554,7 @@ there are pre-build binaries on the <a href="http://leiningen.org/grench.html">o
   <entry>
     <title type="html"><![CDATA[Two way data bindings in Reagent]]></title>
     <link href="http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/"/>
-    <updated>2014-10-22T17:29:00+02:00</updated>
+    <updated>2014-10-22T17:29:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent</id>
     <content type="html"><![CDATA[<p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&#8217;s all about core.async.
@@ -632,7 +632,7 @@ Also provides ability to apply transformation using transducers.</p>
   <entry>
     <title type="html"><![CDATA[Replacing shell scripts with Clojure+JamVM]]></title>
     <link href="http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/"/>
-    <updated>2014-09-28T11:04:00+02:00</updated>
+    <updated>2014-09-28T11:04:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure</id>
     <content type="html"><![CDATA[<p>We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.
@@ -840,7 +840,7 @@ so you can just run <code>apt-get -y install icedtea-7-jre-jamvm</code> to insta
   <entry>
     <title type="html"><![CDATA[Building Hacker News json api with Haskell]]></title>
     <link href="http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell/"/>
-    <updated>2014-08-13T21:43:00+02:00</updated>
+    <updated>2014-08-13T21:43:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/08/13/hacker-news-json-api-with-haskell</id>
     <content type="html"><![CDATA[<p>Small announcement post.</p>
 
@@ -865,7 +865,7 @@ I hope someone will find it useful.</p>
   <entry>
     <title type="html"><![CDATA[Installing Spotify Linux beta on OpenSUSE 13.1]]></title>
     <link href="http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/"/>
-    <updated>2014-05-27T13:31:00+02:00</updated>
+    <updated>2014-05-27T13:31:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1</id>
     <content type="html"><![CDATA[<p>Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).</p>
@@ -873,7 +873,7 @@ Solution can be applied to any rpm based system (I think so).</p>
 <ul>
 <li>Install <a href="http://software.opensuse.org/package/alien">alien</a> (perl scripts for converting packages).</li>
 <li>Download deb from <a href="http://repository.spotify.com/pool/non-free/s/spotify/">spotify repository</a>, pay attention to architecture.</li>
-<li>Convert deb -> rpm by running <code>sudo alien -r spotify*.deb</code>.</li>
+<li>Convert deb -> rpm by running <code>sudo alien --scripts -r spotify*.deb</code>.</li>
 <li>Install rpm <code>sudo zypper in spotify*.rpm</code>.</li>
 <li>Run <code>spotify</code>.</li>
 </ul>
@@ -891,7 +891,7 @@ I noticed few warning about default locates and missing libraries, but client st
   <entry>
     <title type="html"><![CDATA[Autoconnect to NetworkManager VPN on systemd based system]]></title>
     <link href="http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/"/>
-    <updated>2014-05-26T21:17:00+02:00</updated>
+    <updated>2014-05-26T21:17:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system</id>
     <content type="html"><![CDATA[<p>Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?</p>
@@ -971,7 +971,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
   <entry>
     <title type="html"><![CDATA[HN Tray icon in 50 lines of Clojure]]></title>
     <link href="http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/"/>
-    <updated>2014-05-24T22:03:00+02:00</updated>
+    <updated>2014-05-24T22:03:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure</id>
     <content type="html"><![CDATA[<p>Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
 Result is tray app that shows stories from HN front page.
@@ -1101,7 +1101,7 @@ Enjoy!</p>
   <entry>
     <title type="html"><![CDATA[Hardware Cut/Copy/Paste with Arduino Leonardo]]></title>
     <link href="http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/"/>
-    <updated>2014-03-04T10:02:00+01:00</updated>
+    <updated>2014-03-04T10:02:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo</id>
     <content type="html"><![CDATA[<p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
@@ -1605,7 +1605,7 @@ vim: ts=2:sts=2:sw=2:expandtab
   <entry>
     <title type="html"><![CDATA[VisualRuby gem on OpenSUSE 13.1]]></title>
     <link href="http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/"/>
-    <updated>2013-12-13T10:10:00+01:00</updated>
+    <updated>2013-12-13T10:10:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1</id>
     <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.png" alt="visualruby" /></p>
 
@@ -1638,7 +1638,7 @@ But I&#8217;m still in process of figuring things out.</p>
   <entry>
     <title type="html"><![CDATA[Yin-Yang Call/cc puzzle in Ruby]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/"/>
-    <updated>2013-11-26T11:23:00+01:00</updated>
+    <updated>2013-11-26T11:23:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby</id>
     <content type="html"><![CDATA[<p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 
@@ -1712,7 +1712,7 @@ So here is his fixed version:</p>
   <entry>
     <title type="html"><![CDATA[OpenSUSE 13.1 + Mate 1.6 + Xmonad]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/"/>
-    <updated>2013-11-21T22:46:00+01:00</updated>
+    <updated>2013-11-21T22:46:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
     <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
 Since gnome 3.9 support for custom window managers was broken.
@@ -1846,7 +1846,7 @@ Removed it for now (probably will cause issues with some Java(AWT) applications)
   <entry>
     <title type="html"><![CDATA[My first experience with core.typed]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
-    <updated>2013-08-30T12:30:00+02:00</updated>
+    <updated>2013-08-30T12:30:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
     <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
@@ -1965,7 +1965,7 @@ Power of lisp combined with really smart people :)</p>
   <entry>
     <title type="html"><![CDATA[Cheap standing desk]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/"/>
-    <updated>2013-08-25T12:16:00+02:00</updated>
+    <updated>2013-08-25T12:16:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk</id>
     <content type="html"><![CDATA[<p>I love idea of standing desks.
 I feel myself much more productive behind standing desk.
@@ -1999,7 +1999,7 @@ For nice and clean cuts some old pipe cutter is perfect.</p>
   <entry>
     <title type="html"><![CDATA[Speed/Ping test graphs with Clojure and Raspberry Pi]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi/"/>
-    <updated>2013-08-24T14:02:00+02:00</updated>
+    <updated>2013-08-24T14:02:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/24/speed-slash-ping-test-graphs-with-clojure-and-raspberry-pi</id>
     <content type="html"><![CDATA[<p>I&#8217;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
@@ -2182,7 +2182,7 @@ And now we can see some visualization.</p>
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+02:00</updated>
+    <updated>2013-06-28T10:15:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 

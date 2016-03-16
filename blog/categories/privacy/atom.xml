@@ -4,7 +4,7 @@
   <title><![CDATA[Category: privacy | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/privacy/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Autoconnect to NetworkManager VPN on systemd based system]]></title>
     <link href="http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/"/>
-    <updated>2014-05-26T21:17:00+02:00</updated>
+    <updated>2014-05-26T21:17:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system</id>
     <content type="html"><![CDATA[<p>Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?</p>
@@ -84,7 +84,7 @@ password=MY-VPN-PASSWORD</p>
   <entry>
     <title type="html"><![CDATA[The Internet Defense League]]></title>
     <link href="http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/"/>
-    <updated>2012-07-19T14:34:00+02:00</updated>
+    <updated>2012-07-19T14:34:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league</id>
     <content type="html"><![CDATA[<p><img src="http://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" /></p>
 

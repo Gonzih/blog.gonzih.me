@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hacker News | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/hacker-news/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[HN Tray icon in 50 lines of Clojure]]></title>
     <link href="http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/"/>
-    <updated>2014-05-24T22:03:00+02:00</updated>
+    <updated>2014-05-24T22:03:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure</id>
     <content type="html"><![CDATA[<p>Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
 Result is tray app that shows stories from HN front page.

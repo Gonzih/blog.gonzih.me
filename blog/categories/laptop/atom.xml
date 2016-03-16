@@ -4,7 +4,7 @@
   <title><![CDATA[Category: laptop | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/laptop/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Arch Linux on Lenovo IdeaPad Y700 15"]]></title>
     <link href="http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/"/>
-    <updated>2015-12-11T13:20:00+01:00</updated>
+    <updated>2015-12-11T13:20:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15</id>
     <content type="html"><![CDATA[<p>Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAd Y700.</p>
 
@@ -101,7 +101,7 @@ And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulsea
   <entry>
     <title type="html"><![CDATA[Arch Linux on Macbook Pro 8.2 (17" 2011)]]></title>
     <link href="http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/"/>
-    <updated>2015-08-08T09:53:00+02:00</updated>
+    <updated>2015-08-08T09:53:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011</id>
     <content type="html"><![CDATA[<p>Couple of tips from my experience of running Arch on Macbook 8.2.</p>
 

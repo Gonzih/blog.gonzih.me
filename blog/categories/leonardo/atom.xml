@@ -4,7 +4,7 @@
   <title><![CDATA[Category: leonardo | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/leonardo/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Hardware Cut/Copy/Paste with Arduino Leonardo]]></title>
     <link href="http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/"/>
-    <updated>2014-03-04T10:02:00+01:00</updated>
+    <updated>2014-03-04T10:02:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo</id>
     <content type="html"><![CDATA[<p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.

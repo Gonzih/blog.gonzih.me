@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Nvim terminal + ClojureScript and figwheel]]></title>
     <link href="http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/"/>
-    <updated>2015-06-15T19:37:00+02:00</updated>
+    <updated>2015-06-15T19:37:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel</id>
     <content type="html"><![CDATA[<p>This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.</p>
 
@@ -58,7 +58,7 @@ endif
   <entry>
     <title type="html"><![CDATA[ServerSide rendering of Reagent components]]></title>
     <link href="http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/"/>
-    <updated>2015-02-16T10:12:00+01:00</updated>
+    <updated>2015-02-16T10:12:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components</id>
     <content type="html"><![CDATA[<p>Great thing about React is that you can write what people nowadays call "isomorphic JavaScript".
 In this post we will not discuss how wrong this term is in many ways,
@@ -227,7 +227,7 @@ In ruby it's not a problem since we have 1 context per worker.</p>
   <entry>
     <title type="html"><![CDATA[ln -sf /usr/bin/emacs /usr/bin/vim ?]]></title>
     <link href="http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/"/>
-    <updated>2015-02-15T19:21:00+01:00</updated>
+    <updated>2015-02-15T19:21:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim</id>
     <content type="html"><![CDATA[<p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
 And left it like that for a couple of days.
@@ -330,7 +330,7 @@ I'm really hoping to see big movement around neovim once project becomes more or
   <entry>
     <title type="html"><![CDATA[Two way data bindings in Reagent]]></title>
     <link href="http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/"/>
-    <updated>2014-10-22T17:29:00+02:00</updated>
+    <updated>2014-10-22T17:29:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent</id>
     <content type="html"><![CDATA[<p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it's all about core.async.
@@ -384,7 +384,7 @@ Also provides ability to apply transformation using transducers.</p>
   <entry>
     <title type="html"><![CDATA[Replacing shell scripts with Clojure+JamVM]]></title>
     <link href="http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/"/>
-    <updated>2014-09-28T11:04:00+02:00</updated>
+    <updated>2014-09-28T11:04:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure</id>
     <content type="html"><![CDATA[<p>We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.

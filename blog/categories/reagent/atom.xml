@@ -4,7 +4,7 @@
   <title><![CDATA[Category: reagent | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/reagent/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[ServerSide rendering of Reagent components]]></title>
     <link href="http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/"/>
-    <updated>2015-02-16T10:12:00+01:00</updated>
+    <updated>2015-02-16T10:12:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components</id>
     <content type="html"><![CDATA[<p>Great thing about React is that you can write what people nowadays call "isomorphic JavaScript".
 In this post we will not discuss how wrong this term is in many ways,
@@ -185,7 +185,7 @@ In ruby it's not a problem since we have 1 context per worker.</p>
   <entry>
     <title type="html"><![CDATA[Two way data bindings in Reagent]]></title>
     <link href="http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/"/>
-    <updated>2014-10-22T17:29:00+02:00</updated>
+    <updated>2014-10-22T17:29:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent</id>
     <content type="html"><![CDATA[<p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it's all about core.async.

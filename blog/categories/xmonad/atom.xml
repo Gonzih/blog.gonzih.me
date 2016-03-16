@@ -4,7 +4,7 @@
   <title><![CDATA[Category: xmonad | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/xmonad/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[OpenSUSE 13.1 + Mate 1.6 + Xmonad]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/"/>
-    <updated>2013-11-21T22:46:00+01:00</updated>
+    <updated>2013-11-21T22:46:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
     <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it's great. But...
 Since gnome 3.9 support for custom window managers was broken.
@@ -119,7 +119,7 @@ X-MATE-Provides=filemanager
   <entry>
     <title type="html"><![CDATA[Programmer Dvorak and switching workspaces in XMonad]]></title>
     <link href="http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/"/>
-    <updated>2012-10-08T16:31:00+02:00</updated>
+    <updated>2012-10-08T16:31:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad</id>
     <content type="html"><![CDATA[<p>Recently I migarted from awesome to xmonad. I'm Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row. First hack was to use functional keys [F1..F12] like so:</p>
 

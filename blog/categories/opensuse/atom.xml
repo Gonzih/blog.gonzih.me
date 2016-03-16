@@ -4,7 +4,7 @@
   <title><![CDATA[Category: opensuse | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/opensuse/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Installing Spotify Linux beta on OpenSUSE 13.1]]></title>
     <link href="http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/"/>
-    <updated>2014-05-27T13:31:00+02:00</updated>
+    <updated>2014-05-27T13:31:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1</id>
     <content type="html"><![CDATA[<p>Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).</p>
@@ -24,7 +24,7 @@ Solution can be applied to any rpm based system (I think so).</p>
 <ul>
 <li>Install <a href="http://software.opensuse.org/package/alien">alien</a> (perl scripts for converting packages).</li>
 <li>Download deb from <a href="http://repository.spotify.com/pool/non-free/s/spotify/">spotify repository</a>, pay attention to architecture.</li>
-<li>Convert deb -> rpm by running <code>sudo alien -r spotify*.deb</code>.</li>
+<li>Convert deb -> rpm by running <code>sudo alien --scripts -r spotify*.deb</code>.</li>
 <li>Install rpm <code>sudo zypper in spotify*.rpm</code>.</li>
 <li>Run <code>spotify</code>.</li>
 </ul>
@@ -42,7 +42,7 @@ I noticed few warning about default locates and missing libraries, but client st
   <entry>
     <title type="html"><![CDATA[VisualRuby gem on OpenSUSE 13.1]]></title>
     <link href="http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/"/>
-    <updated>2013-12-13T10:10:00+01:00</updated>
+    <updated>2013-12-13T10:10:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1</id>
     <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.png" alt="visualruby" /></p>
 
@@ -69,7 +69,7 @@ But I'm still in process of figuring things out.</p>
   <entry>
     <title type="html"><![CDATA[OpenSUSE 13.1 + Mate 1.6 + Xmonad]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/"/>
-    <updated>2013-11-21T22:46:00+01:00</updated>
+    <updated>2013-11-21T22:46:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad</id>
     <content type="html"><![CDATA[<p>So OpenSUSE 13.1 was released. And it's great. But...
 Since gnome 3.9 support for custom window managers was broken.

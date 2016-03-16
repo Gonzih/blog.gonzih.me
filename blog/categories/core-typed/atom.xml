@@ -4,7 +4,7 @@
   <title><![CDATA[Category: core.typed | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/core-typed/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[My first experience with core.typed]]></title>
     <link href="http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/"/>
-    <updated>2013-08-30T12:30:00+02:00</updated>
+    <updated>2013-08-30T12:30:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed</id>
     <content type="html"><![CDATA[<p>Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.

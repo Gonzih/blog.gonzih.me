@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-10T10:19:49+01:00</updated>
+  <updated>2016-03-16T15:30:53+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Hardware Cut/Copy/Paste with Arduino Leonardo]]></title>
     <link href="http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/"/>
-    <updated>2014-03-04T10:02:00+01:00</updated>
+    <updated>2014-03-04T10:02:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo</id>
     <content type="html"><![CDATA[<p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
@@ -359,7 +359,7 @@ vim: ts=2:sts=2:sw=2:expandtab
   <entry>
     <title type="html"><![CDATA[VisualRuby gem on OpenSUSE 13.1]]></title>
     <link href="http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/"/>
-    <updated>2013-12-13T10:10:00+01:00</updated>
+    <updated>2013-12-13T10:10:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1</id>
     <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.png" alt="visualruby" /></p>
 
@@ -386,7 +386,7 @@ But I'm still in process of figuring things out.</p>
   <entry>
     <title type="html"><![CDATA[Yin-Yang Call/cc puzzle in Ruby]]></title>
     <link href="http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/"/>
-    <updated>2013-11-26T11:23:00+01:00</updated>
+    <updated>2013-11-26T11:23:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby</id>
     <content type="html"><![CDATA[<p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 
@@ -449,7 +449,7 @@ end.call(lambda { |cc| print "@"; cc }.call(callcc { |c| c }),</p>
   <entry>
     <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
     <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
-    <updated>2013-06-28T10:15:00+02:00</updated>
+    <updated>2013-06-28T10:15:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
     <content type="html"><![CDATA[<h3>Motivation</h3>
 
@@ -510,7 +510,7 @@ java.mail framework was not so bad as I was expecting at first.</p>
   <entry>
     <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
     <link href="http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
-    <updated>2011-09-21T18:28:00+02:00</updated>
+    <updated>2011-09-21T18:28:00+00:00</updated>
     <id>http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
     <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.
 ``` text
