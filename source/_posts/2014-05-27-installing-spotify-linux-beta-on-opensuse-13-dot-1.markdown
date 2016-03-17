@@ -21,3 +21,7 @@ I noticed few warning about default locates and missing libraries, but client st
 **PS**
 
 If you have issues with volume being too loud by default make sure that you changed `flat-volumes` from `yes` to `no` in `/etc/pulse/daemon.conf`
+
+**PPS**
+
+People reported that installing version 0.9 -> uninstalling it -> installing version 1.0 might break your system. So watch out for the uninstallation errors.
