@@ -4,7 +4,7 @@
   <title><![CDATA[Category: zypper | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/zypper/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-16T15:30:53+00:00</updated>
+  <updated>2016-03-17T09:02:31+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -36,6 +36,10 @@ I noticed few warning about default locates and missing libraries, but client st
 <p><strong>PS</strong></p>
 
 <p>If you have issues with volume being too loud by default make sure that you changed <code>flat-volumes</code> from <code>yes</code> to <code>no</code> in <code>/etc/pulse/daemon.conf</code></p>
+
+<p><strong>PPS</strong></p>
+
+<p>People reported that installing version 0.9 -> uninstalling it -> installing version 1.0 might break your system. So watch out for the uninstallation errors.</p>
 ]]></content>
   </entry>
   
