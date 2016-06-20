@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-03-17T09:02:31+00:00</updated>
+  <updated>2016-06-20T20:05:35+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -111,6 +111,18 @@ And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulsea
 <h2>Installation</h2>
 
 <p><a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.</p>
+
+<h3>Bootloader via systemd-boot</h3>
+
+<p>Before installing boot loader change /boot partition type to <code>EFI System</code> (<code>ef00</code>).</p>
+
+<p><code>bash
+mkfs.fat -F32 /dev/sda1
+pacman -S dosfstools
+mount /dev/sda1 /mnt/boot
+arch-chroot /mnt
+bootctl --path=/boot instnall
+</code></p>
 
 <h2>Use broadcom-wl wireless module from AUR</h2>
 
