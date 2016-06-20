@@ -14,6 +14,18 @@ Couple of tips from my experience of running Arch on Macbook 8.2.
 
 <a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.
 
+### Bootloader via systemd-boot
+
+Before installing boot loader change /boot partition type to `EFI System` (`ef00`).
+
+```bash
+mkfs.fat -F32 /dev/sda1
+pacman -S dosfstools
+mount /dev/sda1 /mnt/boot
+arch-chroot /mnt
+bootctl --path=/boot instnall
+```
+
 ## Use broadcom-wl wireless module from AUR
 
 This is proprietary broadcom driver. Works fine with BCM4331.
