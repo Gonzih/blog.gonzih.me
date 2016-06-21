@@ -18,7 +18,7 @@ Couple of tips from my experience of running Arch on Macbook 8.2.
 
 Before installing boot loader change /boot partition type to `EFI System` (`ef00`).
 
-```bash
+```
 mkfs.fat -F32 /dev/sda1
 pacman -S dosfstools
 mount /dev/sda1 /mnt/boot
@@ -30,7 +30,7 @@ bootctl --path=/boot instnall
 
 You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be `ef00` type partition of vfta32.
 
-```bash
+```
 mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/boot/efi
 mount /dev/sda2 /mnt/boot/efi
