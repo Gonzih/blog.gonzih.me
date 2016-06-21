@@ -152,6 +152,46 @@
 
 <p><a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.</p>
 
+<h3>Bootloader via systemd-boot</h3>
+
+<p>Before installing boot loader change /boot partition type to <code>EFI System</code> (<code>ef00</code>).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkfs.fat -F32 /dev/sda1
+</span><span class='line'>pacman -S dosfstools
+</span><span class='line'>mount /dev/sda1 /mnt/boot
+</span><span class='line'>arch-chroot /mnt
+</span><span class='line'>bootctl --path=/boot instnall</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Bootloader via grub</h3>
+
+<p>You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be <code>ef00</code> type partition of vfta32.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mount /dev/sda1 /mnt/boot
+</span><span class='line'>mkdir -p /mnt/boot/efi
+</span><span class='line'>mount /dev/sda2 /mnt/boot/efi
+</span><span class='line'>modprobe dm-mod
+</span><span class='line'>arch-chroot /mnt
+</span><span class='line'>grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
+</span><span class='line'>mkdir -p /boot/grub/locale
+</span><span class='line'>cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+</span><span class='line'>grub-mkconfig -o /boot/grub/grub.cfg</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>Use broadcom-wl wireless module from AUR</h2>
 
 <p>This is proprietary broadcom driver. Works fine with BCM4331.

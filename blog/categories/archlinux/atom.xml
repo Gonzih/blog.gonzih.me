@@ -4,7 +4,7 @@
   <title><![CDATA[Category: archlinux | Max Gonzih]]></title>
   <link href="http://blog.gonzih.me/blog/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://blog.gonzih.me/"/>
-  <updated>2016-06-21T09:56:25+00:00</updated>
+  <updated>2016-06-21T11:06:45+00:00</updated>
   <id>http://blog.gonzih.me/</id>
   <author>
     <name><![CDATA[Max Gonzih ]]></name>
@@ -31,7 +31,7 @@
 
 <p>Before installing boot loader change /boot partition type to <code>EFI System</code> (<code>ef00</code>).</p>
 
-<p><code>bash
+<p><code>
 mkfs.fat -F32 /dev/sda1
 pacman -S dosfstools
 mount /dev/sda1 /mnt/boot
@@ -43,7 +43,7 @@ bootctl --path=/boot instnall
 
 <p>You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be <code>ef00</code> type partition of vfta32.</p>
 
-<p><code>bash
+<p><code>
 mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/boot/efi
 mount /dev/sda2 /mnt/boot/efi
