@@ -26,6 +26,22 @@ arch-chroot /mnt
 bootctl --path=/boot instnall
 ```
 
+### Bootloader via grub
+
+You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be `ef00` type partition of vfta32.
+
+```bash
+mount /dev/sda1 /mnt/boot
+mkdir -p /mnt/boot/efi
+mount /dev/sda2 /mnt/boot/efi
+modprobe dm-mod
+arch-chroot /mnt
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
+mkdir -p /boot/grub/locale
+cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
 ## Use broadcom-wl wireless module from AUR
 
 This is proprietary broadcom driver. Works fine with BCM4331.
