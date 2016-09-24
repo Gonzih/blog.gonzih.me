@@ -33,9 +33,6 @@ menu:
       - Name: "Achives"
         Weight: 0
         URL: "/post/"
-      - Name: "gonzih.me"
-        Weight: 1
-        URL: "http://gonzih.me"
       - Name: "Email"
         Weight: 2
         URL: "mailto:gonzih@gmail.com"
@@ -48,6 +45,9 @@ menu:
       - Name: "RSS feed"
         Weight: 5
         URL: "http://blog.gonzih.me/index.xml"
+      - Name: "Homepage"
+        Weight: 10
+        URL: "http://gonzih.me"
 
 metadataformat: "yaml"
 ---
