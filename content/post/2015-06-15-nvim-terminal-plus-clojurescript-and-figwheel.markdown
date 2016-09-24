@@ -3,6 +3,7 @@ layout: post
 title: "Nvim terminal + ClojureScript and figwheel"
 date: "2015-06-15"
 comments: true
+url: "/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/"
 categories: [vim, nvim, clojure, clojurescript, figwheel]
 ---
 
