@@ -17,7 +17,8 @@ public:
 	git clone -b master git@github.com:Gonzih/gonzih.github.com.git public
 
 deploy: public
-	cd public && git add  . && git commit -a -m "Blog updated" && git push
+	cd public && git add  . && git commit -a -m "Blog updated at $(date)" && git push
+	cd ..
 
 docker-image:
 	docker build -t blog-builder .
