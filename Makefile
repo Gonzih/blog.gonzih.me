@@ -21,6 +21,7 @@ deploy: public
 	cd ..
 
 docker-image:
+	docker pull ubuntu:16.04
 	docker build -t blog-builder .
 
 generate-using-docker: docker-image
