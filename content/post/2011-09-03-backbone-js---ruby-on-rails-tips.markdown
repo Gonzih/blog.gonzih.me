@@ -3,6 +3,7 @@ layout: post
 title: "Backbone.js + Ruby on Rails Tips"
 date: "2011-09-03"
 comments: true
+url: "/blog/2011/09/03/backbone-js---ruby-on-rails-tips/"
 categories: [ror, rails, backbone.js]
 ---
 <!--more-->

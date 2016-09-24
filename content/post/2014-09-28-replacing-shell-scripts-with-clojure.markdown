@@ -3,6 +3,7 @@ layout: post
 title: "Replacing shell scripts with Clojure+JamVM"
 date: "2014-09-28"
 comments: true
+url: "/blog/2014/09/28/replacing-shell-scripts-with-clojure/"
 categories: [clojure, jvm, jamvm, linux]
 ---
 We all hate shell scripting.
