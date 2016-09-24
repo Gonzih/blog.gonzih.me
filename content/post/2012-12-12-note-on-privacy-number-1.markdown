@@ -3,6 +3,7 @@ layout: post
 title: "Note on privacy #1"
 date: "2012-12-12"
 comments: true
+url: "/blog/2012/12/12/note-on-privacy-number-1/"
 categories: [pivacy, analytics, ads, ghostery]
 ---
 
