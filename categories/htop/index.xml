@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/htop/index.xml</link>
+    <description>Recent content on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <atom:link href="/categories/htop/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</title>
+      <link>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;install-adb&#34;&gt;Install adb&lt;/h2&gt;
+
+&lt;h3 id=&#34;installing-adb-on-arch-linux&#34;&gt;Installing adb on arch linux&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yaourt -S adb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;running-adb&#34;&gt;Running adb&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;adb kill-server
+sudo adb start-server
+adb shell
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installing-opkg&#34;&gt;Installing opkg&lt;/h2&gt;
+
+&lt;p&gt;Now run in adb shell following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /sdcard
+wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
+cd /
+tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
+# for non cyanogen users
+wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
+# for cyanogen users
+wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+# add /data/xbin to your path
+export PATH=&amp;quot;/data/xbin:$PATH&amp;quot;
+# make /system writable
+mount -o remount,rw /system
+opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
+opkg -f /data/local/opkg.conf update
+opkg install opkg
+mount -o remount,ro /system
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;opkg-usage&#34;&gt;Opkg usage&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;opkg install rsync
+opkg remove rsync
+# list installed packages
+opkg list_installed
+# list files belonging to package
+opkg files rsync
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;available-packages&#34;&gt;Available packages&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;rsync - Lightweight package management system.&lt;/li&gt;
+&lt;li&gt;htop - Interactive processes viewer.&lt;/li&gt;
+&lt;li&gt;mc - Midnight Commander - a powerful file manager.&lt;/li&gt;
+&lt;li&gt;zip - Archiver for .zip files.&lt;/li&gt;
+&lt;li&gt;tree - Tree is a recursive directory listing program.&lt;/li&gt;
+&lt;li&gt;busybox - Tiny utilities for small and embedded systems.&lt;/li&gt;
+&lt;li&gt;dropbear - Lightweight SSH2 server and client.&lt;/li&gt;
+&lt;li&gt;nano - Free Pico clone with some new features.&lt;/li&gt;
+&lt;li&gt;opkg - Lightweight package management system.&lt;/li&gt;
+&lt;li&gt;screen - Terminal multiplexor with VT100/ANSI terminal emulation.&lt;/li&gt;
+&lt;li&gt;terminfo - Basic terminal type definitions.&lt;/li&gt;
+&lt;li&gt;zip - Archiver for .zip files.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

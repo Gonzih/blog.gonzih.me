@@ -1,212 +1,124 @@
-
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>OpenSUSE 13.1 + Mate 1.6 + Xmonad - Max Gonzih</title>
-  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17-DEV" />
 
   
-  <meta name="description" content="OpenSUSE 13.1 + Mate 1.6 + Xmonad Nov 21st, 2013 | Comments So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
-Since gnome 3.9 support &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   
-  <link rel="canonical" href="http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  <title>OpenSUSE 13.1 &#43; Mate 1.6 &#43; Xmonad &middot; Max Gonzih</title>
   
 
+  
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/poole.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/syntax.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/hyde.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-    <a href="/">
-        <div class="clearfix">
-        </div>
-    </a>
-</aside>
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.gonzih.me"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
 
-<ul id="menu">
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/"> Achives </a></li>
+      
+        <li><a href="http://gonzih.me"> gonzih.me </a></li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://twitter.com/Gonzih"> Twitter </a></li>
+      
+        <li><a href="http://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+    </ul>
 
-  <li class="title">
-    <h1 id="title"><a href="/">Max Gonzih</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-
-  <li class="link">
-    <a href="mailto:gonzih@gmail.com">email</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/Gonzih/">github</a>
-  </li>
-
-
-  <li class="link">
-      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://twitter.com/Gonzih/">twitter</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-  <li>
-    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
-  </li>
-</ul>
-
-
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.gonzih.me" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  
-  
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
 </div>
 
-  
-  <header>
-    
-      <h2 class="entry-title">OpenSUSE 13.1 + Mate 1.6 + Xmonad</h2>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-21T22:46:00+00:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<p>So OpenSUSE 13.1 was released. And it&#8217;s great. But&#8230;
+        <div class="content container">
+            <div class="post">
+                <h1>OpenSUSE 13.1 &#43; Mate 1.6 &#43; Xmonad</h1>
+              <span class="post-date">Thu, Nov 21, 2013</span>
+                  <p>So OpenSUSE 13.1 was released. And it&rsquo;s great. But&hellip;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 
 <p><a href="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png"><img src="https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/re_1.png" alt="preview" /></a></p>
 
-<!-- more -->
-
+<p></p>
 
 <p>Patterns for installing mate in OpenSUSE can be found here <a href="http://en.opensuse.org/Portal:MATE">http://en.opensuse.org/Portal:MATE</a></p>
 
 <p>Xmonad can be installed using cabal install or using packages from OBS.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo zypper -n in xorg-x11-devel
-</span><span class='line'>
-</span><span class='line'>cabal install xmonad         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
-</span><span class='line'>cabal install xmonad-contrib --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
-</span><span class='line'>cabal install xmobar         --flags<span class="o">=</span><span class="s2">&quot;with_utf8 with_xft&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-sh">sudo zypper -n in xorg-x11-devel
 
+cabal install xmonad         --flags=&quot;with_utf8 with_xft&quot;
+cabal install xmonad-contrib --flags=&quot;with_utf8 with_xft&quot;
+cabal install xmobar         --flags=&quot;with_utf8 with_xft&quot;
+</code></pre>
 
 <p>Create following file:</p>
 
-<figure class='code'><figcaption><span>/usr/share/applications/xmonad.desktop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>[Desktop Entry]
-</span><span class='line'>Type=Application
-</span><span class='line'>Name=Xmonad
-</span><span class='line'># Replace it with your xmonad launcher
-</span><span class='line'>Exec=xmonad
-</span><span class='line'>NoDisplay=true
-</span><span class='line'>Terminal=false
-</span><span class='line'>StartupNotify=false
-</span><span class='line'>Categories=
-</span></code></pre></td></tr></table></div></figure>
+<p><code>/usr/share/applications/xmonad.desktop</code>:</p>
 
+<pre><code class="language-text">[Desktop Entry]
+Type=Application
+Name=Xmonad
+# Replace it with your xmonad launcher
+Exec=xmonad
+NoDisplay=true
+Terminal=false
+StartupNotify=false
+Categories=
+</code></pre>
 
 <p>Set xmonad as window manager for Mate:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.4</span>
-</span><span class='line'>mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
-</span><span class='line'>
-</span><span class='line'><span class="c"># Mate 1.6</span>
-</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components windowmanager xmonad
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-sh"># Mate 1.4
+mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
 
+# Mate 1.6
+gsettings set org.mate.session.required-components windowmanager xmonad
+</code></pre>
 
 <p>If you have Gnome 3 installed make sure that gnome-settings daemon is not running in mate (can cause gsettings error).</p>
 
@@ -218,102 +130,59 @@ You can kill caja and mate will restore it (temporary fix).</p>
 
 <p>If you have any tips feel free to comment!</p>
 
-<p><strong>UPDATE 0</strong> issues with rendering was caused by <code>setWMName "LG3D"</code> in <code>startupHook</code>.
+<p><strong>UPDATE 0</strong> issues with rendering was caused by <code>setWMName &quot;LG3D&quot;</code> in <code>startupHook</code>.
 Removed it for now (probably will cause issues with some Java(AWT) applications).</p>
 
 <p><strong>UPDATE 1</strong> If you want to disable desktop add following file:</p>
 
-<figure class='code'><figcaption><span>/usr/share/applications/caja-no-desktop.desktop</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>[Desktop Entry]
-</span><span class='line'>Name=Caja
-</span><span class='line'>Exec=caja -n --no-desktop
-</span><span class='line'>Icon=system-file-manager
-</span><span class='line'>Terminal=false
-</span><span class='line'>Type=Application
-</span><span class='line'>StartupNotify=true
-</span><span class='line'>NoDisplay=true
-</span><span class='line'>OnlyShowIn=MATE;
-</span><span class='line'>X-MATE-Bugzilla-Bugzilla=MATE
-</span><span class='line'>X-MATE-Bugzilla-Product=caja
-</span><span class='line'>X-MATE-Bugzilla-Component=general
-</span><span class='line'>X-MATE-Bugzilla-Version=1.6.2
-</span><span class='line'>X-MATE-Autostart-Phase=Desktop
-</span><span class='line'>X-MATE-Autostart-Notify=true
-</span><span class='line'>X-MATE-AutoRestart=true
-</span><span class='line'>X-MATE-Provides=filemanager
-</span></code></pre></td></tr></table></div></figure>
+<p><code>/usr/share/applications/caja-no-desktop.desktop</code>:</p>
 
+<pre><code class="language-text">[Desktop Entry]
+Name=Caja
+Exec=caja -n --no-desktop
+Icon=system-file-manager
+Terminal=false
+Type=Application
+StartupNotify=true
+NoDisplay=true
+OnlyShowIn=MATE;
+X-MATE-Bugzilla-Bugzilla=MATE
+X-MATE-Bugzilla-Product=caja
+X-MATE-Bugzilla-Component=general
+X-MATE-Bugzilla-Version=1.6.2
+X-MATE-Autostart-Phase=Desktop
+X-MATE-Autostart-Notify=true
+X-MATE-AutoRestart=true
+X-MATE-Provides=filemanager
+</code></pre>
 
 <p>And now set it as default file manager for mate:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Mate 1.6</span>
-</span><span class='line'>gsettings <span class="nb">set </span>org.mate.session.required-components filemanager <span class="s2">&quot;caja-no-desktop&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="language-sh"># Mate 1.6
+gsettings set org.mate.session.required-components filemanager &quot;caja-no-desktop&quot;
+</code></pre>
 
 <p>Also you can store all <code>*.desktop</code> files in <code>$HOME/.local/share/applications</code>.</p>
+            </div>
 
-
-
-</article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-  
-
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
 <script type="text/javascript">
-      var disqus_shortname = 'gonzihsblog';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/';
-        var disqus_url = 'http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
 
-
-
-
-
-
-
-
-
-
-</body>
+  </body>
 </html>

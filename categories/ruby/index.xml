@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/ruby/index.xml</link>
+    <description>Recent content on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <atom:link href="/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hardware Cut/Copy/Paste with Arduino Leonardo</title>
+      <link>http://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
+      <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
+      <description>&lt;p&gt;Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
+I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;http://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
+Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
+Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;emulating-keyboard-on-leonardo&#34;&gt;Emulating keyboard on Leonardo.&lt;/h2&gt;
+
+&lt;p&gt;With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
+Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the &lt;a href=&#34;http://arduino.cc/en/Reference/MouseKeyboard&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;arduino-wiring&#34;&gt;Arduino wiring.&lt;/h2&gt;
+
+&lt;p&gt;Wiring will be very simple. We will have 3 buttons on pins 2, 3 and 4 with pull down resistors.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/hardware-cut-copy-paste/schematics1.png&#34; alt=&#34;schematics1&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;hardware-cut-copy-paste&#34;&gt;Hardware Cut/Copy/Paste.&lt;/h2&gt;
+
+&lt;p&gt;So this will be our simplest solution to the my original idea. Here is Arduino sketch:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// version 0.0.1
+
+int cutPin   = 2;
+int copyPin  = 3;
+int pastePin = 4;
+
+void setup() {
+  pinMode(cutPin, INPUT);
+  pinMode(copyPin, INPUT);
+  pinMode(pastePin, INPUT);
+  Keboard.begin()
+}
+
+void loop() {
+  if (digitalRead(cutpin)   == HIGH) { cut();   }
+  if (digitalRead(copypin)  == HIGH) { copy();  }
+  if (digitalRead(pastepin) == HIGH) { paste(); }
+}
+
+void pressCtrl() {
+  Keyboard.press(KEY_LEFT_CTRL);
+}
+
+void pressShift() {
+  Keyboard.press(KEY_LEFT_SHIFT);
+}
+
+void cut() {
+  pressCtrl();
+  Keyboard.write(&#39;x&#39;);
+  Keyboard.releaseAll();
+}
+
+void copy() {
+  pressCtrl();
+  Keyboard.write(&#39;c&#39;);
+  Keyboard.releaseAll();
+}
+
+void paste() {
+  pressCtrl();
+  Keyboard.write(&#39;v&#39;);
+  Keyboard.releaseAll();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It works! But&amp;hellip; for example in my terminal I use Ctrl+Shift+C to copy selection.
+Of course I can press Shift+Copy combination. But maybe there is a better solution.&lt;/p&gt;
+
+&lt;h2 id=&#34;automatic-detection-of-key-combination&#34;&gt;Automatic detection of key combination.&lt;/h2&gt;
+
+&lt;p&gt;Idea is simple. We have serial port open on Leonardo and our Linux PC.
+When I&amp;rsquo;m pressing copy on Leonardo it will ask through serial port PC about required combination.
+On PC there will be running ruby script that will detect currently focused window and look up at the configuration file for
+keys combination. If there is no combination will be found or reply from script will be timed out we will use default combination.&lt;/p&gt;
+
+&lt;h2 id=&#34;detecting-wm-class-from-ruby-2-0-0&#34;&gt;Detecting WM_CLASS from Ruby (2.0.0+).&lt;/h2&gt;
+
+&lt;p&gt;From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
+Here is Window class for the job:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class Window
+  def self.current
+    Window.new(`xprop -root`)
+  end
+
+  def initialize(data)
+    @root_data = data
+  end
+
+  def id
+    matches = @root_data.lines.grep(/_NET_ACTIVE_WINDOW\(WINDOW\)/)
+
+    if matches
+      match_data = matches.first.match(/_NET_ACTIVE_WINDOW\(WINDOW\):.*#\s(.*)\n/)
+      match_data[1]
+    else
+      raise &#39;No Window id was found&#39;
+    end
+  end
+
+  def wm_class
+    out = `xprop -id &#39;#{id}&#39;`
+    matches = out.lines.grep(/WM_CLASS\(STRING\)/)
+
+    if matches
+      match_data = matches.first.match(/WM_CLASS\(STRING\)[^&amp;quot;]*(&amp;quot;.*&amp;quot;)\n/)
+      match_data[1].gsub(/&amp;quot;/,&#39;&#39;).split(&#39;, &#39;)
+    else
+      raise &#39;No Window class was found&#39;
+    end
+  end
+
+  def is_a?(class_string)
+    wm_class.any? { |s| s == class_string }
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Usage examples:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Window.current.wm_class
+=&amp;gt; [&amp;quot;gvim&amp;quot;, &amp;quot;Gvim&amp;quot;]
+
+Window.current.is_a?(&amp;quot;gvim&amp;quot;)
+=&amp;gt; true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;keys-configuration&#34;&gt;Keys configuration.&lt;/h2&gt;
+
+&lt;p&gt;For now lets implement simplest class for that and store all configuration in constant.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class Keys
+  CONFIG = {
+    &#39;terminology&#39; =&amp;gt; {
+      &#39;copy&#39;  =&amp;gt; &#39;ctrl-shift-c&#39;,
+      &#39;cut&#39;   =&amp;gt; &#39;ctrl-shift-c&#39;,
+      &#39;paste&#39; =&amp;gt; &#39;ctrl-shift-v&#39;
+    }
+  }
+
+  def self.[](key)
+    CONFIG[key]
+  end
+
+  def self.for(window)
+    window.wm_class.map do |k|
+      CONFIG[k]
+    end.compact.first
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Keys[&#39;terminology&#39;][&#39;copy&#39;]
+=&amp;gt; &#39;ctrl-shift-c&#39;
+
+# When current window is terminology
+Keys.for(Window.current)[&#39;copy&#39;]
+=&amp;gt; &#39;ctrl-shift-c&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;communicating-with-arduino-via-serialport&#34;&gt;Communicating with Arduino via SerialPort.&lt;/h2&gt;
+
+&lt;p&gt;Code below uses sketch described above with redefined copy/paste/cut functions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;String stringIn;
+// Let&#39;s assume than combination aren&#39;t longer than 4 keys
+String collectedStrings[4];
+int counter, inByte, i;
+
+void setup(){
+  Serial.begin(9600);
+  counter = 0;
+  stringIn = String(&amp;quot;&amp;quot;);
+}
+
+void cut() {
+  Serial.println(&amp;quot;cut&amp;quot;);
+}
+
+void copy() {
+  Serial.println(&amp;quot;copy&amp;quot;);
+}
+
+void paste() {
+  Serial.println(&amp;quot;paste&amp;quot;);
+}
+
+void resetReader() {
+  counter = 0
+  stringIn = String(&amp;quot;&amp;quot;)
+  for (i = 0; i &amp;lt;= 4; i++) {
+    collectedStrings[i] = String(&amp;quot;&amp;quot;)
+  }
+}
+
+void readLine() {
+  while(Serial.available()){
+    inByte = Serial.read();
+    stringIn += inByte;
+
+    if (inByte == &#39;-&#39;){  // Handle delimiter
+      collectedStrings[counter] = String(stringIn);
+      stringIn = String(&amp;quot;&amp;quot;);
+      counter = counter + 1;
+    }
+
+    if(inByte ==  &#39;\r&#39;){  // end of line
+      resetReader();
+      return;
+    }
+  }
+}
+
+void executeCombination() {
+  for(i = 0; i &amp;lt;= 4; i++) {
+    pressKey(collectedstrings[i]);
+  }
+
+  Keyboard.releaseAll();
+}
+
+void pressKeys(String key) {
+  switch(key) {
+    case &amp;quot;ctrl&amp;quot;:
+      pressCtrl();
+      break;
+    case &amp;quot;shift&amp;quot;:
+      pressShift();
+      break;
+    default:
+      char[] arr = key.toCharArray();
+      char k = arr[0];
+      Keyboard.write(k);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;More information on ruby-serialport is &lt;a href=&#34;http://ruby-serialport.rubyforge.org/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;serialport&#39;
+
+class Connection
+  def initialize(port: nil)
+    unless port
+      port = `ls /dev/ttyACM*`.lines.first
+    end
+
+    @connection = SerialPort.new(port, 9600)
+  end
+
+  def loop
+    loop do
+      begin
+        action = @connection.readline
+        @connection.write(&amp;quot;#{Keys.for(Window.current.wm_class)[action]}\r&amp;quot;)
+      rescue Exception =&amp;gt; e
+        p e
+      end
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;Connection.new.loop # starts infinite loop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;PS.&lt;/strong&gt; This post is more like collection of theoretical pices of code.
+I have no time (and probably enthusiasm) to put all this together (at least right now).
+So this implementation can be broken and inaccurate in many ways.
+Feel free to point out any errors and mistakes and I will fix them.&lt;/p&gt;
+
+&lt;!--
+vim: ts=2:sts=2:sw=2:expandtab
+--&gt;</description>
+    </item>
+    
+    <item>
+      <title>VisualRuby gem on OpenSUSE 13.1</title>
+      <link>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</link>
+      <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I found out about ruby gem called &lt;a href=&#34;http://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
+So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
+I bet you can figure out similar packages for different distribution.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo zypper -n in \
+glib2 glib2-branding-openSUSE glib2-devel \
+atk-devel cairo-devel pango-devel gdk-pixbuf-devel \
+gtk2-devel gtksourceview2-devel glade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
+It&amp;rsquo;s not working very well (at least in examples) since most of stuff in suse 13.1 is based on gtk3+.
+But I&amp;rsquo;m still in process of figuring things out.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Yin-Yang Call/cc puzzle in Ruby</title>
+      <link>http://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
+      <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
+      <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
+
+&lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(let* ((yin
+        ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
+       (yang
+        ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
+(yin yang))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/&#34;&gt;Here&lt;/a&gt; you can find good explanation,
+also few of explanations can be found on &lt;a href=&#34;http://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work&#34;&gt;StackOverflow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;After I understand how it works I got all that excited and implemented given puzzle in ruby:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;continuation&amp;quot;
+
+yin  = -&amp;gt;(cc) { print &amp;quot;@&amp;quot;; cc }.call(callcc { |c| c })
+yang = -&amp;gt;(cc) { print &amp;quot;*&amp;quot;; cc }.call(callcc { |c| c })
+
+yin.call(yang)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And it doesn&amp;rsquo;t work. It prints &lt;code&gt;@*@*********...&lt;/code&gt; forever.&lt;/p&gt;
+
+&lt;p&gt;No idea why. Maybe there are some limitations of &lt;a href=&#34;http://www.ruby-doc.org/core-2.0.0/Continuation.html&#34;&gt;ruby&amp;rsquo;s call/cc&lt;/a&gt;.
+I will research further, but if you have any information about that feel free to comment or email me.&lt;/p&gt;
+
+&lt;p&gt;Cheers!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt; Abinoam Praxedes Marques Junio &lt;a href=&#34;https://www.ruby-forum.com/topic/4418860#1129811&#34;&gt;figured&lt;/a&gt; out that let (which is basically lambda application underneath) is crucial here.
+So here is his fixed version:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;continuation&amp;quot;
+
+lambda do |yin, yang|
+  yin.call(yang)
+end.call(lambda { |cc| print &amp;quot;@&amp;quot;; cc }.call(callcc { |c| c }),
+         lambda { |cc| print &amp;quot;*&amp;quot;; cc }.call(callcc { |c| c }))
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>RSS/Atom reader in Clojure via IMAP</title>
+      <link>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
+      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
+      <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
+
+&lt;p&gt;Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;idea&#34;&gt;Idea&lt;/h3&gt;
+
+&lt;p&gt;Then I found post in the Racket community about storing your feeds in the IMAP folders using &amp;ldquo;APPEND&amp;rdquo; command by &lt;a href=&#34;http://www.greghendershott.com/2013/05/feeds2gmail.html&#34;&gt;Greg Hendershott&lt;/a&gt;.
+That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.&lt;/p&gt;
+
+&lt;h3 id=&#34;clojure-version&#34;&gt;Clojure version&lt;/h3&gt;
+
+&lt;p&gt;First I implemented my &lt;a href=&#34;https://github.com/Gonzih/feeds2imap.rb&#34;&gt;prototype in Ruby&lt;/a&gt; in few hours. I picked up Ruby because of built-in rss/atom and imap libraries.
+I used it for few days and liked it. Simple, reliable solution.
+So then I decided to rewrite it in Clojure.
+Why Clojure?
+Because it&amp;rsquo;s pure fun to use.
+I decided to use java.mail framework for message storing and folder manipulations, feedparser-clj to fetch and parse rss/atom feeds and hiccup for templating.
+I was really pleased with feedparser-clj in comparison with Ruby built-in library.
+java.mail framework was not so bad as I was expecting at first.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-it-works&#34;&gt;How it works?&lt;/h3&gt;
+
+&lt;p&gt;Here is project logic:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fetch folders and urls from feeds file.&lt;/li&gt;
+&lt;li&gt;Fetch and parse RSS/Atom data from urls.&lt;/li&gt;
+&lt;li&gt;Select only new items using cache file.&lt;/li&gt;
+&lt;li&gt;Create required imap folders.&lt;/li&gt;
+&lt;li&gt;Store new items as email messages.&lt;/li&gt;
+&lt;li&gt;Mark items as read (put md5 hashes in to the clj file with set of old hashes).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It&amp;rsquo;s running now by cron (every hour) on my BeagleBone (using latest ejre version).&lt;/p&gt;
+
+&lt;p&gt;Source code is hosted on github &lt;a href=&#34;https://github.com/Gonzih/feeds2imap.clj&#34;&gt;here&lt;/a&gt;. Take a look at project README for usage.&lt;/p&gt;
+
+&lt;h3 id=&#34;more-implementations&#34;&gt;More implementations&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Gonzih/feeds2imap.rb&#34;&gt;My Ruby prototype&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Gonzih/feeds2imap.clj&#34;&gt;My Clojure implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/greghendershott/feeds2gmail&#34;&gt;Racket implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cordawyn/rss2imap&#34;&gt;Haskell implementation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Fix Octopress Pygments Error on Arch Linux</title>
+      <link>http://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</link>
+      <pubDate>Wed, 21 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
+      <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Building site: source -&amp;gt; public
+  File &amp;quot;&amp;lt;string&amp;gt;&amp;quot;, line 1
+    import sys; print sys.executable
+                        ^
+SyntaxError: invalid syntax
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
+
+&lt;p&gt;For fix simple add ruby file to plugins directory with following code.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ruby_python_arch_linux_fix.rb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;RubyPython.configure :python_exe =&amp;gt; &#39;python2.7&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also if you get following lib.so related error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can find solution &lt;a href=&#34;https://github.com/tmm1/pygments.rb/issues/10&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024&#34;&gt;via&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
+
+&lt;p&gt;Another Workaround:
+edit &amp;ldquo;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&amp;rdquo; file (path might be different for you)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;-- 31 @library = find_python_lib
+++ 31 @library = &amp;quot;/usr/lib/libpython2.7.so&amp;quot;
+
+-- 126 %x(#{@python} -c &amp;quot;#{command}&amp;quot;).chomp if @python
+++ 126 %x(&amp;quot;#{@python} -c #{command}&amp;quot;).chomp if @python
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tmux &#43; Rvm &#43; Zsh Fix</title>
+      <link>http://blog.gonzih.me/blog/2011/09/15/tmux-&#43;-rvm-&#43;-zsh-fix/</link>
+      <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2011/09/15/tmux-&#43;-rvm-&#43;-zsh-fix/</guid>
+      <description>&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[ $TERM = &amp;quot;screen&amp;quot; ]] &amp;amp;&amp;amp; rvm use default
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

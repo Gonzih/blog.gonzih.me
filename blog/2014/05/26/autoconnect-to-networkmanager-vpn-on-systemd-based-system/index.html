@@ -1,264 +1,156 @@
-
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>Autoconnect to NetworkManager VPN on systemd based system - Max Gonzih</title>
-  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17-DEV" />
 
   
-  <meta name="description" content="Autoconnect to NetworkManager VPN on Systemd Based System May 26th, 2014 | Comments Here is small post with instructions how to setup auto connect &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   
-  <link rel="canonical" href="http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  <title>Autoconnect to NetworkManager VPN on systemd based system &middot; Max Gonzih</title>
   
 
+  
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/poole.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/syntax.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/hyde.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-    <a href="/">
-        <div class="clearfix">
-        </div>
-    </a>
-</aside>
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.gonzih.me"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
 
-<ul id="menu">
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/"> Achives </a></li>
+      
+        <li><a href="http://gonzih.me"> gonzih.me </a></li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://twitter.com/Gonzih"> Twitter </a></li>
+      
+        <li><a href="http://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+    </ul>
 
-  <li class="title">
-    <h1 id="title"><a href="/">Max Gonzih</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-
-  <li class="link">
-    <a href="mailto:gonzih@gmail.com">email</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/Gonzih/">github</a>
-  </li>
-
-
-  <li class="link">
-      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://twitter.com/Gonzih/">twitter</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-  <li>
-    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
-  </li>
-</ul>
-
-
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.gonzih.me" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  
-  
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
 </div>
 
-  
-  <header>
-    
-      <h2 class="entry-title">Autoconnect to NetworkManager VPN on Systemd Based System</h2>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-26T21:17:00+00:00" pubdate data-updated="true">May 26<span>th</span>, 2014</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<p>Here is small post with instructions how to setup auto connect to VPN.
+        <div class="content container">
+            <div class="post">
+                <h1>Autoconnect to NetworkManager VPN on systemd based system</h1>
+              <span class="post-date">Mon, May 26, 2014</span>
+                  <p>Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?</p>
 
-<!-- more -->
-
+<p></p>
 
 <p>Following was tested on OpenSuse 13.1.</p>
 
 <ul>
 <li><p>First create new VPN connection in NetworkManager.</p></li>
+
 <li><p>Create dispatcher file that will connect your VPN.</p></li>
 </ul>
 
+<p><code>/etc/NetworkManager/dispatcher.d/vpn-up</code>:</p>
 
-<figure class='code'><figcaption><span>/etc/NetworkManager/dispatcher.d/vpn-up</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>#!/bin/sh
-</span><span class='line'>
-</span><span class='line'>CONN=&quot;MY-CONNECTION-NAME&quot;
-</span><span class='line'>
-</span><span class='line'>nmcli con status id $CONN &gt; /dev/null
-</span><span class='line'>
-</span><span class='line'>rc=$?
-</span><span class='line'>if [[ $rc != 0 ]] ; then
-</span><span class='line'>    nmcli con up id $CONN
-</span><span class='line'>    sleep 5 # optional wait time
-</span><span class='line'>fi
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-text">#!/bin/sh
 
+CONN=&quot;MY-CONNECTION-NAME&quot;
+
+nmcli con status id $CONN &gt; /dev/null
+
+rc=$?
+if [[ $rc != 0 ]] ; then
+    nmcli con up id $CONN
+    sleep 5 # optional wait time
+fi
+
+</code></pre>
 
 <ul>
 <li>Make file executable <code>chmod +x /etc/NetworkManager/dispatcher.d/vpn-up</code></li>
 <li>Make sure that dispatcher is running by running <code>journalctl -b -u NetworkManager</code> and looking for the line that looks like:</li>
 </ul>
 
+<p><code>NetworkManager</code>:
+```text journalctl -b -u
+<warn> Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.</p>
 
-<figure class='code'><figcaption><span>journalctl -b -u NetworkManager</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
-</span></code></pre></td></tr></table></div></figure>
+<pre><code>
+* If you see line about dispatcher service - enable it manually by running `systemctl enable NetworkManager-dispatcher.service`.
+* By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:
 
+`/etc/NetworkManager/system-connections/MY-CONNECTION-NAME`:
+```text
+...
+[vpn]
+password-flags=0
+...
+[vpn-secrets]
+password=MY-VPN-PASSWORD
 
-<ul>
-<li>If you see line about dispatcher service - enable it manually by running <code>systemctl enable NetworkManager-dispatcher.service</code>.</li>
-<li>By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>/etc/NetworkManager/system-connections/MY-CONNECTION-NAME</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>...
-</span><span class='line'>[vpn]
-</span><span class='line'>password-flags=0
-</span><span class='line'>...
-</span><span class='line'>[vpn-secrets]
-</span><span class='line'>password=MY-VPN-PASSWORD
-</span></code></pre></td></tr></table></div></figure>
-
+</code></pre>
 
 <p>And now everything should work like a charm!</p>
+            </div>
 
-
-
-</article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-  
-
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
 <script type="text/javascript">
-      var disqus_shortname = 'gonzihsblog';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/';
-        var disqus_url = 'http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
 
-
-
-
-
-
-
-
-
-
-</body>
+  </body>
 </html>

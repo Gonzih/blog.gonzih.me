@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/web/index.xml</link>
+    <description>Recent content on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <atom:link href="/categories/web/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin</title>
+      <link>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/</link>
+      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/</guid>
+      <description>&lt;p&gt;So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers.
+You will need three things for that.
+&lt;/p&gt;
+
+&lt;p&gt;First is &lt;a href=&#34;http://modernizr.com/&#34;&gt;Modernizr&lt;/a&gt; javascript library. It allows you to detect which features are supported by your browser and which aren&amp;rsquo;t.&lt;/p&gt;
+
+&lt;p&gt;Second is &lt;a href=&#34;http://jquery.com/&#34;&gt;JQuery&lt;/a&gt;. I think you are already familiar with it, so there is no need to tell you why it&amp;rsquo;s awesome and how to use it.&lt;/p&gt;
+
+&lt;p&gt;Third is &lt;a href=&#34;http://docs.jquery.com/Plugins/Validation&#34;&gt;JQuery Validation Plugin&lt;/a&gt;. It provides mechanism for form validation based on input classes.&lt;/p&gt;
+
+&lt;p&gt;So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small &lt;a href=&#34;http://coffeescript.org/&#34;&gt;CoffeeScript&lt;/a&gt; snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;# initialize plugin on page ready
+$ -&amp;gt;
+  unless (Modernizr.input.required)
+    $(&#39;form&#39;).find(&#39;input[required]&#39;).each -&amp;gt;
+      $(this).attr(&#39;class&#39;, &#39;required &#39; + this.getAttribute(&#39;type&#39;)).removeAttr(&#39;required&#39;)
+
+    $(&#39;form&#39;).each -&amp;gt;
+      $(this).validate()
+
+# check if form is valid by hand
+$(&#39;form&#39;).valid()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And as always, Have a nice day! :)&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

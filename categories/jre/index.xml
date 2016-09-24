@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/jre/index.xml</link>
+    <description>Recent content on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <atom:link href="/categories/jre/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark</title>
+      <link>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</link>
+      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
+
+Pi is running Raspbian.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cat /etc/*-release
+PRETTY_NAME=&amp;quot;Debian GNU/Linux 7.0 (wheezy)&amp;quot;
+NAME=&amp;quot;Debian GNU/Linux&amp;quot;
+VERSION_ID=&amp;quot;7.0&amp;quot;
+VERSION=&amp;quot;7.0 (wheezy)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pi CPU is running on 700Mhz.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cpufreq-info | grep &#39;current CPU&#39;
+current CPU frequency is 700 MHz.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clojure version is 1.5.1.&lt;/p&gt;
+
+&lt;p&gt;Benchmark code is from &lt;a href=&#34;http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/&#34;&gt;nakkaya&amp;rsquo;s post&lt;/a&gt;, also used for my BeagleBone Clojure/ClojureScript benchmarks:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns benchmark.core)
+
+(defn factorial [x]
+  (reduce * (range 1N (inc x))))
+;                   ^ integerOverflow fix
+
+(defn fib [n]
+  (if (&amp;lt;= n 1)
+    1
+    (+ (fib (- n 1)) (fib (- n 2)))))
+
+(defn sort-seq []
+  (sort (repeat 100000 (rand-int 2000000))))
+
+(defn time-it [fn]
+  (let [values  (for [i (range 200)] (with-out-str (time (fn))))
+        doubles (map #(Double. (nth (.split % &amp;quot; &amp;quot;) 2)) values)]
+    (/ (apply + doubles) (count doubles))))
+
+(defn -main []
+  (println &amp;quot;(factorial 5000) \t Avg: &amp;quot; (time-it #(factorial 5000)))
+  (println &amp;quot;(fib 20) \t Avg: &amp;quot; (time-it #(fib 20)))
+  (println &amp;quot;(sort-seq) \t Avg: &amp;quot; (time-it #(sort-seq))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time I was a little bit smarter to run all code with &lt;code&gt;lein trampoline run&lt;/code&gt; to eliminate overhead.&lt;/p&gt;
+
+&lt;p&gt;Numbers:&lt;/p&gt;
+
+&lt;p&gt;OpenJDK:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; sudo apt-get install openjdk-7-jre-headless
+
+&amp;gt; java -version
+java version &amp;quot;1.7.0_07&amp;quot;
+OpenJDK Runtime Environment (IcedTea7 2.3.2) (7u7-2.3.2a-1+rpi1)
+OpenJDK Zero VM (build 22.0-b10, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM
+90.5 15.7
+
+&amp;gt; lein trampoline run
+(factorial 5000) Avg: 5956.007845080006
+(fib 20)         Avg: 713.6807171
+(sort-seq)       Avg: 9633.873322030007
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Oracle JRE:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; java -version
+java version &amp;quot;1.8.0-ea&amp;quot;
+Java(TM) SE Runtime Environment (build 1.8.0-ea-b36e)
+Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM
+87.9 18.9
+
+&amp;gt; lein trampoline run
+(factorial 5000) Avg: 685.5312071299996
+(fib 20)         Avg: 29.505588125000017
+(sort-seq)       Avg: 1137.3281607850001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Startup time for &amp;ldquo;Hello, World!&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# OpenJDK
+&amp;gt; time lein run
+Hello, World!
+lein run  56.51s user 1.58s system 87% cpu 1:06.16 total
+&amp;gt; time lein trampoline run
+Hello, World!
+lein trampoline run  57.73s user 0.96s system 96% cpu 1:00.57 total
+
+# Oracle JRE
+&amp;gt; time lein run
+Hello, World!
+lein run  31.47s user 1.43s system 95% cpu 34.298 total
+&amp;gt; time lein trampoline run
+Hello, World!
+lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Looks promising for clojure on small arm devices :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark</title>
+      <link>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</link>
+      <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
+      <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
+&lt;/p&gt;
+
+&lt;p&gt;BeagleBone is running Ubuntu 12.04.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cat /etc/*-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.04
+DISTRIB_CODENAME=precise
+DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 12.04 LTS&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;BeagleBone CPU is running on 500Mhz.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cpufreq-info | grep &#39;current CPU&#39;
+current CPU frequency is 500 MHz.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clojure version is 1.4.0.&lt;/p&gt;
+
+&lt;p&gt;Benchmark code is from &lt;a href=&#34;http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/&#34;&gt;nakkaya&amp;rsquo;s post&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns benchmark.core)
+
+(defn factorial [x]
+  (reduce * (range 1N (inc x))))
+;                   ^ integerOverflow fix
+
+(defn fib [n]
+  (if (&amp;lt;= n 1)
+    1
+    (+ (fib (- n 1)) (fib (- n 2)))))
+
+(defn sort-seq []
+  (sort (repeat 100000 (rand-int 2000000))))
+
+(defn time-it [fn]
+  (let [values  (for [i (range 200)] (with-out-str (time (fn))))
+        doubles (map #(Double. (nth (.split % &amp;quot; &amp;quot;) 2)) values)]
+    (/ (apply + doubles) (count doubles))))
+
+(defn -main []
+  (println &amp;quot;(factorial 5000) \t Avg: &amp;quot; (time-it #(factorial 5000)))
+  (println &amp;quot;(fib 20) \t Avg: &amp;quot; (time-it #(fib 20)))
+  (println &amp;quot;(sort-seq) \t Avg: &amp;quot; (time-it #(sort-seq))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So here the numbers:&lt;/p&gt;
+
+&lt;p&gt;OpenJDK:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; sudo apt-get install openjdk-7-jre-headless
+
+&amp;gt; java -version
+java version &amp;quot;1.7.0_03&amp;quot;
+OpenJDK Runtime Environment (IcedTea7 2.1.1pre) (7~u3-2.1.1~pre1-1ubuntu3)
+OpenJDK Zero VM (build 22.0-b10, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+96.9 16.3 267932 41172 pts/1  Sl+  09:07  9:28 java
+
+&amp;gt; lein run
+(factorial 5000) Avg:  1681.9940255249999
+(fib 20)         Avg:  490.16940197000025
+(sort-seq)       Avg:  7129.159457125003
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Embedded JRE:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; java -version
+java version &amp;quot;1.7.0_06&amp;quot;
+Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)
+Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+91.2 16.4 221740 41372 pts/1  Sl+  08:28  5:16 java
+
+&amp;gt; lein run
+(factorial 5000) Avg:  1061.0568413899998
+(fib 20)         Avg:  30.877820054999983
+(sort-seq)       Avg:  1729.9035516600002
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here you are. Better performance and slightly better memory usage.
+Good Job, Embedded Java Team :)
+Looking forward for hardfloat ABI version to test it on Raspberry Pi.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

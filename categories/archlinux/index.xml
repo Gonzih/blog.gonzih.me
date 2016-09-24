@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/archlinux/index.xml</link>
+    <description>Recent content on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <atom:link href="/categories/archlinux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Arch Linux on Macbook Pro 8.2 (17&#34; 2011)</title>
+      <link>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
+      <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/MacBook&#34;&gt;Arch Wiki page&lt;/a&gt; covers installation well enough in my opinion.&lt;/p&gt;
+
+&lt;h3 id=&#34;bootloader-via-systemd-boot&#34;&gt;Bootloader via systemd-boot&lt;/h3&gt;
+
+&lt;p&gt;Before installing boot loader change /boot partition type to &lt;code&gt;EFI System&lt;/code&gt; (&lt;code&gt;ef00&lt;/code&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkfs.fat -F32 /dev/sda1
+pacman -S dosfstools
+mount /dev/sda1 /mnt/boot
+arch-chroot /mnt
+bootctl --path=/boot instnall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;bootloader-via-grub&#34;&gt;Bootloader via grub&lt;/h3&gt;
+
+&lt;p&gt;You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be &lt;code&gt;ef00&lt;/code&gt; type partition of vfta32.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mount /dev/sda1 /mnt/boot
+mkdir -p /mnt/boot/efi
+mount /dev/sda2 /mnt/boot/efi
+modprobe dm-mod
+arch-chroot /mnt
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
+mkdir -p /boot/grub/locale
+cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;use-broadcom-wl-wireless-module-from-aur&#34;&gt;Use broadcom-wl wireless module from AUR&lt;/h2&gt;
+
+&lt;p&gt;This is proprietary broadcom driver. Works fine with BCM4331.
+Only thing that does not work - hidden SSID.&lt;/p&gt;
+
+&lt;p&gt;OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.&lt;/p&gt;
+
+&lt;p&gt;To make sure that correct module is used by hardwrare blacklist every other module and reboot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#/etc/modprobe.d/wl.conf
+blacklist b43
+blacklist b43legacy
+blacklist ssb
+blacklist bcm43xx
+blacklist brcm80211
+blacklist brcmfmac
+blacklist brcmsmac
+blacklist bcma
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;disable-radeon-gpu-for-better-power-consumption&#34;&gt;Disable Radeon GPU for better power consumption&lt;/h2&gt;
+
+&lt;p&gt;This will reduce power usage dramatically but also will disable external screen support via display port.
+This laptop relies on the external gpu to work with display port.&lt;/p&gt;
+
+&lt;p&gt;Edit &lt;code&gt;/etc/grub.d/00_header&lt;/code&gt; and add outb lines in between &lt;code&gt;set gfxmode=${GRUB_GFXMODE}&lt;/code&gt; and &lt;code&gt;load video&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+set gfxmode=${GRUB_GFXMODE}
+outb 0x728 1
+outb 0x710 2
+outb 0x740 2
+outb 0x750 0
+load video
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Generate new grub config:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PS. This post will probably grow over time.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

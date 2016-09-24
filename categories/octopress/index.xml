@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/octopress/index.xml</link>
+    <description>Recent content on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <atom:link href="/categories/octopress/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fix Broken Comments Count for Disqus</title>
+      <link>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</guid>
+      <description>&lt;p&gt;I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
+That is why comments count was equal to 0 for every post on my index page.
+To fix that go to admin ui in disqus and use domain migration tool.
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Fix Octopress Pygments Error on Arch Linux</title>
+      <link>http://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</link>
+      <pubDate>Wed, 21 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
+      <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Building site: source -&amp;gt; public
+  File &amp;quot;&amp;lt;string&amp;gt;&amp;quot;, line 1
+    import sys; print sys.executable
+                        ^
+SyntaxError: invalid syntax
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
+
+&lt;p&gt;For fix simple add ruby file to plugins directory with following code.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ruby_python_arch_linux_fix.rb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;RubyPython.configure :python_exe =&amp;gt; &#39;python2.7&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also if you get following lib.so related error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can find solution &lt;a href=&#34;https://github.com/tmm1/pygments.rb/issues/10&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024&#34;&gt;via&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
+
+&lt;p&gt;Another Workaround:
+edit &amp;ldquo;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&amp;rdquo; file (path might be different for you)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;-- 31 @library = find_python_lib
+++ 31 @library = &amp;quot;/usr/lib/libpython2.7.so&amp;quot;
+
+-- 126 %x(#{@python} -c &amp;quot;#{command}&amp;quot;).chomp if @python
+++ 126 %x(&amp;quot;#{@python} -c #{command}&amp;quot;).chomp if @python
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

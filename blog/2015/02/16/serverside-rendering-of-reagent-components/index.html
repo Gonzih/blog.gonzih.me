@@ -1,250 +1,146 @@
-
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>ServerSide rendering of Reagent components - Max Gonzih</title>
-  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17-DEV" />
 
   
-  <meta name="description" content="ServerSide Rendering of Reagent Components Feb 16th, 2015 | Comments Great thing about React is that you can write what people nowadays call &#8220; &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   
-  <link rel="canonical" href="http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  <title>ServerSide rendering of Reagent components &middot; Max Gonzih</title>
   
 
+  
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/poole.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/syntax.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/hyde.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-    <a href="/">
-        <div class="clearfix">
-        </div>
-    </a>
-</aside>
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.gonzih.me"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
 
-<ul id="menu">
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/"> Achives </a></li>
+      
+        <li><a href="http://gonzih.me"> gonzih.me </a></li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://twitter.com/Gonzih"> Twitter </a></li>
+      
+        <li><a href="http://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+    </ul>
 
-  <li class="title">
-    <h1 id="title"><a href="/">Max Gonzih</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-
-  <li class="link">
-    <a href="mailto:gonzih@gmail.com">email</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/Gonzih/">github</a>
-  </li>
-
-
-  <li class="link">
-      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://twitter.com/Gonzih/">twitter</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-  <li>
-    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
-  </li>
-</ul>
-
-
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.gonzih.me" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  
-  
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
 </div>
 
-  
-  <header>
-    
-      <h2 class="entry-title">ServerSide Rendering of Reagent Components</h2>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-02-16T10:12:00+00:00" pubdate data-updated="true">Feb 16<span>th</span>, 2015</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<p>Great thing about React is that you can write what people nowadays call &#8220;isomorphic JavaScript&#8221;.
+        <div class="content container">
+            <div class="post">
+                <h1>ServerSide rendering of Reagent components</h1>
+              <span class="post-date">Mon, Feb 16, 2015</span>
+                  <p>Great thing about React is that you can write what people nowadays call &ldquo;isomorphic JavaScript&rdquo;.
 In this post we will not discuss how wrong this term is in many ways,
 but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.</p>
 
-<!--more-->
-
+<p></p>
 
 <p>In my experience simplest optimization to run in some js engine on server side is whitespace.
 It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
 So our compiler configuration should look something like that:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:id</span> <span class="s">&quot;server-side&quot;</span>
-</span><span class='line'> <span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src&quot;</span><span class="p">]</span>
-</span><span class='line'> <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span> <span class="s">&quot;resources/public/javascripts/server-side.js&quot;</span>
-</span><span class='line'>            <span class="ss">:output-dir</span> <span class="s">&quot;resources/public/javascripts/out-server-side&quot;</span>
-</span><span class='line'>            <span class="ss">:preamble</span> <span class="p">[</span><span class="s">&quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&quot;</span><span class="p">]</span>
-</span><span class='line'>            <span class="ss">:pretty-print</span> <span class="nv">false</span>
-</span><span class='line'>            <span class="ss">:warnings</span> <span class="nv">true</span>
-</span><span class='line'>            <span class="ss">:optimizations</span> <span class="ss">:whitespace</span><span class="p">}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="language-clojure">{:id &quot;server-side&quot;
+ :source-paths [&quot;src&quot;]
+ :compiler {:output-to &quot;resources/public/javascripts/server-side.js&quot;
+            :output-dir &quot;resources/public/javascripts/out-server-side&quot;
+            :preamble [&quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&quot;]
+            :pretty-print false
+            :warnings true
+            :optimizations :whitespace}}
+</code></pre>
 
 <p>Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">main-component</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">with-meta</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">...</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">{</span><span class="ss">:component-did-mount</span> <span class="p">(</span><span class="nb">comp </span><span class="nv">init-my-scroll-handler!</span>
-</span><span class='line'>                                <span class="nv">also-init-my-go-loop!</span><span class="p">)}))</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-clojure">(def main-component
+  (with-meta
+    (fn [] ...)
+    {:component-did-mount (comp init-my-scroll-handler!
+                                also-init-my-go-loop!)}))
+</code></pre>
 
-
-<p>Next let&#8217;s create function that will do some rendering to the string.
+<p>Next let&rsquo;s create function that will do some rendering to the string.
 I like to keep this function in a component specific ns just for convenience.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">render-me-to-s</span> <span class="p">[</span><span class="nv">initial-state</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">reset!</span> <span class="nv">my-main-state</span> <span class="p">(</span><span class="nf">js-&gt;clj</span> <span class="nv">initial-state</span><span class="p">))</span>
-</span><span class='line'>  <span class="c1">; Render component to markup without reactid</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">reagent.core/render-to-static-markup</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">])</span>
-</span><span class='line'>  <span class="c1">; Or render component to ready to-go react markup</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">reagent.core/render-to-string</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">]))</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="language-clojure">(def ^:export render-me-to-s [initial-state]
+  (reset! my-main-state (js-&gt;clj initial-state))
+  ; Render component to markup without reactid
+  (reagent.core/render-to-static-markup [main-component])
+  ; Or render component to ready to-go react markup
+  (reagent.core/render-to-string [main-component]))
+</code></pre>
 
 <p>Now server side bootstrapping, most of this code was taken from <a href="https://github.com/reactjs/react-rails">react-rails plugin</a>.</p>
 
-<p>First of all react expects to have global or window objects in your js engine:</p>
+<p>First of all react expects to have global or window objects in your js engine (setup.js):</p>
 
-<figure class='code'><figcaption><span>setup.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">global</span> <span class="o">=</span> <span class="nx">global</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="nx">self</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nb">window</span> <span class="o">=</span> <span class="nb">window</span> <span class="o">||</span> <span class="k">this</span><span class="p">;</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">console</span> <span class="o">=</span> <span class="nx">global</span><span class="p">.</span><span class="nx">console</span> <span class="o">||</span> <span class="p">{};</span>
-</span><span class='line'><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">fn</span> <span class="k">in</span> <span class="nx">console</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">console</span><span class="p">[</span><span class="nx">fn</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-javascript">var global = global || this;
+var self = self || this;
+var window = window || this;
+var console = global.console || {};
+['error', 'log', 'info', 'warn'].forEach(function (fn) {
+  if (!(fn in console)) {
+    console[fn] = function () {};
+  }
+});
+</code></pre>
 
+<p>Now let&rsquo;s try and use all this in our code (for now in Ruby):</p>
 
-<p>Now let&#8217;s try and use all this in our code (for now in Ruby):</p>
+<pre><code class="language-ruby">cxt = V8::Context.new
+cxt.load('setup.js')
+cxt.load('resources/public/javascripts/server-side.js')
+html = cxt.eval(&quot;my.amazing_component.ns.render_me_to_s(#{init_state.to_json})&quot;)
+</code></pre>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">cxt</span> <span class="o">=</span> <span class="ss">V8</span><span class="p">:</span><span class="ss">:Context</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="n">cxt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;setup.js&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">cxt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;resources/public/javascripts/server-side.js&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">html</span> <span class="o">=</span> <span class="n">cxt</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;my.amazing_component.ns.render_me_to_s(</span><span class="si">#{</span><span class="n">init_state</span><span class="o">.</span><span class="n">to_json</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And that&#8217;s it. As a way to pass data from ruby to clojurescript json works fine.
+<p>And that&rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
 Sometimes you might want to use <code>ActionController::Base.helpers.j</code> helper that will
 escape your data for usage inside json, but most of the time you should be alright without it.</p>
 
@@ -252,135 +148,83 @@ escape your data for usage inside json, but most of the time you should be alrig
 I personally prefer to move core.async initialization into some lifecycle method.
 Another solution is to implement setTimeout function like that in your <code>setup.js</code> snippet:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">goog</span><span class="p">.</span><span class="nx">global</span><span class="p">.</span><span class="nx">setTimeout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">cb</span><span class="p">();</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-javascript">goog.global.setTimeout = function(cb, t) {
+    cb();
+}
+</code></pre>
 
+<p>Now frontend part. First let&rsquo;s in-line generated html in to the container:</p>
 
-<p>Now frontend part. First let&#8217;s in-line generated html in to the container:</p>
+<pre><code class="language-erb">&lt;div id=&quot;content&quot;&gt;&lt;%= html %&gt;&lt;/div&gt;
+</code></pre>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;div id=&quot;content&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">html</span> <span class="cp">%&gt;</span><span class="x">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Then let&rsquo;s write function that will render our component on frontend:</p>
 
-
-<p>Then let&#8217;s write function that will render our component on frontend:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">mount-me</span> <span class="p">[</span><span class="nv">initial-state</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">reset!</span> <span class="nv">my-main-state</span> <span class="p">(</span><span class="nf">js-&gt;clj</span> <span class="nv">initial-state</span><span class="p">))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">reagent.core/render</span> <span class="p">[</span><span class="nv">main-component</span><span class="p">]</span>
-</span><span class='line'>                       <span class="p">(</span><span class="nf">js/document.getElementById</span> <span class="s">&quot;content&quot;</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="language-clojure">(def ^:export mount-me [initial-state]
+  (reset! my-main-state (js-&gt;clj initial-state))
+  (reagent.core/render [main-component]
+                       (js/document.getElementById &quot;content&quot;)))
+</code></pre>
 
 <p>As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
-Am I wrong on this one? Don&#8217;t know yet.</p>
+Am I wrong on this one? Don&rsquo;t know yet.</p>
 
 <p>Inline javascript that you should use on frontend looks like that:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;script&gt;</span>
-</span><span class='line'><span class="x">my.amazing_component.ns.mount_me(</span><span class="cp">&lt;%=</span> <span class="n">init_state</span><span class="o">.</span><span class="n">to_json</span> <span class="cp">%&gt;</span><span class="x">)</span>
-</span><span class='line'><span class="x">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-erb">&lt;script&gt;
+my.amazing_component.ns.mount_me(&lt;%= init_state.to_json %&gt;)
+&lt;/script&gt;
+</code></pre>
 
+<h3 id="nashorn-example-result-of-my-experiments-in-the-repl">Nashorn example (result of my experiments in the REPL)</h3>
 
-<h3>Nashorn example (result of my experiments in the REPL)</h3>
+<pre><code class="language-clojure">(import '[javax.script ScriptEngineManager])
+(def nashorn (.getEngineByName (ScriptEngineManager.) &quot;nashorn&quot;))
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">import </span><span class="o">&#39;</span><span class="p">[</span><span class="nv">javax.script</span> <span class="nv">ScriptEngineManager</span><span class="p">])</span>
-</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">nashorn</span> <span class="p">(</span><span class="nf">.getEngineByName</span> <span class="p">(</span><span class="nf">ScriptEngineManager.</span><span class="p">)</span> <span class="s">&quot;nashorn&quot;</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">; Same as in ruby version</span>
-</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">setup-script</span> <span class="p">(</span><span class="nb">slurp </span><span class="s">&quot;setup.js&quot;</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">ss-script</span> <span class="p">(</span><span class="nb">slurp </span><span class="s">&quot;resources/public/javascripts/server-side.js&quot;</span><span class="p">))</span>
-</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">render-script</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;my.amazing_component.ns.render_me_to_s(&quot;</span> <span class="nv">my-state-json-string</span> <span class="s">&quot;);&quot;</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">.eval</span> <span class="nv">nashorn</span> <span class="nv">setup-script</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">.eval</span> <span class="nv">nashorn</span> <span class="nv">ss-script</span><span class="p">)</span>
-</span><span class='line'><span class="p">(</span><span class="nf">.eval</span> <span class="nv">nashorn</span> <span class="nv">render-script</span><span class="p">)</span> <span class="c1">; our html markup</span>
-</span></code></pre></td></tr></table></div></figure>
+; Same as in ruby version
+(def setup-script (slurp &quot;setup.js&quot;))
+(def ss-script (slurp &quot;resources/public/javascripts/server-side.js&quot;))
+(def render-script (str &quot;my.amazing_component.ns.render_me_to_s(&quot; my-state-json-string &quot;);&quot;))
 
+(.eval nashorn setup-script)
+(.eval nashorn ss-script)
+(.eval nashorn render-script) ; our html markup
+</code></pre>
 
 <p>I must admit that this code works on small reagent example.
-I&#8217;m unable to load production code from my current project in to Nashorn.</p>
+I&rsquo;m unable to load production code from my current project in to Nashorn.</p>
 
 <p>Also it helps a lot if you started developing your project with server side rendering in mind.</p>
 
-<p>Of course it&#8217;s better to have some kind of &#8220;renderers pool&#8221; in JVM.
+<p>Of course it&rsquo;s better to have some kind of &ldquo;renderers pool&rdquo; in JVM.
 Good thing that clojure allows you to implement thing like that in few lines of code.
-In ruby it&#8217;s not a problem since we have 1 context per worker.</p>
+In ruby it&rsquo;s not a problem since we have 1 context per worker.</p>
 
 <p><strong>Useful Links:</strong></p>
 
 <ul>
 <li><a href="https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw">ClojureScript mailing list topic</a></li>
 </ul>
+            </div>
 
-
-
-
-</article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-  
-
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
 <script type="text/javascript">
-      var disqus_shortname = 'gonzihsblog';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/';
-        var disqus_url = 'http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
 
-
-
-
-
-
-
-
-
-
-</body>
+  </body>
 </html>

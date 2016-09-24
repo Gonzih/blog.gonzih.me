@@ -1,0 +1,223 @@
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17-DEV" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Speed/Ping test graphs with Clojure and Raspberry Pi &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/poole.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/syntax.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/hyde.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.gonzih.me"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/"> Achives </a></li>
+      
+        <li><a href="http://gonzih.me"> gonzih.me </a></li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://twitter.com/Gonzih"> Twitter </a></li>
+      
+        <li><a href="http://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Speed/Ping test graphs with Clojure and Raspberry Pi</h1>
+              <span class="post-date">Sat, Aug 24, 2013</span>
+                  <p>I&rsquo;m often complaining about my ISP quality.
+Sometimes pings are high, sometimes download speed goes down.
+So I decided to make sure it&rsquo;s my ISP fault and not just my opinion based on my hate to them.</p>
+
+<p>How to do so? Let&rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.</p>
+
+<p></p>
+
+<p>I have unused Raspberry Pi right now, so it will be used to collect data.</p>
+
+<h2 id="speedtest-data">Speedtest data</h2>
+
+<p>For speedtest I will be using python script that uses speedtest.net servers.
+Pi is running Pidora right now, so let&rsquo;s install script dependencies.</p>
+
+<pre><code class="language-sh">yum -y install python-argparse python-lxml
+</code></pre>
+
+<p>Script is hosted on <a href="https://github.com/Janhouse/tespeed">github</a>.
+Let&rsquo;s get the script.</p>
+
+<pre><code class="language-sh">mkdir ~/scripts
+wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/speedtest.py
+</code></pre>
+
+<p>You can test script running it with:</p>
+
+<pre><code class="language-sh">python ~/scripts/speedtest.py
+</code></pre>
+
+<p>Now let&rsquo;s wrap python script into additional shell script to store time of data collection in csv.
+I&rsquo;m not sure if I need time for now, but let&rsquo;s keep it anyway.
+We will silence stderr from the script and output results as csv.</p>
+
+<p><code>~/bin/speedtest.zsh</code>:</p>
+
+<pre><code class="language-sh">#!/usr/bin/zsh
+
+echo &quot;\&quot;$(date -R)\&quot;,$(python ~/scripts/tespeed.py --csv -s)&quot;
+</code></pre>
+
+<p>Let&rsquo;s put script into crontab to run every 5 minutes, also let&rsquo;s redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.</p>
+
+<p><code>crontab</code>:</p>
+
+<pre><code class="language-sh">*/5 * * * * ~/bin/speedtest.zsh 2&gt;/dev/null &gt;&gt; ~/.speedtest.csv
+</code></pre>
+
+<p>##Ping data</p>
+
+<p>For ping data we will be running <code>ping</code> command with 100 packets (<code>ping -c 100</code>) with google dns as target (8.8.8.8) and storing avg value with time to csv file.</p>
+
+<p><code>~/bin/pingtest.zsh</code>:</p>
+
+<pre><code class="language-sh">#!/usr/bin/zsh
+
+AVG=$(ping -c 100 8.8.8.8 | grep rtt | sed -r 's#.*\=\s.+/(.+)/.+/.+#\1#')
+
+echo &quot;\&quot;$(date -R)\&quot;,$AVG&quot;
+</code></pre>
+
+<p><code>crontab</code>:</p>
+
+<pre><code class="language-sh">*/5 * * * * ~/bin/pingtest.zsh 2&gt;/dev/null &gt;&gt; ~/.pingtest.csv
+</code></pre>
+
+<p>##Graphs</p>
+
+<p>For data visualization let&rsquo;s use Clojure with Incanter. Here is clojure code:</p>
+
+<pre><code class="language-clojure">(ns incanter-graphs.core
+  (:require [incanter.core :refer :all]
+            [incanter.stats :refer :all]
+            [incanter.charts :refer :all]
+            [clojure-csv.core :refer :all])
+  (:gen-class))
+
+(defn to-f [is] (Float/parseFloat is))
+
+(defn get-f-col [data col]
+  (map to-f (sel data :cols col)))
+
+(defn init-chart [data rng {:keys [x-label y-label]}]
+  (line-chart rng data :x-label x-label
+                       :y-label y-label))
+
+(defn add-to-chart [chart data rng]
+  (reduce #(add-categories %1 rng %2) chart data))
+
+(defn draw-file [filename cols &amp; {:as opts}]
+  (let [data (slurp filename)
+        csv (parse-csv data :delimiter \,)
+        rng (range 0 (count csv))
+        data (map (partial get-f-col csv) cols)
+        chart (init-chart (first data) rng opts)
+        chart-to-show (add-to-chart chart (rest data) rng)]
+    (view chart-to-show)))
+
+(defn -main [speedfile pingfile &amp; args]
+  (draw-file speedfile [1 2] :x-label &quot;Time&quot; :y-label &quot;Speed&quot;)
+  (draw-file pingfile [1] :x-label &quot;Time&quot; :y-label &quot;Ping time&quot;))
+</code></pre>
+
+<p>Let&rsquo;s put all launch process to Makefile:</p>
+
+<p><code>Makefile</code>:</p>
+
+<pre><code class="language-makefile">default:
+	scp raspberry-pi.local:.speedtest.csv /tmp/
+	scp raspberry-pi.local:.pingtest.csv /tmp/
+	#Remove lines with only time (script failure)
+	grep &quot;[^,]$$&quot; /tmp/.speedtest.csv &gt; /tmp/.speedtest-fixed.csv
+	grep &quot;[^,]$$&quot; /tmp/.pingtest.csv &gt; /tmp/.pingtest-fixed.csv
+	lein run /tmp/.speedtest-fixed.csv /tmp/.pingtest-fixed.csv
+</code></pre>
+
+<p>I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
+And now we can see some visualization.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/speed.png" alt="Speed Graph" />
+<img src="https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/ping.png" alt="Ping Graph" /></p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

@@ -1,154 +1,86 @@
-
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>Building RC Toy with Clojure - Max Gonzih</title>
-  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17-DEV" />
 
   
-  <meta name="description" content="Building RC Toy With Clojure Mar 19th, 2013 | Comments Bored and have free time? Lets build something.
-Lets build RC Toy. Hm, and lets use Clojure ( &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   
-  <link rel="canonical" href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  <title>Building RC Toy with Clojure &middot; Max Gonzih</title>
   
 
+  
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/poole.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/syntax.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/hyde.css">
+  <link rel="stylesheet" href="http://blog.gonzih.mecss/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-    <a href="/">
-        <div class="clearfix">
-        </div>
-    </a>
-</aside>
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.gonzih.me"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
 
-<ul id="menu">
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/"> Achives </a></li>
+      
+        <li><a href="http://gonzih.me"> gonzih.me </a></li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://twitter.com/Gonzih"> Twitter </a></li>
+      
+        <li><a href="http://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+    </ul>
 
-  <li class="title">
-    <h1 id="title"><a href="/">Max Gonzih</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-
-  <li class="link">
-    <a href="mailto:gonzih@gmail.com">email</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/Gonzih/">github</a>
-  </li>
-
-
-  <li class="link">
-      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://twitter.com/Gonzih/">twitter</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-  <li>
-    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
-  </li>
-</ul>
-
-
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.gonzih.me" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  
-  
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
 </div>
 
-  
-  <header>
-    
-      <h2 class="entry-title">Building RC Toy With Clojure</h2>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-19T11:09:00+00:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<p>Bored and have free time? Lets build something.
+        <div class="content container">
+            <div class="post">
+                <h1>Building RC Toy with Clojure</h1>
+              <span class="post-date">Tue, Mar 19, 2013</span>
+                  <p>Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
 
-<!-- more -->
-
+<p></p>
 
 <p>First of all we need some parts.</p>
 
@@ -156,7 +88,7 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
 <li>Tamiya Universal Plate Set (TAM70157) (better to order 2 pcs)</li>
 <li>Tamiya Track and Wheel Set (TAM70100)</li>
 <li>Tamiya Twin Motor Gearbox  (TAM70097)</li>
-<li>Arduino (I have UNO and Leonardo, UNO was choosen since I don&#8217;t need to make modifications in Firmata code for it (except baudrate))</li>
+<li>Arduino (I have UNO and Leonardo, UNO was choosen since I don&rsquo;t need to make modifications in Firmata code for it (except baudrate))</li>
 <li>HBridge IC L293 (L293B was used)</li>
 <li>Bluetooth module (you can buy Arduino ready module, I will be using cheapest possible module)</li>
 <li>Bluetooth in PC</li>
@@ -165,10 +97,9 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
 <li>Gamepad (Logitech Rumble Gemapad F510 was used)</li>
 </ul>
 
+<h1 id="putting-things-together">Putting things together</h1>
 
-<h1>Putting things together</h1>
-
-<h2>Chassis</h2>
+<h2 id="chassis">Chassis</h2>
 
 <p>First lets build gearbox. You can use it in few different modes of gear ratio. I selected 114.7:1 gear ratio (lucky guess).
 Read instructions, take your time. I had 2 9v motors, so since I will be using 9v batteries I decided to replace default motors with 9v ones.</p>
@@ -176,7 +107,7 @@ Read instructions, take your time. I had 2 9v motors, so since I will be using 9
 <p>Next assemble tracks. Pretty easy, right? Next is time to put it all together. Since I had only 1 plate I made second one from peace of plexiglass.
 I made something like 2 floored chassis. First floor is for motor and wheels (and maybe batteries) and second is for Arduino (and maybe batterries).</p>
 
-<h2>Bluetooth</h2>
+<h2 id="bluetooth">Bluetooth</h2>
 
 <p>We need to do 2 thing with our cheap bluetooth module:</p>
 
@@ -186,17 +117,17 @@ I made something like 2 floored chassis. First floor is for motor and wheels (an
 <p>Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
 <img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg" alt="Voltage devider" /></p>
 
-<h2>Gearbox and HBridge Driver</h2>
+<h2 id="gearbox-and-hbridge-driver">Gearbox and HBridge Driver</h2>
 
-<p>To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I&#8217;m afraid it would be messy.
+<p>To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I&rsquo;m afraid it would be messy.
 To understand how HBridge works you should read <a href="http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview">Adafruit post</a>.</p>
 
-<p>HBridge -> Arduino Schematics:
+<p>HBridge -&gt; Arduino Schematics:
 <img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg" alt="Schematics" /></p>
 
-<h2>Final version</h2>
+<h2 id="final-version">Final version</h2>
 
-<h3>Photos</h3>
+<h3 id="photos">Photos</h3>
 
 <p><img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-001.jpg" alt="rc-toy-001" />
 <img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-002.jpg" alt="rc-toy-002" />
@@ -218,27 +149,27 @@ To understand how HBridge works you should read <a href="http://learn.adafruit.c
 <img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-020.jpg" alt="rc-toy-020" />
 <img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg" alt="rc-toy-021" /></p>
 
-<h3>Video</h3>
+<h3 id="video">Video</h3>
 
-<p><video width='640' height='480' preload='none' controls poster=' https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg'><source src='https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+<p>{% video <a href="https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv">https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv</a> 640 480 <a href="https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg">https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg</a> %}</p>
 
-<h1>Writing some code</h1>
+<h1 id="writing-some-code">Writing some code</h1>
 
-<h2>Bluetooth as Serial port</h2>
+<h2 id="bluetooth-as-serial-port">Bluetooth as Serial port</h2>
 
 <p>I used blueman on my Arch Laptop. Gui is straightforward and easy to use.</p>
 
-<h2>Gamepad and kernel</h2>
+<h2 id="gamepad-and-kernel">Gamepad and kernel</h2>
 
 <p>You need to find kernel module for your gamepad. For my gamepad module <code>joydev</code> was required.
 After module is loaded you should see new device in <code>/dev/input</code>.</p>
 
-<h2>Clojure code</h2>
+<h2 id="clojure-code">Clojure code</h2>
 
 <p>I used <a href="http://clojure.org/">Clojure</a> as main language for controlling Arduino. I took <a href="https://github.com/nakkaya/clodiuno">Clodiuno</a> library.
-It is Firmata protocol implementation for Clojure. Why Firmata? Because it&#8217;s easy, fast and provides great way to extend your project in future.</p>
+It is Firmata protocol implementation for Clojure. Why Firmata? Because it&rsquo;s easy, fast and provides great way to extend your project in future.</p>
 
-<p>So I wrote some code, uploaded Firmata to Arduino. And&#8230; it&#8217;s not working.</p>
+<p>So I wrote some code, uploaded Firmata to Arduino. And&hellip; it&rsquo;s not working.</p>
 
 <p>After some digging in Firmata and Clodiuno code I wrote 2 pull request to Clodiuno.</p>
 
@@ -249,8 +180,7 @@ It is Firmata protocol implementation for Clojure. Why Firmata? Because it&#8217
 <li>Change Clodiuno baudrate to 9600.</li>
 </ul>
 
-
-<p>Second was that Clodiuno waits for version response from Firmata on startup. It&#8217;s ok for wired UNO since it will be restarted when serial connection is established.
+<p>Second was that Clodiuno waits for version response from Firmata on startup. It&rsquo;s ok for wired UNO since it will be restarted when serial connection is established.
 But boards like Leonardo or if you are using bluetooth miss that behavior.</p>
 
 <p>Fix? <a href="https://github.com/nakkaya/clodiuno/pull/6">pull.</a> Manually ask firmware version on Clodiuno initialization.</p>
@@ -262,103 +192,69 @@ I just replaced overtone related events handling with my own code based on Clodi
 
 <p>You can run it with <code>./run.sh</code>.</p>
 
-<h1>Raspberry Pi</h1>
+<h1 id="raspberry-pi">Raspberry Pi</h1>
 
 <p>Currently work in progress on moving Clojure code to Rapberry Pi.</p>
 
-<h2>Fixed Issues</h2>
+<h2 id="fixed-issues">Fixed Issues</h2>
 
-<h3>Native dependencies issue</h3>
+<h3 id="native-dependencies-issue">Native dependencies issue</h3>
 
 <p>Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#INFO: Failed to load library: no jinput-linux64 in java.library.path</span>
-</span><span class='line'>sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so<span class="sb">`</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-sh">#INFO: Failed to load library: no jinput-linux64 in java.library.path
+sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so`
+</code></pre>
 
-
-<h3>Gamepad configuration</h3>
+<h3 id="gamepad-configuration">Gamepad configuration</h3>
 
 <p>Add <code>joydev</code> to <code>/etc/modules</code> to see gamepad in <code>/etc/input</code>.
-Also you need to switch gamepad to direct input mode (X -> D switch on the back of gamepad).</p>
+Also you need to switch gamepad to direct input mode (X -&gt; D switch on the back of gamepad).</p>
 
-<h2>Unfixed Issues</h2>
+<h2 id="unfixed-issues">Unfixed Issues</h2>
 
-<h3>Bluetooth as Serial port</h3>
+<h3 id="bluetooth-as-serial-port-1">Bluetooth as Serial port</h3>
 
 <p>To scan for devices from command line use <code>hcitool scan</code>.</p>
 
 <p>To bind bluetooth to serial port on startup use following code (untested yet):</p>
 
-<figure class='code'><figcaption><span>/etc/bluetooth/rfcomm.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>rfcomm0 {
-</span><span class='line'>        bind yes;
-</span><span class='line'>        device mac-adress-of-bluetooth-on-arduino;
-</span><span class='line'>        channel 1;
-</span><span class='line'>        comment &quot;Arduino&quot;;
-</span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
+<p><code>/etc/bluetooth/rfcomm.conf</code>:</p>
 
+<pre><code class="language-text">rfcomm0 {
+        bind yes;
+        device mac-adress-of-bluetooth-on-arduino;
+        channel 1;
+        comment &quot;Arduino&quot;;
+}
+</code></pre>
 
-<h3>JInput permissions</h3>
+<h3 id="jinput-permissions">JInput permissions</h3>
 
 <p>For now I have no idea how to fix that issue. Looks like something is wrong with permissions.</p>
 
-<figure class='code'><figcaption><span>/etc/bluetooth/rfcomm.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
-</span></code></pre></td></tr></table></div></figure>
+<pre><code>Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
+</code></pre>
+            </div>
 
-
-
-
-</article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-  
-
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
 <script type="text/javascript">
-      var disqus_shortname = 'gonzihsblog';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/';
-        var disqus_url = 'http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
 
-
-
-
-
-
-
-
-
-
-</body>
+  </body>
 </html>

@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/clojure/index.xml</link>
+    <description>Recent content on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <atom:link href="/categories/clojure/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Nvim terminal &#43; ClojureScript and figwheel</title>
+      <link>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-&#43;-clojurescript-and-figwheel/</link>
+      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-&#43;-clojurescript-and-figwheel/</guid>
+      <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://neovim.io/&#34;&gt;NeoVim&lt;/a&gt; nowadays is almost fully compatible with vim.
+It is able to reuse my &lt;a href=&#34;https://github.com/Gonzih/.vim/blob/master/vimrc&#34;&gt;.vimrc&lt;/a&gt; file without any issues.
+And recently it got proper terminal emulator built-in.
+So how about reusing it for ClojureScript development?&lt;/p&gt;
+
+&lt;p&gt;If you are lazy (like I am) and don&amp;rsquo;t want to setup piggieback support
+for fireplace.vim or don&amp;rsquo;t feel like tmux integration is good enough
+this solution should be your new starting point.&lt;/p&gt;
+
+&lt;p&gt;Just open some clojure[script] file and create second split.
+Open terminal using &lt;code&gt;:terminal&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Here are some keybindings that will help you to send code from
+your clojure buffer to the terminal buffer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&amp;quot;nvim&amp;quot;)
+  &amp;quot; Open terminal and run lein figwheel
+  nmap &amp;lt;Leader&amp;gt;term &amp;lt;C-w&amp;gt;v:terminal&amp;lt;CR&amp;gt;lein figwheel&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
+  &amp;quot; Evaluate anything from the visual mode in the next window
+  vmap &amp;lt;buffer&amp;gt; ,e y&amp;lt;C-w&amp;gt;wpi&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
+  &amp;quot; Evaluate outer most form
+  nmap &amp;lt;buffer&amp;gt; ,e ^v%,e
+  &amp;quot; Evaluate buffer&amp;quot;
+  nmap &amp;lt;buffer&amp;gt; ,b ggVG,e
+endif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hey! Now you can finally stop looking at the emacs land!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ServerSide rendering of Reagent components</title>
+      <link>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
+      <pubDate>Mon, 16 Feb 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
+      <description>&lt;p&gt;Great thing about React is that you can write what people nowadays call &amp;ldquo;isomorphic JavaScript&amp;rdquo;.
+In this post we will not discuss how wrong this term is in many ways,
+but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;In my experience simplest optimization to run in some js engine on server side is whitespace.
+It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
+So our compiler configuration should look something like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;{:id &amp;quot;server-side&amp;quot;
+ :source-paths [&amp;quot;src&amp;quot;]
+ :compiler {:output-to &amp;quot;resources/public/javascripts/server-side.js&amp;quot;
+            :output-dir &amp;quot;resources/public/javascripts/out-server-side&amp;quot;
+            :preamble [&amp;quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&amp;quot;]
+            :pretty-print false
+            :warnings true
+            :optimizations :whitespace}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def main-component
+  (with-meta
+    (fn [] ...)
+    {:component-did-mount (comp init-my-scroll-handler!
+                                also-init-my-go-loop!)}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next let&amp;rsquo;s create function that will do some rendering to the string.
+I like to keep this function in a component specific ns just for convenience.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def ^:export render-me-to-s [initial-state]
+  (reset! my-main-state (js-&amp;gt;clj initial-state))
+  ; Render component to markup without reactid
+  (reagent.core/render-to-static-markup [main-component])
+  ; Or render component to ready to-go react markup
+  (reagent.core/render-to-string [main-component]))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now server side bootstrapping, most of this code was taken from &lt;a href=&#34;https://github.com/reactjs/react-rails&#34;&gt;react-rails plugin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First of all react expects to have global or window objects in your js engine (setup.js):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var global = global || this;
+var self = self || this;
+var window = window || this;
+var console = global.console || {};
+[&#39;error&#39;, &#39;log&#39;, &#39;info&#39;, &#39;warn&#39;].forEach(function (fn) {
+  if (!(fn in console)) {
+    console[fn] = function () {};
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s try and use all this in our code (for now in Ruby):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;cxt = V8::Context.new
+cxt.load(&#39;setup.js&#39;)
+cxt.load(&#39;resources/public/javascripts/server-side.js&#39;)
+html = cxt.eval(&amp;quot;my.amazing_component.ns.render_me_to_s(#{init_state.to_json})&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And that&amp;rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
+Sometimes you might want to use &lt;code&gt;ActionController::Base.helpers.j&lt;/code&gt; helper that will
+escape your data for usage inside json, but most of the time you should be alright without it.&lt;/p&gt;
+
+&lt;p&gt;If you have issues with core.async there are 2 ways to solve it.
+I personally prefer to move core.async initialization into some lifecycle method.
+Another solution is to implement setTimeout function like that in your &lt;code&gt;setup.js&lt;/code&gt; snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;goog.global.setTimeout = function(cb, t) {
+    cb();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now frontend part. First let&amp;rsquo;s in-line generated html in to the container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-erb&#34;&gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;%= html %&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then let&amp;rsquo;s write function that will render our component on frontend:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def ^:export mount-me [initial-state]
+  (reset! my-main-state (js-&amp;gt;clj initial-state))
+  (reagent.core/render [main-component]
+                       (js/document.getElementById &amp;quot;content&amp;quot;)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
+Am I wrong on this one? Don&amp;rsquo;t know yet.&lt;/p&gt;
+
+&lt;p&gt;Inline javascript that you should use on frontend looks like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-erb&#34;&gt;&amp;lt;script&amp;gt;
+my.amazing_component.ns.mount_me(&amp;lt;%= init_state.to_json %&amp;gt;)
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;nashorn-example-result-of-my-experiments-in-the-repl&#34;&gt;Nashorn example (result of my experiments in the REPL)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(import &#39;[javax.script ScriptEngineManager])
+(def nashorn (.getEngineByName (ScriptEngineManager.) &amp;quot;nashorn&amp;quot;))
+
+; Same as in ruby version
+(def setup-script (slurp &amp;quot;setup.js&amp;quot;))
+(def ss-script (slurp &amp;quot;resources/public/javascripts/server-side.js&amp;quot;))
+(def render-script (str &amp;quot;my.amazing_component.ns.render_me_to_s(&amp;quot; my-state-json-string &amp;quot;);&amp;quot;))
+
+(.eval nashorn setup-script)
+(.eval nashorn ss-script)
+(.eval nashorn render-script) ; our html markup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I must admit that this code works on small reagent example.
+I&amp;rsquo;m unable to load production code from my current project in to Nashorn.&lt;/p&gt;
+
+&lt;p&gt;Also it helps a lot if you started developing your project with server side rendering in mind.&lt;/p&gt;
+
+&lt;p&gt;Of course it&amp;rsquo;s better to have some kind of &amp;ldquo;renderers pool&amp;rdquo; in JVM.
+Good thing that clojure allows you to implement thing like that in few lines of code.
+In ruby it&amp;rsquo;s not a problem since we have 1 context per worker.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Useful Links:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw&#34;&gt;ClojureScript mailing list topic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
+      <link>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
+      <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
+      <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
+And left it like that for a couple of days.
+I must say that it was surprisingly nice experience.
+Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt;
+
+&lt;p&gt;Of course interesting question is &amp;ldquo;How did I end up with this idea in my head?&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;I tried to play with emacs few times couple of years ago.
+But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.&lt;/p&gt;
+
+&lt;p&gt;I tried evil mode, but it went not so well.
+Problem is that I&amp;rsquo;m also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
+I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
+Also probably my lack of patience played against me.
+So I gave up and continued using vim (something like 5 years of hapiness).&lt;/p&gt;
+
+&lt;p&gt;Recently ClojureScript tool called &lt;a href=&#34;https://github.com/bhauman/lein-figwheel&#34;&gt;figwheel&lt;/a&gt; added repl support.
+So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
+Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
+Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim &lt;a href=&#34;https://github.com/tpope/vim-fireplace&#34;&gt;vim-fireplace&lt;/a&gt; relies on nrepl.
+I was using for some time &lt;a href=&#34;https://github.com/sjl/tslime2.vim&#34;&gt;tslime2&lt;/a&gt; in vim to work with ClojureScript.
+Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
+It works. You don&amp;rsquo;t have out of the box tooling that will select your top most clojure form sadly.
+Once upon a time I had discussion on #clojurescript irc and &lt;a href=&#34;https://twitter.com/martinklepsch&#34;&gt;@martinklepsh&lt;/a&gt; mentioned that nowadays evil-mode is much better.
+I was bored and followed that track. I did run &lt;code&gt;rm -rf .emacs.d&lt;/code&gt; and started from scratch.
+As a result my workflow from vim was ported to emacs in a couple of hours.
+It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
+I set my default editor to emacs and continued doing my thing for a couple of days.&lt;/p&gt;
+
+&lt;p&gt;And here what I think so far.&lt;/p&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Evil mode is good and it&amp;rsquo;s very close. It&amp;rsquo;s probably closest thing to vim that I ever tried.
+It&amp;rsquo;s not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
+(Big shout outs to the author of idea plugin. It&amp;rsquo;s very impressive.)&lt;/li&gt;
+&lt;li&gt;Writing configuration in a language that I understand was a big relief.&lt;/li&gt;
+&lt;li&gt;Mapping configuration is simpler. You are mapping elisp function to the key. It&amp;rsquo;s simpler and easier to understand than remapping mechanism in vim.&lt;/li&gt;
+&lt;li&gt;Helm surprised me in it&amp;rsquo;s speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.&lt;/li&gt;
+&lt;li&gt;Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. &lt;a href=&#34;https://github in inferior lisp mode tuned to play well with clojure&#34;&gt;inf-clojure&lt;/a&gt; is enhanced clojure mode for the inf-lisp.&lt;/li&gt;
+&lt;li&gt;It can do async stuff! If you used vim then you know what I mean. In emacs it&amp;rsquo;s just there. Without required pythor/ruby support enabled during compilation.&lt;/li&gt;
+&lt;li&gt;Built-in package manager. Just run &lt;code&gt;package-install&lt;/code&gt; and it&amp;rsquo;s there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.&lt;/li&gt;
+&lt;li&gt;Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run &lt;code&gt;describe-key&lt;/code&gt; and see what is going on. You can do something similar in vim, but in emacs it&amp;rsquo;s much better.&lt;/li&gt;
+&lt;li&gt;Startup time is slow and it&amp;rsquo;s solvable. Just run systemd user service with &lt;code&gt;emacs --daemon&lt;/code&gt; and that is enough for most cases.&lt;/li&gt;
+&lt;li&gt;And you still have emacs operating system at your disposal!&lt;/li&gt;
+&lt;li&gt;Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Not so good:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it&amp;rsquo;s unnecessary. Of course this is related only to my habits and muscle memory.&lt;/li&gt;
+&lt;li&gt;Evil is slower.
+Most of the time it&amp;rsquo;s not a problem. But sometimes I&amp;rsquo;m mashing my keyboard too fast and mess happens.
+Good example is replace (&lt;code&gt;r&lt;/code&gt;) key.
+Press &lt;code&gt;r:&lt;/code&gt; too fast and you might end up in vim command line.&lt;/li&gt;
+&lt;li&gt;Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don&amp;rsquo;t play well with evil.&lt;/li&gt;
+&lt;li&gt;Good example of painful evil integration is cider.
+It just does not work with evil mode.
+Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
+That was big disappointment for me. I had high hopes for the cider. I&amp;rsquo;m realizing that I don&amp;rsquo;t really need everything that cider provides.
+I&amp;rsquo;m very happy with just ability to evaluate code, without even debugger and nice stacktraces.
+But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
+After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on &lt;a href=&#34;https://github.com/clojure-emacs/inf-clojure&#34;&gt;inf-clojure&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Will I continue using emacs? Yes.&lt;/p&gt;
+
+&lt;p&gt;Will it be my default editor? Probably no.
+Vim feels more reliable because it provides modal editing experience out of the box.
+In emacs it an option.
+I&amp;rsquo;m totally fine with giving away all that goodness that emacs provides to have proper editing experience &lt;strong&gt;all the time&lt;/strong&gt;.
+In every buffer, in every menu.
+And I will continue slowly improving my emacs configuration.&lt;/p&gt;
+
+&lt;p&gt;This experiment reminded me how many things are missing from my setup.
+It also reminded me that &lt;a href=&#34;https://neovim.org&#34;&gt;neovim&lt;/a&gt; might be next big thing in my tool belt.
+I&amp;rsquo;m really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/&#34;&gt;Here&lt;/a&gt; is very good tutorial to get vim users started in emacs.&lt;/li&gt;
+&lt;li&gt;My .emacs.d is &lt;a href=&#34;https://github.com/Gonzih/.emacs.d&#34;&gt;here&lt;/a&gt;. I tried to keep it minimalistic.&lt;/li&gt;
+&lt;li&gt;My .vim is &lt;a href=&#34;https://github.com/Gonzih/.vim&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;If you are looking for the best vim like experience in emacs please take a look at the &lt;a href=&#34;https://github.com/syl20bnr/spacemacs&#34;&gt;spacemacs project&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Looking for the good color theme in emacs? Take a look at the port of &lt;a href=&#34;https://github.com/morhetz/gruvbox&#34;&gt;vim&amp;rsquo;s gruvbox theme&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Two way data bindings in Reagent</title>
+      <link>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
+      <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath it&amp;rsquo;s all about core.async.
+Also provides ability to apply transformation using transducers.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;
+(defonce form (atom {}))
+
+(defn bind-input
+  &amp;quot;Generat on-change callback,
+   bind value to form-key of form-atom.
+   Provides ability to implement transformation using transducers.&amp;quot;
+  [form-atom form-key xform]
+  (let [local-chan (chan 1 xform)]
+    (go-loop []
+      (swap! form-atom assoc form-key (&amp;lt;! local-chan))
+      (recur))
+    (fn [event]
+      (put! local-chan
+            (.-value (.-target event))))))
+
+(defn bound-input
+  &amp;quot;Generate input,
+   create two way data binding
+   between input value and value under form-key in form-atom.
+   Provides ability to implement transformation using transducers.&amp;quot;
+  [attrs form-atom form-key xform]
+  [:input (merge attrs
+                 {:value (form-key @form-atom)
+                  :on-change (bind-input form-atom form-key xform)})])
+
+(defn main-component []
+  [:div
+   [:h3 (:name @form) &amp;quot; value&amp;quot;]
+   [bound-input {:type :text} form :name (filter #(&amp;gt; 15 (count %)))]])
+
+(reagent/render-component [main-component]
+                          (js/document.getElementById &amp;quot;content&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Replacing shell scripts with Clojure&#43;JamVM</title>
+      <link>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure&#43;jamvm/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure&#43;jamvm/</guid>
+      <description>&lt;p&gt;We all hate shell scripting.
+Scripts are annoyingly hard to debug, test and verify.
+Would be lovely, to use some kind of lisp for scripting, right?
+To do interactive development with repl in your favorite editor.
+To write it in a nice predictable language that you also enjoy.
+But sometimes it&amp;rsquo;s impossible to add some external dependencies to the system.
+What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;basic-setup&#34;&gt;Basic setup&lt;/h1&gt;
+
+&lt;p&gt;First what we will need is to get clojure jar file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -O /opt/clojure.jar &#39;http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next lets create executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt; that will live in &lt;code&gt;/usr/bin&lt;/code&gt; (or &lt;code&gt;/opt/bin&lt;/code&gt; or &lt;code&gt;/home/youruser/bin&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
+
+exec java -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now it&amp;rsquo;s time for our hello world script &lt;code&gt;/opt/test.clj&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;#!/usr/bin/clojure
+
+(println &amp;quot;hello world&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make it executable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;chmod +x /opt/test.clj
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And run it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ /opt/test.clj
+hello world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yay! But it feels kind of slow:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
+hello world
+
+real  0m2.684s
+user  0m2.239s
+sys   0m0.186s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2 seconds startup time, not really suitable for scripting, right?
+Can we improve that? What if there would be JVM with fast startup and low memory usage.&lt;/p&gt;
+
+&lt;h1 id=&#34;introducing-jamvm&#34;&gt;Introducing JamVM.&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;&amp;ldquo;But&amp;hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I lied, sorry.&lt;/p&gt;
+
+&lt;p&gt;Compiling JamVM with OpenJDK support:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Fetching required dependencies and source
+apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
+cd /opt
+wget -O jamvm-2.0.0.tar.gz &#39;http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;
+tar -xvzf jamvm-2.0.0.tar.gz
+
+# Building
+cd /opt/jamvm-2.0.0
+./configure --with-java-runtime-library=openjdk7 &amp;amp;&amp;amp; make check &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install
+
+# Installing in to the openjdk installation
+mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
+cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
+
+# Trying it out
+java -jamvm -version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
+You will need to use -jamvm option to java command to run it with small overhead vm.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s update our clojure executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
+
+exec java -jamvm -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s try it out:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
+hello world
+
+real  0m0.866s
+user  0m0.764s
+sys   0m0.076s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Better, right?&lt;/p&gt;
+
+&lt;h2 id=&#34;how-slow-is-jamvm-some-benchmarks&#34;&gt;How slow is JamVM? Some benchmarks:&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Clojure 1.6
+
+JamVM:
+
+(factorial 5000) Avg: 248.65890986500017
+(fib 20)         Avg: 35.33471996000001
+(sort-seq)       Avg: 405.7438969800002
+
+OpenJDK:
+
+(factorial 5000) Avg: 25.016900630000006
+(fib 20)         Avg: 0.69957772
+(sort-seq)       Avg: 11.553695560000001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Much slower, but if you think about it
+shell scripting most of the time is about executing external commands,
+IO and data filtering. Might be as well not so bad.
+Also memory usage of JamVM makes it perfect for embedded systems.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-not-use-something-like-lein-exec&#34;&gt;Why not use something like lein exec?&lt;/h2&gt;
+
+&lt;p&gt;Lein exec is nice. But it adds overhead.
+If you need external dependencies you can solve it (in theory)
+with classpath manipulations in java command (&lt;code&gt;java -cp dep.jar:dep2.jar:.&lt;/code&gt;).
+Still you can plug lein exec to JamVM if you want.&lt;/p&gt;
+
+&lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
+
+&lt;p&gt;I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
+so you can just run &lt;code&gt;apt-get -y install icedtea-7-jre-jamvm&lt;/code&gt; to install latest build.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HN Tray icon in 50 lines of Clojure</title>
+      <link>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
+      <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
+      <description>&lt;p&gt;Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
+Result is tray app that shows stories from HN front page.
+Just in ~50 lines of Clojure code.
+Enjoy!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/hn-tray.clj&#34;&gt;Github Project.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Source code is below:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns hn.core
+  (:require [cheshire.core :as json]
+            [clojure.java.browse :refer [browse-url]]
+            [clojure.java.io :refer [resource]])
+  (:import [java.awt SystemTray TrayIcon PopupMenu MenuItem Toolkit]
+           [java.awt.event ActionListener])
+  (:gen-class))
+
+(defn menu-item [label callback]
+  (let [menu (MenuItem. label)
+        listener (proxy [ActionListener] []
+                   (actionPerformed [event] (callback)))]
+    (.addActionListener menu listener)
+    menu))
+
+(def hn-api-url &amp;quot;http://api.ihackernews.com/page&amp;quot;)
+
+(defn hn-items []
+  (-&amp;gt; hn-api-url
+      slurp
+      (json/parse-string true)
+      :items
+      (#(sort-by :points %))
+      reverse))
+
+(defn add-hn-to-menu! [menu]
+  (letfn [(mapfn [{:keys [title url commentCount points]}]
+            (let [full-title (format &amp;quot;%-4s (%-4s) - %s&amp;quot; points commentCount title)
+                  menu-item (menu-item full-title #(browse-url url))]
+              (println full-title)
+              (.add menu menu-item)))]
+  (doall (map mapfn (hn-items)))))
+
+(defn exit []
+  (shutdown-agents)
+  (System/exit 0))
+
+(defn -main [&amp;amp; args]
+  (let [tray (SystemTray/getSystemTray)
+        image (.getImage (Toolkit/getDefaultToolkit)
+                         (resource &amp;quot;icon.png&amp;quot;))
+        icon (TrayIcon. image)
+        exit (menu-item &amp;quot;Exit&amp;quot; exit)]
+    (.setImageAutoSize icon true)
+    (.add tray icon)
+    (loop []
+      (let [popup (PopupMenu.)]
+        (println &amp;quot;Updating items&amp;quot;)
+        (add-hn-to-menu! popup)
+        (.add popup exit)
+        (.setPopupMenu icon popup)
+        (Thread/sleep (* 5 60 1000))
+        (recur)))))
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>My first experience with core.typed</title>
+      <link>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</link>
+      <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</guid>
+      <description>&lt;p&gt;Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
+I couldn&amp;rsquo;t find answers on my issues in wiki or documentation.
+But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
+Thank you for your patience, man!
+And keep doing what you are doing, core.typed is just amazing thing!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;unresolved-constructor-invocation&#34;&gt;Unresolved constructor invocation&lt;/h3&gt;
+
+&lt;p&gt;Core.typed can&amp;rsquo;t match constructor based on arguments type,
+you should provide type hints to help core.typed with that.&lt;/p&gt;
+
+&lt;h3 id=&#34;by-default-core-typed-assumes-that-all-java-methods-can-return-nil&#34;&gt;By default core.typed assumes that all java methods can return nil&lt;/h3&gt;
+
+&lt;p&gt;Use &lt;code&gt;(non-nil-return ClassOrObject/methodName :all)&lt;/code&gt; to tell core.typed that method won&amp;rsquo;t return nil.
+Core.typed will trust you and will skip further checks.&lt;/p&gt;
+
+&lt;p&gt;Or for example if you are expecting String as a result you can convert result to String with str before returning it.&lt;/p&gt;
+
+&lt;h3 id=&#34;non-nil-return-in-core-typed-works-only-on-methods&#34;&gt;non-nil-return in core.typed works only on methods&lt;/h3&gt;
+
+&lt;p&gt;And if you have static method then something like that would not work:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(non-nil-return javax.mail.Message$RecipientType/TO :all)
+
+(ann recipient-type-to [-&amp;gt; Message$RecipientType])
+(defn ^Message$RecipientType recipient-type-to []
+  (Message$RecipientType/TO))
+
+(comment
+  Type mismatch:
+  Expected:       (Fn [-&amp;gt; Message$RecipientType])
+  Actual:         (Fn [-&amp;gt; (U Message$RecipientType nil)]))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Solution:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(non-nil-return javax.mail.Message$RecipientType/TO :all)
+
+(ann recipient-type-to [-&amp;gt; Message$RecipientType])
+(defn ^Message$RecipientType recipient-type-to
+  []
+  {:post [%]}
+  (Message$RecipientType/TO))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which is the same as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(non-nil-return javax.mail.Message$RecipientType/TO :all)
+
+(ann recipient-type-to [-&amp;gt; Message$RecipientType])
+(defn ^Message$RecipientType recipient-type-to []
+  (let [temp (Message$RecipientType/TO)]
+    (assert temp)
+    temp)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So unless assert evaluates temp to logical true exception will be raised
+and function will always return non nil value, which makes core.typed happy.&lt;/p&gt;
+
+&lt;h3 id=&#34;defining-parameterized-alias-type&#34;&gt;Defining Parameterized alias type&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def-alias Folder
+  (TFn [[x :variance :covariant]] (Map Keyword x)))
+
+(comment
+  (Folder Items)
+  (Folder Urls))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114&#34;&gt;Here is&lt;/a&gt; commit with changes related to core.typed.
+I must say writing type annotations for code that you wrote few months ago is tricky.
+But still I enjoyed process and results and I&amp;rsquo;m still a little bit amazed about all core.typed thing.
+Power of lisp combined with really smart people :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Speed/Ping test graphs with Clojure and Raspberry Pi</title>
+      <link>http://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</link>
+      <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m often complaining about my ISP quality.
+Sometimes pings are high, sometimes download speed goes down.
+So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion based on my hate to them.&lt;/p&gt;
+
+&lt;p&gt;How to do so? Let&amp;rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;I have unused Raspberry Pi right now, so it will be used to collect data.&lt;/p&gt;
+
+&lt;h2 id=&#34;speedtest-data&#34;&gt;Speedtest data&lt;/h2&gt;
+
+&lt;p&gt;For speedtest I will be using python script that uses speedtest.net servers.
+Pi is running Pidora right now, so let&amp;rsquo;s install script dependencies.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;yum -y install python-argparse python-lxml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Script is hosted on &lt;a href=&#34;https://github.com/Janhouse/tespeed&#34;&gt;github&lt;/a&gt;.
+Let&amp;rsquo;s get the script.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir ~/scripts
+wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/speedtest.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can test script running it with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;python ~/scripts/speedtest.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s wrap python script into additional shell script to store time of data collection in csv.
+I&amp;rsquo;m not sure if I need time for now, but let&amp;rsquo;s keep it anyway.
+We will silence stderr from the script and output results as csv.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/bin/speedtest.zsh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/usr/bin/zsh
+
+echo &amp;quot;\&amp;quot;$(date -R)\&amp;quot;,$(python ~/scripts/tespeed.py --csv -s)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s put script into crontab to run every 5 minutes, also let&amp;rsquo;s redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;*/5 * * * * ~/bin/speedtest.zsh 2&amp;gt;/dev/null &amp;gt;&amp;gt; ~/.speedtest.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;##Ping data&lt;/p&gt;
+
+&lt;p&gt;For ping data we will be running &lt;code&gt;ping&lt;/code&gt; command with 100 packets (&lt;code&gt;ping -c 100&lt;/code&gt;) with google dns as target (8.8.8.8) and storing avg value with time to csv file.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/bin/pingtest.zsh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/usr/bin/zsh
+
+AVG=$(ping -c 100 8.8.8.8 | grep rtt | sed -r &#39;s#.*\=\s.+/(.+)/.+/.+#\1#&#39;)
+
+echo &amp;quot;\&amp;quot;$(date -R)\&amp;quot;,$AVG&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;*/5 * * * * ~/bin/pingtest.zsh 2&amp;gt;/dev/null &amp;gt;&amp;gt; ~/.pingtest.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;##Graphs&lt;/p&gt;
+
+&lt;p&gt;For data visualization let&amp;rsquo;s use Clojure with Incanter. Here is clojure code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns incanter-graphs.core
+  (:require [incanter.core :refer :all]
+            [incanter.stats :refer :all]
+            [incanter.charts :refer :all]
+            [clojure-csv.core :refer :all])
+  (:gen-class))
+
+(defn to-f [is] (Float/parseFloat is))
+
+(defn get-f-col [data col]
+  (map to-f (sel data :cols col)))
+
+(defn init-chart [data rng {:keys [x-label y-label]}]
+  (line-chart rng data :x-label x-label
+                       :y-label y-label))
+
+(defn add-to-chart [chart data rng]
+  (reduce #(add-categories %1 rng %2) chart data))
+
+(defn draw-file [filename cols &amp;amp; {:as opts}]
+  (let [data (slurp filename)
+        csv (parse-csv data :delimiter \,)
+        rng (range 0 (count csv))
+        data (map (partial get-f-col csv) cols)
+        chart (init-chart (first data) rng opts)
+        chart-to-show (add-to-chart chart (rest data) rng)]
+    (view chart-to-show)))
+
+(defn -main [speedfile pingfile &amp;amp; args]
+  (draw-file speedfile [1 2] :x-label &amp;quot;Time&amp;quot; :y-label &amp;quot;Speed&amp;quot;)
+  (draw-file pingfile [1] :x-label &amp;quot;Time&amp;quot; :y-label &amp;quot;Ping time&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s put all launch process to Makefile:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Makefile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;default:
+	scp raspberry-pi.local:.speedtest.csv /tmp/
+	scp raspberry-pi.local:.pingtest.csv /tmp/
+	#Remove lines with only time (script failure)
+	grep &amp;quot;[^,]$$&amp;quot; /tmp/.speedtest.csv &amp;gt; /tmp/.speedtest-fixed.csv
+	grep &amp;quot;[^,]$$&amp;quot; /tmp/.pingtest.csv &amp;gt; /tmp/.pingtest-fixed.csv
+	lein run /tmp/.speedtest-fixed.csv /tmp/.pingtest-fixed.csv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
+And now we can see some visualization.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/speed.png&#34; alt=&#34;Speed Graph&#34; /&gt;
+&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/ping.png&#34; alt=&#34;Ping Graph&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>RSS/Atom reader in Clojure via IMAP</title>
+      <link>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
+      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
+      <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
+
+&lt;p&gt;Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;idea&#34;&gt;Idea&lt;/h3&gt;
+
+&lt;p&gt;Then I found post in the Racket community about storing your feeds in the IMAP folders using &amp;ldquo;APPEND&amp;rdquo; command by &lt;a href=&#34;http://www.greghendershott.com/2013/05/feeds2gmail.html&#34;&gt;Greg Hendershott&lt;/a&gt;.
+That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.&lt;/p&gt;
+
+&lt;h3 id=&#34;clojure-version&#34;&gt;Clojure version&lt;/h3&gt;
+
+&lt;p&gt;First I implemented my &lt;a href=&#34;https://github.com/Gonzih/feeds2imap.rb&#34;&gt;prototype in Ruby&lt;/a&gt; in few hours. I picked up Ruby because of built-in rss/atom and imap libraries.
+I used it for few days and liked it. Simple, reliable solution.
+So then I decided to rewrite it in Clojure.
+Why Clojure?
+Because it&amp;rsquo;s pure fun to use.
+I decided to use java.mail framework for message storing and folder manipulations, feedparser-clj to fetch and parse rss/atom feeds and hiccup for templating.
+I was really pleased with feedparser-clj in comparison with Ruby built-in library.
+java.mail framework was not so bad as I was expecting at first.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-it-works&#34;&gt;How it works?&lt;/h3&gt;
+
+&lt;p&gt;Here is project logic:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fetch folders and urls from feeds file.&lt;/li&gt;
+&lt;li&gt;Fetch and parse RSS/Atom data from urls.&lt;/li&gt;
+&lt;li&gt;Select only new items using cache file.&lt;/li&gt;
+&lt;li&gt;Create required imap folders.&lt;/li&gt;
+&lt;li&gt;Store new items as email messages.&lt;/li&gt;
+&lt;li&gt;Mark items as read (put md5 hashes in to the clj file with set of old hashes).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It&amp;rsquo;s running now by cron (every hour) on my BeagleBone (using latest ejre version).&lt;/p&gt;
+
+&lt;p&gt;Source code is hosted on github &lt;a href=&#34;https://github.com/Gonzih/feeds2imap.clj&#34;&gt;here&lt;/a&gt;. Take a look at project README for usage.&lt;/p&gt;
+
+&lt;h3 id=&#34;more-implementations&#34;&gt;More implementations&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Gonzih/feeds2imap.rb&#34;&gt;My Ruby prototype&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Gonzih/feeds2imap.clj&#34;&gt;My Clojure implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/greghendershott/feeds2gmail&#34;&gt;Racket implementation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cordawyn/rss2imap&#34;&gt;Haskell implementation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark</title>
+      <link>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</link>
+      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
+
+Pi is running Raspbian.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cat /etc/*-release
+PRETTY_NAME=&amp;quot;Debian GNU/Linux 7.0 (wheezy)&amp;quot;
+NAME=&amp;quot;Debian GNU/Linux&amp;quot;
+VERSION_ID=&amp;quot;7.0&amp;quot;
+VERSION=&amp;quot;7.0 (wheezy)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pi CPU is running on 700Mhz.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cpufreq-info | grep &#39;current CPU&#39;
+current CPU frequency is 700 MHz.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clojure version is 1.5.1.&lt;/p&gt;
+
+&lt;p&gt;Benchmark code is from &lt;a href=&#34;http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/&#34;&gt;nakkaya&amp;rsquo;s post&lt;/a&gt;, also used for my BeagleBone Clojure/ClojureScript benchmarks:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns benchmark.core)
+
+(defn factorial [x]
+  (reduce * (range 1N (inc x))))
+;                   ^ integerOverflow fix
+
+(defn fib [n]
+  (if (&amp;lt;= n 1)
+    1
+    (+ (fib (- n 1)) (fib (- n 2)))))
+
+(defn sort-seq []
+  (sort (repeat 100000 (rand-int 2000000))))
+
+(defn time-it [fn]
+  (let [values  (for [i (range 200)] (with-out-str (time (fn))))
+        doubles (map #(Double. (nth (.split % &amp;quot; &amp;quot;) 2)) values)]
+    (/ (apply + doubles) (count doubles))))
+
+(defn -main []
+  (println &amp;quot;(factorial 5000) \t Avg: &amp;quot; (time-it #(factorial 5000)))
+  (println &amp;quot;(fib 20) \t Avg: &amp;quot; (time-it #(fib 20)))
+  (println &amp;quot;(sort-seq) \t Avg: &amp;quot; (time-it #(sort-seq))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time I was a little bit smarter to run all code with &lt;code&gt;lein trampoline run&lt;/code&gt; to eliminate overhead.&lt;/p&gt;
+
+&lt;p&gt;Numbers:&lt;/p&gt;
+
+&lt;p&gt;OpenJDK:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; sudo apt-get install openjdk-7-jre-headless
+
+&amp;gt; java -version
+java version &amp;quot;1.7.0_07&amp;quot;
+OpenJDK Runtime Environment (IcedTea7 2.3.2) (7u7-2.3.2a-1+rpi1)
+OpenJDK Zero VM (build 22.0-b10, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM
+90.5 15.7
+
+&amp;gt; lein trampoline run
+(factorial 5000) Avg: 5956.007845080006
+(fib 20)         Avg: 713.6807171
+(sort-seq)       Avg: 9633.873322030007
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Oracle JRE:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; java -version
+java version &amp;quot;1.8.0-ea&amp;quot;
+Java(TM) SE Runtime Environment (build 1.8.0-ea-b36e)
+Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM
+87.9 18.9
+
+&amp;gt; lein trampoline run
+(factorial 5000) Avg: 685.5312071299996
+(fib 20)         Avg: 29.505588125000017
+(sort-seq)       Avg: 1137.3281607850001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Startup time for &amp;ldquo;Hello, World!&amp;rdquo;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# OpenJDK
+&amp;gt; time lein run
+Hello, World!
+lein run  56.51s user 1.58s system 87% cpu 1:06.16 total
+&amp;gt; time lein trampoline run
+Hello, World!
+lein trampoline run  57.73s user 0.96s system 96% cpu 1:00.57 total
+
+# Oracle JRE
+&amp;gt; time lein run
+Hello, World!
+lein run  31.47s user 1.43s system 95% cpu 34.298 total
+&amp;gt; time lein trampoline run
+Hello, World!
+lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Looks promising for clojure on small arm devices :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Building RC Toy with Clojure</title>
+      <link>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</link>
+      <pubDate>Tue, 19 Mar 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</guid>
+      <description>&lt;p&gt;Bored and have free time? Lets build something.
+Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;First of all we need some parts.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Tamiya Universal Plate Set (TAM70157) (better to order 2 pcs)&lt;/li&gt;
+&lt;li&gt;Tamiya Track and Wheel Set (TAM70100)&lt;/li&gt;
+&lt;li&gt;Tamiya Twin Motor Gearbox  (TAM70097)&lt;/li&gt;
+&lt;li&gt;Arduino (I have UNO and Leonardo, UNO was choosen since I don&amp;rsquo;t need to make modifications in Firmata code for it (except baudrate))&lt;/li&gt;
+&lt;li&gt;HBridge IC L293 (L293B was used)&lt;/li&gt;
+&lt;li&gt;Bluetooth module (you can buy Arduino ready module, I will be using cheapest possible module)&lt;/li&gt;
+&lt;li&gt;Bluetooth in PC&lt;/li&gt;
+&lt;li&gt;Wires&lt;/li&gt;
+&lt;li&gt;Batteries or Accumulator (I have 9v batteries so I will use them)&lt;/li&gt;
+&lt;li&gt;Gamepad (Logitech Rumble Gemapad F510 was used)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;putting-things-together&#34;&gt;Putting things together&lt;/h1&gt;
+
+&lt;h2 id=&#34;chassis&#34;&gt;Chassis&lt;/h2&gt;
+
+&lt;p&gt;First lets build gearbox. You can use it in few different modes of gear ratio. I selected 114.7:1 gear ratio (lucky guess).
+Read instructions, take your time. I had 2 9v motors, so since I will be using 9v batteries I decided to replace default motors with 9v ones.&lt;/p&gt;
+
+&lt;p&gt;Next assemble tracks. Pretty easy, right? Next is time to put it all together. Since I had only 1 plate I made second one from peace of plexiglass.
+I made something like 2 floored chassis. First floor is for motor and wheels (and maybe batteries) and second is for Arduino (and maybe batterries).&lt;/p&gt;
+
+&lt;h2 id=&#34;bluetooth&#34;&gt;Bluetooth&lt;/h2&gt;
+
+&lt;p&gt;We need to do 2 thing with our cheap bluetooth module:&lt;/p&gt;
+
+&lt;p&gt;Solder legs to it
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.jpg&#34; alt=&#34;Soldered bluetooth module&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg&#34; alt=&#34;Voltage devider&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;gearbox-and-hbridge-driver&#34;&gt;Gearbox and HBridge Driver&lt;/h2&gt;
+
+&lt;p&gt;To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I&amp;rsquo;m afraid it would be messy.
+To understand how HBridge works you should read &lt;a href=&#34;http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview&#34;&gt;Adafruit post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;HBridge -&amp;gt; Arduino Schematics:
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg&#34; alt=&#34;Schematics&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;final-version&#34;&gt;Final version&lt;/h2&gt;
+
+&lt;h3 id=&#34;photos&#34;&gt;Photos&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-001.jpg&#34; alt=&#34;rc-toy-001&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-002.jpg&#34; alt=&#34;rc-toy-002&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-003.jpg&#34; alt=&#34;rc-toy-003&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-004.jpg&#34; alt=&#34;rc-toy-004&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-005.jpg&#34; alt=&#34;rc-toy-005&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-006.jpg&#34; alt=&#34;rc-toy-006&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-007.jpg&#34; alt=&#34;rc-toy-007&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-008.jpg&#34; alt=&#34;rc-toy-008&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-009.jpg&#34; alt=&#34;rc-toy-009&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-010.jpg&#34; alt=&#34;rc-toy-010&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-011.jpg&#34; alt=&#34;rc-toy-011&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-012.jpg&#34; alt=&#34;rc-toy-012&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-014.jpg&#34; alt=&#34;rc-toy-014&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-016.jpg&#34; alt=&#34;rc-toy-016&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-017.jpg&#34; alt=&#34;rc-toy-017&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-018.jpg&#34; alt=&#34;rc-toy-018&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-019.jpg&#34; alt=&#34;rc-toy-019&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-020.jpg&#34; alt=&#34;rc-toy-020&#34; /&gt;
+&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg&#34; alt=&#34;rc-toy-021&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;video&#34;&gt;Video&lt;/h3&gt;
+
+&lt;p&gt;{% video &lt;a href=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv&#34;&gt;https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv&lt;/a&gt; 640 480 &lt;a href=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg&#34;&gt;https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg&lt;/a&gt; %}&lt;/p&gt;
+
+&lt;h1 id=&#34;writing-some-code&#34;&gt;Writing some code&lt;/h1&gt;
+
+&lt;h2 id=&#34;bluetooth-as-serial-port&#34;&gt;Bluetooth as Serial port&lt;/h2&gt;
+
+&lt;p&gt;I used blueman on my Arch Laptop. Gui is straightforward and easy to use.&lt;/p&gt;
+
+&lt;h2 id=&#34;gamepad-and-kernel&#34;&gt;Gamepad and kernel&lt;/h2&gt;
+
+&lt;p&gt;You need to find kernel module for your gamepad. For my gamepad module &lt;code&gt;joydev&lt;/code&gt; was required.
+After module is loaded you should see new device in &lt;code&gt;/dev/input&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;clojure-code&#34;&gt;Clojure code&lt;/h2&gt;
+
+&lt;p&gt;I used &lt;a href=&#34;http://clojure.org/&#34;&gt;Clojure&lt;/a&gt; as main language for controlling Arduino. I took &lt;a href=&#34;https://github.com/nakkaya/clodiuno&#34;&gt;Clodiuno&lt;/a&gt; library.
+It is Firmata protocol implementation for Clojure. Why Firmata? Because it&amp;rsquo;s easy, fast and provides great way to extend your project in future.&lt;/p&gt;
+
+&lt;p&gt;So I wrote some code, uploaded Firmata to Arduino. And&amp;hellip; it&amp;rsquo;s not working.&lt;/p&gt;
+
+&lt;p&gt;After some digging in Firmata and Clodiuno code I wrote 2 pull request to Clodiuno.&lt;/p&gt;
+
+&lt;p&gt;First issue was that bluetooth uses 9600 baudrate for communications. Fix? &lt;a href=&#34;https://github.com/nakkaya/clodiuno/pull/5&#34;&gt;pull.&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Update standart Firmata example code in Arduino IDE. Change baudrate to 9600.&lt;/li&gt;
+&lt;li&gt;Change Clodiuno baudrate to 9600.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Second was that Clodiuno waits for version response from Firmata on startup. It&amp;rsquo;s ok for wired UNO since it will be restarted when serial connection is established.
+But boards like Leonardo or if you are using bluetooth miss that behavior.&lt;/p&gt;
+
+&lt;p&gt;Fix? &lt;a href=&#34;https://github.com/nakkaya/clodiuno/pull/6&#34;&gt;pull.&lt;/a&gt; Manually ask firmware version on Clodiuno initialization.&lt;/p&gt;
+
+&lt;p&gt;Most of controller related logic was extracted from awesome library &lt;a href=&#34;https://github.com/gavilancomun/jinput-overtone&#34;&gt;overtone-jinput&lt;/a&gt;.
+I just replaced overtone related events handling with my own code based on Clodiuno.&lt;/p&gt;
+
+&lt;p&gt;Final version of code is on &lt;a href=&#34;https://github.com/Gonzih/clj-arduino-rc-toy&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can run it with &lt;code&gt;./run.sh&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;raspberry-pi&#34;&gt;Raspberry Pi&lt;/h1&gt;
+
+&lt;p&gt;Currently work in progress on moving Clojure code to Rapberry Pi.&lt;/p&gt;
+
+&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
+
+&lt;h3 id=&#34;native-dependencies-issue&#34;&gt;Native dependencies issue&lt;/h3&gt;
+
+&lt;p&gt;Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#INFO: Failed to load library: no jinput-linux64 in java.library.path
+sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;gamepad-configuration&#34;&gt;Gamepad configuration&lt;/h3&gt;
+
+&lt;p&gt;Add &lt;code&gt;joydev&lt;/code&gt; to &lt;code&gt;/etc/modules&lt;/code&gt; to see gamepad in &lt;code&gt;/etc/input&lt;/code&gt;.
+Also you need to switch gamepad to direct input mode (X -&amp;gt; D switch on the back of gamepad).&lt;/p&gt;
+
+&lt;h2 id=&#34;unfixed-issues&#34;&gt;Unfixed Issues&lt;/h2&gt;
+
+&lt;h3 id=&#34;bluetooth-as-serial-port-1&#34;&gt;Bluetooth as Serial port&lt;/h3&gt;
+
+&lt;p&gt;To scan for devices from command line use &lt;code&gt;hcitool scan&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To bind bluetooth to serial port on startup use following code (untested yet):&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/bluetooth/rfcomm.conf&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;rfcomm0 {
+        bind yes;
+        device mac-adress-of-bluetooth-on-arduino;
+        channel 1;
+        comment &amp;quot;Arduino&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;jinput-permissions&#34;&gt;JInput permissions&lt;/h3&gt;
+
+&lt;p&gt;For now I have no idea how to fix that issue. Looks like something is wrong with permissions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>ClojureScript on BeagleBone: simple benchmark with Node.js</title>
+      <link>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</link>
+      <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</guid>
+      <description>&lt;p&gt;Benchmark is based on my &lt;a href=&#34;http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/&#34;&gt;previous experiments&lt;/a&gt; with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
+Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/clojurescript-small-benchmark-for-embed&#34;&gt;Code&lt;/a&gt; is modified to run on top of the JavaScript:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns benchmark.core)
+
+(defn factorial [x]
+  (reduce * (range 1 (inc x))))
+
+(defn fib [n]
+  (if (&amp;lt;= n 1)
+    1
+    (+ (fib (- n 1)) (fib (- n 2)))))
+
+(defn sort-seq []
+  (sort (repeat 100000 (rand-int 2000000))))
+
+(defn time-fun [fun]
+  (let [start  (.getTime (js/Date.))
+        _      (fun)
+        end    (.getTime (js/Date.))
+        result (- end start)]
+    result))
+
+(defn time-it [fun]
+  (let [values  (for [i (range 200)] (time-fun fun))]
+    (/ (apply + values)
+       (count values))))
+
+(defn -main []
+  (println &amp;quot;(factorial 5000) \t Avg: &amp;quot; (time-it #(factorial 5000)))
+  (println &amp;quot;(fib 20) \t Avg: &amp;quot;         (time-it #(fib 20)))
+  (println &amp;quot;(sort-seq) \t Avg: &amp;quot;       (time-it #(sort-seq))))
+
+(set! *main-cli-fn* -main)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Benchmark results:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; node --version
+v0.6.12
+
+# simple compiler optimization
+&amp;gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+91.4 20.3 90816  51292 pts/1  Rl+  08:46  0:54 node clojurescript-benchmark-optimization-simple.js
+
+&amp;gt; node clojurescript-benchmark-optimization-simple.js
+(factorial 5000) Avg: 64.345
+(fib 20)         Avg: 5.575
+(sort-seq)       Avg: 7281.975
+
+# advanced compiler optimization
+&amp;gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js
+
+&amp;gt; node clojurescript-benchmark-optimization-advanced.js
+(factorial 5000) Avg: 54.775
+(fib 20)         Avg: 2.77
+(sort-seq)       Avg: 6325.71
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
+Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark</title>
+      <link>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</link>
+      <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
+      <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
+&lt;/p&gt;
+
+&lt;p&gt;BeagleBone is running Ubuntu 12.04.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cat /etc/*-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.04
+DISTRIB_CODENAME=precise
+DISTRIB_DESCRIPTION=&amp;quot;Ubuntu 12.04 LTS&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;BeagleBone CPU is running on 500Mhz.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cpufreq-info | grep &#39;current CPU&#39;
+current CPU frequency is 500 MHz.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clojure version is 1.4.0.&lt;/p&gt;
+
+&lt;p&gt;Benchmark code is from &lt;a href=&#34;http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/&#34;&gt;nakkaya&amp;rsquo;s post&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns benchmark.core)
+
+(defn factorial [x]
+  (reduce * (range 1N (inc x))))
+;                   ^ integerOverflow fix
+
+(defn fib [n]
+  (if (&amp;lt;= n 1)
+    1
+    (+ (fib (- n 1)) (fib (- n 2)))))
+
+(defn sort-seq []
+  (sort (repeat 100000 (rand-int 2000000))))
+
+(defn time-it [fn]
+  (let [values  (for [i (range 200)] (with-out-str (time (fn))))
+        doubles (map #(Double. (nth (.split % &amp;quot; &amp;quot;) 2)) values)]
+    (/ (apply + doubles) (count doubles))))
+
+(defn -main []
+  (println &amp;quot;(factorial 5000) \t Avg: &amp;quot; (time-it #(factorial 5000)))
+  (println &amp;quot;(fib 20) \t Avg: &amp;quot; (time-it #(fib 20)))
+  (println &amp;quot;(sort-seq) \t Avg: &amp;quot; (time-it #(sort-seq))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So here the numbers:&lt;/p&gt;
+
+&lt;p&gt;OpenJDK:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; sudo apt-get install openjdk-7-jre-headless
+
+&amp;gt; java -version
+java version &amp;quot;1.7.0_03&amp;quot;
+OpenJDK Runtime Environment (IcedTea7 2.1.1pre) (7~u3-2.1.1~pre1-1ubuntu3)
+OpenJDK Zero VM (build 22.0-b10, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+96.9 16.3 267932 41172 pts/1  Sl+  09:07  9:28 java
+
+&amp;gt; lein run
+(factorial 5000) Avg:  1681.9940255249999
+(fib 20)         Avg:  490.16940197000025
+(sort-seq)       Avg:  7129.159457125003
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Embedded JRE:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; java -version
+java version &amp;quot;1.7.0_06&amp;quot;
+Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)
+Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)
+
+&amp;gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+91.2 16.4 221740 41372 pts/1  Sl+  08:28  5:16 java
+
+&amp;gt; lein run
+(factorial 5000) Avg:  1061.0568413899998
+(fib 20)         Avg:  30.877820054999983
+(sort-seq)       Avg:  1729.9035516600002
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here you are. Better performance and slightly better memory usage.
+Good Job, Embedded Java Team :)
+Looking forward for hardfloat ABI version to test it on Raspberry Pi.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
