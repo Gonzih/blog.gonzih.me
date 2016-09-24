@@ -13,11 +13,12 @@ generate: go-get
 preview: go-get
 	hugo server
 
+TS := $(date)
 public:
 	git clone -b master git@github.com:Gonzih/gonzih.github.com.git public
 
 deploy: public
-	cd public && git add  . && git commit -a -m "Blog updated at $(date)" && git push
+	cd public && git add  . && git commit -a -m "Blog updated at $(shell date)" && git push
 	cd ..
 
 docker-image:
