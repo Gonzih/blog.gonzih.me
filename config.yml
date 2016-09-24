@@ -1,0 +1,53 @@
+---
+theme: "hyde"
+baseurl: "http://blog.gonzih.me/"
+
+title: "Max Gonzih"
+subtitle: "KEEP CALM and CODE ON"
+
+languageCode: "en-us"
+copyright: "This work is licensed under a Creative Commons Attribution 4.0 International License."
+
+author:
+  name: "Max Gonzih"
+  email: "gonzih@gmail.com"
+
+layoutdir: "layouts"
+contentdir: "content"
+publishdir: "public"
+
+indexes:
+    category: "categories"
+
+permalinks:
+    post: /blog/:year/:month/:day/:title/
+
+params:
+  disqusShortname: "gonzihsblog"
+  description: "KEEP CALM and CODE ON"
+  copyrightImage: "https://i.creativecommons.org/l/by/4.0/88x31.png"
+  copyright: "This work is licensed under a Creative Commons Attribution 4.0 International License."
+
+menu:
+  main:
+      - Name: "Achives"
+        Weight: 0
+        URL: "/post/"
+      - Name: "gonzih.me"
+        Weight: 1
+        URL: "http://gonzih.me"
+      - Name: "Email"
+        Weight: 2
+        URL: "mailto:gonzih@gmail.com"
+      - Name: "Github"
+        Weight: 3
+        URL: "https://github.com/Gonzih"
+      - Name: "Twitter"
+        Weight: 4
+        URL: "https://twitter.com/Gonzih"
+      - Name: "RSS feed"
+        Weight: 5
+        URL: "http://blog.gonzih.me/index.xml"
+
+metadataformat: "yaml"
+---

@@ -1,21 +1,23 @@
 push:
 	git push
 
-bundle-install:
-	bundle install --path vendor/bundle
+go-get-update:
+	go get -u github.com/spf13/hugo
 
-generate: bundle-install
-	bundle exec rake generate
+go-get:
+	go get github.com/spf13/hugo
 
-preview: bundle-install
-	bundle exec rake generate
-	bundle exec rake preview
+generate: go-get
+	hugo
 
-_deploy:
-	git clone -b master git@github.com:Gonzih/gonzih.github.com.git _deploy
+preview: go-get
+	hugo server
 
-deploy: _deploy
-	bundle exec rake push
+public:
+	git clone -b master git@github.com:Gonzih/gonzih.github.com.git public
+
+deploy: public
+	cd public && git add  . && git commit -a -m "Blog updated" && git push
 
 docker-image:
 	docker build -t blog-builder .

@@ -1,10 +1,9 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Max Gonzih <gonzih at gmail dot com>
 
 RUN apt-get update && apt-get -y upgrade
 
-RUN apt-get -y install python2.7 ruby ruby-dev nodejs make build-essential
-RUN gem install bundler
+RUN apt-get -y install go
 
 VOLUME /var/blog
 
@@ -19,8 +18,6 @@ ENV LC_ALL en_US.UTF-8
 ENV USER gnzh
 
 RUN useradd -m $USER
-
-RUN ln -s /usr/bin/python2 /usr/bin/python
 
 USER $USER
 RUN mkdir $HOME/bin
