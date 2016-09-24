@@ -30,7 +30,7 @@ params:
 
 menu:
   main:
-      - Name: "Achives"
+      - Name: "Archives"
         Weight: 0
         URL: "/post/"
       - Name: "Email"
