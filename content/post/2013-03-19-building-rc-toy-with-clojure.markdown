@@ -71,7 +71,7 @@ HBridge -> Arduino Schematics:
 ![rc-toy-021](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg)
 
 ### Video
-{% video https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv 640 480 https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg %}
+[VIDEO](https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv)
 
 # Writing some code
 ## Bluetooth as Serial port
