@@ -176,10 +176,10 @@ load video
     
     <item>
       <title>Replacing shell scripts with Clojure&#43;JamVM</title>
-      <link>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure&#43;jamvm/</link>
+      <link>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure&#43;jamvm/</guid>
+      <guid>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
       <description>&lt;p&gt;We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.
 Would be lovely, to use some kind of lisp for scripting, right?

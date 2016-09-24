@@ -1,393 +1,238 @@
-
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>Replacing shell scripts with Clojure+JamVM - Max Gonzih</title>
-  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17-DEV" />
 
   
-  <meta name="description" content="Replacing Shell Scripts With Clojure+JamVM Sep 28th, 2014 | Comments We all hate shell scripting.
-Scripts are annoyingly hard to debug, test and &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   
-  <link rel="canonical" href="http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  <title>Replacing shell scripts with Clojure&#43;JamVM &middot; Max Gonzih</title>
   
 
+  
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-    <a href="/">
-        <div class="clearfix">
-        </div>
-    </a>
-</aside>
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
 
-<ul id="menu">
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/"> Achives </a></li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://twitter.com/Gonzih"> Twitter </a></li>
+      
+        <li><a href="http://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="http://gonzih.me"> Homepage </a></li>
+      
+    </ul>
 
-  <li class="title">
-    <h1 id="title"><a href="/">Max Gonzih</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-
-  <li class="link">
-    <a href="mailto:gonzih@gmail.com">email</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/Gonzih/">github</a>
-  </li>
-
-
-  <li class="link">
-      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://twitter.com/Gonzih/">twitter</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-  <li>
-    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
-  </li>
-</ul>
-
-
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.gonzih.me" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  
-  
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
 </div>
 
-  
-  <header>
-    
-      <h2 class="entry-title">Replacing Shell Scripts With Clojure+JamVM</h2>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-28T11:04:00+00:00" pubdate data-updated="true">Sep 28<span>th</span>, 2014</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<p>We all hate shell scripting.
+        <div class="content container">
+            <div class="post">
+                <h1>Replacing shell scripts with Clojure&#43;JamVM</h1>
+              <span class="post-date">Sun, Sep 28, 2014</span>
+                  <p>We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.
 Would be lovely, to use some kind of lisp for scripting, right?
 To do interactive development with repl in your favorite editor.
 To write it in a nice predictable language that you also enjoy.
-But sometimes it&#8217;s impossible to add some external dependencies to the system.
+But sometimes it&rsquo;s impossible to add some external dependencies to the system.
 What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?</p>
 
-<!--more-->
+<p></p>
 
-
-<h1>Basic setup</h1>
+<h1 id="basic-setup">Basic setup</h1>
 
 <p>First what we will need is to get clojure jar file:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget -O /opt/clojure.jar 'http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'</span></code></pre></td></tr></table></div></figure>
+<pre><code>wget -O /opt/clojure.jar 'http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'
+</code></pre>
 
+<p>Next lets create executable <code>/usr/bin/clojure</code> that will live in <code>/usr/bin</code> (or <code>/opt/bin</code> or <code>/home/youruser/bin</code>):</p>
 
-<p>Next lets create executable that will live in <code>/usr/bin</code> (or <code>/opt/bin</code> or <code>/home/youruser/bin</code>):</p>
+<pre><code class="language-bash">#!/bin/sh
 
-<figure class='code'><figcaption><span>/usr/bin/clojure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">exec </span>java -jar /opt/clojure.jar <span class="s2">&quot;$@&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+exec java -jar /opt/clojure.jar &quot;$@&quot;
+</code></pre>
 
+<p>And now it&rsquo;s time for our hello world script <code>/opt/test.clj</code>:</p>
 
-<p>And now it&#8217;s time for our hello world script:</p>
+<pre><code class="language-clojure">#!/usr/bin/clojure
 
-<figure class='code'><figcaption><span>/opt/test.clj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="o">#</span><span class="nv">!/usr/bin/clojure</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nb">println </span><span class="s">&quot;hello world&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
+(println &quot;hello world&quot;)
+</code></pre>
 
 <p>Make it executable:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>chmod +x /opt/test.clj
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="language-bash">chmod +x /opt/test.clj
+</code></pre>
 
 <p>And run it:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>/opt/test.clj
-</span><span class='line'>hello world
-</span></code></pre></td></tr></table></div></figure>
-
+<pre><code class="language-bash">$ /opt/test.clj
+hello world
+</code></pre>
 
 <p>Yay! But it feels kind of slow:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">time</span> /opt/test.clj
-</span><span class='line'>hello world
-</span><span class='line'>
-</span><span class='line'>real  0m2.684s
-</span><span class='line'>user  0m2.239s
-</span><span class='line'>sys   0m0.186s
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-bash">time /opt/test.clj
+hello world
 
+real  0m2.684s
+user  0m2.239s
+sys   0m0.186s
+</code></pre>
 
 <p>2 seconds startup time, not really suitable for scripting, right?
 Can we improve that? What if there would be JVM with fast startup and low memory usage.</p>
 
-<h1>Introducing JamVM.</h1>
+<h1 id="introducing-jamvm">Introducing JamVM.</h1>
 
-<p><em>&#8220;But&#8230; but you told us that there is only JVM available on production system without ability to add external dependencies.&#8221;</em></p>
+<p><em>&ldquo;But&hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&rdquo;</em></p>
 
 <p>I lied, sorry.</p>
 
 <p>Compiling JamVM with OpenJDK support:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Fetching required dependencies and source</span>
-</span><span class='line'>apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
-</span><span class='line'><span class="nb">cd</span> /opt
-</span><span class='line'>wget -O jamvm-2.0.0.tar.gz <span class="s1">&#39;http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;</span>
-</span><span class='line'>tar -xvzf jamvm-2.0.0.tar.gz
-</span><span class='line'>
-</span><span class='line'><span class="c"># Building</span>
-</span><span class='line'><span class="nb">cd</span> /opt/jamvm-2.0.0
-</span><span class='line'>./configure --with-java-runtime-library<span class="o">=</span>openjdk7 <span class="o">&amp;&amp;</span> make check <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> make install
-</span><span class='line'>
-</span><span class='line'><span class="c"># Installing in to the openjdk installation</span>
-</span><span class='line'>mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
-</span><span class='line'>cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
-</span><span class='line'>
-</span><span class='line'><span class="c"># Trying it out</span>
-</span><span class='line'>java -jamvm -version
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-bash"># Fetching required dependencies and source
+apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
+cd /opt
+wget -O jamvm-2.0.0.tar.gz 'http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz'
+tar -xvzf jamvm-2.0.0.tar.gz
 
+# Building
+cd /opt/jamvm-2.0.0
+./configure --with-java-runtime-library=openjdk7 &amp;&amp; make check &amp;&amp; make &amp;&amp; make install
+
+# Installing in to the openjdk installation
+mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
+cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
+
+# Trying it out
+java -jamvm -version
+</code></pre>
 
 <p>JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
 You will need to use -jamvm option to java command to run it with small overhead vm.</p>
 
-<p>Let&#8217;s update our clojure executable:</p>
+<p>Let&rsquo;s update our clojure executable <code>/usr/bin/clojure</code>:</p>
 
-<figure class='code'><figcaption><span>/usr/bin/clojure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">exec </span>java -jamvm -jar /opt/clojure.jar <span class="s2">&quot;$@&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-bash">#!/bin/sh
 
+exec java -jamvm -jar /opt/clojure.jar &quot;$@&quot;
+</code></pre>
 
-<p>Let&#8217;s try it out:</p>
+<p>Let&rsquo;s try it out:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">time</span> /opt/test.clj
-</span><span class='line'>hello world
-</span><span class='line'>
-</span><span class='line'>real  0m0.866s
-</span><span class='line'>user  0m0.764s
-</span><span class='line'>sys   0m0.076s
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-bash">time /opt/test.clj
+hello world
 
+real  0m0.866s
+user  0m0.764s
+sys   0m0.076s
+</code></pre>
 
 <p>Better, right?</p>
 
-<h2>How slow is JamVM? Some benchmarks:</h2>
+<h2 id="how-slow-is-jamvm-some-benchmarks">How slow is JamVM? Some benchmarks:</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Clojure 1.6
-</span><span class='line'>
-</span><span class='line'>JamVM:
-</span><span class='line'>
-</span><span class='line'>(factorial 5000) Avg: 248.65890986500017
-</span><span class='line'>(fib 20)         Avg: 35.33471996000001
-</span><span class='line'>(sort-seq)       Avg: 405.7438969800002
-</span><span class='line'>
-</span><span class='line'>OpenJDK:
-</span><span class='line'>
-</span><span class='line'>(factorial 5000) Avg: 25.016900630000006
-</span><span class='line'>(fib 20)         Avg: 0.69957772
-</span><span class='line'>(sort-seq)       Avg: 11.553695560000001
-</span></code></pre></td></tr></table></div></figure>
+<pre><code class="language-text">Clojure 1.6
 
+JamVM:
+
+(factorial 5000) Avg: 248.65890986500017
+(fib 20)         Avg: 35.33471996000001
+(sort-seq)       Avg: 405.7438969800002
+
+OpenJDK:
+
+(factorial 5000) Avg: 25.016900630000006
+(fib 20)         Avg: 0.69957772
+(sort-seq)       Avg: 11.553695560000001
+</code></pre>
 
 <p>Much slower, but if you think about it
 shell scripting most of the time is about executing external commands,
 IO and data filtering. Might be as well not so bad.
 Also memory usage of JamVM makes it perfect for embedded systems.</p>
 
-<h2>Why not use something like lein exec?</h2>
+<h2 id="why-not-use-something-like-lein-exec">Why not use something like lein exec?</h2>
 
 <p>Lein exec is nice. But it adds overhead.
 If you need external dependencies you can solve it (in theory)
 with classpath manipulations in java command (<code>java -cp dep.jar:dep2.jar:.</code>).
 Still you can plug lein exec to JamVM if you want.</p>
 
-<h3>Update</h3>
+<h3 id="update">Update</h3>
 
 <p>I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
 so you can just run <code>apt-get -y install icedtea-7-jre-jamvm</code> to install latest build.</p>
+            </div>
 
-
-
-</article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-  
-
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
 <script type="text/javascript">
-      var disqus_shortname = 'gonzihsblog';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/';
-        var disqus_url = 'http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
 
-
-
-
-
-
-
-
-
-
-</body>
+  </body>
 </html>
