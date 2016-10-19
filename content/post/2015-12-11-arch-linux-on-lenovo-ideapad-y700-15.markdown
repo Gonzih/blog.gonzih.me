@@ -46,14 +46,6 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
 There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/lists/linux/kernel/2323659).
 
-## Hibernate
-* Add `resume=/dev/my-swap-partition` to `GRUB_CMDLINE_LINUX_DEFAULT` line in `/etc/default/grub`
-* Run `sudo grub-mkconfig -o /boot/grub/grub.cfg`
-* Add `resume` to the list of `HOOKS` in `/etc/mkinitcpio.conf` before `filesystems` but after all `block`, `sata` and other hardware related hooks.
-* Run `sudo mkinitcpio -p linux`
-* Reboot
-* `systemctl hibernate` should work now
-
 ### Temporary solution 1:
 
 * `sudo systemctl enable rfkill-unblock@wifi.service`
@@ -70,3 +62,11 @@ There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/l
 This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
 To do that append `timeout=36000` to line `load-module module-suspend-on-idle` in the `/etc/pulse/default.pa` configuration file.
 And now restart pulse by running `pulseaudio --kill` and `pulseaudio --start`.
+
+## Hibernate
+* Add `resume=/dev/my-swap-partition` to `GRUB_CMDLINE_LINUX_DEFAULT` line in `/etc/default/grub`
+* Run `sudo grub-mkconfig -o /boot/grub/grub.cfg`
+* Add `resume` to the list of `HOOKS` in `/etc/mkinitcpio.conf` before `filesystems` but after all `block`, `sata` and other hardware related hooks.
+* Run `sudo mkinitcpio -p linux`
+* Reboot
+* `systemctl hibernate` should work now
