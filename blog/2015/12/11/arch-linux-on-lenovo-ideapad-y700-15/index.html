@@ -3,7 +3,7 @@
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.17-DEV" />
+  <meta name="generator" content="Hugo 0.18-DEV" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -27,8 +27,6 @@
   <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
 
   
-  
-      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
@@ -68,7 +66,7 @@
     </ul>
 
     <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
-    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+    <p class="cc-logo"><img src=""/></p>
   </div>
 </div>
 
@@ -86,6 +84,7 @@
 <ul>
 <li>WIFI</li>
 <li>Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)</li>
+<li>Hibernate</li>
 <li>Sound without subwoofer</li>
 <li>Video (I used bumblebee to switch between intel/nvidia GPUs)</li>
 <li>Brightness</li>
@@ -147,24 +146,19 @@ There was a patch for the 17 inch model <a href="http://www.gossamer-threads.com
 <p>This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
 To do that append <code>timeout=36000</code> to line <code>load-module module-suspend-on-idle</code> in the <code>/etc/pulse/default.pa</code> configuration file.
 And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulseaudio --start</code>.</p>
+
+<h2 id="hibernate">Hibernate</h2>
+
+<ul>
+<li>Add <code>resume=/dev/my-swap-partition</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> line in <code>/etc/default/grub</code></li>
+<li>Run <code>sudo grub-mkconfig -o /boot/grub/grub.cfg</code></li>
+<li>Add <code>resume</code> to the list of <code>HOOKS</code> in <code>/etc/mkinitcpio.conf</code> before <code>filesystems</code> but after all <code>block</code>, <code>sata</code> and other hardware related hooks.</li>
+<li>Run <code>sudo mkinitcpio -p linux</code></li>
+<li>Reboot</li>
+<li><code>systemctl hibernate</code> should work now</li>
+</ul>
             </div>
 
-            
-                <h2>Comments</h2>
-                <div id="disqus_thread"></div>
-<script type="text/javascript">
-     
-    var disqus_shortname = 'gonzihsblog'; 
-
-     
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
             
         </div>
 

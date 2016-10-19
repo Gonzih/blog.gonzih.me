@@ -26,6 +26,7 @@
 &lt;ul&gt;
 &lt;li&gt;WIFI&lt;/li&gt;
 &lt;li&gt;Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)&lt;/li&gt;
+&lt;li&gt;Hibernate&lt;/li&gt;
 &lt;li&gt;Sound without subwoofer&lt;/li&gt;
 &lt;li&gt;Video (I used bumblebee to switch between intel/nvidia GPUs)&lt;/li&gt;
 &lt;li&gt;Brightness&lt;/li&gt;
@@ -86,7 +87,18 @@ There was a patch for the 17 inch model &lt;a href=&#34;http://www.gossamer-thre
 
 &lt;p&gt;This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
 To do that append &lt;code&gt;timeout=36000&lt;/code&gt; to line &lt;code&gt;load-module module-suspend-on-idle&lt;/code&gt; in the &lt;code&gt;/etc/pulse/default.pa&lt;/code&gt; configuration file.
-And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and &lt;code&gt;pulseaudio --start&lt;/code&gt;.&lt;/p&gt;</description>
+And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and &lt;code&gt;pulseaudio --start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;hibernate&#34;&gt;Hibernate&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;resume=/dev/my-swap-partition&lt;/code&gt; to &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; line in &lt;code&gt;/etc/default/grub&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;resume&lt;/code&gt; to the list of &lt;code&gt;HOOKS&lt;/code&gt; in &lt;code&gt;/etc/mkinitcpio.conf&lt;/code&gt; before &lt;code&gt;filesystems&lt;/code&gt; but after all &lt;code&gt;block&lt;/code&gt;, &lt;code&gt;sata&lt;/code&gt; and other hardware related hooks.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;sudo mkinitcpio -p linux&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Reboot&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;systemctl hibernate&lt;/code&gt; should work now&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
