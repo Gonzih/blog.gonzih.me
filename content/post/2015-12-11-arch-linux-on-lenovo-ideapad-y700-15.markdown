@@ -13,6 +13,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 # What works so far
 * WIFI
 * Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)
+* Hibernate
 * Sound without subwoofer
 * Video (I used bumblebee to switch between intel/nvidia GPUs)
 * Brightness
@@ -44,6 +45,14 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 
 Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
 There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/lists/linux/kernel/2323659).
+
+## Hibernate
+* Add `resume=/dev/my-swap-partition` to `GRUB_CMDLINE_LINUX_DEFAULT` line in `/etc/default/grub`
+* Run `sudo grub-mkconfig -o /boot/grub/grub.cfg`
+* Add `resume` to the list of `HOOKS` in `/etc/mkinitcpio.conf` before `filesystems` but after all `block`, `sata` and other hardware related hooks.
+* Run `sudo mkinitcpio -p linux`
+* Reboot
+* `systemctl hibernate` should work now
 
 ### Temporary solution 1:
 
