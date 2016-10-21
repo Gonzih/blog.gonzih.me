@@ -17,11 +17,11 @@
       <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
-      <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAd Y700.&lt;/p&gt;
+      <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 
-&lt;h1 id=&#34;what-works-so-far&#34;&gt;What works so far&lt;/h1&gt;
+&lt;h1 id=&#34;what-works&#34;&gt;What works&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;WIFI&lt;/li&gt;
@@ -36,7 +36,7 @@
 &lt;li&gt;HDMI output&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&#34;what-does-not-work&#34;&gt;What does not work&lt;/h1&gt;
+&lt;h1 id=&#34;what-does-not-work-so-far&#34;&gt;What does not work so far&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Subwoofer&lt;/li&gt;
