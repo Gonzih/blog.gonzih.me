@@ -10,7 +10,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 
 <!--more-->
 
-# What works so far
+# What works
 * WIFI
 * Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)
 * Hibernate
@@ -22,7 +22,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 * Card reader (you might need to run `echo 1 | sudo tee /sys/bus/pci/rescan` so card reader becomes visible)
 * HDMI output
 
-# What does not work
+# What does not work so far
 * Subwoofer
 
 # Installation
