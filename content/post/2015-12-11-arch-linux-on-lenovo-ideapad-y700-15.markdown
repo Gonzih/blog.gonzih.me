@@ -6,7 +6,7 @@ comments: true
 categories: [arch, linux, lenovo, laptop]
 ---
 
-Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAd Y700.
+Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.
 
 <!--more-->
 
