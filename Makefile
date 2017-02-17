@@ -4,13 +4,10 @@ push:
 go-get-update:
 	go get -u github.com/spf13/hugo
 
-go-get:
-	go get github.com/spf13/hugo
-
-generate: go-get
+generate:
 	hugo
 
-preview: go-get
+preview:
 	hugo server
 
 TS := $(date)
