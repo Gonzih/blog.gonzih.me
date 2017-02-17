@@ -1,9 +1,5 @@
-FROM ubuntu:16.04
+FROM golang:1.8
 MAINTAINER Max Gonzih <gonzih at gmail dot com>
-
-RUN apt-get update && apt-get -y upgrade
-
-RUN apt-get -y install go
 
 VOLUME /var/blog
 
