@@ -19,11 +19,10 @@ deploy: public
 	cd ..
 
 docker-image:
-	docker pull golang:1.8
 	docker build -t blog-builder .
 
 generate-using-docker: docker-image
-	docker run --rm=true -t -v $(shell pwd):/var/blog --name blog-builder blog-builder make generate
+	docker run --rm -t -v $(shell pwd):/var/blog --name blog-builder blog-builder make generate
 
 deploy-using-docker:
 	make generate-using-docker
@@ -31,7 +30,7 @@ deploy-using-docker:
 	make push
 
 preview-using-docker: docker-image
-	docker run --rm=true -t -v $(shell pwd):/var/blog -p 4000:4000 --name blog-builder blog-builder make preview
+	docker run --rm -t -v $(shell pwd):/var/blog -p 1313:1313 --name blog-builder blog-builder make preview
 
 debug-using-docker: docker-image
-	docker run --rm=true -ti -v $(shell pwd):/var/blog -p 4000:4000 --name blog-builder blog-builder bash
+	docker run --rm -ti -v $(shell pwd):/var/blog -p 1313:1313 --name blog-builder blog-builder bash
