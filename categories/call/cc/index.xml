@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/call/cc/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Call/Cc on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/call/cc/</link>
+    <description>Recent content in Call/Cc on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/call/cc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Nov 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/call/cc/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Yin-Yang Call/cc puzzle in Ruby</title>
@@ -30,38 +33,7 @@
 
 &lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/&#34;&gt;Here&lt;/a&gt; you can find good explanation,
-also few of explanations can be found on &lt;a href=&#34;http://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work&#34;&gt;StackOverflow&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;After I understand how it works I got all that excited and implemented given puzzle in ruby:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;continuation&amp;quot;
-
-yin  = -&amp;gt;(cc) { print &amp;quot;@&amp;quot;; cc }.call(callcc { |c| c })
-yang = -&amp;gt;(cc) { print &amp;quot;*&amp;quot;; cc }.call(callcc { |c| c })
-
-yin.call(yang)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And it doesn&amp;rsquo;t work. It prints &lt;code&gt;@*@*********...&lt;/code&gt; forever.&lt;/p&gt;
-
-&lt;p&gt;No idea why. Maybe there are some limitations of &lt;a href=&#34;http://www.ruby-doc.org/core-2.0.0/Continuation.html&#34;&gt;ruby&amp;rsquo;s call/cc&lt;/a&gt;.
-I will research further, but if you have any information about that feel free to comment or email me.&lt;/p&gt;
-
-&lt;p&gt;Cheers!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt; Abinoam Praxedes Marques Junio &lt;a href=&#34;https://www.ruby-forum.com/topic/4418860#1129811&#34;&gt;figured&lt;/a&gt; out that let (which is basically lambda application underneath) is crucial here.
-So here is his fixed version:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;continuation&amp;quot;
-
-lambda do |yin, yang|
-  yin.call(yang)
-end.call(lambda { |cc| print &amp;quot;@&amp;quot;; cc }.call(callcc { |c| c }),
-         lambda { |cc| print &amp;quot;*&amp;quot;; cc }.call(callcc { |c| c }))
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

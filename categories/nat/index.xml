@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/nat/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Nat on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/nat/</link>
+    <description>Recent content in Nat on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/nat/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Apr 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/nat/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Quick LXC configuration with netctl nat</title>
@@ -19,100 +22,7 @@
       <guid>http://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/</guid>
       <description>&lt;p&gt;So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Install &lt;code&gt;lxc&lt;/code&gt; first.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo pacman -S lxc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next is bridge device for nat. I&amp;rsquo;m already migrated to netctl in arch linux so my configuration is for netctl.
-&lt;code&gt;/etc/netctl/lxcbridge&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;Description=&amp;quot;LXC Bridge connection&amp;quot;
-Interface=lxcbr0
-Connection=bridge
-BindsToInterfaces=()
-IP=static
-Address=192.168.100.1/24
-FwdDelay=0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Make sure you have &lt;code&gt;dnsmasq&lt;/code&gt; installed.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;pacman -S dnsmasq
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Run interface.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo netctl start lxcbridge
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And enable it for startup&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo netctl enable lxcbridge
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Add iptables rule:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo iptables -t nat -A POSTROUTING -o &amp;lt;you-main-ethernet-device-here&amp;gt; -j MASQUERADE
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Save iptables (as superuser):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;iptables-save &amp;gt; /etc/iptables/iptables.rules
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Enable ip_forward:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo sysctl net.ipv4.ip_forward=1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or to save forwarding persisent add following line:
-&lt;code&gt;/etc/sysctl.conf&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;net.ipv4.ip_forward=1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Create new Ubuntu container:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo lxc-create -n playtime -t ubuntu
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It will create new root filesystem with new configuration. Lets now change conatiner&amp;rsquo;s configuration:
-&lt;code&gt;/var/lib/lxc/playtime/config&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;lxc.network.type = veth
-lxc.network.flags = up
-lxc.network.link = lxcbr0
-lxc.network.hwaddr = 00:FF:AA:00:00:01
-lxc.network.ipv4 = 192.168.100.10/24
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Lets boot our conatiner. Better use screen or tmux for it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo lxc-start -n playtime
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Default user and password for ubuntu template is &lt;code&gt;ubuntu&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Login to container and add default gateway configuration on network up:
-&lt;code&gt;/etc/network/if-up.d/routes&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#! /bin/sh
-
-route add default gw 192.168.100.1
-
-exit 0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Reboot container with &lt;code&gt;sudo reboot&lt;/code&gt; in it.&lt;/p&gt;
-
-&lt;p&gt;Now you can ssh to your container &lt;code&gt;ssh ubuntu@192.168.100.10&lt;/code&gt;.
-You can also run container as daemon &lt;code&gt;sudo lxc-start -n playtime -d&lt;/code&gt;.
-And you can shutdown container with &lt;code&gt;sudo shutdown&lt;/code&gt; inside container.&lt;/p&gt;
-
-&lt;p&gt;Thanks for reading. Let me know if I miss something or you know better way of configuring all this stuff.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

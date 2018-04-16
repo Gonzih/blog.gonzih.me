@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/raspberry-pi/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Raspberry Pi on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/raspberry-pi/</link>
+    <description>Recent content in Raspberry Pi on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/raspberry-pi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Aug 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/raspberry-pi/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Speed/Ping test graphs with Clojure and Raspberry Pi</title>
@@ -23,121 +26,7 @@ So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion ba
 
 &lt;p&gt;How to do so? Let&amp;rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;I have unused Raspberry Pi right now, so it will be used to collect data.&lt;/p&gt;
-
-&lt;h2 id=&#34;speedtest-data&#34;&gt;Speedtest data&lt;/h2&gt;
-
-&lt;p&gt;For speedtest I will be using python script that uses speedtest.net servers.
-Pi is running Pidora right now, so let&amp;rsquo;s install script dependencies.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;yum -y install python-argparse python-lxml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Script is hosted on &lt;a href=&#34;https://github.com/Janhouse/tespeed&#34;&gt;github&lt;/a&gt;.
-Let&amp;rsquo;s get the script.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir ~/scripts
-wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/speedtest.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can test script running it with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;python ~/scripts/speedtest.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now let&amp;rsquo;s wrap python script into additional shell script to store time of data collection in csv.
-I&amp;rsquo;m not sure if I need time for now, but let&amp;rsquo;s keep it anyway.
-We will silence stderr from the script and output results as csv.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;~/bin/speedtest.zsh&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/usr/bin/zsh
-
-echo &amp;quot;\&amp;quot;$(date -R)\&amp;quot;,$(python ~/scripts/tespeed.py --csv -s)&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s put script into crontab to run every 5 minutes, also let&amp;rsquo;s redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;*/5 * * * * ~/bin/speedtest.zsh 2&amp;gt;/dev/null &amp;gt;&amp;gt; ~/.speedtest.csv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;##Ping data&lt;/p&gt;
-
-&lt;p&gt;For ping data we will be running &lt;code&gt;ping&lt;/code&gt; command with 100 packets (&lt;code&gt;ping -c 100&lt;/code&gt;) with google dns as target (8.8.8.8) and storing avg value with time to csv file.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;~/bin/pingtest.zsh&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/usr/bin/zsh
-
-AVG=$(ping -c 100 8.8.8.8 | grep rtt | sed -r &#39;s#.*\=\s.+/(.+)/.+/.+#\1#&#39;)
-
-echo &amp;quot;\&amp;quot;$(date -R)\&amp;quot;,$AVG&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;*/5 * * * * ~/bin/pingtest.zsh 2&amp;gt;/dev/null &amp;gt;&amp;gt; ~/.pingtest.csv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;##Graphs&lt;/p&gt;
-
-&lt;p&gt;For data visualization let&amp;rsquo;s use Clojure with Incanter. Here is clojure code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns incanter-graphs.core
-  (:require [incanter.core :refer :all]
-            [incanter.stats :refer :all]
-            [incanter.charts :refer :all]
-            [clojure-csv.core :refer :all])
-  (:gen-class))
-
-(defn to-f [is] (Float/parseFloat is))
-
-(defn get-f-col [data col]
-  (map to-f (sel data :cols col)))
-
-(defn init-chart [data rng {:keys [x-label y-label]}]
-  (line-chart rng data :x-label x-label
-                       :y-label y-label))
-
-(defn add-to-chart [chart data rng]
-  (reduce #(add-categories %1 rng %2) chart data))
-
-(defn draw-file [filename cols &amp;amp; {:as opts}]
-  (let [data (slurp filename)
-        csv (parse-csv data :delimiter \,)
-        rng (range 0 (count csv))
-        data (map (partial get-f-col csv) cols)
-        chart (init-chart (first data) rng opts)
-        chart-to-show (add-to-chart chart (rest data) rng)]
-    (view chart-to-show)))
-
-(defn -main [speedfile pingfile &amp;amp; args]
-  (draw-file speedfile [1 2] :x-label &amp;quot;Time&amp;quot; :y-label &amp;quot;Speed&amp;quot;)
-  (draw-file pingfile [1] :x-label &amp;quot;Time&amp;quot; :y-label &amp;quot;Ping time&amp;quot;))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s put all launch process to Makefile:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Makefile&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;default:
-	scp raspberry-pi.local:.speedtest.csv /tmp/
-	scp raspberry-pi.local:.pingtest.csv /tmp/
-	#Remove lines with only time (script failure)
-	grep &amp;quot;[^,]$$&amp;quot; /tmp/.speedtest.csv &amp;gt; /tmp/.speedtest-fixed.csv
-	grep &amp;quot;[^,]$$&amp;quot; /tmp/.pingtest.csv &amp;gt; /tmp/.pingtest-fixed.csv
-	lein run /tmp/.speedtest-fixed.csv /tmp/.pingtest-fixed.csv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
-And now we can see some visualization.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/speed.png&#34; alt=&#34;Speed Graph&#34; /&gt;
-&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/ping.png&#34; alt=&#34;Ping Graph&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -148,110 +37,7 @@ And now we can see some visualization.&lt;/p&gt;
       <guid>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
 
-Pi is running Raspbian.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; cat /etc/*-release
-PRETTY_NAME=&amp;quot;Debian GNU/Linux 7.0 (wheezy)&amp;quot;
-NAME=&amp;quot;Debian GNU/Linux&amp;quot;
-VERSION_ID=&amp;quot;7.0&amp;quot;
-VERSION=&amp;quot;7.0 (wheezy)&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Pi CPU is running on 700Mhz.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; cpufreq-info | grep &#39;current CPU&#39;
-current CPU frequency is 700 MHz.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Clojure version is 1.5.1.&lt;/p&gt;
-
-&lt;p&gt;Benchmark code is from &lt;a href=&#34;http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/&#34;&gt;nakkaya&amp;rsquo;s post&lt;/a&gt;, also used for my BeagleBone Clojure/ClojureScript benchmarks:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns benchmark.core)
-
-(defn factorial [x]
-  (reduce * (range 1N (inc x))))
-;                   ^ integerOverflow fix
-
-(defn fib [n]
-  (if (&amp;lt;= n 1)
-    1
-    (+ (fib (- n 1)) (fib (- n 2)))))
-
-(defn sort-seq []
-  (sort (repeat 100000 (rand-int 2000000))))
-
-(defn time-it [fn]
-  (let [values  (for [i (range 200)] (with-out-str (time (fn))))
-        doubles (map #(Double. (nth (.split % &amp;quot; &amp;quot;) 2)) values)]
-    (/ (apply + doubles) (count doubles))))
-
-(defn -main []
-  (println &amp;quot;(factorial 5000) \t Avg: &amp;quot; (time-it #(factorial 5000)))
-  (println &amp;quot;(fib 20) \t Avg: &amp;quot; (time-it #(fib 20)))
-  (println &amp;quot;(sort-seq) \t Avg: &amp;quot; (time-it #(sort-seq))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This time I was a little bit smarter to run all code with &lt;code&gt;lein trampoline run&lt;/code&gt; to eliminate overhead.&lt;/p&gt;
-
-&lt;p&gt;Numbers:&lt;/p&gt;
-
-&lt;p&gt;OpenJDK:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; sudo apt-get install openjdk-7-jre-headless
-
-&amp;gt; java -version
-java version &amp;quot;1.7.0_07&amp;quot;
-OpenJDK Runtime Environment (IcedTea7 2.3.2) (7u7-2.3.2a-1+rpi1)
-OpenJDK Zero VM (build 22.0-b10, mixed mode)
-
-&amp;gt; ps eu
-%CPU %MEM
-90.5 15.7
-
-&amp;gt; lein trampoline run
-(factorial 5000) Avg: 5956.007845080006
-(fib 20)         Avg: 713.6807171
-(sort-seq)       Avg: 9633.873322030007
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Oracle JRE:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; java -version
-java version &amp;quot;1.8.0-ea&amp;quot;
-Java(TM) SE Runtime Environment (build 1.8.0-ea-b36e)
-Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
-
-&amp;gt; ps eu
-%CPU %MEM
-87.9 18.9
-
-&amp;gt; lein trampoline run
-(factorial 5000) Avg: 685.5312071299996
-(fib 20)         Avg: 29.505588125000017
-(sort-seq)       Avg: 1137.3281607850001
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Startup time for &amp;ldquo;Hello, World!&amp;rdquo;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# OpenJDK
-&amp;gt; time lein run
-Hello, World!
-lein run  56.51s user 1.58s system 87% cpu 1:06.16 total
-&amp;gt; time lein trampoline run
-Hello, World!
-lein trampoline run  57.73s user 0.96s system 96% cpu 1:00.57 total
-
-# Oracle JRE
-&amp;gt; time lein run
-Hello, World!
-lein run  31.47s user 1.43s system 95% cpu 34.298 total
-&amp;gt; time lein trampoline run
-Hello, World!
-lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Looks promising for clojure on small arm devices :)&lt;/p&gt;</description>
+Pi is running Raspbian.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -263,161 +49,7 @@ lein trampoline run  32.11s user 1.18s system 94% cpu 35.070 total
       <description>&lt;p&gt;Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;First of all we need some parts.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Tamiya Universal Plate Set (TAM70157) (better to order 2 pcs)&lt;/li&gt;
-&lt;li&gt;Tamiya Track and Wheel Set (TAM70100)&lt;/li&gt;
-&lt;li&gt;Tamiya Twin Motor Gearbox  (TAM70097)&lt;/li&gt;
-&lt;li&gt;Arduino (I have UNO and Leonardo, UNO was choosen since I don&amp;rsquo;t need to make modifications in Firmata code for it (except baudrate))&lt;/li&gt;
-&lt;li&gt;HBridge IC L293 (L293B was used)&lt;/li&gt;
-&lt;li&gt;Bluetooth module (you can buy Arduino ready module, I will be using cheapest possible module)&lt;/li&gt;
-&lt;li&gt;Bluetooth in PC&lt;/li&gt;
-&lt;li&gt;Wires&lt;/li&gt;
-&lt;li&gt;Batteries or Accumulator (I have 9v batteries so I will use them)&lt;/li&gt;
-&lt;li&gt;Gamepad (Logitech Rumble Gemapad F510 was used)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;putting-things-together&#34;&gt;Putting things together&lt;/h1&gt;
-
-&lt;h2 id=&#34;chassis&#34;&gt;Chassis&lt;/h2&gt;
-
-&lt;p&gt;First lets build gearbox. You can use it in few different modes of gear ratio. I selected 114.7:1 gear ratio (lucky guess).
-Read instructions, take your time. I had 2 9v motors, so since I will be using 9v batteries I decided to replace default motors with 9v ones.&lt;/p&gt;
-
-&lt;p&gt;Next assemble tracks. Pretty easy, right? Next is time to put it all together. Since I had only 1 plate I made second one from peace of plexiglass.
-I made something like 2 floored chassis. First floor is for motor and wheels (and maybe batteries) and second is for Arduino (and maybe batterries).&lt;/p&gt;
-
-&lt;h2 id=&#34;bluetooth&#34;&gt;Bluetooth&lt;/h2&gt;
-
-&lt;p&gt;We need to do 2 thing with our cheap bluetooth module:&lt;/p&gt;
-
-&lt;p&gt;Solder legs to it
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.jpg&#34; alt=&#34;Soldered bluetooth module&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg&#34; alt=&#34;Voltage devider&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;gearbox-and-hbridge-driver&#34;&gt;Gearbox and HBridge Driver&lt;/h2&gt;
-
-&lt;p&gt;To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I&amp;rsquo;m afraid it would be messy.
-To understand how HBridge works you should read &lt;a href=&#34;http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview&#34;&gt;Adafruit post&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;HBridge -&amp;gt; Arduino Schematics:
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg&#34; alt=&#34;Schematics&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;final-version&#34;&gt;Final version&lt;/h2&gt;
-
-&lt;h3 id=&#34;photos&#34;&gt;Photos&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-001.jpg&#34; alt=&#34;rc-toy-001&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-002.jpg&#34; alt=&#34;rc-toy-002&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-003.jpg&#34; alt=&#34;rc-toy-003&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-004.jpg&#34; alt=&#34;rc-toy-004&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-005.jpg&#34; alt=&#34;rc-toy-005&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-006.jpg&#34; alt=&#34;rc-toy-006&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-007.jpg&#34; alt=&#34;rc-toy-007&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-008.jpg&#34; alt=&#34;rc-toy-008&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-009.jpg&#34; alt=&#34;rc-toy-009&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-010.jpg&#34; alt=&#34;rc-toy-010&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-011.jpg&#34; alt=&#34;rc-toy-011&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-012.jpg&#34; alt=&#34;rc-toy-012&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-014.jpg&#34; alt=&#34;rc-toy-014&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-016.jpg&#34; alt=&#34;rc-toy-016&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-017.jpg&#34; alt=&#34;rc-toy-017&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-018.jpg&#34; alt=&#34;rc-toy-018&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-019.jpg&#34; alt=&#34;rc-toy-019&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-020.jpg&#34; alt=&#34;rc-toy-020&#34; /&gt;
-&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg&#34; alt=&#34;rc-toy-021&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;video&#34;&gt;Video&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv&#34;&gt;VIDEO&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;writing-some-code&#34;&gt;Writing some code&lt;/h1&gt;
-
-&lt;h2 id=&#34;bluetooth-as-serial-port&#34;&gt;Bluetooth as Serial port&lt;/h2&gt;
-
-&lt;p&gt;I used blueman on my Arch Laptop. Gui is straightforward and easy to use.&lt;/p&gt;
-
-&lt;h2 id=&#34;gamepad-and-kernel&#34;&gt;Gamepad and kernel&lt;/h2&gt;
-
-&lt;p&gt;You need to find kernel module for your gamepad. For my gamepad module &lt;code&gt;joydev&lt;/code&gt; was required.
-After module is loaded you should see new device in &lt;code&gt;/dev/input&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;clojure-code&#34;&gt;Clojure code&lt;/h2&gt;
-
-&lt;p&gt;I used &lt;a href=&#34;http://clojure.org/&#34;&gt;Clojure&lt;/a&gt; as main language for controlling Arduino. I took &lt;a href=&#34;https://github.com/nakkaya/clodiuno&#34;&gt;Clodiuno&lt;/a&gt; library.
-It is Firmata protocol implementation for Clojure. Why Firmata? Because it&amp;rsquo;s easy, fast and provides great way to extend your project in future.&lt;/p&gt;
-
-&lt;p&gt;So I wrote some code, uploaded Firmata to Arduino. And&amp;hellip; it&amp;rsquo;s not working.&lt;/p&gt;
-
-&lt;p&gt;After some digging in Firmata and Clodiuno code I wrote 2 pull request to Clodiuno.&lt;/p&gt;
-
-&lt;p&gt;First issue was that bluetooth uses 9600 baudrate for communications. Fix? &lt;a href=&#34;https://github.com/nakkaya/clodiuno/pull/5&#34;&gt;pull.&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Update standart Firmata example code in Arduino IDE. Change baudrate to 9600.&lt;/li&gt;
-&lt;li&gt;Change Clodiuno baudrate to 9600.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Second was that Clodiuno waits for version response from Firmata on startup. It&amp;rsquo;s ok for wired UNO since it will be restarted when serial connection is established.
-But boards like Leonardo or if you are using bluetooth miss that behavior.&lt;/p&gt;
-
-&lt;p&gt;Fix? &lt;a href=&#34;https://github.com/nakkaya/clodiuno/pull/6&#34;&gt;pull.&lt;/a&gt; Manually ask firmware version on Clodiuno initialization.&lt;/p&gt;
-
-&lt;p&gt;Most of controller related logic was extracted from awesome library &lt;a href=&#34;https://github.com/gavilancomun/jinput-overtone&#34;&gt;overtone-jinput&lt;/a&gt;.
-I just replaced overtone related events handling with my own code based on Clodiuno.&lt;/p&gt;
-
-&lt;p&gt;Final version of code is on &lt;a href=&#34;https://github.com/Gonzih/clj-arduino-rc-toy&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;You can run it with &lt;code&gt;./run.sh&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&#34;raspberry-pi&#34;&gt;Raspberry Pi&lt;/h1&gt;
-
-&lt;p&gt;Currently work in progress on moving Clojure code to Rapberry Pi.&lt;/p&gt;
-
-&lt;h2 id=&#34;fixed-issues&#34;&gt;Fixed Issues&lt;/h2&gt;
-
-&lt;h3 id=&#34;native-dependencies-issue&#34;&gt;Native dependencies issue&lt;/h3&gt;
-
-&lt;p&gt;Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#INFO: Failed to load library: no jinput-linux64 in java.library.path
-sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;gamepad-configuration&#34;&gt;Gamepad configuration&lt;/h3&gt;
-
-&lt;p&gt;Add &lt;code&gt;joydev&lt;/code&gt; to &lt;code&gt;/etc/modules&lt;/code&gt; to see gamepad in &lt;code&gt;/etc/input&lt;/code&gt;.
-Also you need to switch gamepad to direct input mode (X -&amp;gt; D switch on the back of gamepad).&lt;/p&gt;
-
-&lt;h2 id=&#34;unfixed-issues&#34;&gt;Unfixed Issues&lt;/h2&gt;
-
-&lt;h3 id=&#34;bluetooth-as-serial-port-1&#34;&gt;Bluetooth as Serial port&lt;/h3&gt;
-
-&lt;p&gt;To scan for devices from command line use &lt;code&gt;hcitool scan&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;To bind bluetooth to serial port on startup use following code (untested yet):&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;/etc/bluetooth/rfcomm.conf&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;rfcomm0 {
-        bind yes;
-        device mac-adress-of-bluetooth-on-arduino;
-        channel 1;
-        comment &amp;quot;Arduino&amp;quot;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;jinput-permissions&#34;&gt;JInput permissions&lt;/h3&gt;
-
-&lt;p&gt;For now I have no idea how to fix that issue. Looks like something is wrong with permissions.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

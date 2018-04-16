@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/vim/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Vim on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/vim/</link>
+    <description>Recent content in Vim on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Jun 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Nvim terminal &#43; ClojureScript and figwheel</title>
@@ -19,36 +22,7 @@
       <guid>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
       <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://neovim.io/&#34;&gt;NeoVim&lt;/a&gt; nowadays is almost fully compatible with vim.
-It is able to reuse my &lt;a href=&#34;https://github.com/Gonzih/.vim/blob/master/vimrc&#34;&gt;.vimrc&lt;/a&gt; file without any issues.
-And recently it got proper terminal emulator built-in.
-So how about reusing it for ClojureScript development?&lt;/p&gt;
-
-&lt;p&gt;If you are lazy (like I am) and don&amp;rsquo;t want to setup piggieback support
-for fireplace.vim or don&amp;rsquo;t feel like tmux integration is good enough
-this solution should be your new starting point.&lt;/p&gt;
-
-&lt;p&gt;Just open some clojure[script] file and create second split.
-Open terminal using &lt;code&gt;:terminal&lt;/code&gt; command.&lt;/p&gt;
-
-&lt;p&gt;Here are some keybindings that will help you to send code from
-your clojure buffer to the terminal buffer.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&amp;quot;nvim&amp;quot;)
-  &amp;quot; Open terminal and run lein figwheel
-  nmap &amp;lt;Leader&amp;gt;term &amp;lt;C-w&amp;gt;v:terminal&amp;lt;CR&amp;gt;lein figwheel&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
-  &amp;quot; Evaluate anything from the visual mode in the next window
-  vmap &amp;lt;buffer&amp;gt; ,e y&amp;lt;C-w&amp;gt;wpi&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
-  &amp;quot; Evaluate outer most form
-  nmap &amp;lt;buffer&amp;gt; ,e ^v%,e
-  &amp;quot; Evaluate buffer&amp;quot;
-  nmap &amp;lt;buffer&amp;gt; ,b ggVG,e
-endif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hey! Now you can finally stop looking at the emacs land!&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -64,90 +38,7 @@ Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt
 
 &lt;p&gt;Of course interesting question is &amp;ldquo;How did I end up with this idea in my head?&amp;rdquo;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;I tried to play with emacs few times couple of years ago.
-But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.&lt;/p&gt;
-
-&lt;p&gt;I tried evil mode, but it went not so well.
-Problem is that I&amp;rsquo;m also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
-I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
-Also probably my lack of patience played against me.
-So I gave up and continued using vim (something like 5 years of hapiness).&lt;/p&gt;
-
-&lt;p&gt;Recently ClojureScript tool called &lt;a href=&#34;https://github.com/bhauman/lein-figwheel&#34;&gt;figwheel&lt;/a&gt; added repl support.
-So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
-Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
-Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim &lt;a href=&#34;https://github.com/tpope/vim-fireplace&#34;&gt;vim-fireplace&lt;/a&gt; relies on nrepl.
-I was using for some time &lt;a href=&#34;https://github.com/sjl/tslime2.vim&#34;&gt;tslime2&lt;/a&gt; in vim to work with ClojureScript.
-Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
-It works. You don&amp;rsquo;t have out of the box tooling that will select your top most clojure form sadly.
-Once upon a time I had discussion on #clojurescript irc and &lt;a href=&#34;https://twitter.com/martinklepsch&#34;&gt;@martinklepsh&lt;/a&gt; mentioned that nowadays evil-mode is much better.
-I was bored and followed that track. I did run &lt;code&gt;rm -rf .emacs.d&lt;/code&gt; and started from scratch.
-As a result my workflow from vim was ported to emacs in a couple of hours.
-It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
-I set my default editor to emacs and continued doing my thing for a couple of days.&lt;/p&gt;
-
-&lt;p&gt;And here what I think so far.&lt;/p&gt;
-
-&lt;p&gt;Good:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Evil mode is good and it&amp;rsquo;s very close. It&amp;rsquo;s probably closest thing to vim that I ever tried.
-It&amp;rsquo;s not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
-(Big shout outs to the author of idea plugin. It&amp;rsquo;s very impressive.)&lt;/li&gt;
-&lt;li&gt;Writing configuration in a language that I understand was a big relief.&lt;/li&gt;
-&lt;li&gt;Mapping configuration is simpler. You are mapping elisp function to the key. It&amp;rsquo;s simpler and easier to understand than remapping mechanism in vim.&lt;/li&gt;
-&lt;li&gt;Helm surprised me in it&amp;rsquo;s speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.&lt;/li&gt;
-&lt;li&gt;Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. &lt;a href=&#34;https://github in inferior lisp mode tuned to play well with clojure&#34;&gt;inf-clojure&lt;/a&gt; is enhanced clojure mode for the inf-lisp.&lt;/li&gt;
-&lt;li&gt;It can do async stuff! If you used vim then you know what I mean. In emacs it&amp;rsquo;s just there. Without required pythor/ruby support enabled during compilation.&lt;/li&gt;
-&lt;li&gt;Built-in package manager. Just run &lt;code&gt;package-install&lt;/code&gt; and it&amp;rsquo;s there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.&lt;/li&gt;
-&lt;li&gt;Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run &lt;code&gt;describe-key&lt;/code&gt; and see what is going on. You can do something similar in vim, but in emacs it&amp;rsquo;s much better.&lt;/li&gt;
-&lt;li&gt;Startup time is slow and it&amp;rsquo;s solvable. Just run systemd user service with &lt;code&gt;emacs --daemon&lt;/code&gt; and that is enough for most cases.&lt;/li&gt;
-&lt;li&gt;And you still have emacs operating system at your disposal!&lt;/li&gt;
-&lt;li&gt;Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Not so good:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it&amp;rsquo;s unnecessary. Of course this is related only to my habits and muscle memory.&lt;/li&gt;
-&lt;li&gt;Evil is slower.
-Most of the time it&amp;rsquo;s not a problem. But sometimes I&amp;rsquo;m mashing my keyboard too fast and mess happens.
-Good example is replace (&lt;code&gt;r&lt;/code&gt;) key.
-Press &lt;code&gt;r:&lt;/code&gt; too fast and you might end up in vim command line.&lt;/li&gt;
-&lt;li&gt;Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don&amp;rsquo;t play well with evil.&lt;/li&gt;
-&lt;li&gt;Good example of painful evil integration is cider.
-It just does not work with evil mode.
-Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
-That was big disappointment for me. I had high hopes for the cider. I&amp;rsquo;m realizing that I don&amp;rsquo;t really need everything that cider provides.
-I&amp;rsquo;m very happy with just ability to evaluate code, without even debugger and nice stacktraces.
-But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
-After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on &lt;a href=&#34;https://github.com/clojure-emacs/inf-clojure&#34;&gt;inf-clojure&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Will I continue using emacs? Yes.&lt;/p&gt;
-
-&lt;p&gt;Will it be my default editor? Probably no.
-Vim feels more reliable because it provides modal editing experience out of the box.
-In emacs it an option.
-I&amp;rsquo;m totally fine with giving away all that goodness that emacs provides to have proper editing experience &lt;strong&gt;all the time&lt;/strong&gt;.
-In every buffer, in every menu.
-And I will continue slowly improving my emacs configuration.&lt;/p&gt;
-
-&lt;p&gt;This experiment reminded me how many things are missing from my setup.
-It also reminded me that &lt;a href=&#34;https://neovim.org&#34;&gt;neovim&lt;/a&gt; might be next big thing in my tool belt.
-I&amp;rsquo;m really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/&#34;&gt;Here&lt;/a&gt; is very good tutorial to get vim users started in emacs.&lt;/li&gt;
-&lt;li&gt;My .emacs.d is &lt;a href=&#34;https://github.com/Gonzih/.emacs.d&#34;&gt;here&lt;/a&gt;. I tried to keep it minimalistic.&lt;/li&gt;
-&lt;li&gt;My .vim is &lt;a href=&#34;https://github.com/Gonzih/.vim&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;If you are looking for the best vim like experience in emacs please take a look at the &lt;a href=&#34;https://github.com/syl20bnr/spacemacs&#34;&gt;spacemacs project&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Looking for the good color theme in emacs? Take a look at the port of &lt;a href=&#34;https://github.com/morhetz/gruvbox&#34;&gt;vim&amp;rsquo;s gruvbox theme&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -158,86 +49,7 @@ I&amp;rsquo;m really hoping to see big movement around neovim once project becom
       <guid>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</guid>
       <description>&lt;p&gt;Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Functions do following:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Initialize tags file with symlink to /tmp (tmpfs) with uuid in name if no symlink was found&lt;/li&gt;
-&lt;li&gt;Touch tags file&lt;/li&gt;
-&lt;li&gt;If file is empty (wc -l return 0 lines) then populate it with &lt;code&gt;ctags -R&lt;/code&gt; command&lt;/li&gt;
-&lt;li&gt;Remove all lines from tags file related to current file&lt;/li&gt;
-&lt;li&gt;Update tags file with new content of current file with &lt;code&gt;ctags -a&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Why I use symlinks for tags file?&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Writes are slow&lt;/li&gt;
-&lt;li&gt;Writes are bad for my SSD&lt;/li&gt;
-&lt;li&gt;Memory is blazingly fast&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here is my code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; If tags file does not exist initializes it with symlink to tmp with UUID in
-&amp;quot; filename
-function! InitTagsFileWithSymlink(f)
-  let filepath = a:f
-  let issymlink = system(&amp;quot;find &#39;&amp;quot; . filepath . &amp;quot;&#39; -type l | wc -l&amp;quot;)
-  if issymlink == 0
-    let uuid = system(&#39;uuidgen&#39;)
-    let cmd  = &#39;ln -s &amp;quot;/tmp/ctags-for-vim-&#39; . uuid . &#39;&amp;quot; &amp;quot;&#39; . filepath . &#39;&amp;quot;&#39;
-    let cmd  = substitute(cmd, &#39;\n&#39;, &#39;&#39;, &#39;g&#39;)
-    let resp = system(cmd)
-  endif
-endfunction
-
-&amp;quot; Populates tags file if lines count is equal to 0
-&amp;quot; with `ctags -R .`
-function! PopulateTagsFile(f)
-  let filepath = a:f
-  let resp     = system(&#39;touch &amp;quot;&#39; . filepath . &#39;&amp;quot;&#39;)
-  let lines    = system(&#39;wc -l &amp;quot;&#39; . filepath . &#39;&amp;quot;&#39;)
-  let linescnt = substitute(lines, &#39;\D&#39;, &#39;&#39;, &#39;g&#39;)
-  if linescnt == 0
-    let cwd  = getcwd()
-    let cmd  = &#39;ctags -Rf &amp;quot;&#39;. filepath . &#39;&amp;quot; &amp;quot;&#39; . cwd . &#39;&amp;quot;&#39;
-    let resp = system(cmd)
-  endif
-endfunction
-
-&amp;quot; Remove tags for saved file from tags file
-function! DelTagOfFile(file)
-  let fullpath    = a:file
-  let cwd         = getcwd()
-  let tagfilename = cwd . &amp;quot;/tags&amp;quot;
-  let f           = substitute(fullpath, cwd . &amp;quot;/&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;&amp;quot;)
-  let f           = escape(f, &#39;./&#39;)
-  let cmd         = &#39;sed --follow-symlinks -i &amp;quot;/&#39; . f . &#39;/d&amp;quot; &amp;quot;&#39; . tagfilename . &#39;&amp;quot;&#39;
-  let resp        = system(cmd)
-endfunction
-
-&amp;quot; Init tags file
-&amp;quot; Populate it
-&amp;quot; Remove data related to saved file
-&amp;quot; Append it with data for saved file
-function! UpdateTags()
-  let f           = expand(&amp;quot;%:p&amp;quot;)
-  let cwd         = getcwd()
-  let tagfilename = cwd . &amp;quot;/tags&amp;quot;
-  call InitTagsFileWithSymlink(tagfilename)
-  call PopulateTagsFile(tagfilename)
-  call DelTagOfFile(f)
-  let cmd  = &#39;ctags -a -f &#39; . tagfilename . &#39; &amp;quot;&#39; . f . &#39;&amp;quot;&#39;
-  let resp = system(cmd)
-endfunction
-
-command UpdateTags call UpdateTags()
-autocmd BufWritePost *.rb,*.js,*.coffee,*.clj call UpdateTags()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Enjoy :)&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

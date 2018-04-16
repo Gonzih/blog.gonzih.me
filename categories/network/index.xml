@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/network/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Network on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/network/</link>
+    <description>Recent content in Network on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/network/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Aug 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/network/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Speed/Ping test graphs with Clojure and Raspberry Pi</title>
@@ -23,121 +26,7 @@ So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion ba
 
 &lt;p&gt;How to do so? Let&amp;rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;I have unused Raspberry Pi right now, so it will be used to collect data.&lt;/p&gt;
-
-&lt;h2 id=&#34;speedtest-data&#34;&gt;Speedtest data&lt;/h2&gt;
-
-&lt;p&gt;For speedtest I will be using python script that uses speedtest.net servers.
-Pi is running Pidora right now, so let&amp;rsquo;s install script dependencies.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;yum -y install python-argparse python-lxml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Script is hosted on &lt;a href=&#34;https://github.com/Janhouse/tespeed&#34;&gt;github&lt;/a&gt;.
-Let&amp;rsquo;s get the script.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;mkdir ~/scripts
-wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/speedtest.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can test script running it with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;python ~/scripts/speedtest.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now let&amp;rsquo;s wrap python script into additional shell script to store time of data collection in csv.
-I&amp;rsquo;m not sure if I need time for now, but let&amp;rsquo;s keep it anyway.
-We will silence stderr from the script and output results as csv.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;~/bin/speedtest.zsh&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/usr/bin/zsh
-
-echo &amp;quot;\&amp;quot;$(date -R)\&amp;quot;,$(python ~/scripts/tespeed.py --csv -s)&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s put script into crontab to run every 5 minutes, also let&amp;rsquo;s redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;*/5 * * * * ~/bin/speedtest.zsh 2&amp;gt;/dev/null &amp;gt;&amp;gt; ~/.speedtest.csv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;##Ping data&lt;/p&gt;
-
-&lt;p&gt;For ping data we will be running &lt;code&gt;ping&lt;/code&gt; command with 100 packets (&lt;code&gt;ping -c 100&lt;/code&gt;) with google dns as target (8.8.8.8) and storing avg value with time to csv file.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;~/bin/pingtest.zsh&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/usr/bin/zsh
-
-AVG=$(ping -c 100 8.8.8.8 | grep rtt | sed -r &#39;s#.*\=\s.+/(.+)/.+/.+#\1#&#39;)
-
-echo &amp;quot;\&amp;quot;$(date -R)\&amp;quot;,$AVG&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;*/5 * * * * ~/bin/pingtest.zsh 2&amp;gt;/dev/null &amp;gt;&amp;gt; ~/.pingtest.csv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;##Graphs&lt;/p&gt;
-
-&lt;p&gt;For data visualization let&amp;rsquo;s use Clojure with Incanter. Here is clojure code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns incanter-graphs.core
-  (:require [incanter.core :refer :all]
-            [incanter.stats :refer :all]
-            [incanter.charts :refer :all]
-            [clojure-csv.core :refer :all])
-  (:gen-class))
-
-(defn to-f [is] (Float/parseFloat is))
-
-(defn get-f-col [data col]
-  (map to-f (sel data :cols col)))
-
-(defn init-chart [data rng {:keys [x-label y-label]}]
-  (line-chart rng data :x-label x-label
-                       :y-label y-label))
-
-(defn add-to-chart [chart data rng]
-  (reduce #(add-categories %1 rng %2) chart data))
-
-(defn draw-file [filename cols &amp;amp; {:as opts}]
-  (let [data (slurp filename)
-        csv (parse-csv data :delimiter \,)
-        rng (range 0 (count csv))
-        data (map (partial get-f-col csv) cols)
-        chart (init-chart (first data) rng opts)
-        chart-to-show (add-to-chart chart (rest data) rng)]
-    (view chart-to-show)))
-
-(defn -main [speedfile pingfile &amp;amp; args]
-  (draw-file speedfile [1 2] :x-label &amp;quot;Time&amp;quot; :y-label &amp;quot;Speed&amp;quot;)
-  (draw-file pingfile [1] :x-label &amp;quot;Time&amp;quot; :y-label &amp;quot;Ping time&amp;quot;))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s put all launch process to Makefile:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Makefile&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-makefile&#34;&gt;default:
-	scp raspberry-pi.local:.speedtest.csv /tmp/
-	scp raspberry-pi.local:.pingtest.csv /tmp/
-	#Remove lines with only time (script failure)
-	grep &amp;quot;[^,]$$&amp;quot; /tmp/.speedtest.csv &amp;gt; /tmp/.speedtest-fixed.csv
-	grep &amp;quot;[^,]$$&amp;quot; /tmp/.pingtest.csv &amp;gt; /tmp/.pingtest-fixed.csv
-	lein run /tmp/.speedtest-fixed.csv /tmp/.pingtest-fixed.csv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
-And now we can see some visualization.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/speed.png&#34; alt=&#34;Speed Graph&#34; /&gt;
-&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/ping.png&#34; alt=&#34;Ping Graph&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

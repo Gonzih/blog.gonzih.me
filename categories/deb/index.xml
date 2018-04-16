@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/deb/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Deb on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/deb/</link>
+    <description>Recent content in Deb on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/deb/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 May 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/deb/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Installing Spotify Linux beta on OpenSUSE 13.1</title>
@@ -19,26 +22,7 @@
       <guid>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Install &lt;a href=&#34;http://software.opensuse.org/package/alien&#34;&gt;alien&lt;/a&gt; (perl scripts for converting packages).&lt;/li&gt;
-&lt;li&gt;Download deb from &lt;a href=&#34;http://repository.spotify.com/pool/non-free/s/spotify/&#34;&gt;spotify repository&lt;/a&gt;, pay attention to architecture.&lt;/li&gt;
-&lt;li&gt;Convert deb -&amp;gt; rpm by running &lt;code&gt;sudo alien --scripts -r spotify*.deb&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Install rpm &lt;code&gt;sudo zypper in spotify*.rpm&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;spotify&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And it should work.
-I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;If you have issues with volume being too loud by default make sure that you changed &lt;code&gt;flat-volumes&lt;/code&gt; from &lt;code&gt;yes&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt; in &lt;code&gt;/etc/pulse/daemon.conf&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PPS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;People reported that installing version 0.9 -&amp;gt; uninstalling it -&amp;gt; installing version 1.0 might break your system. So watch out for the uninstallation errors.&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

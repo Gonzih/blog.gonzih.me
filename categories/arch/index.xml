@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/arch/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Arch on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/arch/</link>
+    <description>Recent content in Arch on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/arch/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Dec 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/arch/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Arch Linux on Lenovo IdeaPad Y700 15&#34;</title>
@@ -19,86 +22,7 @@
       <guid>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
       <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;what-works&#34;&gt;What works&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;WIFI&lt;/li&gt;
-&lt;li&gt;Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)&lt;/li&gt;
-&lt;li&gt;Hibernate&lt;/li&gt;
-&lt;li&gt;Sound without subwoofer&lt;/li&gt;
-&lt;li&gt;Video (I used bumblebee to switch between intel/nvidia GPUs)&lt;/li&gt;
-&lt;li&gt;Brightness&lt;/li&gt;
-&lt;li&gt;Keyboard backlit&lt;/li&gt;
-&lt;li&gt;Power managment via laptop mode tools and systemd.&lt;/li&gt;
-&lt;li&gt;Card reader (you might need to run &lt;code&gt;echo 1 | sudo tee /sys/bus/pci/rescan&lt;/code&gt; so card reader becomes visible)&lt;/li&gt;
-&lt;li&gt;HDMI output&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;what-does-not-work-so-far&#34;&gt;What does not work so far&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Subwoofer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;installation&#34;&gt;Installation&lt;/h1&gt;
-
-&lt;h2 id=&#34;boot&#34;&gt;Boot&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Add nomodeset to the kernel options on Live USB boot&lt;/li&gt;
-&lt;li&gt;Make sure secure boot is disabled (to make your life easier)&lt;/li&gt;
-&lt;li&gt;Follow &lt;a href=&#34;https://wiki.archlinux.org/index.php/Installation_guide&#34;&gt;arch linux installation instructions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;extra-tweaking&#34;&gt;Extra tweaking&lt;/h1&gt;
-
-&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Make sure switchable GPUs are enabled in BIOS&lt;/li&gt;
-&lt;li&gt;Follow &lt;a href=&#34;https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA&#34;&gt;insructions on the arch wiki&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;To enable intel GPU add &lt;code&gt;i915.preliminary_hw_support=1&lt;/code&gt; to &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; in the &lt;code&gt;/etc/default/grub&lt;/code&gt; file. This should be solved after 4.3 kernel release.&lt;/li&gt;
-&lt;li&gt;Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;wifi&#34;&gt;Wifi&lt;/h2&gt;
-
-&lt;p&gt;Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
-There was a patch for the 17 inch model &lt;a href=&#34;http://www.gossamer-threads.com/lists/linux/kernel/2323659&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;temporary-solution-1&#34;&gt;Temporary solution 1:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;sudo systemctl enable rfkill-unblock@wifi.service&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sudo rfkill unblock wifi&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Works fine with &lt;code&gt;wicd&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Configuring NetworkManager service to be run after rfkill service should also work&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;temporary-solution-2&#34;&gt;Temporary solution 2:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf&lt;/code&gt; to disable acpi module&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;audio-clicking&#34;&gt;Audio clicking&lt;/h2&gt;
-
-&lt;p&gt;This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
-To do that append &lt;code&gt;timeout=36000&lt;/code&gt; to line &lt;code&gt;load-module module-suspend-on-idle&lt;/code&gt; in the &lt;code&gt;/etc/pulse/default.pa&lt;/code&gt; configuration file.
-And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and &lt;code&gt;pulseaudio --start&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;hibernate&#34;&gt;Hibernate&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Add &lt;code&gt;resume=/dev/my-swap-partition&lt;/code&gt; to &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; line in &lt;code&gt;/etc/default/grub&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Add &lt;code&gt;resume&lt;/code&gt; to the list of &lt;code&gt;HOOKS&lt;/code&gt; in &lt;code&gt;/etc/mkinitcpio.conf&lt;/code&gt; before &lt;code&gt;filesystems&lt;/code&gt; but after all &lt;code&gt;block&lt;/code&gt;, &lt;code&gt;sata&lt;/code&gt; and other hardware related hooks.&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;sudo mkinitcpio -p linux&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Reboot&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;systemctl hibernate&lt;/code&gt; should work now&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -115,9 +39,7 @@ And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and 
 &lt;li&gt;&lt;a href=&#34;http://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file&#34;&gt;Migration information is here&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/&#34;&gt;My current GRUB2 theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;li&gt;&lt;a href=&#34;http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;</description>
     </item>
     
   </channel>

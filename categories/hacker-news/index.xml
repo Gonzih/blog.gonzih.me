@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/hacker-news/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Hacker News on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/hacker-news/</link>
+    <description>Recent content in Hacker News on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/hacker-news/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 May 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/hacker-news/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>HN Tray icon in 50 lines of Clojure</title>
@@ -26,62 +29,7 @@ Enjoy!&lt;/p&gt;
 
 &lt;p&gt;Source code is below:&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns hn.core
-  (:require [cheshire.core :as json]
-            [clojure.java.browse :refer [browse-url]]
-            [clojure.java.io :refer [resource]])
-  (:import [java.awt SystemTray TrayIcon PopupMenu MenuItem Toolkit]
-           [java.awt.event ActionListener])
-  (:gen-class))
-
-(defn menu-item [label callback]
-  (let [menu (MenuItem. label)
-        listener (proxy [ActionListener] []
-                   (actionPerformed [event] (callback)))]
-    (.addActionListener menu listener)
-    menu))
-
-(def hn-api-url &amp;quot;http://api.ihackernews.com/page&amp;quot;)
-
-(defn hn-items []
-  (-&amp;gt; hn-api-url
-      slurp
-      (json/parse-string true)
-      :items
-      (#(sort-by :points %))
-      reverse))
-
-(defn add-hn-to-menu! [menu]
-  (letfn [(mapfn [{:keys [title url commentCount points]}]
-            (let [full-title (format &amp;quot;%-4s (%-4s) - %s&amp;quot; points commentCount title)
-                  menu-item (menu-item full-title #(browse-url url))]
-              (println full-title)
-              (.add menu menu-item)))]
-  (doall (map mapfn (hn-items)))))
-
-(defn exit []
-  (shutdown-agents)
-  (System/exit 0))
-
-(defn -main [&amp;amp; args]
-  (let [tray (SystemTray/getSystemTray)
-        image (.getImage (Toolkit/getDefaultToolkit)
-                         (resource &amp;quot;icon.png&amp;quot;))
-        icon (TrayIcon. image)
-        exit (menu-item &amp;quot;Exit&amp;quot; exit)]
-    (.setImageAutoSize icon true)
-    (.add tray icon)
-    (loop []
-      (let [popup (PopupMenu.)]
-        (println &amp;quot;Updating items&amp;quot;)
-        (add-hn-to-menu! popup)
-        (.add popup exit)
-        (.setPopupMenu icon popup)
-        (Thread/sleep (* 5 60 1000))
-        (recur)))))
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

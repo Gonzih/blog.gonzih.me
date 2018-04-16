@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/comments/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Comments on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/comments/</link>
+    <description>Recent content in Comments on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/comments/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Jul 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/comments/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Fix Broken Comments Count for Disqus</title>

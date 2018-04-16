@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/jamvm/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Jamvm on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/jamvm/</link>
+    <description>Recent content in Jamvm on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/jamvm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/jamvm/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Replacing shell scripts with Clojure&#43;JamVM</title>
@@ -25,134 +28,7 @@ To write it in a nice predictable language that you also enjoy.
 But sometimes it&amp;rsquo;s impossible to add some external dependencies to the system.
 What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;basic-setup&#34;&gt;Basic setup&lt;/h1&gt;
-
-&lt;p&gt;First what we will need is to get clojure jar file:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;wget -O /opt/clojure.jar &#39;http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next lets create executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt; that will live in &lt;code&gt;/usr/bin&lt;/code&gt; (or &lt;code&gt;/opt/bin&lt;/code&gt; or &lt;code&gt;/home/youruser/bin&lt;/code&gt;):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
-
-exec java -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now it&amp;rsquo;s time for our hello world script &lt;code&gt;/opt/test.clj&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;#!/usr/bin/clojure
-
-(println &amp;quot;hello world&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Make it executable:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;chmod +x /opt/test.clj
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And run it:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ /opt/test.clj
-hello world
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Yay! But it feels kind of slow:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
-hello world
-
-real  0m2.684s
-user  0m2.239s
-sys   0m0.186s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2 seconds startup time, not really suitable for scripting, right?
-Can we improve that? What if there would be JVM with fast startup and low memory usage.&lt;/p&gt;
-
-&lt;h1 id=&#34;introducing-jamvm&#34;&gt;Introducing JamVM.&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;&amp;ldquo;But&amp;hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;I lied, sorry.&lt;/p&gt;
-
-&lt;p&gt;Compiling JamVM with OpenJDK support:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Fetching required dependencies and source
-apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
-cd /opt
-wget -O jamvm-2.0.0.tar.gz &#39;http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;
-tar -xvzf jamvm-2.0.0.tar.gz
-
-# Building
-cd /opt/jamvm-2.0.0
-./configure --with-java-runtime-library=openjdk7 &amp;amp;&amp;amp; make check &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install
-
-# Installing in to the openjdk installation
-mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
-cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
-
-# Trying it out
-java -jamvm -version
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
-You will need to use -jamvm option to java command to run it with small overhead vm.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s update our clojure executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
-
-exec java -jamvm -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s try it out:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
-hello world
-
-real  0m0.866s
-user  0m0.764s
-sys   0m0.076s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Better, right?&lt;/p&gt;
-
-&lt;h2 id=&#34;how-slow-is-jamvm-some-benchmarks&#34;&gt;How slow is JamVM? Some benchmarks:&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Clojure 1.6
-
-JamVM:
-
-(factorial 5000) Avg: 248.65890986500017
-(fib 20)         Avg: 35.33471996000001
-(sort-seq)       Avg: 405.7438969800002
-
-OpenJDK:
-
-(factorial 5000) Avg: 25.016900630000006
-(fib 20)         Avg: 0.69957772
-(sort-seq)       Avg: 11.553695560000001
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Much slower, but if you think about it
-shell scripting most of the time is about executing external commands,
-IO and data filtering. Might be as well not so bad.
-Also memory usage of JamVM makes it perfect for embedded systems.&lt;/p&gt;
-
-&lt;h2 id=&#34;why-not-use-something-like-lein-exec&#34;&gt;Why not use something like lein exec?&lt;/h2&gt;
-
-&lt;p&gt;Lein exec is nice. But it adds overhead.
-If you need external dependencies you can solve it (in theory)
-with classpath manipulations in java command (&lt;code&gt;java -cp dep.jar:dep2.jar:.&lt;/code&gt;).
-Still you can plug lein exec to JamVM if you want.&lt;/p&gt;
-
-&lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
-
-&lt;p&gt;I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
-so you can just run &lt;code&gt;apt-get -y install icedtea-7-jre-jamvm&lt;/code&gt; to install latest build.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

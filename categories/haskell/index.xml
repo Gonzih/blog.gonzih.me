@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/haskell/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Haskell on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/haskell/</link>
+    <description>Recent content in Haskell on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Aug 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Building Hacker News json api with Haskell</title>
@@ -44,33 +47,7 @@ I hope someone will find it useful.
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</guid>
       <description>&lt;p&gt;Recently I migarted from awesome to xmonad. I&amp;rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.
-&lt;/p&gt;
-
-&lt;p&gt;First hack was to use functional keys [F1..F12] like so:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;    -- mod-[F1..F12]       Switch to workspace N
-    -- mod-shift-[F1..F12] Move client to workspace N
-    --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) &amp;lt;- zip (XMonad.workspaces conf) [xK_F1 .. xK_F12]
-        , (f, m) &amp;lt;- [(W.greedyView, 0), (W.shift, shiftMask)]]
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;But after some research I found that I can detect key symbol using xev command. Here is my latest solution:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;    -- Programmer Dvorak
-    -- mod-[1..9]       Switch to workspace N
-    -- mod-shift-[1..9] Move client to workspace N
-    --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) &amp;lt;- zip (XMonad.workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright, xK_parenleft
-                                                 ,xK_equal, xK_asterisk, xK_parenright, xK_plus, xK_bracketright, xK_exclam]
-        , (f, m) &amp;lt;- [(W.greedyView, 0), (W.shift, shiftMask)]]
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hooray! It works!&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

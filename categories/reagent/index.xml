@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/reagent/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Reagent on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/reagent/</link>
+    <description>Recent content in Reagent on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/reagent/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Feb 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/reagent/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>ServerSide rendering of Reagent components</title>
@@ -21,130 +24,7 @@
 In this post we will not discuss how wrong this term is in many ways,
 but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;In my experience simplest optimization to run in some js engine on server side is whitespace.
-It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
-So our compiler configuration should look something like that:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;{:id &amp;quot;server-side&amp;quot;
- :source-paths [&amp;quot;src&amp;quot;]
- :compiler {:output-to &amp;quot;resources/public/javascripts/server-side.js&amp;quot;
-            :output-dir &amp;quot;resources/public/javascripts/out-server-side&amp;quot;
-            :preamble [&amp;quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&amp;quot;]
-            :pretty-print false
-            :warnings true
-            :optimizations :whitespace}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def main-component
-  (with-meta
-    (fn [] ...)
-    {:component-did-mount (comp init-my-scroll-handler!
-                                also-init-my-go-loop!)}))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next let&amp;rsquo;s create function that will do some rendering to the string.
-I like to keep this function in a component specific ns just for convenience.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def ^:export render-me-to-s [initial-state]
-  (reset! my-main-state (js-&amp;gt;clj initial-state))
-  ; Render component to markup without reactid
-  (reagent.core/render-to-static-markup [main-component])
-  ; Or render component to ready to-go react markup
-  (reagent.core/render-to-string [main-component]))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now server side bootstrapping, most of this code was taken from &lt;a href=&#34;https://github.com/reactjs/react-rails&#34;&gt;react-rails plugin&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;First of all react expects to have global or window objects in your js engine (setup.js):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var global = global || this;
-var self = self || this;
-var window = window || this;
-var console = global.console || {};
-[&#39;error&#39;, &#39;log&#39;, &#39;info&#39;, &#39;warn&#39;].forEach(function (fn) {
-  if (!(fn in console)) {
-    console[fn] = function () {};
-  }
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now let&amp;rsquo;s try and use all this in our code (for now in Ruby):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;cxt = V8::Context.new
-cxt.load(&#39;setup.js&#39;)
-cxt.load(&#39;resources/public/javascripts/server-side.js&#39;)
-html = cxt.eval(&amp;quot;my.amazing_component.ns.render_me_to_s(#{init_state.to_json})&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And that&amp;rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
-Sometimes you might want to use &lt;code&gt;ActionController::Base.helpers.j&lt;/code&gt; helper that will
-escape your data for usage inside json, but most of the time you should be alright without it.&lt;/p&gt;
-
-&lt;p&gt;If you have issues with core.async there are 2 ways to solve it.
-I personally prefer to move core.async initialization into some lifecycle method.
-Another solution is to implement setTimeout function like that in your &lt;code&gt;setup.js&lt;/code&gt; snippet:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;goog.global.setTimeout = function(cb, t) {
-    cb();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now frontend part. First let&amp;rsquo;s in-line generated html in to the container:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-erb&#34;&gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;%= html %&amp;gt;&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then let&amp;rsquo;s write function that will render our component on frontend:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def ^:export mount-me [initial-state]
-  (reset! my-main-state (js-&amp;gt;clj initial-state))
-  (reagent.core/render [main-component]
-                       (js/document.getElementById &amp;quot;content&amp;quot;)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
-Am I wrong on this one? Don&amp;rsquo;t know yet.&lt;/p&gt;
-
-&lt;p&gt;Inline javascript that you should use on frontend looks like that:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-erb&#34;&gt;&amp;lt;script&amp;gt;
-my.amazing_component.ns.mount_me(&amp;lt;%= init_state.to_json %&amp;gt;)
-&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;nashorn-example-result-of-my-experiments-in-the-repl&#34;&gt;Nashorn example (result of my experiments in the REPL)&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(import &#39;[javax.script ScriptEngineManager])
-(def nashorn (.getEngineByName (ScriptEngineManager.) &amp;quot;nashorn&amp;quot;))
-
-; Same as in ruby version
-(def setup-script (slurp &amp;quot;setup.js&amp;quot;))
-(def ss-script (slurp &amp;quot;resources/public/javascripts/server-side.js&amp;quot;))
-(def render-script (str &amp;quot;my.amazing_component.ns.render_me_to_s(&amp;quot; my-state-json-string &amp;quot;);&amp;quot;))
-
-(.eval nashorn setup-script)
-(.eval nashorn ss-script)
-(.eval nashorn render-script) ; our html markup
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I must admit that this code works on small reagent example.
-I&amp;rsquo;m unable to load production code from my current project in to Nashorn.&lt;/p&gt;
-
-&lt;p&gt;Also it helps a lot if you started developing your project with server side rendering in mind.&lt;/p&gt;
-
-&lt;p&gt;Of course it&amp;rsquo;s better to have some kind of &amp;ldquo;renderers pool&amp;rdquo; in JVM.
-Good thing that clojure allows you to implement thing like that in few lines of code.
-In ruby it&amp;rsquo;s not a problem since we have 1 context per worker.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Useful Links:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw&#34;&gt;ClojureScript mailing list topic&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -156,42 +36,7 @@ In ruby it&amp;rsquo;s not a problem since we have 1 context per worker.&lt;/p&g
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
 Also provides ability to apply transformation using transducers.
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;
-(defonce form (atom {}))
-
-(defn bind-input
-  &amp;quot;Generat on-change callback,
-   bind value to form-key of form-atom.
-   Provides ability to implement transformation using transducers.&amp;quot;
-  [form-atom form-key xform]
-  (let [local-chan (chan 1 xform)]
-    (go-loop []
-      (swap! form-atom assoc form-key (&amp;lt;! local-chan))
-      (recur))
-    (fn [event]
-      (put! local-chan
-            (.-value (.-target event))))))
-
-(defn bound-input
-  &amp;quot;Generate input,
-   create two way data binding
-   between input value and value under form-key in form-atom.
-   Provides ability to implement transformation using transducers.&amp;quot;
-  [attrs form-atom form-key xform]
-  [:input (merge attrs
-                 {:value (form-key @form-atom)
-                  :on-change (bind-input form-atom form-key xform)})])
-
-(defn main-component []
-  [:div
-   [:h3 (:name @form) &amp;quot; value&amp;quot;]
-   [bound-input {:type :text} form :name (filter #(&amp;gt; 15 (count %)))]])
-
-(reagent/render-component [main-component]
-                          (js/document.getElementById &amp;quot;content&amp;quot;))
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/core.typed/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Core.typed on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/core.typed/</link>
+    <description>Recent content in Core.typed on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/core.typed/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Aug 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/core.typed/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>My first experience with core.typed</title>
@@ -24,75 +27,7 @@ But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
 Thank you for your patience, man!
 And keep doing what you are doing, core.typed is just amazing thing!&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;unresolved-constructor-invocation&#34;&gt;Unresolved constructor invocation&lt;/h3&gt;
-
-&lt;p&gt;Core.typed can&amp;rsquo;t match constructor based on arguments type,
-you should provide type hints to help core.typed with that.&lt;/p&gt;
-
-&lt;h3 id=&#34;by-default-core-typed-assumes-that-all-java-methods-can-return-nil&#34;&gt;By default core.typed assumes that all java methods can return nil&lt;/h3&gt;
-
-&lt;p&gt;Use &lt;code&gt;(non-nil-return ClassOrObject/methodName :all)&lt;/code&gt; to tell core.typed that method won&amp;rsquo;t return nil.
-Core.typed will trust you and will skip further checks.&lt;/p&gt;
-
-&lt;p&gt;Or for example if you are expecting String as a result you can convert result to String with str before returning it.&lt;/p&gt;
-
-&lt;h3 id=&#34;non-nil-return-in-core-typed-works-only-on-methods&#34;&gt;non-nil-return in core.typed works only on methods&lt;/h3&gt;
-
-&lt;p&gt;And if you have static method then something like that would not work:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(non-nil-return javax.mail.Message$RecipientType/TO :all)
-
-(ann recipient-type-to [-&amp;gt; Message$RecipientType])
-(defn ^Message$RecipientType recipient-type-to []
-  (Message$RecipientType/TO))
-
-(comment
-  Type mismatch:
-  Expected:       (Fn [-&amp;gt; Message$RecipientType])
-  Actual:         (Fn [-&amp;gt; (U Message$RecipientType nil)]))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Solution:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(non-nil-return javax.mail.Message$RecipientType/TO :all)
-
-(ann recipient-type-to [-&amp;gt; Message$RecipientType])
-(defn ^Message$RecipientType recipient-type-to
-  []
-  {:post [%]}
-  (Message$RecipientType/TO))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Which is the same as:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(non-nil-return javax.mail.Message$RecipientType/TO :all)
-
-(ann recipient-type-to [-&amp;gt; Message$RecipientType])
-(defn ^Message$RecipientType recipient-type-to []
-  (let [temp (Message$RecipientType/TO)]
-    (assert temp)
-    temp)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So unless assert evaluates temp to logical true exception will be raised
-and function will always return non nil value, which makes core.typed happy.&lt;/p&gt;
-
-&lt;h3 id=&#34;defining-parameterized-alias-type&#34;&gt;Defining Parameterized alias type&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def-alias Folder
-  (TFn [[x :variance :covariant]] (Map Keyword x)))
-
-(comment
-  (Folder Items)
-  (Folder Urls))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114&#34;&gt;Here is&lt;/a&gt; commit with changes related to core.typed.
-I must say writing type annotations for code that you wrote few months ago is tricky.
-But still I enjoyed process and results and I&amp;rsquo;m still a little bit amazed about all core.typed thing.
-Power of lisp combined with really smart people :)&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

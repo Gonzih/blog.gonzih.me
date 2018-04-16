@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/vpn/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Vpn on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/vpn/</link>
+    <description>Recent content in Vpn on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/vpn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 May 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/vpn/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Autoconnect to NetworkManager VPN on systemd based system</title>
@@ -20,57 +23,7 @@
       <description>&lt;p&gt;Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Following was tested on OpenSuse 13.1.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;First create new VPN connection in NetworkManager.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Create dispatcher file that will connect your VPN.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;/etc/NetworkManager/dispatcher.d/vpn-up&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!/bin/sh
-
-CONN=&amp;quot;MY-CONNECTION-NAME&amp;quot;
-
-nmcli con status id $CONN &amp;gt; /dev/null
-
-rc=$?
-if [[ $rc != 0 ]] ; then
-    nmcli con up id $CONN
-    sleep 5 # optional wait time
-fi
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Make file executable &lt;code&gt;chmod +x /etc/NetworkManager/dispatcher.d/vpn-up&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Make sure that dispatcher is running by running &lt;code&gt;journalctl -b -u NetworkManager&lt;/code&gt; and looking for the line that looks like:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;NetworkManager&lt;/code&gt;:
-```text journalctl -b -u
-&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;
-* If you see line about dispatcher service - enable it manually by running `systemctl enable NetworkManager-dispatcher.service`.
-* By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:
-
-`/etc/NetworkManager/system-connections/MY-CONNECTION-NAME`:
-```text
-...
-[vpn]
-password-flags=0
-...
-[vpn-secrets]
-password=MY-VPN-PASSWORD
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now everything should work like a charm!&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/opensuse/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Opensuse on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/opensuse/</link>
+    <description>Recent content in Opensuse on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/opensuse/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 May 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/opensuse/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Installing Spotify Linux beta on OpenSUSE 13.1</title>
@@ -19,26 +22,7 @@
       <guid>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Install &lt;a href=&#34;http://software.opensuse.org/package/alien&#34;&gt;alien&lt;/a&gt; (perl scripts for converting packages).&lt;/li&gt;
-&lt;li&gt;Download deb from &lt;a href=&#34;http://repository.spotify.com/pool/non-free/s/spotify/&#34;&gt;spotify repository&lt;/a&gt;, pay attention to architecture.&lt;/li&gt;
-&lt;li&gt;Convert deb -&amp;gt; rpm by running &lt;code&gt;sudo alien --scripts -r spotify*.deb&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Install rpm &lt;code&gt;sudo zypper in spotify*.rpm&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;spotify&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And it should work.
-I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;If you have issues with volume being too loud by default make sure that you changed &lt;code&gt;flat-volumes&lt;/code&gt; from &lt;code&gt;yes&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt; in &lt;code&gt;/etc/pulse/daemon.conf&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PPS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;People reported that installing version 0.9 -&amp;gt; uninstalling it -&amp;gt; installing version 1.0 might break your system. So watch out for the uninstallation errors.&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -47,23 +31,13 @@ I noticed few warning about default locates and missing libraries, but client st
       <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;http://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo zypper -n in \
-glib2 glib2-branding-openSUSE glib2-devel \
-atk-devel cairo-devel pango-devel gdk-pixbuf-devel \
-gtk2-devel gtksourceview2-devel glade
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
-It&amp;rsquo;s not working very well (at least in examples) since most of stuff in suse 13.1 is based on gtk3+.
-But I&amp;rsquo;m still in process of figuring things out.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -76,88 +50,9 @@ But I&amp;rsquo;m still in process of figuring things out.&lt;/p&gt;</descriptio
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Patterns for installing mate in OpenSUSE can be found here &lt;a href=&#34;http://en.opensuse.org/Portal:MATE&#34;&gt;http://en.opensuse.org/Portal:MATE&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Xmonad can be installed using cabal install or using packages from OBS.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo zypper -n in xorg-x11-devel
-
-cabal install xmonad         --flags=&amp;quot;with_utf8 with_xft&amp;quot;
-cabal install xmonad-contrib --flags=&amp;quot;with_utf8 with_xft&amp;quot;
-cabal install xmobar         --flags=&amp;quot;with_utf8 with_xft&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Create following file:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;/usr/share/applications/xmonad.desktop&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;[Desktop Entry]
-Type=Application
-Name=Xmonad
-# Replace it with your xmonad launcher
-Exec=xmonad
-NoDisplay=true
-Terminal=false
-StartupNotify=false
-Categories=
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Set xmonad as window manager for Mate:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Mate 1.4
-mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
-
-# Mate 1.6
-gsettings set org.mate.session.required-components windowmanager xmonad
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you have Gnome 3 installed make sure that gnome-settings daemon is not running in mate (can cause gsettings error).&lt;/p&gt;
-
-&lt;p&gt;Enjoy!&lt;/p&gt;
-
-&lt;p&gt;By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
-Also &lt;code&gt;caja -n&lt;/code&gt; which is responsible for displaying icons on desktop loves to hide my xmobar.
-You can kill caja and mate will restore it (temporary fix).&lt;/p&gt;
-
-&lt;p&gt;If you have any tips feel free to comment!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UPDATE 0&lt;/strong&gt; issues with rendering was caused by &lt;code&gt;setWMName &amp;quot;LG3D&amp;quot;&lt;/code&gt; in &lt;code&gt;startupHook&lt;/code&gt;.
-Removed it for now (probably will cause issues with some Java(AWT) applications).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UPDATE 1&lt;/strong&gt; If you want to disable desktop add following file:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;/usr/share/applications/caja-no-desktop.desktop&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;[Desktop Entry]
-Name=Caja
-Exec=caja -n --no-desktop
-Icon=system-file-manager
-Terminal=false
-Type=Application
-StartupNotify=true
-NoDisplay=true
-OnlyShowIn=MATE;
-X-MATE-Bugzilla-Bugzilla=MATE
-X-MATE-Bugzilla-Product=caja
-X-MATE-Bugzilla-Component=general
-X-MATE-Bugzilla-Version=1.6.2
-X-MATE-Autostart-Phase=Desktop
-X-MATE-Autostart-Notify=true
-X-MATE-AutoRestart=true
-X-MATE-Provides=filemanager
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now set it as default file manager for mate:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Mate 1.6
-gsettings set org.mate.session.required-components filemanager &amp;quot;caja-no-desktop&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Also you can store all &lt;code&gt;*.desktop&lt;/code&gt; files in &lt;code&gt;$HOME/.local/share/applications&lt;/code&gt;.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

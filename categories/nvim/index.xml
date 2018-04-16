@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/nvim/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Nvim on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/nvim/</link>
+    <description>Recent content in Nvim on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/nvim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 15 Jun 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/nvim/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Nvim terminal &#43; ClojureScript and figwheel</title>
@@ -19,36 +22,7 @@
       <guid>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
       <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://neovim.io/&#34;&gt;NeoVim&lt;/a&gt; nowadays is almost fully compatible with vim.
-It is able to reuse my &lt;a href=&#34;https://github.com/Gonzih/.vim/blob/master/vimrc&#34;&gt;.vimrc&lt;/a&gt; file without any issues.
-And recently it got proper terminal emulator built-in.
-So how about reusing it for ClojureScript development?&lt;/p&gt;
-
-&lt;p&gt;If you are lazy (like I am) and don&amp;rsquo;t want to setup piggieback support
-for fireplace.vim or don&amp;rsquo;t feel like tmux integration is good enough
-this solution should be your new starting point.&lt;/p&gt;
-
-&lt;p&gt;Just open some clojure[script] file and create second split.
-Open terminal using &lt;code&gt;:terminal&lt;/code&gt; command.&lt;/p&gt;
-
-&lt;p&gt;Here are some keybindings that will help you to send code from
-your clojure buffer to the terminal buffer.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&amp;quot;nvim&amp;quot;)
-  &amp;quot; Open terminal and run lein figwheel
-  nmap &amp;lt;Leader&amp;gt;term &amp;lt;C-w&amp;gt;v:terminal&amp;lt;CR&amp;gt;lein figwheel&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
-  &amp;quot; Evaluate anything from the visual mode in the next window
-  vmap &amp;lt;buffer&amp;gt; ,e y&amp;lt;C-w&amp;gt;wpi&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
-  &amp;quot; Evaluate outer most form
-  nmap &amp;lt;buffer&amp;gt; ,e ^v%,e
-  &amp;quot; Evaluate buffer&amp;quot;
-  nmap &amp;lt;buffer&amp;gt; ,b ggVG,e
-endif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hey! Now you can finally stop looking at the emacs land!&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

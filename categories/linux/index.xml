@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/linux/index.xml</link>
-    <description>Recent content on Max Gonzih</description>
+    <title>Linux on Max Gonzih</title>
+    <link>http://blog.gonzih.me/categories/linux/</link>
+    <description>Recent content in Linux on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <atom:link href="/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Dec 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.gonzih.me/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Arch Linux on Lenovo IdeaPad Y700 15&#34;</title>
@@ -19,86 +22,7 @@
       <guid>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
       <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;what-works&#34;&gt;What works&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;WIFI&lt;/li&gt;
-&lt;li&gt;Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)&lt;/li&gt;
-&lt;li&gt;Hibernate&lt;/li&gt;
-&lt;li&gt;Sound without subwoofer&lt;/li&gt;
-&lt;li&gt;Video (I used bumblebee to switch between intel/nvidia GPUs)&lt;/li&gt;
-&lt;li&gt;Brightness&lt;/li&gt;
-&lt;li&gt;Keyboard backlit&lt;/li&gt;
-&lt;li&gt;Power managment via laptop mode tools and systemd.&lt;/li&gt;
-&lt;li&gt;Card reader (you might need to run &lt;code&gt;echo 1 | sudo tee /sys/bus/pci/rescan&lt;/code&gt; so card reader becomes visible)&lt;/li&gt;
-&lt;li&gt;HDMI output&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;what-does-not-work-so-far&#34;&gt;What does not work so far&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Subwoofer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;installation&#34;&gt;Installation&lt;/h1&gt;
-
-&lt;h2 id=&#34;boot&#34;&gt;Boot&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Add nomodeset to the kernel options on Live USB boot&lt;/li&gt;
-&lt;li&gt;Make sure secure boot is disabled (to make your life easier)&lt;/li&gt;
-&lt;li&gt;Follow &lt;a href=&#34;https://wiki.archlinux.org/index.php/Installation_guide&#34;&gt;arch linux installation instructions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;extra-tweaking&#34;&gt;Extra tweaking&lt;/h1&gt;
-
-&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Make sure switchable GPUs are enabled in BIOS&lt;/li&gt;
-&lt;li&gt;Follow &lt;a href=&#34;https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA&#34;&gt;insructions on the arch wiki&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;To enable intel GPU add &lt;code&gt;i915.preliminary_hw_support=1&lt;/code&gt; to &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; in the &lt;code&gt;/etc/default/grub&lt;/code&gt; file. This should be solved after 4.3 kernel release.&lt;/li&gt;
-&lt;li&gt;Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;wifi&#34;&gt;Wifi&lt;/h2&gt;
-
-&lt;p&gt;Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
-There was a patch for the 17 inch model &lt;a href=&#34;http://www.gossamer-threads.com/lists/linux/kernel/2323659&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;temporary-solution-1&#34;&gt;Temporary solution 1:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;sudo systemctl enable rfkill-unblock@wifi.service&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sudo rfkill unblock wifi&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Works fine with &lt;code&gt;wicd&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Configuring NetworkManager service to be run after rfkill service should also work&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;temporary-solution-2&#34;&gt;Temporary solution 2:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf&lt;/code&gt; to disable acpi module&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;audio-clicking&#34;&gt;Audio clicking&lt;/h2&gt;
-
-&lt;p&gt;This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
-To do that append &lt;code&gt;timeout=36000&lt;/code&gt; to line &lt;code&gt;load-module module-suspend-on-idle&lt;/code&gt; in the &lt;code&gt;/etc/pulse/default.pa&lt;/code&gt; configuration file.
-And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and &lt;code&gt;pulseaudio --start&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;hibernate&#34;&gt;Hibernate&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Add &lt;code&gt;resume=/dev/my-swap-partition&lt;/code&gt; to &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; line in &lt;code&gt;/etc/default/grub&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Add &lt;code&gt;resume&lt;/code&gt; to the list of &lt;code&gt;HOOKS&lt;/code&gt; in &lt;code&gt;/etc/mkinitcpio.conf&lt;/code&gt; before &lt;code&gt;filesystems&lt;/code&gt; but after all &lt;code&gt;block&lt;/code&gt;, &lt;code&gt;sata&lt;/code&gt; and other hardware related hooks.&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;sudo mkinitcpio -p linux&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Reboot&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;systemctl hibernate&lt;/code&gt; should work now&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -109,81 +33,7 @@ And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and 
       <guid>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
       <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/MacBook&#34;&gt;Arch Wiki page&lt;/a&gt; covers installation well enough in my opinion.&lt;/p&gt;
-
-&lt;h3 id=&#34;bootloader-via-systemd-boot&#34;&gt;Bootloader via systemd-boot&lt;/h3&gt;
-
-&lt;p&gt;Before installing boot loader change /boot partition type to &lt;code&gt;EFI System&lt;/code&gt; (&lt;code&gt;ef00&lt;/code&gt;).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mkfs.fat -F32 /dev/sda1
-pacman -S dosfstools
-mount /dev/sda1 /mnt/boot
-arch-chroot /mnt
-bootctl --path=/boot instnall
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;bootloader-via-grub&#34;&gt;Bootloader via grub&lt;/h3&gt;
-
-&lt;p&gt;You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be &lt;code&gt;ef00&lt;/code&gt; type partition of vfta32.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mount /dev/sda1 /mnt/boot
-mkdir -p /mnt/boot/efi
-mount /dev/sda2 /mnt/boot/efi
-modprobe dm-mod
-arch-chroot /mnt
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
-mkdir -p /boot/grub/locale
-cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
-grub-mkconfig -o /boot/grub/grub.cfg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;use-broadcom-wl-wireless-module-from-aur&#34;&gt;Use broadcom-wl wireless module from AUR&lt;/h2&gt;
-
-&lt;p&gt;This is proprietary broadcom driver. Works fine with BCM4331.
-Only thing that does not work - hidden SSID.&lt;/p&gt;
-
-&lt;p&gt;OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.&lt;/p&gt;
-
-&lt;p&gt;To make sure that correct module is used by hardwrare blacklist every other module and reboot:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#/etc/modprobe.d/wl.conf
-blacklist b43
-blacklist b43legacy
-blacklist ssb
-blacklist bcm43xx
-blacklist brcm80211
-blacklist brcmfmac
-blacklist brcmsmac
-blacklist bcma
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;disable-radeon-gpu-for-better-power-consumption&#34;&gt;Disable Radeon GPU for better power consumption&lt;/h2&gt;
-
-&lt;p&gt;This will reduce power usage dramatically but also will disable external screen support via display port.
-This laptop relies on the external gpu to work with display port.&lt;/p&gt;
-
-&lt;p&gt;Edit &lt;code&gt;/etc/grub.d/00_header&lt;/code&gt; and add outb lines in between &lt;code&gt;set gfxmode=${GRUB_GFXMODE}&lt;/code&gt; and &lt;code&gt;load video&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-set gfxmode=${GRUB_GFXMODE}
-outb 0x728 1
-outb 0x710 2
-outb 0x740 2
-outb 0x750 0
-load video
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Generate new grub config:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;PS. This post will probably grow over time.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -200,134 +50,7 @@ To write it in a nice predictable language that you also enjoy.
 But sometimes it&amp;rsquo;s impossible to add some external dependencies to the system.
 What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;basic-setup&#34;&gt;Basic setup&lt;/h1&gt;
-
-&lt;p&gt;First what we will need is to get clojure jar file:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;wget -O /opt/clojure.jar &#39;http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next lets create executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt; that will live in &lt;code&gt;/usr/bin&lt;/code&gt; (or &lt;code&gt;/opt/bin&lt;/code&gt; or &lt;code&gt;/home/youruser/bin&lt;/code&gt;):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
-
-exec java -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now it&amp;rsquo;s time for our hello world script &lt;code&gt;/opt/test.clj&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;#!/usr/bin/clojure
-
-(println &amp;quot;hello world&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Make it executable:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;chmod +x /opt/test.clj
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And run it:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ /opt/test.clj
-hello world
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Yay! But it feels kind of slow:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
-hello world
-
-real  0m2.684s
-user  0m2.239s
-sys   0m0.186s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2 seconds startup time, not really suitable for scripting, right?
-Can we improve that? What if there would be JVM with fast startup and low memory usage.&lt;/p&gt;
-
-&lt;h1 id=&#34;introducing-jamvm&#34;&gt;Introducing JamVM.&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;&amp;ldquo;But&amp;hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;I lied, sorry.&lt;/p&gt;
-
-&lt;p&gt;Compiling JamVM with OpenJDK support:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Fetching required dependencies and source
-apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
-cd /opt
-wget -O jamvm-2.0.0.tar.gz &#39;http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;
-tar -xvzf jamvm-2.0.0.tar.gz
-
-# Building
-cd /opt/jamvm-2.0.0
-./configure --with-java-runtime-library=openjdk7 &amp;amp;&amp;amp; make check &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install
-
-# Installing in to the openjdk installation
-mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
-cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
-
-# Trying it out
-java -jamvm -version
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
-You will need to use -jamvm option to java command to run it with small overhead vm.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s update our clojure executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
-
-exec java -jamvm -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Let&amp;rsquo;s try it out:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
-hello world
-
-real  0m0.866s
-user  0m0.764s
-sys   0m0.076s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Better, right?&lt;/p&gt;
-
-&lt;h2 id=&#34;how-slow-is-jamvm-some-benchmarks&#34;&gt;How slow is JamVM? Some benchmarks:&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Clojure 1.6
-
-JamVM:
-
-(factorial 5000) Avg: 248.65890986500017
-(fib 20)         Avg: 35.33471996000001
-(sort-seq)       Avg: 405.7438969800002
-
-OpenJDK:
-
-(factorial 5000) Avg: 25.016900630000006
-(fib 20)         Avg: 0.69957772
-(sort-seq)       Avg: 11.553695560000001
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Much slower, but if you think about it
-shell scripting most of the time is about executing external commands,
-IO and data filtering. Might be as well not so bad.
-Also memory usage of JamVM makes it perfect for embedded systems.&lt;/p&gt;
-
-&lt;h2 id=&#34;why-not-use-something-like-lein-exec&#34;&gt;Why not use something like lein exec?&lt;/h2&gt;
-
-&lt;p&gt;Lein exec is nice. But it adds overhead.
-If you need external dependencies you can solve it (in theory)
-with classpath manipulations in java command (&lt;code&gt;java -cp dep.jar:dep2.jar:.&lt;/code&gt;).
-Still you can plug lein exec to JamVM if you want.&lt;/p&gt;
-
-&lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
-
-&lt;p&gt;I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
-so you can just run &lt;code&gt;apt-get -y install icedtea-7-jre-jamvm&lt;/code&gt; to install latest build.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -338,26 +61,7 @@ so you can just run &lt;code&gt;apt-get -y install icedtea-7-jre-jamvm&lt;/code&
       <guid>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Install &lt;a href=&#34;http://software.opensuse.org/package/alien&#34;&gt;alien&lt;/a&gt; (perl scripts for converting packages).&lt;/li&gt;
-&lt;li&gt;Download deb from &lt;a href=&#34;http://repository.spotify.com/pool/non-free/s/spotify/&#34;&gt;spotify repository&lt;/a&gt;, pay attention to architecture.&lt;/li&gt;
-&lt;li&gt;Convert deb -&amp;gt; rpm by running &lt;code&gt;sudo alien --scripts -r spotify*.deb&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Install rpm &lt;code&gt;sudo zypper in spotify*.rpm&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;spotify&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And it should work.
-I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;If you have issues with volume being too loud by default make sure that you changed &lt;code&gt;flat-volumes&lt;/code&gt; from &lt;code&gt;yes&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt; in &lt;code&gt;/etc/pulse/daemon.conf&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PPS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;People reported that installing version 0.9 -&amp;gt; uninstalling it -&amp;gt; installing version 1.0 might break your system. So watch out for the uninstallation errors.&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -369,57 +73,7 @@ I noticed few warning about default locates and missing libraries, but client st
       <description>&lt;p&gt;Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Following was tested on OpenSuse 13.1.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;First create new VPN connection in NetworkManager.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Create dispatcher file that will connect your VPN.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;/etc/NetworkManager/dispatcher.d/vpn-up&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!/bin/sh
-
-CONN=&amp;quot;MY-CONNECTION-NAME&amp;quot;
-
-nmcli con status id $CONN &amp;gt; /dev/null
-
-rc=$?
-if [[ $rc != 0 ]] ; then
-    nmcli con up id $CONN
-    sleep 5 # optional wait time
-fi
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Make file executable &lt;code&gt;chmod +x /etc/NetworkManager/dispatcher.d/vpn-up&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Make sure that dispatcher is running by running &lt;code&gt;journalctl -b -u NetworkManager&lt;/code&gt; and looking for the line that looks like:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;NetworkManager&lt;/code&gt;:
-```text journalctl -b -u
-&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;
-* If you see line about dispatcher service - enable it manually by running `systemctl enable NetworkManager-dispatcher.service`.
-* By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:
-
-`/etc/NetworkManager/system-connections/MY-CONNECTION-NAME`:
-```text
-...
-[vpn]
-password-flags=0
-...
-[vpn-secrets]
-password=MY-VPN-PASSWORD
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now everything should work like a charm!&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -432,88 +86,9 @@ password=MY-VPN-PASSWORD
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Patterns for installing mate in OpenSUSE can be found here &lt;a href=&#34;http://en.opensuse.org/Portal:MATE&#34;&gt;http://en.opensuse.org/Portal:MATE&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Xmonad can be installed using cabal install or using packages from OBS.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo zypper -n in xorg-x11-devel
-
-cabal install xmonad         --flags=&amp;quot;with_utf8 with_xft&amp;quot;
-cabal install xmonad-contrib --flags=&amp;quot;with_utf8 with_xft&amp;quot;
-cabal install xmobar         --flags=&amp;quot;with_utf8 with_xft&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Create following file:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;/usr/share/applications/xmonad.desktop&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;[Desktop Entry]
-Type=Application
-Name=Xmonad
-# Replace it with your xmonad launcher
-Exec=xmonad
-NoDisplay=true
-Terminal=false
-StartupNotify=false
-Categories=
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Set xmonad as window manager for Mate:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Mate 1.4
-mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
-
-# Mate 1.6
-gsettings set org.mate.session.required-components windowmanager xmonad
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you have Gnome 3 installed make sure that gnome-settings daemon is not running in mate (can cause gsettings error).&lt;/p&gt;
-
-&lt;p&gt;Enjoy!&lt;/p&gt;
-
-&lt;p&gt;By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
-Also &lt;code&gt;caja -n&lt;/code&gt; which is responsible for displaying icons on desktop loves to hide my xmobar.
-You can kill caja and mate will restore it (temporary fix).&lt;/p&gt;
-
-&lt;p&gt;If you have any tips feel free to comment!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UPDATE 0&lt;/strong&gt; issues with rendering was caused by &lt;code&gt;setWMName &amp;quot;LG3D&amp;quot;&lt;/code&gt; in &lt;code&gt;startupHook&lt;/code&gt;.
-Removed it for now (probably will cause issues with some Java(AWT) applications).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UPDATE 1&lt;/strong&gt; If you want to disable desktop add following file:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;/usr/share/applications/caja-no-desktop.desktop&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;[Desktop Entry]
-Name=Caja
-Exec=caja -n --no-desktop
-Icon=system-file-manager
-Terminal=false
-Type=Application
-StartupNotify=true
-NoDisplay=true
-OnlyShowIn=MATE;
-X-MATE-Bugzilla-Bugzilla=MATE
-X-MATE-Bugzilla-Product=caja
-X-MATE-Bugzilla-Component=general
-X-MATE-Bugzilla-Version=1.6.2
-X-MATE-Autostart-Phase=Desktop
-X-MATE-Autostart-Notify=true
-X-MATE-AutoRestart=true
-X-MATE-Provides=filemanager
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And now set it as default file manager for mate:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Mate 1.6
-gsettings set org.mate.session.required-components filemanager &amp;quot;caja-no-desktop&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Also you can store all &lt;code&gt;*.desktop&lt;/code&gt; files in &lt;code&gt;$HOME/.local/share/applications&lt;/code&gt;.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -524,7 +99,7 @@ gsettings set org.mate.session.required-components filemanager &amp;quot;caja-no
       <guid>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</guid>
       <description>&lt;p&gt;I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png&#34;&gt;&lt;img src=&#34;https://dl.dropbox.com/u/4109351/octopress/midnight-commander-theme/theme.png&#34; alt=&#34;Blue Midnight Commander color scheme&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png&#34; alt=&#34;Blue Midnight Commander color scheme&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;.config/mc/ini&lt;/code&gt;:&lt;/p&gt;
 
@@ -544,33 +119,7 @@ Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/cod
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</guid>
       <description>&lt;p&gt;Recently I migarted from awesome to xmonad. I&amp;rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.
-&lt;/p&gt;
-
-&lt;p&gt;First hack was to use functional keys [F1..F12] like so:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;    -- mod-[F1..F12]       Switch to workspace N
-    -- mod-shift-[F1..F12] Move client to workspace N
-    --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) &amp;lt;- zip (XMonad.workspaces conf) [xK_F1 .. xK_F12]
-        , (f, m) &amp;lt;- [(W.greedyView, 0), (W.shift, shiftMask)]]
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;But after some research I found that I can detect key symbol using xev command. Here is my latest solution:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;    -- Programmer Dvorak
-    -- mod-[1..9]       Switch to workspace N
-    -- mod-shift-[1..9] Move client to workspace N
-    --
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) &amp;lt;- zip (XMonad.workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright, xK_parenleft
-                                                 ,xK_equal, xK_asterisk, xK_parenright, xK_plus, xK_bracketright, xK_exclam]
-        , (f, m) &amp;lt;- [(W.greedyView, 0), (W.shift, shiftMask)]]
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hooray! It works!&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -587,9 +136,7 @@ Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/cod
 &lt;li&gt;&lt;a href=&#34;http://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file&#34;&gt;Migration information is here&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/&#34;&gt;My current GRUB2 theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;li&gt;&lt;a href=&#34;http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;</description>
     </item>
     
   </channel>

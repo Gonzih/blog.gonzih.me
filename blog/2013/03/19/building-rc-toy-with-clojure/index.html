@@ -3,7 +3,7 @@
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.18-DEV" />
+  <meta name="generator" content="Hugo 0.40-DEV" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -28,6 +28,8 @@
 
   
   
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
@@ -51,8 +53,6 @@
     <ul class="sidebar-nav">
       <li><a href="/">Home</a> </li>
       
-        <li><a href="/post/"> Archives </a></li>
-      
         <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
       
         <li><a href="https://github.com/Gonzih"> Github </a></li>
@@ -63,10 +63,12 @@
       
         <li><a href="http://gonzih.me"> Homepage </a></li>
       
+        <li><a href="/post/"> Archives </a></li>
+      
     </ul>
 
     <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
-    <p class="cc-logo"><img src=""/></p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
   </div>
 </div>
 
@@ -110,10 +112,10 @@ I made something like 2 floored chassis. First floor is for motor and wheels (an
 <p>We need to do 2 thing with our cheap bluetooth module:</p>
 
 <p>Solder legs to it
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.jpg" alt="Soldered bluetooth module" /></p>
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/bluetooth-module-for-Arduino.jpg" alt="Soldered bluetooth module" /></p>
 
 <p>Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg" alt="Voltage devider" /></p>
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/bluetooth-module-for-Arduino.svg" alt="Voltage devider" /></p>
 
 <h2 id="gearbox-and-hbridge-driver">Gearbox and HBridge Driver</h2>
 
@@ -121,35 +123,35 @@ I made something like 2 floored chassis. First floor is for motor and wheels (an
 To understand how HBridge works you should read <a href="http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview">Adafruit post</a>.</p>
 
 <p>HBridge -&gt; Arduino Schematics:
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg" alt="Schematics" /></p>
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg" alt="Schematics" /></p>
 
 <h2 id="final-version">Final version</h2>
 
 <h3 id="photos">Photos</h3>
 
-<p><img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-001.jpg" alt="rc-toy-001" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-002.jpg" alt="rc-toy-002" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-003.jpg" alt="rc-toy-003" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-004.jpg" alt="rc-toy-004" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-005.jpg" alt="rc-toy-005" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-006.jpg" alt="rc-toy-006" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-007.jpg" alt="rc-toy-007" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-008.jpg" alt="rc-toy-008" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-009.jpg" alt="rc-toy-009" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-010.jpg" alt="rc-toy-010" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-011.jpg" alt="rc-toy-011" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-012.jpg" alt="rc-toy-012" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-014.jpg" alt="rc-toy-014" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-016.jpg" alt="rc-toy-016" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-017.jpg" alt="rc-toy-017" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-018.jpg" alt="rc-toy-018" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-019.jpg" alt="rc-toy-019" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-020.jpg" alt="rc-toy-020" />
-<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg" alt="rc-toy-021" /></p>
+<p><img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-001.jpg" alt="rc-toy-001" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-002.jpg" alt="rc-toy-002" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-003.jpg" alt="rc-toy-003" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-004.jpg" alt="rc-toy-004" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-005.jpg" alt="rc-toy-005" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-006.jpg" alt="rc-toy-006" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-007.jpg" alt="rc-toy-007" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-008.jpg" alt="rc-toy-008" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-009.jpg" alt="rc-toy-009" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-010.jpg" alt="rc-toy-010" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-011.jpg" alt="rc-toy-011" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-012.jpg" alt="rc-toy-012" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-014.jpg" alt="rc-toy-014" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-016.jpg" alt="rc-toy-016" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-017.jpg" alt="rc-toy-017" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-018.jpg" alt="rc-toy-018" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-019.jpg" alt="rc-toy-019" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-020.jpg" alt="rc-toy-020" />
+<img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-021.jpg" alt="rc-toy-021" /></p>
 
 <h3 id="video">Video</h3>
 
-<p><a href="https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv">VIDEO</a></p>
+<p><a href="https://d1wvxg652jdms0.cloudfront.net/rc-toy/video-1.flv">VIDEO</a></p>
 
 <h1 id="writing-some-code">Writing some code</h1>
 
