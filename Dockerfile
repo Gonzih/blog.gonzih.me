@@ -13,7 +13,9 @@ ENV LC_ALL en_US.UTF-8
 
 ENV USER gnzh
 
-RUN adduser -S $USER
+ARG GNZHUID 1000
+
+RUN adduser -S -u $GNZHUID $USER
 
 USER $USER
 RUN mkdir $HOME/bin

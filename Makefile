@@ -5,6 +5,7 @@ go-get-update:
 	go get -u github.com/spf13/hugo
 
 generate:
+	ls -lha /var/blog
 	hugo
 
 preview:
@@ -18,8 +19,9 @@ deploy: public
 	cd public && git add  . && git commit -a -m "Blog updated at $(shell date)" && git push
 	cd ..
 
+UID=$(shell id -u gnzh)
 docker-image:
-	docker build -t blog-builder .
+	docker build --build-arg GNZHUID=$(UID) -t blog-builder .
 
 generate-using-docker: docker-image
 	docker run --rm -t -v $(shell pwd):/var/blog --name blog-builder blog-builder make generate
