@@ -6,7 +6,7 @@ comments: true
 url: "/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/"
 categories: [ruby, gkt, opensuse]
 ---
-![visualruby](https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.png)
+![visualruby](https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png)
 
 I found out about ruby gem called [visualruby](http://visualruby.net/) and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your's if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.

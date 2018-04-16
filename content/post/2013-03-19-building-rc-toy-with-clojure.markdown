@@ -35,43 +35,43 @@ I made something like 2 floored chassis. First floor is for motor and wheels (an
 We need to do 2 thing with our cheap bluetooth module:
 
 Solder legs to it
-![Soldered bluetooth module](https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.jpg)
+![Soldered bluetooth module](https://d1wvxg652jdms0.cloudfront.net/rc-toy/bluetooth-module-for-Arduino.jpg)
 
 Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
-![Voltage devider](https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg)
+![Voltage devider](https://d1wvxg652jdms0.cloudfront.net/rc-toy/bluetooth-module-for-Arduino.svg)
 
 ## Gearbox and HBridge Driver
 To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I'm afraid it would be messy.
 To understand how HBridge works you should read [Adafruit post](http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview).
 
 HBridge -> Arduino Schematics:
-![Schematics](https://dl.dropbox.com/u/4109351/octopress/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg)
+![Schematics](https://d1wvxg652jdms0.cloudfront.net/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg)
 
 ## Final version
 
 ### Photos
-![rc-toy-001](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-001.jpg)
-![rc-toy-002](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-002.jpg)
-![rc-toy-003](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-003.jpg)
-![rc-toy-004](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-004.jpg)
-![rc-toy-005](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-005.jpg)
-![rc-toy-006](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-006.jpg)
-![rc-toy-007](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-007.jpg)
-![rc-toy-008](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-008.jpg)
-![rc-toy-009](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-009.jpg)
-![rc-toy-010](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-010.jpg)
-![rc-toy-011](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-011.jpg)
-![rc-toy-012](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-012.jpg)
-![rc-toy-014](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-014.jpg)
-![rc-toy-016](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-016.jpg)
-![rc-toy-017](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-017.jpg)
-![rc-toy-018](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-018.jpg)
-![rc-toy-019](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-019.jpg)
-![rc-toy-020](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-020.jpg)
-![rc-toy-021](https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg)
+![rc-toy-001](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-001.jpg)
+![rc-toy-002](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-002.jpg)
+![rc-toy-003](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-003.jpg)
+![rc-toy-004](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-004.jpg)
+![rc-toy-005](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-005.jpg)
+![rc-toy-006](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-006.jpg)
+![rc-toy-007](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-007.jpg)
+![rc-toy-008](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-008.jpg)
+![rc-toy-009](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-009.jpg)
+![rc-toy-010](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-010.jpg)
+![rc-toy-011](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-011.jpg)
+![rc-toy-012](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-012.jpg)
+![rc-toy-014](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-014.jpg)
+![rc-toy-016](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-016.jpg)
+![rc-toy-017](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-017.jpg)
+![rc-toy-018](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-018.jpg)
+![rc-toy-019](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-019.jpg)
+![rc-toy-020](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-020.jpg)
+![rc-toy-021](https://d1wvxg652jdms0.cloudfront.net/rc-toy/photos/photo-021.jpg)
 
 ### Video
-[VIDEO](https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv)
+[VIDEO](https://d1wvxg652jdms0.cloudfront.net/rc-toy/video-1.flv)
 
 # Writing some code
 ## Bluetooth as Serial port

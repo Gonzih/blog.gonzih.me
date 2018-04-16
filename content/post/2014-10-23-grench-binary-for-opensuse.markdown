@@ -14,7 +14,7 @@ there are pre-build binaries on the [official website](http://leiningen.org/gren
 
 And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).
 
-[grench-opensuse](https://dl.dropboxusercontent.com/u/4109351/grenchman/grench-0.2.0-opensuse)
-[[sha1](https://dl.dropboxusercontent.com/u/4109351/grenchman/grench-0.2.0-opensuse.sha1)
-| [sig](https://dl.dropboxusercontent.com/u/4109351/grenchman/grench-0.2.0-opensuse.asc)]
+[grench-opensuse](https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse)
+[[sha1](https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.sha1)
+| [sig](https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.asc)]
 <!--more-->

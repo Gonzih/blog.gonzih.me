@@ -128,5 +128,5 @@ default:
 I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
 And now we can see some visualization.
 
-![Speed Graph](https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/speed.png)
-![Ping Graph](https://dl.dropboxusercontent.com/u/4109351/octopress/ping-speed-graphs/ping.png)
+![Speed Graph](https://d1wvxg652jdms0.cloudfront.net/ping-speed-graphs/speed.png)
+![Ping Graph](https://d1wvxg652jdms0.cloudfront.net/ping-speed-graphs/ping.png)

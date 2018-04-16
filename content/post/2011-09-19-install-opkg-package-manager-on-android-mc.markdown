@@ -25,13 +25,13 @@ Now run in adb shell following:
 
 ``` bash
 cd /sdcard
-wget http://dl.dropbox.com/u/4109351/soft/android/opkg-bootstrap-v2.tar.bz2
+wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg-bootstrap-v2.tar.bz2
 cd /
 tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
 # for non cyanogen users
-wget http://dl.dropbox.com/u/4109351/soft/android/opkg.conf -O /data/local/opkg.conf
+wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg.conf -O /data/local/opkg.conf
 # for cyanogen users
-wget http://dl.dropbox.com/u/4109351/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
 # add /data/xbin to your path
 export PATH="/data/xbin:$PATH"
 # make /system writable

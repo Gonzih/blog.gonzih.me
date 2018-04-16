@@ -22,7 +22,7 @@ Those libraries allow you to emulate fully functional mouse and keyboard from yo
 
 Wiring will be very simple. We will have 3 buttons on pins 2, 3 and 4 with pull down resistors.
 
-![schematics1](https://dl.dropboxusercontent.com/u/4109351/octopress/hardware-cut-copy-paste/schematics1.png)
+![schematics1](https://d1wvxg652jdms0.cloudfront.net/hardware-cut-copy-paste/schematics1.png)
 
 ## Hardware Cut/Copy/Paste.
 

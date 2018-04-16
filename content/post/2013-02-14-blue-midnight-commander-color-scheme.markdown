@@ -7,7 +7,7 @@ categories: [mc, linux, color, terminal]
 ---
 I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)
 
-[![Blue Midnight Commander color scheme](https://dl.dropbox.com/u/4109351/octopress/midnight-commander-theme/theme.png)](https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png)
+[![Blue Midnight Commander color scheme](https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png)](https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png)
 
 
 `.config/mc/ini`:
