@@ -40,10 +40,10 @@ menu:
         Weight: 3
         URL: "https://github.com/Gonzih"
       - Name: "RSS feed"
-        Weight: 5
+        Weight: 4
         URL: "http://blog.gonzih.me/index.xml"
       - Name: "Homepage"
-        Weight: 10
+        Weight: 5
         URL: "http://gonzih.me"
 
 metadataformat: "yaml"
