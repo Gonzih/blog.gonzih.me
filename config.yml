@@ -39,9 +39,6 @@ menu:
       - Name: "Github"
         Weight: 3
         URL: "https://github.com/Gonzih"
-      - Name: "Twitter"
-        Weight: 4
-        URL: "https://twitter.com/Gonzih"
       - Name: "RSS feed"
         Weight: 5
         URL: "http://blog.gonzih.me/index.xml"
