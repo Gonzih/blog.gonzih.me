@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Packages Manager on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/packages-manager/</link>
+    <link>https://blog.gonzih.me/categories/packages-manager/</link>
     <description>Recent content in Packages Manager on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Mon, 19 Sep 2011 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/packages-manager/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/packages-manager/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</title>
-      <link>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</link>
       <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

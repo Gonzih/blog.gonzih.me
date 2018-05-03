@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Opensuse on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/opensuse/</link>
+    <link>https://blog.gonzih.me/categories/opensuse/</link>
     <description>Recent content in Opensuse on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Tue, 27 May 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/opensuse/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/opensuse/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Installing Spotify Linux beta on OpenSUSE 13.1</title>
-      <link>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</link>
       <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).
 &lt;/p&gt;</description>
@@ -27,10 +27,10 @@ Solution can be applied to any rpm based system (I think so).
     
     <item>
       <title>VisualRuby gem on OpenSUSE 13.1</title>
-      <link>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</link>
+      <link>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</link>
       <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;http://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
@@ -42,10 +42,10 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;
     
     <item>
       <title>OpenSUSE 13.1 &#43; Mate 1.6 &#43; Xmonad</title>
-      <link>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</link>
+      <link>https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</link>
       <pubDate>Thu, 21 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</guid>
       <description>&lt;p&gt;So OpenSUSE 13.1 was released. And it&amp;rsquo;s great. But&amp;hellip;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;

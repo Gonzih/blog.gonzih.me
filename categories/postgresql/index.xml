@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Postgresql on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/postgresql/</link>
+    <link>https://blog.gonzih.me/categories/postgresql/</link>
     <description>Recent content in Postgresql on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Fri, 30 Sep 2011 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/postgresql/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/postgresql/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Set New PostgreSQL Databases Encoding to Unicode</title>
-      <link>http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</link>
       <pubDate>Fri, 30 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</guid>
       <description>&lt;p&gt;You must change encoding for template1. For do that run following.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;su - postgres

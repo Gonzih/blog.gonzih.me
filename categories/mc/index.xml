@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mc on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/mc/</link>
+    <link>https://blog.gonzih.me/categories/mc/</link>
     <description>Recent content in Mc on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Thu, 14 Feb 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/mc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/mc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Blue Midnight Commander color scheme</title>
-      <link>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</link>
+      <link>https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</link>
       <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</guid>
       <description>&lt;p&gt;I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png&#34; alt=&#34;Blue Midnight Commander color scheme&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
@@ -37,10 +37,10 @@ Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/cod
     
     <item>
       <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</title>
-      <link>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</link>
       <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

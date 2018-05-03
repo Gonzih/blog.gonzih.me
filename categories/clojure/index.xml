@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Clojure on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/clojure/</link>
+    <link>https://blog.gonzih.me/categories/clojure/</link>
     <description>Recent content in Clojure on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Mon, 15 Jun 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/clojure/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/clojure/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Nvim terminal &#43; ClojureScript and figwheel</title>
-      <link>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
+      <link>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
       <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
       <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -27,10 +27,10 @@
     
     <item>
       <title>ServerSide rendering of Reagent components</title>
-      <link>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
       <pubDate>Mon, 16 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
       <description>&lt;p&gt;Great thing about React is that you can write what people nowadays call &amp;ldquo;isomorphic JavaScript&amp;rdquo;.
 In this post we will not discuss how wrong this term is in many ways,
 but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
@@ -40,10 +40,10 @@ but instead we will focus on how to achieve similar results in your ClojureScrip
     
     <item>
       <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
-      <link>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
       <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
       <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
@@ -56,10 +56,10 @@ Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt
     
     <item>
       <title>Two way data bindings in Reagent</title>
-      <link>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
+      <link>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
       <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
 Also provides ability to apply transformation using transducers.
@@ -68,10 +68,10 @@ Also provides ability to apply transformation using transducers.
     
     <item>
       <title>Replacing shell scripts with Clojure&#43;JamVM</title>
-      <link>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
       <description>&lt;p&gt;We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.
 Would be lovely, to use some kind of lisp for scripting, right?
@@ -85,10 +85,10 @@ What if you have only JVM to your disposal, will you be able to pull it off only
     
     <item>
       <title>HN Tray icon in 50 lines of Clojure</title>
-      <link>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
       <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
       <description>&lt;p&gt;Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
 Result is tray app that shows stories from HN front page.
 Just in ~50 lines of Clojure code.
@@ -103,10 +103,10 @@ Enjoy!&lt;/p&gt;
     
     <item>
       <title>My first experience with core.typed</title>
-      <link>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</link>
+      <link>https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</link>
       <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</guid>
       <description>&lt;p&gt;Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
 I couldn&amp;rsquo;t find answers on my issues in wiki or documentation.
@@ -119,10 +119,10 @@ And keep doing what you are doing, core.typed is just amazing thing!&lt;/p&gt;
     
     <item>
       <title>Speed/Ping test graphs with Clojure and Raspberry Pi</title>
-      <link>http://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</link>
+      <link>https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</link>
       <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion based on my hate to them.&lt;/p&gt;
@@ -134,10 +134,10 @@ So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion ba
     
     <item>
       <title>RSS/Atom reader in Clojure via IMAP</title>
-      <link>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
+      <link>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
       <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
       <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
 
 &lt;p&gt;Google Reader was shut down and I started looking for alternatives.
@@ -150,10 +150,10 @@ All I wanted was simple to use news reader.&lt;/p&gt;
     
     <item>
       <title>Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark</title>
-      <link>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</link>
+      <link>https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</link>
       <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
 
 Pi is running Raspbian.&lt;/p&gt;</description>
@@ -161,10 +161,10 @@ Pi is running Raspbian.&lt;/p&gt;</description>
     
     <item>
       <title>Building RC Toy with Clojure</title>
-      <link>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</link>
       <pubDate>Tue, 19 Mar 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</guid>
       <description>&lt;p&gt;Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).&lt;/p&gt;
 
@@ -173,21 +173,21 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
     
     <item>
       <title>ClojureScript on BeagleBone: simple benchmark with Node.js</title>
-      <link>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</link>
+      <link>https://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</link>
       <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</guid>
-      <description>&lt;p&gt;Benchmark is based on my &lt;a href=&#34;http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/&#34;&gt;previous experiments&lt;/a&gt; with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
+      <guid>https://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</guid>
+      <description>&lt;p&gt;Benchmark is based on my &lt;a href=&#34;https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/&#34;&gt;previous experiments&lt;/a&gt; with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark</title>
-      <link>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</link>
+      <link>https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</link>
       <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
       <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
 &lt;/p&gt;</description>
     </item>

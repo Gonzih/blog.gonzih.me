@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/vim/</link>
+    <link>https://blog.gonzih.me/categories/vim/</link>
     <description>Recent content in Vim on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Mon, 15 Jun 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/vim/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Nvim terminal &#43; ClojureScript and figwheel</title>
-      <link>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
+      <link>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
       <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
       <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -27,10 +27,10 @@
     
     <item>
       <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
-      <link>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
       <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
       <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
@@ -43,10 +43,10 @@ Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt
     
     <item>
       <title>How I cook Ctags in Vim</title>
-      <link>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</link>
+      <link>https://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</link>
       <pubDate>Mon, 18 Mar 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</guid>
       <description>&lt;p&gt;Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -54,10 +54,10 @@ Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt
     
     <item>
       <title>Nice Vim Keys Map</title>
-      <link>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</link>
+      <link>https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</link>
       <pubDate>Tue, 18 Oct 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</guid>
       <description>&lt;p&gt;Large &lt;a href=&#34;https://github.com/Gonzih/vim-keymap/raw/master/new/new.png&#34;&gt;image&lt;/a&gt; (2.4 Megabytes).&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/vim-keymap/&#34;&gt;Source on github&lt;/a&gt;.

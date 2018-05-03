@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Beaglebone on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/beaglebone/</link>
+    <link>https://blog.gonzih.me/categories/beaglebone/</link>
     <description>Recent content in Beaglebone on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Mon, 03 Sep 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/beaglebone/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/beaglebone/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue</title>
-      <link>http://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</link>
+      <link>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</link>
       <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
       <description>&lt;p&gt;Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&amp;rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:&lt;/p&gt;
 

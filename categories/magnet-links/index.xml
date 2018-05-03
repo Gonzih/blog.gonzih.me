@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Magnet Links on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/magnet-links/</link>
+    <link>https://blog.gonzih.me/categories/magnet-links/</link>
     <description>Recent content in Magnet Links on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Fri, 17 Feb 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/magnet-links/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/magnet-links/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to use Magnet Links with RTorrent</title>
-      <link>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</link>
+      <link>https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</link>
       <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</guid>
       <description>&lt;p&gt;Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash

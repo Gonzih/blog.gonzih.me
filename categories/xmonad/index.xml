@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Xmonad on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/xmonad/</link>
+    <link>https://blog.gonzih.me/categories/xmonad/</link>
     <description>Recent content in Xmonad on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Thu, 21 Nov 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/xmonad/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/xmonad/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>OpenSUSE 13.1 &#43; Mate 1.6 &#43; Xmonad</title>
-      <link>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</link>
+      <link>https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</link>
       <pubDate>Thu, 21 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</guid>
       <description>&lt;p&gt;So OpenSUSE 13.1 was released. And it&amp;rsquo;s great. But&amp;hellip;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
@@ -31,10 +31,10 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
     
     <item>
       <title>Programmer Dvorak and switching workspaces in XMonad</title>
-      <link>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</link>
+      <link>https://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</link>
       <pubDate>Mon, 08 Oct 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</guid>
       <description>&lt;p&gt;Recently I migarted from awesome to xmonad. I&amp;rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.
 &lt;/p&gt;</description>
     </item>

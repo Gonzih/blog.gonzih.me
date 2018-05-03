@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Max Gonzih</title>
-    <link>http://blog.gonzih.me/post/</link>
+    <link>https://blog.gonzih.me/post/</link>
     <description>Recent content in Posts on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Fri, 11 Dec 2015 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Arch Linux on Lenovo IdeaPad Y700 15&#34;</title>
-      <link>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</link>
+      <link>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</link>
       <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
       <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -27,10 +27,10 @@
     
     <item>
       <title>Arch Linux on Macbook Pro 8.2 (17&#34; 2011)</title>
-      <link>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</link>
+      <link>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</link>
       <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
       <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -38,10 +38,10 @@
     
     <item>
       <title>Nvim terminal &#43; ClojureScript and figwheel</title>
-      <link>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
+      <link>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
       <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
       <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -49,10 +49,10 @@
     
     <item>
       <title>ServerSide rendering of Reagent components</title>
-      <link>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
       <pubDate>Mon, 16 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
       <description>&lt;p&gt;Great thing about React is that you can write what people nowadays call &amp;ldquo;isomorphic JavaScript&amp;rdquo;.
 In this post we will not discuss how wrong this term is in many ways,
 but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
@@ -62,10 +62,10 @@ but instead we will focus on how to achieve similar results in your ClojureScrip
     
     <item>
       <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
-      <link>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
       <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
       <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
@@ -78,10 +78,10 @@ Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt
     
     <item>
       <title>Grench binary for OpenSUSE</title>
-      <link>http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</link>
+      <link>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
 
 &lt;p&gt;Helps with JVM startup time during development.
@@ -98,10 +98,10 @@ there are pre-build binaries on the &lt;a href=&#34;http://leiningen.org/grench.
     
     <item>
       <title>Two way data bindings in Reagent</title>
-      <link>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
+      <link>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
       <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
 Also provides ability to apply transformation using transducers.
@@ -110,10 +110,10 @@ Also provides ability to apply transformation using transducers.
     
     <item>
       <title>Replacing shell scripts with Clojure&#43;JamVM</title>
-      <link>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
       <description>&lt;p&gt;We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.
 Would be lovely, to use some kind of lisp for scripting, right?
@@ -127,10 +127,10 @@ What if you have only JVM to your disposal, will you be able to pull it off only
     
     <item>
       <title>Building Hacker News json api with Haskell</title>
-      <link>http://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</link>
+      <link>https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</link>
       <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</guid>
       <description>&lt;p&gt;Small announcement post.&lt;/p&gt;
 
 &lt;p&gt;Today I launched tiny scotty server that serves json for Hacker News front page.
@@ -153,10 +153,10 @@ I hope someone will find it useful.
     
     <item>
       <title>Installing Spotify Linux beta on OpenSUSE 13.1</title>
-      <link>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</link>
       <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).
 &lt;/p&gt;</description>
@@ -164,10 +164,10 @@ Solution can be applied to any rpm based system (I think so).
     
     <item>
       <title>Autoconnect to NetworkManager VPN on systemd based system</title>
-      <link>http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</link>
       <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</guid>
       <description>&lt;p&gt;Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;
 
@@ -176,10 +176,10 @@ Of course you can probably figure out all this yourself, but what if you are laz
     
     <item>
       <title>HN Tray icon in 50 lines of Clojure</title>
-      <link>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
       <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
       <description>&lt;p&gt;Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
 Result is tray app that shows stories from HN front page.
 Just in ~50 lines of Clojure code.
@@ -194,10 +194,10 @@ Enjoy!&lt;/p&gt;
     
     <item>
       <title>Hardware Cut/Copy/Paste with Arduino Leonardo</title>
-      <link>http://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
+      <link>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
       <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
       <description>&lt;p&gt;Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
 I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;http://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
@@ -209,10 +209,10 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
     
     <item>
       <title>VisualRuby gem on OpenSUSE 13.1</title>
-      <link>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</link>
+      <link>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</link>
       <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;http://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
@@ -224,10 +224,10 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;
     
     <item>
       <title>Yin-Yang Call/cc puzzle in Ruby</title>
-      <link>http://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
+      <link>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
       <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
 
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
@@ -246,10 +246,10 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;
     
     <item>
       <title>OpenSUSE 13.1 &#43; Mate 1.6 &#43; Xmonad</title>
-      <link>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</link>
+      <link>https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</link>
       <pubDate>Thu, 21 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/</guid>
       <description>&lt;p&gt;So OpenSUSE 13.1 was released. And it&amp;rsquo;s great. But&amp;hellip;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
@@ -261,10 +261,10 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
     
     <item>
       <title>My first experience with core.typed</title>
-      <link>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</link>
+      <link>https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</link>
       <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</guid>
       <description>&lt;p&gt;Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
 I couldn&amp;rsquo;t find answers on my issues in wiki or documentation.
@@ -277,10 +277,10 @@ And keep doing what you are doing, core.typed is just amazing thing!&lt;/p&gt;
     
     <item>
       <title>Cheap standing desk</title>
-      <link>http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/</link>
+      <link>https://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/</link>
       <pubDate>Sun, 25 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/</guid>
       <description>&lt;p&gt;I love idea of standing desks.
 I feel myself much more productive behind standing desk.
 But commercial desks suffer from high price and complicated design.&lt;/p&gt;
@@ -292,10 +292,10 @@ But commercial desks suffer from high price and complicated design.&lt;/p&gt;
     
     <item>
       <title>Speed/Ping test graphs with Clojure and Raspberry Pi</title>
-      <link>http://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</link>
+      <link>https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</link>
       <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion based on my hate to them.&lt;/p&gt;
@@ -307,10 +307,10 @@ So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion ba
     
     <item>
       <title>RSS/Atom reader in Clojure via IMAP</title>
-      <link>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
+      <link>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
       <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
       <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
 
 &lt;p&gt;Google Reader was shut down and I started looking for alternatives.
@@ -323,10 +323,10 @@ All I wanted was simple to use news reader.&lt;/p&gt;
     
     <item>
       <title>Quick LXC configuration with netctl nat</title>
-      <link>http://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/</link>
+      <link>https://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/</link>
       <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/</guid>
       <description>&lt;p&gt;So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -334,10 +334,10 @@ All I wanted was simple to use news reader.&lt;/p&gt;
     
     <item>
       <title>Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark</title>
-      <link>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</link>
+      <link>https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</link>
       <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
 
 Pi is running Raspbian.&lt;/p&gt;</description>
@@ -345,10 +345,10 @@ Pi is running Raspbian.&lt;/p&gt;</description>
     
     <item>
       <title>Building RC Toy with Clojure</title>
-      <link>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</link>
       <pubDate>Tue, 19 Mar 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</guid>
       <description>&lt;p&gt;Bored and have free time? Lets build something.
 Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).&lt;/p&gt;
 
@@ -357,10 +357,10 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
     
     <item>
       <title>How I cook Ctags in Vim</title>
-      <link>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</link>
+      <link>https://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</link>
       <pubDate>Mon, 18 Mar 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/</guid>
       <description>&lt;p&gt;Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -368,10 +368,10 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
     
     <item>
       <title>Blue Midnight Commander color scheme</title>
-      <link>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</link>
+      <link>https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</link>
       <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</guid>
       <description>&lt;p&gt;I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png&#34; alt=&#34;Blue Midnight Commander color scheme&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
@@ -389,21 +389,21 @@ Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/cod
     
     <item>
       <title>ClojureScript on BeagleBone: simple benchmark with Node.js</title>
-      <link>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</link>
+      <link>https://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</link>
       <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</guid>
-      <description>&lt;p&gt;Benchmark is based on my &lt;a href=&#34;http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/&#34;&gt;previous experiments&lt;/a&gt; with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
+      <guid>https://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</guid>
+      <description>&lt;p&gt;Benchmark is based on my &lt;a href=&#34;https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/&#34;&gt;previous experiments&lt;/a&gt; with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin</title>
-      <link>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/</link>
+      <link>https://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/</link>
       <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/</guid>
       <description>&lt;p&gt;So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers.
 You will need three things for that.
 &lt;/p&gt;</description>
@@ -411,40 +411,40 @@ You will need three things for that.
     
     <item>
       <title>Note on privacy #1</title>
-      <link>http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/</link>
+      <link>https://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/</link>
       <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/</guid>
       <description>Today I removed from my blog all stuff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.
 Why? Because it&amp;rsquo;s just unfair. Why would you provide any information about yourself by just being curious? I actually not interested in how many people are reading my blog, anything about traffic sources. Only thing that I am interested in is feedback from users.</description>
     </item>
     
     <item>
       <title>Programmer Dvorak and switching workspaces in XMonad</title>
-      <link>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</link>
+      <link>https://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</link>
       <pubDate>Mon, 08 Oct 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</guid>
       <description>&lt;p&gt;Recently I migarted from awesome to xmonad. I&amp;rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark</title>
-      <link>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</link>
+      <link>https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</link>
       <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
       <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue</title>
-      <link>http://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</link>
+      <link>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</link>
       <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
       <description>&lt;p&gt;Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&amp;rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:&lt;/p&gt;
 
@@ -462,10 +462,10 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
     
     <item>
       <title>Arch Linux migrated to GRUB2</title>
-      <link>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/</link>
+      <link>https://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/</link>
       <pubDate>Fri, 20 Jul 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://i.imgur.com/ASSDN.png&#34; alt=&#34;My current GRUB2 theme&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Great news everyone! Today Arch Linux officially switched to GRUB2!&lt;/p&gt;
@@ -479,10 +479,10 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
     
     <item>
       <title>Fix Broken Comments Count for Disqus</title>
-      <link>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</link>
+      <link>https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</link>
       <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</guid>
       <description>&lt;p&gt;I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
 That is why comments count was equal to 0 for every post on my index page.
 To fix that go to admin ui in disqus and use domain migration tool.
@@ -491,10 +491,10 @@ To fix that go to admin ui in disqus and use domain migration tool.
     
     <item>
       <title>The Internet Defense League</title>
-      <link>http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/</link>
+      <link>https://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/</link>
       <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;http://internetdefenseleague.org/images/launch/cat_sky.jpg&#34; alt=&#34;IDL Launch&#34; /&gt;
 &amp;gt;The &lt;a href=&#34;http://sopastrike.com/&#34;&gt;Internet Blackout&lt;/a&gt; was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp;amp; monopolies. Are you in?&lt;/p&gt;
 
@@ -504,10 +504,10 @@ To fix that go to admin ui in disqus and use domain migration tool.
     
     <item>
       <title>How to use Magnet Links with RTorrent</title>
-      <link>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</link>
+      <link>https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</link>
       <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</guid>
       <description>&lt;p&gt;Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
@@ -523,10 +523,10 @@ echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BAS
     
     <item>
       <title>Nice Vim Keys Map</title>
-      <link>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</link>
+      <link>https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</link>
       <pubDate>Tue, 18 Oct 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</guid>
       <description>&lt;p&gt;Large &lt;a href=&#34;https://github.com/Gonzih/vim-keymap/raw/master/new/new.png&#34;&gt;image&lt;/a&gt; (2.4 Megabytes).&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/vim-keymap/&#34;&gt;Source on github&lt;/a&gt;.
@@ -535,10 +535,10 @@ echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BAS
     
     <item>
       <title>Set New PostgreSQL Databases Encoding to Unicode</title>
-      <link>http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</link>
       <pubDate>Fri, 30 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</guid>
       <description>&lt;p&gt;You must change encoding for template1. For do that run following.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;su - postgres
@@ -560,10 +560,10 @@ VACUUM FREEZE;
     
     <item>
       <title>How To Fix Octopress Pygments Error on Arch Linux</title>
-      <link>http://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</link>
       <pubDate>Wed, 21 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
       <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Building site: source -&amp;gt; public
@@ -581,19 +581,19 @@ SyntaxError: invalid syntax
     
     <item>
       <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</title>
-      <link>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</link>
       <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Tmux &#43; Rvm &#43; Zsh Fix</title>
-      <link>http://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</guid>
       <description>&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[ $TERM = &amp;quot;screen&amp;quot; ]] &amp;amp;&amp;amp; rvm use default
@@ -604,10 +604,10 @@ SyntaxError: invalid syntax
     
     <item>
       <title>Backbone.js &#43; Ruby on Rails Tips</title>
-      <link>http://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</link>
       <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</guid>
       <description>&lt;p&gt;&lt;/p&gt;</description>
     </item>
     

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Core.typed on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/core.typed/</link>
+    <link>https://blog.gonzih.me/categories/core.typed/</link>
     <description>Recent content in Core.typed on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Fri, 30 Aug 2013 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/core.typed/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/core.typed/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>My first experience with core.typed</title>
-      <link>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</link>
+      <link>https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</link>
       <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/</guid>
       <description>&lt;p&gt;Today I started improving my feeds2imap.clj project with core.typed.
 And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
 I couldn&amp;rsquo;t find answers on my issues in wiki or documentation.

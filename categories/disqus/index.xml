@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Disqus on Max Gonzih</title>
-    <link>http://blog.gonzih.me/categories/disqus/</link>
+    <link>https://blog.gonzih.me/categories/disqus/</link>
     <description>Recent content in Disqus on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,15 +11,15 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Thu, 19 Jul 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.gonzih.me/categories/disqus/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/disqus/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Fix Broken Comments Count for Disqus</title>
-      <link>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</link>
+      <link>https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</link>
       <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</guid>
+      <guid>https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</guid>
       <description>&lt;p&gt;I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
 That is why comments count was equal to 0 for every post on my index page.
 To fix that go to admin ui in disqus and use domain migration tool.

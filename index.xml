@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Max Gonzih on Max Gonzih</title>
-    <link>http://blog.gonzih.me/</link>
+    <link>https://blog.gonzih.me/</link>
     <description>Recent content in Max Gonzih on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -14,10 +14,10 @@
     
     <item>
       <title>Arch Linux on Lenovo IdeaPad Y700 15&#34;</title>
-      <link>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</link>
+      <link>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</link>
       <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
       <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
@@ -104,10 +104,10 @@ And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and 
     
     <item>
       <title>Arch Linux on Macbook Pro 8.2 (17&#34; 2011)</title>
-      <link>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</link>
+      <link>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</link>
       <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
       <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
@@ -189,10 +189,10 @@ load video
     
     <item>
       <title>Nvim terminal &#43; ClojureScript and figwheel</title>
-      <link>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
+      <link>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
       <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
       <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
@@ -229,10 +229,10 @@ endif
     
     <item>
       <title>ServerSide rendering of Reagent components</title>
-      <link>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
       <pubDate>Mon, 16 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
       <description>&lt;p&gt;Great thing about React is that you can write what people nowadays call &amp;ldquo;isomorphic JavaScript&amp;rdquo;.
 In this post we will not discuss how wrong this term is in many ways,
 but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
@@ -365,10 +365,10 @@ In ruby it&amp;rsquo;s not a problem since we have 1 context per worker.&lt;/p&g
     
     <item>
       <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
-      <link>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
       <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
       <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
@@ -464,10 +464,10 @@ I&amp;rsquo;m really hoping to see big movement around neovim once project becom
     
     <item>
       <title>Grench binary for OpenSUSE</title>
-      <link>http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</link>
+      <link>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
 
 &lt;p&gt;Helps with JVM startup time during development.
@@ -484,10 +484,10 @@ there are pre-build binaries on the &lt;a href=&#34;http://leiningen.org/grench.
     
     <item>
       <title>Two way data bindings in Reagent</title>
-      <link>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
+      <link>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
       <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
 Also provides ability to apply transformation using transducers.
@@ -531,10 +531,10 @@ Also provides ability to apply transformation using transducers.
     
     <item>
       <title>Replacing shell scripts with Clojure&#43;JamVM</title>
-      <link>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
       <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
       <description>&lt;p&gt;We all hate shell scripting.
 Scripts are annoyingly hard to debug, test and verify.
 Would be lovely, to use some kind of lisp for scripting, right?
@@ -675,10 +675,10 @@ so you can just run &lt;code&gt;apt-get -y install icedtea-7-jre-jamvm&lt;/code&
     
     <item>
       <title>Building Hacker News json api with Haskell</title>
-      <link>http://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</link>
+      <link>https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</link>
       <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</guid>
       <description>&lt;p&gt;Small announcement post.&lt;/p&gt;
 
 &lt;p&gt;Today I launched tiny scotty server that serves json for Hacker News front page.
@@ -701,10 +701,10 @@ I hope someone will find it useful.
     
     <item>
       <title>Installing Spotify Linux beta on OpenSUSE 13.1</title>
-      <link>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</link>
       <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).
 &lt;/p&gt;
@@ -731,10 +731,10 @@ I noticed few warning about default locates and missing libraries, but client st
     
     <item>
       <title>Autoconnect to NetworkManager VPN on systemd based system</title>
-      <link>http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</link>
       <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</guid>
       <description>&lt;p&gt;Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;
 
@@ -793,10 +793,10 @@ password=MY-VPN-PASSWORD
     
     <item>
       <title>HN Tray icon in 50 lines of Clojure</title>
-      <link>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
+      <link>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
       <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
       <description>&lt;p&gt;Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
 Result is tray app that shows stories from HN front page.
 Just in ~50 lines of Clojure code.
@@ -866,10 +866,10 @@ Enjoy!&lt;/p&gt;
     
     <item>
       <title>Hardware Cut/Copy/Paste with Arduino Leonardo</title>
-      <link>http://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
+      <link>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
       <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
       <description>&lt;p&gt;Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
 I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;http://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
@@ -1156,10 +1156,10 @@ vim: ts=2:sts=2:sw=2:expandtab
     
     <item>
       <title>VisualRuby gem on OpenSUSE 13.1</title>
-      <link>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</link>
+      <link>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</link>
       <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;http://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
@@ -1181,10 +1181,10 @@ But I&amp;rsquo;m still in process of figuring things out.&lt;/p&gt;</descriptio
     
     <item>
       <title>Yin-Yang Call/cc puzzle in Ruby</title>
-      <link>http://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
+      <link>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
       <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>http://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
 
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
