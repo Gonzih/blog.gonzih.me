@@ -1,6 +1,6 @@
 ---
 theme: "hyde"
-baseurl: "http://blog.gonzih.me/"
+baseurl: "https://blog.gonzih.me/"
 
 title: "Max Gonzih"
 subtitle: "KEEP CALM and CODE ON"
@@ -41,10 +41,10 @@ menu:
         URL: "https://github.com/Gonzih"
       - Name: "RSS feed"
         Weight: 4
-        URL: "http://blog.gonzih.me/index.xml"
+        URL: "https://blog.gonzih.me/index.xml"
       - Name: "Homepage"
         Weight: 5
-        URL: "http://gonzih.me"
+        URL: "https://www.gonzih.me"
 
 metadataformat: "yaml"
 ---
