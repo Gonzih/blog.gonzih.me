@@ -5,7 +5,7 @@ date: "2012-07-20"
 comments: true
 categories: [arch, linux, grub2]
 ---
-![My current GRUB2 theme](http://i.imgur.com/ASSDN.png)
+![My current GRUB2 theme](https://i.imgur.com/ASSDN.png)
 
 Great news everyone! Today Arch Linux officially switched to GRUB2!
 
