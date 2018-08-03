@@ -769,17 +769,19 @@ fi
 &lt;li&gt;Make sure that dispatcher is running by running &lt;code&gt;journalctl -b -u NetworkManager&lt;/code&gt; and looking for the line that looks like:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;code&gt;NetworkManager&lt;/code&gt;:
-```text journalctl -b -u
-&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;NetworkManager&lt;/code&gt;:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;
-* If you see line about dispatcher service - enable it manually by running `systemctl enable NetworkManager-dispatcher.service`.
-* By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;&amp;lt;warn&amp;gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+&lt;/code&gt;&lt;/pre&gt;
 
-`/etc/NetworkManager/system-connections/MY-CONNECTION-NAME`:
-```text
-...
+&lt;ul&gt;
+&lt;li&gt;If you see line about dispatcher service - enable it manually by running &lt;code&gt;systemctl enable NetworkManager-dispatcher.service&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/NetworkManager/system-connections/MY-CONNECTION-NAME&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;...
 [vpn]
 password-flags=0
 ...

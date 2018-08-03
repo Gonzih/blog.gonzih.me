@@ -3,7 +3,7 @@
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.40-DEV" />
+  <meta name="generator" content="Hugo 0.47-DEV" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -109,17 +109,19 @@ fi
 <li>Make sure that dispatcher is running by running <code>journalctl -b -u NetworkManager</code> and looking for the line that looks like:</li>
 </ul>
 
-<p><code>NetworkManager</code>:
-```text journalctl -b -u
-<warn> Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.</p>
+<p><code>NetworkManager</code>:</p>
 
-<pre><code>
-* If you see line about dispatcher service - enable it manually by running `systemctl enable NetworkManager-dispatcher.service`.
-* By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:
+<pre><code class="language-text">&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+</code></pre>
 
-`/etc/NetworkManager/system-connections/MY-CONNECTION-NAME`:
-```text
-...
+<ul>
+<li>If you see line about dispatcher service - enable it manually by running <code>systemctl enable NetworkManager-dispatcher.service</code>.</li>
+<li>By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:</li>
+</ul>
+
+<p><code>/etc/NetworkManager/system-connections/MY-CONNECTION-NAME</code>:</p>
+
+<pre><code class="language-text">...
 [vpn]
 password-flags=0
 ...
