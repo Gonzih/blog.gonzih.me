@@ -62,7 +62,7 @@ $ ykman openpgp reset
 WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
 ```
 
-There are 2 way to use your yubikey as a ssh key:
+There are two ways to use your yubikey as a ssh key:
 
 
 ## Method #1: Generating keys on yubikey itself
@@ -160,8 +160,8 @@ $ gpg-agent --daemon --enable-ssh-support
 $ gpg-agent --daemon --enable-ssh-support --write-env-file ~/.gpg-agent-env
 ```
 
-Or if you are on systemd based system there is a chance that your user already has bunch of systemd sockets enabled for this purpose.
-One socket that you should be interested is `gpg-agent-ssh.socket`, you can see if its running by running `systemctl --user status gpg-agent-ssh.socket`.
+Or if you are on systemd based system there is a chance that your user already has a bunch of systemd sockets enabled for this purpose.
+One socket that you should be interested in is `gpg-agent-ssh.socket`, you can see if its running by running `systemctl --user status gpg-agent-ssh.socket`.
 
 Add this to your `.bashrc` to initialize env var properly:
 ```bash
