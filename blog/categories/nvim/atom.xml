@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nvim | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/nvim/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Nvim terminal + ClojureScript and figwheel]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/"/>
+    <updated>2015-06-15T19:37:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel</id>
+    <content type="html"><![CDATA[<p>This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.</p>
+
+<!--more-->
+
+
+<p><a href="http://neovim.io/">NeoVim</a> nowadays is almost fully compatible with vim.
+It is able to reuse my <a href="https://github.com/Gonzih/.vim/blob/master/vimrc">.vimrc</a> file without any issues.
+And recently it got proper terminal emulator built-in.
+So how about reusing it for ClojureScript development?</p>
+
+<p>If you are lazy (like I am) and don't want to setup piggieback support
+for fireplace.vim or don't feel like tmux integration is good enough
+this solution should be your new starting point.</p>
+
+<p>Just open some clojure[script] file and create second split.
+Open terminal using <code>:terminal</code> command.</p>
+
+<p>Here are some keybindings that will help you to send code from
+your clojure buffer to the terminal buffer.</p>
+
+<p><code>vim
+if has("nvim")
+  " Open terminal and run lein figwheel
+  nmap &lt;Leader&gt;term &lt;C-w&gt;v:terminal&lt;CR&gt;lein figwheel&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p
+  " Evaluate anything from the visual mode in the next window
+  vmap &lt;buffer&gt; ,e y&lt;C-w&gt;wpi&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p
+  " Evaluate outer most form
+  nmap &lt;buffer&gt; ,e ^v%,e
+  " Evaluate buffer"
+  nmap &lt;buffer&gt; ,b ggVG,e
+endif
+</code></p>
+
+<p>Hey! Now you can finally stop looking at the emacs land!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/gonzih
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://blog.gonzih.me
+  * I am gonzih (https://keybase.io/gonzih) on keybase.
+  * I have a public key ASDuSCBmos0345fAhkjGxVRvU8p40Ikp8RGA5wu5UxdTLQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120ab3f223c828bb30c83830271b68c2f39dc405606440e95f04fe93dc3502c65c40a",
+      "host": "keybase.io",
+      "kid": "0120ee482066a2cd37e397c08648c6c5546f53ca78d08929f11180e70bb95317532d0a",
+      "uid": "228d02a15384b3b2bd6a09e68fe8e719",
+      "username": "gonzih"
+    },
+    "merkle_root": {
+      "ctime": 1533322232,
+      "hash": "5789d79fc4055a9a53dad15d691fe593fae9919727d4387d1d2d0135a50e5b47ce82dfb82f881d1dc15eb66d0d4b58eacefb39f514b4f5f103aa44d80f7ecee9",
+      "hash_meta": "20d7494888e6424ad4743f16b99e1145f762258a3715493b621d2322603f09a0",
+      "seqno": 3405183
+    },
+    "service": {
+      "entropy": "MQD4tVHP1d42A1djXq/VPUTH",
+      "hostname": "blog.gonzih.me",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "2.3.0"
+  },
+  "ctime": 1533322256,
+  "expire_in": 504576000,
+  "prev": "0ff259c5a2335afe055b3a9bb6e7f97ffa6bdd74d909fe92d2ef054b37fc4513",
+  "seqno": 14,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg7kggZqLNN+OXwIZIxsVUb1PKeNCJKfERgOcLuVMXUy0Kp3BheWxvYWTESpcCDsQgD/JZxaIzWv4FWzqbtuf5f/pr3XTZCf6S0u8FSzf8RRPEILM1H2GdQB38BLa/EddQG5lgH4ZFpStPxaooKlC5sFkTAgHCo3NpZ8RApnJOtn1xtuxrkd+dWp8BjRCXRR6YOFfJAAS8MxAXRbuxZco2nCYM2/reIjC1fIvrdFWv8jkDEu6DOcKD5blIAahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIKMYQWW+HJFbfinkaUlvoQRGQ5zNy3UwU5MeMIQlh2SFo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/gonzih
+
+==================================================================

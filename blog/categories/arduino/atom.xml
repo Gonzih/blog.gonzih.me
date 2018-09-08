@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: arduino | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/arduino/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hardware Cut/Copy/Paste with Arduino Leonardo]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/"/>
+    <updated>2014-03-04T10:02:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo</id>
+    <content type="html"><![CDATA[<p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
+I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw <a href="http://keyboard.io">keyboard.io</a>.
+Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
+Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.</p>
+
+<!-- more -->
+
+
+<h2>Emulating keyboard on Leonardo.</h2>
+
+<p>With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
+Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the <a href="http://arduino.cc/en/Reference/MouseKeyboard">documentation</a>.</p>
+
+<h2>Arduino wiring.</h2>
+
+<p>Wiring will be very simple. We will have 3 buttons on pins 2, 3 and 4 with pull down resistors.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/hardware-cut-copy-paste/schematics1.png" alt="schematics1" /></p>
+
+<h2>Hardware Cut/Copy/Paste.</h2>
+
+<p>So this will be our simplest solution to the my original idea. Here is Arduino sketch:</p>
+
+<p>```cpp
+// version 0.0.1</p>
+
+<p>int cutPin   = 2;
+int copyPin  = 3;
+int pastePin = 4;</p>
+
+<p>void setup() {
+  pinMode(cutPin, INPUT);
+  pinMode(copyPin, INPUT);
+  pinMode(pastePin, INPUT);
+  Keboard.begin()
+}</p>
+
+<p>void loop() {
+  if (digitalRead(cutpin)   == HIGH) { cut();   }
+  if (digitalRead(copypin)  == HIGH) { copy();  }
+  if (digitalRead(pastepin) == HIGH) { paste(); }
+}</p>
+
+<p>void pressCtrl() {
+  Keyboard.press(KEY_LEFT_CTRL);
+}</p>
+
+<p>void pressShift() {
+  Keyboard.press(KEY_LEFT_SHIFT);
+}</p>
+
+<p>void cut() {
+  pressCtrl();
+  Keyboard.write('x');
+  Keyboard.releaseAll();
+}</p>
+
+<p>void copy() {
+  pressCtrl();
+  Keyboard.write('c');
+  Keyboard.releaseAll();
+}</p>
+
+<p>void paste() {
+  pressCtrl();
+  Keyboard.write('v');
+  Keyboard.releaseAll();
+}
+```</p>
+
+<p>It works! But... for example in my terminal I use Ctrl+Shift+C to copy selection.
+Of course I can press Shift+Copy combination. But maybe there is a better solution.</p>
+
+<h2>Automatic detection of key combination.</h2>
+
+<p>Idea is simple. We have serial port open on Leonardo and our Linux PC.
+When I'm pressing copy on Leonardo it will ask through serial port PC about required combination.
+On PC there will be running ruby script that will detect currently focused window and look up at the configuration file for
+keys combination. If there is no combination will be found or reply from script will be timed out we will use default combination.</p>
+
+<h2>Detecting WM_CLASS from Ruby (2.0.0+).</h2>
+
+<p>From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
+Here is Window class for the job:</p>
+
+<p>```ruby
+class Window
+  def self.current</p>
+
+<pre><code>Window.new(`xprop -root`)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def initialize(data)</p>
+
+<pre><code>@root_data = data
+</code></pre>
+
+<p>  end</p>
+
+<p>  def id</p>
+
+<pre><code>matches = @root_data.lines.grep(/_NET_ACTIVE_WINDOW\(WINDOW\)/)
+
+if matches
+  match_data = matches.first.match(/_NET_ACTIVE_WINDOW\(WINDOW\):.*#\s(.*)\n/)
+  match_data[1]
+else
+  raise 'No Window id was found'
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def wm_class</p>
+
+<pre><code>out = `xprop -id '#{id}'`
+matches = out.lines.grep(/WM_CLASS\(STRING\)/)
+
+if matches
+  match_data = matches.first.match(/WM_CLASS\(STRING\)[^"]*(".*")\n/)
+  match_data[1].gsub(/"/,'').split(', ')
+else
+  raise 'No Window class was found'
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def is_a?(class_string)</p>
+
+<pre><code>wm_class.any? { |s| s == class_string }
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage examples:</p>
+
+<p>```ruby
+Window.current.wm_class
+=> ["gvim", "Gvim"]</p>
+
+<p>Window.current.is_a?("gvim")
+=> true
+```</p>
+
+<h2>Keys configuration.</h2>
+
+<p>For now lets implement simplest class for that and store all configuration in constant.</p>
+
+<p>```ruby
+class Keys
+  CONFIG = {</p>
+
+<pre><code>'terminology' =&gt; {
+  'copy'  =&gt; 'ctrl-shift-c',
+  'cut'   =&gt; 'ctrl-shift-c',
+  'paste' =&gt; 'ctrl-shift-v'
+}
+</code></pre>
+
+<p>  }</p>
+
+<p>  def self.<a href="key"></a></p>
+
+<pre><code>CONFIG[key]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.for(window)</p>
+
+<pre><code>window.wm_class.map do |k|
+  CONFIG[k]
+end.compact.first
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage:</p>
+
+<p>```ruby
+Keys['terminology']['copy']
+=> 'ctrl-shift-c'</p>
+
+<h1>When current window is terminology</h1>
+
+<p>Keys.for(Window.current)['copy']
+=> 'ctrl-shift-c'
+```</p>
+
+<h2>Communicating with Arduino via SerialPort.</h2>
+
+<p>Code below uses sketch described above with redefined copy/paste/cut functions.</p>
+
+<p>```cpp
+String stringIn;
+// Let's assume than combination aren't longer than 4 keys
+String collectedStrings[4];
+int counter, inByte, i;</p>
+
+<p>void setup(){
+  Serial.begin(9600);
+  counter = 0;
+  stringIn = String("");
+}</p>
+
+<p>void cut() {
+  Serial.println("cut");
+}</p>
+
+<p>void copy() {
+  Serial.println("copy");
+}</p>
+
+<p>void paste() {
+  Serial.println("paste");
+}</p>
+
+<p>void resetReader() {
+  counter = 0
+  stringIn = String("")
+  for (i = 0; i &lt;= 4; i++) {</p>
+
+<pre><code>collectedStrings[i] = String("")
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>void readLine() {
+  while(Serial.available()){</p>
+
+<pre><code>inByte = Serial.read();
+stringIn += inByte;
+
+if (inByte == '-'){  // Handle delimiter
+  collectedStrings[counter] = String(stringIn);
+  stringIn = String("");
+  counter = counter + 1;
+}
+
+if(inByte ==  '\r'){  // end of line
+  resetReader();
+  return;
+}
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>void executeCombination() {
+  for(i = 0; i &lt;= 4; i++) {</p>
+
+<pre><code>pressKey(collectedstrings[i]);
+</code></pre>
+
+<p>  }</p>
+
+<p>  Keyboard.releaseAll();
+}</p>
+
+<p>void pressKeys(String key) {
+  switch(key) {</p>
+
+<pre><code>case "ctrl":
+  pressCtrl();
+  break;
+case "shift":
+  pressShift();
+  break;
+default:
+  char[] arr = key.toCharArray();
+  char k = arr[0];
+  Keyboard.write(k);
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>More information on ruby-serialport is <a href="http://ruby-serialport.rubyforge.org/">here</a>.</p>
+
+<p>```ruby
+require 'serialport'</p>
+
+<p>class Connection
+  def initialize(port: nil)</p>
+
+<pre><code>unless port
+  port = `ls /dev/ttyACM*`.lines.first
+end
+
+@connection = SerialPort.new(port, 9600)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def loop</p>
+
+<pre><code>loop do
+  begin
+    action = @connection.readline
+    @connection.write("#{Keys.for(Window.current.wm_class)[action]}\r")
+  rescue Exception =&gt; e
+    p e
+  end
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage:</p>
+
+<p><code>ruby
+Connection.new.loop # starts infinite loop
+</code></p>
+
+<p><strong>PS.</strong> This post is more like collection of theoretical pices of code.
+I have no time (and probably enthusiasm) to put all this together (at least right now).
+So this implementation can be broken and inaccurate in many ways.
+Feel free to point out any errors and mistakes and I will fix them.</p>
+
+<!--
+vim: ts=2:sts=2:sw=2:expandtab
+-->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building RC Toy with Clojure]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/"/>
+    <updated>2013-03-19T11:09:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure</id>
+    <content type="html"><![CDATA[<p>Bored and have free time? Lets build something.
+Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
+
+<!-- more -->
+
+
+<p>First of all we need some parts.</p>
+
+<ul>
+<li>Tamiya Universal Plate Set (TAM70157) (better to order 2 pcs)</li>
+<li>Tamiya Track and Wheel Set (TAM70100)</li>
+<li>Tamiya Twin Motor Gearbox  (TAM70097)</li>
+<li>Arduino (I have UNO and Leonardo, UNO was choosen since I don't need to make modifications in Firmata code for it (except baudrate))</li>
+<li>HBridge IC L293 (L293B was used)</li>
+<li>Bluetooth module (you can buy Arduino ready module, I will be using cheapest possible module)</li>
+<li>Bluetooth in PC</li>
+<li>Wires</li>
+<li>Batteries or Accumulator (I have 9v batteries so I will use them)</li>
+<li>Gamepad (Logitech Rumble Gemapad F510 was used)</li>
+</ul>
+
+
+<h1>Putting things together</h1>
+
+<h2>Chassis</h2>
+
+<p>First lets build gearbox. You can use it in few different modes of gear ratio. I selected 114.7:1 gear ratio (lucky guess).
+Read instructions, take your time. I had 2 9v motors, so since I will be using 9v batteries I decided to replace default motors with 9v ones.</p>
+
+<p>Next assemble tracks. Pretty easy, right? Next is time to put it all together. Since I had only 1 plate I made second one from peace of plexiglass.
+I made something like 2 floored chassis. First floor is for motor and wheels (and maybe batteries) and second is for Arduino (and maybe batterries).</p>
+
+<h2>Bluetooth</h2>
+
+<p>We need to do 2 thing with our cheap bluetooth module:</p>
+
+<p>Solder legs to it
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.jpg" alt="Soldered bluetooth module" /></p>
+
+<p>Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 5v)
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/bluetooth-module-for-Arduino.svg" alt="Voltage devider" /></p>
+
+<h2>Gearbox and HBridge Driver</h2>
+
+<p>To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I'm afraid it would be messy.
+To understand how HBridge works you should read <a href="http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview">Adafruit post</a>.</p>
+
+<p>HBridge -> Arduino Schematics:
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg" alt="Schematics" /></p>
+
+<h2>Final version</h2>
+
+<h3>Photos</h3>
+
+<p><img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-001.jpg" alt="rc-toy-001" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-002.jpg" alt="rc-toy-002" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-003.jpg" alt="rc-toy-003" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-004.jpg" alt="rc-toy-004" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-005.jpg" alt="rc-toy-005" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-006.jpg" alt="rc-toy-006" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-007.jpg" alt="rc-toy-007" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-008.jpg" alt="rc-toy-008" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-009.jpg" alt="rc-toy-009" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-010.jpg" alt="rc-toy-010" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-011.jpg" alt="rc-toy-011" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-012.jpg" alt="rc-toy-012" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-014.jpg" alt="rc-toy-014" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-016.jpg" alt="rc-toy-016" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-017.jpg" alt="rc-toy-017" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-018.jpg" alt="rc-toy-018" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-019.jpg" alt="rc-toy-019" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-020.jpg" alt="rc-toy-020" />
+<img src="https://dl.dropbox.com/u/4109351/octopress/rc-toy/photos/photo-021.jpg" alt="rc-toy-021" /></p>
+
+<h3>Video</h3>
+
+<p><video width='640' height='480' preload='none' controls poster=' https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1-cover.jpg'><source src='https://dl.dropbox.com/u/4109351/octopress/rc-toy/video-1.flv' type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/></video></p>
+
+<h1>Writing some code</h1>
+
+<h2>Bluetooth as Serial port</h2>
+
+<p>I used blueman on my Arch Laptop. Gui is straightforward and easy to use.</p>
+
+<h2>Gamepad and kernel</h2>
+
+<p>You need to find kernel module for your gamepad. For my gamepad module <code>joydev</code> was required.
+After module is loaded you should see new device in <code>/dev/input</code>.</p>
+
+<h2>Clojure code</h2>
+
+<p>I used <a href="http://clojure.org/">Clojure</a> as main language for controlling Arduino. I took <a href="https://github.com/nakkaya/clodiuno">Clodiuno</a> library.
+It is Firmata protocol implementation for Clojure. Why Firmata? Because it's easy, fast and provides great way to extend your project in future.</p>
+
+<p>So I wrote some code, uploaded Firmata to Arduino. And... it's not working.</p>
+
+<p>After some digging in Firmata and Clodiuno code I wrote 2 pull request to Clodiuno.</p>
+
+<p>First issue was that bluetooth uses 9600 baudrate for communications. Fix? <a href="https://github.com/nakkaya/clodiuno/pull/5">pull.</a></p>
+
+<ul>
+<li>Update standart Firmata example code in Arduino IDE. Change baudrate to 9600.</li>
+<li>Change Clodiuno baudrate to 9600.</li>
+</ul>
+
+
+<p>Second was that Clodiuno waits for version response from Firmata on startup. It's ok for wired UNO since it will be restarted when serial connection is established.
+But boards like Leonardo or if you are using bluetooth miss that behavior.</p>
+
+<p>Fix? <a href="https://github.com/nakkaya/clodiuno/pull/6">pull.</a> Manually ask firmware version on Clodiuno initialization.</p>
+
+<p>Most of controller related logic was extracted from awesome library <a href="https://github.com/gavilancomun/jinput-overtone">overtone-jinput</a>.
+I just replaced overtone related events handling with my own code based on Clodiuno.</p>
+
+<p>Final version of code is on <a href="https://github.com/Gonzih/clj-arduino-rc-toy">GitHub</a></p>
+
+<p>You can run it with <code>./run.sh</code>.</p>
+
+<h1>Raspberry Pi</h1>
+
+<p>Currently work in progress on moving Clojure code to Rapberry Pi.</p>
+
+<h2>Fixed Issues</h2>
+
+<h3>Native dependencies issue</h3>
+
+<p>Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:</p>
+
+<p>```sh</p>
+
+<h1>INFO: Failed to load library: no jinput-linux64 in java.library.path</h1>
+
+<p>sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so`
+```</p>
+
+<h3>Gamepad configuration</h3>
+
+<p>Add <code>joydev</code> to <code>/etc/modules</code> to see gamepad in <code>/etc/input</code>.
+Also you need to switch gamepad to direct input mode (X -> D switch on the back of gamepad).</p>
+
+<h2>Unfixed Issues</h2>
+
+<h3>Bluetooth as Serial port</h3>
+
+<p>To scan for devices from command line use <code>hcitool scan</code>.</p>
+
+<p>To bind bluetooth to serial port on startup use following code (untested yet):</p>
+
+<p>```text /etc/bluetooth/rfcomm.conf
+rfcomm0 {</p>
+
+<pre><code>    bind yes;
+    device mac-adress-of-bluetooth-on-arduino;
+    channel 1;
+    comment "Arduino";
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>JInput permissions</h3>
+
+<p>For now I have no idea how to fix that issue. Looks like something is wrong with permissions.
+<code>
+Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

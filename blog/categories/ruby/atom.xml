@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hardware Cut/Copy/Paste with Arduino Leonardo]]></title>
+    <link href="http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo/"/>
+    <updated>2014-03-04T10:02:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2014/03/04/hardware-cut-slash-copy-slash-paste-with-arduino-leonardo</id>
+    <content type="html"><![CDATA[<p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
+I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw <a href="http://keyboard.io">keyboard.io</a>.
+Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
+Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.</p>
+
+<!-- more -->
+
+
+<h2>Emulating keyboard on Leonardo.</h2>
+
+<p>With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
+Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the <a href="http://arduino.cc/en/Reference/MouseKeyboard">documentation</a>.</p>
+
+<h2>Arduino wiring.</h2>
+
+<p>Wiring will be very simple. We will have 3 buttons on pins 2, 3 and 4 with pull down resistors.</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/hardware-cut-copy-paste/schematics1.png" alt="schematics1" /></p>
+
+<h2>Hardware Cut/Copy/Paste.</h2>
+
+<p>So this will be our simplest solution to the my original idea. Here is Arduino sketch:</p>
+
+<p>```cpp
+// version 0.0.1</p>
+
+<p>int cutPin   = 2;
+int copyPin  = 3;
+int pastePin = 4;</p>
+
+<p>void setup() {
+  pinMode(cutPin, INPUT);
+  pinMode(copyPin, INPUT);
+  pinMode(pastePin, INPUT);
+  Keboard.begin()
+}</p>
+
+<p>void loop() {
+  if (digitalRead(cutpin)   == HIGH) { cut();   }
+  if (digitalRead(copypin)  == HIGH) { copy();  }
+  if (digitalRead(pastepin) == HIGH) { paste(); }
+}</p>
+
+<p>void pressCtrl() {
+  Keyboard.press(KEY_LEFT_CTRL);
+}</p>
+
+<p>void pressShift() {
+  Keyboard.press(KEY_LEFT_SHIFT);
+}</p>
+
+<p>void cut() {
+  pressCtrl();
+  Keyboard.write('x');
+  Keyboard.releaseAll();
+}</p>
+
+<p>void copy() {
+  pressCtrl();
+  Keyboard.write('c');
+  Keyboard.releaseAll();
+}</p>
+
+<p>void paste() {
+  pressCtrl();
+  Keyboard.write('v');
+  Keyboard.releaseAll();
+}
+```</p>
+
+<p>It works! But... for example in my terminal I use Ctrl+Shift+C to copy selection.
+Of course I can press Shift+Copy combination. But maybe there is a better solution.</p>
+
+<h2>Automatic detection of key combination.</h2>
+
+<p>Idea is simple. We have serial port open on Leonardo and our Linux PC.
+When I'm pressing copy on Leonardo it will ask through serial port PC about required combination.
+On PC there will be running ruby script that will detect currently focused window and look up at the configuration file for
+keys combination. If there is no combination will be found or reply from script will be timed out we will use default combination.</p>
+
+<h2>Detecting WM_CLASS from Ruby (2.0.0+).</h2>
+
+<p>From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
+Here is Window class for the job:</p>
+
+<p>```ruby
+class Window
+  def self.current</p>
+
+<pre><code>Window.new(`xprop -root`)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def initialize(data)</p>
+
+<pre><code>@root_data = data
+</code></pre>
+
+<p>  end</p>
+
+<p>  def id</p>
+
+<pre><code>matches = @root_data.lines.grep(/_NET_ACTIVE_WINDOW\(WINDOW\)/)
+
+if matches
+  match_data = matches.first.match(/_NET_ACTIVE_WINDOW\(WINDOW\):.*#\s(.*)\n/)
+  match_data[1]
+else
+  raise 'No Window id was found'
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def wm_class</p>
+
+<pre><code>out = `xprop -id '#{id}'`
+matches = out.lines.grep(/WM_CLASS\(STRING\)/)
+
+if matches
+  match_data = matches.first.match(/WM_CLASS\(STRING\)[^"]*(".*")\n/)
+  match_data[1].gsub(/"/,'').split(', ')
+else
+  raise 'No Window class was found'
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def is_a?(class_string)</p>
+
+<pre><code>wm_class.any? { |s| s == class_string }
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage examples:</p>
+
+<p>```ruby
+Window.current.wm_class
+=> ["gvim", "Gvim"]</p>
+
+<p>Window.current.is_a?("gvim")
+=> true
+```</p>
+
+<h2>Keys configuration.</h2>
+
+<p>For now lets implement simplest class for that and store all configuration in constant.</p>
+
+<p>```ruby
+class Keys
+  CONFIG = {</p>
+
+<pre><code>'terminology' =&gt; {
+  'copy'  =&gt; 'ctrl-shift-c',
+  'cut'   =&gt; 'ctrl-shift-c',
+  'paste' =&gt; 'ctrl-shift-v'
+}
+</code></pre>
+
+<p>  }</p>
+
+<p>  def self.<a href="key"></a></p>
+
+<pre><code>CONFIG[key]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.for(window)</p>
+
+<pre><code>window.wm_class.map do |k|
+  CONFIG[k]
+end.compact.first
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage:</p>
+
+<p>```ruby
+Keys['terminology']['copy']
+=> 'ctrl-shift-c'</p>
+
+<h1>When current window is terminology</h1>
+
+<p>Keys.for(Window.current)['copy']
+=> 'ctrl-shift-c'
+```</p>
+
+<h2>Communicating with Arduino via SerialPort.</h2>
+
+<p>Code below uses sketch described above with redefined copy/paste/cut functions.</p>
+
+<p>```cpp
+String stringIn;
+// Let's assume than combination aren't longer than 4 keys
+String collectedStrings[4];
+int counter, inByte, i;</p>
+
+<p>void setup(){
+  Serial.begin(9600);
+  counter = 0;
+  stringIn = String("");
+}</p>
+
+<p>void cut() {
+  Serial.println("cut");
+}</p>
+
+<p>void copy() {
+  Serial.println("copy");
+}</p>
+
+<p>void paste() {
+  Serial.println("paste");
+}</p>
+
+<p>void resetReader() {
+  counter = 0
+  stringIn = String("")
+  for (i = 0; i &lt;= 4; i++) {</p>
+
+<pre><code>collectedStrings[i] = String("")
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>void readLine() {
+  while(Serial.available()){</p>
+
+<pre><code>inByte = Serial.read();
+stringIn += inByte;
+
+if (inByte == '-'){  // Handle delimiter
+  collectedStrings[counter] = String(stringIn);
+  stringIn = String("");
+  counter = counter + 1;
+}
+
+if(inByte ==  '\r'){  // end of line
+  resetReader();
+  return;
+}
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>void executeCombination() {
+  for(i = 0; i &lt;= 4; i++) {</p>
+
+<pre><code>pressKey(collectedstrings[i]);
+</code></pre>
+
+<p>  }</p>
+
+<p>  Keyboard.releaseAll();
+}</p>
+
+<p>void pressKeys(String key) {
+  switch(key) {</p>
+
+<pre><code>case "ctrl":
+  pressCtrl();
+  break;
+case "shift":
+  pressShift();
+  break;
+default:
+  char[] arr = key.toCharArray();
+  char k = arr[0];
+  Keyboard.write(k);
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>More information on ruby-serialport is <a href="http://ruby-serialport.rubyforge.org/">here</a>.</p>
+
+<p>```ruby
+require 'serialport'</p>
+
+<p>class Connection
+  def initialize(port: nil)</p>
+
+<pre><code>unless port
+  port = `ls /dev/ttyACM*`.lines.first
+end
+
+@connection = SerialPort.new(port, 9600)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def loop</p>
+
+<pre><code>loop do
+  begin
+    action = @connection.readline
+    @connection.write("#{Keys.for(Window.current.wm_class)[action]}\r")
+  rescue Exception =&gt; e
+    p e
+  end
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Usage:</p>
+
+<p><code>ruby
+Connection.new.loop # starts infinite loop
+</code></p>
+
+<p><strong>PS.</strong> This post is more like collection of theoretical pices of code.
+I have no time (and probably enthusiasm) to put all this together (at least right now).
+So this implementation can be broken and inaccurate in many ways.
+Feel free to point out any errors and mistakes and I will fix them.</p>
+
+<!--
+vim: ts=2:sts=2:sw=2:expandtab
+-->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[VisualRuby gem on OpenSUSE 13.1]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/"/>
+    <updated>2013-12-13T10:10:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1</id>
+    <content type="html"><![CDATA[<p><img src="https://dl.dropboxusercontent.com/u/4109351/octopress/visualruby/1.png" alt="visualruby" /></p>
+
+<p>I found out about ruby gem called <a href="http://visualruby.net/">visualruby</a> and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
+So to save my (or maybe your's if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
+I bet you can figure out similar packages for different distribution.</p>
+
+<!-- more -->
+
+
+<p><code>sh
+sudo zypper -n in \
+glib2 glib2-branding-openSUSE glib2-devel \
+atk-devel cairo-devel pango-devel gdk-pixbuf-devel \
+gtk2-devel gtksourceview2-devel glade
+</code></p>
+
+<p>Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
+It's not working very well (at least in examples) since most of stuff in suse 13.1 is based on gtk3+.
+But I'm still in process of figuring things out.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yin-Yang Call/cc puzzle in Ruby]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby/"/>
+    <updated>2013-11-26T11:23:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/11/26/yin-yang-callcc-puzzle-in-ruby</id>
+    <content type="html"><![CDATA[<p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
+
+<p>Here is Scheme implementation:</p>
+
+<p>```scheme
+(let* ((yin</p>
+
+<pre><code>    ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
+   (yang
+    ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
+</code></pre>
+
+<p>(yin yang))
+```</p>
+
+<p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+
+<!-- more -->
+
+
+<p><a href="http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/">Here</a> you can find good explanation,
+also few of explanations can be found on <a href="http://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work">StackOverflow</a>.</p>
+
+<p>After I understand how it works I got all that excited and implemented given puzzle in ruby:</p>
+
+<p>```ruby
+require "continuation"</p>
+
+<p>yin  = ->(cc) { print "@"; cc }.call(callcc { |c| c })
+yang = ->(cc) { print "*"; cc }.call(callcc { |c| c })</p>
+
+<p>yin.call(yang)
+```</p>
+
+<p>And it doesn't work. It prints <code>@*@*********...</code> forever.</p>
+
+<p>No idea why. Maybe there are some limitations of <a href="http://www.ruby-doc.org/core-2.0.0/Continuation.html">ruby's call/cc</a>.
+I will research further, but if you have any information about that feel free to comment or email me.</p>
+
+<p>Cheers!</p>
+
+<p><strong>UPDATE</strong> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
+So here is his fixed version:</p>
+
+<p>```ruby
+require "continuation"</p>
+
+<p>lambda do |yin, yang|
+  yin.call(yang)
+end.call(lambda { |cc| print "@"; cc }.call(callcc { |c| c }),</p>
+
+<pre><code>     lambda { |cc| print "*"; cc }.call(callcc { |c| c }))
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RSS/Atom reader in Clojure via IMAP]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap/"/>
+    <updated>2013-06-28T10:15:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/06/28/rss-slash-atom-reader-in-clojure-via-imap</id>
+    <content type="html"><![CDATA[<h3>Motivation</h3>
+
+<p>Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.</p>
+
+<!-- more -->
+
+
+<h3>Idea</h3>
+
+<p>Then I found post in the Racket community about storing your feeds in the IMAP folders using "APPEND" command by <a href="http://www.greghendershott.com/2013/05/feeds2gmail.html">Greg Hendershott</a>.
+That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.</p>
+
+<h3>Clojure version</h3>
+
+<p>First I implemented my <a href="https://github.com/Gonzih/feeds2imap.rb">prototype in Ruby</a> in few hours. I picked up Ruby because of built-in rss/atom and imap libraries.
+I used it for few days and liked it. Simple, reliable solution.
+So then I decided to rewrite it in Clojure.
+Why Clojure?
+Because it's pure fun to use.
+I decided to use java.mail framework for message storing and folder manipulations, feedparser-clj to fetch and parse rss/atom feeds and hiccup for templating.
+I was really pleased with feedparser-clj in comparison with Ruby built-in library.
+java.mail framework was not so bad as I was expecting at first.</p>
+
+<h3>How it works?</h3>
+
+<p>Here is project logic:</p>
+
+<ul>
+<li>Fetch folders and urls from feeds file.</li>
+<li>Fetch and parse RSS/Atom data from urls.</li>
+<li>Select only new items using cache file.</li>
+<li>Create required imap folders.</li>
+<li>Store new items as email messages.</li>
+<li>Mark items as read (put md5 hashes in to the clj file with set of old hashes).</li>
+</ul>
+
+
+<p>It's running now by cron (every hour) on my BeagleBone (using latest ejre version).</p>
+
+<p>Source code is hosted on github <a href="https://github.com/Gonzih/feeds2imap.clj">here</a>. Take a look at project README for usage.</p>
+
+<h3>More implementations</h3>
+
+<ul>
+<li><a href="https://github.com/Gonzih/feeds2imap.rb">My Ruby prototype</a></li>
+<li><a href="https://github.com/Gonzih/feeds2imap.clj">My Clojure implementation</a></li>
+<li><a href="https://github.com/greghendershott/feeds2gmail">Racket implementation</a></li>
+<li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
+    <link href="http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
+    <updated>2011-09-21T18:28:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
+    <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.
+``` text
+Building site: source -> public
+  File "<string>", line 1</p>
+
+<pre><code>import sys; print sys.executable
+                    ^
+</code></pre>
+
+<p>SyntaxError: invalid syntax
+```
+It's happens because RubyPython use Python version 2 by calling "python" command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with following code.
+<code>ruby ruby_python_arch_linux_fix.rb
+RubyPython.configure :python_exe =&gt; 'python2.7'
+</code></p>
+
+<p>Also if you get following lib.so related error:
+<code>text
+LoadError: Could not open library 'lib.so': lib.so: cannot open shared object file: No such file or directory
+</code>
+You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
+
+<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+
+<h3>Update</h3>
+
+<p>Another Workaround:
+edit "vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb" file (path might be different for you)
+```ruby
+-- 31 @library = find_python_lib
+++ 31 @library = "/usr/lib/libpython2.7.so"</p>
+
+<p>-- 126 %x(#{@python} -c "#{command}").chomp if @python
+++ 126 %x("#{@python} -c #{command}").chomp if @python
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux containers | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/linux-containers/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quick LXC configuration with netctl nat]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat/"/>
+    <updated>2013-04-16T07:42:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/04/16/fast-lxc-configuration-on-laptop-with-netctl-nat</id>
+    <content type="html"><![CDATA[<p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
+
+<!--more-->
+
+
+<p>Install <code>lxc</code> first.
+<code>sh
+sudo pacman -S lxc
+</code></p>
+
+<p>Next is bridge device for nat. I'm already migrated to netctl in arch linux so my configuration is for netctl.
+<code>ini /etc/netctl/lxcbridge
+Description="LXC Bridge connection"
+Interface=lxcbr0
+Connection=bridge
+BindsToInterfaces=()
+IP=static
+Address=192.168.100.1/24
+FwdDelay=0
+</code></p>
+
+<p>Make sure you have <code>dnsmasq</code> installed.
+<code>sh
+pacman -S dnsmasq
+</code></p>
+
+<p>Run interface.
+<code>sh
+sudo netctl start lxcbridge
+</code></p>
+
+<p>And enable it for startup
+<code>sh
+sudo netctl enable lxcbridge
+</code></p>
+
+<p>Add iptables rule:
+<code>sh
+sudo iptables -t nat -A POSTROUTING -o &lt;you-main-ethernet-device-here&gt; -j MASQUERADE
+</code></p>
+
+<p>Save iptables (as superuser):
+<code>
+iptables-save &gt; /etc/iptables/iptables.rules
+</code></p>
+
+<p>Enable ip_forward:
+<code>
+sudo sysctl net.ipv4.ip_forward=1
+</code>
+Or to save forwarding persisent add following line:
+<code>text /etc/sysctl.conf
+net.ipv4.ip_forward=1
+</code></p>
+
+<p>Create new Ubuntu container:
+<code>sh
+sudo lxc-create -n playtime -t ubuntu
+</code></p>
+
+<p>It will create new root filesystem with new configuration. Lets now change conatiner's configuration:
+<code>ini /var/lib/lxc/playtime/config
+lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = lxcbr0
+lxc.network.hwaddr = 00:FF:AA:00:00:01
+lxc.network.ipv4 = 192.168.100.10/24
+</code></p>
+
+<p>Lets boot our conatiner. Better use screen or tmux for it.
+<code>sh
+sudo lxc-start -n playtime
+</code></p>
+
+<p>Default user and password for ubuntu template is <code>ubuntu</code>.</p>
+
+<p>Login to container and add default gateway configuration on network up:
+```sh /etc/network/if-up.d/routes</p>
+
+<h1>! /bin/sh</h1>
+
+<p>route add default gw 192.168.100.1</p>
+
+<p>exit 0
+```</p>
+
+<p>Reboot container with <code>sudo reboot</code> in it.</p>
+
+<p>Now you can ssh to your container <code>ssh ubuntu@192.168.100.10</code>.
+You can also run container as daemon <code>sudo lxc-start -n playtime -d</code>.
+And you can shutdown container with <code>sudo shutdown</code> inside container.</p>
+
+<p>Thanks for reading. Let me know if I miss something or you know better way of configuring all this stuff.</p>
+]]></content>
+  </entry>
+  
+</feed>

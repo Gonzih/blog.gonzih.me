@@ -1,0 +1,238 @@
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.17-DEV" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Replacing shell scripts with Clojure&#43;JamVM &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="http://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="/post/"> Achives </a></li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://twitter.com/Gonzih"> Twitter </a></li>
+      
+        <li><a href="http://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="http://gonzih.me"> Homepage </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Replacing shell scripts with Clojure&#43;JamVM</h1>
+              <span class="post-date">Sun, Sep 28, 2014</span>
+                  <p>We all hate shell scripting.
+Scripts are annoyingly hard to debug, test and verify.
+Would be lovely, to use some kind of lisp for scripting, right?
+To do interactive development with repl in your favorite editor.
+To write it in a nice predictable language that you also enjoy.
+But sometimes it&rsquo;s impossible to add some external dependencies to the system.
+What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?</p>
+
+<p></p>
+
+<h1 id="basic-setup">Basic setup</h1>
+
+<p>First what we will need is to get clojure jar file:</p>
+
+<pre><code>wget -O /opt/clojure.jar 'http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'
+</code></pre>
+
+<p>Next lets create executable <code>/usr/bin/clojure</code> that will live in <code>/usr/bin</code> (or <code>/opt/bin</code> or <code>/home/youruser/bin</code>):</p>
+
+<pre><code class="language-bash">#!/bin/sh
+
+exec java -jar /opt/clojure.jar &quot;$@&quot;
+</code></pre>
+
+<p>And now it&rsquo;s time for our hello world script <code>/opt/test.clj</code>:</p>
+
+<pre><code class="language-clojure">#!/usr/bin/clojure
+
+(println &quot;hello world&quot;)
+</code></pre>
+
+<p>Make it executable:</p>
+
+<pre><code class="language-bash">chmod +x /opt/test.clj
+</code></pre>
+
+<p>And run it:</p>
+
+<pre><code class="language-bash">$ /opt/test.clj
+hello world
+</code></pre>
+
+<p>Yay! But it feels kind of slow:</p>
+
+<pre><code class="language-bash">time /opt/test.clj
+hello world
+
+real  0m2.684s
+user  0m2.239s
+sys   0m0.186s
+</code></pre>
+
+<p>2 seconds startup time, not really suitable for scripting, right?
+Can we improve that? What if there would be JVM with fast startup and low memory usage.</p>
+
+<h1 id="introducing-jamvm">Introducing JamVM.</h1>
+
+<p><em>&ldquo;But&hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&rdquo;</em></p>
+
+<p>I lied, sorry.</p>
+
+<p>Compiling JamVM with OpenJDK support:</p>
+
+<pre><code class="language-bash"># Fetching required dependencies and source
+apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
+cd /opt
+wget -O jamvm-2.0.0.tar.gz 'http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz'
+tar -xvzf jamvm-2.0.0.tar.gz
+
+# Building
+cd /opt/jamvm-2.0.0
+./configure --with-java-runtime-library=openjdk7 &amp;&amp; make check &amp;&amp; make &amp;&amp; make install
+
+# Installing in to the openjdk installation
+mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
+cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
+
+# Trying it out
+java -jamvm -version
+</code></pre>
+
+<p>JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
+You will need to use -jamvm option to java command to run it with small overhead vm.</p>
+
+<p>Let&rsquo;s update our clojure executable <code>/usr/bin/clojure</code>:</p>
+
+<pre><code class="language-bash">#!/bin/sh
+
+exec java -jamvm -jar /opt/clojure.jar &quot;$@&quot;
+</code></pre>
+
+<p>Let&rsquo;s try it out:</p>
+
+<pre><code class="language-bash">time /opt/test.clj
+hello world
+
+real  0m0.866s
+user  0m0.764s
+sys   0m0.076s
+</code></pre>
+
+<p>Better, right?</p>
+
+<h2 id="how-slow-is-jamvm-some-benchmarks">How slow is JamVM? Some benchmarks:</h2>
+
+<pre><code class="language-text">Clojure 1.6
+
+JamVM:
+
+(factorial 5000) Avg: 248.65890986500017
+(fib 20)         Avg: 35.33471996000001
+(sort-seq)       Avg: 405.7438969800002
+
+OpenJDK:
+
+(factorial 5000) Avg: 25.016900630000006
+(fib 20)         Avg: 0.69957772
+(sort-seq)       Avg: 11.553695560000001
+</code></pre>
+
+<p>Much slower, but if you think about it
+shell scripting most of the time is about executing external commands,
+IO and data filtering. Might be as well not so bad.
+Also memory usage of JamVM makes it perfect for embedded systems.</p>
+
+<h2 id="why-not-use-something-like-lein-exec">Why not use something like lein exec?</h2>
+
+<p>Lein exec is nice. But it adds overhead.
+If you need external dependencies you can solve it (in theory)
+with classpath manipulations in java command (<code>java -cp dep.jar:dep2.jar:.</code>).
+Still you can plug lein exec to JamVM if you want.</p>
+
+<h3 id="update">Update</h3>
+
+<p>I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
+so you can just run <code>apt-get -y install icedtea-7-jre-jamvm</code> to install latest build.</p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>
