@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   
-  <title>Yubikey as a portable SSH key &middot; Max Gonzih</title>
+  <title>YubiKey as a portable SSH key &middot; Max Gonzih</title>
   
 
   
@@ -73,20 +73,20 @@
 
         <div class="content container">
             <div class="post">
-                <h1>Yubikey as a portable SSH key</h1>
+                <h1>YubiKey as a portable SSH key</h1>
               <span class="post-date">Sat, Sep 8, 2018</span>
-                  <p>This blog post is just a bunch of shell snippets quickly put together that explain how to use yubikey as your ssh key.</p>
+                  <p>This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.</p>
 
 <p></p>
 
 <h2 id="setup">Setup</h2>
 
-<p>So first things first, we will have to enable CCID (smartcard interface) on yubikey:</p>
+<p>So first things first, we will have to enable CCID (smartcard interface) on YubiKey:</p>
 
 <pre><code class="language-shell">$ ykpersonalize -m82
 </code></pre>
 
-<p>Next step would be to change default PINs on yubikey:</p>
+<p>Next step would be to change default PINs on YubiKey:</p>
 
 <pre><code class="language-shell">$ gpg --card-edit
 
@@ -122,15 +122,15 @@ Your selection? 3
 
 </code></pre>
 
-<p>If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your yubikey:</p>
+<p>If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your YubiKey:</p>
 
 <pre><code class="language-shell">$ ykman openpgp reset
 WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
 </code></pre>
 
-<p>There are two ways to use your yubikey as a ssh key:</p>
+<p>There are two ways to use your YubiKey as a ssh key:</p>
 
-<h2 id="method-1-generating-keys-on-yubikey-itself">Method #1: Generating keys on yubikey itself</h2>
+<h2 id="method-1-generating-keys-on-yubikey-itself">Method #1: Generating keys on YubiKey itself</h2>
 
 <p>Simply run the following commands:</p>
 
@@ -139,14 +139,14 @@ WARNING! This will delete all stored OpenPGP keys and data and restore factory s
 gpg/card&gt; generate
 </code></pre>
 
-<p>Benefit of this method is that your keys and yubikey are self contained, this is also a downside of this method.
+<p>Benefit of this method is that your keys and YubiKey are self contained, this is also a downside of this method.
 If you lost a key, you also going to loose access to your private key.
-There is no way to backup secret keys from yubikey itself.
+There is no way to backup secret keys from YubiKey itself.
 I did not really test this method extensively, but still felt like mentioning this as a valuable option.</p>
 
 <h2 id="method-2-generating-a-subkey-for-your-own-private-key">Method #2: Generating a subkey for your own private key</h2>
 
-<p>So lets say you generated your own private key with id <code>ABCDEFG</code>, now we can generate 2 subkeys and store them on our yubikey.
+<p>So lets say you generated your own private key with id <code>ABCDEFG</code>, now we can generate 2 subkeys and store them on our YubiKey.
 The advantage of this approach is in the fact that subkeys can be revoked by using your private key.</p>
 
 <pre><code class="language-shell">$ gpg --edi-key ABCDEFG
@@ -186,7 +186,7 @@ Your selection? 1
 # And now lets select our main private key
 &gt; key 1
 
-# Time to upload card keys to our yubikey in to encryption slot
+# Time to upload card keys to our YubiKey in to encryption slot
 &gt; keytocard
 
 Signature key ....: ANOTHER ID
@@ -234,7 +234,7 @@ One socket that you should be interested in is <code>gpg-agent-ssh.socket</code>
 <pre><code class="language-shell">$ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
 </code></pre>
 
-<p>And if gpg-agent is setup properly you should be ready to go. Just plug in your yubikey and try to ssh to some host, you should see PIN prompt which means everything works as expected.</p>
+<p>And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.</p>
             </div>
 
             

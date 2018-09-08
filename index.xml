@@ -13,23 +13,23 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Yubikey as a portable SSH key</title>
+      <title>YubiKey as a portable SSH key</title>
       <link>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</link>
       <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</guid>
-      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use yubikey as your ssh key.&lt;/p&gt;
+      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
 
-&lt;p&gt;So first things first, we will have to enable CCID (smartcard interface) on yubikey:&lt;/p&gt;
+&lt;p&gt;So first things first, we will have to enable CCID (smartcard interface) on YubiKey:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykpersonalize -m82
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Next step would be to change default PINs on yubikey:&lt;/p&gt;
+&lt;p&gt;Next step would be to change default PINs on YubiKey:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --card-edit
 
@@ -65,15 +65,15 @@ Your selection? 3
 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your yubikey:&lt;/p&gt;
+&lt;p&gt;If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your YubiKey:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykman openpgp reset
 WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;There are two ways to use your yubikey as a ssh key:&lt;/p&gt;
+&lt;p&gt;There are two ways to use your YubiKey as a ssh key:&lt;/p&gt;
 
-&lt;h2 id=&#34;method-1-generating-keys-on-yubikey-itself&#34;&gt;Method #1: Generating keys on yubikey itself&lt;/h2&gt;
+&lt;h2 id=&#34;method-1-generating-keys-on-yubikey-itself&#34;&gt;Method #1: Generating keys on YubiKey itself&lt;/h2&gt;
 
 &lt;p&gt;Simply run the following commands:&lt;/p&gt;
 
@@ -82,14 +82,14 @@ WARNING! This will delete all stored OpenPGP keys and data and restore factory s
 gpg/card&amp;gt; generate
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Benefit of this method is that your keys and yubikey are self contained, this is also a downside of this method.
+&lt;p&gt;Benefit of this method is that your keys and YubiKey are self contained, this is also a downside of this method.
 If you lost a key, you also going to loose access to your private key.
-There is no way to backup secret keys from yubikey itself.
+There is no way to backup secret keys from YubiKey itself.
 I did not really test this method extensively, but still felt like mentioning this as a valuable option.&lt;/p&gt;
 
 &lt;h2 id=&#34;method-2-generating-a-subkey-for-your-own-private-key&#34;&gt;Method #2: Generating a subkey for your own private key&lt;/h2&gt;
 
-&lt;p&gt;So lets say you generated your own private key with id &lt;code&gt;ABCDEFG&lt;/code&gt;, now we can generate 2 subkeys and store them on our yubikey.
+&lt;p&gt;So lets say you generated your own private key with id &lt;code&gt;ABCDEFG&lt;/code&gt;, now we can generate 2 subkeys and store them on our YubiKey.
 The advantage of this approach is in the fact that subkeys can be revoked by using your private key.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --edi-key ABCDEFG
@@ -129,7 +129,7 @@ Your selection? 1
 # And now lets select our main private key
 &amp;gt; key 1
 
-# Time to upload card keys to our yubikey in to encryption slot
+# Time to upload card keys to our YubiKey in to encryption slot
 &amp;gt; keytocard
 
 Signature key ....: ANOTHER ID
@@ -177,7 +177,7 @@ One socket that you should be interested in is &lt;code&gt;gpg-agent-ssh.socket&
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;And if gpg-agent is setup properly you should be ready to go. Just plug in your yubikey and try to ssh to some host, you should see PIN prompt which means everything works as expected.&lt;/p&gt;</description>
+&lt;p&gt;And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.&lt;/p&gt;</description>
     </item>
     
     <item>
