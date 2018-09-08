@@ -235,6 +235,27 @@ One socket that you should be interested in is <code>gpg-agent-ssh.socket</code>
 </code></pre>
 
 <p>And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.</p>
+
+<h2 id="caching-pin-on-a-key-itself">Caching PIN on a key itself</h2>
+
+<p>It might be annoying to type in PIN on every action every time, there is an option to cache PIN on YubiKey itself, so you will have to input PIN only once after you plugged your key (will have to do that every time you unplug/plug your key) for every action (separate key cache for signing/authenticating using the key).
+To do that you should enable <code>forcesig</code> in <code>gpg</code>:</p>
+
+<pre><code class="language-shell">$ gpg --card-edit
+
+gpg/card&gt; admin
+Admin commands are allowed
+
+gpg/card&gt; forcesig
+gpg/card&gt; save
+</code></pre>
+
+<p>To add extra layer of security, you can enable <a href="https://developers.yubico.com/PGP/Card_edit.html">YubiKey 4 Touch</a> feature (every action will have to be confirmed with a touch), this can be enabled using <code>yubikey-manager</code> cli:</p>
+
+<pre><code class="language-shell">$ ykman openpgp touch aut on
+$ ykman openpgp touch sig on
+$ ykman openpgp touch enc on
+</code></pre>
             </div>
 
             
