@@ -3,7 +3,9 @@ push:
 
 generate:
 	ls -lha /var/blog
+	du -hs *
 	hugo
+	du -hs *
 
 preview:
 	hugo server --bind 0.0.0.0
