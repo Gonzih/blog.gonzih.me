@@ -6,7 +6,7 @@ generate:
 	hugo
 
 preview:
-	hugo server
+	hugo server --bind 0.0.0.0
 
 TS := $(date)
 public:
