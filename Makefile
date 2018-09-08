@@ -1,9 +1,6 @@
 push:
 	git push
 
-go-get-update:
-	go get -u github.com/spf13/hugo
-
 generate:
 	ls -lha /var/blog
 	hugo
