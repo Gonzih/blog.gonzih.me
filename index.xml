@@ -9,8 +9,176 @@
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 11 Dec 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Sep 2018 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Yubikey as a portable SSH key</title>
+      <link>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</guid>
+      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use yubikey as your ssh key.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;So first things first, we will have to enable CCID (smartcard interface) on yubikey:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykpersonalize -m82
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next step would be to change default PINs on yubikey:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --card-edit
+
+gpg/card&amp;gt; admin
+Admin commands are allowed
+
+gpg/card&amp;gt; passwd
+gpg: OpenPGP card no. _____ detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+# default password here is 123456
+Your selection? 1
+
+...
+
+gpg: OpenPGP card no. _____ detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+# default password here is 12345678
+Your selection? 3
+
+...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your yubikey:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykman openpgp reset
+WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are 2 way to use your yubikey as a ssh key:&lt;/p&gt;
+
+&lt;h2 id=&#34;method-1-generating-keys-on-yubikey-itself&#34;&gt;Method #1: Generating keys on yubikey itself&lt;/h2&gt;
+
+&lt;p&gt;Simply run the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;gpg --card-edit
+
+gpg/card&amp;gt; generate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Benefit of this method is that your keys and yubikey are self contained, this is also a downside of this method.
+If you lost a key, you also going to loose access to your private key.
+There is no way to backup secret keys from yubikey itself.
+I did not really test this method extensively, but still felt like mentioning this as a valuable option.&lt;/p&gt;
+
+&lt;h2 id=&#34;method-2-generating-a-subkey-for-your-own-private-key&#34;&gt;Method #2: Generating a subkey for your own private key&lt;/h2&gt;
+
+&lt;p&gt;So lets say you generated your own private key with id &lt;code&gt;ABCDEFG&lt;/code&gt;, now we can generate 2 subkeys and store them on our yubikey.
+The advantage of this approach is in the fact that subkeys can be revoked by using your private key.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --edi-key ABCDEFG
+
+gpg&amp;gt; addcardkey
+
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+
+Please select the type of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? 3
+
+# Now answer bunch of questions and enter PIN couple of times to make gpg happy
+# After that we can do the same for the Signature key
+
+...
+
+gpg&amp;gt; addcardkey
+
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: OUR NEW KEY ID
+
+Please select the type of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? 1
+
+# Now lets use toggle to switch in to private key listing mode
+&amp;gt; toggle
+
+# And now lets select our main private key
+&amp;gt; key 1
+
+# Time to upload card keys to our yubikey in to encryption slot
+&amp;gt; keytocard
+
+Signature key ....: ANOTHER ID
+Encryption key....: [none]
+Authentication key: OUR NEW KEY ID
+
+Please select where to store the key:
+   (2) Encryption key
+Your selection? 2
+
+# And we are done here
+gpg&amp;gt; save
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Don&amp;rsquo;t forget to distribute your private key if needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --keyserver hkps://pgp.mit.edu --send-key ABCDEFG
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;final-steps&#34;&gt;Final steps&lt;/h2&gt;
+
+&lt;p&gt;Generating ssh key out of our gpg key is pretty straightforward:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --export-ssh-key ABCDEFG
+ssh-rsa BLABLABLA openpgp:someid
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now its time to start &lt;code&gt;gpg-agent&lt;/code&gt; with ssh support on:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg-agent --daemon --enable-ssh-support
+# or on older gpg versions you can generate env file that you can source in your .bashrc directly
+$ gpg-agent --daemon --enable-ssh-support --write-env-file ~/.gpg-agent-env
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or if you are on systemd based system there is a chance that your user already has bunch of systemd sockets enabled for this purpose.
+One socket that you should be interested is &lt;code&gt;gpg-agent-ssh.socket&lt;/code&gt;, you can see if its running by running &lt;code&gt;systemctl --user status gpg-agent-ssh.socket&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Add this to your &lt;code&gt;.bashrc&lt;/code&gt; to initialize env var properly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export SSH_AUTH_SOCK=&amp;quot;$(gpgconf --list-dirs agent-ssh-socket)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;setting-up-key-on-a-new-machine&#34;&gt;Setting up key on a new machine&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And if gpg-agent is setup properly you should be ready to go. Just plug in your yubikey and try to ssh to some host, you should see PIN prompt which means everything works as expected.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Arch Linux on Lenovo IdeaPad Y700 15&#34;</title>
@@ -1179,59 +1347,6 @@ gtk2-devel gtksourceview2-devel glade
 &lt;p&gt;Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
 It&amp;rsquo;s not working very well (at least in examples) since most of stuff in suse 13.1 is based on gtk3+.
 But I&amp;rsquo;m still in process of figuring things out.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Yin-Yang Call/cc puzzle in Ruby</title>
-      <link>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
-      <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
-      <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
-
-&lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(let* ((yin
-        ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
-       (yang
-        ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
-(yin yang))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/&#34;&gt;Here&lt;/a&gt; you can find good explanation,
-also few of explanations can be found on &lt;a href=&#34;http://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work&#34;&gt;StackOverflow&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;After I understand how it works I got all that excited and implemented given puzzle in ruby:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;continuation&amp;quot;
-
-yin  = -&amp;gt;(cc) { print &amp;quot;@&amp;quot;; cc }.call(callcc { |c| c })
-yang = -&amp;gt;(cc) { print &amp;quot;*&amp;quot;; cc }.call(callcc { |c| c })
-
-yin.call(yang)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And it doesn&amp;rsquo;t work. It prints &lt;code&gt;@*@*********...&lt;/code&gt; forever.&lt;/p&gt;
-
-&lt;p&gt;No idea why. Maybe there are some limitations of &lt;a href=&#34;http://www.ruby-doc.org/core-2.0.0/Continuation.html&#34;&gt;ruby&amp;rsquo;s call/cc&lt;/a&gt;.
-I will research further, but if you have any information about that feel free to comment or email me.&lt;/p&gt;
-
-&lt;p&gt;Cheers!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt; Abinoam Praxedes Marques Junio &lt;a href=&#34;https://www.ruby-forum.com/topic/4418860#1129811&#34;&gt;figured&lt;/a&gt; out that let (which is basically lambda application underneath) is crucial here.
-So here is his fixed version:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &amp;quot;continuation&amp;quot;
-
-lambda do |yin, yang|
-  yin.call(yang)
-end.call(lambda { |cc| print &amp;quot;@&amp;quot;; cc }.call(callcc { |c| c }),
-         lambda { |cc| print &amp;quot;*&amp;quot;; cc }.call(callcc { |c| c }))
-&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>

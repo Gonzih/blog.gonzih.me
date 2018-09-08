@@ -44,7 +44,7 @@
     <item>
       <title>Arch</title>
       <link>https://blog.gonzih.me/categories/arch/</link>
-      <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/categories/arch/</guid>
       <description></description>
@@ -169,10 +169,10 @@
     
     <item>
       <title>Call/Cc</title>
-      <link>https://blog.gonzih.me/categories/call/cc/</link>
+      <link>https://blog.gonzih.me/categories/call-cc/</link>
       <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/call/cc/</guid>
+      <guid>https://blog.gonzih.me/categories/call-cc/</guid>
       <description></description>
     </item>
     
@@ -539,7 +539,7 @@
     <item>
       <title>Linux</title>
       <link>https://blog.gonzih.me/categories/linux/</link>
-      <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/categories/linux/</guid>
       <description></description>
@@ -654,6 +654,15 @@
     </item>
     
     <item>
+      <title>Openpgp</title>
+      <link>https://blog.gonzih.me/categories/openpgp/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/openpgp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Opensuse</title>
       <link>https://blog.gonzih.me/categories/opensuse/</link>
       <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
@@ -677,6 +686,15 @@
       <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/categories/packages-manager/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pgp</title>
+      <link>https://blog.gonzih.me/categories/pgp/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/pgp/</guid>
       <description></description>
     </item>
     
@@ -888,6 +906,15 @@
     </item>
     
     <item>
+      <title>Ssh</title>
+      <link>https://blog.gonzih.me/categories/ssh/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Standing Desk</title>
       <link>https://blog.gonzih.me/categories/standing-desk/</link>
       <pubDate>Sun, 25 Aug 2013 00:00:00 +0000</pubDate>
@@ -1001,6 +1028,15 @@
       <pubDate>Thu, 21 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/categories/xmonad/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yubikey</title>
+      <link>https://blog.gonzih.me/categories/yubikey/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/yubikey/</guid>
       <description></description>
     </item>
     

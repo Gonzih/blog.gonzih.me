@@ -1,0 +1,244 @@
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.49-DEV" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Yubikey as a portable SSH key &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Yubikey as a portable SSH key</h1>
+              <span class="post-date">Sat, Sep 8, 2018</span>
+                  <p>This blog post is just a bunch of shell snippets quickly put together that explain how to use yubikey as your ssh key.</p>
+
+<p></p>
+
+<h2 id="setup">Setup</h2>
+
+<p>So first things first, we will have to enable CCID (smartcard interface) on yubikey:</p>
+
+<pre><code class="language-shell">$ ykpersonalize -m82
+</code></pre>
+
+<p>Next step would be to change default PINs on yubikey:</p>
+
+<pre><code class="language-shell">$ gpg --card-edit
+
+gpg/card&gt; admin
+Admin commands are allowed
+
+gpg/card&gt; passwd
+gpg: OpenPGP card no. _____ detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+# default password here is 123456
+Your selection? 1
+
+...
+
+gpg: OpenPGP card no. _____ detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+# default password here is 12345678
+Your selection? 3
+
+...
+
+</code></pre>
+
+<p>If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your yubikey:</p>
+
+<pre><code class="language-shell">$ ykman openpgp reset
+WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
+</code></pre>
+
+<p>There are 2 way to use your yubikey as a ssh key:</p>
+
+<h2 id="method-1-generating-keys-on-yubikey-itself">Method #1: Generating keys on yubikey itself</h2>
+
+<p>Simply run the following commands:</p>
+
+<pre><code class="language-shell">gpg --card-edit
+
+gpg/card&gt; generate
+</code></pre>
+
+<p>Benefit of this method is that your keys and yubikey are self contained, this is also a downside of this method.
+If you lost a key, you also going to loose access to your private key.
+There is no way to backup secret keys from yubikey itself.
+I did not really test this method extensively, but still felt like mentioning this as a valuable option.</p>
+
+<h2 id="method-2-generating-a-subkey-for-your-own-private-key">Method #2: Generating a subkey for your own private key</h2>
+
+<p>So lets say you generated your own private key with id <code>ABCDEFG</code>, now we can generate 2 subkeys and store them on our yubikey.
+The advantage of this approach is in the fact that subkeys can be revoked by using your private key.</p>
+
+<pre><code class="language-shell">$ gpg --edi-key ABCDEFG
+
+gpg&gt; addcardkey
+
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+
+Please select the type of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? 3
+
+# Now answer bunch of questions and enter PIN couple of times to make gpg happy
+# After that we can do the same for the Signature key
+
+...
+
+gpg&gt; addcardkey
+
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: OUR NEW KEY ID
+
+Please select the type of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? 1
+
+# Now lets use toggle to switch in to private key listing mode
+&gt; toggle
+
+# And now lets select our main private key
+&gt; key 1
+
+# Time to upload card keys to our yubikey in to encryption slot
+&gt; keytocard
+
+Signature key ....: ANOTHER ID
+Encryption key....: [none]
+Authentication key: OUR NEW KEY ID
+
+Please select where to store the key:
+   (2) Encryption key
+Your selection? 2
+
+# And we are done here
+gpg&gt; save
+</code></pre>
+
+<p>Don&rsquo;t forget to distribute your private key if needed:</p>
+
+<pre><code class="language-shell">$ gpg --keyserver hkps://pgp.mit.edu --send-key ABCDEFG
+</code></pre>
+
+<h2 id="final-steps">Final steps</h2>
+
+<p>Generating ssh key out of our gpg key is pretty straightforward:</p>
+
+<pre><code class="language-shell">$ gpg --export-ssh-key ABCDEFG
+ssh-rsa BLABLABLA openpgp:someid
+</code></pre>
+
+<p>Now its time to start <code>gpg-agent</code> with ssh support on:</p>
+
+<pre><code class="language-shell">$ gpg-agent --daemon --enable-ssh-support
+# or on older gpg versions you can generate env file that you can source in your .bashrc directly
+$ gpg-agent --daemon --enable-ssh-support --write-env-file ~/.gpg-agent-env
+</code></pre>
+
+<p>Or if you are on systemd based system there is a chance that your user already has bunch of systemd sockets enabled for this purpose.
+One socket that you should be interested is <code>gpg-agent-ssh.socket</code>, you can see if its running by running <code>systemctl --user status gpg-agent-ssh.socket</code>.</p>
+
+<p>Add this to your <code>.bashrc</code> to initialize env var properly:</p>
+
+<pre><code class="language-bash">export SSH_AUTH_SOCK=&quot;$(gpgconf --list-dirs agent-ssh-socket)&quot;
+</code></pre>
+
+<h2 id="setting-up-key-on-a-new-machine">Setting up key on a new machine</h2>
+
+<pre><code class="language-shell">$ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
+</code></pre>
+
+<p>And if gpg-agent is setup properly you should be ready to go. Just plug in your yubikey and try to ssh to some host, you should see PIN prompt which means everything works as expected.</p>
+            </div>
+
+            
+        </div>
+
+  </body>
+</html>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</loc>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</loc>
     <lastmod>2015-12-11T00:00:00+00:00</lastmod>
   </url>
@@ -227,7 +232,7 @@
   
   <url>
     <loc>https://blog.gonzih.me/categories/arch/</loc>
-    <lastmod>2015-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -310,7 +315,7 @@
   </url>
   
   <url>
-    <loc>https://blog.gonzih.me/categories/call/cc/</loc>
+    <loc>https://blog.gonzih.me/categories/call-cc/</loc>
     <lastmod>2013-11-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -563,7 +568,7 @@
   
   <url>
     <loc>https://blog.gonzih.me/categories/linux/</loc>
-    <lastmod>2015-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -593,7 +598,7 @@
   
   <url>
     <loc>https://blog.gonzih.me/</loc>
-    <lastmod>2015-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -646,6 +651,12 @@
   </url>
   
   <url>
+    <loc>https://blog.gonzih.me/categories/openpgp/</loc>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.gonzih.me/categories/opensuse/</loc>
     <lastmod>2014-05-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -660,6 +671,12 @@
   <url>
     <loc>https://blog.gonzih.me/categories/packages-manager/</loc>
     <lastmod>2011-09-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/categories/pgp/</loc>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -683,7 +700,7 @@
   
   <url>
     <loc>https://blog.gonzih.me/post/</loc>
-    <lastmod>2015-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -808,6 +825,12 @@
   </url>
   
   <url>
+    <loc>https://blog.gonzih.me/categories/ssh/</loc>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.gonzih.me/categories/standing-desk/</loc>
     <lastmod>2013-08-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -882,6 +905,12 @@
   <url>
     <loc>https://blog.gonzih.me/categories/xmonad/</loc>
     <lastmod>2013-11-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/categories/yubikey/</loc>
+    <lastmod>2018-09-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
