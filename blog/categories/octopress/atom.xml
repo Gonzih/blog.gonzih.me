@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fix Broken Comments Count for Disqus]]></title>
+    <link href="http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/"/>
+    <updated>2012-07-19T18:16:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus</id>
+    <content type="html"><![CDATA[<p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
+That is why comments count was equal to 0 for every post on my index page.
+To fix that go to admin ui in disqus and use domain migration tool.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How To Fix Octopress Pygments Error on Arch Linux]]></title>
+    <link href="http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux/"/>
+    <updated>2011-09-21T18:28:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/09/21/fix-octopress-pygments-error-on-arch-linux</id>
+    <content type="html"><![CDATA[<p>If your get following pygments error using octopress with arch linux.
+``` text
+Building site: source -> public
+  File "<string>", line 1</p>
+
+<pre><code>import sys; print sys.executable
+                    ^
+</code></pre>
+
+<p>SyntaxError: invalid syntax
+```
+It's happens because RubyPython use Python version 2 by calling "python" command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with following code.
+<code>ruby ruby_python_arch_linux_fix.rb
+RubyPython.configure :python_exe =&gt; 'python2.7'
+</code></p>
+
+<p>Also if you get following lib.so related error:
+<code>text
+LoadError: Could not open library 'lib.so': lib.so: cannot open shared object file: No such file or directory
+</code>
+You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
+
+<p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
+
+<h3>Update</h3>
+
+<p>Another Workaround:
+edit "vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb" file (path might be different for you)
+```ruby
+-- 31 @library = find_python_lib
+++ 31 @library = "/usr/lib/libpython2.7.so"</p>
+
+<p>-- 126 %x(#{@python} -c "#{command}").chomp if @python
+++ 126 %x("#{@python} -c #{command}").chomp if @python
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

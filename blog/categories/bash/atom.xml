@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bash | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to use Magnet Links with RTorrent]]></title>
+    <link href="http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/"/>
+    <updated>2012-02-17T18:04:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent</id>
+    <content type="html"><![CDATA[<p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>cd ~/watch    # set your watch directory here
+[[ "$1" =~ xt=urn:btih:([^&amp;/]+) ]] || exit;
+echo "d10:magnet-uri${#1}:${1}e" > "meta-${BASH_REMATCH[1]}.torrent"
+```
+<a href="http://libtorrent.rakshasa.no/ticket/2100">via</a></p>
+]]></content>
+  </entry>
+  
+</feed>

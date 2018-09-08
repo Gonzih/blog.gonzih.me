@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: viml | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/viml/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
+    <updated>2013-03-18T20:50:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
+    <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
+
+<!--more-->
+
+
+<p>Functions do following:</p>
+
+<ul>
+<li>Initialize tags file with symlink to /tmp (tmpfs) with uuid in name if no symlink was found</li>
+<li>Touch tags file</li>
+<li>If file is empty (wc -l return 0 lines) then populate it with <code>ctags -R</code> command</li>
+<li>Remove all lines from tags file related to current file</li>
+<li>Update tags file with new content of current file with <code>ctags -a</code></li>
+</ul>
+
+
+<p>Why I use symlinks for tags file?</p>
+
+<ul>
+<li>Writes are slow</li>
+<li>Writes are bad for my SSD</li>
+<li>Memory is blazingly fast</li>
+</ul>
+
+
+<p>Here is my code:</p>
+
+<p>```vim
+" If tags file does not exist initializes it with symlink to tmp with UUID in
+" filename
+function! InitTagsFileWithSymlink(f)
+  let filepath = a:f
+  let issymlink = system("find '" . filepath . "' -type l | wc -l")
+  if issymlink == 0</p>
+
+<pre><code>let uuid = system('uuidgen')
+let cmd  = 'ln -s "/tmp/ctags-for-vim-' . uuid . '" "' . filepath . '"'
+let cmd  = substitute(cmd, '\n', '', 'g')
+let resp = system(cmd)
+</code></pre>
+
+<p>  endif
+endfunction</p>
+
+<p>" Populates tags file if lines count is equal to 0
+" with <code>ctags -R .</code>
+function! PopulateTagsFile(f)
+  let filepath = a:f
+  let resp     = system('touch "' . filepath . '"')
+  let lines    = system('wc -l "' . filepath . '"')
+  let linescnt = substitute(lines, '\D', '', 'g')
+  if linescnt == 0</p>
+
+<pre><code>let cwd  = getcwd()
+let cmd  = 'ctags -Rf "'. filepath . '" "' . cwd . '"'
+let resp = system(cmd)
+</code></pre>
+
+<p>  endif
+endfunction</p>
+
+<p>" Remove tags for saved file from tags file
+function! DelTagOfFile(file)
+  let fullpath    = a:file
+  let cwd         = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f           = substitute(fullpath, cwd . "/", "", "")
+  let f           = escape(f, './')
+  let cmd         = 'sed --follow-symlinks -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp        = system(cmd)
+endfunction</p>
+
+<p>" Init tags file
+" Populate it
+" Remove data related to saved file
+" Append it with data for saved file
+function! UpdateTags()
+  let f           = expand("%:p")
+  let cwd         = getcwd()
+  let tagfilename = cwd . "/tags"
+  call InitTagsFileWithSymlink(tagfilename)
+  call PopulateTagsFile(tagfilename)
+  call DelTagOfFile(f)
+  let cmd  = 'ctags -a -f ' . tagfilename . ' "' . f . '"'
+  let resp = system(cmd)
+endfunction</p>
+
+<p>command UpdateTags call UpdateTags()
+autocmd BufWritePost <em>.rb,</em>.js,<em>.coffee,</em>.clj call UpdateTags()
+```</p>
+
+<p>Enjoy :)</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vim | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Nvim terminal + ClojureScript and figwheel]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/"/>
+    <updated>2015-06-15T19:37:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel</id>
+    <content type="html"><![CDATA[<p>This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.</p>
+
+<!--more-->
+
+
+<p><a href="http://neovim.io/">NeoVim</a> nowadays is almost fully compatible with vim.
+It is able to reuse my <a href="https://github.com/Gonzih/.vim/blob/master/vimrc">.vimrc</a> file without any issues.
+And recently it got proper terminal emulator built-in.
+So how about reusing it for ClojureScript development?</p>
+
+<p>If you are lazy (like I am) and don't want to setup piggieback support
+for fireplace.vim or don't feel like tmux integration is good enough
+this solution should be your new starting point.</p>
+
+<p>Just open some clojure[script] file and create second split.
+Open terminal using <code>:terminal</code> command.</p>
+
+<p>Here are some keybindings that will help you to send code from
+your clojure buffer to the terminal buffer.</p>
+
+<p><code>vim
+if has("nvim")
+  " Open terminal and run lein figwheel
+  nmap &lt;Leader&gt;term &lt;C-w&gt;v:terminal&lt;CR&gt;lein figwheel&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p
+  " Evaluate anything from the visual mode in the next window
+  vmap &lt;buffer&gt; ,e y&lt;C-w&gt;wpi&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p
+  " Evaluate outer most form
+  nmap &lt;buffer&gt; ,e ^v%,e
+  " Evaluate buffer"
+  nmap &lt;buffer&gt; ,b ggVG,e
+endif
+</code></p>
+
+<p>Hey! Now you can finally stop looking at the emacs land!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ln -sf /usr/bin/emacs /usr/bin/vim ?]]></title>
+    <link href="http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/"/>
+    <updated>2015-02-15T19:21:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim</id>
+    <content type="html"><![CDATA[<p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
+And left it like that for a couple of days.
+I must say that it was surprisingly nice experience.
+Tinkering around with elisp, building editing environment from scratch.</p>
+
+<p>Of course interesting question is "How did I end up with this idea in my head?".</p>
+
+<!--more-->
+
+
+<p>I tried to play with emacs few times couple of years ago.
+But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.</p>
+
+<p>I tried evil mode, but it went not so well.
+Problem is that I'm also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
+I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
+Also probably my lack of patience played against me.
+So I gave up and continued using vim (something like 5 years of hapiness).</p>
+
+<p>Recently ClojureScript tool called <a href="https://github.com/bhauman/lein-figwheel">figwheel</a> added repl support.
+So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
+Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
+Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim <a href="https://github.com/tpope/vim-fireplace">vim-fireplace</a> relies on nrepl.
+I was using for some time <a href="https://github.com/sjl/tslime2.vim">tslime2</a> in vim to work with ClojureScript.
+Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
+It works. You don't have out of the box tooling that will select your top most clojure form sadly.
+Once upon a time I had discussion on #clojurescript irc and <a href="https://twitter.com/martinklepsch">@martinklepsh</a> mentioned that nowadays evil-mode is much better.
+I was bored and followed that track. I did run <code>rm -rf .emacs.d</code> and started from scratch.
+As a result my workflow from vim was ported to emacs in a couple of hours.
+It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
+I set my default editor to emacs and continued doing my thing for a couple of days.</p>
+
+<p>And here what I think so far.</p>
+
+<p>Good:</p>
+
+<ul>
+<li>Evil mode is good and it's very close. It's probably closest thing to vim that I ever tried.
+It's not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
+(Big shout outs to the author of idea plugin. It's very impressive.)</li>
+<li>Writing configuration in a language that I understand was a big relief.</li>
+<li>Mapping configuration is simpler. You are mapping elisp function to the key. It's simpler and easier to understand than remapping mechanism in vim.</li>
+<li>Helm surprised me in it's speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.</li>
+<li>Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. <a href="https://github%20in%20inferior%20lisp%20mode%20tuned%20to%20play%20well%20with%20clojure">inf-clojure</a> is enhanced clojure mode for the inf-lisp.</li>
+<li>It can do async stuff! If you used vim then you know what I mean. In emacs it's just there. Without required pythor/ruby support enabled during compilation.</li>
+<li>Built-in package manager. Just run <code>package-install</code> and it's there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.</li>
+<li>Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run <code>describe-key</code> and see what is going on. You can do something similar in vim, but in emacs it's much better.</li>
+<li>Startup time is slow and it's solvable. Just run systemd user service with <code>emacs --daemon</code> and that is enough for most cases.</li>
+<li>And you still have emacs operating system at your disposal!</li>
+<li>Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.</li>
+</ul>
+
+
+<p>Not so good:</p>
+
+<ul>
+<li>Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it's unnecessary. Of course this is related only to my habits and muscle memory.</li>
+<li>Evil is slower.
+Most of the time it's not a problem. But sometimes I'm mashing my keyboard too fast and mess happens.
+Good example is replace (<code>r</code>) key.
+Press <code>r:</code> too fast and you might end up in vim command line.</li>
+<li>Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don't play well with evil.</li>
+<li>Good example of painful evil integration is cider.
+It just does not work with evil mode.
+Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
+That was big disappointment for me. I had high hopes for the cider. I'm realizing that I don't really need everything that cider provides.
+I'm very happy with just ability to evaluate code, without even debugger and nice stacktraces.
+But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
+After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on <a href="https://github.com/clojure-emacs/inf-clojure">inf-clojure</a>.</li>
+</ul>
+
+
+<p>Will I continue using emacs? Yes.</p>
+
+<p>Will it be my default editor? Probably no.
+Vim feels more reliable because it provides modal editing experience out of the box.
+In emacs it an option.
+I'm totally fine with giving away all that goodness that emacs provides to have proper editing experience <strong>all the time</strong>.
+In every buffer, in every menu.
+And I will continue slowly improving my emacs configuration.</p>
+
+<p>This experiment reminded me how many things are missing from my setup.
+It also reminded me that <a href="https://neovim.org">neovim</a> might be next big thing in my tool belt.
+I'm really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.</p>
+
+<p><strong>PS</strong></p>
+
+<ul>
+<li><a href="http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/">Here</a> is very good tutorial to get vim users started in emacs.</li>
+<li>My .emacs.d is <a href="https://github.com/Gonzih/.emacs.d">here</a>. I tried to keep it minimalistic.</li>
+<li>My .vim is <a href="https://github.com/Gonzih/.vim">here</a>.</li>
+<li>If you are looking for the best vim like experience in emacs please take a look at the <a href="https://github.com/syl20bnr/spacemacs">spacemacs project</a>.</li>
+<li>Looking for the good color theme in emacs? Take a look at the port of <a href="https://github.com/morhetz/gruvbox">vim's gruvbox theme</a>.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How I cook Ctags in Vim]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/"/>
+    <updated>2013-03-18T20:50:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim</id>
+    <content type="html"><![CDATA[<p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
+
+<!--more-->
+
+
+<p>Functions do following:</p>
+
+<ul>
+<li>Initialize tags file with symlink to /tmp (tmpfs) with uuid in name if no symlink was found</li>
+<li>Touch tags file</li>
+<li>If file is empty (wc -l return 0 lines) then populate it with <code>ctags -R</code> command</li>
+<li>Remove all lines from tags file related to current file</li>
+<li>Update tags file with new content of current file with <code>ctags -a</code></li>
+</ul>
+
+
+<p>Why I use symlinks for tags file?</p>
+
+<ul>
+<li>Writes are slow</li>
+<li>Writes are bad for my SSD</li>
+<li>Memory is blazingly fast</li>
+</ul>
+
+
+<p>Here is my code:</p>
+
+<p>```vim
+" If tags file does not exist initializes it with symlink to tmp with UUID in
+" filename
+function! InitTagsFileWithSymlink(f)
+  let filepath = a:f
+  let issymlink = system("find '" . filepath . "' -type l | wc -l")
+  if issymlink == 0</p>
+
+<pre><code>let uuid = system('uuidgen')
+let cmd  = 'ln -s "/tmp/ctags-for-vim-' . uuid . '" "' . filepath . '"'
+let cmd  = substitute(cmd, '\n', '', 'g')
+let resp = system(cmd)
+</code></pre>
+
+<p>  endif
+endfunction</p>
+
+<p>" Populates tags file if lines count is equal to 0
+" with <code>ctags -R .</code>
+function! PopulateTagsFile(f)
+  let filepath = a:f
+  let resp     = system('touch "' . filepath . '"')
+  let lines    = system('wc -l "' . filepath . '"')
+  let linescnt = substitute(lines, '\D', '', 'g')
+  if linescnt == 0</p>
+
+<pre><code>let cwd  = getcwd()
+let cmd  = 'ctags -Rf "'. filepath . '" "' . cwd . '"'
+let resp = system(cmd)
+</code></pre>
+
+<p>  endif
+endfunction</p>
+
+<p>" Remove tags for saved file from tags file
+function! DelTagOfFile(file)
+  let fullpath    = a:file
+  let cwd         = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f           = substitute(fullpath, cwd . "/", "", "")
+  let f           = escape(f, './')
+  let cmd         = 'sed --follow-symlinks -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp        = system(cmd)
+endfunction</p>
+
+<p>" Init tags file
+" Populate it
+" Remove data related to saved file
+" Append it with data for saved file
+function! UpdateTags()
+  let f           = expand("%:p")
+  let cwd         = getcwd()
+  let tagfilename = cwd . "/tags"
+  call InitTagsFileWithSymlink(tagfilename)
+  call PopulateTagsFile(tagfilename)
+  call DelTagOfFile(f)
+  let cmd  = 'ctags -a -f ' . tagfilename . ' "' . f . '"'
+  let resp = system(cmd)
+endfunction</p>
+
+<p>command UpdateTags call UpdateTags()
+autocmd BufWritePost <em>.rb,</em>.js,<em>.coffee,</em>.clj call UpdateTags()
+```</p>
+
+<p>Enjoy :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Nice Vim Keys Map]]></title>
+    <link href="http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/"/>
+    <updated>2011-10-18T20:05:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map</id>
+    <content type="html"><![CDATA[<p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
+
+<p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

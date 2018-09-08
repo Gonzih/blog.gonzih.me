@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: node.js | Max Gonzih]]></title>
+  <link href="http://blog.gonzih.me/blog/categories/node-js/atom.xml" rel="self"/>
+  <link href="http://blog.gonzih.me/"/>
+  <updated>2016-06-21T11:06:45+00:00</updated>
+  <id>http://blog.gonzih.me/</id>
+  <author>
+    <name><![CDATA[Max Gonzih ]]></name>
+    <email><![CDATA[gonzih@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ClojureScript on BeagleBone: simple benchmark with Node.js]]></title>
+    <link href="http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/"/>
+    <updated>2013-01-23T17:16:00+00:00</updated>
+    <id>http://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js</id>
+    <content type="html"><![CDATA[<p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
+Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
+
+<!-- more -->
+
+
+<p><a href="https://github.com/Gonzih/clojurescript-small-benchmark-for-embed">Code</a> is modified to run on top of the JavaScript:
+```clojure
+(ns benchmark.core)</p>
+
+<p>(defn factorial [x]
+  (reduce * (range 1 (inc x))))</p>
+
+<p>(defn fib [n]
+  (if (&lt;= n 1)</p>
+
+<pre><code>1
+(+ (fib (- n 1)) (fib (- n 2)))))
+</code></pre>
+
+<p>(defn sort-seq []
+  (sort (repeat 100000 (rand-int 2000000))))</p>
+
+<p>(defn time-fun [fun]
+  (let [start  (.getTime (js/Date.))</p>
+
+<pre><code>    _      (fun)
+    end    (.getTime (js/Date.))
+    result (- end start)]
+result))
+</code></pre>
+
+<p>(defn time-it [fun]
+  (let [values  (for [i (range 200)] (time-fun fun))]</p>
+
+<pre><code>(/ (apply + values)
+   (count values))))
+</code></pre>
+
+<p>(defn -main []
+  (println "(factorial 5000) \t Avg: " (time-it #(factorial 5000)))
+  (println "(fib 20) \t Avg: "         (time-it #(fib 20)))
+  (println "(sort-seq) \t Avg: "       (time-it #(sort-seq))))</p>
+
+<p>(set! <em>main-cli-fn</em> -main)
+```</p>
+
+<p>Benchmark results:</p>
+
+<p>```</p>
+
+<blockquote><p>node --version
+v0.6.12</p></blockquote>
+
+<h1>simple compiler optimization</h1>
+
+<blockquote><p>ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+91.4 20.3 90816  51292 pts/1  Rl+  08:46  0:54 node clojurescript-benchmark-optimization-simple.js</p>
+
+<p>node clojurescript-benchmark-optimization-simple.js
+(factorial 5000) Avg: 64.345
+(fib 20)         Avg: 5.575
+(sort-seq)       Avg: 7281.975</p></blockquote>
+
+<h1>advanced compiler optimization</h1>
+
+<blockquote><p>ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js</p>
+
+<p>node clojurescript-benchmark-optimization-advanced.js
+(factorial 5000) Avg: 54.775
+(fib 20)         Avg: 2.77
+(sort-seq)       Avg: 6325.71
+```</p></blockquote>
+
+<p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
+Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :)</p>
+]]></content>
+  </entry>
+  
+</feed>
