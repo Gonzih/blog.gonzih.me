@@ -7,13 +7,15 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - rm -rf public || exit 0
-  - git clone -b master https://$GITHUB_TOKEN@github.com/Gonzih/gonzih.github.com.git public
-  - rm -rf public/.git
-
-script:
-  - make generate-using-docker
-
-deploy:
-  - make deploy
+jobs:
+  include:
+    - stage: setup
+      script:
+      - rm -rf public || exit 0
+      - git clone -b master https://$GITHUB_TOKEN@github.com/Gonzih/gonzih.github.com.git public
+    - stage: generate
+      script:
+      - make generate-using-docker
+    - stage: deploy
+      script:
+      - make deploy
