@@ -7,8 +7,10 @@ sudo: required
 services:
   - docker
 
-script:
+before_install:
   - rm -rf public || exit 0
+
+script:
   - make generate-using-docker
 
 deploy:
@@ -18,5 +20,6 @@ deploy:
   local-dir: public
   target-branch: master
   keep-history: true
+  verbose: true
   on:
     branch: source
