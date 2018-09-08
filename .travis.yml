@@ -20,6 +20,6 @@ deploy:
   local-dir: public
   target-branch: master
   keep-history: true
-  verbose: true
+  verbose: false
   on:
     branch: source
