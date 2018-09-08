@@ -175,3 +175,26 @@ $ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
 ```
 
 And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.
+
+## Caching PIN on a key itself
+
+It might be annoying to type in PIN on every action every time, there is an option to cache PIN on YubiKey itself, so you will have to input PIN only once after you plugged your key (will have to do that every time you unplug/plug your key) for every action (separate key cache for signing/authenticating using the key).
+To do that you should enable `forcesig` in `gpg`:
+
+```shell
+$ gpg --card-edit
+
+gpg/card> admin
+Admin commands are allowed
+
+gpg/card> forcesig
+gpg/card> save
+```
+
+To add extra layer of security, you can enable [YubiKey 4 Touch](https://developers.yubico.com/PGP/Card_edit.html) feature (every action will have to be confirmed with a touch), this can be enabled using `yubikey-manager` cli:
+
+```shell
+$ ykman openpgp touch aut on
+$ ykman openpgp touch sig on
+$ ykman openpgp touch enc on
+```
