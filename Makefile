@@ -16,7 +16,8 @@ deploy: public
 	cd public && git add  . && git commit -a -m "Blog updated at $(shell date)" && git push
 	cd ..
 
-UID=$(shell id -u gnzh)
+USER=$(shell whoami)
+UID=$(shell id -u $(USER))
 docker-image:
 	docker build --build-arg GNZHUID=$(UID) -t blog-builder .
 
