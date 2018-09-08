@@ -9,6 +9,8 @@ services:
 
 before_install:
   - rm -rf public || exit 0
+  - git clone --depth 1 -b master git@github.com:Gonzih/gonzih.github.com.git public
+  - rm -rf public/.git
 
 script:
   - make generate-using-docker
