@@ -20,7 +20,11 @@ UID=$(shell id -u gnzh)
 docker-image:
 	docker build --build-arg GNZHUID=$(UID) -t blog-builder .
 
-generate-using-docker: docker-image
+docker-rm:
+	docker kill blog-builder || echo "Not found"
+	docker rm blog-builder || echo "Not found"
+
+generate-using-docker: docker-image docker-rm
 	docker run --rm -t -v $(shell pwd):/var/blog --name blog-builder blog-builder make generate
 
 deploy-using-docker:
@@ -28,8 +32,8 @@ deploy-using-docker:
 	make deploy
 	make push
 
-preview-using-docker: docker-image
+preview-using-docker: docker-image docker-rm
 	docker run --rm -t -v $(shell pwd):/var/blog -p 1313:1313 --name blog-builder blog-builder make preview
 
-debug-using-docker: docker-image
+debug-using-docker: docker-image docker-rm
 	docker run --rm -ti -v $(shell pwd):/var/blog -p 1313:1313 --name blog-builder blog-builder bash
