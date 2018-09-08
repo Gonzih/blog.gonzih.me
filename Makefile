@@ -12,7 +12,7 @@ preview:
 
 TS := $(date)
 public:
-	git clone -b master https://github.com/Gonzih/gonzih.github.com.git public
+	git clone -b master git@github.com:Gonzih/gonzih.github.com.git public
 
 deploy: public
 	cd public && git add  . && git commit -a -m "Blog updated at $(shell date)" && git push

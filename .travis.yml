@@ -9,19 +9,11 @@ services:
 
 before_install:
   - rm -rf public || exit 0
-  - git clone --depth 1 -b master https://github.com/Gonzih/gonzih.github.com.git public
+  - git clone -b master https://$GITHUB_TOKEN@github.com/Gonzih/gonzih.github.com.git public
   - rm -rf public/.git
 
 script:
   - make generate-using-docker
 
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local-dir: public
-  target-branch: master
-  keep-history: true
-  verbose: false
-  on:
-    branch: source
+  - make deploy
