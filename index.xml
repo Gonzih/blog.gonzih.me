@@ -71,7 +71,7 @@ Your selection? 3
 WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;There are 2 way to use your yubikey as a ssh key:&lt;/p&gt;
+&lt;p&gt;There are two ways to use your yubikey as a ssh key:&lt;/p&gt;
 
 &lt;h2 id=&#34;method-1-generating-keys-on-yubikey-itself&#34;&gt;Method #1: Generating keys on yubikey itself&lt;/h2&gt;
 
@@ -164,8 +164,8 @@ ssh-rsa BLABLABLA openpgp:someid
 $ gpg-agent --daemon --enable-ssh-support --write-env-file ~/.gpg-agent-env
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Or if you are on systemd based system there is a chance that your user already has bunch of systemd sockets enabled for this purpose.
-One socket that you should be interested is &lt;code&gt;gpg-agent-ssh.socket&lt;/code&gt;, you can see if its running by running &lt;code&gt;systemctl --user status gpg-agent-ssh.socket&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Or if you are on systemd based system there is a chance that your user already has a bunch of systemd sockets enabled for this purpose.
+One socket that you should be interested in is &lt;code&gt;gpg-agent-ssh.socket&lt;/code&gt;, you can see if its running by running &lt;code&gt;systemctl --user status gpg-agent-ssh.socket&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Add this to your &lt;code&gt;.bashrc&lt;/code&gt; to initialize env var properly:&lt;/p&gt;
 
