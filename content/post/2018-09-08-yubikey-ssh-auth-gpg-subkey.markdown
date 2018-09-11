@@ -172,7 +172,7 @@ Last improvement that can be made to this setup is forcing gpg-agent to use pcsc
 This should solve some issues with a card being unavailable when some other application is accessing it.
 Just add following to the `~/.gnupg/scdaemon.conf` file:
 
-```
+```text
 pcsc-driver /usr/lib/libpcsclite.so
 card-timeout 5
 disable-ccid
