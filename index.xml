@@ -176,7 +176,7 @@ One socket that you should be interested in is &lt;code&gt;gpg-agent-ssh.socket&
 This should solve some issues with a card being unavailable when some other application is accessing it.
 Just add following to the &lt;code&gt;~/.gnupg/scdaemon.conf&lt;/code&gt; file:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;pcsc-driver /usr/lib/libpcsclite.so
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;pcsc-driver /usr/lib/libpcsclite.so
 card-timeout 5
 disable-ccid
 &lt;/code&gt;&lt;/pre&gt;
