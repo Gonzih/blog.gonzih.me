@@ -230,7 +230,7 @@ One socket that you should be interested in is <code>gpg-agent-ssh.socket</code>
 </code></pre>
 
 <p>Last improvement that can be made to this setup is forcing gpg-agent to use pcscd instead of ccid.
-This should solve some issues with card being unavailable when some other application is accessing it.
+This should solve some issues with a card being unavailable when some other application is accessing it.
 Just add following to the <code>~/.gnupg/scdaemon.conf</code> file:</p>
 
 <pre><code>pcsc-driver /usr/lib/libpcsclite.so
