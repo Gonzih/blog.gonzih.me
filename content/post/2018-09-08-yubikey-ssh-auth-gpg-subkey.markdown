@@ -168,6 +168,16 @@ Add this to your `.bashrc` to initialize env var properly:
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 ```
 
+Last improvement that can be made to this setup is forcing gpg-agent to use pcscd instead of ccid.
+This should solve some issues with card being unavailable when some other application is accessing it.
+Just add following to the `~/.gnupg/scdaemon.conf` file:
+
+```
+pcsc-driver /usr/lib/libpcsclite.so
+card-timeout 5
+disable-ccid
+```
+
 ## Setting up key on a new machine
 
 ```shell
