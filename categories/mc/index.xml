@@ -30,7 +30,7 @@
 base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;For more information take look at &lt;a href=&#34;http://www.midnight-commander.org/wiki/doc/common/skins&#34;&gt;mc wiki&lt;/a&gt; and run &lt;code&gt;mc --help-color&lt;/code&gt; to see available color variables in your mc version.
+&lt;p&gt;For more information take look at &lt;a href=&#34;https://www.midnight-commander.org/wiki/doc/common/skins&#34;&gt;mc wiki&lt;/a&gt; and run &lt;code&gt;mc --help-color&lt;/code&gt; to see available color variables in your mc version.
 Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/code&gt;. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).
 &lt;/p&gt;</description>
     </item>

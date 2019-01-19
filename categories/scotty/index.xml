@@ -24,10 +24,10 @@
 
 &lt;p&gt;Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on &lt;a href=&#34;https://github.com/Gonzih/HNApi&#34;&gt;github&lt;/a&gt;.
-You can access api &lt;a href=&#34;http://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+You can access api &lt;a href=&#34;https://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;http://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
-and &lt;a href=&#34;http://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
+&lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;https://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
+and &lt;a href=&#34;https://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
 Json is served with help of &lt;a href=&#34;https://github.com/scotty-web/scotty/&#34;&gt;Scotty&lt;/a&gt; web framework.
 Currently it&amp;rsquo;s running on Heroku using &lt;a href=&#34;https://github.com/begriffs/heroku-buildpack-ghc&#34;&gt;this ghc-7.8 buildpack&lt;/a&gt;.&lt;/p&gt;
 

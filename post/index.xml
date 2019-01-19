@@ -105,11 +105,11 @@ Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt
       <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
 
 &lt;p&gt;Helps with JVM startup time during development.
 Build in OCaml. If you are not in to the building binary on your own,
-there are pre-build binaries on the &lt;a href=&#34;http://leiningen.org/grench.html&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
+there are pre-build binaries on the &lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).&lt;/p&gt;
 
@@ -158,10 +158,10 @@ What if you have only JVM to your disposal, will you be able to pull it off only
 
 &lt;p&gt;Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on &lt;a href=&#34;https://github.com/Gonzih/HNApi&#34;&gt;github&lt;/a&gt;.
-You can access api &lt;a href=&#34;http://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+You can access api &lt;a href=&#34;https://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;http://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
-and &lt;a href=&#34;http://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
+&lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;https://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
+and &lt;a href=&#34;https://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
 Json is served with help of &lt;a href=&#34;https://github.com/scotty-web/scotty/&#34;&gt;Scotty&lt;/a&gt; web framework.
 Currently it&amp;rsquo;s running on Heroku using &lt;a href=&#34;https://github.com/begriffs/heroku-buildpack-ghc&#34;&gt;this ghc-7.8 buildpack&lt;/a&gt;.&lt;/p&gt;
 
@@ -223,7 +223,7 @@ Enjoy!&lt;/p&gt;
       <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
       <description>&lt;p&gt;Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
-I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;http://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;https://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
 Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
 Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.&lt;/p&gt;
 
@@ -238,7 +238,7 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
       <guid>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;I found out about ruby gem called &lt;a href=&#34;http://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
+&lt;p&gt;I found out about ruby gem called &lt;a href=&#34;https://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.&lt;/p&gt;
 
@@ -361,7 +361,7 @@ All I wanted was simple to use news reader.&lt;/p&gt;
       <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
+      <description>&lt;p&gt;&lt;a href=&#34;https://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
 
 Pi is running Raspbian.&lt;/p&gt;</description>
     </item>
@@ -405,7 +405,7 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
 base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;For more information take look at &lt;a href=&#34;http://www.midnight-commander.org/wiki/doc/common/skins&#34;&gt;mc wiki&lt;/a&gt; and run &lt;code&gt;mc --help-color&lt;/code&gt; to see available color variables in your mc version.
+&lt;p&gt;For more information take look at &lt;a href=&#34;https://www.midnight-commander.org/wiki/doc/common/skins&#34;&gt;mc wiki&lt;/a&gt; and run &lt;code&gt;mc --help-color&lt;/code&gt; to see available color variables in your mc version.
 Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/code&gt;. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).
 &lt;/p&gt;</description>
     </item>
@@ -494,10 +494,10 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
 &lt;p&gt;Great news everyone! Today Arch Linux officially switched to GRUB2!&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file&#34;&gt;Migration information is here&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/&#34;&gt;My current GRUB2 theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;</description>
+&lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/&#34;&gt;My current GRUB2 theme&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;</description>
     </item>
     
     <item>
@@ -519,9 +519,9 @@ To fix that go to admin ui in disqus and use domain migration tool.
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://internetdefenseleague.org/images/launch/cat_sky.jpg&#34; alt=&#34;IDL Launch&#34; /&gt;
-&amp;gt;The &lt;a href=&#34;http://sopastrike.com/&#34;&gt;Internet Blackout&lt;/a&gt; was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp;amp; monopolies. Are you in?&lt;/p&gt;
+&amp;gt;The &lt;a href=&#34;https://sopastrike.com/&#34;&gt;Internet Blackout&lt;/a&gt; was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp;amp; monopolies. Are you in?&lt;/p&gt;
 
-&lt;p&gt;Join &lt;strong&gt;Internet Defence League&lt;/strong&gt; at &lt;a href=&#34;http://internetdefenseleague.org/&#34;&gt;internetdefenseleague.org&lt;/a&gt;
+&lt;p&gt;Join &lt;strong&gt;Internet Defence League&lt;/strong&gt; at &lt;a href=&#34;https://internetdefenseleague.org/&#34;&gt;internetdefenseleague.org&lt;/a&gt;
 &lt;/p&gt;</description>
     </item>
     
@@ -540,7 +540,7 @@ cd ~/watch    # set your watch directory here
 echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BASH_REMATCH[1]}.torrent&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;https://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;
 &lt;/p&gt;</description>
     </item>
     
@@ -577,7 +577,7 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = &#39;template1&#39;;
 VACUUM FREEZE;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&#34;&gt;via&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&#34;&gt;via&lt;/a&gt;
 &lt;/p&gt;</description>
     </item>
     

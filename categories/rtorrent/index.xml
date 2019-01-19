@@ -29,7 +29,7 @@ cd ~/watch    # set your watch directory here
 echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BASH_REMATCH[1]}.torrent&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;https://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;
 &lt;/p&gt;</description>
     </item>
     

@@ -35,7 +35,7 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = &#39;template1&#39;;
 VACUUM FREEZE;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&#34;&gt;via&lt;/a&gt;
+&lt;p&gt;&lt;a href=&#34;https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&#34;&gt;via&lt;/a&gt;
 &lt;/p&gt;</description>
     </item>
     

@@ -33,7 +33,7 @@ Solution can be applied to any rpm based system (I think so).
       <guid>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;I found out about ruby gem called &lt;a href=&#34;http://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
+&lt;p&gt;I found out about ruby gem called &lt;a href=&#34;https://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.&lt;/p&gt;
 

@@ -1,7 +1,7 @@
     <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="generator" content="Hugo 0.48" />
 
@@ -118,7 +118,7 @@ I made something like 2 floored chassis. First floor is for motor and wheels (an
 <h2 id="gearbox-and-hbridge-driver">Gearbox and HBridge Driver</h2>
 
 <p>To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I&rsquo;m afraid it would be messy.
-To understand how HBridge works you should read <a href="http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview">Adafruit post</a>.</p>
+To understand how HBridge works you should read <a href="https://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview">Adafruit post</a>.</p>
 
 <p>HBridge -&gt; Arduino Schematics:
 <img src="https://d1wvxg652jdms0.cloudfront.net/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg" alt="Schematics" /></p>
@@ -164,7 +164,7 @@ After module is loaded you should see new device in <code>/dev/input</code>.</p>
 
 <h2 id="clojure-code">Clojure code</h2>
 
-<p>I used <a href="http://clojure.org/">Clojure</a> as main language for controlling Arduino. I took <a href="https://github.com/nakkaya/clodiuno">Clodiuno</a> library.
+<p>I used <a href="https://clojure.org/">Clojure</a> as main language for controlling Arduino. I took <a href="https://github.com/nakkaya/clodiuno">Clodiuno</a> library.
 It is Firmata protocol implementation for Clojure. Why Firmata? Because it&rsquo;s easy, fast and provides great way to extend your project in future.</p>
 
 <p>So I wrote some code, uploaded Firmata to Arduino. And&hellip; it&rsquo;s not working.</p>

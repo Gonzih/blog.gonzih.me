@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="https://www.w3.org/2005/Atom">
   <channel>
     <title>Max Gonzih on Max Gonzih</title>
     <link>https://blog.gonzih.me/</link>
@@ -325,7 +325,7 @@ $ ykman openpgp touch enc on
 &lt;h2 id=&#34;wifi&#34;&gt;Wifi&lt;/h2&gt;
 
 &lt;p&gt;Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
-There was a patch for the 17 inch model &lt;a href=&#34;http://www.gossamer-threads.com/lists/linux/kernel/2323659&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+There was a patch for the 17 inch model &lt;a href=&#34;https://www.gossamer-threads.com/lists/linux/kernel/2323659&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&#34;temporary-solution-1&#34;&gt;Temporary solution 1:&lt;/h3&gt;
 
@@ -455,7 +455,7 @@ load video
 
 &lt;p&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;http://neovim.io/&#34;&gt;NeoVim&lt;/a&gt; nowadays is almost fully compatible with vim.
+&lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;NeoVim&lt;/a&gt; nowadays is almost fully compatible with vim.
 It is able to reuse my &lt;a href=&#34;https://github.com/Gonzih/.vim/blob/master/vimrc&#34;&gt;.vimrc&lt;/a&gt; file without any issues.
 And recently it got proper terminal emulator built-in.
 So how about reusing it for ClojureScript development?&lt;/p&gt;
@@ -712,7 +712,7 @@ I&amp;rsquo;m really hoping to see big movement around neovim once project becom
 &lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/&#34;&gt;Here&lt;/a&gt; is very good tutorial to get vim users started in emacs.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/&#34;&gt;Here&lt;/a&gt; is very good tutorial to get vim users started in emacs.&lt;/li&gt;
 &lt;li&gt;My .emacs.d is &lt;a href=&#34;https://github.com/Gonzih/.emacs.d&#34;&gt;here&lt;/a&gt;. I tried to keep it minimalistic.&lt;/li&gt;
 &lt;li&gt;My .vim is &lt;a href=&#34;https://github.com/Gonzih/.vim&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;If you are looking for the best vim like experience in emacs please take a look at the &lt;a href=&#34;https://github.com/syl20bnr/spacemacs&#34;&gt;spacemacs project&lt;/a&gt;.&lt;/li&gt;
@@ -726,11 +726,11 @@ I&amp;rsquo;m really hoping to see big movement around neovim once project becom
       <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
 
 &lt;p&gt;Helps with JVM startup time during development.
 Build in OCaml. If you are not in to the building binary on your own,
-there are pre-build binaries on the &lt;a href=&#34;http://leiningen.org/grench.html&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
+there are pre-build binaries on the &lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).&lt;/p&gt;
 
@@ -807,7 +807,7 @@ What if you have only JVM to your disposal, will you be able to pull it off only
 
 &lt;p&gt;First what we will need is to get clojure jar file:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;wget -O /opt/clojure.jar &#39;http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;
+&lt;pre&gt;&lt;code&gt;wget -O /opt/clojure.jar &#39;https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next lets create executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt; that will live in &lt;code&gt;/usr/bin&lt;/code&gt; (or &lt;code&gt;/opt/bin&lt;/code&gt; or &lt;code&gt;/home/youruser/bin&lt;/code&gt;):&lt;/p&gt;
@@ -859,7 +859,7 @@ Can we improve that? What if there would be JVM with fast startup and low memory
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Fetching required dependencies and source
 apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
 cd /opt
-wget -O jamvm-2.0.0.tar.gz &#39;http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;
+wget -O jamvm-2.0.0.tar.gz &#39;https://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;
 tar -xvzf jamvm-2.0.0.tar.gz
 
 # Building
@@ -941,10 +941,10 @@ so you can just run &lt;code&gt;apt-get -y install icedtea-7-jre-jamvm&lt;/code&
 
 &lt;p&gt;Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on &lt;a href=&#34;https://github.com/Gonzih/HNApi&#34;&gt;github&lt;/a&gt;.
-You can access api &lt;a href=&#34;http://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+You can access api &lt;a href=&#34;https://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;http://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
-and &lt;a href=&#34;http://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
+&lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;https://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
+and &lt;a href=&#34;https://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
 Json is served with help of &lt;a href=&#34;https://github.com/scotty-web/scotty/&#34;&gt;Scotty&lt;/a&gt; web framework.
 Currently it&amp;rsquo;s running on Heroku using &lt;a href=&#34;https://github.com/begriffs/heroku-buildpack-ghc&#34;&gt;this ghc-7.8 buildpack&lt;/a&gt;.&lt;/p&gt;
 
@@ -968,8 +968,8 @@ Solution can be applied to any rpm based system (I think so).
 &lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Install &lt;a href=&#34;http://software.opensuse.org/package/alien&#34;&gt;alien&lt;/a&gt; (perl scripts for converting packages).&lt;/li&gt;
-&lt;li&gt;Download deb from &lt;a href=&#34;http://repository.spotify.com/pool/non-free/s/spotify/&#34;&gt;spotify repository&lt;/a&gt;, pay attention to architecture.&lt;/li&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://software.opensuse.org/package/alien&#34;&gt;alien&lt;/a&gt; (perl scripts for converting packages).&lt;/li&gt;
+&lt;li&gt;Download deb from &lt;a href=&#34;https://repository.spotify.com/pool/non-free/s/spotify/&#34;&gt;spotify repository&lt;/a&gt;, pay attention to architecture.&lt;/li&gt;
 &lt;li&gt;Convert deb -&amp;gt; rpm by running &lt;code&gt;sudo alien --scripts -r spotify*.deb&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Install rpm &lt;code&gt;sudo zypper in spotify*.rpm&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;spotify&lt;/code&gt;.&lt;/li&gt;
@@ -1083,7 +1083,7 @@ Enjoy!&lt;/p&gt;
     (.addActionListener menu listener)
     menu))
 
-(def hn-api-url &amp;quot;http://api.ihackernews.com/page&amp;quot;)
+(def hn-api-url &amp;quot;https://api.ihackernews.com/page&amp;quot;)
 
 (defn hn-items []
   (-&amp;gt; hn-api-url
@@ -1132,7 +1132,7 @@ Enjoy!&lt;/p&gt;
       <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
       <description>&lt;p&gt;Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
-I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;http://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;https://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
 Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
 Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.&lt;/p&gt;
 
@@ -1141,7 +1141,7 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
 &lt;h2 id=&#34;emulating-keyboard-on-leonardo&#34;&gt;Emulating keyboard on Leonardo.&lt;/h2&gt;
 
 &lt;p&gt;With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
-Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the &lt;a href=&#34;http://arduino.cc/en/Reference/MouseKeyboard&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the &lt;a href=&#34;https://arduino.cc/en/Reference/MouseKeyboard&#34;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;arduino-wiring&#34;&gt;Arduino wiring.&lt;/h2&gt;
 
@@ -1373,7 +1373,7 @@ void pressKeys(String key) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;More information on ruby-serialport is &lt;a href=&#34;http://ruby-serialport.rubyforge.org/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;More information on ruby-serialport is &lt;a href=&#34;https://ruby-serialport.rubyforge.org/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;serialport&#39;
 
