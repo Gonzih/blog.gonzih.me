@@ -9,7 +9,7 @@ categories: [go, google, cloud functions, gke, routing]
 Couple of days ago Google cloud functions got [official support for go 1.11](https://cloud.google.com/blog/products/application-development/cloud-functions-go-1-11-is-now-a-supported-language).
 I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on `http.ServeMux`.
 
-<!-- more -->
+<!--more-->
 
 To get started with cloud functions you can follow [this simple tutorial](https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0).
 
