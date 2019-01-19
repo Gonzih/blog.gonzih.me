@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Google on Max Gonzih</title>
-    <link>https://blog.gonzih.me/categories/google/</link>
-    <description>Recent content in Google on Max Gonzih</description>
+    <title>Cloud Functions on Max Gonzih</title>
+    <link>https://blog.gonzih.me/categories/cloud-functions/</link>
+    <description>Recent content in Cloud Functions on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
@@ -11,7 +11,7 @@
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
     <lastBuildDate>Fri, 18 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.gonzih.me/categories/google/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.gonzih.me/categories/cloud-functions/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -23,22 +23,6 @@
       <description>Couple of days ago Google cloud functions got official support for go 1.11. I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on http.ServeMux.
 To get started with cloud functions you can follow this simple tutorial.
 One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as source for your newly defined cloud function.</description>
-    </item>
-    
-    <item>
-      <title>RSS/Atom reader in Clojure via IMAP</title>
-      <link>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
-      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
-      <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
-
-&lt;p&gt;Google Reader was shut down and I started looking for alternatives.
-And sadly I did not found anything close to Google Reader experience.
-There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
-All I wanted was simple to use news reader.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

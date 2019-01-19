@@ -195,6 +195,15 @@
     </item>
     
     <item>
+      <title>Cloud Functions</title>
+      <link>https://blog.gonzih.me/categories/cloud-functions/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/cloud-functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Coffeescript</title>
       <link>https://blog.gonzih.me/categories/coffeescript/</link>
       <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
@@ -321,6 +330,15 @@
     </item>
     
     <item>
+      <title>Gke</title>
+      <link>https://blog.gonzih.me/categories/gke/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/gke/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Gkt</title>
       <link>https://blog.gonzih.me/categories/gkt/</link>
       <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
@@ -330,9 +348,18 @@
     </item>
     
     <item>
+      <title>Go</title>
+      <link>https://blog.gonzih.me/categories/go/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Google</title>
       <link>https://blog.gonzih.me/categories/google/</link>
-      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/categories/google/</guid>
       <description></description>
@@ -803,6 +830,15 @@
       <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/categories/ror/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Routing</title>
+      <link>https://blog.gonzih.me/categories/routing/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/routing/</guid>
       <description></description>
     </item>
     
