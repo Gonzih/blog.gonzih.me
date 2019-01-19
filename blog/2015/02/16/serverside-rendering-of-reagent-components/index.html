@@ -1,0 +1,226 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>ServerSide rendering of Reagent components &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>ServerSide rendering of Reagent components</h1>
+              <span class="post-date">Mon, Feb 16, 2015</span>
+                  <p>Great thing about React is that you can write what people nowadays call &ldquo;isomorphic JavaScript&rdquo;.
+In this post we will not discuss how wrong this term is in many ways,
+but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.</p>
+
+<p>In my experience simplest optimization to run in some js engine on server side is whitespace.
+It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
+So our compiler configuration should look something like that:</p>
+
+<pre><code class="language-clojure">{:id &quot;server-side&quot;
+ :source-paths [&quot;src&quot;]
+ :compiler {:output-to &quot;resources/public/javascripts/server-side.js&quot;
+            :output-dir &quot;resources/public/javascripts/out-server-side&quot;
+            :preamble [&quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&quot;]
+            :pretty-print false
+            :warnings true
+            :optimizations :whitespace}}
+</code></pre>
+
+<p>Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:</p>
+
+<pre><code class="language-clojure">(def main-component
+  (with-meta
+    (fn [] ...)
+    {:component-did-mount (comp init-my-scroll-handler!
+                                also-init-my-go-loop!)}))
+</code></pre>
+
+<p>Next let&rsquo;s create function that will do some rendering to the string.
+I like to keep this function in a component specific ns just for convenience.</p>
+
+<pre><code class="language-clojure">(def ^:export render-me-to-s [initial-state]
+  (reset! my-main-state (js-&gt;clj initial-state))
+  ; Render component to markup without reactid
+  (reagent.core/render-to-static-markup [main-component])
+  ; Or render component to ready to-go react markup
+  (reagent.core/render-to-string [main-component]))
+</code></pre>
+
+<p>Now server side bootstrapping, most of this code was taken from <a href="https://github.com/reactjs/react-rails">react-rails plugin</a>.</p>
+
+<p>First of all react expects to have global or window objects in your js engine (setup.js):</p>
+
+<pre><code class="language-javascript">var global = global || this;
+var self = self || this;
+var window = window || this;
+var console = global.console || {};
+['error', 'log', 'info', 'warn'].forEach(function (fn) {
+  if (!(fn in console)) {
+    console[fn] = function () {};
+  }
+});
+</code></pre>
+
+<p>Now let&rsquo;s try and use all this in our code (for now in Ruby):</p>
+
+<pre><code class="language-ruby">cxt = V8::Context.new
+cxt.load('setup.js')
+cxt.load('resources/public/javascripts/server-side.js')
+html = cxt.eval(&quot;my.amazing_component.ns.render_me_to_s(#{init_state.to_json})&quot;)
+</code></pre>
+
+<p>And that&rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
+Sometimes you might want to use <code>ActionController::Base.helpers.j</code> helper that will
+escape your data for usage inside json, but most of the time you should be alright without it.</p>
+
+<p>If you have issues with core.async there are 2 ways to solve it.
+I personally prefer to move core.async initialization into some lifecycle method.
+Another solution is to implement setTimeout function like that in your <code>setup.js</code> snippet:</p>
+
+<pre><code class="language-javascript">goog.global.setTimeout = function(cb, t) {
+    cb();
+}
+</code></pre>
+
+<p>Now frontend part. First let&rsquo;s in-line generated html in to the container:</p>
+
+<pre><code class="language-erb">&lt;div id=&quot;content&quot;&gt;&lt;%= html %&gt;&lt;/div&gt;
+</code></pre>
+
+<p>Then let&rsquo;s write function that will render our component on frontend:</p>
+
+<pre><code class="language-clojure">(def ^:export mount-me [initial-state]
+  (reset! my-main-state (js-&gt;clj initial-state))
+  (reagent.core/render [main-component]
+                       (js/document.getElementById &quot;content&quot;)))
+</code></pre>
+
+<p>As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
+Am I wrong on this one? Don&rsquo;t know yet.</p>
+
+<p>Inline javascript that you should use on frontend looks like that:</p>
+
+<pre><code class="language-erb">&lt;script&gt;
+my.amazing_component.ns.mount_me(&lt;%= init_state.to_json %&gt;)
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="nashorn-example-result-of-my-experiments-in-the-repl">Nashorn example (result of my experiments in the REPL)</h3>
+
+<pre><code class="language-clojure">(import '[javax.script ScriptEngineManager])
+(def nashorn (.getEngineByName (ScriptEngineManager.) &quot;nashorn&quot;))
+
+; Same as in ruby version
+(def setup-script (slurp &quot;setup.js&quot;))
+(def ss-script (slurp &quot;resources/public/javascripts/server-side.js&quot;))
+(def render-script (str &quot;my.amazing_component.ns.render_me_to_s(&quot; my-state-json-string &quot;);&quot;))
+
+(.eval nashorn setup-script)
+(.eval nashorn ss-script)
+(.eval nashorn render-script) ; our html markup
+</code></pre>
+
+<p>I must admit that this code works on small reagent example.
+I&rsquo;m unable to load production code from my current project in to Nashorn.</p>
+
+<p>Also it helps a lot if you started developing your project with server side rendering in mind.</p>
+
+<p>Of course it&rsquo;s better to have some kind of &ldquo;renderers pool&rdquo; in JVM.
+Good thing that clojure allows you to implement thing like that in few lines of code.
+In ruby it&rsquo;s not a problem since we have 1 context per worker.</p>
+
+<p><strong>Useful Links:</strong></p>
+
+<ul>
+<li><a href="https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw">ClojureScript mailing list topic</a></li>
+</ul>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

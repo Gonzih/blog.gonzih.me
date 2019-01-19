@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workflow on Max Gonzih</title>
+    <link>https://blog.gonzih.me/categories/workflow/</link>
+    <description>Recent content in Workflow on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 25 Aug 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.gonzih.me/categories/workflow/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cheap standing desk</title>
+      <link>https://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/</link>
+      <pubDate>Sun, 25 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/</guid>
+      <description>&lt;p&gt;I love idea of standing desks.
+I feel myself much more productive behind standing desk.
+But commercial desks suffer from high price and complicated design.&lt;/p&gt;
+
+&lt;p&gt;Solution? Build your own standing desk!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

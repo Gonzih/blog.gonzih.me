@@ -1,0 +1,163 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>HN Tray icon in 50 lines of Clojure &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>HN Tray icon in 50 lines of Clojure</h1>
+              <span class="post-date">Sat, May 24, 2014</span>
+                  <p>Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
+Result is tray app that shows stories from HN front page.
+Just in ~50 lines of Clojure code.
+Enjoy!</p>
+
+<p><a href="https://github.com/Gonzih/hn-tray.clj">Github Project.</a></p>
+
+<p>Source code is below:</p>
+
+<pre><code class="language-clojure">(ns hn.core
+  (:require [cheshire.core :as json]
+            [clojure.java.browse :refer [browse-url]]
+            [clojure.java.io :refer [resource]])
+  (:import [java.awt SystemTray TrayIcon PopupMenu MenuItem Toolkit]
+           [java.awt.event ActionListener])
+  (:gen-class))
+
+(defn menu-item [label callback]
+  (let [menu (MenuItem. label)
+        listener (proxy [ActionListener] []
+                   (actionPerformed [event] (callback)))]
+    (.addActionListener menu listener)
+    menu))
+
+(def hn-api-url &quot;https://api.ihackernews.com/page&quot;)
+
+(defn hn-items []
+  (-&gt; hn-api-url
+      slurp
+      (json/parse-string true)
+      :items
+      (#(sort-by :points %))
+      reverse))
+
+(defn add-hn-to-menu! [menu]
+  (letfn [(mapfn [{:keys [title url commentCount points]}]
+            (let [full-title (format &quot;%-4s (%-4s) - %s&quot; points commentCount title)
+                  menu-item (menu-item full-title #(browse-url url))]
+              (println full-title)
+              (.add menu menu-item)))]
+  (doall (map mapfn (hn-items)))))
+
+(defn exit []
+  (shutdown-agents)
+  (System/exit 0))
+
+(defn -main [&amp; args]
+  (let [tray (SystemTray/getSystemTray)
+        image (.getImage (Toolkit/getDefaultToolkit)
+                         (resource &quot;icon.png&quot;))
+        icon (TrayIcon. image)
+        exit (menu-item &quot;Exit&quot; exit)]
+    (.setImageAutoSize icon true)
+    (.add tray icon)
+    (loop []
+      (let [popup (PopupMenu.)]
+        (println &quot;Updating items&quot;)
+        (add-hn-to-menu! popup)
+        (.add popup exit)
+        (.setPopupMenu icon popup)
+        (Thread/sleep (* 5 60 1000))
+        (recur)))))
+</code></pre>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

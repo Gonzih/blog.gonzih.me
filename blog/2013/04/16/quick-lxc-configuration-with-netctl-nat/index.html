@@ -1,0 +1,194 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Quick LXC configuration with netctl nat &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Quick LXC configuration with netctl nat</h1>
+              <span class="post-date">Tue, Apr 16, 2013</span>
+                  <p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
+
+<p>Install <code>lxc</code> first.</p>
+
+<pre><code class="language-sh">sudo pacman -S lxc
+</code></pre>
+
+<p>Next is bridge device for nat. I&rsquo;m already migrated to netctl in arch linux so my configuration is for netctl.
+<code>/etc/netctl/lxcbridge</code>:</p>
+
+<pre><code class="language-ini">Description=&quot;LXC Bridge connection&quot;
+Interface=lxcbr0
+Connection=bridge
+BindsToInterfaces=()
+IP=static
+Address=192.168.100.1/24
+FwdDelay=0
+</code></pre>
+
+<p>Make sure you have <code>dnsmasq</code> installed.</p>
+
+<pre><code class="language-sh">pacman -S dnsmasq
+</code></pre>
+
+<p>Run interface.</p>
+
+<pre><code class="language-sh">sudo netctl start lxcbridge
+</code></pre>
+
+<p>And enable it for startup</p>
+
+<pre><code class="language-sh">sudo netctl enable lxcbridge
+</code></pre>
+
+<p>Add iptables rule:</p>
+
+<pre><code class="language-sh">sudo iptables -t nat -A POSTROUTING -o &lt;you-main-ethernet-device-here&gt; -j MASQUERADE
+</code></pre>
+
+<p>Save iptables (as superuser):</p>
+
+<pre><code>iptables-save &gt; /etc/iptables/iptables.rules
+</code></pre>
+
+<p>Enable ip_forward:</p>
+
+<pre><code>sudo sysctl net.ipv4.ip_forward=1
+</code></pre>
+
+<p>Or to save forwarding persisent add following line:
+<code>/etc/sysctl.conf</code>:</p>
+
+<pre><code class="language-text">net.ipv4.ip_forward=1
+</code></pre>
+
+<p>Create new Ubuntu container:</p>
+
+<pre><code class="language-sh">sudo lxc-create -n playtime -t ubuntu
+</code></pre>
+
+<p>It will create new root filesystem with new configuration. Lets now change conatiner&rsquo;s configuration:
+<code>/var/lib/lxc/playtime/config</code>:</p>
+
+<pre><code class="language-ini">lxc.network.type = veth
+lxc.network.flags = up
+lxc.network.link = lxcbr0
+lxc.network.hwaddr = 00:FF:AA:00:00:01
+lxc.network.ipv4 = 192.168.100.10/24
+</code></pre>
+
+<p>Lets boot our conatiner. Better use screen or tmux for it.</p>
+
+<pre><code class="language-sh">sudo lxc-start -n playtime
+</code></pre>
+
+<p>Default user and password for ubuntu template is <code>ubuntu</code>.</p>
+
+<p>Login to container and add default gateway configuration on network up:
+<code>/etc/network/if-up.d/routes</code>:</p>
+
+<pre><code class="language-sh">#! /bin/sh
+
+route add default gw 192.168.100.1
+
+exit 0
+</code></pre>
+
+<p>Reboot container with <code>sudo reboot</code> in it.</p>
+
+<p>Now you can ssh to your container <code>ssh ubuntu@192.168.100.10</code>.
+You can also run container as daemon <code>sudo lxc-start -n playtime -d</code>.
+And you can shutdown container with <code>sudo shutdown</code> inside container.</p>
+
+<p>Thanks for reading. Let me know if I miss something or you know better way of configuring all this stuff.</p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network on Max Gonzih</title>
+    <link>https://blog.gonzih.me/categories/network/</link>
+    <description>Recent content in Network on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <lastBuildDate>Sat, 24 Aug 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.gonzih.me/categories/network/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Speed/Ping test graphs with Clojure and Raspberry Pi</title>
+      <link>https://blog.gonzih.me/blog/2013/08/24/speed-ping-test-graphs-with-clojure-and-raspberry-pi/</link>
+      <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2013/08/24/speed-ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m often complaining about my ISP quality.
+Sometimes pings are high, sometimes download speed goes down.
+So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion based on my hate to them.&lt;/p&gt;
+
+&lt;p&gt;How to do so? Let&amp;rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Octopress on Max Gonzih</title>
+    <link>https://blog.gonzih.me/categories/octopress/</link>
+    <description>Recent content in Octopress on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 19 Jul 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.gonzih.me/categories/octopress/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fix Broken Comments Count for Disqus</title>
+      <link>https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</guid>
+      <description>&lt;p&gt;I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
+That is why comments count was equal to 0 for every post on my index page.
+To fix that go to admin ui in disqus and use domain migration tool.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How To Fix Octopress Pygments Error on Arch Linux</title>
+      <link>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</link>
+      <pubDate>Wed, 21 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
+      <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Building site: source -&amp;gt; public
+  File &amp;quot;&amp;lt;string&amp;gt;&amp;quot;, line 1
+    import sys; print sys.executable
+                        ^
+SyntaxError: invalid syntax
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
+
+&lt;p&gt;For fix simple add ruby file to plugins directory with following code.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

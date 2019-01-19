@@ -1,0 +1,180 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Arch Linux on Lenovo IdeaPad Y700 15&#34; &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Arch Linux on Lenovo IdeaPad Y700 15&#34;</h1>
+              <span class="post-date">Fri, Dec 11, 2015</span>
+                  <p>Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.</p>
+
+<h1 id="what-works">What works</h1>
+
+<ul>
+<li>WIFI</li>
+<li>Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)</li>
+<li>Hibernate</li>
+<li>Sound without subwoofer</li>
+<li>Video (I used bumblebee to switch between intel/nvidia GPUs)</li>
+<li>Brightness</li>
+<li>Keyboard backlit</li>
+<li>Power managment via laptop mode tools and systemd.</li>
+<li>Card reader (you might need to run <code>echo 1 | sudo tee /sys/bus/pci/rescan</code> so card reader becomes visible)</li>
+<li>HDMI output</li>
+</ul>
+
+<h1 id="what-does-not-work-so-far">What does not work so far</h1>
+
+<ul>
+<li>Subwoofer</li>
+</ul>
+
+<h1 id="installation">Installation</h1>
+
+<h2 id="boot">Boot</h2>
+
+<ul>
+<li>Add nomodeset to the kernel options on Live USB boot</li>
+<li>Make sure secure boot is disabled (to make your life easier)</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Installation_guide">arch linux installation instructions</a></li>
+</ul>
+
+<h1 id="extra-tweaking">Extra tweaking</h1>
+
+<h2 id="video">Video</h2>
+
+<ul>
+<li>Make sure switchable GPUs are enabled in BIOS</li>
+<li>Follow <a href="https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA">insructions on the arch wiki</a></li>
+<li>To enable intel GPU add <code>i915.preliminary_hw_support=1</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> in the <code>/etc/default/grub</code> file. This should be solved after 4.3 kernel release.</li>
+<li>Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).</li>
+</ul>
+
+<h2 id="wifi">Wifi</h2>
+
+<p>Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
+There was a patch for the 17 inch model <a href="https://www.gossamer-threads.com/lists/linux/kernel/2323659">here</a>.</p>
+
+<h3 id="temporary-solution-1">Temporary solution 1:</h3>
+
+<ul>
+<li><code>sudo systemctl enable rfkill-unblock@wifi.service</code></li>
+<li><code>sudo rfkill unblock wifi</code></li>
+<li>Works fine with <code>wicd</code></li>
+<li>Configuring NetworkManager service to be run after rfkill service should also work</li>
+</ul>
+
+<h3 id="temporary-solution-2">Temporary solution 2:</h3>
+
+<ul>
+<li><code>echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf</code> to disable acpi module</li>
+</ul>
+
+<h2 id="audio-clicking">Audio clicking</h2>
+
+<p>This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
+To do that append <code>timeout=36000</code> to line <code>load-module module-suspend-on-idle</code> in the <code>/etc/pulse/default.pa</code> configuration file.
+And now restart pulse by running <code>pulseaudio --kill</code> and <code>pulseaudio --start</code>.</p>
+
+<h2 id="hibernate">Hibernate</h2>
+
+<ul>
+<li>Add <code>resume=/dev/my-swap-partition</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> line in <code>/etc/default/grub</code></li>
+<li>Run <code>sudo grub-mkconfig -o /boot/grub/grub.cfg</code></li>
+<li>Add <code>resume</code> to the list of <code>HOOKS</code> in <code>/etc/mkinitcpio.conf</code> before <code>filesystems</code> but after all <code>block</code>, <code>sata</code> and other hardware related hooks.</li>
+<li>Run <code>sudo mkinitcpio -p linux</code></li>
+<li>Reboot</li>
+<li><code>systemctl hibernate</code> should work now</li>
+</ul>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

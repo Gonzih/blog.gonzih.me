@@ -1,0 +1,164 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree) &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</h1>
+              <span class="post-date">Mon, Sep 19, 2011</span>
+                  <h2 id="install-adb">Install adb</h2>
+
+<h3 id="installing-adb-on-arch-linux">Installing adb on arch linux</h3>
+
+<pre><code class="language-bash">yaourt -S adb
+</code></pre>
+
+<h2 id="running-adb">Running adb</h2>
+
+<pre><code class="language-bash">adb kill-server
+sudo adb start-server
+adb shell
+</code></pre>
+
+<h2 id="installing-opkg">Installing opkg</h2>
+
+<p>Now run in adb shell following:</p>
+
+<pre><code class="language-bash">cd /sdcard
+wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg-bootstrap-v2.tar.bz2
+cd /
+tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
+# for non cyanogen users
+wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg.conf -O /data/local/opkg.conf
+# for cyanogen users
+wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+# add /data/xbin to your path
+export PATH=&quot;/data/xbin:$PATH&quot;
+# make /system writable
+mount -o remount,rw /system
+opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
+opkg -f /data/local/opkg.conf update
+opkg install opkg
+mount -o remount,ro /system
+</code></pre>
+
+<h2 id="opkg-usage">Opkg usage</h2>
+
+<pre><code class="language-bash">opkg install rsync
+opkg remove rsync
+# list installed packages
+opkg list_installed
+# list files belonging to package
+opkg files rsync
+</code></pre>
+
+<h2 id="available-packages">Available packages</h2>
+
+<ul>
+<li>rsync - Lightweight package management system.</li>
+<li>htop - Interactive processes viewer.</li>
+<li>mc - Midnight Commander - a powerful file manager.</li>
+<li>zip - Archiver for .zip files.</li>
+<li>tree - Tree is a recursive directory listing program.</li>
+<li>busybox - Tiny utilities for small and embedded systems.</li>
+<li>dropbear - Lightweight SSH2 server and client.</li>
+<li>nano - Free Pico clone with some new features.</li>
+<li>opkg - Lightweight package management system.</li>
+<li>screen - Terminal multiplexor with VT100/ANSI terminal emulation.</li>
+<li>terminfo - Basic terminal type definitions.</li>
+<li>zip - Archiver for .zip files.</li>
+</ul>
+
+<p><a href="https://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/">via</a></p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

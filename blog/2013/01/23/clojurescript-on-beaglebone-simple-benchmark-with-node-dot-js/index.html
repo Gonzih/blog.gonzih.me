@@ -1,0 +1,166 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>ClojureScript on BeagleBone: simple benchmark with Node.js &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>ClojureScript on BeagleBone: simple benchmark with Node.js</h1>
+              <span class="post-date">Wed, Jan 23, 2013</span>
+                  <p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
+Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
+
+<p><a href="https://github.com/Gonzih/clojurescript-small-benchmark-for-embed">Code</a> is modified to run on top of the JavaScript:</p>
+
+<pre><code class="language-clojure">(ns benchmark.core)
+
+(defn factorial [x]
+  (reduce * (range 1 (inc x))))
+
+(defn fib [n]
+  (if (&lt;= n 1)
+    1
+    (+ (fib (- n 1)) (fib (- n 2)))))
+
+(defn sort-seq []
+  (sort (repeat 100000 (rand-int 2000000))))
+
+(defn time-fun [fun]
+  (let [start  (.getTime (js/Date.))
+        _      (fun)
+        end    (.getTime (js/Date.))
+        result (- end start)]
+    result))
+
+(defn time-it [fun]
+  (let [values  (for [i (range 200)] (time-fun fun))]
+    (/ (apply + values)
+       (count values))))
+
+(defn -main []
+  (println &quot;(factorial 5000) \t Avg: &quot; (time-it #(factorial 5000)))
+  (println &quot;(fib 20) \t Avg: &quot;         (time-it #(fib 20)))
+  (println &quot;(sort-seq) \t Avg: &quot;       (time-it #(sort-seq))))
+
+(set! *main-cli-fn* -main)
+</code></pre>
+
+<p>Benchmark results:</p>
+
+<pre><code>&gt; node --version
+v0.6.12
+
+# simple compiler optimization
+&gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+91.4 20.3 90816  51292 pts/1  Rl+  08:46  0:54 node clojurescript-benchmark-optimization-simple.js
+
+&gt; node clojurescript-benchmark-optimization-simple.js
+(factorial 5000) Avg: 64.345
+(fib 20)         Avg: 5.575
+(sort-seq)       Avg: 7281.975
+
+# advanced compiler optimization
+&gt; ps eu
+%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js
+
+&gt; node clojurescript-benchmark-optimization-advanced.js
+(factorial 5000) Avg: 54.775
+(fib 20)         Avg: 2.77
+(sort-seq)       Avg: 6325.71
+</code></pre>
+
+<p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
+Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :)</p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>
