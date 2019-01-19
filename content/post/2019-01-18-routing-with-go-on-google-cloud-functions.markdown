@@ -26,9 +26,11 @@ import (
 	"net/http"
 )
 
+var mux = newMux()
+
 //F represents cloud function entry point
 func F(w http.ResponseWriter, r *http.Request) {
-	newMux().ServeHTTP(w, r)
+	mux.ServeHTTP(w, r)
 }
 
 func newMux() *http.ServeMux {
