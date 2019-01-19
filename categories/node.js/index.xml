@@ -21,8 +21,7 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/</guid>
       <description>&lt;p&gt;Benchmark is based on my &lt;a href=&#34;https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/&#34;&gt;previous experiments&lt;/a&gt; with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
-Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.
-&lt;/p&gt;</description>
+Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.&lt;/p&gt;</description>
     </item>
     
   </channel>

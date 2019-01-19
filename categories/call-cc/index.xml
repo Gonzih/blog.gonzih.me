@@ -16,10 +16,10 @@
     
     <item>
       <title>Yin-Yang Call/cc puzzle in Ruby</title>
-      <link>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
+      <link>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call-cc-puzzle-in-ruby/</link>
       <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call-cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
 
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
@@ -31,9 +31,7 @@
 (yin yang))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;</description>
     </item>
     
   </channel>

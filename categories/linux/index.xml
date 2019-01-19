@@ -20,9 +20,7 @@
       <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</guid>
-      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,9 +29,7 @@
       <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
-      <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -42,9 +38,7 @@
       <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
-      <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -59,9 +53,7 @@ Would be lovely, to use some kind of lisp for scripting, right?
 To do interactive development with repl in your favorite editor.
 To write it in a nice predictable language that you also enjoy.
 But sometimes it&amp;rsquo;s impossible to add some external dependencies to the system.
-What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -71,8 +63,7 @@ What if you have only JVM to your disposal, will you be able to pull it off only
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
-Solution can be applied to any rpm based system (I think so).
-&lt;/p&gt;</description>
+Solution can be applied to any rpm based system (I think so).&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -82,9 +73,7 @@ Solution can be applied to any rpm based system (I think so).
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</guid>
       <description>&lt;p&gt;Here is small post with instructions how to setup auto connect to VPN.
-Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -97,9 +86,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -119,8 +106,7 @@ base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,l
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;For more information take look at &lt;a href=&#34;https://www.midnight-commander.org/wiki/doc/common/skins&#34;&gt;mc wiki&lt;/a&gt; and run &lt;code&gt;mc --help-color&lt;/code&gt; to see available color variables in your mc version.
-Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/code&gt;. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).
-&lt;/p&gt;</description>
+Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/code&gt;. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -129,8 +115,7 @@ Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/cod
       <pubDate>Mon, 08 Oct 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/</guid>
-      <description>&lt;p&gt;Recently I migarted from awesome to xmonad. I&amp;rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently I migarted from awesome to xmonad. I&amp;rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -147,7 +132,8 @@ Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/cod
 &lt;li&gt;&lt;a href=&#34;https://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file&#34;&gt;Migration information is here&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/&#34;&gt;My current GRUB2 theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;</description>
+&lt;li&gt;&lt;a href=&#34;https://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

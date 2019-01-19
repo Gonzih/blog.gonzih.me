@@ -21,8 +21,7 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
-Solution can be applied to any rpm based system (I think so).
-&lt;/p&gt;</description>
+Solution can be applied to any rpm based system (I think so).&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,9 +34,7 @@ Solution can be applied to any rpm based system (I think so).
 
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;https://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
-I bet you can figure out similar packages for different distribution.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+I bet you can figure out similar packages for different distribution.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,9 +47,7 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

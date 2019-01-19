@@ -21,8 +21,6 @@
       <description>&lt;p&gt;Couple of days ago Google cloud functions got &lt;a href=&#34;https://cloud.google.com/blog/products/application-development/cloud-functions-go-1-11-is-now-a-supported-language&#34;&gt;official support for go 1.11&lt;/a&gt;.
 I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on &lt;code&gt;http.ServeMux&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;p&gt;To get started with cloud functions you can follow &lt;a href=&#34;https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0&#34;&gt;this simple tutorial&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as source for your newly defined cloud function.&lt;/p&gt;
@@ -79,8 +77,6 @@ func three(w http.ResponseWriter, r *http.Request) {
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</guid>
       <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
 
@@ -278,8 +274,6 @@ $ ykman openpgp touch enc on
       <guid>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
       <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h1 id=&#34;what-works&#34;&gt;What works&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -368,8 +362,6 @@ And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and 
       <guid>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
       <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/MacBook&#34;&gt;Arch Wiki page&lt;/a&gt; covers installation well enough in my opinion.&lt;/p&gt;
@@ -453,8 +445,6 @@ load video
       <guid>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
       <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;NeoVim&lt;/a&gt; nowadays is almost fully compatible with vim.
 It is able to reuse my &lt;a href=&#34;https://github.com/Gonzih/.vim/blob/master/vimrc&#34;&gt;.vimrc&lt;/a&gt; file without any issues.
 And recently it got proper terminal emulator built-in.
@@ -494,8 +484,6 @@ endif
       <description>&lt;p&gt;Great thing about React is that you can write what people nowadays call &amp;ldquo;isomorphic JavaScript&amp;rdquo;.
 In this post we will not discuss how wrong this term is in many ways,
 but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;In my experience simplest optimization to run in some js engine on server side is whitespace.
 It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
@@ -623,18 +611,16 @@ In ruby it&amp;rsquo;s not a problem since we have 1 context per worker.&lt;/p&g
     
     <item>
       <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
-      <link>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/</link>
       <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/</guid>
       <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt;
 
 &lt;p&gt;Of course interesting question is &amp;ldquo;How did I end up with this idea in my head?&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;I tried to play with emacs few times couple of years ago.
 But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.&lt;/p&gt;
@@ -736,8 +722,7 @@ there are pre-build binaries on the &lt;a href=&#34;https://leiningen.org/grench
 
 &lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse&#34;&gt;grench-opensuse&lt;/a&gt;
 [&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.sha1&#34;&gt;sha1&lt;/a&gt;
-| &lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.asc&#34;&gt;sig&lt;/a&gt;]
-&lt;/p&gt;</description>
+| &lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.asc&#34;&gt;sig&lt;/a&gt;]&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -748,8 +733,7 @@ there are pre-build binaries on the &lt;a href=&#34;https://leiningen.org/grench
       <guid>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
-Also provides ability to apply transformation using transducers.
-&lt;/p&gt;
+Also provides ability to apply transformation using transducers.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;
 (defonce form (atom {}))
@@ -800,8 +784,6 @@ To do interactive development with repl in your favorite editor.
 To write it in a nice predictable language that you also enjoy.
 But sometimes it&amp;rsquo;s impossible to add some external dependencies to the system.
 What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;basic-setup&#34;&gt;Basic setup&lt;/h1&gt;
 
@@ -953,8 +935,7 @@ For me HN is more about interesting links than community and conversations behin
 So I don&amp;rsquo;t really care about anything except front page.&lt;/p&gt;
 
 &lt;p&gt;Originally I started this project as a Haskell learning exercise.
-I hope someone will find it useful.
-&lt;/p&gt;</description>
+I hope someone will find it useful.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -964,8 +945,7 @@ I hope someone will find it useful.
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
-Solution can be applied to any rpm based system (I think so).
-&lt;/p&gt;
+Solution can be applied to any rpm based system (I think so).&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Install &lt;a href=&#34;https://software.opensuse.org/package/alien&#34;&gt;alien&lt;/a&gt; (perl scripts for converting packages).&lt;/li&gt;
@@ -995,8 +975,6 @@ I noticed few warning about default locates and missing libraries, but client st
       <guid>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</guid>
       <description>&lt;p&gt;Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;p&gt;Following was tested on OpenSuse 13.1.&lt;/p&gt;
 
@@ -1066,8 +1044,6 @@ Enjoy!&lt;/p&gt;
 
 &lt;p&gt;Source code is below:&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns hn.core
   (:require [cheshire.core :as json]
             [clojure.java.browse :refer [browse-url]]
@@ -1126,17 +1102,15 @@ Enjoy!&lt;/p&gt;
     
     <item>
       <title>Hardware Cut/Copy/Paste with Arduino Leonardo</title>
-      <link>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
+      <link>https://blog.gonzih.me/blog/2014/03/04/hardware-cut-copy-paste-with-arduino-leonardo/</link>
       <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut-copy-paste-with-arduino-leonardo/</guid>
       <description>&lt;p&gt;Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
 I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;https://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.
 Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
 Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;emulating-keyboard-on-leonardo&#34;&gt;Emulating keyboard on Leonardo.&lt;/h2&gt;
 

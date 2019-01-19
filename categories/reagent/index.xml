@@ -22,9 +22,7 @@
       <guid>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
       <description>&lt;p&gt;Great thing about React is that you can write what people nowadays call &amp;ldquo;isomorphic JavaScript&amp;rdquo;.
 In this post we will not discuss how wrong this term is in many ways,
-but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,8 +33,7 @@ but instead we will focus on how to achieve similar results in your ClojureScrip
       <guid>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
-Also provides ability to apply transformation using transducers.
-&lt;/p&gt;</description>
+Also provides ability to apply transformation using transducers.&lt;/p&gt;</description>
     </item>
     
   </channel>

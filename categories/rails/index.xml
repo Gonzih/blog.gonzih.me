@@ -16,11 +16,11 @@
     
     <item>
       <title>Backbone.js &#43; Ruby on Rails Tips</title>
-      <link>https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/</link>
       <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <guid>https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/</guid>
+      <description> Add initializer that disable sending data in namespaces in json.  ActiveRecord::Base.include_root_in_json = false # {&amp;quot;post&amp;quot;: {&amp;quot;title&amp;quot;: &amp;quot;some title&amp;quot;, &amp;quot;content&amp;quot;: &amp;quot;some content&amp;quot;}} # will be # {&amp;quot;title&amp;quot;: &amp;quot;some title&amp;quot;, &amp;quot;content&amp;quot;: &amp;quot;some content}   Use attr_accessible for filtering attributes in mass assigments from backbone. In rails &amp;gt; 3.1 you can use attr_accessible with :as =&amp;gt; role. Use inherited resources for faster development. </description>
     </item>
     
   </channel>

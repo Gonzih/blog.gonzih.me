@@ -21,9 +21,7 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2019/01/18/routing-with-go-on-google-cloud-functions/</guid>
       <description>&lt;p&gt;Couple of days ago Google cloud functions got &lt;a href=&#34;https://cloud.google.com/blog/products/application-development/cloud-functions-go-1-11-is-now-a-supported-language&#34;&gt;official support for go 1.11&lt;/a&gt;.
-I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on &lt;code&gt;http.ServeMux&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on &lt;code&gt;http.ServeMux&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
   </channel>

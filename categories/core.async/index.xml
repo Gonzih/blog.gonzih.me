@@ -22,8 +22,7 @@
       <guid>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
-Also provides ability to apply transformation using transducers.
-&lt;/p&gt;</description>
+Also provides ability to apply transformation using transducers.&lt;/p&gt;</description>
     </item>
     
   </channel>

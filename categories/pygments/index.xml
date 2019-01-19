@@ -31,8 +31,7 @@ SyntaxError: invalid syntax
 
 &lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
 
-&lt;p&gt;For fix simple add ruby file to plugins directory with following code.
-&lt;/p&gt;</description>
+&lt;p&gt;For fix simple add ruby file to plugins directory with following code.&lt;/p&gt;</description>
     </item>
     
   </channel>

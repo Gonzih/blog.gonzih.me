@@ -27,9 +27,7 @@ Enjoy!&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/hn-tray.clj&#34;&gt;Github Project.&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Source code is below:&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Source code is below:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -38,9 +36,7 @@ Enjoy!&lt;/p&gt;
       <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
-
-Pi is running Raspbian.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -49,8 +45,7 @@ Pi is running Raspbian.&lt;/p&gt;</description>
       <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
-      <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -70,8 +65,7 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;
-&lt;/p&gt;</description>
+&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

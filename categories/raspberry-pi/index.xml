@@ -16,17 +16,15 @@
     
     <item>
       <title>Speed/Ping test graphs with Clojure and Raspberry Pi</title>
-      <link>https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</link>
+      <link>https://blog.gonzih.me/blog/2013/08/24/speed-ping-test-graphs-with-clojure-and-raspberry-pi/</link>
       <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/08/24/speed-ping-test-graphs-with-clojure-and-raspberry-pi/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion based on my hate to them.&lt;/p&gt;
 
-&lt;p&gt;How to do so? Let&amp;rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;How to do so? Let&amp;rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,9 +33,7 @@ So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion ba
       <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
-
-Pi is running Raspbian.&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://jdk8.java.net/fxarmpreview/&#34;&gt;Here&lt;/a&gt; you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -47,9 +43,7 @@ Pi is running Raspbian.&lt;/p&gt;</description>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/</guid>
       <description>&lt;p&gt;Bored and have free time? Lets build something.
-Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).&lt;/p&gt;</description>
     </item>
     
   </channel>

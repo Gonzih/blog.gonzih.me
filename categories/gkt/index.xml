@@ -24,9 +24,7 @@
 
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;https://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
-I bet you can figure out similar packages for different distribution.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+I bet you can figure out similar packages for different distribution.&lt;/p&gt;</description>
     </item>
     
   </channel>

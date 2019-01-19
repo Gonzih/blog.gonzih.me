@@ -16,18 +16,16 @@
     
     <item>
       <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
-      <link>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/</link>
       <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2015/02/15/ln--sf-/usr/bin/emacs-/usr/bin/vim-/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/</guid>
       <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt;
 
-&lt;p&gt;Of course interesting question is &amp;ldquo;How did I end up with this idea in my head?&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Of course interesting question is &amp;ldquo;How did I end up with this idea in my head?&amp;rdquo;.&lt;/p&gt;</description>
     </item>
     
   </channel>

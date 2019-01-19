@@ -16,16 +16,14 @@
     
     <item>
       <title>Tmux &#43; Rvm &#43; Zsh Fix</title>
-      <link>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/</guid>
       <description>&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[ $TERM = &amp;quot;screen&amp;quot; ]] &amp;amp;&amp;amp; rvm use default
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>

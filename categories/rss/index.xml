@@ -25,25 +25,21 @@ And already hit few issues, so this post is something like collection of tips ho
 I couldn&amp;rsquo;t find answers on my issues in wiki or documentation.
 But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
 Thank you for your patience, man!
-And keep doing what you are doing, core.typed is just amazing thing!&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+And keep doing what you are doing, core.typed is just amazing thing!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>RSS/Atom reader in Clojure via IMAP</title>
-      <link>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
+      <link>https://blog.gonzih.me/blog/2013/06/28/rss-atom-reader-in-clojure-via-imap/</link>
       <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/06/28/rss-atom-reader-in-clojure-via-imap/</guid>
       <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
 
 &lt;p&gt;Google Reader was shut down and I started looking for alternatives.
 And sadly I did not found anything close to Google Reader experience.
 There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
-All I wanted was simple to use news reader.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+All I wanted was simple to use news reader.&lt;/p&gt;</description>
     </item>
     
   </channel>

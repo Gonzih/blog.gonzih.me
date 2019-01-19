@@ -21,8 +21,7 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
       <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
-Solution can be applied to any rpm based system (I think so).
-&lt;/p&gt;</description>
+Solution can be applied to any rpm based system (I think so).&lt;/p&gt;</description>
     </item>
     
   </channel>

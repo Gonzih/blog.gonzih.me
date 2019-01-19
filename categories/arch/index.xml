@@ -20,9 +20,7 @@
       <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</guid>
-      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,9 +29,7 @@
       <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
-      <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,7 +46,8 @@
 &lt;li&gt;&lt;a href=&#34;https://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file&#34;&gt;Migration information is here&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/&#34;&gt;My current GRUB2 theme&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;</description>
+&lt;li&gt;&lt;a href=&#34;https://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;amp;action=contents&#34;&gt;More GRUB2 themes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

@@ -20,8 +20,7 @@
       <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/</guid>
-      <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.&lt;/p&gt;</description>
     </item>
     
   </channel>

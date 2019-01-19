@@ -22,8 +22,7 @@
       <guid>https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/</guid>
       <description>&lt;p&gt;I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
 That is why comments count was equal to 0 for every post on my index page.
-To fix that go to admin ui in disqus and use domain migration tool.
-&lt;/p&gt;</description>
+To fix that go to admin ui in disqus and use domain migration tool.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,8 +42,7 @@ SyntaxError: invalid syntax
 
 &lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
 
-&lt;p&gt;For fix simple add ruby file to plugins directory with following code.
-&lt;/p&gt;</description>
+&lt;p&gt;For fix simple add ruby file to plugins directory with following code.&lt;/p&gt;</description>
     </item>
     
   </channel>

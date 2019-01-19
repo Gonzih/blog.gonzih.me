@@ -20,9 +20,7 @@
       <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/</guid>
-      <description>&lt;p&gt;So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.&lt;/p&gt;</description>
     </item>
     
   </channel>

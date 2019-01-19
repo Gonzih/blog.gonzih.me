@@ -1,164 +1,92 @@
-
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head>
-  <meta charset="utf-8">
-  <title>ln -sf /usr/bin/emacs /usr/bin/vim ? - Max Gonzih</title>
-  <meta name="author" content="Max Gonzih <gonzih@gmail.com>">
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.53" />
 
   
-  <meta name="description" content="Ln -sf /usr/bin/emacs /usr/bin/vim ? Feb 15th, 2015 | Comments Some time ago I actually did run ln -sf /usr/bin/emacs /usr/bin/vim.
-And left it like &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   
-  <link rel="canonical" href="http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Max Gonzih" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  <title>ln -sf /usr/bin/emacs /usr/bin/vim ? &middot; Max Gonzih</title>
   
 
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-    <a href="/">
-        <div class="clearfix">
-        </div>
-    </a>
-</aside>
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
 
-<ul id="menu">
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
 
-  <li class="title">
-    <h1 id="title"><a href="/">Max Gonzih</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">KEEP CALM and CODE ON</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-
-  <li class="link">
-    <a href="mailto:gonzih@gmail.com">email</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/Gonzih/">github</a>
-  </li>
-
-
-  <li class="link">
-      <a href="https://plus.google.com/107826984980304612787" class="link" target="_blank">google+</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://twitter.com/Gonzih/">twitter</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-  <li>
-    <a target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
-  </li>
-</ul>
-
-
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.gonzih.me" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  
-  
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
 </div>
 
-  
-  <header>
-    
-      <h2 class="entry-title">Ln -sf /usr/bin/emacs /usr/bin/vim ?</h2>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-02-15T19:21:00+00:00" pubdate data-updated="true">Feb 15<span>th</span>, 2015</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
+        <div class="content container">
+            <div class="post">
+                <h1>ln -sf /usr/bin/emacs /usr/bin/vim ?</h1>
+              <span class="post-date">Sun, Feb 15, 2015</span>
+                  <p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.</p>
 
-<p>Of course interesting question is &#8220;How did I end up with this idea in my head?&#8221;.</p>
-
-<!--more-->
-
+<p>Of course interesting question is &ldquo;How did I end up with this idea in my head?&rdquo;.</p>
 
 <p>I tried to play with emacs few times couple of years ago.
 But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.</p>
 
 <p>I tried evil mode, but it went not so well.
-Problem is that I&#8217;m also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
+Problem is that I&rsquo;m also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
 I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
 Also probably my lack of patience played against me.
 So I gave up and continued using vim (something like 5 years of hapiness).</p>
@@ -169,7 +97,7 @@ Development flow like that is very common practice in clojure world and one reas
 Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim <a href="https://github.com/tpope/vim-fireplace">vim-fireplace</a> relies on nrepl.
 I was using for some time <a href="https://github.com/sjl/tslime2.vim">tslime2</a> in vim to work with ClojureScript.
 Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
-It works. You don&#8217;t have out of the box tooling that will select your top most clojure form sadly.
+It works. You don&rsquo;t have out of the box tooling that will select your top most clojure form sadly.
 Once upon a time I had discussion on #clojurescript irc and <a href="https://twitter.com/martinklepsch">@martinklepsh</a> mentioned that nowadays evil-mode is much better.
 I was bored and followed that track. I did run <code>rm -rf .emacs.d</code> and started from scratch.
 As a result my workflow from vim was ported to emacs in a couple of hours.
@@ -181,108 +109,81 @@ I set my default editor to emacs and continued doing my thing for a couple of da
 <p>Good:</p>
 
 <ul>
-<li>Evil mode is good and it&#8217;s very close. It&#8217;s probably closest thing to vim that I ever tried.
-It&#8217;s not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
-(Big shout outs to the author of idea plugin. It&#8217;s very impressive.)</li>
+<li>Evil mode is good and it&rsquo;s very close. It&rsquo;s probably closest thing to vim that I ever tried.
+It&rsquo;s not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
+(Big shout outs to the author of idea plugin. It&rsquo;s very impressive.)</li>
 <li>Writing configuration in a language that I understand was a big relief.</li>
-<li>Mapping configuration is simpler. You are mapping elisp function to the key. It&#8217;s simpler and easier to understand than remapping mechanism in vim.</li>
-<li>Helm surprised me in it&#8217;s speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.</li>
-<li>Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. <a href="https://github%20in%20inferior%20lisp%20mode%20tuned%20to%20play%20well%20with%20clojure">inf-clojure</a> is enhanced clojure mode for the inf-lisp.</li>
-<li>It can do async stuff! If you used vim then you know what I mean. In emacs it&#8217;s just there. Without required pythor/ruby support enabled during compilation.</li>
-<li>Built-in package manager. Just run <code>package-install</code> and it&#8217;s there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.</li>
-<li>Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run <code>describe-key</code> and see what is going on. You can do something similar in vim, but in emacs it&#8217;s much better.</li>
-<li>Startup time is slow and it&#8217;s solvable. Just run systemd user service with <code>emacs --daemon</code> and that is enough for most cases.</li>
+<li>Mapping configuration is simpler. You are mapping elisp function to the key. It&rsquo;s simpler and easier to understand than remapping mechanism in vim.</li>
+<li>Helm surprised me in it&rsquo;s speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.</li>
+<li>Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. <a href="https://github in inferior lisp mode tuned to play well with clojure">inf-clojure</a> is enhanced clojure mode for the inf-lisp.</li>
+<li>It can do async stuff! If you used vim then you know what I mean. In emacs it&rsquo;s just there. Without required pythor/ruby support enabled during compilation.</li>
+<li>Built-in package manager. Just run <code>package-install</code> and it&rsquo;s there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.</li>
+<li>Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run <code>describe-key</code> and see what is going on. You can do something similar in vim, but in emacs it&rsquo;s much better.</li>
+<li>Startup time is slow and it&rsquo;s solvable. Just run systemd user service with <code>emacs --daemon</code> and that is enough for most cases.</li>
 <li>And you still have emacs operating system at your disposal!</li>
 <li>Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.</li>
 </ul>
 
-
 <p>Not so good:</p>
 
 <ul>
-<li>Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it&#8217;s unnecessary. Of course this is related only to my habits and muscle memory.</li>
+<li>Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it&rsquo;s unnecessary. Of course this is related only to my habits and muscle memory.</li>
 <li>Evil is slower.
-Most of the time it&#8217;s not a problem. But sometimes I&#8217;m mashing my keyboard too fast and mess happens.
+Most of the time it&rsquo;s not a problem. But sometimes I&rsquo;m mashing my keyboard too fast and mess happens.
 Good example is replace (<code>r</code>) key.
 Press <code>r:</code> too fast and you might end up in vim command line.</li>
-<li>Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don&#8217;t play well with evil.</li>
+<li>Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don&rsquo;t play well with evil.</li>
 <li>Good example of painful evil integration is cider.
 It just does not work with evil mode.
 Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
-That was big disappointment for me. I had high hopes for the cider. I&#8217;m realizing that I don&#8217;t really need everything that cider provides.
-I&#8217;m very happy with just ability to evaluate code, without even debugger and nice stacktraces.
+That was big disappointment for me. I had high hopes for the cider. I&rsquo;m realizing that I don&rsquo;t really need everything that cider provides.
+I&rsquo;m very happy with just ability to evaluate code, without even debugger and nice stacktraces.
 But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
 After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on <a href="https://github.com/clojure-emacs/inf-clojure">inf-clojure</a>.</li>
 </ul>
-
 
 <p>Will I continue using emacs? Yes.</p>
 
 <p>Will it be my default editor? Probably no.
 Vim feels more reliable because it provides modal editing experience out of the box.
 In emacs it an option.
-I&#8217;m totally fine with giving away all that goodness that emacs provides to have proper editing experience <strong>all the time</strong>.
+I&rsquo;m totally fine with giving away all that goodness that emacs provides to have proper editing experience <strong>all the time</strong>.
 In every buffer, in every menu.
 And I will continue slowly improving my emacs configuration.</p>
 
 <p>This experiment reminded me how many things are missing from my setup.
 It also reminded me that <a href="https://neovim.org">neovim</a> might be next big thing in my tool belt.
-I&#8217;m really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.</p>
+I&rsquo;m really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.</p>
 
 <p><strong>PS</strong></p>
 
 <ul>
-<li><a href="http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/">Here</a> is very good tutorial to get vim users started in emacs.</li>
+<li><a href="https://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/">Here</a> is very good tutorial to get vim users started in emacs.</li>
 <li>My .emacs.d is <a href="https://github.com/Gonzih/.emacs.d">here</a>. I tried to keep it minimalistic.</li>
 <li>My .vim is <a href="https://github.com/Gonzih/.vim">here</a>.</li>
 <li>If you are looking for the best vim like experience in emacs please take a look at the <a href="https://github.com/syl20bnr/spacemacs">spacemacs project</a>.</li>
-<li>Looking for the good color theme in emacs? Take a look at the port of <a href="https://github.com/morhetz/gruvbox">vim&#8217;s gruvbox theme</a>.</li>
+<li>Looking for the good color theme in emacs? Take a look at the port of <a href="https://github.com/morhetz/gruvbox">vim&rsquo;s gruvbox theme</a>.</li>
 </ul>
+            </div>
 
-
-
-
-</article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-  
-
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
 <script type="text/javascript">
-      var disqus_shortname = 'gonzihsblog';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/';
-        var disqus_url = 'http://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
 
-
-
-
-
-
-
-
-
-
-</body>
+  </body>
 </html>
