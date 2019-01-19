@@ -25,7 +25,7 @@ current CPU frequency is 500 MHz.
 
 Clojure version is 1.4.0.
 
-Benchmark code is from [nakkaya's post](http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/):
+Benchmark code is from [nakkaya's post](https://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/):
 ```clojure
 (ns benchmark.core)
 

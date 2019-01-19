@@ -6,11 +6,11 @@ comments: true
 categories:
 ---
 
-[Grenchman](http://leiningen.org/grench.html) is a small tool that runs leiningen tasks over nrepl.
+[Grenchman](https://leiningen.org/grench.html) is a small tool that runs leiningen tasks over nrepl.
 
 Helps with JVM startup time during development.
 Build in OCaml. If you are not in to the building binary on your own,
-there are pre-build binaries on the [official website](http://leiningen.org/grench.html).
+there are pre-build binaries on the [official website](https://leiningen.org/grench.html).
 
 And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).
 

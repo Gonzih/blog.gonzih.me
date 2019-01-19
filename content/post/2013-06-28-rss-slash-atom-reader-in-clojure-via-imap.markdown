@@ -14,7 +14,7 @@ All I wanted was simple to use news reader.
 <!--more-->
 
 ### Idea
-Then I found post in the Racket community about storing your feeds in the IMAP folders using "APPEND" command by [Greg Hendershott](http://www.greghendershott.com/2013/05/feeds2gmail.html).
+Then I found post in the Racket community about storing your feeds in the IMAP folders using "APPEND" command by [Greg Hendershott](https://www.greghendershott.com/2013/05/feeds2gmail.html).
 That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.
 
 ### Clojure version

@@ -11,8 +11,8 @@ Very small post (more like insruction for myself for the future) on how to conve
 Solution can be applied to any rpm based system (I think so).
 <!--more-->
 
-* Install [alien](http://software.opensuse.org/package/alien) (perl scripts for converting packages).
-* Download deb from [spotify repository](http://repository.spotify.com/pool/non-free/s/spotify/), pay attention to architecture.
+* Install [alien](https://software.opensuse.org/package/alien) (perl scripts for converting packages).
+* Download deb from [spotify repository](https://repository.spotify.com/pool/non-free/s/spotify/), pay attention to architecture.
 * Convert deb -> rpm by running `sudo alien --scripts -r spotify*.deb`.
 * Install rpm `sudo zypper in spotify*.rpm`.
 * Run `spotify`.

@@ -11,7 +11,7 @@ This is a small post on how to improve your ClojureScript development flow in Ne
 
 <!--more-->
 
-[NeoVim](http://neovim.io/) nowadays is almost fully compatible with vim.
+[NeoVim](https://neovim.io/) nowadays is almost fully compatible with vim.
 It is able to reuse my [.vimrc](https://github.com/Gonzih/.vim/blob/master/vimrc) file without any issues.
 And recently it got proper terminal emulator built-in.
 So how about reusing it for ClojureScript development?

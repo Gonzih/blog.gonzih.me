@@ -8,10 +8,10 @@ min_version = 0.14
 
 [author]
     name = "spf13"
-    homepage = "http://spf13.com"
+    homepage = "https://spf13.com"
 
 # If Porting existing theme
 [original]
     author =  "mdo"
-    homepage = "http://markdotto.com/"
+    homepage = "https://markdotto.com/"
     repo = "https://www.github.com/mdo/hyde"

@@ -15,5 +15,5 @@ cd ~/watch    # set your watch directory here
 [[ "$1" =~ xt=urn:btih:([^&/]+) ]] || exit;
 echo "d10:magnet-uri${#1}:${1}e" > "meta-${BASH_REMATCH[1]}.torrent"
 ```
-[via](http://libtorrent.rakshasa.no/ticket/2100)
+[via](https://libtorrent.rakshasa.no/ticket/2100)
 <!--more-->

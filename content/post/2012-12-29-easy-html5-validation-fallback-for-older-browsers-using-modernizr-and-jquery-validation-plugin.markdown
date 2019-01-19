@@ -10,13 +10,13 @@ So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Gre
 You will need three things for that.
 <!--more-->
 
-First is [Modernizr](http://modernizr.com/) javascript library. It allows you to detect which features are supported by your browser and which aren't.
+First is [Modernizr](https://modernizr.com/) javascript library. It allows you to detect which features are supported by your browser and which aren't.
 
-Second is [JQuery](http://jquery.com/). I think you are already familiar with it, so there is no need to tell you why it's awesome and how to use it.
+Second is [JQuery](https://jquery.com/). I think you are already familiar with it, so there is no need to tell you why it's awesome and how to use it.
 
-Third is [JQuery Validation Plugin](http://docs.jquery.com/Plugins/Validation). It provides mechanism for form validation based on input classes.
+Third is [JQuery Validation Plugin](https://docs.jquery.com/Plugins/Validation). It provides mechanism for form validation based on input classes.
 
-So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small [CoffeeScript](http://coffeescript.org/) snippet:
+So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small [CoffeeScript](https://coffeescript.org/) snippet:
 
 ```coffeescript
 # initialize plugin on page ready

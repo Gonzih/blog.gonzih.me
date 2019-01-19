@@ -86,7 +86,7 @@ I'm really hoping to see big movement around neovim once project becomes more or
 
 **PS**
 
-* [Here](http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/) is very good tutorial to get vim users started in emacs.
+* [Here](https://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/) is very good tutorial to get vim users started in emacs.
 * My .emacs.d is [here](https://github.com/Gonzih/.emacs.d). I tried to keep it minimalistic.
 * My .vim is [here](https://github.com/Gonzih/.vim).
 * If you are looking for the best vim like experience in emacs please take a look at the [spacemacs project](https://github.com/syl20bnr/spacemacs).

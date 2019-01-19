@@ -21,5 +21,5 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
 VACUUM FREEZE;
 ```
 
-[via](http://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/)
+[via](https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/)
 <!--more-->

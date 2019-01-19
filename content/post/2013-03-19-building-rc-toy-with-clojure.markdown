@@ -42,7 +42,7 @@ Use voltage divider (bluetooth module is working on 3.3v, Arduino is working on 
 
 ## Gearbox and HBridge Driver
 To control motors I decided to use HBridge. You can use bunch of transistors if you want, but I'm afraid it would be messy.
-To understand how HBridge works you should read [Adafruit post](http://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview).
+To understand how HBridge works you should read [Adafruit post](https://learn.adafruit.com/adafruit-Arduino-lesson-15-dc-motor-reversing/overview).
 
 HBridge -> Arduino Schematics:
 ![Schematics](https://d1wvxg652jdms0.cloudfront.net/rc-toy/arduino-and-hbridge-l293b-rc-toy.svg)
@@ -82,7 +82,7 @@ You need to find kernel module for your gamepad. For my gamepad module `joydev` 
 After module is loaded you should see new device in `/dev/input`.
 
 ## Clojure code
-I used [Clojure](http://clojure.org/) as main language for controlling Arduino. I took [Clodiuno](https://github.com/nakkaya/clodiuno) library.
+I used [Clojure](https://clojure.org/) as main language for controlling Arduino. I took [Clodiuno](https://github.com/nakkaya/clodiuno) library.
 It is Firmata protocol implementation for Clojure. Why Firmata? Because it's easy, fast and provides great way to extend your project in future.
 
 So I wrote some code, uploaded Firmata to Arduino. And... it's not working.

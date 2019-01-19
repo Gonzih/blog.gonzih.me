@@ -21,8 +21,8 @@ It will print `@*@**@***@****@*****@******@...` forever.
 
 <!--more-->
 
-[Here](http://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/) you can find good explanation,
-also few of explanations can be found on [StackOverflow](http://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work).
+[Here](https://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/) you can find good explanation,
+also few of explanations can be found on [StackOverflow](https://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work).
 
 After I understand how it works I got all that excited and implemented given puzzle in ruby:
 
@@ -37,7 +37,7 @@ yin.call(yang)
 
 And it doesn't work. It prints `@*@*********...` forever.
 
-No idea why. Maybe there are some limitations of [ruby's call/cc](http://www.ruby-doc.org/core-2.0.0/Continuation.html).
+No idea why. Maybe there are some limitations of [ruby's call/cc](https://www.ruby-doc.org/core-2.0.0/Continuation.html).
 I will research further, but if you have any information about that feel free to comment or email me.
 
 Cheers!

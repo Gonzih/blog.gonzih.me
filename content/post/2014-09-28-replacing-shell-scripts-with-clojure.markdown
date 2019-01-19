@@ -21,7 +21,7 @@ What if you have only JVM to your disposal, will you be able to pull it off only
 First what we will need is to get clojure jar file:
 
 ```
-wget -O /opt/clojure.jar 'http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'
+wget -O /opt/clojure.jar 'https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'
 ```
 
 Next lets create executable `/usr/bin/clojure` that will live in `/usr/bin` (or `/opt/bin` or `/home/youruser/bin`):
@@ -79,7 +79,7 @@ Compiling JamVM with OpenJDK support:
 # Fetching required dependencies and source
 apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
 cd /opt
-wget -O jamvm-2.0.0.tar.gz 'http://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz'
+wget -O jamvm-2.0.0.tar.gz 'https://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz'
 tar -xvzf jamvm-2.0.0.tar.gz
 
 # Building

@@ -5,7 +5,7 @@ date: "2013-04-14"
 comments: true
 categories: [clojure, java, jre, raspberry pi, openjdk, java 8, armhf]
 ---
-[Here](http://jdk8.java.net/fxarmpreview/) you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
+[Here](https://jdk8.java.net/fxarmpreview/) you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
 <!--more-->
 Pi is running Raspbian.
 ```
@@ -24,7 +24,7 @@ current CPU frequency is 700 MHz.
 
 Clojure version is 1.5.1.
 
-Benchmark code is from [nakkaya's post](http://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/), also used for my BeagleBone Clojure/ClojureScript benchmarks:
+Benchmark code is from [nakkaya's post](https://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/), also used for my BeagleBone Clojure/ClojureScript benchmarks:
 ```clojure
 (ns benchmark.core)
 

@@ -66,4 +66,4 @@ opkg files rsync
 * terminfo - Basic terminal type definitions.
 * zip - Archiver for .zip files.
 
-[via](http://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/)
+[via](https://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/)

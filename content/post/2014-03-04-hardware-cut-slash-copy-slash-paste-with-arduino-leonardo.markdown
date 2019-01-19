@@ -7,7 +7,7 @@ categories: [arduino, leonardo, keyboard, ruby]
 ---
 Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
-I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw [keyboard.io](http://keyboard.io).
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw [keyboard.io](https://keyboard.io).
 Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
 Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.
 
@@ -16,7 +16,7 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
 ## Emulating keyboard on Leonardo.
 
 With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
-Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the [documentation](http://arduino.cc/en/Reference/MouseKeyboard).
+Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the [documentation](https://arduino.cc/en/Reference/MouseKeyboard).
 
 ## Arduino wiring.
 
@@ -254,7 +254,7 @@ void pressKeys(String key) {
 }
 ```
 
-More information on ruby-serialport is [here](http://ruby-serialport.rubyforge.org/).
+More information on ruby-serialport is [here](https://ruby-serialport.rubyforge.org/).
 
 ```ruby
 require 'serialport'

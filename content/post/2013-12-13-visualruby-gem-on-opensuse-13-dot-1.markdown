@@ -8,7 +8,7 @@ categories: [ruby, gkt, opensuse]
 ---
 ![visualruby](https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png)
 
-I found out about ruby gem called [visualruby](http://visualruby.net/) and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
+I found out about ruby gem called [visualruby](https://visualruby.net/) and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your's if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.
 

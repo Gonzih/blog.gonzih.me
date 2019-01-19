@@ -44,7 +44,7 @@ Collection of tweaks that I gathered after installing Arch Linux on to Lenovo Id
 ## Wifi
 
 Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
-There was a patch for the 17 inch model [here](http://www.gossamer-threads.com/lists/linux/kernel/2323659).
+There was a patch for the 17 inch model [here](https://www.gossamer-threads.com/lists/linux/kernel/2323659).
 
 ### Temporary solution 1:
 

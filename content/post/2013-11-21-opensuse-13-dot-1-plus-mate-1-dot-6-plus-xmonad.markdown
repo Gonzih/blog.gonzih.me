@@ -14,7 +14,7 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.
 
 <!--more-->
 
-Patterns for installing mate in OpenSUSE can be found here [http://en.opensuse.org/Portal:MATE](http://en.opensuse.org/Portal:MATE)
+Patterns for installing mate in OpenSUSE can be found here [https://en.opensuse.org/Portal:MATE](https://en.opensuse.org/Portal:MATE)
 
 Xmonad can be installed using cabal install or using packages from OBS.
 
