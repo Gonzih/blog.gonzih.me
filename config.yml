@@ -1,4 +1,3 @@
----
 theme: "hyde"
 baseurl: "https://blog.gonzih.me/"
 
@@ -47,4 +46,3 @@ menu:
         URL: "https://www.gonzih.me"
 
 metadataformat: "yaml"
----
