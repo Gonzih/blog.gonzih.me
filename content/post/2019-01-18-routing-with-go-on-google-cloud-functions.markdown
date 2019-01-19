@@ -13,7 +13,7 @@ I got interested in how to handle routing in cloud functions in go, so after cou
 
 To get started with cloud functions you can follow [this simple tutorial](https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0).
 
-One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as a source for your newly defined cloud function.
+One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as the source repository for your newly defined cloud function.
 
 It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.
 
