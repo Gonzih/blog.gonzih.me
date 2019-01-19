@@ -1,3 +1,5 @@
+metadataformat: "yaml"
+
 theme: "hyde"
 baseurl: "https://blog.gonzih.me/"
 
@@ -44,5 +46,3 @@ menu:
       - Name: "Homepage"
         Weight: 5
         URL: "https://www.gonzih.me"
-
-metadataformat: "yaml"
