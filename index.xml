@@ -23,10 +23,11 @@ I got interested in how to handle routing in cloud functions in go, so after cou
 
 &lt;p&gt;To get started with cloud functions you can follow &lt;a href=&#34;https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0&#34;&gt;this simple tutorial&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as source for your newly defined cloud function.&lt;/p&gt;
+&lt;p&gt;One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as a source for your newly defined cloud function.&lt;/p&gt;
 
-&lt;p&gt;It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.
-Ultimately we can simply define our own router using &lt;code&gt;NewServeMux&lt;/code&gt; like this:&lt;/p&gt;
+&lt;p&gt;It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.&lt;/p&gt;
+
+&lt;p&gt;Ultimately we can simply define our own router using &lt;code&gt;NewServeMux&lt;/code&gt; like this:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package function
 
@@ -65,7 +66,7 @@ func three(w http.ResponseWriter, r *http.Request) {
 
 &lt;p&gt;This works because your cloud function receives request with prefix stripped away from the URL. This is very handy since allows one to port existing http server in to cloud function without changing it too much.&lt;/p&gt;
 
-&lt;p&gt;I hope that helps, and happy hacking on cloud functions with go!&lt;/p&gt;
+&lt;p&gt;I hope this helps, and happy hacking on cloud functions with go!&lt;/p&gt;
 
 &lt;p&gt;Example code can be &lt;a href=&#34;https://github.com/Gonzih/go-google-functions-demo&#34;&gt;found here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>

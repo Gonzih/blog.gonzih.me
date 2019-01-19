@@ -80,10 +80,11 @@ I got interested in how to handle routing in cloud functions in go, so after cou
 
 <p>To get started with cloud functions you can follow <a href="https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0">this simple tutorial</a>.</p>
 
-<p>One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as source for your newly defined cloud function.</p>
+<p>One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as a source for your newly defined cloud function.</p>
 
-<p>It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.
-Ultimately we can simply define our own router using <code>NewServeMux</code> like this:</p>
+<p>It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.</p>
+
+<p>Ultimately we can simply define our own router using <code>NewServeMux</code> like this:</p>
 
 <pre><code class="language-go">package function
 
@@ -122,7 +123,7 @@ func three(w http.ResponseWriter, r *http.Request) {
 
 <p>This works because your cloud function receives request with prefix stripped away from the URL. This is very handy since allows one to port existing http server in to cloud function without changing it too much.</p>
 
-<p>I hope that helps, and happy hacking on cloud functions with go!</p>
+<p>I hope this helps, and happy hacking on cloud functions with go!</p>
 
 <p>Example code can be <a href="https://github.com/Gonzih/go-google-functions-demo">found here</a>.</p>
             </div>
