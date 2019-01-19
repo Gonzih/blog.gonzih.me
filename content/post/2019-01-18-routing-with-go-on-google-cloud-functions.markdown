@@ -13,9 +13,10 @@ I got interested in how to handle routing in cloud functions in go, so after cou
 
 To get started with cloud functions you can follow [this simple tutorial](https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0).
 
-One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as source for your newly defined cloud function.
+One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as a source for your newly defined cloud function.
 
 It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.
+
 Ultimately we can simply define our own router using `NewServeMux` like this:
 
 ```go
@@ -56,6 +57,6 @@ Now you can access your handlers by appending `/one`, `/two` or `/subroute/three
 
 This works because your cloud function receives request with prefix stripped away from the URL. This is very handy since allows one to port existing http server in to cloud function without changing it too much.
 
-I hope that helps, and happy hacking on cloud functions with go!
+I hope this helps, and happy hacking on cloud functions with go!
 
 Example code can be [found here](https://github.com/Gonzih/go-google-functions-demo).
