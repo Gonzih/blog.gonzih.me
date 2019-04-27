@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Opensuse on Max Gonzih</title>
+    <title>opensuse on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/opensuse/</link>
-    <description>Recent content in Opensuse on Max Gonzih</description>
+    <description>Recent content in opensuse on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>

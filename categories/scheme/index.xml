@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Scheme on Max Gonzih</title>
+    <title>scheme on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/scheme/</link>
-    <description>Recent content in Scheme on Max Gonzih</description>
+    <description>Recent content in scheme on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
@@ -16,10 +16,10 @@
     
     <item>
       <title>Yin-Yang Call/cc puzzle in Ruby</title>
-      <link>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call-cc-puzzle-in-ruby/</link>
+      <link>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</link>
       <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call-cc-puzzle-in-ruby/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
 
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;

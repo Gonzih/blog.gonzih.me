@@ -1,0 +1,185 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.55.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Scripting with Go on NixOS &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Scripting with Go on NixOS</h1>
+              <span class="post-date">Fri, Apr 26, 2019</span>
+                  <p>This is a short HOWTO based on great idea from <a href="https://blog.cloudflare.com/using-go-as-a-scripting-language-in-linux/">this blog post</a> on how
+to utilize <a href="https://github.com/erning/gorun">gorun</a> and <code>binfmt_misc</code> to use go files for scripting.</p>
+
+<p>First lets install <code>gorun</code> as a system package on NixOS.</p>
+
+<p>Lets create <code>gorun.nix</code> file first:</p>
+
+<pre><code>with import &lt;nixpkgs&gt; {};
+
+buildGoPackage rec {
+  name = &quot;gorun-${version}&quot;;
+  version = &quot;master-85cd5f5e084af0863ed0c3f18c00e64526d1b899&quot;;
+  goPackagePath = &quot;github.com/erning/gorun&quot;;
+
+  src = fetchFromGitHub {
+    owner = &quot;erning&quot;;
+    repo = &quot;gorun&quot;;
+    rev = &quot;85cd5f5e084af0863ed0c3f18c00e64526d1b899&quot;;
+    sha256 = &quot;sha256:1hdqimfzpynnpqc7p8m8hkcv9dlfbd8kl22979i6626nq57dvln8&quot;;
+  };
+
+  meta = with stdenv.lib; {
+    description = &quot;gorun is a tool enabling one to put a \&quot;bang line\&quot; in the source code of a Go program to run it&quot;;
+    homepage = https://github.com/erning/gorun;
+    license = licenses.mit;
+    maintainers = with maintainers; [ Gonzih ];
+    platforms = platforms.linux ++ platforms.darwin;
+  };
+}
+</code></pre>
+
+<p>Next lets add this package to <code>systemPackages</code> list:</p>
+
+<pre><code>environment.systemPackages = with pkgs; [
+  ...
+  (import ./gorun.nix)
+  ...
+];
+</code></pre>
+
+<p>Next step would be to utilize <code>boot.binfmtMiscRegistrations</code> to register our <code>gorun</code> in <code>binfmt_misc</code> module which is
+responsible for parsing shebang scripts and binary files. Drop the following lines in to your <code>configuration.nix</code>:</p>
+
+<pre><code>boot.binfmtMiscRegistrations = {
+  go = {
+    recognitionType = &quot;extension&quot;;
+    magicOrExtension = &quot;go&quot;;
+    interpreter = &quot;/run/current-system/sw/bin/gorun&quot;;
+    preserveArgvZero = false;
+    openBinary = true;
+    matchCredentials = true;
+    fixBinary = false;
+  };
+};
+</code></pre>
+
+<p>What does this configuration do? <code>recognitionType</code> tells <code>binfmt</code> to make a decision based on file extension,
+<code>magicOrExtension</code> tells it to look for <code>.go</code> extension, <code>interpreter</code> specifies which binary to invoke,
+<code>openBinary</code> corresponds to <code>O</code> flag of <code>binfmt</code> (which I dont fully understand tbh), <code>matchCredentials</code> tells kernel to run
+interpreter with permissions set on original script. For more information on <code>binfmt</code> please do check out <a href="https://www.kernel.org/doc/html/v4.14/admin-guide/binfmt-misc.html">these amazing kernel docs</a>.</p>
+
+<p>Now lets simply run <code>sudo nixos-rebuild --switch</code> and after everything is done lets give it a try.</p>
+
+<p>First lets create a simple hello world script:</p>
+
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+func main() {
+	fmt.Println(&quot;Hello World!&quot;)
+}
+</code></pre>
+
+<p>Lets make it executable with <code>chmod +x hello.go</code>.</p>
+
+<p>And now lets run it:</p>
+
+<pre><code>$ ./hello.go
+Hello World!
+</code></pre>
+
+<p>Yay! It works!</p>
+
+<p>Hope that helps somewhat.</p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

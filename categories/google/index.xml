@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Google on Max Gonzih</title>
+    <title>google on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/google/</link>
-    <description>Recent content in Google on Max Gonzih</description>
+    <description>Recent content in google on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
@@ -26,10 +26,10 @@ I got interested in how to handle routing in cloud functions in go, so after cou
     
     <item>
       <title>RSS/Atom reader in Clojure via IMAP</title>
-      <link>https://blog.gonzih.me/blog/2013/06/28/rss-atom-reader-in-clojure-via-imap/</link>
+      <link>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</link>
       <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2013/06/28/rss-atom-reader-in-clojure-via-imap/</guid>
+      <guid>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
       <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
 
 &lt;p&gt;Google Reader was shut down and I started looking for alternatives.

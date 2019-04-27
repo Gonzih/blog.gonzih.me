@@ -9,193 +9,49 @@
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 12 Dec 2012 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://blog.gonzih.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Ads</title>
-      <link>https://blog.gonzih.me/categories/ads/</link>
-      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
+      <title>go</title>
+      <link>https://blog.gonzih.me/categories/go/</link>
+      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ads/</guid>
+      <guid>https://blog.gonzih.me/categories/go/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Analytics</title>
-      <link>https://blog.gonzih.me/categories/analytics/</link>
-      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
+      <title>link</title>
+      <link>https://blog.gonzih.me/categories/link/</link>
+      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/analytics/</guid>
+      <guid>https://blog.gonzih.me/categories/link/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Android</title>
-      <link>https://blog.gonzih.me/categories/android/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <title>nixos</title>
+      <link>https://blog.gonzih.me/categories/nixos/</link>
+      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/android/</guid>
+      <guid>https://blog.gonzih.me/categories/nixos/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Arch</title>
-      <link>https://blog.gonzih.me/categories/arch/</link>
-      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <title>scripting</title>
+      <link>https://blog.gonzih.me/categories/scripting/</link>
+      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/arch/</guid>
+      <guid>https://blog.gonzih.me/categories/scripting/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Arch Linux</title>
-      <link>https://blog.gonzih.me/categories/arch-linux/</link>
-      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/arch-linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Archlinux</title>
-      <link>https://blog.gonzih.me/categories/archlinux/</link>
-      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/archlinux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Arduino</title>
-      <link>https://blog.gonzih.me/categories/arduino/</link>
-      <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/arduino/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Arm</title>
-      <link>https://blog.gonzih.me/categories/arm/</link>
-      <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/arm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Armhf</title>
-      <link>https://blog.gonzih.me/categories/armhf/</link>
-      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/armhf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Armsf</title>
-      <link>https://blog.gonzih.me/categories/armsf/</link>
-      <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/armsf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Atom</title>
-      <link>https://blog.gonzih.me/categories/atom/</link>
-      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/atom/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Awt</title>
-      <link>https://blog.gonzih.me/categories/awt/</link>
-      <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/awt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Backbone.js</title>
-      <link>https://blog.gonzih.me/categories/backbone.js/</link>
-      <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/backbone.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bash</title>
-      <link>https://blog.gonzih.me/categories/bash/</link>
-      <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/bash/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Beaglebone</title>
-      <link>https://blog.gonzih.me/categories/beaglebone/</link>
-      <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/beaglebone/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bealbebone</title>
-      <link>https://blog.gonzih.me/categories/bealbebone/</link>
-      <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/bealbebone/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Busybox</title>
-      <link>https://blog.gonzih.me/categories/busybox/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/busybox/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Call/Cc</title>
-      <link>https://blog.gonzih.me/categories/call-cc/</link>
-      <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/call-cc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Clojure</title>
-      <link>https://blog.gonzih.me/categories/clojure/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/clojure/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Clojurescript</title>
-      <link>https://blog.gonzih.me/categories/clojurescript/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/clojurescript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cloud Functions</title>
+      <title>cloud functions</title>
       <link>https://blog.gonzih.me/categories/cloud-functions/</link>
       <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -204,133 +60,7 @@
     </item>
     
     <item>
-      <title>Coffeescript</title>
-      <link>https://blog.gonzih.me/categories/coffeescript/</link>
-      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/coffeescript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Color</title>
-      <link>https://blog.gonzih.me/categories/color/</link>
-      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/color/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Comments</title>
-      <link>https://blog.gonzih.me/categories/comments/</link>
-      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/comments/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Core.async</title>
-      <link>https://blog.gonzih.me/categories/core.async/</link>
-      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/core.async/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Core.typed</title>
-      <link>https://blog.gonzih.me/categories/core.typed/</link>
-      <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/core.typed/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ctags</title>
-      <link>https://blog.gonzih.me/categories/ctags/</link>
-      <pubDate>Mon, 18 Mar 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ctags/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Db</title>
-      <link>https://blog.gonzih.me/categories/db/</link>
-      <pubDate>Fri, 30 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/db/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deb</title>
-      <link>https://blog.gonzih.me/categories/deb/</link>
-      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/deb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Disqus</title>
-      <link>https://blog.gonzih.me/categories/disqus/</link>
-      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/disqus/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ejre</title>
-      <link>https://blog.gonzih.me/categories/ejre/</link>
-      <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ejre/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Emacs</title>
-      <link>https://blog.gonzih.me/categories/emacs/</link>
-      <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/emacs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Embed</title>
-      <link>https://blog.gonzih.me/categories/embed/</link>
-      <pubDate>Tue, 19 Mar 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/embed/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Figwheel</title>
-      <link>https://blog.gonzih.me/categories/figwheel/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/figwheel/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ghostery</title>
-      <link>https://blog.gonzih.me/categories/ghostery/</link>
-      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ghostery/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gke</title>
+      <title>gke</title>
       <link>https://blog.gonzih.me/categories/gke/</link>
       <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -339,25 +69,7 @@
     </item>
     
     <item>
-      <title>Gkt</title>
-      <link>https://blog.gonzih.me/categories/gkt/</link>
-      <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/gkt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Go</title>
-      <link>https://blog.gonzih.me/categories/go/</link>
-      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Google</title>
+      <title>google</title>
       <link>https://blog.gonzih.me/categories/google/</link>
       <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -366,11 +78,308 @@
     </item>
     
     <item>
-      <title>Grub2</title>
-      <link>https://blog.gonzih.me/categories/grub2/</link>
-      <pubDate>Fri, 20 Jul 2012 00:00:00 +0000</pubDate>
+      <title>routing</title>
+      <link>https://blog.gonzih.me/categories/routing/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/grub2/</guid>
+      <guid>https://blog.gonzih.me/categories/routing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>arch</title>
+      <link>https://blog.gonzih.me/categories/arch/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/arch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://blog.gonzih.me/categories/linux/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openpgp</title>
+      <link>https://blog.gonzih.me/categories/openpgp/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/openpgp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pgp</title>
+      <link>https://blog.gonzih.me/categories/pgp/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/pgp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://blog.gonzih.me/categories/ssh/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yubikey</title>
+      <link>https://blog.gonzih.me/categories/yubikey/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/yubikey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>laptop</title>
+      <link>https://blog.gonzih.me/categories/laptop/</link>
+      <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/laptop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lenovo</title>
+      <link>https://blog.gonzih.me/categories/lenovo/</link>
+      <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/lenovo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>archlinux</title>
+      <link>https://blog.gonzih.me/categories/archlinux/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/archlinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>macbook</title>
+      <link>https://blog.gonzih.me/categories/macbook/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/macbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>clojure</title>
+      <link>https://blog.gonzih.me/categories/clojure/</link>
+      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/clojure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>clojurescript</title>
+      <link>https://blog.gonzih.me/categories/clojurescript/</link>
+      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/clojurescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>figwheel</title>
+      <link>https://blog.gonzih.me/categories/figwheel/</link>
+      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/figwheel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nvim</title>
+      <link>https://blog.gonzih.me/categories/nvim/</link>
+      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/nvim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://blog.gonzih.me/categories/vim/</link>
+      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reagent</title>
+      <link>https://blog.gonzih.me/categories/reagent/</link>
+      <pubDate>Mon, 16 Feb 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/reagent/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emacs</title>
+      <link>https://blog.gonzih.me/categories/emacs/</link>
+      <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>core.async</title>
+      <link>https://blog.gonzih.me/categories/core.async/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/core.async/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react.js</title>
+      <link>https://blog.gonzih.me/categories/react.js/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/react.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jamvm</title>
+      <link>https://blog.gonzih.me/categories/jamvm/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/jamvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jvm</title>
+      <link>https://blog.gonzih.me/categories/jvm/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/jvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haskell</title>
+      <link>https://blog.gonzih.me/categories/haskell/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>heroku</title>
+      <link>https://blog.gonzih.me/categories/heroku/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/heroku/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hn</title>
+      <link>https://blog.gonzih.me/categories/hn/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/hn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hxt</title>
+      <link>https://blog.gonzih.me/categories/hxt/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/hxt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scotty</title>
+      <link>https://blog.gonzih.me/categories/scotty/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/scotty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deb</title>
+      <link>https://blog.gonzih.me/categories/deb/</link>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/deb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opensuse</title>
+      <link>https://blog.gonzih.me/categories/opensuse/</link>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/opensuse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rpm</title>
+      <link>https://blog.gonzih.me/categories/rpm/</link>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/rpm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spotify</title>
+      <link>https://blog.gonzih.me/categories/spotify/</link>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/spotify/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zypper</title>
+      <link>https://blog.gonzih.me/categories/zypper/</link>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/zypper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>privacy</title>
+      <link>https://blog.gonzih.me/categories/privacy/</link>
+      <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/privacy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vpn</title>
+      <link>https://blog.gonzih.me/categories/vpn/</link>
+      <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/vpn/</guid>
       <description></description>
     </item>
     
@@ -384,97 +393,16 @@
     </item>
     
     <item>
-      <title>Haskell</title>
-      <link>https://blog.gonzih.me/categories/haskell/</link>
-      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <title>awt</title>
+      <link>https://blog.gonzih.me/categories/awt/</link>
+      <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/haskell/</guid>
+      <guid>https://blog.gonzih.me/categories/awt/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Heroku</title>
-      <link>https://blog.gonzih.me/categories/heroku/</link>
-      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/heroku/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hn</title>
-      <link>https://blog.gonzih.me/categories/hn/</link>
-      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/hn/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Html5</title>
-      <link>https://blog.gonzih.me/categories/html5/</link>
-      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/html5/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Htop</title>
-      <link>https://blog.gonzih.me/categories/htop/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/htop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hxt</title>
-      <link>https://blog.gonzih.me/categories/hxt/</link>
-      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/hxt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ie</title>
-      <link>https://blog.gonzih.me/categories/ie/</link>
-      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ie/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Internet</title>
-      <link>https://blog.gonzih.me/categories/internet/</link>
-      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/internet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Issue</title>
-      <link>https://blog.gonzih.me/categories/issue/</link>
-      <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/issue/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jamvm</title>
-      <link>https://blog.gonzih.me/categories/jamvm/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/jamvm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
+      <title>java</title>
       <link>https://blog.gonzih.me/categories/java/</link>
       <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -483,43 +411,16 @@
     </item>
     
     <item>
-      <title>Java 8</title>
-      <link>https://blog.gonzih.me/categories/java-8/</link>
-      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
+      <title>arduino</title>
+      <link>https://blog.gonzih.me/categories/arduino/</link>
+      <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/java-8/</guid>
+      <guid>https://blog.gonzih.me/categories/arduino/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Jquery</title>
-      <link>https://blog.gonzih.me/categories/jquery/</link>
-      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/jquery/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jre</title>
-      <link>https://blog.gonzih.me/categories/jre/</link>
-      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/jre/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jvm</title>
-      <link>https://blog.gonzih.me/categories/jvm/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/jvm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Keyboard</title>
+      <title>keyboard</title>
       <link>https://blog.gonzih.me/categories/keyboard/</link>
       <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -528,34 +429,7 @@
     </item>
     
     <item>
-      <title>Keymap</title>
-      <link>https://blog.gonzih.me/categories/keymap/</link>
-      <pubDate>Tue, 18 Oct 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/keymap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Laptop</title>
-      <link>https://blog.gonzih.me/categories/laptop/</link>
-      <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/laptop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Lenovo</title>
-      <link>https://blog.gonzih.me/categories/lenovo/</link>
-      <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/lenovo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Leonardo</title>
+      <title>leonardo</title>
       <link>https://blog.gonzih.me/categories/leonardo/</link>
       <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -564,322 +438,7 @@
     </item>
     
     <item>
-      <title>Linux</title>
-      <link>https://blog.gonzih.me/categories/linux/</link>
-      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux Containers</title>
-      <link>https://blog.gonzih.me/categories/linux-containers/</link>
-      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/linux-containers/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Macbook</title>
-      <link>https://blog.gonzih.me/categories/macbook/</link>
-      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/macbook/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Magnet Links</title>
-      <link>https://blog.gonzih.me/categories/magnet-links/</link>
-      <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/magnet-links/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mate</title>
-      <link>https://blog.gonzih.me/categories/mate/</link>
-      <pubDate>Thu, 21 Nov 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/mate/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mc</title>
-      <link>https://blog.gonzih.me/categories/mc/</link>
-      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/mc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nat</title>
-      <link>https://blog.gonzih.me/categories/nat/</link>
-      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/nat/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Netctl</title>
-      <link>https://blog.gonzih.me/categories/netctl/</link>
-      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/netctl/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Network</title>
-      <link>https://blog.gonzih.me/categories/network/</link>
-      <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Node.js</title>
-      <link>https://blog.gonzih.me/categories/node.js/</link>
-      <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/node.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nvim</title>
-      <link>https://blog.gonzih.me/categories/nvim/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/nvim/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Octopress</title>
-      <link>https://blog.gonzih.me/categories/octopress/</link>
-      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/octopress/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Openjdk</title>
-      <link>https://blog.gonzih.me/categories/openjdk/</link>
-      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/openjdk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Openpgp</title>
-      <link>https://blog.gonzih.me/categories/openpgp/</link>
-      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/openpgp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Opensuse</title>
-      <link>https://blog.gonzih.me/categories/opensuse/</link>
-      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/opensuse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Opkg</title>
-      <link>https://blog.gonzih.me/categories/opkg/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/opkg/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Packages Manager</title>
-      <link>https://blog.gonzih.me/categories/packages-manager/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/packages-manager/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pgp</title>
-      <link>https://blog.gonzih.me/categories/pgp/</link>
-      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/pgp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pipa</title>
-      <link>https://blog.gonzih.me/categories/pipa/</link>
-      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/pipa/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pivacy</title>
-      <link>https://blog.gonzih.me/categories/pivacy/</link>
-      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/pivacy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Postgresql</title>
-      <link>https://blog.gonzih.me/categories/postgresql/</link>
-      <pubDate>Fri, 30 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/postgresql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Privacy</title>
-      <link>https://blog.gonzih.me/categories/privacy/</link>
-      <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/privacy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pygments</title>
-      <link>https://blog.gonzih.me/categories/pygments/</link>
-      <pubDate>Wed, 21 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/pygments/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Racket</title>
-      <link>https://blog.gonzih.me/categories/racket/</link>
-      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/racket/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rails</title>
-      <link>https://blog.gonzih.me/categories/rails/</link>
-      <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/rails/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Raspberry Pi</title>
-      <link>https://blog.gonzih.me/categories/raspberry-pi/</link>
-      <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/raspberry-pi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>React.js</title>
-      <link>https://blog.gonzih.me/categories/react.js/</link>
-      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/react.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Reagent</title>
-      <link>https://blog.gonzih.me/categories/reagent/</link>
-      <pubDate>Mon, 16 Feb 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/reagent/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Remote Controll</title>
-      <link>https://blog.gonzih.me/categories/remote-controll/</link>
-      <pubDate>Tue, 19 Mar 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/remote-controll/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ror</title>
-      <link>https://blog.gonzih.me/categories/ror/</link>
-      <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ror/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Routing</title>
-      <link>https://blog.gonzih.me/categories/routing/</link>
-      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/routing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rpm</title>
-      <link>https://blog.gonzih.me/categories/rpm/</link>
-      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/rpm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rss</title>
-      <link>https://blog.gonzih.me/categories/rss/</link>
-      <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/rss/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rsync</title>
-      <link>https://blog.gonzih.me/categories/rsync/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/rsync/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rtorrent</title>
-      <link>https://blog.gonzih.me/categories/rtorrent/</link>
-      <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/rtorrent/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ruby</title>
+      <title>ruby</title>
       <link>https://blog.gonzih.me/categories/ruby/</link>
       <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -888,16 +447,25 @@
     </item>
     
     <item>
-      <title>Rvm</title>
-      <link>https://blog.gonzih.me/categories/rvm/</link>
-      <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
+      <title>gkt</title>
+      <link>https://blog.gonzih.me/categories/gkt/</link>
+      <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/rvm/</guid>
+      <guid>https://blog.gonzih.me/categories/gkt/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Scheme</title>
+      <title>call/cc</title>
+      <link>https://blog.gonzih.me/categories/call/cc/</link>
+      <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/call/cc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scheme</title>
       <link>https://blog.gonzih.me/categories/scheme/</link>
       <pubDate>Tue, 26 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -906,160 +474,16 @@
     </item>
     
     <item>
-      <title>Scotty</title>
-      <link>https://blog.gonzih.me/categories/scotty/</link>
-      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <title>mate</title>
+      <link>https://blog.gonzih.me/categories/mate/</link>
+      <pubDate>Thu, 21 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/scotty/</guid>
+      <guid>https://blog.gonzih.me/categories/mate/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Screen</title>
-      <link>https://blog.gonzih.me/categories/screen/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/screen/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sopa</title>
-      <link>https://blog.gonzih.me/categories/sopa/</link>
-      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/sopa/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Spotify</title>
-      <link>https://blog.gonzih.me/categories/spotify/</link>
-      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/spotify/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ssh</title>
-      <link>https://blog.gonzih.me/categories/ssh/</link>
-      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ssh/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Standing Desk</title>
-      <link>https://blog.gonzih.me/categories/standing-desk/</link>
-      <pubDate>Sun, 25 Aug 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/standing-desk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Terminal</title>
-      <link>https://blog.gonzih.me/categories/terminal/</link>
-      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/terminal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tmux</title>
-      <link>https://blog.gonzih.me/categories/tmux/</link>
-      <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/tmux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tree</title>
-      <link>https://blog.gonzih.me/categories/tree/</link>
-      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/tree/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ubuntu</title>
-      <link>https://blog.gonzih.me/categories/ubuntu/</link>
-      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/ubuntu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Validation</title>
-      <link>https://blog.gonzih.me/categories/validation/</link>
-      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/validation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vim</title>
-      <link>https://blog.gonzih.me/categories/vim/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/vim/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Viml</title>
-      <link>https://blog.gonzih.me/categories/viml/</link>
-      <pubDate>Mon, 18 Mar 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/viml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vpn</title>
-      <link>https://blog.gonzih.me/categories/vpn/</link>
-      <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/vpn/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Web</title>
-      <link>https://blog.gonzih.me/categories/web/</link>
-      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Wm</title>
-      <link>https://blog.gonzih.me/categories/wm/</link>
-      <pubDate>Mon, 08 Oct 2012 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/wm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Workflow</title>
-      <link>https://blog.gonzih.me/categories/workflow/</link>
-      <pubDate>Sun, 25 Aug 2013 00:00:00 +0000</pubDate>
-      <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/workflow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Xmonad</title>
+      <title>xmonad</title>
       <link>https://blog.gonzih.me/categories/xmonad/</link>
       <pubDate>Thu, 21 Nov 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -1068,16 +492,583 @@
     </item>
     
     <item>
-      <title>Yubikey</title>
-      <link>https://blog.gonzih.me/categories/yubikey/</link>
-      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <title>core.typed</title>
+      <link>https://blog.gonzih.me/categories/core.typed/</link>
+      <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/yubikey/</guid>
+      <guid>https://blog.gonzih.me/categories/core.typed/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Zip</title>
+      <title>rss</title>
+      <link>https://blog.gonzih.me/categories/rss/</link>
+      <pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/rss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>standing desk</title>
+      <link>https://blog.gonzih.me/categories/standing-desk/</link>
+      <pubDate>Sun, 25 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/standing-desk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>workflow</title>
+      <link>https://blog.gonzih.me/categories/workflow/</link>
+      <pubDate>Sun, 25 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/workflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>network</title>
+      <link>https://blog.gonzih.me/categories/network/</link>
+      <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raspberry pi</title>
+      <link>https://blog.gonzih.me/categories/raspberry-pi/</link>
+      <pubDate>Sat, 24 Aug 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/raspberry-pi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>atom</title>
+      <link>https://blog.gonzih.me/categories/atom/</link>
+      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/atom/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>racket</title>
+      <link>https://blog.gonzih.me/categories/racket/</link>
+      <pubDate>Fri, 28 Jun 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/racket/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>arch linux</title>
+      <link>https://blog.gonzih.me/categories/arch-linux/</link>
+      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/arch-linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux containers</title>
+      <link>https://blog.gonzih.me/categories/linux-containers/</link>
+      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/linux-containers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nat</title>
+      <link>https://blog.gonzih.me/categories/nat/</link>
+      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/nat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>netctl</title>
+      <link>https://blog.gonzih.me/categories/netctl/</link>
+      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/netctl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>https://blog.gonzih.me/categories/ubuntu/</link>
+      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>armhf</title>
+      <link>https://blog.gonzih.me/categories/armhf/</link>
+      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/armhf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java 8</title>
+      <link>https://blog.gonzih.me/categories/java-8/</link>
+      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/java-8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jre</title>
+      <link>https://blog.gonzih.me/categories/jre/</link>
+      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/jre/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openjdk</title>
+      <link>https://blog.gonzih.me/categories/openjdk/</link>
+      <pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/openjdk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>embed</title>
+      <link>https://blog.gonzih.me/categories/embed/</link>
+      <pubDate>Tue, 19 Mar 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/embed/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>remote controll</title>
+      <link>https://blog.gonzih.me/categories/remote-controll/</link>
+      <pubDate>Tue, 19 Mar 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/remote-controll/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ctags</title>
+      <link>https://blog.gonzih.me/categories/ctags/</link>
+      <pubDate>Mon, 18 Mar 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ctags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>viml</title>
+      <link>https://blog.gonzih.me/categories/viml/</link>
+      <pubDate>Mon, 18 Mar 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/viml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>color</title>
+      <link>https://blog.gonzih.me/categories/color/</link>
+      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/color/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mc</title>
+      <link>https://blog.gonzih.me/categories/mc/</link>
+      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/mc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terminal</title>
+      <link>https://blog.gonzih.me/categories/terminal/</link>
+      <pubDate>Thu, 14 Feb 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bealbebone</title>
+      <link>https://blog.gonzih.me/categories/bealbebone/</link>
+      <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/bealbebone/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node.js</title>
+      <link>https://blog.gonzih.me/categories/node.js/</link>
+      <pubDate>Wed, 23 Jan 2013 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coffeescript</title>
+      <link>https://blog.gonzih.me/categories/coffeescript/</link>
+      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/coffeescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>html5</title>
+      <link>https://blog.gonzih.me/categories/html5/</link>
+      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/html5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ie</title>
+      <link>https://blog.gonzih.me/categories/ie/</link>
+      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ie/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jquery</title>
+      <link>https://blog.gonzih.me/categories/jquery/</link>
+      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/jquery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>validation</title>
+      <link>https://blog.gonzih.me/categories/validation/</link>
+      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/validation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://blog.gonzih.me/categories/web/</link>
+      <pubDate>Sat, 29 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ads</title>
+      <link>https://blog.gonzih.me/categories/ads/</link>
+      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ads/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>analytics</title>
+      <link>https://blog.gonzih.me/categories/analytics/</link>
+      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/analytics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ghostery</title>
+      <link>https://blog.gonzih.me/categories/ghostery/</link>
+      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ghostery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pivacy</title>
+      <link>https://blog.gonzih.me/categories/pivacy/</link>
+      <pubDate>Wed, 12 Dec 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/pivacy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wm</title>
+      <link>https://blog.gonzih.me/categories/wm/</link>
+      <pubDate>Mon, 08 Oct 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/wm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>armsf</title>
+      <link>https://blog.gonzih.me/categories/armsf/</link>
+      <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/armsf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ejre</title>
+      <link>https://blog.gonzih.me/categories/ejre/</link>
+      <pubDate>Fri, 07 Sep 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ejre/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>arm</title>
+      <link>https://blog.gonzih.me/categories/arm/</link>
+      <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/arm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>beaglebone</title>
+      <link>https://blog.gonzih.me/categories/beaglebone/</link>
+      <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/beaglebone/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>issue</title>
+      <link>https://blog.gonzih.me/categories/issue/</link>
+      <pubDate>Mon, 03 Sep 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/issue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>grub2</title>
+      <link>https://blog.gonzih.me/categories/grub2/</link>
+      <pubDate>Fri, 20 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/grub2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>comments</title>
+      <link>https://blog.gonzih.me/categories/comments/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/comments/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>disqus</title>
+      <link>https://blog.gonzih.me/categories/disqus/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/disqus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>internet</title>
+      <link>https://blog.gonzih.me/categories/internet/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/internet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>octopress</title>
+      <link>https://blog.gonzih.me/categories/octopress/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/octopress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pipa</title>
+      <link>https://blog.gonzih.me/categories/pipa/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/pipa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sopa</title>
+      <link>https://blog.gonzih.me/categories/sopa/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/sopa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash</title>
+      <link>https://blog.gonzih.me/categories/bash/</link>
+      <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>magnet links</title>
+      <link>https://blog.gonzih.me/categories/magnet-links/</link>
+      <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/magnet-links/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rtorrent</title>
+      <link>https://blog.gonzih.me/categories/rtorrent/</link>
+      <pubDate>Fri, 17 Feb 2012 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/rtorrent/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keymap</title>
+      <link>https://blog.gonzih.me/categories/keymap/</link>
+      <pubDate>Tue, 18 Oct 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/keymap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>db</title>
+      <link>https://blog.gonzih.me/categories/db/</link>
+      <pubDate>Fri, 30 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/db/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgresql</title>
+      <link>https://blog.gonzih.me/categories/postgresql/</link>
+      <pubDate>Fri, 30 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/postgresql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pygments</title>
+      <link>https://blog.gonzih.me/categories/pygments/</link>
+      <pubDate>Wed, 21 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/pygments/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>android</title>
+      <link>https://blog.gonzih.me/categories/android/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>busybox</title>
+      <link>https://blog.gonzih.me/categories/busybox/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/busybox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>htop</title>
+      <link>https://blog.gonzih.me/categories/htop/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/htop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opkg</title>
+      <link>https://blog.gonzih.me/categories/opkg/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/opkg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packages manager</title>
+      <link>https://blog.gonzih.me/categories/packages-manager/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/packages-manager/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rsync</title>
+      <link>https://blog.gonzih.me/categories/rsync/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/rsync/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>screen</title>
+      <link>https://blog.gonzih.me/categories/screen/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/screen/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tree</title>
+      <link>https://blog.gonzih.me/categories/tree/</link>
+      <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/tree/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zip</title>
       <link>https://blog.gonzih.me/categories/zip/</link>
       <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -1086,7 +1077,25 @@
     </item>
     
     <item>
-      <title>Zsh</title>
+      <title>rvm</title>
+      <link>https://blog.gonzih.me/categories/rvm/</link>
+      <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/rvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tmux</title>
+      <link>https://blog.gonzih.me/categories/tmux/</link>
+      <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/tmux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zsh</title>
       <link>https://blog.gonzih.me/categories/zsh/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
@@ -1095,11 +1104,29 @@
     </item>
     
     <item>
-      <title>Zypper</title>
-      <link>https://blog.gonzih.me/categories/zypper/</link>
-      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      <title>backbone.js</title>
+      <link>https://blog.gonzih.me/categories/backbone.js/</link>
+      <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/categories/zypper/</guid>
+      <guid>https://blog.gonzih.me/categories/backbone.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rails</title>
+      <link>https://blog.gonzih.me/categories/rails/</link>
+      <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ror</title>
+      <link>https://blog.gonzih.me/categories/ror/</link>
+      <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/categories/ror/</guid>
       <description></description>
     </item>
     

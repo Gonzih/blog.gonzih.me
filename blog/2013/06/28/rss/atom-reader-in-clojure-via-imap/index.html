@@ -1,0 +1,148 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.55.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>RSS/Atom reader in Clojure via IMAP &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>RSS/Atom reader in Clojure via IMAP</h1>
+              <span class="post-date">Fri, Jun 28, 2013</span>
+                  <h3 id="motivation">Motivation</h3>
+
+<p>Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.</p>
+
+<h3 id="idea">Idea</h3>
+
+<p>Then I found post in the Racket community about storing your feeds in the IMAP folders using &ldquo;APPEND&rdquo; command by <a href="https://www.greghendershott.com/2013/05/feeds2gmail.html">Greg Hendershott</a>.
+That was it. Simplest possible solution, that I can run on small device or server by cron. I played a little bit with Racket source code and decided to write my own version to do the job.</p>
+
+<h3 id="clojure-version">Clojure version</h3>
+
+<p>First I implemented my <a href="https://github.com/Gonzih/feeds2imap.rb">prototype in Ruby</a> in few hours. I picked up Ruby because of built-in rss/atom and imap libraries.
+I used it for few days and liked it. Simple, reliable solution.
+So then I decided to rewrite it in Clojure.
+Why Clojure?
+Because it&rsquo;s pure fun to use.
+I decided to use java.mail framework for message storing and folder manipulations, feedparser-clj to fetch and parse rss/atom feeds and hiccup for templating.
+I was really pleased with feedparser-clj in comparison with Ruby built-in library.
+java.mail framework was not so bad as I was expecting at first.</p>
+
+<h3 id="how-it-works">How it works?</h3>
+
+<p>Here is project logic:</p>
+
+<ul>
+<li>Fetch folders and urls from feeds file.</li>
+<li>Fetch and parse RSS/Atom data from urls.</li>
+<li>Select only new items using cache file.</li>
+<li>Create required imap folders.</li>
+<li>Store new items as email messages.</li>
+<li>Mark items as read (put md5 hashes in to the clj file with set of old hashes).</li>
+</ul>
+
+<p>It&rsquo;s running now by cron (every hour) on my BeagleBone (using latest ejre version).</p>
+
+<p>Source code is hosted on github <a href="https://github.com/Gonzih/feeds2imap.clj">here</a>. Take a look at project README for usage.</p>
+
+<h3 id="more-implementations">More implementations</h3>
+
+<ul>
+<li><a href="https://github.com/Gonzih/feeds2imap.rb">My Ruby prototype</a></li>
+<li><a href="https://github.com/Gonzih/feeds2imap.clj">My Clojure implementation</a></li>
+<li><a href="https://github.com/greghendershott/feeds2gmail">Racket implementation</a></li>
+<li><a href="https://github.com/cordawyn/rss2imap">Haskell implementation</a></li>
+</ul>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Leonardo on Max Gonzih</title>
+    <title>leonardo on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/leonardo/</link>
-    <description>Recent content in Leonardo on Max Gonzih</description>
+    <description>Recent content in leonardo on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
@@ -16,10 +16,10 @@
     
     <item>
       <title>Hardware Cut/Copy/Paste with Arduino Leonardo</title>
-      <link>https://blog.gonzih.me/blog/2014/03/04/hardware-cut-copy-paste-with-arduino-leonardo/</link>
+      <link>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
       <pubDate>Tue, 04 Mar 2014 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut-copy-paste-with-arduino-leonardo/</guid>
+      <guid>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</guid>
       <description>&lt;p&gt;Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
 I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
 I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw &lt;a href=&#34;https://keyboard.io&#34;&gt;keyboard.io&lt;/a&gt;.

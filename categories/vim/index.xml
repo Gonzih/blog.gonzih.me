@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Vim on Max Gonzih</title>
+    <title>vim on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/vim/</link>
-    <description>Recent content in Vim on Max Gonzih</description>
+    <description>Recent content in vim on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
@@ -25,10 +25,10 @@
     
     <item>
       <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
-      <link>https://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/</link>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln-sf-/usr/bin/emacs-/usr/bin/vim/</link>
       <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2015/02/15/ln-sf-usr-bin-emacs-usr-bin-vim/</guid>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln-sf-/usr/bin/emacs-/usr/bin/vim/</guid>
       <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.

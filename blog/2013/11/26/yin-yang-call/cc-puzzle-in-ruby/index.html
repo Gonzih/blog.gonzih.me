@@ -1,0 +1,143 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.55.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Yin-Yang Call/cc puzzle in Ruby &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://www.gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>Yin-Yang Call/cc puzzle in Ruby</h1>
+              <span class="post-date">Tue, Nov 26, 2013</span>
+                  <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
+
+<p>Here is Scheme implementation:</p>
+
+<pre><code class="language-scheme">(let* ((yin
+        ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
+       (yang
+        ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
+(yin yang))
+</code></pre>
+
+<p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+
+<p><a href="https://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/">Here</a> you can find good explanation,
+also few of explanations can be found on <a href="https://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work">StackOverflow</a>.</p>
+
+<p>After I understand how it works I got all that excited and implemented given puzzle in ruby:</p>
+
+<pre><code class="language-ruby">require &quot;continuation&quot;
+
+yin  = -&gt;(cc) { print &quot;@&quot;; cc }.call(callcc { |c| c })
+yang = -&gt;(cc) { print &quot;*&quot;; cc }.call(callcc { |c| c })
+
+yin.call(yang)
+</code></pre>
+
+<p>And it doesn&rsquo;t work. It prints <code>@*@*********...</code> forever.</p>
+
+<p>No idea why. Maybe there are some limitations of <a href="https://www.ruby-doc.org/core-2.0.0/Continuation.html">ruby&rsquo;s call/cc</a>.
+I will research further, but if you have any information about that feel free to comment or email me.</p>
+
+<p>Cheers!</p>
+
+<p><strong>UPDATE</strong> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
+So here is his fixed version:</p>
+
+<pre><code class="language-ruby">require &quot;continuation&quot;
+
+lambda do |yin, yang|
+  yin.call(yang)
+end.call(lambda { |cc| print &quot;@&quot;; cc }.call(callcc { |c| c }),
+         lambda { |cc| print &quot;*&quot;; cc }.call(callcc { |c| c }))
+</code></pre>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

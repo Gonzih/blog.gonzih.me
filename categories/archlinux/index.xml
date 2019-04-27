@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Archlinux on Max Gonzih</title>
+    <title>archlinux on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/archlinux/</link>
-    <description>Recent content in Archlinux on Max Gonzih</description>
+    <description>Recent content in archlinux on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>

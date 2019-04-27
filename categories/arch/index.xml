@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Arch on Max Gonzih</title>
+    <title>arch on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/arch/</link>
-    <description>Recent content in Arch on Max Gonzih</description>
+    <description>Recent content in arch on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>

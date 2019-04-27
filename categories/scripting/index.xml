@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scripting on Max Gonzih</title>
+    <link>https://blog.gonzih.me/categories/scripting/</link>
+    <description>Recent content in scripting on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 26 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.gonzih.me/categories/scripting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Scripting with Go on NixOS</title>
+      <link>https://blog.gonzih.me/blog/2019/04/26/scripting-with-go-on-nixos/</link>
+      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2019/04/26/scripting-with-go-on-nixos/</guid>
+      <description>&lt;p&gt;This is a short HOWTO based on great idea from &lt;a href=&#34;https://blog.cloudflare.com/using-go-as-a-scripting-language-in-linux/&#34;&gt;this blog post&lt;/a&gt; on how
+to utilize &lt;a href=&#34;https://github.com/erning/gorun&#34;&gt;gorun&lt;/a&gt; and &lt;code&gt;binfmt_misc&lt;/code&gt; to use go files for scripting.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rsync on Max Gonzih</title>
+    <title>rsync on Max Gonzih</title>
     <link>https://blog.gonzih.me/categories/rsync/</link>
-    <description>Recent content in Rsync on Max Gonzih</description>
+    <description>Recent content in rsync on Max Gonzih</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
@@ -20,8 +20,7 @@
       <pubDate>Mon, 19 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/</guid>
-      <description>Install adb Installing adb on arch linux yaourt -S adb  Running adb adb kill-server sudo adb start-server adb shell  Installing opkg Now run in adb shell following:
-cd /sdcard wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg-bootstrap-v2.tar.bz2 cd / tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2 # for non cyanogen users wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg.conf -O /data/local/opkg.conf # for cyanogen users wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf # add /data/xbin to your path export PATH=&amp;quot;/data/xbin:$PATH&amp;quot; # make /system writable mount -o remount,rw /system opkg install /sdcard/opkg_0.</description>
+      <description></description>
     </item>
     
   </channel>
