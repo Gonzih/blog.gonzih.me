@@ -14,9 +14,19 @@ This blog post is just a bunch of shell snippets quickly put together that expla
 
 So first things first, we will have to enable CCID (smartcard interface) on YubiKey:
 
+For YubiKey Neo or YubiKey 4 run following:
+
 ```shell
 $ ykpersonalize -m82
 ```
+
+For YubiKey 5:
+
+```shell
+$ ykman config usb --enable-all # For USB
+$ ykman config nfc --enable-all # For NFC
+```
+
 
 Next step would be to change default PINs on YubiKey:
 
