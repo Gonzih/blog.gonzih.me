@@ -152,7 +152,7 @@ gpg> save
 Don't forget to distribute your private key if needed:
 
 ```shell
-$ gpg --keyserver hkps://pgp.mit.edu --send-key ABCDEFG
+$ gpg --keyserver hkps://keys.gnupg.net --send-key ABCDEFG
 ```
 
 ## Final steps
