@@ -177,7 +177,15 @@ func three(w http.ResponseWriter, r *http.Request) {
 
 &lt;p&gt;So first things first, we will have to enable CCID (smartcard interface) on YubiKey:&lt;/p&gt;
 
+&lt;p&gt;For YubiKey Neo or YubiKey 4 run following:&lt;/p&gt;
+
 &lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykpersonalize -m82
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For YubiKey 5:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykman config usb --enable-all # For USB
+$ ykman config nfc --enable-all # For NFC
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Next step would be to change default PINs on YubiKey:&lt;/p&gt;

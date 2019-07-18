@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.55.6" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -81,7 +81,15 @@
 
 <p>So first things first, we will have to enable CCID (smartcard interface) on YubiKey:</p>
 
+<p>For YubiKey Neo or YubiKey 4 run following:</p>
+
 <pre><code class="language-shell">$ ykpersonalize -m82
+</code></pre>
+
+<p>For YubiKey 5:</p>
+
+<pre><code class="language-shell">$ ykman config usb --enable-all # For USB
+$ ykman config nfc --enable-all # For NFC
 </code></pre>
 
 <p>Next step would be to change default PINs on YubiKey:</p>
