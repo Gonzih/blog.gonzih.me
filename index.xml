@@ -305,7 +305,7 @@ gpg&amp;gt; save
 
 &lt;p&gt;Don&amp;rsquo;t forget to distribute your private key if needed:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --keyserver hkps://pgp.mit.edu --send-key ABCDEFG
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --keyserver hkps://keys.gnupg.net --send-key ABCDEFG
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;final-steps&#34;&gt;Final steps&lt;/h2&gt;
