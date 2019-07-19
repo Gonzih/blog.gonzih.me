@@ -218,3 +218,13 @@ $ ykman openpgp touch aut on
 $ ykman openpgp touch sig on
 $ ykman openpgp touch enc on
 ```
+
+
+### P.S.
+
+GPG agent for NixOS:
+
+```
+programs.ssh.startAgent = false;
+programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+```
