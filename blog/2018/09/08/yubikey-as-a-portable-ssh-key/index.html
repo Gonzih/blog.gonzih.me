@@ -271,6 +271,14 @@ gpg/card&gt; save
 $ ykman openpgp touch sig on
 $ ykman openpgp touch enc on
 </code></pre>
+
+<h3 id="p-s">P.S.</h3>
+
+<p>GPG agent for NixOS:</p>
+
+<pre><code>programs.ssh.startAgent = false;
+programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+</code></pre>
             </div>
 
             
