@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.55.6" />
+  <meta name="generator" content="Hugo 0.58.2" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -246,7 +246,11 @@ disable-ccid
 
 <h2 id="setting-up-key-on-a-new-machine">Setting up key on a new machine</h2>
 
-<pre><code class="language-shell">$ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
+<pre><code class="language-shell"># Pull key info from a keyserver
+$ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
+
+# Initialize smart card data in gpg db
+$ gpg --card-status
 </code></pre>
 
 <p>And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.</p>
