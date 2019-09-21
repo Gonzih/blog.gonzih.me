@@ -191,7 +191,11 @@ disable-ccid
 ## Setting up key on a new machine
 
 ```shell
+# Pull key info from a keyserver
 $ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
+
+# Initialize smart card data in gpg db
+$ gpg --card-status
 ```
 
 And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.
