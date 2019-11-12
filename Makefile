@@ -24,7 +24,8 @@ deploy: public
 USER=$(shell whoami)
 UID=$(shell id -u $(USER))
 docker-image:
-	docker build --build-arg GNZHUID=$(UID) -t blog-builder .
+	# docker build --build-arg GNZHUID=$(UID) -t blog-builder .
+	docker build -t blog-builder .
 
 docker-rm:
 	docker kill blog-builder || echo "Not found"

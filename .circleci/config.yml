@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    branches:
+      only:
+        - source
+    docker:
+      - image: nixos/nix
+    steps:
+      - checkout
+      - run: nix-env -i gnumake docker git hugo
+      - run: rm -rf public || exit 0
+      - run: git clone -b master https://$GITHUB_TOKEN@github.com/Gonzih/gonzih.github.com.git public
+      - run: make generate
+      - run: git config --global user.name "Deployment Bot (from Circle CI)"
+      - run: git config --global user.email "deploy@circleci.com"
+      - run: make deploy
