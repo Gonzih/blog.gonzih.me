@@ -12,12 +12,1207 @@
     <atom:link href="https://blog.gonzih.me/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Posts</title>
-      <link>https://blog.gonzih.me/post/</link>
+      <title>Scripting with Go on NixOS</title>
+      <link>https://blog.gonzih.me/blog/2019/04/26/scripting-with-go-on-nixos/</link>
       <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/post/</guid>
-      <description></description>
+      <guid>https://blog.gonzih.me/blog/2019/04/26/scripting-with-go-on-nixos/</guid>
+      <description>&lt;p&gt;This is a short HOWTO based on great idea from &lt;a href=&#34;https://blog.cloudflare.com/using-go-as-a-scripting-language-in-linux/&#34;&gt;this blog post&lt;/a&gt; on how
+to utilize &lt;a href=&#34;https://github.com/erning/gorun&#34;&gt;gorun&lt;/a&gt; and &lt;code&gt;binfmt_misc&lt;/code&gt; to use go files for scripting.&lt;/p&gt;
+
+&lt;p&gt;First lets install &lt;code&gt;gorun&lt;/code&gt; as a system package on NixOS.&lt;/p&gt;
+
+&lt;p&gt;Lets create &lt;code&gt;gorun.nix&lt;/code&gt; file first:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;with import &amp;lt;nixpkgs&amp;gt; {};
+
+buildGoPackage rec {
+  name = &amp;quot;gorun-${version}&amp;quot;;
+  version = &amp;quot;master-85cd5f5e084af0863ed0c3f18c00e64526d1b899&amp;quot;;
+  goPackagePath = &amp;quot;github.com/erning/gorun&amp;quot;;
+
+  src = fetchFromGitHub {
+    owner = &amp;quot;erning&amp;quot;;
+    repo = &amp;quot;gorun&amp;quot;;
+    rev = &amp;quot;85cd5f5e084af0863ed0c3f18c00e64526d1b899&amp;quot;;
+    sha256 = &amp;quot;sha256:1hdqimfzpynnpqc7p8m8hkcv9dlfbd8kl22979i6626nq57dvln8&amp;quot;;
+  };
+
+  meta = with stdenv.lib; {
+    description = &amp;quot;gorun is a tool enabling one to put a \&amp;quot;bang line\&amp;quot; in the source code of a Go program to run it&amp;quot;;
+    homepage = https://github.com/erning/gorun;
+    license = licenses.mit;
+    maintainers = with maintainers; [ Gonzih ];
+    platforms = platforms.linux ++ platforms.darwin;
+  };
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next lets add this package to &lt;code&gt;systemPackages&lt;/code&gt; list:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;environment.systemPackages = with pkgs; [
+  ...
+  (import ./gorun.nix)
+  ...
+];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next step would be to utilize &lt;code&gt;boot.binfmtMiscRegistrations&lt;/code&gt; to register our &lt;code&gt;gorun&lt;/code&gt; in &lt;code&gt;binfmt_misc&lt;/code&gt; module which is
+responsible for parsing shebang scripts and binary files. Drop the following lines in to your &lt;code&gt;configuration.nix&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;boot.binfmtMiscRegistrations = {
+  go = {
+    recognitionType = &amp;quot;extension&amp;quot;;
+    magicOrExtension = &amp;quot;go&amp;quot;;
+    interpreter = &amp;quot;/run/current-system/sw/bin/gorun&amp;quot;;
+    preserveArgvZero = false;
+    openBinary = true;
+    matchCredentials = true;
+    fixBinary = false;
+  };
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What does this configuration do? &lt;code&gt;recognitionType&lt;/code&gt; tells &lt;code&gt;binfmt&lt;/code&gt; to make a decision based on file extension,
+&lt;code&gt;magicOrExtension&lt;/code&gt; tells it to look for &lt;code&gt;.go&lt;/code&gt; extension, &lt;code&gt;interpreter&lt;/code&gt; specifies which binary to invoke,
+&lt;code&gt;openBinary&lt;/code&gt; corresponds to &lt;code&gt;O&lt;/code&gt; flag of &lt;code&gt;binfmt&lt;/code&gt; (which I dont fully understand tbh), &lt;code&gt;matchCredentials&lt;/code&gt; tells kernel to run
+interpreter with permissions set on original script. For more information on &lt;code&gt;binfmt&lt;/code&gt; please do check out &lt;a href=&#34;https://www.kernel.org/doc/html/v4.14/admin-guide/binfmt-misc.html&#34;&gt;these amazing kernel docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now lets simply run &lt;code&gt;sudo nixos-rebuild --switch&lt;/code&gt; and after everything is done lets give it a try.&lt;/p&gt;
+
+&lt;p&gt;First lets create a simple hello world script:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import &amp;quot;fmt&amp;quot;
+
+func main() {
+	fmt.Println(&amp;quot;Hello World!&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lets make it executable with &lt;code&gt;chmod +x hello.go&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;And now lets run it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ./hello.go
+Hello World!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yay! It works!&lt;/p&gt;
+
+&lt;p&gt;Hope that helps somewhat.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Routing with Go on Google Cloud Functions</title>
+      <link>https://blog.gonzih.me/blog/2019/01/18/routing-with-go-on-google-cloud-functions/</link>
+      <pubDate>Fri, 18 Jan 2019 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2019/01/18/routing-with-go-on-google-cloud-functions/</guid>
+      <description>&lt;p&gt;Couple of days ago Google cloud functions got &lt;a href=&#34;https://cloud.google.com/blog/products/application-development/cloud-functions-go-1-11-is-now-a-supported-language&#34;&gt;official support for go 1.11&lt;/a&gt;.
+I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on &lt;code&gt;http.ServeMux&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To get started with cloud functions you can follow &lt;a href=&#34;https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0&#34;&gt;this simple tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as the source repository for your newly defined cloud function.&lt;/p&gt;
+
+&lt;p&gt;It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.&lt;/p&gt;
+
+&lt;p&gt;Ultimately we can simply define our own router using &lt;code&gt;NewServeMux&lt;/code&gt; like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package function
+
+import (
+	&amp;quot;net/http&amp;quot;
+)
+
+var mux = newMux()
+
+//F represents cloud function entry point
+func F(w http.ResponseWriter, r *http.Request) {
+	mux.ServeHTTP(w, r)
+}
+
+func newMux() *http.ServeMux {
+	mux := http.NewServeMux()
+	mux.HandleFunc(&amp;quot;/one&amp;quot;, one)
+	mux.HandleFunc(&amp;quot;/two&amp;quot;, two)
+	mux.HandleFunc(&amp;quot;/subroute/three&amp;quot;, three)
+
+	return mux
+}
+
+func one(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte(&amp;quot;hello from one&amp;quot;))
+}
+
+func two(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte(&amp;quot;hello from two&amp;quot;))
+}
+
+func three(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte(&amp;quot;hello from three&amp;quot;))
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you can access your handlers by appending &lt;code&gt;/one&lt;/code&gt;, &lt;code&gt;/two&lt;/code&gt; or &lt;code&gt;/subroute/three&lt;/code&gt; to URL that cloud functions will have in triggers section of the UI like this: &lt;code&gt;https://us-central1-my-test-project-123456.cloudfunctions.net/my-function-1/one&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This works because your cloud function receives request with prefix stripped away from the URL. This is very handy since allows one to port existing http server in to cloud function without changing it too much.&lt;/p&gt;
+
+&lt;p&gt;I hope this helps, and happy hacking on cloud functions with go!&lt;/p&gt;
+
+&lt;p&gt;Example code can be &lt;a href=&#34;https://github.com/Gonzih/go-google-functions-demo&#34;&gt;found here&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>YubiKey as a portable SSH key</title>
+      <link>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</guid>
+      <description>&lt;p&gt;This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.&lt;/p&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;So first things first, we will have to enable CCID (smartcard interface) on YubiKey:&lt;/p&gt;
+
+&lt;p&gt;For YubiKey Neo or YubiKey 4 run following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykpersonalize -m82
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For YubiKey 5:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykman config usb --enable-all # For USB
+$ ykman config nfc --enable-all # For NFC
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next step would be to change default PINs on YubiKey:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --card-edit
+
+gpg/card&amp;gt; admin
+Admin commands are allowed
+
+gpg/card&amp;gt; passwd
+gpg: OpenPGP card no. _____ detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+# default password here is 123456
+Your selection? 1
+
+...
+
+gpg: OpenPGP card no. _____ detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+# default password here is 12345678
+Your selection? 3
+
+...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your YubiKey:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykman openpgp reset
+WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are two ways to use your YubiKey as a ssh key:&lt;/p&gt;
+
+&lt;h2 id=&#34;method-1-generating-keys-on-yubikey-itself&#34;&gt;Method #1: Generating keys on YubiKey itself&lt;/h2&gt;
+
+&lt;p&gt;Simply run the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;gpg --card-edit
+
+gpg/card&amp;gt; generate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Benefit of this method is that your keys and YubiKey are self contained, this is also a downside of this method.
+If you lost a key, you also going to loose access to your private key.
+There is no way to backup secret keys from YubiKey itself.
+I did not really test this method extensively, but still felt like mentioning this as a valuable option.&lt;/p&gt;
+
+&lt;h2 id=&#34;method-2-generating-a-subkey-for-your-own-private-key&#34;&gt;Method #2: Generating a subkey for your own private key&lt;/h2&gt;
+
+&lt;p&gt;So lets say you generated your own private key with id &lt;code&gt;ABCDEFG&lt;/code&gt;, now we can generate 2 subkeys and store them on our YubiKey.
+The advantage of this approach is in the fact that subkeys can be revoked by using your private key.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --edi-key ABCDEFG
+
+gpg&amp;gt; addcardkey
+
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
+
+Please select the type of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? 3
+
+# Now answer bunch of questions and enter PIN couple of times to make gpg happy
+# After that we can do the same for the Signature key
+
+...
+
+gpg&amp;gt; addcardkey
+
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: OUR NEW KEY ID
+
+Please select the type of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? 1
+
+# Now lets use toggle to switch in to private key listing mode
+&amp;gt; toggle
+
+# And now lets select our main private key
+&amp;gt; key 1
+
+# Time to upload card keys to our YubiKey in to encryption slot
+&amp;gt; keytocard
+
+Signature key ....: ANOTHER ID
+Encryption key....: [none]
+Authentication key: OUR NEW KEY ID
+
+Please select where to store the key:
+   (2) Encryption key
+Your selection? 2
+
+# And we are done here
+gpg&amp;gt; save
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Don&amp;rsquo;t forget to distribute your private key if needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --keyserver hkps://keys.gnupg.net --send-key ABCDEFG
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;final-steps&#34;&gt;Final steps&lt;/h2&gt;
+
+&lt;p&gt;Generating ssh key out of our gpg key is pretty straightforward:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --export-ssh-key ABCDEFG
+ssh-rsa BLABLABLA openpgp:someid
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now its time to start &lt;code&gt;gpg-agent&lt;/code&gt; with ssh support on:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg-agent --daemon --enable-ssh-support
+# or on older gpg versions you can generate env file that you can source in your .bashrc directly
+$ gpg-agent --daemon --enable-ssh-support --write-env-file ~/.gpg-agent-env
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or if you are on systemd based system there is a chance that your user already has a bunch of systemd sockets enabled for this purpose.
+One socket that you should be interested in is &lt;code&gt;gpg-agent-ssh.socket&lt;/code&gt;, you can see if its running by running &lt;code&gt;systemctl --user status gpg-agent-ssh.socket&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Add this to your &lt;code&gt;.bashrc&lt;/code&gt; to initialize env var properly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;export SSH_AUTH_SOCK=&amp;quot;$(gpgconf --list-dirs agent-ssh-socket)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Last improvement that can be made to this setup is forcing gpg-agent to use pcscd instead of ccid.
+This should solve some issues with a card being unavailable when some other application is accessing it.
+Just add following to the &lt;code&gt;~/.gnupg/scdaemon.conf&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;pcsc-driver /usr/lib/libpcsclite.so
+card-timeout 5
+disable-ccid
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;setting-up-key-on-a-new-machine&#34;&gt;Setting up key on a new machine&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;# Pull key info from a keyserver
+$ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
+
+# Initialize smart card data in gpg db
+$ gpg --card-status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.&lt;/p&gt;
+
+&lt;h2 id=&#34;caching-pin-on-a-key-itself&#34;&gt;Caching PIN on a key itself&lt;/h2&gt;
+
+&lt;p&gt;It might be annoying to type in PIN on every action every time, there is an option to cache PIN on YubiKey itself, so you will have to input PIN only once after you plugged your key (will have to do that every time you unplug/plug your key) for every action (separate key cache for signing/authenticating using the key).
+To do that you should enable &lt;code&gt;forcesig&lt;/code&gt; in &lt;code&gt;gpg&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ gpg --card-edit
+
+gpg/card&amp;gt; admin
+Admin commands are allowed
+
+gpg/card&amp;gt; forcesig
+gpg/card&amp;gt; save
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To add extra layer of security, you can enable &lt;a href=&#34;https://developers.yubico.com/PGP/Card_edit.html&#34;&gt;YubiKey 4 Touch&lt;/a&gt; feature (every action will have to be confirmed with a touch), this can be enabled using &lt;code&gt;yubikey-manager&lt;/code&gt; cli:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;$ ykman openpgp touch aut on
+$ ykman openpgp touch sig on
+$ ykman openpgp touch enc on
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;p-s&#34;&gt;P.S.&lt;/h3&gt;
+
+&lt;p&gt;GPG agent for NixOS:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;programs.ssh.startAgent = false;
+programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Arch Linux on Lenovo IdeaPad Y700 15&#34;</title>
+      <link>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</link>
+      <pubDate>Fri, 11 Dec 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/</guid>
+      <description>&lt;p&gt;Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-works&#34;&gt;What works&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;WIFI&lt;/li&gt;
+&lt;li&gt;Suspend (look at the bumblebee issue with suspend if nvidia module gets loaded on resume)&lt;/li&gt;
+&lt;li&gt;Hibernate&lt;/li&gt;
+&lt;li&gt;Sound without subwoofer&lt;/li&gt;
+&lt;li&gt;Video (I used bumblebee to switch between intel/nvidia GPUs)&lt;/li&gt;
+&lt;li&gt;Brightness&lt;/li&gt;
+&lt;li&gt;Keyboard backlit&lt;/li&gt;
+&lt;li&gt;Power managment via laptop mode tools and systemd.&lt;/li&gt;
+&lt;li&gt;Card reader (you might need to run &lt;code&gt;echo 1 | sudo tee /sys/bus/pci/rescan&lt;/code&gt; so card reader becomes visible)&lt;/li&gt;
+&lt;li&gt;HDMI output&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;what-does-not-work-so-far&#34;&gt;What does not work so far&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Subwoofer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;installation&#34;&gt;Installation&lt;/h1&gt;
+
+&lt;h2 id=&#34;boot&#34;&gt;Boot&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add nomodeset to the kernel options on Live USB boot&lt;/li&gt;
+&lt;li&gt;Make sure secure boot is disabled (to make your life easier)&lt;/li&gt;
+&lt;li&gt;Follow &lt;a href=&#34;https://wiki.archlinux.org/index.php/Installation_guide&#34;&gt;arch linux installation instructions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;extra-tweaking&#34;&gt;Extra tweaking&lt;/h1&gt;
+
+&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make sure switchable GPUs are enabled in BIOS&lt;/li&gt;
+&lt;li&gt;Follow &lt;a href=&#34;https://wiki.archlinux.org/index.php/Bumblebee#Installing_Bumblebee_with_Intel.2FNVIDIA&#34;&gt;insructions on the arch wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;To enable intel GPU add &lt;code&gt;i915.preliminary_hw_support=1&lt;/code&gt; to &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; in the &lt;code&gt;/etc/default/grub&lt;/code&gt; file. This should be solved after 4.3 kernel release.&lt;/li&gt;
+&lt;li&gt;Problems with video scaling in fullscreen mode can be solved by using gl as an output driver (mplayer -vo gl).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;wifi&#34;&gt;Wifi&lt;/h2&gt;
+
+&lt;p&gt;Since there is no HW based wifi switch (only Fn+F5 combination) and kernel still tries to read it wifi is reported disabled on every boot.
+There was a patch for the 17 inch model &lt;a href=&#34;https://www.gossamer-threads.com/lists/linux/kernel/2323659&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;temporary-solution-1&#34;&gt;Temporary solution 1:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo systemctl enable rfkill-unblock@wifi.service&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo rfkill unblock wifi&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Works fine with &lt;code&gt;wicd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Configuring NetworkManager service to be run after rfkill service should also work&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;temporary-solution-2&#34;&gt;Temporary solution 2:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;echo blacklist ideapad_laptop | sudo tee /etc/modprobe.d/blacklist.conf&lt;/code&gt; to disable acpi module&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;audio-clicking&#34;&gt;Audio clicking&lt;/h2&gt;
+
+&lt;p&gt;This is caused by suspend-on-idle module in the pulse audio. Instead of disabling the module I decided to just set very long timeout.
+To do that append &lt;code&gt;timeout=36000&lt;/code&gt; to line &lt;code&gt;load-module module-suspend-on-idle&lt;/code&gt; in the &lt;code&gt;/etc/pulse/default.pa&lt;/code&gt; configuration file.
+And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and &lt;code&gt;pulseaudio --start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;hibernate&#34;&gt;Hibernate&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add &lt;code&gt;resume=/dev/my-swap-partition&lt;/code&gt; to &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; line in &lt;code&gt;/etc/default/grub&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;sudo grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;resume&lt;/code&gt; to the list of &lt;code&gt;HOOKS&lt;/code&gt; in &lt;code&gt;/etc/mkinitcpio.conf&lt;/code&gt; before &lt;code&gt;filesystems&lt;/code&gt; but after all &lt;code&gt;block&lt;/code&gt;, &lt;code&gt;sata&lt;/code&gt; and other hardware related hooks.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;sudo mkinitcpio -p linux&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Reboot&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;systemctl hibernate&lt;/code&gt; should work now&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Arch Linux on Macbook Pro 8.2 (17&#34; 2011)</title>
+      <link>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</link>
+      <pubDate>Sat, 08 Aug 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/</guid>
+      <description>&lt;p&gt;Couple of tips from my experience of running Arch on Macbook 8.2.&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/MacBook&#34;&gt;Arch Wiki page&lt;/a&gt; covers installation well enough in my opinion.&lt;/p&gt;
+
+&lt;h3 id=&#34;bootloader-via-systemd-boot&#34;&gt;Bootloader via systemd-boot&lt;/h3&gt;
+
+&lt;p&gt;Before installing boot loader change /boot partition type to &lt;code&gt;EFI System&lt;/code&gt; (&lt;code&gt;ef00&lt;/code&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkfs.fat -F32 /dev/sda1
+pacman -S dosfstools
+mount /dev/sda1 /mnt/boot
+arch-chroot /mnt
+bootctl --path=/boot instnall
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;bootloader-via-grub&#34;&gt;Bootloader via grub&lt;/h3&gt;
+
+&lt;p&gt;You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be &lt;code&gt;ef00&lt;/code&gt; type partition of vfta32.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mount /dev/sda1 /mnt/boot
+mkdir -p /mnt/boot/efi
+mount /dev/sda2 /mnt/boot/efi
+modprobe dm-mod
+arch-chroot /mnt
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
+mkdir -p /boot/grub/locale
+cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;use-broadcom-wl-wireless-module-from-aur&#34;&gt;Use broadcom-wl wireless module from AUR&lt;/h2&gt;
+
+&lt;p&gt;This is proprietary broadcom driver. Works fine with BCM4331.
+Only thing that does not work - hidden SSID.&lt;/p&gt;
+
+&lt;p&gt;OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.&lt;/p&gt;
+
+&lt;p&gt;To make sure that correct module is used by hardwrare blacklist every other module and reboot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#/etc/modprobe.d/wl.conf
+blacklist b43
+blacklist b43legacy
+blacklist ssb
+blacklist bcm43xx
+blacklist brcm80211
+blacklist brcmfmac
+blacklist brcmsmac
+blacklist bcma
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;disable-radeon-gpu-for-better-power-consumption&#34;&gt;Disable Radeon GPU for better power consumption&lt;/h2&gt;
+
+&lt;p&gt;This will reduce power usage dramatically but also will disable external screen support via display port.
+This laptop relies on the external gpu to work with display port.&lt;/p&gt;
+
+&lt;p&gt;Edit &lt;code&gt;/etc/grub.d/00_header&lt;/code&gt; and add outb lines in between &lt;code&gt;set gfxmode=${GRUB_GFXMODE}&lt;/code&gt; and &lt;code&gt;load video&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+set gfxmode=${GRUB_GFXMODE}
+outb 0x728 1
+outb 0x710 2
+outb 0x740 2
+outb 0x750 0
+load video
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Generate new grub config:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PS. This post will probably grow over time.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nvim terminal &#43; ClojureScript and figwheel</title>
+      <link>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</link>
+      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/</guid>
+      <description>&lt;p&gt;This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;NeoVim&lt;/a&gt; nowadays is almost fully compatible with vim.
+It is able to reuse my &lt;a href=&#34;https://github.com/Gonzih/.vim/blob/master/vimrc&#34;&gt;.vimrc&lt;/a&gt; file without any issues.
+And recently it got proper terminal emulator built-in.
+So how about reusing it for ClojureScript development?&lt;/p&gt;
+
+&lt;p&gt;If you are lazy (like I am) and don&amp;rsquo;t want to setup piggieback support
+for fireplace.vim or don&amp;rsquo;t feel like tmux integration is good enough
+this solution should be your new starting point.&lt;/p&gt;
+
+&lt;p&gt;Just open some clojure[script] file and create second split.
+Open terminal using &lt;code&gt;:terminal&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Here are some keybindings that will help you to send code from
+your clojure buffer to the terminal buffer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&amp;quot;nvim&amp;quot;)
+  &amp;quot; Open terminal and run lein figwheel
+  nmap &amp;lt;Leader&amp;gt;term &amp;lt;C-w&amp;gt;v:terminal&amp;lt;CR&amp;gt;lein figwheel&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
+  &amp;quot; Evaluate anything from the visual mode in the next window
+  vmap &amp;lt;buffer&amp;gt; ,e y&amp;lt;C-w&amp;gt;wpi&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p
+  &amp;quot; Evaluate outer most form
+  nmap &amp;lt;buffer&amp;gt; ,e ^v%,e
+  &amp;quot; Evaluate buffer&amp;quot;
+  nmap &amp;lt;buffer&amp;gt; ,b ggVG,e
+endif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hey! Now you can finally stop looking at the emacs land!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ServerSide rendering of Reagent components</title>
+      <link>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</link>
+      <pubDate>Mon, 16 Feb 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/</guid>
+      <description>&lt;p&gt;Great thing about React is that you can write what people nowadays call &amp;ldquo;isomorphic JavaScript&amp;rdquo;.
+In this post we will not discuss how wrong this term is in many ways,
+but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.&lt;/p&gt;
+
+&lt;p&gt;In my experience simplest optimization to run in some js engine on server side is whitespace.
+It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
+So our compiler configuration should look something like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;{:id &amp;quot;server-side&amp;quot;
+ :source-paths [&amp;quot;src&amp;quot;]
+ :compiler {:output-to &amp;quot;resources/public/javascripts/server-side.js&amp;quot;
+            :output-dir &amp;quot;resources/public/javascripts/out-server-side&amp;quot;
+            :preamble [&amp;quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&amp;quot;]
+            :pretty-print false
+            :warnings true
+            :optimizations :whitespace}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def main-component
+  (with-meta
+    (fn [] ...)
+    {:component-did-mount (comp init-my-scroll-handler!
+                                also-init-my-go-loop!)}))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next let&amp;rsquo;s create function that will do some rendering to the string.
+I like to keep this function in a component specific ns just for convenience.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def ^:export render-me-to-s [initial-state]
+  (reset! my-main-state (js-&amp;gt;clj initial-state))
+  ; Render component to markup without reactid
+  (reagent.core/render-to-static-markup [main-component])
+  ; Or render component to ready to-go react markup
+  (reagent.core/render-to-string [main-component]))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now server side bootstrapping, most of this code was taken from &lt;a href=&#34;https://github.com/reactjs/react-rails&#34;&gt;react-rails plugin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First of all react expects to have global or window objects in your js engine (setup.js):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var global = global || this;
+var self = self || this;
+var window = window || this;
+var console = global.console || {};
+[&#39;error&#39;, &#39;log&#39;, &#39;info&#39;, &#39;warn&#39;].forEach(function (fn) {
+  if (!(fn in console)) {
+    console[fn] = function () {};
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s try and use all this in our code (for now in Ruby):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;cxt = V8::Context.new
+cxt.load(&#39;setup.js&#39;)
+cxt.load(&#39;resources/public/javascripts/server-side.js&#39;)
+html = cxt.eval(&amp;quot;my.amazing_component.ns.render_me_to_s(#{init_state.to_json})&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And that&amp;rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
+Sometimes you might want to use &lt;code&gt;ActionController::Base.helpers.j&lt;/code&gt; helper that will
+escape your data for usage inside json, but most of the time you should be alright without it.&lt;/p&gt;
+
+&lt;p&gt;If you have issues with core.async there are 2 ways to solve it.
+I personally prefer to move core.async initialization into some lifecycle method.
+Another solution is to implement setTimeout function like that in your &lt;code&gt;setup.js&lt;/code&gt; snippet:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;goog.global.setTimeout = function(cb, t) {
+    cb();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now frontend part. First let&amp;rsquo;s in-line generated html in to the container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-erb&#34;&gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&amp;lt;%= html %&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then let&amp;rsquo;s write function that will render our component on frontend:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(def ^:export mount-me [initial-state]
+  (reset! my-main-state (js-&amp;gt;clj initial-state))
+  (reagent.core/render [main-component]
+                       (js/document.getElementById &amp;quot;content&amp;quot;)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
+Am I wrong on this one? Don&amp;rsquo;t know yet.&lt;/p&gt;
+
+&lt;p&gt;Inline javascript that you should use on frontend looks like that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-erb&#34;&gt;&amp;lt;script&amp;gt;
+my.amazing_component.ns.mount_me(&amp;lt;%= init_state.to_json %&amp;gt;)
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;nashorn-example-result-of-my-experiments-in-the-repl&#34;&gt;Nashorn example (result of my experiments in the REPL)&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(import &#39;[javax.script ScriptEngineManager])
+(def nashorn (.getEngineByName (ScriptEngineManager.) &amp;quot;nashorn&amp;quot;))
+
+; Same as in ruby version
+(def setup-script (slurp &amp;quot;setup.js&amp;quot;))
+(def ss-script (slurp &amp;quot;resources/public/javascripts/server-side.js&amp;quot;))
+(def render-script (str &amp;quot;my.amazing_component.ns.render_me_to_s(&amp;quot; my-state-json-string &amp;quot;);&amp;quot;))
+
+(.eval nashorn setup-script)
+(.eval nashorn ss-script)
+(.eval nashorn render-script) ; our html markup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I must admit that this code works on small reagent example.
+I&amp;rsquo;m unable to load production code from my current project in to Nashorn.&lt;/p&gt;
+
+&lt;p&gt;Also it helps a lot if you started developing your project with server side rendering in mind.&lt;/p&gt;
+
+&lt;p&gt;Of course it&amp;rsquo;s better to have some kind of &amp;ldquo;renderers pool&amp;rdquo; in JVM.
+Good thing that clojure allows you to implement thing like that in few lines of code.
+In ruby it&amp;rsquo;s not a problem since we have 1 context per worker.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Useful Links:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw&#34;&gt;ClojureScript mailing list topic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>ln -sf /usr/bin/emacs /usr/bin/vim ?</title>
+      <link>https://blog.gonzih.me/blog/2015/02/15/ln-sf-/usr/bin/emacs-/usr/bin/vim/</link>
+      <pubDate>Sun, 15 Feb 2015 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2015/02/15/ln-sf-/usr/bin/emacs-/usr/bin/vim/</guid>
+      <description>&lt;p&gt;Some time ago I actually did run &lt;code&gt;ln -sf /usr/bin/emacs /usr/bin/vim&lt;/code&gt;.
+And left it like that for a couple of days.
+I must say that it was surprisingly nice experience.
+Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt;
+
+&lt;p&gt;Of course interesting question is &amp;ldquo;How did I end up with this idea in my head?&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;I tried to play with emacs few times couple of years ago.
+But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.&lt;/p&gt;
+
+&lt;p&gt;I tried evil mode, but it went not so well.
+Problem is that I&amp;rsquo;m also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
+I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
+Also probably my lack of patience played against me.
+So I gave up and continued using vim (something like 5 years of hapiness).&lt;/p&gt;
+
+&lt;p&gt;Recently ClojureScript tool called &lt;a href=&#34;https://github.com/bhauman/lein-figwheel&#34;&gt;figwheel&lt;/a&gt; added repl support.
+So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
+Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
+Problem here is that it does not support nrepl (network repl) protocol and best tool for clojure in vim &lt;a href=&#34;https://github.com/tpope/vim-fireplace&#34;&gt;vim-fireplace&lt;/a&gt; relies on nrepl.
+I was using for some time &lt;a href=&#34;https://github.com/sjl/tslime2.vim&#34;&gt;tslime2&lt;/a&gt; in vim to work with ClojureScript.
+Idea is very simple - tslime allows you to send pieces of text from your vim into some tmux panel.
+It works. You don&amp;rsquo;t have out of the box tooling that will select your top most clojure form sadly.
+Once upon a time I had discussion on #clojurescript irc and &lt;a href=&#34;https://twitter.com/martinklepsch&#34;&gt;@martinklepsh&lt;/a&gt; mentioned that nowadays evil-mode is much better.
+I was bored and followed that track. I did run &lt;code&gt;rm -rf .emacs.d&lt;/code&gt; and started from scratch.
+As a result my workflow from vim was ported to emacs in a couple of hours.
+It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
+I set my default editor to emacs and continued doing my thing for a couple of days.&lt;/p&gt;
+
+&lt;p&gt;And here what I think so far.&lt;/p&gt;
+
+&lt;p&gt;Good:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Evil mode is good and it&amp;rsquo;s very close. It&amp;rsquo;s probably closest thing to vim that I ever tried.
+It&amp;rsquo;s not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
+(Big shout outs to the author of idea plugin. It&amp;rsquo;s very impressive.)&lt;/li&gt;
+&lt;li&gt;Writing configuration in a language that I understand was a big relief.&lt;/li&gt;
+&lt;li&gt;Mapping configuration is simpler. You are mapping elisp function to the key. It&amp;rsquo;s simpler and easier to understand than remapping mechanism in vim.&lt;/li&gt;
+&lt;li&gt;Helm surprised me in it&amp;rsquo;s speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.&lt;/li&gt;
+&lt;li&gt;Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. &lt;a href=&#34;https://github in inferior lisp mode tuned to play well with clojure&#34;&gt;inf-clojure&lt;/a&gt; is enhanced clojure mode for the inf-lisp.&lt;/li&gt;
+&lt;li&gt;It can do async stuff! If you used vim then you know what I mean. In emacs it&amp;rsquo;s just there. Without required pythor/ruby support enabled during compilation.&lt;/li&gt;
+&lt;li&gt;Built-in package manager. Just run &lt;code&gt;package-install&lt;/code&gt; and it&amp;rsquo;s there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.&lt;/li&gt;
+&lt;li&gt;Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run &lt;code&gt;describe-key&lt;/code&gt; and see what is going on. You can do something similar in vim, but in emacs it&amp;rsquo;s much better.&lt;/li&gt;
+&lt;li&gt;Startup time is slow and it&amp;rsquo;s solvable. Just run systemd user service with &lt;code&gt;emacs --daemon&lt;/code&gt; and that is enough for most cases.&lt;/li&gt;
+&lt;li&gt;And you still have emacs operating system at your disposal!&lt;/li&gt;
+&lt;li&gt;Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Not so good:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it&amp;rsquo;s unnecessary. Of course this is related only to my habits and muscle memory.&lt;/li&gt;
+&lt;li&gt;Evil is slower.
+Most of the time it&amp;rsquo;s not a problem. But sometimes I&amp;rsquo;m mashing my keyboard too fast and mess happens.
+Good example is replace (&lt;code&gt;r&lt;/code&gt;) key.
+Press &lt;code&gt;r:&lt;/code&gt; too fast and you might end up in vim command line.&lt;/li&gt;
+&lt;li&gt;Evil is just a plugin. Sometimes you are forced to use default emacs mode in some menus/buffers that don&amp;rsquo;t play well with evil.&lt;/li&gt;
+&lt;li&gt;Good example of painful evil integration is cider.
+It just does not work with evil mode.
+Most configuration examples that I was able to find on github related to cider and evil mode where just forcing default emacs mode in cider repl and related buffers.
+That was big disappointment for me. I had high hopes for the cider. I&amp;rsquo;m realizing that I don&amp;rsquo;t really need everything that cider provides.
+I&amp;rsquo;m very happy with just ability to evaluate code, without even debugger and nice stacktraces.
+But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
+After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on &lt;a href=&#34;https://github.com/clojure-emacs/inf-clojure&#34;&gt;inf-clojure&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Will I continue using emacs? Yes.&lt;/p&gt;
+
+&lt;p&gt;Will it be my default editor? Probably no.
+Vim feels more reliable because it provides modal editing experience out of the box.
+In emacs it an option.
+I&amp;rsquo;m totally fine with giving away all that goodness that emacs provides to have proper editing experience &lt;strong&gt;all the time&lt;/strong&gt;.
+In every buffer, in every menu.
+And I will continue slowly improving my emacs configuration.&lt;/p&gt;
+
+&lt;p&gt;This experiment reminded me how many things are missing from my setup.
+It also reminded me that &lt;a href=&#34;https://neovim.org&#34;&gt;neovim&lt;/a&gt; might be next big thing in my tool belt.
+I&amp;rsquo;m really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/&#34;&gt;Here&lt;/a&gt; is very good tutorial to get vim users started in emacs.&lt;/li&gt;
+&lt;li&gt;My .emacs.d is &lt;a href=&#34;https://github.com/Gonzih/.emacs.d&#34;&gt;here&lt;/a&gt;. I tried to keep it minimalistic.&lt;/li&gt;
+&lt;li&gt;My .vim is &lt;a href=&#34;https://github.com/Gonzih/.vim&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;If you are looking for the best vim like experience in emacs please take a look at the &lt;a href=&#34;https://github.com/syl20bnr/spacemacs&#34;&gt;spacemacs project&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Looking for the good color theme in emacs? Take a look at the port of &lt;a href=&#34;https://github.com/morhetz/gruvbox&#34;&gt;vim&amp;rsquo;s gruvbox theme&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Grench binary for OpenSUSE</title>
+      <link>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</link>
+      <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
+
+&lt;p&gt;Helps with JVM startup time during development.
+Build in OCaml. If you are not in to the building binary on your own,
+there are pre-build binaries on the &lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse&#34;&gt;grench-opensuse&lt;/a&gt;
+[&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.sha1&#34;&gt;sha1&lt;/a&gt;
+| &lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.asc&#34;&gt;sig&lt;/a&gt;]&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Two way data bindings in Reagent</title>
+      <link>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/</guid>
+      <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath it&amp;rsquo;s all about core.async.
+Also provides ability to apply transformation using transducers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;
+(defonce form (atom {}))
+
+(defn bind-input
+  &amp;quot;Generat on-change callback,
+   bind value to form-key of form-atom.
+   Provides ability to implement transformation using transducers.&amp;quot;
+  [form-atom form-key xform]
+  (let [local-chan (chan 1 xform)]
+    (go-loop []
+      (swap! form-atom assoc form-key (&amp;lt;! local-chan))
+      (recur))
+    (fn [event]
+      (put! local-chan
+            (.-value (.-target event))))))
+
+(defn bound-input
+  &amp;quot;Generate input,
+   create two way data binding
+   between input value and value under form-key in form-atom.
+   Provides ability to implement transformation using transducers.&amp;quot;
+  [attrs form-atom form-key xform]
+  [:input (merge attrs
+                 {:value (form-key @form-atom)
+                  :on-change (bind-input form-atom form-key xform)})])
+
+(defn main-component []
+  [:div
+   [:h3 (:name @form) &amp;quot; value&amp;quot;]
+   [bound-input {:type :text} form :name (filter #(&amp;gt; 15 (count %)))]])
+
+(reagent/render-component [main-component]
+                          (js/document.getElementById &amp;quot;content&amp;quot;))
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Replacing shell scripts with Clojure&#43;JamVM</title>
+      <link>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/</guid>
+      <description>&lt;p&gt;We all hate shell scripting.
+Scripts are annoyingly hard to debug, test and verify.
+Would be lovely, to use some kind of lisp for scripting, right?
+To do interactive development with repl in your favorite editor.
+To write it in a nice predictable language that you also enjoy.
+But sometimes it&amp;rsquo;s impossible to add some external dependencies to the system.
+What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;
+
+&lt;h1 id=&#34;basic-setup&#34;&gt;Basic setup&lt;/h1&gt;
+
+&lt;p&gt;First what we will need is to get clojure jar file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget -O /opt/clojure.jar &#39;https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next lets create executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt; that will live in &lt;code&gt;/usr/bin&lt;/code&gt; (or &lt;code&gt;/opt/bin&lt;/code&gt; or &lt;code&gt;/home/youruser/bin&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
+
+exec java -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now it&amp;rsquo;s time for our hello world script &lt;code&gt;/opt/test.clj&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;#!/usr/bin/clojure
+
+(println &amp;quot;hello world&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make it executable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;chmod +x /opt/test.clj
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And run it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ /opt/test.clj
+hello world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yay! But it feels kind of slow:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
+hello world
+
+real  0m2.684s
+user  0m2.239s
+sys   0m0.186s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2 seconds startup time, not really suitable for scripting, right?
+Can we improve that? What if there would be JVM with fast startup and low memory usage.&lt;/p&gt;
+
+&lt;h1 id=&#34;introducing-jamvm&#34;&gt;Introducing JamVM.&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;&amp;ldquo;But&amp;hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I lied, sorry.&lt;/p&gt;
+
+&lt;p&gt;Compiling JamVM with OpenJDK support:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Fetching required dependencies and source
+apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
+cd /opt
+wget -O jamvm-2.0.0.tar.gz &#39;https://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;
+tar -xvzf jamvm-2.0.0.tar.gz
+
+# Building
+cd /opt/jamvm-2.0.0
+./configure --with-java-runtime-library=openjdk7 &amp;amp;&amp;amp; make check &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install
+
+# Installing in to the openjdk installation
+mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
+cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
+
+# Trying it out
+java -jamvm -version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
+You will need to use -jamvm option to java command to run it with small overhead vm.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s update our clojure executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/sh
+
+exec java -jamvm -jar /opt/clojure.jar &amp;quot;$@&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s try it out:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;time /opt/test.clj
+hello world
+
+real  0m0.866s
+user  0m0.764s
+sys   0m0.076s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Better, right?&lt;/p&gt;
+
+&lt;h2 id=&#34;how-slow-is-jamvm-some-benchmarks&#34;&gt;How slow is JamVM? Some benchmarks:&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Clojure 1.6
+
+JamVM:
+
+(factorial 5000) Avg: 248.65890986500017
+(fib 20)         Avg: 35.33471996000001
+(sort-seq)       Avg: 405.7438969800002
+
+OpenJDK:
+
+(factorial 5000) Avg: 25.016900630000006
+(fib 20)         Avg: 0.69957772
+(sort-seq)       Avg: 11.553695560000001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Much slower, but if you think about it
+shell scripting most of the time is about executing external commands,
+IO and data filtering. Might be as well not so bad.
+Also memory usage of JamVM makes it perfect for embedded systems.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-not-use-something-like-lein-exec&#34;&gt;Why not use something like lein exec?&lt;/h2&gt;
+
+&lt;p&gt;Lein exec is nice. But it adds overhead.
+If you need external dependencies you can solve it (in theory)
+with classpath manipulations in java command (&lt;code&gt;java -cp dep.jar:dep2.jar:.&lt;/code&gt;).
+Still you can plug lein exec to JamVM if you want.&lt;/p&gt;
+
+&lt;h3 id=&#34;update&#34;&gt;Update&lt;/h3&gt;
+
+&lt;p&gt;I just noticed that in Ubuntu 14:04 repos there is already JamVM package,
+so you can just run &lt;code&gt;apt-get -y install icedtea-7-jre-jamvm&lt;/code&gt; to install latest build.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Building Hacker News json api with Haskell</title>
+      <link>https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</link>
+      <pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</guid>
+      <description>&lt;p&gt;Small announcement post.&lt;/p&gt;
+
+&lt;p&gt;Today I launched tiny scotty server that serves json for Hacker News front page.
+Project source code is located on &lt;a href=&#34;https://github.com/Gonzih/HNApi&#34;&gt;github&lt;/a&gt;.
+You can access api &lt;a href=&#34;https://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;https://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
+and &lt;a href=&#34;https://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
+Json is served with help of &lt;a href=&#34;https://github.com/scotty-web/scotty/&#34;&gt;Scotty&lt;/a&gt; web framework.
+Currently it&amp;rsquo;s running on Heroku using &lt;a href=&#34;https://github.com/begriffs/heroku-buildpack-ghc&#34;&gt;this ghc-7.8 buildpack&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I don&amp;rsquo;t use RSS since I&amp;rsquo;m also interested in points and amount of comments.
+For me HN is more about interesting links than community and conversations behind the posts.
+So I don&amp;rsquo;t really care about anything except front page.&lt;/p&gt;
+
+&lt;p&gt;Originally I started this project as a Haskell learning exercise.
+I hope someone will find it useful.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Installing Spotify Linux beta on OpenSUSE 13.1</title>
+      <link>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</link>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/</guid>
+      <description>&lt;p&gt;Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
+Solution can be applied to any rpm based system (I think so).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://software.opensuse.org/package/alien&#34;&gt;alien&lt;/a&gt; (perl scripts for converting packages).&lt;/li&gt;
+&lt;li&gt;Download deb from &lt;a href=&#34;https://repository.spotify.com/pool/non-free/s/spotify/&#34;&gt;spotify repository&lt;/a&gt;, pay attention to architecture.&lt;/li&gt;
+&lt;li&gt;Convert deb -&amp;gt; rpm by running &lt;code&gt;sudo alien --scripts -r spotify*.deb&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Install rpm &lt;code&gt;sudo zypper in spotify*.rpm&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;spotify&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And it should work.
+I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you have issues with volume being too loud by default make sure that you changed &lt;code&gt;flat-volumes&lt;/code&gt; from &lt;code&gt;yes&lt;/code&gt; to &lt;code&gt;no&lt;/code&gt; in &lt;code&gt;/etc/pulse/daemon.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PPS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;People reported that installing version 0.9 -&amp;gt; uninstalling it -&amp;gt; installing version 1.0 might break your system. So watch out for the uninstallation errors.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Autoconnect to NetworkManager VPN on systemd based system</title>
+      <link>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</link>
+      <pubDate>Mon, 26 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/</guid>
+      <description>&lt;p&gt;Here is small post with instructions how to setup auto connect to VPN.
+Of course you can probably figure out all this yourself, but what if you are lazy?&lt;/p&gt;
+
+&lt;p&gt;Following was tested on OpenSuse 13.1.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;First create new VPN connection in NetworkManager.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create dispatcher file that will connect your VPN.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/NetworkManager/dispatcher.d/vpn-up&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;#!/bin/sh
+
+CONN=&amp;quot;MY-CONNECTION-NAME&amp;quot;
+
+nmcli con status id $CONN &amp;gt; /dev/null
+
+rc=$?
+if [[ $rc != 0 ]] ; then
+    nmcli con up id $CONN
+    sleep 5 # optional wait time
+fi
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make file executable &lt;code&gt;chmod +x /etc/NetworkManager/dispatcher.d/vpn-up&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Make sure that dispatcher is running by running &lt;code&gt;journalctl -b -u NetworkManager&lt;/code&gt; and looking for the line that looks like:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;NetworkManager&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;&amp;lt;warn&amp;gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you see line about dispatcher service - enable it manually by running &lt;code&gt;systemctl enable NetworkManager-dispatcher.service&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;/etc/NetworkManager/system-connections/MY-CONNECTION-NAME&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;...
+[vpn]
+password-flags=0
+...
+[vpn-secrets]
+password=MY-VPN-PASSWORD
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now everything should work like a charm!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HN Tray icon in 50 lines of Clojure</title>
+      <link>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
+      <pubDate>Sat, 24 May 2014 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</guid>
+      <description>&lt;p&gt;Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
+Result is tray app that shows stories from HN front page.
+Just in ~50 lines of Clojure code.
+Enjoy!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/hn-tray.clj&#34;&gt;Github Project.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Source code is below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-clojure&#34;&gt;(ns hn.core
+  (:require [cheshire.core :as json]
+            [clojure.java.browse :refer [browse-url]]
+            [clojure.java.io :refer [resource]])
+  (:import [java.awt SystemTray TrayIcon PopupMenu MenuItem Toolkit]
+           [java.awt.event ActionListener])
+  (:gen-class))
+
+(defn menu-item [label callback]
+  (let [menu (MenuItem. label)
+        listener (proxy [ActionListener] []
+                   (actionPerformed [event] (callback)))]
+    (.addActionListener menu listener)
+    menu))
+
+(def hn-api-url &amp;quot;https://api.ihackernews.com/page&amp;quot;)
+
+(defn hn-items []
+  (-&amp;gt; hn-api-url
+      slurp
+      (json/parse-string true)
+      :items
+      (#(sort-by :points %))
+      reverse))
+
+(defn add-hn-to-menu! [menu]
+  (letfn [(mapfn [{:keys [title url commentCount points]}]
+            (let [full-title (format &amp;quot;%-4s (%-4s) - %s&amp;quot; points commentCount title)
+                  menu-item (menu-item full-title #(browse-url url))]
+              (println full-title)
+              (.add menu menu-item)))]
+  (doall (map mapfn (hn-items)))))
+
+(defn exit []
+  (shutdown-agents)
+  (System/exit 0))
+
+(defn -main [&amp;amp; args]
+  (let [tray (SystemTray/getSystemTray)
+        image (.getImage (Toolkit/getDefaultToolkit)
+                         (resource &amp;quot;icon.png&amp;quot;))
+        icon (TrayIcon. image)
+        exit (menu-item &amp;quot;Exit&amp;quot; exit)]
+    (.setImageAutoSize icon true)
+    (.add tray icon)
+    (loop []
+      (let [popup (PopupMenu.)]
+        (println &amp;quot;Updating items&amp;quot;)
+        (add-hn-to-menu! popup)
+        (.add popup exit)
+        (.setPopupMenu icon popup)
+        (Thread/sleep (* 5 60 1000))
+        (recur)))))
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
   </channel>
