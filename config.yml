@@ -45,4 +45,4 @@ menu:
         URL: "https://blog.gonzih.me/index.xml"
       - Name: "Homepage"
         Weight: 5
-        URL: "https://www.gonzih.me"
+        URL: "https://gonzih.me"
