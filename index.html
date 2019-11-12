@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.2" />
+  <meta name="generator" content="Hugo 0.55.3" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -78,12 +78,701 @@
       
   <div class="post">
     <h1 class="post-title">
-      <a href="https://blog.gonzih.me/post/">
-        Posts
+      <a href="https://blog.gonzih.me/blog/2019/04/26/scripting-with-go-on-nixos/">
+        Scripting with Go on NixOS
       </a>
     </h1>
 
-    <span class="post-date">Fri, Apr 26, 2019 | <a href="https://blog.gonzih.me/post/#disqus_thread">Comments</a></span>
+    <span class="post-date">Fri, Apr 26, 2019 | <a href="https://blog.gonzih.me/blog/2019/04/26/scripting-with-go-on-nixos/#disqus_thread">Comments</a></span>
+
+    <p>This is a short HOWTO based on great idea from <a href="https://blog.cloudflare.com/using-go-as-a-scripting-language-in-linux/">this blog post</a> on how
+to utilize <a href="https://github.com/erning/gorun">gorun</a> and <code>binfmt_misc</code> to use go files for scripting.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2019/01/18/routing-with-go-on-google-cloud-functions/">
+        Routing with Go on Google Cloud Functions
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Jan 18, 2019 | <a href="https://blog.gonzih.me/blog/2019/01/18/routing-with-go-on-google-cloud-functions/#disqus_thread">Comments</a></span>
+
+    <p>Couple of days ago Google cloud functions got <a href="https://cloud.google.com/blog/products/application-development/cloud-functions-go-1-11-is-now-a-supported-language">official support for go 1.11</a>.
+I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on <code>http.ServeMux</code>.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/">
+        YubiKey as a portable SSH key
+      </a>
+    </h1>
+
+    <span class="post-date">Sat, Sep 8, 2018 | <a href="https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/#disqus_thread">Comments</a></span>
+
+    <p>This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/">
+        Arch Linux on Lenovo IdeaPad Y700 15&#34;
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Dec 11, 2015 | <a href="https://blog.gonzih.me/blog/2015/12/11/arch-linux-on-lenovo-ideapad-y700-15/#disqus_thread">Comments</a></span>
+
+    <p>Collection of tweaks that I gathered after installing Arch Linux on to Lenovo IdeaPAD Y700.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/">
+        Arch Linux on Macbook Pro 8.2 (17&#34; 2011)
+      </a>
+    </h1>
+
+    <span class="post-date">Sat, Aug 8, 2015 | <a href="https://blog.gonzih.me/blog/2015/08/08/arch-linux-on-macbook-pro-8-dot-2-17-2011/#disqus_thread">Comments</a></span>
+
+    <p>Couple of tips from my experience of running Arch on Macbook 8.2.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/">
+        Nvim terminal &#43; ClojureScript and figwheel
+      </a>
+    </h1>
+
+    <span class="post-date">Mon, Jun 15, 2015 | <a href="https://blog.gonzih.me/blog/2015/06/15/nvim-terminal-plus-clojurescript-and-figwheel/#disqus_thread">Comments</a></span>
+
+    <p>This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/">
+        ServerSide rendering of Reagent components
+      </a>
+    </h1>
+
+    <span class="post-date">Mon, Feb 16, 2015 | <a href="https://blog.gonzih.me/blog/2015/02/16/serverside-rendering-of-reagent-components/#disqus_thread">Comments</a></span>
+
+    <p>Great thing about React is that you can write what people nowadays call &ldquo;isomorphic JavaScript&rdquo;.
+In this post we will not discuss how wrong this term is in many ways,
+but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2015/02/15/ln-sf-/usr/bin/emacs-/usr/bin/vim/">
+        ln -sf /usr/bin/emacs /usr/bin/vim ?
+      </a>
+    </h1>
+
+    <span class="post-date">Sun, Feb 15, 2015 | <a href="https://blog.gonzih.me/blog/2015/02/15/ln-sf-/usr/bin/emacs-/usr/bin/vim/#disqus_thread">Comments</a></span>
+
+    <p>Some time ago I actually did run <code>ln -sf /usr/bin/emacs /usr/bin/vim</code>.
+And left it like that for a couple of days.
+I must say that it was surprisingly nice experience.
+Tinkering around with elisp, building editing environment from scratch.</p>
+
+<p>Of course interesting question is &ldquo;How did I end up with this idea in my head?&rdquo;.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/">
+        Grench binary for OpenSUSE
+      </a>
+    </h1>
+
+    <span class="post-date">Thu, Oct 23, 2014 | <a href="https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/#disqus_thread">Comments</a></span>
+
+    <p><a href="https://leiningen.org/grench.html">Grenchman</a> is a small tool that runs leiningen tasks over nrepl.</p>
+
+<p>Helps with JVM startup time during development.
+Build in OCaml. If you are not in to the building binary on your own,
+there are pre-build binaries on the <a href="https://leiningen.org/grench.html">official website</a>.</p>
+
+<p>And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).</p>
+
+<p><a href="https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse">grench-opensuse</a>
+[<a href="https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.sha1">sha1</a>
+| <a href="https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.asc">sig</a>]</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/">
+        Two way data bindings in Reagent
+      </a>
+    </h1>
+
+    <span class="post-date">Wed, Oct 22, 2014 | <a href="https://blog.gonzih.me/blog/2014/10/22/two-way-data-bindings-in-reagent/#disqus_thread">Comments</a></span>
+
+    <p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
+Underneath it&rsquo;s all about core.async.
+Also provides ability to apply transformation using transducers.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/">
+        Replacing shell scripts with Clojure&#43;JamVM
+      </a>
+    </h1>
+
+    <span class="post-date">Sun, Sep 28, 2014 | <a href="https://blog.gonzih.me/blog/2014/09/28/replacing-shell-scripts-with-clojure/#disqus_thread">Comments</a></span>
+
+    <p>We all hate shell scripting.
+Scripts are annoyingly hard to debug, test and verify.
+Would be lovely, to use some kind of lisp for scripting, right?
+To do interactive development with repl in your favorite editor.
+To write it in a nice predictable language that you also enjoy.
+But sometimes it&rsquo;s impossible to add some external dependencies to the system.
+What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/">
+        Building Hacker News json api with Haskell
+      </a>
+    </h1>
+
+    <span class="post-date">Wed, Aug 13, 2014 | <a href="https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/#disqus_thread">Comments</a></span>
+
+    <p>Small announcement post.</p>
+
+<p>Today I launched tiny scotty server that serves json for Hacker News front page.
+Project source code is located on <a href="https://github.com/Gonzih/HNApi">github</a>.
+You can access api <a href="https://hn.gonzih.me/">here</a>.</p>
+
+<p>Hacker news parser is implemented using <a href="https://hackage.haskell.org/package/hxt-8.5.2">HXT</a>
+and <a href="https://egonschiele.github.io/HandsomeSoup/">HandsomeSoup</a>.
+Json is served with help of <a href="https://github.com/scotty-web/scotty/">Scotty</a> web framework.
+Currently it&rsquo;s running on Heroku using <a href="https://github.com/begriffs/heroku-buildpack-ghc">this ghc-7.8 buildpack</a>.</p>
+
+<p>I don&rsquo;t use RSS since I&rsquo;m also interested in points and amount of comments.
+For me HN is more about interesting links than community and conversations behind the posts.
+So I don&rsquo;t really care about anything except front page.</p>
+
+<p>Originally I started this project as a Haskell learning exercise.
+I hope someone will find it useful.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/">
+        Installing Spotify Linux beta on OpenSUSE 13.1
+      </a>
+    </h1>
+
+    <span class="post-date">Tue, May 27, 2014 | <a href="https://blog.gonzih.me/blog/2014/05/27/installing-spotify-linux-beta-on-opensuse-13-dot-1/#disqus_thread">Comments</a></span>
+
+    <p>Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
+Solution can be applied to any rpm based system (I think so).</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/">
+        Autoconnect to NetworkManager VPN on systemd based system
+      </a>
+    </h1>
+
+    <span class="post-date">Mon, May 26, 2014 | <a href="https://blog.gonzih.me/blog/2014/05/26/autoconnect-to-networkmanager-vpn-on-systemd-based-system/#disqus_thread">Comments</a></span>
+
+    <p>Here is small post with instructions how to setup auto connect to VPN.
+Of course you can probably figure out all this yourself, but what if you are lazy?</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/">
+        HN Tray icon in 50 lines of Clojure
+      </a>
+    </h1>
+
+    <span class="post-date">Sat, May 24, 2014 | <a href="https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/#disqus_thread">Comments</a></span>
+
+    <p>Today I got a little bit bored and spend few hours poking around with java.awt in Clojure.
+Result is tray app that shows stories from HN front page.
+Just in ~50 lines of Clojure code.
+Enjoy!</p>
+
+<p><a href="https://github.com/Gonzih/hn-tray.clj">Github Project.</a></p>
+
+<p>Source code is below:</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/">
+        Hardware Cut/Copy/Paste with Arduino Leonardo
+      </a>
+    </h1>
+
+    <span class="post-date">Tue, Mar 4, 2014 | <a href="https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/#disqus_thread">Comments</a></span>
+
+    <p>Since I switched to Programmed Dvorak layout default keybindings for different operations started to annoy me sometimes.
+I was thinking about hardware cut/copy/paste in apps even before that. But only with Dvorak I realized how useful it can be.
+I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw <a href="https://keyboard.io">keyboard.io</a>.
+Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
+Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/">
+        VisualRuby gem on OpenSUSE 13.1
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Dec 13, 2013 | <a href="https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/#disqus_thread">Comments</a></span>
+
+    <p><img src="https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png" alt="visualruby" /></p>
+
+<p>I found out about ruby gem called <a href="https://visualruby.net/">visualruby</a> and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
+So to save my (or maybe your&rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
+I bet you can figure out similar packages for different distribution.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/">
+        Yin-Yang Call/cc puzzle in Ruby
+      </a>
+    </h1>
+
+    <span class="post-date">Tue, Nov 26, 2013 | <a href="https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/#disqus_thread">Comments</a></span>
+
+    <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
+
+<p>Here is Scheme implementation:</p>
+
+<pre><code class="language-scheme">(let* ((yin
+        ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
+       (yang
+        ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
+(yin yang))
+</code></pre>
+
+<p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/">
+        OpenSUSE 13.1 &#43; Mate 1.6 &#43; Xmonad
+      </a>
+    </h1>
+
+    <span class="post-date">Thu, Nov 21, 2013 | <a href="https://blog.gonzih.me/blog/2013/11/21/opensuse-13-dot-1-plus-mate-1-dot-6-plus-xmonad/#disqus_thread">Comments</a></span>
+
+    <p>So OpenSUSE 13.1 was released. And it&rsquo;s great. But&hellip;
+Since gnome 3.9 support for custom window managers was broken.
+How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
+
+<p><a href="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png"><img src="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png" alt="preview" /></a></p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/">
+        My first experience with core.typed
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Aug 30, 2013 | <a href="https://blog.gonzih.me/blog/2013/08/30/my-first-experience-with-core-dot-typed/#disqus_thread">Comments</a></span>
+
+    <p>Today I started improving my feeds2imap.clj project with core.typed.
+And already hit few issues, so this post is something like collection of tips how to solve issues with core.typed based on my experience.
+I couldn&rsquo;t find answers on my issues in wiki or documentation.
+But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
+Thank you for your patience, man!
+And keep doing what you are doing, core.typed is just amazing thing!</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/">
+        Cheap standing desk
+      </a>
+    </h1>
+
+    <span class="post-date">Sun, Aug 25, 2013 | <a href="https://blog.gonzih.me/blog/2013/08/25/cheap-standing-desk/#disqus_thread">Comments</a></span>
+
+    <p>I love idea of standing desks.
+I feel myself much more productive behind standing desk.
+But commercial desks suffer from high price and complicated design.</p>
+
+<p>Solution? Build your own standing desk!</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/">
+        Speed/Ping test graphs with Clojure and Raspberry Pi
+      </a>
+    </h1>
+
+    <span class="post-date">Sat, Aug 24, 2013 | <a href="https://blog.gonzih.me/blog/2013/08/24/speed/ping-test-graphs-with-clojure-and-raspberry-pi/#disqus_thread">Comments</a></span>
+
+    <p>I&rsquo;m often complaining about my ISP quality.
+Sometimes pings are high, sometimes download speed goes down.
+So I decided to make sure it&rsquo;s my ISP fault and not just my opinion based on my hate to them.</p>
+
+<p>How to do so? Let&rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/">
+        RSS/Atom reader in Clojure via IMAP
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Jun 28, 2013 | <a href="https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/#disqus_thread">Comments</a></span>
+
+    <h3 id="motivation">Motivation</h3>
+
+<p>Google Reader was shut down and I started looking for alternatives.
+And sadly I did not found anything close to Google Reader experience.
+There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
+All I wanted was simple to use news reader.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/">
+        Quick LXC configuration with netctl nat
+      </a>
+    </h1>
+
+    <span class="post-date">Tue, Apr 16, 2013 | <a href="https://blog.gonzih.me/blog/2013/04/16/quick-lxc-configuration-with-netctl-nat/#disqus_thread">Comments</a></span>
+
+    <p>So I spend few hours playing with Linux Containers. Pretty interesting stuff. So here is small tutorial on how to create and use container on Arch Linux as host machine.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/">
+        Clojure on Raspberry Pi: OpenJDK vs Oracle JRE (Java 8 armhf beta) benchmark
+      </a>
+    </h1>
+
+    <span class="post-date">Sun, Apr 14, 2013 | <a href="https://blog.gonzih.me/blog/2013/04/14/clojure-on-raspberry-pi-openjdk-vs-oracle-jre-java-8-armhf-beta-benchmark/#disqus_thread">Comments</a></span>
+
+    <p><a href="https://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/">
+        Building RC Toy with Clojure
+      </a>
+    </h1>
+
+    <span class="post-date">Tue, Mar 19, 2013 | <a href="https://blog.gonzih.me/blog/2013/03/19/building-rc-toy-with-clojure/#disqus_thread">Comments</a></span>
+
+    <p>Bored and have free time? Lets build something.
+Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use).</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/">
+        How I cook Ctags in Vim
+      </a>
+    </h1>
+
+    <span class="post-date">Mon, Mar 18, 2013 | <a href="https://blog.gonzih.me/blog/2013/03/18/how-i-cook-ctags-in-vim/#disqus_thread">Comments</a></span>
+
+    <p>Ctags is great piece of software. And it took me some time to realize how I can use ctags with vim in optimal for me way. My solution is petty simle. I have few vim functions that vim runs when buffer write is done.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/">
+        Blue Midnight Commander color scheme
+      </a>
+    </h1>
+
+    <span class="post-date">Thu, Feb 14, 2013 | <a href="https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/#disqus_thread">Comments</a></span>
+
+    <p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
+
+<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
+
+<p><code>.config/mc/ini</code>:</p>
+
+<pre><code class="language-ini">[Colors]
+base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:
+</code></pre>
+
+<p>For more information take look at <a href="https://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
+Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/">
+        ClojureScript on BeagleBone: simple benchmark with Node.js
+      </a>
+    </h1>
+
+    <span class="post-date">Wed, Jan 23, 2013 | <a href="https://blog.gonzih.me/blog/2013/01/23/clojurescript-on-beaglebone-simple-benchmark-with-node-dot-js/#disqus_thread">Comments</a></span>
+
+    <p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
+Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/">
+        Easy HTML5 Validation Fallback for Older Browsers using Modernizr and JQuery Validation Plugin
+      </a>
+    </h1>
+
+    <span class="post-date">Sat, Dec 29, 2012 | <a href="https://blog.gonzih.me/blog/2012/12/29/easy-html5-validation-fallback-for-older-browsers-using-modernizr-and-jquery-validation-plugin/#disqus_thread">Comments</a></span>
+
+    <p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers.
+You will need three things for that.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/">
+        Note on privacy #1
+      </a>
+    </h1>
+
+    <span class="post-date">Wed, Dec 12, 2012 | <a href="https://blog.gonzih.me/blog/2012/12/12/note-on-privacy-number-1/#disqus_thread">Comments</a></span>
+
+    Today I removed from my blog all stuff that can track users. I removed Twitter follow and tweet buttons, Google +1 button, Google Analytics script, Facebook related crap.
+Why? Because it&rsquo;s just unfair. Why would you provide any information about yourself by just being curious? I actually not interested in how many people are reading my blog, anything about traffic sources. Only thing that I am interested in is feedback from users.
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/">
+        Programmer Dvorak and switching workspaces in XMonad
+      </a>
+    </h1>
+
+    <span class="post-date">Mon, Oct 8, 2012 | <a href="https://blog.gonzih.me/blog/2012/10/08/programmer-dvorak-and-switching-workspaces-in-xmonad/#disqus_thread">Comments</a></span>
+
+    <p>Recently I migarted from awesome to xmonad. I&rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">
+        Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Sep 7, 2012 | <a href="https://blog.gonzih.me/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/#disqus_thread">Comments</a></span>
+
+    <p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/">
+        Installing Oracle Embedded Java on Beaglebone and Ubuntu Issue
+      </a>
+    </h1>
+
+    <span class="post-date">Mon, Sep 3, 2012 | <a href="https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/#disqus_thread">Comments</a></span>
+
+    <p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&rsquo;s new Embedded JRE.
+But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
+
+<pre><code class="language-text">java: no such file or directory
+</code></pre>
+
+<p>So here is fix:</p>
+
+<pre><code class="language-sh">sudo apt-get install -y libc6-armel libsfgcc1
+</code></pre>
+
+<p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/">
+        Arch Linux migrated to GRUB2
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Jul 20, 2012 | <a href="https://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/#disqus_thread">Comments</a></span>
+
+    <p><img src="https://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
+
+<p>Great news everyone! Today Arch Linux officially switched to GRUB2!</p>
+
+<ul>
+<li><a href="https://www.archlinux.org/news/grub-legacy-no-longer-supported/">Post on Arch News</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file">Migration information is here</a></li>
+<li><a href="https://www.reddit.com/r/linux/comments/w7mux/i_make_grub_themes_heres_my_newest_one/">My current GRUB2 theme</a></li>
+<li><a href="https://gnome-look.org/usermanager/search.php?username=LegendaryBibo&amp;action=contents">More GRUB2 themes</a></li>
+</ul>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/">
+        Fix Broken Comments Count for Disqus
+      </a>
+    </h1>
+
+    <span class="post-date">Thu, Jul 19, 2012 | <a href="https://blog.gonzih.me/blog/2012/07/19/fix-broken-comments-count-for-disqus/#disqus_thread">Comments</a></span>
+
+    <p>I just figured out that my disqus account was attached to gonzih.github.com but my blog was actually hosted using blog.gonzih.org domain.
+That is why comments count was equal to 0 for every post on my index page.
+To fix that go to admin ui in disqus and use domain migration tool.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/">
+        The Internet Defense League
+      </a>
+    </h1>
+
+    <span class="post-date">Thu, Jul 19, 2012 | <a href="https://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/#disqus_thread">Comments</a></span>
+
+    <p><img src="https://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" />
+&gt;The Internet Blackout was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p>
+
+<p>Join <strong>Internet Defence League</strong> at <a href="https://internetdefenseleague.org/">internetdefenseleague.org</a></p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/">
+        How to use Magnet Links with RTorrent
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Feb 17, 2012 | <a href="https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/#disqus_thread">Comments</a></span>
+
+    <p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
+
+<pre><code class="language-bash">#!/bin/bash
+
+cd ~/watch    # set your watch directory here
+[[ &quot;$1&quot; =~ xt=urn:btih:([^&amp;/]+) ]] || exit;
+echo &quot;d10:magnet-uri${#1}:${1}e&quot; &gt; &quot;meta-${BASH_REMATCH[1]}.torrent&quot;
+</code></pre>
+
+<p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/">
+        Nice Vim Keys Map
+      </a>
+    </h1>
+
+    <span class="post-date">Tue, Oct 18, 2011 | <a href="https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/#disqus_thread">Comments</a></span>
+
+    <p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
+
+<p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/">
+        Set New PostgreSQL Databases Encoding to Unicode
+      </a>
+    </h1>
+
+    <span class="post-date">Fri, Sep 30, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/#disqus_thread">Comments</a></span>
+
+    <p>You must change encoding for template1. For do that run following.</p>
+
+<pre><code>su - postgres
+psql
+
+UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
+DROP DATABASE template1;
+CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+
+#recomended
+\c template1
+VACUUM FREEZE;
+</code></pre>
+
+<p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/">
+        How To Fix Octopress Pygments Error on Arch Linux
+      </a>
+    </h1>
+
+    <span class="post-date">Wed, Sep 21, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/#disqus_thread">Comments</a></span>
+
+    <p>If your get following pygments error using octopress with arch linux.</p>
+
+<pre><code class="language-text">Building site: source -&gt; public
+  File &quot;&lt;string&gt;&quot;, line 1
+    import sys; print sys.executable
+                        ^
+SyntaxError: invalid syntax
+</code></pre>
+
+<p>It&rsquo;s happens because RubyPython use Python version 2 by calling &ldquo;python&rdquo; command. By default python equal to python3 in Arch Linux.</p>
+
+<p>For fix simple add ruby file to plugins directory with following code.</p>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/">
+        Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)
+      </a>
+    </h1>
+
+    <span class="post-date">Mon, Sep 19, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/19/installing-opkg-package-manager-on-android-mc-rsync-screen-htop-zip-busybox-tree/#disqus_thread">Comments</a></span>
+
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/">
+        Tmux &#43; Rvm &#43; Zsh Fix
+      </a>
+    </h1>
+
+    <span class="post-date">Thu, Sep 15, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/#disqus_thread">Comments</a></span>
+
+    <p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
+
+<pre><code class="language-bash">[[ $TERM = &quot;screen&quot; ]] &amp;&amp; rvm use default
+</code></pre>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/">
+        Backbone.js &#43; Ruby on Rails Tips
+      </a>
+    </h1>
+
+    <span class="post-date">Sat, Sep 3, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/#disqus_thread">Comments</a></span>
 
     
   </div>

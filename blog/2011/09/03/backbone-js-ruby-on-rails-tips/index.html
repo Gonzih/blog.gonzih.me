@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.2" />
+  <meta name="generator" content="Hugo 0.55.3" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,18 +76,19 @@
                 <h1>Backbone.js &#43; Ruby on Rails Tips</h1>
               <span class="post-date">Sat, Sep 3, 2011</span>
                   <ul>
-<li><p>Add initializer that disable sending data in namespaces in json.</p>
+<li>Add initializer that disable sending data in namespaces in json.</li>
+</ul>
 
 <pre><code class="language-ruby">ActiveRecord::Base.include_root_in_json = false
 
 # {&quot;post&quot;: {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content&quot;}}
 # will be
 # {&quot;title&quot;: &quot;some title&quot;, &quot;content&quot;: &quot;some content}
-</code></pre></li>
+</code></pre>
 
-<li><p>Use attr_accessible for filtering attributes in mass assigments from backbone. In rails &gt; 3.1 you can use attr_accessible with :as =&gt; role.</p></li>
-
-<li><p>Use <a href="https://github.com/josevalim/inherited_resources">inherited resources</a> for faster development.</p></li>
+<ul>
+<li>Use attr_accessible for filtering attributes in mass assigments from backbone. In rails &gt; 3.1 you can use attr_accessible with :as =&gt; role.</li>
+<li>Use <a href="https://github.com/josevalim/inherited_resources">inherited resources</a> for faster development.</li>
 </ul>
             </div>
 
