@@ -11,8 +11,17 @@ preview:
 	hugo server --bind 0.0.0.0
 
 TS := $(date)
+ifdef GH_TOKEN
+PUBLIC_URL = https://$(GH_TOKEN)@github.com/Gonzih/blog.gonzih.me.git
+else
+PUBLIC_URL = git@github.com:Gonzih/blog.gonzih.me.git
+endif
 public:
-	git clone -b master git@github.com:Gonzih/gonzih.github.com.git public
+	git clone -b master $(PUBLIC_URL) public
+
+setup-git:
+	git config --global user.email "$(GIT_EMAIL)"
+	git config --global user.name "$(GIT_NAME)"
 
 deploy: public
 	cd public \
