@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "3D printed foraging cat toy design"
+title: "3D printed foraging cat toy"
 date: "2020-02-12"
 comments: true
 draft: false
