@@ -13,4 +13,4 @@ Here is a small foraging cat toy based on design I saw in this [youtube video](h
 
 Main difference in my design is that its implemented in openscad and is also configurable.
 
-Preview of design is available on [thingiverse]() or [github]().
+Preview of design is available on [thingiverse]() or [github](https://github.com/Gonzih/scad-library/blob/master/stl/foraging_cat_toy_preview.stl).
