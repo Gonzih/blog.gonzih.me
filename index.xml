@@ -21,9 +21,9 @@
 
 &lt;p&gt;Main difference in this design is that it&amp;rsquo;s implemented in OpenSCAD and as a result fully configurable.&lt;/p&gt;
 
-&lt;p&gt;3D designs are available on &lt;a href=&#34;https://www.thingiverse.com/thing:4159282&#34;&gt;thingiverse&lt;/a&gt; or &lt;a href=&#34;https://github.com/Gonzih/scad-library/blob/master/stl/foraging_cat_toy.stl&#34;&gt;github&lt;/a&gt;.
+&lt;p&gt;3D designs are available on &lt;a href=&#34;https://github.com/Gonzih/scad-library/blob/master/stl/foraging_cat_toy.stl&#34;&gt;github&lt;/a&gt;.
 OpenSCAD source code is available also on &lt;a href=&#34;https://github.com/Gonzih/scad-library/blob/master/foraging_cat_toy.scad&#34;&gt;github&lt;/a&gt;.
-One can use either OpenSCAD or &lt;a href=&#34;https://www.thingiverse.com/thing:4159282&#34;&gt;thingiverse&lt;/a&gt; to customize the design.&lt;/p&gt;
+One can use either OpenSCAD to customize the design.&lt;/p&gt;
 
 &lt;h3 id=&#34;preview-model&#34;&gt;Preview model&lt;/h3&gt;
 
