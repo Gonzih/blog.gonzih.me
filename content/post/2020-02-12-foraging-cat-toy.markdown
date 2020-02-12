@@ -14,14 +14,14 @@ Here is a foraging cat toy based on design I saw in [youtube video](https://www.
 Main difference in this design is that it's implemented in OpenSCAD and as a result fully configurable.
 
 3D designs are available on [github](https://github.com/Gonzih/scad-library/blob/master/stl/foraging_cat_toy.stl).
-OpenSCAD source code is available also on [github](https://github.com/Gonzih/scad-library/blob/master/foraging_cat_toy.scad).
-One can use either OpenSCAD to customize the design.
+OpenSCAD source code is available also on [github](https://github.com/Gonzih/scad-library/blob/master/foraging_cat_toy.scad),
+which can be used to customize this design.
 
-### Preview model
-<script src="https://embed.github.com/view/3d/Gonzih/scad-library/master/stl/foraging_cat_toy_preview.stl"></script>
+### Preview model [[link]](https://github.com/Gonzih/scad-library/blob/master/stl/foraging_cat_toy_preview.stl)
+<script src="https://embed.github.com/view/3d/Gonzih/scad-library/master/stl/foraging_cat_toy_preview.stl?width=600"></script>
 
-### Complete model
-<script src="https://embed.github.com/view/3d/Gonzih/scad-library/master/stl/foraging_cat_toy.stl"></script>
+### Complete model [[link]](https://github.com/Gonzih/scad-library/blob/master/stl/foraging_cat_toy.stl)
+<script src="https://embed.github.com/view/3d/Gonzih/scad-library/master/stl/foraging_cat_toy.stl?width=600"></script>
 
 ### PS
 Pictures of toy in action are coming soon.
