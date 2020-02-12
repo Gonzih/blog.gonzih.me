@@ -49,7 +49,7 @@ deploy-using-docker: public
 	make push
 
 preview-using-docker: docker-image docker-rm public
-	docker run --rm -t -v $(shell pwd):/var/blog -p 1313:1313 --name blog-builder blog-builder make preview
+	docker run --rm -ti -v $(shell pwd):/var/blog -p 1313:1313 --name blog-builder blog-builder make preview
 
 debug-using-docker: docker-image docker-rm public
 	docker run --rm -ti -v $(shell pwd):/var/blog -p 1313:1313 --name blog-builder blog-builder bash
