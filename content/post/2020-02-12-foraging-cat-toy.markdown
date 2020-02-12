@@ -11,7 +11,7 @@ Here is a foraging cat toy based on design I saw in [youtube video](https://www.
 
 <!--more-->
 
-Main difference in this design is that it's implemented in OpenSCAD and as a result fully configurable.
+Main difference in this design is that it's implemented in OpenSCAD and as a result is fully configurable.
 
 3D designs are available on [github](https://github.com/Gonzih/scad-library/blob/master/stl/foraging_cat_toy.stl).
 OpenSCAD source code is available also on [github](https://github.com/Gonzih/scad-library/blob/master/foraging_cat_toy.scad),
