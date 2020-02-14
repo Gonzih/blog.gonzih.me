@@ -7,7 +7,7 @@ draft: false
 categories: [3d, 3dprint, openscad, stl, cad, modeling]
 ---
 
-Here is a foraging cat toy based on design I saw in [youtube video](https://www.youtube.com/watch?v=Su1XqO96X2Y) by [EvanAndKatelyn](https://www.youtube.com/channel/UCUuMYw2l2UeWyTGYixYfRCA).
+Here is a foraging cat toy based on design I saw in a [youtube video](https://www.youtube.com/watch?v=Su1XqO96X2Y) by [EvanAndKatelyn](https://www.youtube.com/channel/UCUuMYw2l2UeWyTGYixYfRCA).
 
 <!--more-->
 
