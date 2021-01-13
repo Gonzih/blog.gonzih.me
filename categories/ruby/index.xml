@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ruby on Max Gonzih</title>
@@ -9,11 +9,7 @@
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 04 Mar 2014 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.gonzih.me/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 04 Mar 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gonzih.me/categories/ruby/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hardware Cut/Copy/Paste with Arduino Leonardo</title>
       <link>https://blog.gonzih.me/blog/2014/03/04/hardware-cut/copy/paste-with-arduino-leonardo/</link>
@@ -33,8 +29,7 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
       <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34;&gt;&lt;/p&gt;
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;https://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.&lt;/p&gt;</description>
@@ -47,17 +42,13 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;<
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
-
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(let* ((yin
-        ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
-       (yang
-        ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
-(yin yang))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;let* &lt;/span&gt;((&lt;span style=&#34;color:#a6e22e&#34;&gt;yin&lt;/span&gt;
+        ((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;cc&lt;/span&gt;) (display &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;@) cc) (call-with-current-continuation (&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;) c))))
+       (&lt;span style=&#34;color:#a6e22e&#34;&gt;yang&lt;/span&gt;
+        ((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;cc&lt;/span&gt;) (display &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;*) cc) (call-with-current-continuation (&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;) c)))))
+(&lt;span style=&#34;color:#a6e22e&#34;&gt;yin&lt;/span&gt; yang))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -67,7 +58,6 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;<
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
       <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
-
 &lt;p&gt;Google Reader was shut down and I started looking for alternatives.
 And sadly I did not found anything close to Google Reader experience.
 There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
@@ -81,29 +71,24 @@ All I wanted was simple to use news reader.&lt;/p&gt;</description>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
       <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Building site: source -&amp;gt; public
-  File &amp;quot;&amp;lt;string&amp;gt;&amp;quot;, line 1
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Building site: source -&amp;gt; public
+  File &amp;#34;&amp;lt;string&amp;gt;&amp;#34;, line 1
     import sys; print sys.executable
                         ^
 SyntaxError: invalid syntax
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
 &lt;p&gt;For fix simple add ruby file to plugins directory with following code.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Tmux &#43; Rvm &#43; Zsh Fix</title>
-      <link>https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</guid>
       <description>&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[ $TERM = &amp;quot;screen&amp;quot; ]] &amp;amp;&amp;amp; rvm use default
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt; $TERM &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;screen&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rvm use default
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

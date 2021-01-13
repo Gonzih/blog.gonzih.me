@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -79,18 +79,14 @@
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.</p>
-
 <p>Of course interesting question is &ldquo;How did I end up with this idea in my head?&rdquo;.</p>
-
 <p>I tried to play with emacs few times couple of years ago.
 But as a modal editing kind of guy I was unable to comprehend finger bending experience that default key bindings in emacs give you.</p>
-
 <p>I tried evil mode, but it went not so well.
 Problem is that I&rsquo;m also using programmer dvorak layout, so I need to remap couple of keys for better comfort.
 I failed all my previous attempts because it was not very trivial at that time to remap those keys everywhere.
 Also probably my lack of patience played against me.
 So I gave up and continued using vim (something like 5 years of hapiness).</p>
-
 <p>Recently ClojureScript tool called <a href="https://github.com/bhauman/lein-figwheel">figwheel</a> added repl support.
 So as a result you have repl that compiles your clojure code into javascript and executes result in your browser session printing result back to you.
 Development flow like that is very common practice in clojure world and one reason why it makes clojure much better.
@@ -103,11 +99,8 @@ I was bored and followed that track. I did run <code>rm -rf .emacs.d</code> and 
 As a result my workflow from vim was ported to emacs in a couple of hours.
 It surprised me both how simple was that and how relatively close my setup is to default one in vim/evil.
 I set my default editor to emacs and continued doing my thing for a couple of days.</p>
-
 <p>And here what I think so far.</p>
-
 <p>Good:</p>
-
 <ul>
 <li>Evil mode is good and it&rsquo;s very close. It&rsquo;s probably closest thing to vim that I ever tried.
 It&rsquo;s not fancy smart like vim mode in IntelliJ IDEA that actually reads your .vimrc and uses it to configure keybindings
@@ -115,7 +108,7 @@ It&rsquo;s not fancy smart like vim mode in IntelliJ IDEA that actually reads yo
 <li>Writing configuration in a language that I understand was a big relief.</li>
 <li>Mapping configuration is simpler. You are mapping elisp function to the key. It&rsquo;s simpler and easier to understand than remapping mechanism in vim.</li>
 <li>Helm surprised me in it&rsquo;s speed and functionality, I spent lot of time fighting with Ctrl-P/Unite in vim. Configuring Unite was painful experience. Helm on the other hand just works. And works well.</li>
-<li>Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. <a href="https://github in inferior lisp mode tuned to play well with clojure">inf-clojure</a> is enhanced clojure mode for the inf-lisp.</li>
+<li>Inferior lisp is so goooood. Having editor with lisp support in mind is incredible experience for any lisp developer. [inf-clojure](https://github in inferior lisp mode tuned to play well with clojure) is enhanced clojure mode for the inf-lisp.</li>
 <li>It can do async stuff! If you used vim then you know what I mean. In emacs it&rsquo;s just there. Without required pythor/ruby support enabled during compilation.</li>
 <li>Built-in package manager. Just run <code>package-install</code> and it&rsquo;s there. No NeoBundle/Bundle installation needed. No need to mess with git submodules.</li>
 <li>Ability to inspect everything at run time helps during configuration. Some key executes something weird? Just run <code>describe-key</code> and see what is going on. You can do something similar in vim, but in emacs it&rsquo;s much better.</li>
@@ -123,9 +116,7 @@ It&rsquo;s not fancy smart like vim mode in IntelliJ IDEA that actually reads yo
 <li>And you still have emacs operating system at your disposal!</li>
 <li>Configuring emacs from scratch made me realize that my vim configuration is really really messy and big. I need probably to think about some changes in there.</li>
 </ul>
-
 <p>Not so good:</p>
-
 <ul>
 <li>Paredit feels different from one that exists in vim. Less strict I guess most of the time and too strict when it&rsquo;s unnecessary. Of course this is related only to my habits and muscle memory.</li>
 <li>Evil is slower.
@@ -141,22 +132,17 @@ I&rsquo;m very happy with just ability to evaluate code, without even debugger a
 But cider looked so shiny and cool. And bloated. Seems like author of cider does not use evil mode so my hopes that cider+evil story will improve are low.
 After few hours of grinding my teeth over emacs configuration I gave up and decided to rely on <a href="https://github.com/clojure-emacs/inf-clojure">inf-clojure</a>.</li>
 </ul>
-
 <p>Will I continue using emacs? Yes.</p>
-
 <p>Will it be my default editor? Probably no.
 Vim feels more reliable because it provides modal editing experience out of the box.
 In emacs it an option.
 I&rsquo;m totally fine with giving away all that goodness that emacs provides to have proper editing experience <strong>all the time</strong>.
 In every buffer, in every menu.
 And I will continue slowly improving my emacs configuration.</p>
-
 <p>This experiment reminded me how many things are missing from my setup.
 It also reminded me that <a href="https://neovim.org">neovim</a> might be next big thing in my tool belt.
 I&rsquo;m really hoping to see big movement around neovim once project becomes more or less compatible with current viml based configurations.</p>
-
 <p><strong>PS</strong></p>
-
 <ul>
 <li><a href="https://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/">Here</a> is very good tutorial to get vim users started in emacs.</li>
 <li>My .emacs.d is <a href="https://github.com/Gonzih/.emacs.d">here</a>. I tried to keep it minimalistic.</li>

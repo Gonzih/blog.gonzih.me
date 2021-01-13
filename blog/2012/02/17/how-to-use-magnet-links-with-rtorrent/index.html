@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,15 +76,12 @@
                 <h1>How to use Magnet Links with RTorrent</h1>
               <span class="post-date">Fri, Feb 17, 2012</span>
                   <p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
-
-<pre><code class="language-bash">#!/bin/bash
-
-cd ~/watch    # set your watch directory here
-[[ &quot;$1&quot; =~ xt=urn:btih:([^&amp;/]+) ]] || exit;
-echo &quot;d10:magnet-uri${#1}:${1}e&quot; &gt; &quot;meta-${BASH_REMATCH[1]}.torrent&quot;
-</code></pre>
-
-<p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+cd ~/watch    <span style="color:#75715e"># set your watch directory here</span>
+<span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ xt<span style="color:#f92672">=</span>urn:btih:<span style="color:#f92672">([</span>^&amp;/<span style="color:#f92672">]</span>+<span style="color:#f92672">)</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">||</span> exit;
+echo <span style="color:#e6db74">&#34;d10:magnet-uri</span><span style="color:#e6db74">${#</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">e&#34;</span> &gt; <span style="color:#e6db74">&#34;meta-</span><span style="color:#e6db74">${</span>BASH_REMATCH[1]<span style="color:#e6db74">}</span><span style="color:#e6db74">.torrent&#34;</span>
+</code></pre></div><p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
             </div>
 
             

@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -81,71 +81,51 @@ I couldn&rsquo;t find answers on my issues in wiki or documentation.
 But I got answers annoying Ambrose Bonnaire-Sergeant on Google+.
 Thank you for your patience, man!
 And keep doing what you are doing, core.typed is just amazing thing!</p>
-
 <h3 id="unresolved-constructor-invocation">Unresolved constructor invocation</h3>
-
 <p>Core.typed can&rsquo;t match constructor based on arguments type,
 you should provide type hints to help core.typed with that.</p>
-
-<h3 id="by-default-core-typed-assumes-that-all-java-methods-can-return-nil">By default core.typed assumes that all java methods can return nil</h3>
-
+<h3 id="by-default-coretyped-assumes-that-all-java-methods-can-return-nil">By default core.typed assumes that all java methods can return nil</h3>
 <p>Use <code>(non-nil-return ClassOrObject/methodName :all)</code> to tell core.typed that method won&rsquo;t return nil.
 Core.typed will trust you and will skip further checks.</p>
-
 <p>Or for example if you are expecting String as a result you can convert result to String with str before returning it.</p>
-
-<h3 id="non-nil-return-in-core-typed-works-only-on-methods">non-nil-return in core.typed works only on methods</h3>
-
+<h3 id="non-nil-return-in-coretyped-works-only-on-methods">non-nil-return in core.typed works only on methods</h3>
 <p>And if you have static method then something like that would not work:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
 
-<pre><code class="language-clojure">(non-nil-return javax.mail.Message$RecipientType/TO :all)
+(<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
+(<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to []
+  (<span style="color:#a6e22e">Message$RecipientType/TO</span>))
 
-(ann recipient-type-to [-&gt; Message$RecipientType])
-(defn ^Message$RecipientType recipient-type-to []
-  (Message$RecipientType/TO))
+(<span style="color:#a6e22e">comment</span>
+  Type mismatch<span style="color:#960050;background-color:#1e0010">:</span>
+  Expected<span style="color:#960050;background-color:#1e0010">:</span>       (<span style="color:#a6e22e">Fn</span> [-&gt; Message$RecipientType])
+  Actual<span style="color:#960050;background-color:#1e0010">:</span>         (<span style="color:#a6e22e">Fn</span> [-&gt; (<span style="color:#a6e22e">U</span> Message$RecipientType nil)]))
+</code></pre></div><p>Solution:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
 
-(comment
-  Type mismatch:
-  Expected:       (Fn [-&gt; Message$RecipientType])
-  Actual:         (Fn [-&gt; (U Message$RecipientType nil)]))
-</code></pre>
-
-<p>Solution:</p>
-
-<pre><code class="language-clojure">(non-nil-return javax.mail.Message$RecipientType/TO :all)
-
-(ann recipient-type-to [-&gt; Message$RecipientType])
-(defn ^Message$RecipientType recipient-type-to
+(<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
+(<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to
   []
-  {:post [%]}
-  (Message$RecipientType/TO))
-</code></pre>
+  {<span style="color:#e6db74">:post</span> [%]}
+  (<span style="color:#a6e22e">Message$RecipientType/TO</span>))
+</code></pre></div><p>Which is the same as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
 
-<p>Which is the same as:</p>
-
-<pre><code class="language-clojure">(non-nil-return javax.mail.Message$RecipientType/TO :all)
-
-(ann recipient-type-to [-&gt; Message$RecipientType])
-(defn ^Message$RecipientType recipient-type-to []
-  (let [temp (Message$RecipientType/TO)]
+(<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
+(<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to []
+  (<span style="color:#66d9ef">let </span>[temp (<span style="color:#a6e22e">Message$RecipientType/TO</span>)]
     (assert temp)
     temp)
-</code></pre>
-
-<p>So unless assert evaluates temp to logical true exception will be raised
+</code></pre></div><p>So unless assert evaluates temp to logical true exception will be raised
 and function will always return non nil value, which makes core.typed happy.</p>
-
 <h3 id="defining-parameterized-alias-type">Defining Parameterized alias type</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">def-alias</span> Folder
+  (<span style="color:#a6e22e">TFn</span> [[x <span style="color:#e6db74">:variance</span> <span style="color:#e6db74">:covariant</span>]] (<span style="color:#a6e22e">Map</span> Keyword x)))
 
-<pre><code class="language-clojure">(def-alias Folder
-  (TFn [[x :variance :covariant]] (Map Keyword x)))
-
-(comment
-  (Folder Items)
-  (Folder Urls))
-</code></pre>
-
-<p><a href="https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114">Here is</a> commit with changes related to core.typed.
+(<span style="color:#a6e22e">comment</span>
+  (<span style="color:#a6e22e">Folder</span> Items)
+  (<span style="color:#a6e22e">Folder</span> Urls))
+</code></pre></div><p><a href="https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114">Here is</a> commit with changes related to core.typed.
 I must say writing type annotations for code that you wrote few months ago is tricky.
 But still I enjoyed process and results and I&rsquo;m still a little bit amazed about all core.typed thing.
 Power of lisp combined with really smart people :)</p>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bash on Max Gonzih</title>
@@ -9,11 +9,7 @@
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 17 Feb 2012 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.gonzih.me/categories/bash/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 17 Feb 2012 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gonzih.me/categories/bash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to use Magnet Links with RTorrent</title>
       <link>https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</link>
@@ -21,15 +17,12 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</guid>
       <description>&lt;p&gt;Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
-
-cd ~/watch    # set your watch directory here
-[[ &amp;quot;$1&amp;quot; =~ xt=urn:btih:([^&amp;amp;/]+) ]] || exit;
-echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BASH_REMATCH[1]}.torrent&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+cd ~/watch    &lt;span style=&#34;color:#75715e&#34;&gt;# set your watch directory here&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;~ xt&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;urn:btih:&lt;span style=&#34;color:#f92672&#34;&gt;([&lt;/span&gt;^&amp;amp;/&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; exit;
+echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;d10:magnet-uri&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;e&amp;#34;&lt;/span&gt; &amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;meta-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;BASH_REMATCH[1]&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.torrent&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

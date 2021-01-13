@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -77,16 +77,10 @@
               <span class="post-date">Mon, Sep 3, 2012</span>
                   <p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
-
-<pre><code class="language-text">java: no such file or directory
-</code></pre>
-
-<p>So here is fix:</p>
-
-<pre><code class="language-sh">sudo apt-get install -y libc6-armel libsfgcc1
-</code></pre>
-
-<p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">java: no such file or directory
+</code></pre></div><p>So here is fix:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install -y libc6-armel libsfgcc1
+</code></pre></div><p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
             </div>
 
             

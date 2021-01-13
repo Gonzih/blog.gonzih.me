@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -77,7 +77,6 @@
               <span class="post-date">Tue, May 27, 2014</span>
                   <p>Very small post (more like insruction for myself for the future) on how to convert deb packages provided by Spotify to rpm.
 Solution can be applied to any rpm based system (I think so).</p>
-
 <ul>
 <li>Install <a href="https://software.opensuse.org/package/alien">alien</a> (perl scripts for converting packages).</li>
 <li>Download deb from <a href="https://repository.spotify.com/pool/non-free/s/spotify/">spotify repository</a>, pay attention to architecture.</li>
@@ -85,16 +84,11 @@ Solution can be applied to any rpm based system (I think so).</p>
 <li>Install rpm <code>sudo zypper in spotify*.rpm</code>.</li>
 <li>Run <code>spotify</code>.</li>
 </ul>
-
 <p>And it should work.
 I noticed few warning about default locates and missing libraries, but client still works fine without any changes to system (symlinks, locales and etc).</p>
-
 <p><strong>PS</strong></p>
-
 <p>If you have issues with volume being too loud by default make sure that you changed <code>flat-volumes</code> from <code>yes</code> to <code>no</code> in <code>/etc/pulse/daemon.conf</code></p>
-
 <p><strong>PPS</strong></p>
-
 <p>People reported that installing version 0.9 -&gt; uninstalling it -&gt; installing version 1.0 might break your system. So watch out for the uninstallation errors.</p>
             </div>
 

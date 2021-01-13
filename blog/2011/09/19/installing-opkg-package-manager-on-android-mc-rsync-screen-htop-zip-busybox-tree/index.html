@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,53 +76,38 @@
                 <h1>Installing opkg Package Manager on Android (mc, rsync, screen, htop, zip, busybox, tree)</h1>
               <span class="post-date">Mon, Sep 19, 2011</span>
                   <h2 id="install-adb">Install adb</h2>
-
 <h3 id="installing-adb-on-arch-linux">Installing adb on arch linux</h3>
-
-<pre><code class="language-bash">yaourt -S adb
-</code></pre>
-
-<h2 id="running-adb">Running adb</h2>
-
-<pre><code class="language-bash">adb kill-server
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yaourt -S adb
+</code></pre></div><h2 id="running-adb">Running adb</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">adb kill-server
 sudo adb start-server
 adb shell
-</code></pre>
-
-<h2 id="installing-opkg">Installing opkg</h2>
-
+</code></pre></div><h2 id="installing-opkg">Installing opkg</h2>
 <p>Now run in adb shell following:</p>
-
-<pre><code class="language-bash">cd /sdcard
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /sdcard
 wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg-bootstrap-v2.tar.bz2
 cd /
 tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
-# for non cyanogen users
+<span style="color:#75715e"># for non cyanogen users</span>
 wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg.conf -O /data/local/opkg.conf
-# for cyanogen users
+<span style="color:#75715e"># for cyanogen users</span>
 wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
-# add /data/xbin to your path
-export PATH=&quot;/data/xbin:$PATH&quot;
-# make /system writable
+<span style="color:#75715e"># add /data/xbin to your path</span>
+export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/xbin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+<span style="color:#75715e"># make /system writable</span>
 mount -o remount,rw /system
 opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
 opkg -f /data/local/opkg.conf update
 opkg install opkg
 mount -o remount,ro /system
-</code></pre>
-
-<h2 id="opkg-usage">Opkg usage</h2>
-
-<pre><code class="language-bash">opkg install rsync
+</code></pre></div><h2 id="opkg-usage">Opkg usage</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">opkg install rsync
 opkg remove rsync
-# list installed packages
+<span style="color:#75715e"># list installed packages</span>
 opkg list_installed
-# list files belonging to package
+<span style="color:#75715e"># list files belonging to package</span>
 opkg files rsync
-</code></pre>
-
-<h2 id="available-packages">Available packages</h2>
-
+</code></pre></div><h2 id="available-packages">Available packages</h2>
 <ul>
 <li>rsync - Lightweight package management system.</li>
 <li>htop - Interactive processes viewer.</li>
@@ -137,7 +122,6 @@ opkg files rsync
 <li>terminfo - Basic terminal type definitions.</li>
 <li>zip - Archiver for .zip files.</li>
 </ul>
-
 <p><a href="https://android.modaco.com/topic/299984-linux-tools-coming-to-mcr/">via</a></p>
             </div>
 

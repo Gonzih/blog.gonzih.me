@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -75,19 +75,15 @@
             <div class="post">
                 <h1>VisualRuby gem on OpenSUSE 13.1</h1>
               <span class="post-date">Fri, Dec 13, 2013</span>
-                  <p><img src="https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png" alt="visualruby" /></p>
-
+                  <p><img src="https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png" alt="visualruby"></p>
 <p>I found out about ruby gem called <a href="https://visualruby.net/">visualruby</a> and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.</p>
-
-<pre><code class="language-sh">sudo zypper -n in \
-glib2 glib2-branding-openSUSE glib2-devel \
-atk-devel cairo-devel pango-devel gdk-pixbuf-devel \
-gtk2-devel gtksourceview2-devel glade
-</code></pre>
-
-<p>Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo zypper -n in <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>glib2 glib2-branding-openSUSE glib2-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>atk-devel cairo-devel pango-devel gdk-pixbuf-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>gtk2-devel gtksourceview2-devel glade
+</code></pre></div><p>Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
 It&rsquo;s not working very well (at least in examples) since most of stuff in suse 13.1 is based on gtk3+.
 But I&rsquo;m still in process of figuring things out.</p>
             </div>

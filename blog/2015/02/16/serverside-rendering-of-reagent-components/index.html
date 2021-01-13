@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -78,126 +78,88 @@
                   <p>Great thing about React is that you can write what people nowadays call &ldquo;isomorphic JavaScript&rdquo;.
 In this post we will not discuss how wrong this term is in many ways,
 but instead we will focus on how to achieve similar results in your ClojureScript code using Reagent library.</p>
-
 <p>In my experience simplest optimization to run in some js engine on server side is whitespace.
 It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
 So our compiler configuration should look something like that:</p>
-
-<pre><code class="language-clojure">{:id &quot;server-side&quot;
- :source-paths [&quot;src&quot;]
- :compiler {:output-to &quot;resources/public/javascripts/server-side.js&quot;
-            :output-dir &quot;resources/public/javascripts/out-server-side&quot;
-            :preamble [&quot;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&quot;]
-            :pretty-print false
-            :warnings true
-            :optimizations :whitespace}}
-</code></pre>
-
-<p>Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:</p>
-
-<pre><code class="language-clojure">(def main-component
-  (with-meta
-    (fn [] ...)
-    {:component-did-mount (comp init-my-scroll-handler!
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">{<span style="color:#e6db74">:id</span> <span style="color:#e6db74">&#34;server-side&#34;</span>
+ <span style="color:#e6db74">:source-paths</span> [<span style="color:#e6db74">&#34;src&#34;</span>]
+ <span style="color:#e6db74">:compiler</span> {<span style="color:#e6db74">:output-to</span> <span style="color:#e6db74">&#34;resources/public/javascripts/server-side.js&#34;</span>
+            <span style="color:#e6db74">:output-dir</span> <span style="color:#e6db74">&#34;resources/public/javascripts/out-server-side&#34;</span>
+            <span style="color:#e6db74">:preamble</span> [<span style="color:#e6db74">&#34;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&#34;</span>]
+            <span style="color:#e6db74">:pretty-print</span> false
+            <span style="color:#e6db74">:warnings</span> true
+            <span style="color:#e6db74">:optimizations</span> <span style="color:#e6db74">:whitespace</span>}}
+</code></pre></div><p>Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span>main-component
+  (<span style="color:#a6e22e">with-meta</span>
+    (<span style="color:#66d9ef">fn </span>[] ...)
+    {<span style="color:#e6db74">:component-did-mount</span> (comp init-my-scroll-handler!
                                 also-init-my-go-loop!)}))
-</code></pre>
-
-<p>Next let&rsquo;s create function that will do some rendering to the string.
+</code></pre></div><p>Next let&rsquo;s create function that will do some rendering to the string.
 I like to keep this function in a component specific ns just for convenience.</p>
-
-<pre><code class="language-clojure">(def ^:export render-me-to-s [initial-state]
-  (reset! my-main-state (js-&gt;clj initial-state))
-  ; Render component to markup without reactid
-  (reagent.core/render-to-static-markup [main-component])
-  ; Or render component to ready to-go react markup
-  (reagent.core/render-to-string [main-component]))
-</code></pre>
-
-<p>Now server side bootstrapping, most of this code was taken from <a href="https://github.com/reactjs/react-rails">react-rails plugin</a>.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span><span style="color:#f92672">^</span><span style="color:#e6db74">:export</span> render-me-to-s [initial-state]
+  (<span style="color:#a6e22e">reset!</span> my-main-state (<span style="color:#a6e22e">js-&gt;clj</span> initial-state))
+  <span style="color:#75715e">; Render component to markup without reactid</span>
+  (<span style="color:#a6e22e">reagent.core/render-to-static-markup</span> [main-component])
+  <span style="color:#75715e">; Or render component to ready to-go react markup</span>
+  (<span style="color:#a6e22e">reagent.core/render-to-string</span> [main-component]))
+</code></pre></div><p>Now server side bootstrapping, most of this code was taken from <a href="https://github.com/reactjs/react-rails">react-rails plugin</a>.</p>
 <p>First of all react expects to have global or window objects in your js engine (setup.js):</p>
-
-<pre><code class="language-javascript">var global = global || this;
-var self = self || this;
-var window = window || this;
-var console = global.console || {};
-['error', 'log', 'info', 'warn'].forEach(function (fn) {
-  if (!(fn in console)) {
-    console[fn] = function () {};
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">self</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">self</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>;
+<span style="color:#66d9ef">var</span> window <span style="color:#f92672">=</span> window <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">console</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">console</span> <span style="color:#f92672">||</span> {};
+[<span style="color:#e6db74">&#39;error&#39;</span>, <span style="color:#e6db74">&#39;log&#39;</span>, <span style="color:#e6db74">&#39;info&#39;</span>, <span style="color:#e6db74">&#39;warn&#39;</span>].<span style="color:#a6e22e">forEach</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">fn</span>) {
+  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>(<span style="color:#a6e22e">fn</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">console</span>)) {
+    <span style="color:#a6e22e">console</span>[<span style="color:#a6e22e">fn</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {};
   }
 });
-</code></pre>
-
-<p>Now let&rsquo;s try and use all this in our code (for now in Ruby):</p>
-
-<pre><code class="language-ruby">cxt = V8::Context.new
-cxt.load('setup.js')
-cxt.load('resources/public/javascripts/server-side.js')
-html = cxt.eval(&quot;my.amazing_component.ns.render_me_to_s(#{init_state.to_json})&quot;)
-</code></pre>
-
-<p>And that&rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
+</code></pre></div><p>Now let&rsquo;s try and use all this in our code (for now in Ruby):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">cxt <span style="color:#f92672">=</span> <span style="color:#66d9ef">V8</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Context</span><span style="color:#f92672">.</span>new
+cxt<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;setup.js&#39;</span>)
+cxt<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;resources/public/javascripts/server-side.js&#39;</span>)
+html <span style="color:#f92672">=</span> cxt<span style="color:#f92672">.</span>eval(<span style="color:#e6db74">&#34;my.amazing_component.ns.render_me_to_s(</span><span style="color:#e6db74">#{</span>init_state<span style="color:#f92672">.</span>to_json<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
+</code></pre></div><p>And that&rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
 Sometimes you might want to use <code>ActionController::Base.helpers.j</code> helper that will
 escape your data for usage inside json, but most of the time you should be alright without it.</p>
-
 <p>If you have issues with core.async there are 2 ways to solve it.
 I personally prefer to move core.async initialization into some lifecycle method.
 Another solution is to implement setTimeout function like that in your <code>setup.js</code> snippet:</p>
-
-<pre><code class="language-javascript">goog.global.setTimeout = function(cb, t) {
-    cb();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">goog</span>.<span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">setTimeout</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">cb</span>, <span style="color:#a6e22e">t</span>) {
+    <span style="color:#a6e22e">cb</span>();
 }
-</code></pre>
-
-<p>Now frontend part. First let&rsquo;s in-line generated html in to the container:</p>
-
-<pre><code class="language-erb">&lt;div id=&quot;content&quot;&gt;&lt;%= html %&gt;&lt;/div&gt;
-</code></pre>
-
-<p>Then let&rsquo;s write function that will render our component on frontend:</p>
-
-<pre><code class="language-clojure">(def ^:export mount-me [initial-state]
-  (reset! my-main-state (js-&gt;clj initial-state))
-  (reagent.core/render [main-component]
-                       (js/document.getElementById &quot;content&quot;)))
-</code></pre>
-
-<p>As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
+</code></pre></div><p>Now frontend part. First let&rsquo;s in-line generated html in to the container:</p>
+<pre><code class="language-erb" data-lang="erb">&lt;div id=&quot;content&quot;&gt;&lt;%= html %&gt;&lt;/div&gt;
+</code></pre><p>Then let&rsquo;s write function that will render our component on frontend:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span><span style="color:#f92672">^</span><span style="color:#e6db74">:export</span> mount-me [initial-state]
+  (<span style="color:#a6e22e">reset!</span> my-main-state (<span style="color:#a6e22e">js-&gt;clj</span> initial-state))
+  (<span style="color:#a6e22e">reagent.core/render</span> [main-component]
+                       (<span style="color:#a6e22e">js/document.getElementById</span> <span style="color:#e6db74">&#34;content&#34;</span>)))
+</code></pre></div><p>As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
 Am I wrong on this one? Don&rsquo;t know yet.</p>
-
 <p>Inline javascript that you should use on frontend looks like that:</p>
-
-<pre><code class="language-erb">&lt;script&gt;
+<pre><code class="language-erb" data-lang="erb">&lt;script&gt;
 my.amazing_component.ns.mount_me(&lt;%= init_state.to_json %&gt;)
 &lt;/script&gt;
-</code></pre>
+</code></pre><h3 id="nashorn-example-result-of-my-experiments-in-the-repl">Nashorn example (result of my experiments in the REPL)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(import <span style="color:#f92672">&#39;</span>[javax.script ScriptEngineManager])
+(<span style="color:#66d9ef">def </span>nashorn (<span style="color:#a6e22e">.getEngineByName</span> (<span style="color:#a6e22e">ScriptEngineManager.</span>) <span style="color:#e6db74">&#34;nashorn&#34;</span>))
 
-<h3 id="nashorn-example-result-of-my-experiments-in-the-repl">Nashorn example (result of my experiments in the REPL)</h3>
+<span style="color:#75715e">; Same as in ruby version</span>
+(<span style="color:#66d9ef">def </span>setup-script (slurp <span style="color:#e6db74">&#34;setup.js&#34;</span>))
+(<span style="color:#66d9ef">def </span>ss-script (slurp <span style="color:#e6db74">&#34;resources/public/javascripts/server-side.js&#34;</span>))
+(<span style="color:#66d9ef">def </span>render-script (str <span style="color:#e6db74">&#34;my.amazing_component.ns.render_me_to_s(&#34;</span> my-state-json-string <span style="color:#e6db74">&#34;);&#34;</span>))
 
-<pre><code class="language-clojure">(import '[javax.script ScriptEngineManager])
-(def nashorn (.getEngineByName (ScriptEngineManager.) &quot;nashorn&quot;))
-
-; Same as in ruby version
-(def setup-script (slurp &quot;setup.js&quot;))
-(def ss-script (slurp &quot;resources/public/javascripts/server-side.js&quot;))
-(def render-script (str &quot;my.amazing_component.ns.render_me_to_s(&quot; my-state-json-string &quot;);&quot;))
-
-(.eval nashorn setup-script)
-(.eval nashorn ss-script)
-(.eval nashorn render-script) ; our html markup
-</code></pre>
-
-<p>I must admit that this code works on small reagent example.
+(<span style="color:#a6e22e">.eval</span> nashorn setup-script)
+(<span style="color:#a6e22e">.eval</span> nashorn ss-script)
+(<span style="color:#a6e22e">.eval</span> nashorn render-script) <span style="color:#75715e">; our html markup</span>
+</code></pre></div><p>I must admit that this code works on small reagent example.
 I&rsquo;m unable to load production code from my current project in to Nashorn.</p>
-
 <p>Also it helps a lot if you started developing your project with server side rendering in mind.</p>
-
 <p>Of course it&rsquo;s better to have some kind of &ldquo;renderers pool&rdquo; in JVM.
 Good thing that clojure allows you to implement thing like that in few lines of code.
 In ruby it&rsquo;s not a problem since we have 1 context per worker.</p>
-
 <p><strong>Useful Links:</strong></p>
-
 <ul>
 <li><a href="https://groups.google.com/forum/#!topic/clojurescript/IIjUxnl4Zbw">ClojureScript mailing list topic</a></li>
 </ul>

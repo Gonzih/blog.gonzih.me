@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -189,7 +189,6 @@ but instead we will focus on how to achieve similar results in your ClojureScrip
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.</p>
-
 <p>Of course interesting question is &ldquo;How did I end up with this idea in my head?&rdquo;.</p>
             </div>
             
@@ -203,13 +202,10 @@ Tinkering around with elisp, building editing environment from scratch.</p>
                 <span class="post-date">Thu, Oct 23, 2014 | <a href="https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/#disqus_thread">Comments</a></span>
 
                 <p><a href="https://leiningen.org/grench.html">Grenchman</a> is a small tool that runs leiningen tasks over nrepl.</p>
-
 <p>Helps with JVM startup time during development.
 Build in OCaml. If you are not in to the building binary on your own,
 there are pre-build binaries on the <a href="https://leiningen.org/grench.html">official website</a>.</p>
-
 <p>And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).</p>
-
 <p><a href="https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse">grench-opensuse</a>
 [<a href="https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.sha1">sha1</a>
 | <a href="https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.asc">sig</a>]</p>
@@ -257,20 +253,16 @@ What if you have only JVM to your disposal, will you be able to pull it off only
                 <span class="post-date">Wed, Aug 13, 2014 | <a href="https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/#disqus_thread">Comments</a></span>
 
                 <p>Small announcement post.</p>
-
 <p>Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on <a href="https://github.com/Gonzih/HNApi">github</a>.
 You can access api <a href="https://hn.gonzih.me/">here</a>.</p>
-
 <p>Hacker news parser is implemented using <a href="https://hackage.haskell.org/package/hxt-8.5.2">HXT</a>
 and <a href="https://egonschiele.github.io/HandsomeSoup/">HandsomeSoup</a>.
 Json is served with help of <a href="https://github.com/scotty-web/scotty/">Scotty</a> web framework.
 Currently it&rsquo;s running on Heroku using <a href="https://github.com/begriffs/heroku-buildpack-ghc">this ghc-7.8 buildpack</a>.</p>
-
 <p>I don&rsquo;t use RSS since I&rsquo;m also interested in points and amount of comments.
 For me HN is more about interesting links than community and conversations behind the posts.
 So I don&rsquo;t really care about anything except front page.</p>
-
 <p>Originally I started this project as a Haskell learning exercise.
 I hope someone will find it useful.</p>
             </div>
@@ -314,9 +306,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
 Result is tray app that shows stories from HN front page.
 Just in ~50 lines of Clojure code.
 Enjoy!</p>
-
 <p><a href="https://github.com/Gonzih/hn-tray.clj">Github Project.</a></p>
-
 <p>Source code is below:</p>
             </div>
             
@@ -345,8 +335,7 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
 
                 <span class="post-date">Fri, Dec 13, 2013 | <a href="https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/#disqus_thread">Comments</a></span>
 
-                <p><img src="https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png" alt="visualruby" /></p>
-
+                <p><img src="https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png" alt="visualruby"></p>
 <p>I found out about ruby gem called <a href="https://visualruby.net/">visualruby</a> and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.</p>
@@ -362,17 +351,13 @@ I bet you can figure out similar packages for different distribution.</p>
                 <span class="post-date">Tue, Nov 26, 2013 | <a href="https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/#disqus_thread">Comments</a></span>
 
                 <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
-
 <p>Here is Scheme implementation:</p>
-
-<pre><code class="language-scheme">(let* ((yin
-        ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
-       (yang
-        ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
-(yin yang))
-</code></pre>
-
-<p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let* </span>((<span style="color:#a6e22e">yin</span>
+        ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">cc</span>) (display <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">\</span>@) cc) (call-with-current-continuation (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) c))))
+       (<span style="color:#a6e22e">yang</span>
+        ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">cc</span>) (display <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">\</span>*) cc) (call-with-current-continuation (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) c)))))
+(<span style="color:#a6e22e">yin</span> yang))
+</code></pre></div><p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
             </div>
             
             <div class="post">
@@ -387,8 +372,7 @@ I bet you can figure out similar packages for different distribution.</p>
                 <p>So OpenSUSE 13.1 was released. And it&rsquo;s great. But&hellip;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
-
-<p><a href="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png"><img src="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png" alt="preview" /></a></p>
+<p><a href="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png"><img src="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png" alt="preview"></a></p>
             </div>
             
             <div class="post">
@@ -420,7 +404,6 @@ And keep doing what you are doing, core.typed is just amazing thing!</p>
                 <p>I love idea of standing desks.
 I feel myself much more productive behind standing desk.
 But commercial desks suffer from high price and complicated design.</p>
-
 <p>Solution? Build your own standing desk!</p>
             </div>
             
@@ -436,7 +419,6 @@ But commercial desks suffer from high price and complicated design.</p>
                 <p>I&rsquo;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it&rsquo;s my ISP fault and not just my opinion based on my hate to them.</p>
-
 <p>How to do so? Let&rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.</p>
             </div>
             
@@ -450,7 +432,6 @@ So I decided to make sure it&rsquo;s my ISP fault and not just my opinion based 
                 <span class="post-date">Fri, Jun 28, 2013 | <a href="https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/#disqus_thread">Comments</a></span>
 
                 <h3 id="motivation">Motivation</h3>
-
 <p>Google Reader was shut down and I started looking for alternatives.
 And sadly I did not found anything close to Google Reader experience.
 There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
@@ -516,16 +497,11 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
                 <span class="post-date">Thu, Feb 14, 2013 | <a href="https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/#disqus_thread">Comments</a></span>
 
                 <p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
-
-<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png" alt="Blue Midnight Commander color scheme" /></a></p>
-
+<p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png" alt="Blue Midnight Commander color scheme"></a></p>
 <p><code>.config/mc/ini</code>:</p>
-
-<pre><code class="language-ini">[Colors]
-base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:
-</code></pre>
-
-<p>For more information take look at <a href="https://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[Colors]</span>
+<span style="color:#a6e22e">base_color</span><span style="color:#f92672">=</span><span style="color:#e6db74">lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:</span>
+</code></pre></div><p>For more information take look at <a href="https://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
 Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
             </div>
             
@@ -603,16 +579,10 @@ Why? Because it&rsquo;s just unfair. Why would you provide any information about
 
                 <p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
-
-<pre><code class="language-text">java: no such file or directory
-</code></pre>
-
-<p>So here is fix:</p>
-
-<pre><code class="language-sh">sudo apt-get install -y libc6-armel libsfgcc1
-</code></pre>
-
-<p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">java: no such file or directory
+</code></pre></div><p>So here is fix:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install -y libc6-armel libsfgcc1
+</code></pre></div><p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
             </div>
             
             <div class="post">
@@ -624,10 +594,8 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
 
                 <span class="post-date">Fri, Jul 20, 2012 | <a href="https://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/#disqus_thread">Comments</a></span>
 
-                <p><img src="https://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme" /></p>
-
+                <p><img src="https://i.imgur.com/ASSDN.png" alt="My current GRUB2 theme"></p>
 <p>Great news everyone! Today Arch Linux officially switched to GRUB2!</p>
-
 <ul>
 <li><a href="https://www.archlinux.org/news/grub-legacy-no-longer-supported/">Post on Arch News</a></li>
 <li><a href="https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file">Migration information is here</a></li>
@@ -659,9 +627,10 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
 
                 <span class="post-date">Thu, Jul 19, 2012 | <a href="https://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/#disqus_thread">Comments</a></span>
 
-                <p><img src="https://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch" />
-&gt;The Internet Blackout was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p>
-
+                <p><img src="https://internetdefenseleague.org/images/launch/cat_sky.jpg" alt="IDL Launch"></p>
+<blockquote>
+<p>The Internet Blackout was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp; monopolies. Are you in?</p>
+</blockquote>
 <p>Join <strong>Internet Defence League</strong> at <a href="https://internetdefenseleague.org/">internetdefenseleague.org</a></p>
             </div>
             
@@ -675,15 +644,12 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
                 <span class="post-date">Fri, Feb 17, 2012 | <a href="https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/#disqus_thread">Comments</a></span>
 
                 <p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
-
-<pre><code class="language-bash">#!/bin/bash
-
-cd ~/watch    # set your watch directory here
-[[ &quot;$1&quot; =~ xt=urn:btih:([^&amp;/]+) ]] || exit;
-echo &quot;d10:magnet-uri${#1}:${1}e&quot; &gt; &quot;meta-${BASH_REMATCH[1]}.torrent&quot;
-</code></pre>
-
-<p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+cd ~/watch    <span style="color:#75715e"># set your watch directory here</span>
+<span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ xt<span style="color:#f92672">=</span>urn:btih:<span style="color:#f92672">([</span>^&amp;/<span style="color:#f92672">]</span>+<span style="color:#f92672">)</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">||</span> exit;
+echo <span style="color:#e6db74">&#34;d10:magnet-uri</span><span style="color:#e6db74">${#</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">e&#34;</span> &gt; <span style="color:#e6db74">&#34;meta-</span><span style="color:#e6db74">${</span>BASH_REMATCH[1]<span style="color:#e6db74">}</span><span style="color:#e6db74">.torrent&#34;</span>
+</code></pre></div><p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
             </div>
             
             <div class="post">
@@ -696,7 +662,6 @@ echo &quot;d10:magnet-uri${#1}:${1}e&quot; &gt; &quot;meta-${BASH_REMATCH[1]}.to
                 <span class="post-date">Tue, Oct 18, 2011 | <a href="https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/#disqus_thread">Comments</a></span>
 
                 <p>Large <a href="https://github.com/Gonzih/vim-keymap/raw/master/new/new.png">image</a> (2.4 Megabytes).</p>
-
 <p><a href="https://github.com/Gonzih/vim-keymap/">Source on github</a>.</p>
             </div>
             
@@ -710,7 +675,6 @@ echo &quot;d10:magnet-uri${#1}:${1}e&quot; &gt; &quot;meta-${BASH_REMATCH[1]}.to
                 <span class="post-date">Fri, Sep 30, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/#disqus_thread">Comments</a></span>
 
                 <p>You must change encoding for template1. For do that run following.</p>
-
 <pre><code>su - postgres
 psql
 
@@ -722,9 +686,7 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
 #recomended
 \c template1
 VACUUM FREEZE;
-</code></pre>
-
-<p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+</code></pre><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
             </div>
             
             <div class="post">
@@ -737,16 +699,12 @@ VACUUM FREEZE;
                 <span class="post-date">Wed, Sep 21, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/#disqus_thread">Comments</a></span>
 
                 <p>If your get following pygments error using octopress with arch linux.</p>
-
-<pre><code class="language-text">Building site: source -&gt; public
-  File &quot;&lt;string&gt;&quot;, line 1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Building site: source -&gt; public
+  File &#34;&lt;string&gt;&#34;, line 1
     import sys; print sys.executable
                         ^
 SyntaxError: invalid syntax
-</code></pre>
-
-<p>It&rsquo;s happens because RubyPython use Python version 2 by calling &ldquo;python&rdquo; command. By default python equal to python3 in Arch Linux.</p>
-
+</code></pre></div><p>It&rsquo;s happens because RubyPython use Python version 2 by calling &ldquo;python&rdquo; command. By default python equal to python3 in Arch Linux.</p>
 <p>For fix simple add ruby file to plugins directory with following code.</p>
             </div>
             
@@ -764,27 +722,26 @@ SyntaxError: invalid syntax
             
             <div class="post">
                 <h1 class="post-title">
-                    <a href="https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/">
+                    <a href="https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/">
                         Tmux &#43; Rvm &#43; Zsh Fix
                     </a>
                 </h1>
 
-                <span class="post-date">Thu, Sep 15, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/#disqus_thread">Comments</a></span>
+                <span class="post-date">Thu, Sep 15, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/#disqus_thread">Comments</a></span>
 
                 <p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
-
-<pre><code class="language-bash">[[ $TERM = &quot;screen&quot; ]] &amp;&amp; rvm use default
-</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[[</span> $TERM <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;screen&#34;</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> rvm use default
+</code></pre></div>
             </div>
             
             <div class="post">
                 <h1 class="post-title">
-                    <a href="https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/">
+                    <a href="https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/">
                         Backbone.js &#43; Ruby on Rails Tips
                     </a>
                 </h1>
 
-                <span class="post-date">Sat, Sep 3, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/#disqus_thread">Comments</a></span>
+                <span class="post-date">Sat, Sep 3, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/#disqus_thread">Comments</a></span>
 
                 
             </div>

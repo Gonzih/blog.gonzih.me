@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -380,11 +380,6 @@
   <url>
     <loc>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</loc>
     <lastmod>2013-12-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.gonzih.me/categories/call/cc/</loc>
-    <lastmod>2013-11-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -863,7 +858,7 @@
   </url>
   
   <url>
-    <loc>https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/</loc>
+    <loc>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</loc>
     <lastmod>2011-09-15T00:00:00+00:00</lastmod>
   </url>
   
@@ -878,7 +873,7 @@
   </url>
   
   <url>
-    <loc>https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/</loc>
+    <loc>https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</loc>
     <lastmod>2011-09-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -890,6 +885,10 @@
   <url>
     <loc>https://blog.gonzih.me/categories/ror/</loc>
     <lastmod>2011-09-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/categories/call/cc/</loc>
   </url>
   
 </urlset>

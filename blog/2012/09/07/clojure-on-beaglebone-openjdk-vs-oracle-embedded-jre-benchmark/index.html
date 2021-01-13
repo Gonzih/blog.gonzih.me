@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,55 +76,42 @@
                 <h1>Clojure on BeagleBone: OpenJDK vs Oracle Embedded JRE benchmark</h1>
               <span class="post-date">Fri, Sep 7, 2012</span>
                   <p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
-
 <p>BeagleBone is running Ubuntu 12.04.</p>
-
 <pre><code>&gt; cat /etc/*-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=12.04
 DISTRIB_CODENAME=precise
 DISTRIB_DESCRIPTION=&quot;Ubuntu 12.04 LTS&quot;
-</code></pre>
-
-<p>BeagleBone CPU is running on 500Mhz.</p>
-
+</code></pre><p>BeagleBone CPU is running on 500Mhz.</p>
 <pre><code>&gt; cpufreq-info | grep 'current CPU'
 current CPU frequency is 500 MHz.
-</code></pre>
-
-<p>Clojure version is 1.4.0.</p>
-
+</code></pre><p>Clojure version is 1.4.0.</p>
 <p>Benchmark code is from <a href="https://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya&rsquo;s post</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>benchmark.core)
 
-<pre><code class="language-clojure">(ns benchmark.core)
+(<span style="color:#66d9ef">defn </span>factorial [x]
+  (reduce * (range <span style="color:#ae81ff">1</span>N (inc x))))
+<span style="color:#75715e">;                   ^ integerOverflow fix</span>
 
-(defn factorial [x]
-  (reduce * (range 1N (inc x))))
-;                   ^ integerOverflow fix
+(<span style="color:#66d9ef">defn </span>fib [n]
+  (<span style="color:#66d9ef">if </span>(&lt;= n <span style="color:#ae81ff">1</span>)
+    <span style="color:#ae81ff">1</span>
+    (+ (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">1</span>)) (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">2</span>)))))
 
-(defn fib [n]
-  (if (&lt;= n 1)
-    1
-    (+ (fib (- n 1)) (fib (- n 2)))))
+(<span style="color:#66d9ef">defn </span>sort-seq []
+  (sort (repeat <span style="color:#ae81ff">100000</span> (rand-int <span style="color:#ae81ff">2000000</span>))))
 
-(defn sort-seq []
-  (sort (repeat 100000 (rand-int 2000000))))
-
-(defn time-it [fn]
-  (let [values  (for [i (range 200)] (with-out-str (time (fn))))
-        doubles (map #(Double. (nth (.split % &quot; &quot;) 2)) values)]
+(<span style="color:#66d9ef">defn </span>time-it [fn]
+  (<span style="color:#66d9ef">let </span>[values  (for [i (range <span style="color:#ae81ff">200</span>)] (with-out-str (time (<span style="color:#a6e22e">fn</span>))))
+        doubles (map <span style="color:#f92672">#</span>(<span style="color:#a6e22e">Double.</span> (nth (<span style="color:#a6e22e">.split</span> % <span style="color:#e6db74">&#34; &#34;</span>) <span style="color:#ae81ff">2</span>)) values)]
     (/ (apply + doubles) (count doubles))))
 
-(defn -main []
-  (println &quot;(factorial 5000) \t Avg: &quot; (time-it #(factorial 5000)))
-  (println &quot;(fib 20) \t Avg: &quot; (time-it #(fib 20)))
-  (println &quot;(sort-seq) \t Avg: &quot; (time-it #(sort-seq))))
-</code></pre>
-
-<p>So here the numbers:</p>
-
+(<span style="color:#66d9ef">defn </span>-main []
+  (println <span style="color:#e6db74">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">factorial</span> <span style="color:#ae81ff">5000</span>)))
+  (println <span style="color:#e6db74">&#34;(fib 20) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">fib</span> <span style="color:#ae81ff">20</span>)))
+  (println <span style="color:#e6db74">&#34;(sort-seq) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">sort-seq</span>))))
+</code></pre></div><p>So here the numbers:</p>
 <p>OpenJDK:</p>
-
 <pre><code>&gt; sudo apt-get install openjdk-7-jre-headless
 
 &gt; java -version
@@ -140,10 +127,7 @@ OpenJDK Zero VM (build 22.0-b10, mixed mode)
 (factorial 5000) Avg:  1681.9940255249999
 (fib 20)         Avg:  490.16940197000025
 (sort-seq)       Avg:  7129.159457125003
-</code></pre>
-
-<p>Embedded JRE:</p>
-
+</code></pre><p>Embedded JRE:</p>
 <pre><code>&gt; java -version
 java version &quot;1.7.0_06&quot;
 Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)
@@ -157,9 +141,7 @@ Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)
 (factorial 5000) Avg:  1061.0568413899998
 (fib 20)         Avg:  30.877820054999983
 (sort-seq)       Avg:  1729.9035516600002
-</code></pre>
-
-<p>Here you are. Better performance and slightly better memory usage.
+</code></pre><p>Here you are. Better performance and slightly better memory usage.
 Good Job, Embedded Java Team :)
 Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
             </div>

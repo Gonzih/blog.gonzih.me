@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>java on Max Gonzih</title>
@@ -9,11 +9,7 @@
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 24 May 2014 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.gonzih.me/categories/java/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 24 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gonzih.me/categories/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HN Tray icon in 50 lines of Clojure</title>
       <link>https://blog.gonzih.me/blog/2014/05/24/hn-tray-icon-in-50-lines-of-clojure/</link>
@@ -24,9 +20,7 @@
 Result is tray app that shows stories from HN front page.
 Just in ~50 lines of Clojure code.
 Enjoy!&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/hn-tray.clj&#34;&gt;Github Project.&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;Source code is below:&lt;/p&gt;</description>
     </item>
     
@@ -56,16 +50,10 @@ Enjoy!&lt;/p&gt;
       <guid>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
       <description>&lt;p&gt;Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&amp;rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;java: no such file or directory
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So here is fix:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java: no such file or directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So here is fix:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

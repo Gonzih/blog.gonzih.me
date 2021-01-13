@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Max Gonzih</title>
@@ -9,11 +9,7 @@
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.gonzih.me/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gonzih.me/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>3D printed foraging cat toy</title>
       <link>https://blog.gonzih.me/blog/2020/02/12/3d-printed-foraging-cat-toy/</link>
@@ -100,7 +96,6 @@ but instead we will focus on how to achieve similar results in your ClojureScrip
 And left it like that for a couple of days.
 I must say that it was surprisingly nice experience.
 Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt;
-
 &lt;p&gt;Of course interesting question is &amp;ldquo;How did I end up with this idea in my head?&amp;rdquo;.&lt;/p&gt;</description>
     </item>
     
@@ -111,13 +106,10 @@ Tinkering around with elisp, building editing environment from scratch.&lt;/p&gt
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/10/23/grench-binary-for-opensuse/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;Grenchman&lt;/a&gt; is a small tool that runs leiningen tasks over nrepl.&lt;/p&gt;
-
 &lt;p&gt;Helps with JVM startup time during development.
 Build in OCaml. If you are not in to the building binary on your own,
 there are pre-build binaries on the &lt;a href=&#34;https://leiningen.org/grench.html&#34;&gt;official website&lt;/a&gt;.&lt;/p&gt;
-
 &lt;p&gt;And here is one missing binary for OpenSUSE (tested on 13.1, fedora binary does not work).&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse&#34;&gt;grench-opensuse&lt;/a&gt;
 [&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.sha1&#34;&gt;sha1&lt;/a&gt;
 | &lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/grenchman/grench-0.2.0-opensuse.asc&#34;&gt;sig&lt;/a&gt;]&lt;/p&gt;</description>
@@ -156,20 +148,16 @@ What if you have only JVM to your disposal, will you be able to pull it off only
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2014/08/13/building-hacker-news-json-api-with-haskell/</guid>
       <description>&lt;p&gt;Small announcement post.&lt;/p&gt;
-
 &lt;p&gt;Today I launched tiny scotty server that serves json for Hacker News front page.
 Project source code is located on &lt;a href=&#34;https://github.com/Gonzih/HNApi&#34;&gt;github&lt;/a&gt;.
 You can access api &lt;a href=&#34;https://hn.gonzih.me/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
 &lt;p&gt;Hacker news parser is implemented using &lt;a href=&#34;https://hackage.haskell.org/package/hxt-8.5.2&#34;&gt;HXT&lt;/a&gt;
 and &lt;a href=&#34;https://egonschiele.github.io/HandsomeSoup/&#34;&gt;HandsomeSoup&lt;/a&gt;.
 Json is served with help of &lt;a href=&#34;https://github.com/scotty-web/scotty/&#34;&gt;Scotty&lt;/a&gt; web framework.
 Currently it&amp;rsquo;s running on Heroku using &lt;a href=&#34;https://github.com/begriffs/heroku-buildpack-ghc&#34;&gt;this ghc-7.8 buildpack&lt;/a&gt;.&lt;/p&gt;
-
 &lt;p&gt;I don&amp;rsquo;t use RSS since I&amp;rsquo;m also interested in points and amount of comments.
 For me HN is more about interesting links than community and conversations behind the posts.
 So I don&amp;rsquo;t really care about anything except front page.&lt;/p&gt;
-
 &lt;p&gt;Originally I started this project as a Haskell learning exercise.
 I hope someone will find it useful.&lt;/p&gt;</description>
     </item>
@@ -204,9 +192,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
 Result is tray app that shows stories from HN front page.
 Just in ~50 lines of Clojure code.
 Enjoy!&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/hn-tray.clj&#34;&gt;Github Project.&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;Source code is below:&lt;/p&gt;</description>
     </item>
     
@@ -229,8 +215,7 @@ Lets start with implementing hardware cut/copy/paste using Leonardo and then let
       <pubDate>Fri, 13 Dec 2013 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/12/13/visualruby-gem-on-opensuse-13-dot-1/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/visualruby/1.png&#34; alt=&#34;visualruby&#34;&gt;&lt;/p&gt;
 &lt;p&gt;I found out about ruby gem called &lt;a href=&#34;https://visualruby.net/&#34;&gt;visualruby&lt;/a&gt; and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&amp;rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.&lt;/p&gt;</description>
@@ -243,17 +228,13 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;<
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
-
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-scheme&#34;&gt;(let* ((yin
-        ((lambda (cc) (display #\@) cc) (call-with-current-continuation (lambda (c) c))))
-       (yang
-        ((lambda (cc) (display #\*) cc) (call-with-current-continuation (lambda (c) c)))))
-(yin yang))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;let* &lt;/span&gt;((&lt;span style=&#34;color:#a6e22e&#34;&gt;yin&lt;/span&gt;
+        ((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;cc&lt;/span&gt;) (display &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;@) cc) (call-with-current-continuation (&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;) c))))
+       (&lt;span style=&#34;color:#a6e22e&#34;&gt;yang&lt;/span&gt;
+        ((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;cc&lt;/span&gt;) (display &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;*) cc) (call-with-current-continuation (&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;) c)))))
+(&lt;span style=&#34;color:#a6e22e&#34;&gt;yin&lt;/span&gt; yang))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -265,8 +246,7 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;<
       <description>&lt;p&gt;So OpenSUSE 13.1 was released. And it&amp;rsquo;s great. But&amp;hellip;
 Since gnome 3.9 support for custom window managers was broken.
 How to restore sanity to your desktop? Mate it! Here is quick how to.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34; /&gt;&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;a href=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png&#34; alt=&#34;preview&#34;&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -292,7 +272,6 @@ And keep doing what you are doing, core.typed is just amazing thing!&lt;/p&gt;</
       <description>&lt;p&gt;I love idea of standing desks.
 I feel myself much more productive behind standing desk.
 But commercial desks suffer from high price and complicated design.&lt;/p&gt;
-
 &lt;p&gt;Solution? Build your own standing desk!&lt;/p&gt;</description>
     </item>
     
@@ -305,7 +284,6 @@ But commercial desks suffer from high price and complicated design.&lt;/p&gt;
       <description>&lt;p&gt;I&amp;rsquo;m often complaining about my ISP quality.
 Sometimes pings are high, sometimes download speed goes down.
 So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion based on my hate to them.&lt;/p&gt;
-
 &lt;p&gt;How to do so? Let&amp;rsquo;s collect data about download speed and pings over time, and show some graphs based on that data.&lt;/p&gt;</description>
     </item>
     
@@ -316,7 +294,6 @@ So I decided to make sure it&amp;rsquo;s my ISP fault and not just my opinion ba
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/06/28/rss/atom-reader-in-clojure-via-imap/</guid>
       <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
-
 &lt;p&gt;Google Reader was shut down and I started looking for alternatives.
 And sadly I did not found anything close to Google Reader experience.
 There are plenty good alternatives, but all of them suffer from some kind of background noise (social based features, weird hotkeys, weird ui, unusable mobile clients and etc.).
@@ -367,16 +344,11 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2013/02/14/blue-midnight-commander-color-scheme/</guid>
       <description>&lt;p&gt;I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png&#34; alt=&#34;Blue Midnight Commander color scheme&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;a href=&#34;https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png&#34;&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png&#34; alt=&#34;Blue Midnight Commander color scheme&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;.config/mc/ini&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[Colors]
-base_color=lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For more information take look at &lt;a href=&#34;https://www.midnight-commander.org/wiki/doc/common/skins&#34;&gt;mc wiki&lt;/a&gt; and run &lt;code&gt;mc --help-color&lt;/code&gt; to see available color variables in your mc version.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;[Colors]&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;base_color&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For more information take look at &lt;a href=&#34;https://www.midnight-commander.org/wiki/doc/common/skins&#34;&gt;mc wiki&lt;/a&gt; and run &lt;code&gt;mc --help-color&lt;/code&gt; to see available color variables in your mc version.
 Format of color configuration is &lt;code&gt;what=foreground,background:&lt;/code&gt;. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).&lt;/p&gt;</description>
     </item>
     
@@ -436,16 +408,10 @@ Why? Because it&amp;rsquo;s just unfair. Why would you provide any information a
       <guid>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
       <description>&lt;p&gt;Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&amp;rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;java: no such file or directory
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So here is fix:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java: no such file or directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So here is fix:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -454,10 +420,8 @@ But after downloading JRE from Oracle website (with filling useless stupid forms
       <pubDate>Fri, 20 Jul 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/ASSDN.png&#34; alt=&#34;My current GRUB2 theme&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/ASSDN.png&#34; alt=&#34;My current GRUB2 theme&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Great news everyone! Today Arch Linux officially switched to GRUB2!&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file&#34;&gt;Migration information is here&lt;/a&gt;&lt;/li&gt;
@@ -483,9 +447,10 @@ To fix that go to admin ui in disqus and use domain migration tool.&lt;/p&gt;</d
       <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/07/19/the-internet-defense-league/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://internetdefenseleague.org/images/launch/cat_sky.jpg&#34; alt=&#34;IDL Launch&#34; /&gt;
-&amp;gt;The Internet Blackout was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp;amp; monopolies. Are you in?&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://internetdefenseleague.org/images/launch/cat_sky.jpg&#34; alt=&#34;IDL Launch&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The Internet Blackout was just the beginning. Together, our websites and personal networks can mobilize the planet to defend the internet from bad laws &amp;amp; monopolies. Are you in?&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Join &lt;strong&gt;Internet Defence League&lt;/strong&gt; at &lt;a href=&#34;https://internetdefenseleague.org/&#34;&gt;internetdefenseleague.org&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -496,15 +461,12 @@ To fix that go to admin ui in disqus and use domain migration tool.&lt;/p&gt;</d
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/</guid>
       <description>&lt;p&gt;Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
-
-cd ~/watch    # set your watch directory here
-[[ &amp;quot;$1&amp;quot; =~ xt=urn:btih:([^&amp;amp;/]+) ]] || exit;
-echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BASH_REMATCH[1]}.torrent&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+cd ~/watch    &lt;span style=&#34;color:#75715e&#34;&gt;# set your watch directory here&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$1&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;~ xt&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;urn:btih:&lt;span style=&#34;color:#f92672&#34;&gt;([&lt;/span&gt;^&amp;amp;/&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; exit;
+echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;d10:magnet-uri&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${#&lt;/span&gt;1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;1&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;e&amp;#34;&lt;/span&gt; &amp;gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;meta-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;BASH_REMATCH[1]&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.torrent&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://libtorrent.rakshasa.no/ticket/2100&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -514,7 +476,6 @@ echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BAS
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/10/18/nice-vim-keys-map/</guid>
       <description>&lt;p&gt;Large &lt;a href=&#34;https://github.com/Gonzih/vim-keymap/raw/master/new/new.png&#34;&gt;image&lt;/a&gt; (2.4 Megabytes).&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&#34;https://github.com/Gonzih/vim-keymap/&#34;&gt;Source on github&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
@@ -525,7 +486,6 @@ echo &amp;quot;d10:magnet-uri${#1}:${1}e&amp;quot; &amp;gt; &amp;quot;meta-${BAS
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/</guid>
       <description>&lt;p&gt;You must change encoding for template1. For do that run following.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;su - postgres
 psql
 
@@ -537,9 +497,7 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = &#39;template1&#39;;
 #recomended
 \c template1
 VACUUM FREEZE;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;a href=&#34;https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -549,16 +507,12 @@ VACUUM FREEZE;
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
       <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;Building site: source -&amp;gt; public
-  File &amp;quot;&amp;lt;string&amp;gt;&amp;quot;, line 1
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Building site: source -&amp;gt; public
+  File &amp;#34;&amp;lt;string&amp;gt;&amp;#34;, line 1
     import sys; print sys.executable
                         ^
 SyntaxError: invalid syntax
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
 &lt;p&gt;For fix simple add ruby file to plugins directory with following code.&lt;/p&gt;</description>
     </item>
     
@@ -573,22 +527,21 @@ SyntaxError: invalid syntax
     
     <item>
       <title>Tmux &#43; Rvm &#43; Zsh Fix</title>
-      <link>https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</link>
       <pubDate>Thu, 15 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2011/09/15/tmux-rvm-zsh-fix/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</guid>
       <description>&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[ $TERM = &amp;quot;screen&amp;quot; ]] &amp;amp;&amp;amp; rvm use default
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt; $TERM &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;screen&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rvm use default
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
       <title>Backbone.js &#43; Ruby on Rails Tips</title>
-      <link>https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/</link>
+      <link>https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</link>
       <pubDate>Sat, 03 Sep 2011 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
-      <guid>https://blog.gonzih.me/blog/2011/09/03/backbone-js-ruby-on-rails-tips/</guid>
+      <guid>https://blog.gonzih.me/blog/2011/09/03/backbone-js---ruby-on-rails-tips/</guid>
       <description></description>
     </item>
     

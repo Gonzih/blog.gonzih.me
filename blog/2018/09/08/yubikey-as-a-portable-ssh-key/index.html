@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,25 +76,15 @@
                 <h1>YubiKey as a portable SSH key</h1>
               <span class="post-date">Sat, Sep 8, 2018</span>
                   <p>This blog post is just a bunch of shell snippets quickly put together that explain how to use YubiKey as your ssh key.</p>
-
 <h2 id="setup">Setup</h2>
-
 <p>So first things first, we will have to enable CCID (smartcard interface) on YubiKey:</p>
-
 <p>For YubiKey Neo or YubiKey 4 run following:</p>
-
-<pre><code class="language-shell">$ ykpersonalize -m82
-</code></pre>
-
-<p>For YubiKey 5:</p>
-
-<pre><code class="language-shell">$ ykman config usb --enable-all # For USB
-$ ykman config nfc --enable-all # For NFC
-</code></pre>
-
-<p>Next step would be to change default PINs on YubiKey:</p>
-
-<pre><code class="language-shell">$ gpg --card-edit
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ykpersonalize -m82
+</code></pre></div><p>For YubiKey 5:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ykman config usb --enable-all <span style="color:#75715e"># For USB</span>
+$ ykman config nfc --enable-all <span style="color:#75715e"># For NFC</span>
+</code></pre></div><p>Next step would be to change default PINs on YubiKey:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ gpg --card-edit
 
 gpg/card&gt; admin
 Admin commands are allowed
@@ -102,184 +92,139 @@ Admin commands are allowed
 gpg/card&gt; passwd
 gpg: OpenPGP card no. _____ detected
 
-1 - change PIN
-2 - unblock PIN
-3 - change Admin PIN
-4 - set the Reset Code
+<span style="color:#ae81ff">1</span> - change PIN
+<span style="color:#ae81ff">2</span> - unblock PIN
+<span style="color:#ae81ff">3</span> - change Admin PIN
+<span style="color:#ae81ff">4</span> - set the Reset Code
 Q - quit
 
-# default password here is 123456
-Your selection? 1
+<span style="color:#75715e"># default password here is 123456</span>
+Your selection? <span style="color:#ae81ff">1</span>
 
 ...
 
 gpg: OpenPGP card no. _____ detected
 
-1 - change PIN
-2 - unblock PIN
-3 - change Admin PIN
-4 - set the Reset Code
+<span style="color:#ae81ff">1</span> - change PIN
+<span style="color:#ae81ff">2</span> - unblock PIN
+<span style="color:#ae81ff">3</span> - change Admin PIN
+<span style="color:#ae81ff">4</span> - set the Reset Code
 Q - quit
 
-# default password here is 12345678
-Your selection? 3
+<span style="color:#75715e"># default password here is 12345678</span>
+Your selection? <span style="color:#ae81ff">3</span>
 
 ...
 
-</code></pre>
-
-<p>If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your YubiKey:</p>
-
-<pre><code class="language-shell">$ ykman openpgp reset
-WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
-</code></pre>
-
-<p>There are two ways to use your YubiKey as a ssh key:</p>
-
+</code></pre></div><p>If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your YubiKey:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ykman openpgp reset
+WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? <span style="color:#f92672">[</span>y/N<span style="color:#f92672">]</span>: y
+</code></pre></div><p>There are two ways to use your YubiKey as a ssh key:</p>
 <h2 id="method-1-generating-keys-on-yubikey-itself">Method #1: Generating keys on YubiKey itself</h2>
-
 <p>Simply run the following commands:</p>
-
-<pre><code class="language-shell">gpg --card-edit
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gpg --card-edit
 
 gpg/card&gt; generate
-</code></pre>
-
-<p>Benefit of this method is that your keys and YubiKey are self contained, this is also a downside of this method.
+</code></pre></div><p>Benefit of this method is that your keys and YubiKey are self contained, this is also a downside of this method.
 If you lost a key, you also going to loose access to your private key.
 There is no way to backup secret keys from YubiKey itself.
 I did not really test this method extensively, but still felt like mentioning this as a valuable option.</p>
-
 <h2 id="method-2-generating-a-subkey-for-your-own-private-key">Method #2: Generating a subkey for your own private key</h2>
-
 <p>So lets say you generated your own private key with id <code>ABCDEFG</code>, now we can generate 2 subkeys and store them on our YubiKey.
 The advantage of this approach is in the fact that subkeys can be revoked by using your private key.</p>
-
-<pre><code class="language-shell">$ gpg --edi-key ABCDEFG
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ gpg --edi-key ABCDEFG
 
 gpg&gt; addcardkey
 
-Signature key ....: [none]
-Encryption key....: [none]
-Authentication key: [none]
+Signature key ....: <span style="color:#f92672">[</span>none<span style="color:#f92672">]</span>
+Encryption key....: <span style="color:#f92672">[</span>none<span style="color:#f92672">]</span>
+Authentication key: <span style="color:#f92672">[</span>none<span style="color:#f92672">]</span>
 
-Please select the type of key to generate:
-   (1) Signature key
-   (2) Encryption key
-   (3) Authentication key
-Your selection? 3
+Please <span style="color:#66d9ef">select</span> the type of key to generate:
+   <span style="color:#f92672">(</span>1<span style="color:#f92672">)</span> Signature key
+   <span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> Encryption key
+   <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> Authentication key
+Your selection? <span style="color:#ae81ff">3</span>
 
-# Now answer bunch of questions and enter PIN couple of times to make gpg happy
-# After that we can do the same for the Signature key
+<span style="color:#75715e"># Now answer bunch of questions and enter PIN couple of times to make gpg happy</span>
+<span style="color:#75715e"># After that we can do the same for the Signature key</span>
 
 ...
 
 gpg&gt; addcardkey
 
-Signature key ....: [none]
-Encryption key....: [none]
+Signature key ....: <span style="color:#f92672">[</span>none<span style="color:#f92672">]</span>
+Encryption key....: <span style="color:#f92672">[</span>none<span style="color:#f92672">]</span>
 Authentication key: OUR NEW KEY ID
 
-Please select the type of key to generate:
-   (1) Signature key
-   (2) Encryption key
-   (3) Authentication key
-Your selection? 1
+Please <span style="color:#66d9ef">select</span> the type of key to generate:
+   <span style="color:#f92672">(</span>1<span style="color:#f92672">)</span> Signature key
+   <span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> Encryption key
+   <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span> Authentication key
+Your selection? <span style="color:#ae81ff">1</span>
 
-# Now lets use toggle to switch in to private key listing mode
+<span style="color:#75715e"># Now lets use toggle to switch in to private key listing mode</span>
 &gt; toggle
 
-# And now lets select our main private key
-&gt; key 1
+<span style="color:#75715e"># And now lets select our main private key</span>
+&gt; key <span style="color:#ae81ff">1</span>
 
-# Time to upload card keys to our YubiKey in to encryption slot
+<span style="color:#75715e"># Time to upload card keys to our YubiKey in to encryption slot</span>
 &gt; keytocard
 
 Signature key ....: ANOTHER ID
-Encryption key....: [none]
+Encryption key....: <span style="color:#f92672">[</span>none<span style="color:#f92672">]</span>
 Authentication key: OUR NEW KEY ID
 
-Please select where to store the key:
-   (2) Encryption key
-Your selection? 2
+Please <span style="color:#66d9ef">select</span> where to store the key:
+   <span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> Encryption key
+Your selection? <span style="color:#ae81ff">2</span>
 
-# And we are done here
+<span style="color:#75715e"># And we are done here</span>
 gpg&gt; save
-</code></pre>
-
-<p>Don&rsquo;t forget to distribute your private key if needed:</p>
-
-<pre><code class="language-shell">$ gpg --keyserver hkps://keys.gnupg.net --send-key ABCDEFG
-</code></pre>
-
-<h2 id="final-steps">Final steps</h2>
-
+</code></pre></div><p>Don&rsquo;t forget to distribute your private key if needed:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ gpg --keyserver hkps://keys.gnupg.net --send-key ABCDEFG
+</code></pre></div><h2 id="final-steps">Final steps</h2>
 <p>Generating ssh key out of our gpg key is pretty straightforward:</p>
-
-<pre><code class="language-shell">$ gpg --export-ssh-key ABCDEFG
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ gpg --export-ssh-key ABCDEFG
 ssh-rsa BLABLABLA openpgp:someid
-</code></pre>
-
-<p>Now its time to start <code>gpg-agent</code> with ssh support on:</p>
-
-<pre><code class="language-shell">$ gpg-agent --daemon --enable-ssh-support
-# or on older gpg versions you can generate env file that you can source in your .bashrc directly
+</code></pre></div><p>Now its time to start <code>gpg-agent</code> with ssh support on:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ gpg-agent --daemon --enable-ssh-support
+<span style="color:#75715e"># or on older gpg versions you can generate env file that you can source in your .bashrc directly</span>
 $ gpg-agent --daemon --enable-ssh-support --write-env-file ~/.gpg-agent-env
-</code></pre>
-
-<p>Or if you are on systemd based system there is a chance that your user already has a bunch of systemd sockets enabled for this purpose.
+</code></pre></div><p>Or if you are on systemd based system there is a chance that your user already has a bunch of systemd sockets enabled for this purpose.
 One socket that you should be interested in is <code>gpg-agent-ssh.socket</code>, you can see if its running by running <code>systemctl --user status gpg-agent-ssh.socket</code>.</p>
-
 <p>Add this to your <code>.bashrc</code> to initialize env var properly:</p>
-
-<pre><code class="language-bash">export SSH_AUTH_SOCK=&quot;$(gpgconf --list-dirs agent-ssh-socket)&quot;
-</code></pre>
-
-<p>Last improvement that can be made to this setup is forcing gpg-agent to use pcscd instead of ccid.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export SSH_AUTH_SOCK<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>gpgconf --list-dirs agent-ssh-socket<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>Last improvement that can be made to this setup is forcing gpg-agent to use pcscd instead of ccid.
 This should solve some issues with a card being unavailable when some other application is accessing it.
 Just add following to the <code>~/.gnupg/scdaemon.conf</code> file:</p>
-
-<pre><code class="language-text">pcsc-driver /usr/lib/libpcsclite.so
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">pcsc-driver /usr/lib/libpcsclite.so
 card-timeout 5
 disable-ccid
-</code></pre>
-
-<h2 id="setting-up-key-on-a-new-machine">Setting up key on a new machine</h2>
-
-<pre><code class="language-shell"># Pull key info from a keyserver
+</code></pre></div><h2 id="setting-up-key-on-a-new-machine">Setting up key on a new machine</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># Pull key info from a keyserver</span>
 $ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
 
-# Initialize smart card data in gpg db
+<span style="color:#75715e"># Initialize smart card data in gpg db</span>
 $ gpg --card-status
-</code></pre>
-
-<p>And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.</p>
-
+</code></pre></div><p>And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.</p>
 <h2 id="caching-pin-on-a-key-itself">Caching PIN on a key itself</h2>
-
 <p>It might be annoying to type in PIN on every action every time, there is an option to cache PIN on YubiKey itself, so you will have to input PIN only once after you plugged your key (will have to do that every time you unplug/plug your key) for every action (separate key cache for signing/authenticating using the key).
 To do that you should enable <code>forcesig</code> in <code>gpg</code>:</p>
-
-<pre><code class="language-shell">$ gpg --card-edit
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ gpg --card-edit
 
 gpg/card&gt; admin
 Admin commands are allowed
 
 gpg/card&gt; forcesig
 gpg/card&gt; save
-</code></pre>
-
-<p>To add extra layer of security, you can enable <a href="https://developers.yubico.com/PGP/Card_edit.html">YubiKey 4 Touch</a> feature (every action will have to be confirmed with a touch), this can be enabled using <code>yubikey-manager</code> cli:</p>
-
-<pre><code class="language-shell">$ ykman openpgp touch aut on
+</code></pre></div><p>To add extra layer of security, you can enable <a href="https://developers.yubico.com/PGP/Card_edit.html">YubiKey 4 Touch</a> feature (every action will have to be confirmed with a touch), this can be enabled using <code>yubikey-manager</code> cli:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ykman openpgp touch aut on
 $ ykman openpgp touch sig on
 $ ykman openpgp touch enc on
-</code></pre>
-
-<h3 id="p-s">P.S.</h3>
-
+</code></pre></div><h3 id="ps">P.S.</h3>
 <p>GPG agent for NixOS:</p>
-
 <pre><code>programs.ssh.startAgent = false;
 programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 </code></pre>

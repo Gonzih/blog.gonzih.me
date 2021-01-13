@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -77,56 +77,46 @@
               <span class="post-date">Fri, Jan 18, 2019</span>
                   <p>Couple of days ago Google cloud functions got <a href="https://cloud.google.com/blog/products/application-development/cloud-functions-go-1-11-is-now-a-supported-language">official support for go 1.11</a>.
 I got interested in how to handle routing in cloud functions in go, so after couple of experiments I came up with a solution based on <code>http.ServeMux</code>.</p>
-
 <p>To get started with cloud functions you can follow <a href="https://codelabs.developers.google.com/codelabs/cloud-starting-cloudfunctions/index.html?index=..%2F..index#0">this simple tutorial</a>.</p>
-
 <p>One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as the source repository for your newly defined cloud function.</p>
-
 <p>It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.</p>
-
 <p>Ultimately we can simply define our own router using <code>NewServeMux</code> like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">function</span>
 
-<pre><code class="language-go">package function
-
-import (
-	&quot;net/http&quot;
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
 )
 
-var mux = newMux()
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">mux</span> = <span style="color:#a6e22e">newMux</span>()
 
-//F represents cloud function entry point
-func F(w http.ResponseWriter, r *http.Request) {
-	mux.ServeHTTP(w, r)
+<span style="color:#75715e">//F represents cloud function entry point
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">F</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>)
 }
 
-func newMux() *http.ServeMux {
-	mux := http.NewServeMux()
-	mux.HandleFunc(&quot;/one&quot;, one)
-	mux.HandleFunc(&quot;/two&quot;, two)
-	mux.HandleFunc(&quot;/subroute/three&quot;, three)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">newMux</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ServeMux</span> {
+	<span style="color:#a6e22e">mux</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">NewServeMux</span>()
+	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/one&#34;</span>, <span style="color:#a6e22e">one</span>)
+	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/two&#34;</span>, <span style="color:#a6e22e">two</span>)
+	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/subroute/three&#34;</span>, <span style="color:#a6e22e">three</span>)
 
-	return mux
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">mux</span>
 }
 
-func one(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(&quot;hello from one&quot;))
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">one</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;hello from one&#34;</span>))
 }
 
-func two(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(&quot;hello from two&quot;))
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">two</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;hello from two&#34;</span>))
 }
 
-func three(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(&quot;hello from three&quot;))
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">three</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;hello from three&#34;</span>))
 }
-</code></pre>
-
-<p>Now you can access your handlers by appending <code>/one</code>, <code>/two</code> or <code>/subroute/three</code> to URL that cloud functions will have in triggers section of the UI like this: <code>https://us-central1-my-test-project-123456.cloudfunctions.net/my-function-1/one</code>.</p>
-
+</code></pre></div><p>Now you can access your handlers by appending <code>/one</code>, <code>/two</code> or <code>/subroute/three</code> to URL that cloud functions will have in triggers section of the UI like this: <code>https://us-central1-my-test-project-123456.cloudfunctions.net/my-function-1/one</code>.</p>
 <p>This works because your cloud function receives request with prefix stripped away from the URL. This is very handy since allows one to port existing http server in to cloud function without changing it too much.</p>
-
 <p>I hope this helps, and happy hacking on cloud functions with go!</p>
-
 <p>Example code can be <a href="https://github.com/Gonzih/go-google-functions-demo">found here</a>.</p>
             </div>
 

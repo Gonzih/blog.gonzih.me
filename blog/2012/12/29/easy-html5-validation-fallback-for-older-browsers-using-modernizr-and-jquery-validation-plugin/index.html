@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -77,29 +77,22 @@
               <span class="post-date">Sat, Dec 29, 2012</span>
                   <p>So I heard that you hate IE. Also I heard that you love HTML5. Is that true? Great, I feel the same about IE. So here is quick fallback script for html5 validation in older browsers.
 You will need three things for that.</p>
-
 <p>First is <a href="https://modernizr.com/">Modernizr</a> javascript library. It allows you to detect which features are supported by your browser and which aren&rsquo;t.</p>
-
 <p>Second is <a href="https://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it&rsquo;s awesome and how to use it.</p>
-
 <p>Third is <a href="https://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides mechanism for form validation based on input classes.</p>
-
 <p>So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="https://coffeescript.org/">CoffeeScript</a> snippet:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-coffeescript" data-lang="coffeescript"><span style="color:#75715e"># initialize plugin on page ready
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span> <span style="color:#a6e22e">-&gt;</span>
+  <span style="color:#66d9ef">unless</span> (<span style="color:#a6e22e">Modernizr</span>.<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">required</span>)
+    <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;form&#39;</span>).<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#39;input[required]&#39;</span>).<span style="color:#a6e22e">each</span> <span style="color:#a6e22e">-&gt;</span>
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">attr</span>(<span style="color:#e6db74">&#39;class&#39;</span>, <span style="color:#e6db74">&#39;required &#39;</span> <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getAttribute</span>(<span style="color:#e6db74">&#39;type&#39;</span>)).<span style="color:#a6e22e">removeAttr</span>(<span style="color:#e6db74">&#39;required&#39;</span>)
 
-<pre><code class="language-coffeescript"># initialize plugin on page ready
-$ -&gt;
-  unless (Modernizr.input.required)
-    $('form').find('input[required]').each -&gt;
-      $(this).attr('class', 'required ' + this.getAttribute('type')).removeAttr('required')
+    <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;form&#39;</span>).<span style="color:#a6e22e">each</span> <span style="color:#a6e22e">-&gt;</span>
+      <span style="color:#a6e22e">$</span>(<span style="color:#66d9ef">this</span>).<span style="color:#a6e22e">validate</span>()
 
-    $('form').each -&gt;
-      $(this).validate()
-
-# check if form is valid by hand
-$('form').valid()
-</code></pre>
-
-<p>And as always, Have a nice day! :)</p>
+<span style="color:#75715e"># check if form is valid by hand
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;form&#39;</span>).<span style="color:#a6e22e">valid</span>()
+</code></pre></div><p>And as always, Have a nice day! :)</p>
             </div>
 
             

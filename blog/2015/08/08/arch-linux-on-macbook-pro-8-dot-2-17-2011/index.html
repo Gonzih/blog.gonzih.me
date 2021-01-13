@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,26 +76,17 @@
                 <h1>Arch Linux on Macbook Pro 8.2 (17&#34; 2011)</h1>
               <span class="post-date">Sat, Aug 8, 2015</span>
                   <p>Couple of tips from my experience of running Arch on Macbook 8.2.</p>
-
 <h2 id="installation">Installation</h2>
-
-<p><a href="https://wiki.archlinux.org/index.php/MacBook">Arch Wiki page</a> covers installation well enough in my opinion.</p>
-
+<p><!-- raw HTML omitted -->Arch Wiki page<!-- raw HTML omitted --> covers installation well enough in my opinion.</p>
 <h3 id="bootloader-via-systemd-boot">Bootloader via systemd-boot</h3>
-
 <p>Before installing boot loader change /boot partition type to <code>EFI System</code> (<code>ef00</code>).</p>
-
 <pre><code>mkfs.fat -F32 /dev/sda1
 pacman -S dosfstools
 mount /dev/sda1 /mnt/boot
 arch-chroot /mnt
 bootctl --path=/boot instnall
-</code></pre>
-
-<h3 id="bootloader-via-grub">Bootloader via grub</h3>
-
+</code></pre><h3 id="bootloader-via-grub">Bootloader via grub</h3>
 <p>You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be <code>ef00</code> type partition of vfta32.</p>
-
 <pre><code>mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/boot/efi
 mount /dev/sda2 /mnt/boot/efi
@@ -105,17 +96,11 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_
 mkdir -p /boot/grub/locale
 cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
-</code></pre>
-
-<h2 id="use-broadcom-wl-wireless-module-from-aur">Use broadcom-wl wireless module from AUR</h2>
-
+</code></pre><h2 id="use-broadcom-wl-wireless-module-from-aur">Use broadcom-wl wireless module from AUR</h2>
 <p>This is proprietary broadcom driver. Works fine with BCM4331.
 Only thing that does not work - hidden SSID.</p>
-
 <p>OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.</p>
-
 <p>To make sure that correct module is used by hardwrare blacklist every other module and reboot:</p>
-
 <pre><code>#/etc/modprobe.d/wl.conf
 blacklist b43
 blacklist b43legacy
@@ -125,15 +110,10 @@ blacklist brcm80211
 blacklist brcmfmac
 blacklist brcmsmac
 blacklist bcma
-</code></pre>
-
-<h2 id="disable-radeon-gpu-for-better-power-consumption">Disable Radeon GPU for better power consumption</h2>
-
+</code></pre><h2 id="disable-radeon-gpu-for-better-power-consumption">Disable Radeon GPU for better power consumption</h2>
 <p>This will reduce power usage dramatically but also will disable external screen support via display port.
 This laptop relies on the external gpu to work with display port.</p>
-
 <p>Edit <code>/etc/grub.d/00_header</code> and add outb lines in between <code>set gfxmode=${GRUB_GFXMODE}</code> and <code>load video</code>:</p>
-
 <pre><code>...
 set gfxmode=${GRUB_GFXMODE}
 outb 0x728 1
@@ -142,14 +122,9 @@ outb 0x740 2
 outb 0x750 0
 load video
 ...
-</code></pre>
-
-<p>Generate new grub config:</p>
-
+</code></pre><p>Generate new grub config:</p>
 <pre><code># grub-mkconfig -o /boot/grub/grub.cfg
-</code></pre>
-
-<p>PS. This post will probably grow over time.</p>
+</code></pre><p>PS. This post will probably grow over time.</p>
             </div>
 
             

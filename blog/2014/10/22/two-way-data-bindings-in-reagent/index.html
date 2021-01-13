@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -78,41 +78,40 @@
                   <p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&rsquo;s all about core.async.
 Also provides ability to apply transformation using transducers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">
+(<span style="color:#66d9ef">defonce </span>form (<span style="color:#a6e22e">atom</span> {}))
 
-<pre><code class="language-clojure">
-(defonce form (atom {}))
-
-(defn bind-input
-  &quot;Generat on-change callback,
-   bind value to form-key of form-atom.
-   Provides ability to implement transformation using transducers.&quot;
+(<span style="color:#66d9ef">defn </span>bind-input
+  <span style="color:#e6db74">&#34;Generat on-change callback,
+</span><span style="color:#e6db74">   bind value to form-key of form-atom.
+</span><span style="color:#e6db74">   Provides ability to implement transformation using transducers.&#34;</span>
   [form-atom form-key xform]
-  (let [local-chan (chan 1 xform)]
-    (go-loop []
-      (swap! form-atom assoc form-key (&lt;! local-chan))
-      (recur))
-    (fn [event]
-      (put! local-chan
-            (.-value (.-target event))))))
+  (<span style="color:#66d9ef">let </span>[local-chan (<span style="color:#a6e22e">chan</span> <span style="color:#ae81ff">1</span> xform)]
+    (<span style="color:#a6e22e">go-loop</span> []
+      (<span style="color:#a6e22e">swap!</span> form-atom assoc form-key (<span style="color:#a6e22e">&lt;!</span> local-chan))
+      (<span style="color:#a6e22e">recur</span>))
+    (<span style="color:#66d9ef">fn </span>[event]
+      (<span style="color:#a6e22e">put!</span> local-chan
+            (<span style="color:#a6e22e">.-value</span> (<span style="color:#a6e22e">.-target</span> event))))))
 
-(defn bound-input
-  &quot;Generate input,
-   create two way data binding
-   between input value and value under form-key in form-atom.
-   Provides ability to implement transformation using transducers.&quot;
+(<span style="color:#66d9ef">defn </span>bound-input
+  <span style="color:#e6db74">&#34;Generate input,
+</span><span style="color:#e6db74">   create two way data binding
+</span><span style="color:#e6db74">   between input value and value under form-key in form-atom.
+</span><span style="color:#e6db74">   Provides ability to implement transformation using transducers.&#34;</span>
   [attrs form-atom form-key xform]
-  [:input (merge attrs
-                 {:value (form-key @form-atom)
-                  :on-change (bind-input form-atom form-key xform)})])
+  [<span style="color:#e6db74">:input</span> (merge attrs
+                 {<span style="color:#e6db74">:value</span> (<span style="color:#a6e22e">form-key</span> <span style="color:#f92672">@</span>form-atom)
+                  <span style="color:#e6db74">:on-change</span> (<span style="color:#a6e22e">bind-input</span> form-atom form-key xform)})])
 
-(defn main-component []
-  [:div
-   [:h3 (:name @form) &quot; value&quot;]
-   [bound-input {:type :text} form :name (filter #(&gt; 15 (count %)))]])
+(<span style="color:#66d9ef">defn </span>main-component []
+  [<span style="color:#e6db74">:div</span>
+   [<span style="color:#e6db74">:h3</span> (<span style="color:#e6db74">:name</span> <span style="color:#f92672">@</span>form) <span style="color:#e6db74">&#34; value&#34;</span>]
+   [bound-input {<span style="color:#e6db74">:type</span> <span style="color:#e6db74">:text</span>} form <span style="color:#e6db74">:name</span> (filter <span style="color:#f92672">#</span>(&gt; <span style="color:#ae81ff">15</span> (count %)))]])
 
-(reagent/render-component [main-component]
-                          (js/document.getElementById &quot;content&quot;))
-</code></pre>
+(<span style="color:#a6e22e">reagent/render-component</span> [main-component]
+                          (<span style="color:#a6e22e">js/document.getElementById</span> <span style="color:#e6db74">&#34;content&#34;</span>))
+</code></pre></div>
             </div>
 
             

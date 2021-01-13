@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -77,11 +77,8 @@
               <span class="post-date">Fri, Apr 26, 2019</span>
                   <p>This is a short HOWTO based on great idea from <a href="https://blog.cloudflare.com/using-go-as-a-scripting-language-in-linux/">this blog post</a> on how
 to utilize <a href="https://github.com/erning/gorun">gorun</a> and <code>binfmt_misc</code> to use go files for scripting.</p>
-
 <p>First lets install <code>gorun</code> as a system package on NixOS.</p>
-
 <p>Lets create <code>gorun.nix</code> file first:</p>
-
 <pre><code>with import &lt;nixpkgs&gt; {};
 
 buildGoPackage rec {
@@ -104,20 +101,14 @@ buildGoPackage rec {
     platforms = platforms.linux ++ platforms.darwin;
   };
 }
-</code></pre>
-
-<p>Next lets add this package to <code>systemPackages</code> list:</p>
-
+</code></pre><p>Next lets add this package to <code>systemPackages</code> list:</p>
 <pre><code>environment.systemPackages = with pkgs; [
   ...
   (import ./gorun.nix)
   ...
 ];
-</code></pre>
-
-<p>Next step would be to utilize <code>boot.binfmtMiscRegistrations</code> to register our <code>gorun</code> in <code>binfmt_misc</code> module which is
+</code></pre><p>Next step would be to utilize <code>boot.binfmtMiscRegistrations</code> to register our <code>gorun</code> in <code>binfmt_misc</code> module which is
 responsible for parsing shebang scripts and binary files. Drop the following lines in to your <code>configuration.nix</code>:</p>
-
 <pre><code>boot.binfmtMiscRegistrations = {
   go = {
     recognitionType = &quot;extension&quot;;
@@ -129,36 +120,24 @@ responsible for parsing shebang scripts and binary files. Drop the following lin
     fixBinary = false;
   };
 };
-</code></pre>
-
-<p>What does this configuration do? <code>recognitionType</code> tells <code>binfmt</code> to make a decision based on file extension,
+</code></pre><p>What does this configuration do? <code>recognitionType</code> tells <code>binfmt</code> to make a decision based on file extension,
 <code>magicOrExtension</code> tells it to look for <code>.go</code> extension, <code>interpreter</code> specifies which binary to invoke,
 <code>openBinary</code> corresponds to <code>O</code> flag of <code>binfmt</code> (which I dont fully understand tbh), <code>matchCredentials</code> tells kernel to run
 interpreter with permissions set on original script. For more information on <code>binfmt</code> please do check out <a href="https://www.kernel.org/doc/html/v4.14/admin-guide/binfmt-misc.html">these amazing kernel docs</a>.</p>
-
 <p>Now lets simply run <code>sudo nixos-rebuild --switch</code> and after everything is done lets give it a try.</p>
-
 <p>First lets create a simple hello world script:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
-<pre><code class="language-go">package main
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
 
-import &quot;fmt&quot;
-
-func main() {
-	fmt.Println(&quot;Hello World!&quot;)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello World!&#34;</span>)
 }
-</code></pre>
-
-<p>Lets make it executable with <code>chmod +x hello.go</code>.</p>
-
+</code></pre></div><p>Lets make it executable with <code>chmod +x hello.go</code>.</p>
 <p>And now lets run it:</p>
-
 <pre><code>$ ./hello.go
 Hello World!
-</code></pre>
-
-<p>Yay! It works!</p>
-
+</code></pre><p>Yay! It works!</p>
 <p>Hope that helps somewhat.</p>
             </div>
 

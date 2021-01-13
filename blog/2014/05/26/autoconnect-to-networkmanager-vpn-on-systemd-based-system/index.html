@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -77,20 +77,19 @@
               <span class="post-date">Mon, May 26, 2014</span>
                   <p>Here is small post with instructions how to setup auto connect to VPN.
 Of course you can probably figure out all this yourself, but what if you are lazy?</p>
-
 <p>Following was tested on OpenSuse 13.1.</p>
-
 <ul>
-<li><p>First create new VPN connection in NetworkManager.</p></li>
-
-<li><p>Create dispatcher file that will connect your VPN.</p></li>
+<li>
+<p>First create new VPN connection in NetworkManager.</p>
+</li>
+<li>
+<p>Create dispatcher file that will connect your VPN.</p>
+</li>
 </ul>
-
 <p><code>/etc/NetworkManager/dispatcher.d/vpn-up</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#!/bin/sh
 
-<pre><code class="language-text">#!/bin/sh
-
-CONN=&quot;MY-CONNECTION-NAME&quot;
+CONN=&#34;MY-CONNECTION-NAME&#34;
 
 nmcli con status id $CONN &gt; /dev/null
 
@@ -100,35 +99,25 @@ if [[ $rc != 0 ]] ; then
     sleep 5 # optional wait time
 fi
 
-</code></pre>
-
-<ul>
+</code></pre></div><ul>
 <li>Make file executable <code>chmod +x /etc/NetworkManager/dispatcher.d/vpn-up</code></li>
 <li>Make sure that dispatcher is running by running <code>journalctl -b -u NetworkManager</code> and looking for the line that looks like:</li>
 </ul>
-
 <p><code>NetworkManager</code>:</p>
-
-<pre><code class="language-text">&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
-</code></pre>
-
-<ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+</code></pre></div><ul>
 <li>If you see line about dispatcher service - enable it manually by running <code>systemctl enable NetworkManager-dispatcher.service</code>.</li>
 <li>By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:</li>
 </ul>
-
 <p><code>/etc/NetworkManager/system-connections/MY-CONNECTION-NAME</code>:</p>
-
-<pre><code class="language-text">...
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
 [vpn]
 password-flags=0
 ...
 [vpn-secrets]
 password=MY-VPN-PASSWORD
 
-</code></pre>
-
-<p>And now everything should work like a charm!</p>
+</code></pre></div><p>And now everything should work like a charm!</p>
             </div>
 
             

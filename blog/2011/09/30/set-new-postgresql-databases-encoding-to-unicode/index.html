@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,7 +76,6 @@
                 <h1>Set New PostgreSQL Databases Encoding to Unicode</h1>
               <span class="post-date">Fri, Sep 30, 2011</span>
                   <p>You must change encoding for template1. For do that run following.</p>
-
 <pre><code>su - postgres
 psql
 
@@ -88,9 +87,7 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
 #recomended
 \c template1
 VACUUM FREEZE;
-</code></pre>
-
-<p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+</code></pre><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
             </div>
 
             

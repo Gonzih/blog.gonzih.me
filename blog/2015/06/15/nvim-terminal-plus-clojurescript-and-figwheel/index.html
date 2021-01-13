@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -76,35 +76,28 @@
                 <h1>Nvim terminal &#43; ClojureScript and figwheel</h1>
               <span class="post-date">Mon, Jun 15, 2015</span>
                   <p>This is a small post on how to improve your ClojureScript development flow in NeoVim using its terminal feature.</p>
-
 <p><a href="https://neovim.io/">NeoVim</a> nowadays is almost fully compatible with vim.
 It is able to reuse my <a href="https://github.com/Gonzih/.vim/blob/master/vimrc">.vimrc</a> file without any issues.
 And recently it got proper terminal emulator built-in.
 So how about reusing it for ClojureScript development?</p>
-
 <p>If you are lazy (like I am) and don&rsquo;t want to setup piggieback support
 for fireplace.vim or don&rsquo;t feel like tmux integration is good enough
 this solution should be your new starting point.</p>
-
 <p>Just open some clojure[script] file and create second split.
 Open terminal using <code>:terminal</code> command.</p>
-
 <p>Here are some keybindings that will help you to send code from
 your clojure buffer to the terminal buffer.</p>
-
-<pre><code class="language-vim">if has(&quot;nvim&quot;)
-  &quot; Open terminal and run lein figwheel
-  nmap &lt;Leader&gt;term &lt;C-w&gt;v:terminal&lt;CR&gt;lein figwheel&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p
-  &quot; Evaluate anything from the visual mode in the next window
-  vmap &lt;buffer&gt; ,e y&lt;C-w&gt;wpi&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p
-  &quot; Evaluate outer most form
-  nmap &lt;buffer&gt; ,e ^v%,e
-  &quot; Evaluate buffer&quot;
-  nmap &lt;buffer&gt; ,b ggVG,e
-endif
-</code></pre>
-
-<p>Hey! Now you can finally stop looking at the emacs land!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#34;nvim&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">  &#34; Open terminal and run lein figwheel</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#a6e22e">nmap</span> &lt;<span style="color:#a6e22e">Leader</span>&gt;<span style="color:#a6e22e">term</span> &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">w</span>&gt;<span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">terminal</span>&lt;<span style="color:#a6e22e">CR</span>&gt;<span style="color:#a6e22e">lein</span> <span style="color:#a6e22e">figwheel</span>&lt;<span style="color:#a6e22e">CR</span>&gt;&lt;<span style="color:#a6e22e">C</span>-\&gt;&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">n</span>&gt;&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">w</span>&gt;<span style="color:#a6e22e">p</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">  &#34; Evaluate anything from the visual mode in the next window</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#a6e22e">vmap</span> &lt;<span style="color:#a6e22e">buffer</span>&gt; ,<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">y</span>&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">w</span>&gt;<span style="color:#a6e22e">wpi</span>&lt;<span style="color:#a6e22e">CR</span>&gt;&lt;<span style="color:#a6e22e">C</span>-\&gt;&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">n</span>&gt;&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">w</span>&gt;<span style="color:#a6e22e">p</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">  &#34; Evaluate outer most form</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#a6e22e">nmap</span> &lt;<span style="color:#a6e22e">buffer</span>&gt; ,<span style="color:#a6e22e">e</span> ^<span style="color:#a6e22e">v</span>%,<span style="color:#a6e22e">e</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">  &#34; Evaluate buffer&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#a6e22e">nmap</span> &lt;<span style="color:#a6e22e">buffer</span>&gt; ,<span style="color:#a6e22e">b</span> <span style="color:#a6e22e">ggVG</span>,<span style="color:#a6e22e">e</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>Hey! Now you can finally stop looking at the emacs land!</p>
             </div>
 
             

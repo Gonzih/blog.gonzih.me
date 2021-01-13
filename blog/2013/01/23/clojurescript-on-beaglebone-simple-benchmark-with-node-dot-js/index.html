@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -77,44 +77,39 @@
               <span class="post-date">Wed, Jan 23, 2013</span>
                   <p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
-
 <p><a href="https://github.com/Gonzih/clojurescript-small-benchmark-for-embed">Code</a> is modified to run on top of the JavaScript:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>benchmark.core)
 
-<pre><code class="language-clojure">(ns benchmark.core)
+(<span style="color:#66d9ef">defn </span>factorial [x]
+  (reduce * (range <span style="color:#ae81ff">1</span> (inc x))))
 
-(defn factorial [x]
-  (reduce * (range 1 (inc x))))
+(<span style="color:#66d9ef">defn </span>fib [n]
+  (<span style="color:#66d9ef">if </span>(&lt;= n <span style="color:#ae81ff">1</span>)
+    <span style="color:#ae81ff">1</span>
+    (+ (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">1</span>)) (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">2</span>)))))
 
-(defn fib [n]
-  (if (&lt;= n 1)
-    1
-    (+ (fib (- n 1)) (fib (- n 2)))))
+(<span style="color:#66d9ef">defn </span>sort-seq []
+  (sort (repeat <span style="color:#ae81ff">100000</span> (rand-int <span style="color:#ae81ff">2000000</span>))))
 
-(defn sort-seq []
-  (sort (repeat 100000 (rand-int 2000000))))
-
-(defn time-fun [fun]
-  (let [start  (.getTime (js/Date.))
-        _      (fun)
-        end    (.getTime (js/Date.))
+(<span style="color:#66d9ef">defn </span>time-fun [fun]
+  (<span style="color:#66d9ef">let </span>[start  (<span style="color:#a6e22e">.getTime</span> (<span style="color:#a6e22e">js/Date.</span>))
+        _      (<span style="color:#a6e22e">fun</span>)
+        end    (<span style="color:#a6e22e">.getTime</span> (<span style="color:#a6e22e">js/Date.</span>))
         result (- end start)]
     result))
 
-(defn time-it [fun]
-  (let [values  (for [i (range 200)] (time-fun fun))]
+(<span style="color:#66d9ef">defn </span>time-it [fun]
+  (<span style="color:#66d9ef">let </span>[values  (for [i (range <span style="color:#ae81ff">200</span>)] (<span style="color:#a6e22e">time-fun</span> fun))]
     (/ (apply + values)
        (count values))))
 
-(defn -main []
-  (println &quot;(factorial 5000) \t Avg: &quot; (time-it #(factorial 5000)))
-  (println &quot;(fib 20) \t Avg: &quot;         (time-it #(fib 20)))
-  (println &quot;(sort-seq) \t Avg: &quot;       (time-it #(sort-seq))))
+(<span style="color:#66d9ef">defn </span>-main []
+  (println <span style="color:#e6db74">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">factorial</span> <span style="color:#ae81ff">5000</span>)))
+  (println <span style="color:#e6db74">&#34;(fib 20) \t Avg: &#34;</span>         (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">fib</span> <span style="color:#ae81ff">20</span>)))
+  (println <span style="color:#e6db74">&#34;(sort-seq) \t Avg: &#34;</span>       (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">sort-seq</span>))))
 
-(set! *main-cli-fn* -main)
-</code></pre>
-
-<p>Benchmark results:</p>
-
+(<span style="color:#a6e22e">set!</span> *main-cli-fn* -main)
+</code></pre></div><p>Benchmark results:</p>
 <pre><code>&gt; node --version
 v0.6.12
 
@@ -137,9 +132,7 @@ v0.6.12
 (factorial 5000) Avg: 54.775
 (fib 20)         Avg: 2.77
 (sort-seq)       Avg: 6325.71
-</code></pre>
-
-<p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
+</code></pre><p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
 Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :)</p>
             </div>
 

@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -80,281 +80,242 @@ I was thinking about hardware cut/copy/paste in apps even before that. But only 
 I always wondered why there is no hardware support for that on various keyboard that are out there. And then I saw <a href="https://keyboard.io">keyboard.io</a>.
 Project is about hackable ergonomic mechanical keyboards build on top of Teensy/Arduino Micro boards. And I decided to play a little bit with that idea.
 Lets start with implementing hardware cut/copy/paste using Leonardo and then lets see how far we can push the idea.</p>
-
 <h2 id="emulating-keyboard-on-leonardo">Emulating keyboard on Leonardo.</h2>
-
 <p>With release of first boards based on ATmega32u4 Keyboard and Mouse libraries were introduced in Arduino IDE.
 Those libraries allow you to emulate fully functional mouse and keyboard from your Arduino board using USB connection. For more information take a look at the <a href="https://arduino.cc/en/Reference/MouseKeyboard">documentation</a>.</p>
-
 <h2 id="arduino-wiring">Arduino wiring.</h2>
-
 <p>Wiring will be very simple. We will have 3 buttons on pins 2, 3 and 4 with pull down resistors.</p>
-
-<p><img src="https://d1wvxg652jdms0.cloudfront.net/hardware-cut-copy-paste/schematics1.png" alt="schematics1" /></p>
-
-<h2 id="hardware-cut-copy-paste">Hardware Cut/Copy/Paste.</h2>
-
+<p><img src="https://d1wvxg652jdms0.cloudfront.net/hardware-cut-copy-paste/schematics1.png" alt="schematics1"></p>
+<h2 id="hardware-cutcopypaste">Hardware Cut/Copy/Paste.</h2>
 <p>So this will be our simplest solution to the my original idea. Here is Arduino sketch:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// version 0.0.1
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> cutPin   <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+<span style="color:#66d9ef">int</span> copyPin  <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+<span style="color:#66d9ef">int</span> pastePin <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
 
-<pre><code class="language-cpp">// version 0.0.1
-
-int cutPin   = 2;
-int copyPin  = 3;
-int pastePin = 4;
-
-void setup() {
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>() {
   pinMode(cutPin, INPUT);
   pinMode(copyPin, INPUT);
   pinMode(pastePin, INPUT);
   Keboard.begin()
 }
 
-void loop() {
-  if (digitalRead(cutpin)   == HIGH) { cut();   }
-  if (digitalRead(copypin)  == HIGH) { copy();  }
-  if (digitalRead(pastepin) == HIGH) { paste(); }
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loop</span>() {
+  <span style="color:#66d9ef">if</span> (digitalRead(cutpin)   <span style="color:#f92672">==</span> HIGH) { cut();   }
+  <span style="color:#66d9ef">if</span> (digitalRead(copypin)  <span style="color:#f92672">==</span> HIGH) { copy();  }
+  <span style="color:#66d9ef">if</span> (digitalRead(pastepin) <span style="color:#f92672">==</span> HIGH) { paste(); }
 }
 
-void pressCtrl() {
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pressCtrl</span>() {
   Keyboard.press(KEY_LEFT_CTRL);
 }
 
-void pressShift() {
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pressShift</span>() {
   Keyboard.press(KEY_LEFT_SHIFT);
 }
 
-void cut() {
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cut</span>() {
   pressCtrl();
-  Keyboard.write('x');
+  Keyboard.write(<span style="color:#e6db74">&#39;x&#39;</span>);
   Keyboard.releaseAll();
 }
 
-void copy() {
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">copy</span>() {
   pressCtrl();
-  Keyboard.write('c');
+  Keyboard.write(<span style="color:#e6db74">&#39;c&#39;</span>);
   Keyboard.releaseAll();
 }
 
-void paste() {
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">paste</span>() {
   pressCtrl();
-  Keyboard.write('v');
+  Keyboard.write(<span style="color:#e6db74">&#39;v&#39;</span>);
   Keyboard.releaseAll();
 }
-</code></pre>
-
-<p>It works! But&hellip; for example in my terminal I use Ctrl+Shift+C to copy selection.
+</code></pre></div><p>It works! But&hellip; for example in my terminal I use Ctrl+Shift+C to copy selection.
 Of course I can press Shift+Copy combination. But maybe there is a better solution.</p>
-
 <h2 id="automatic-detection-of-key-combination">Automatic detection of key combination.</h2>
-
 <p>Idea is simple. We have serial port open on Leonardo and our Linux PC.
 When I&rsquo;m pressing copy on Leonardo it will ask through serial port PC about required combination.
 On PC there will be running ruby script that will detect currently focused window and look up at the configuration file for
 keys combination. If there is no combination will be found or reply from script will be timed out we will use default combination.</p>
-
-<h2 id="detecting-wm-class-from-ruby-2-0-0">Detecting WM_CLASS from Ruby (2.0.0+).</h2>
-
+<h2 id="detecting-wm_class-from-ruby-200">Detecting WM_CLASS from Ruby (2.0.0+).</h2>
 <p>From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
 Here is Window class for the job:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Window</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">.</span><span style="color:#a6e22e">current</span>
+    <span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">`xprop -root`</span>)
+  <span style="color:#66d9ef">end</span>
 
-<pre><code class="language-ruby">class Window
-  def self.current
-    Window.new(`xprop -root`)
-  end
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>(data)
+    @root_data <span style="color:#f92672">=</span> data
+  <span style="color:#66d9ef">end</span>
 
-  def initialize(data)
-    @root_data = data
-  end
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">id</span>
+    matches <span style="color:#f92672">=</span> @root_data<span style="color:#f92672">.</span>lines<span style="color:#f92672">.</span>grep(<span style="color:#e6db74">/_NET_ACTIVE_WINDOW\(WINDOW\)/</span>)
 
-  def id
-    matches = @root_data.lines.grep(/_NET_ACTIVE_WINDOW\(WINDOW\)/)
+    <span style="color:#66d9ef">if</span> matches
+      match_data <span style="color:#f92672">=</span> matches<span style="color:#f92672">.</span>first<span style="color:#f92672">.</span>match(<span style="color:#e6db74">/_NET_ACTIVE_WINDOW\(WINDOW\):.*#\s(.*)\n/</span>)
+      match_data<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>
+    <span style="color:#66d9ef">else</span>
+      <span style="color:#66d9ef">raise</span> <span style="color:#e6db74">&#39;No Window id was found&#39;</span>
+    <span style="color:#66d9ef">end</span>
+  <span style="color:#66d9ef">end</span>
 
-    if matches
-      match_data = matches.first.match(/_NET_ACTIVE_WINDOW\(WINDOW\):.*#\s(.*)\n/)
-      match_data[1]
-    else
-      raise 'No Window id was found'
-    end
-  end
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wm_class</span>
+    out <span style="color:#f92672">=</span> <span style="color:#e6db74">`xprop -id &#39;</span><span style="color:#e6db74">#{</span>id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;`</span>
+    matches <span style="color:#f92672">=</span> out<span style="color:#f92672">.</span>lines<span style="color:#f92672">.</span>grep(<span style="color:#e6db74">/WM_CLASS\(STRING\)/</span>)
 
-  def wm_class
-    out = `xprop -id '#{id}'`
-    matches = out.lines.grep(/WM_CLASS\(STRING\)/)
+    <span style="color:#66d9ef">if</span> matches
+      match_data <span style="color:#f92672">=</span> matches<span style="color:#f92672">.</span>first<span style="color:#f92672">.</span>match(<span style="color:#e6db74">/WM_CLASS\(STRING\)[^&#34;]*(&#34;.*&#34;)\n/</span>)
+      match_data<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">].</span>gsub(<span style="color:#e6db74">/&#34;/</span>,<span style="color:#e6db74">&#39;&#39;</span>)<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;, &#39;</span>)
+    <span style="color:#66d9ef">else</span>
+      <span style="color:#66d9ef">raise</span> <span style="color:#e6db74">&#39;No Window class was found&#39;</span>
+    <span style="color:#66d9ef">end</span>
+  <span style="color:#66d9ef">end</span>
 
-    if matches
-      match_data = matches.first.match(/WM_CLASS\(STRING\)[^&quot;]*(&quot;.*&quot;)\n/)
-      match_data[1].gsub(/&quot;/,'').split(', ')
-    else
-      raise 'No Window class was found'
-    end
-  end
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_a?</span>(class_string)
+    wm_class<span style="color:#f92672">.</span>any? { <span style="color:#f92672">|</span>s<span style="color:#f92672">|</span> s <span style="color:#f92672">==</span> class_string }
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>Usage examples:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>current<span style="color:#f92672">.</span>wm_class
+<span style="color:#f92672">=&gt;</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;gvim&#34;</span>, <span style="color:#e6db74">&#34;Gvim&#34;</span><span style="color:#f92672">]</span>
 
-  def is_a?(class_string)
-    wm_class.any? { |s| s == class_string }
-  end
-end
-</code></pre>
-
-<p>Usage examples:</p>
-
-<pre><code class="language-ruby">Window.current.wm_class
-=&gt; [&quot;gvim&quot;, &quot;Gvim&quot;]
-
-Window.current.is_a?(&quot;gvim&quot;)
-=&gt; true
-</code></pre>
-
-<h2 id="keys-configuration">Keys configuration.</h2>
-
+<span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>current<span style="color:#f92672">.</span>is_a?(<span style="color:#e6db74">&#34;gvim&#34;</span>)
+<span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>
+</code></pre></div><h2 id="keys-configuration">Keys configuration.</h2>
 <p>For now lets implement simplest class for that and store all configuration in constant.</p>
-
-<pre><code class="language-ruby">class Keys
-  CONFIG = {
-    'terminology' =&gt; {
-      'copy'  =&gt; 'ctrl-shift-c',
-      'cut'   =&gt; 'ctrl-shift-c',
-      'paste' =&gt; 'ctrl-shift-v'
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Keys</span>
+  <span style="color:#66d9ef">CONFIG</span> <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#39;terminology&#39;</span> <span style="color:#f92672">=&gt;</span> {
+      <span style="color:#e6db74">&#39;copy&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-c&#39;</span>,
+      <span style="color:#e6db74">&#39;cut&#39;</span>   <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-c&#39;</span>,
+      <span style="color:#e6db74">&#39;paste&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-v&#39;</span>
     }
   }
 
-  def self.[](key)
-    CONFIG[key]
-  end
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">.</span><span style="color:#a6e22e">[]</span>(key)
+    <span style="color:#66d9ef">CONFIG</span><span style="color:#f92672">[</span>key<span style="color:#f92672">]</span>
+  <span style="color:#66d9ef">end</span>
 
-  def self.for(window)
-    window.wm_class.map do |k|
-      CONFIG[k]
-    end.compact.first
-  end
-end
-</code></pre>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">.</span><span style="color:#a6e22e">for</span>(window)
+    window<span style="color:#f92672">.</span>wm_class<span style="color:#f92672">.</span>map <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>k<span style="color:#f92672">|</span>
+      <span style="color:#66d9ef">CONFIG</span><span style="color:#f92672">[</span>k<span style="color:#f92672">]</span>
+    <span style="color:#66d9ef">end</span><span style="color:#f92672">.</span>compact<span style="color:#f92672">.</span>first
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>Usage:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Keys</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;terminology&#39;</span><span style="color:#f92672">][</span><span style="color:#e6db74">&#39;copy&#39;</span><span style="color:#f92672">]</span>
+<span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-c&#39;</span>
 
-<p>Usage:</p>
-
-<pre><code class="language-ruby">Keys['terminology']['copy']
-=&gt; 'ctrl-shift-c'
-
-# When current window is terminology
-Keys.for(Window.current)['copy']
-=&gt; 'ctrl-shift-c'
-</code></pre>
-
-<h2 id="communicating-with-arduino-via-serialport">Communicating with Arduino via SerialPort.</h2>
-
+<span style="color:#75715e"># When current window is terminology</span>
+<span style="color:#66d9ef">Keys</span><span style="color:#f92672">.</span>for(<span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>current)<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;copy&#39;</span><span style="color:#f92672">]</span>
+<span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-c&#39;</span>
+</code></pre></div><h2 id="communicating-with-arduino-via-serialport">Communicating with Arduino via SerialPort.</h2>
 <p>Code below uses sketch described above with redefined copy/paste/cut functions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">String stringIn;
+<span style="color:#75715e">// Let&#39;s assume than combination aren&#39;t longer than 4 keys
+</span><span style="color:#75715e"></span>String collectedStrings[<span style="color:#ae81ff">4</span>];
+<span style="color:#66d9ef">int</span> counter, inByte, i;
 
-<pre><code class="language-cpp">String stringIn;
-// Let's assume than combination aren't longer than 4 keys
-String collectedStrings[4];
-int counter, inByte, i;
-
-void setup(){
-  Serial.begin(9600);
-  counter = 0;
-  stringIn = String(&quot;&quot;);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>(){
+  Serial.begin(<span style="color:#ae81ff">9600</span>);
+  counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  stringIn <span style="color:#f92672">=</span> String(<span style="color:#e6db74">&#34;&#34;</span>);
 }
 
-void cut() {
-  Serial.println(&quot;cut&quot;);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cut</span>() {
+  Serial.println(<span style="color:#e6db74">&#34;cut&#34;</span>);
 }
 
-void copy() {
-  Serial.println(&quot;copy&quot;);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">copy</span>() {
+  Serial.println(<span style="color:#e6db74">&#34;copy&#34;</span>);
 }
 
-void paste() {
-  Serial.println(&quot;paste&quot;);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">paste</span>() {
+  Serial.println(<span style="color:#e6db74">&#34;paste&#34;</span>);
 }
 
-void resetReader() {
-  counter = 0
-  stringIn = String(&quot;&quot;)
-  for (i = 0; i &lt;= 4; i++) {
-    collectedStrings[i] = String(&quot;&quot;)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">resetReader</span>() {
+  counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+  stringIn <span style="color:#f92672">=</span> String(<span style="color:#e6db74">&#34;&#34;</span>)
+  <span style="color:#66d9ef">for</span> (i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
+    collectedStrings[i] <span style="color:#f92672">=</span> String(<span style="color:#e6db74">&#34;&#34;</span>)
   }
 }
 
-void readLine() {
-  while(Serial.available()){
-    inByte = Serial.read();
-    stringIn += inByte;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readLine</span>() {
+  <span style="color:#66d9ef">while</span>(Serial.available()){
+    inByte <span style="color:#f92672">=</span> Serial.read();
+    stringIn <span style="color:#f92672">+=</span> inByte;
 
-    if (inByte == '-'){  // Handle delimiter
-      collectedStrings[counter] = String(stringIn);
-      stringIn = String(&quot;&quot;);
-      counter = counter + 1;
+    <span style="color:#66d9ef">if</span> (inByte <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span>){  <span style="color:#75715e">// Handle delimiter
+</span><span style="color:#75715e"></span>      collectedStrings[counter] <span style="color:#f92672">=</span> String(stringIn);
+      stringIn <span style="color:#f92672">=</span> String(<span style="color:#e6db74">&#34;&#34;</span>);
+      counter <span style="color:#f92672">=</span> counter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
     }
 
-    if(inByte ==  '\r'){  // end of line
-      resetReader();
-      return;
+    <span style="color:#66d9ef">if</span>(inByte <span style="color:#f92672">==</span>  <span style="color:#e6db74">&#39;\r&#39;</span>){  <span style="color:#75715e">// end of line
+</span><span style="color:#75715e"></span>      resetReader();
+      <span style="color:#66d9ef">return</span>;
     }
   }
 }
 
-void executeCombination() {
-  for(i = 0; i &lt;= 4; i++) {
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">executeCombination</span>() {
+  <span style="color:#66d9ef">for</span>(i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
     pressKey(collectedstrings[i]);
   }
 
   Keyboard.releaseAll();
 }
 
-void pressKeys(String key) {
-  switch(key) {
-    case &quot;ctrl&quot;:
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pressKeys</span>(String key) {
+  <span style="color:#66d9ef">switch</span>(key) {
+    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;ctrl&#34;</span><span style="color:#f92672">:</span>
       pressCtrl();
-      break;
-    case &quot;shift&quot;:
+      <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;shift&#34;</span><span style="color:#f92672">:</span>
       pressShift();
-      break;
-    default:
-      char[] arr = key.toCharArray();
-      char k = arr[0];
+      <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+      <span style="color:#66d9ef">char</span>[] arr <span style="color:#f92672">=</span> key.toCharArray();
+      <span style="color:#66d9ef">char</span> k <span style="color:#f92672">=</span> arr[<span style="color:#ae81ff">0</span>];
       Keyboard.write(k);
   }
 }
-</code></pre>
+</code></pre></div><p>More information on ruby-serialport is <a href="https://ruby-serialport.rubyforge.org/">here</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;serialport&#39;</span>
 
-<p>More information on ruby-serialport is <a href="https://ruby-serialport.rubyforge.org/">here</a>.</p>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Connection</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>(<span style="color:#e6db74">port</span>: <span style="color:#66d9ef">nil</span>)
+    <span style="color:#66d9ef">unless</span> port
+      port <span style="color:#f92672">=</span> <span style="color:#e6db74">`ls /dev/ttyACM*`</span><span style="color:#f92672">.</span>lines<span style="color:#f92672">.</span>first
+    <span style="color:#66d9ef">end</span>
 
-<pre><code class="language-ruby">require 'serialport'
+    @connection <span style="color:#f92672">=</span> <span style="color:#66d9ef">SerialPort</span><span style="color:#f92672">.</span>new(port, <span style="color:#ae81ff">9600</span>)
+  <span style="color:#66d9ef">end</span>
 
-class Connection
-  def initialize(port: nil)
-    unless port
-      port = `ls /dev/ttyACM*`.lines.first
-    end
-
-    @connection = SerialPort.new(port, 9600)
-  end
-
-  def loop
-    loop do
-      begin
-        action = @connection.readline
-        @connection.write(&quot;#{Keys.for(Window.current.wm_class)[action]}\r&quot;)
-      rescue Exception =&gt; e
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">loop</span>
+    <span style="color:#66d9ef">loop</span> <span style="color:#66d9ef">do</span>
+      <span style="color:#66d9ef">begin</span>
+        action <span style="color:#f92672">=</span> @connection<span style="color:#f92672">.</span>readline
+        @connection<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">#{</span><span style="color:#66d9ef">Keys</span><span style="color:#f92672">.</span>for(<span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>current<span style="color:#f92672">.</span>wm_class)<span style="color:#f92672">[</span>action<span style="color:#f92672">]</span><span style="color:#e6db74">}</span><span style="color:#ae81ff">\r</span><span style="color:#e6db74">&#34;</span>)
+      <span style="color:#66d9ef">rescue</span> <span style="color:#66d9ef">Exception</span> <span style="color:#f92672">=&gt;</span> e
         p e
-      end
-    end
-  end
-end
-</code></pre>
-
-<p>Usage:</p>
-
-<pre><code class="language-ruby">Connection.new.loop # starts infinite loop
-</code></pre>
-
-<p><strong>PS.</strong> This post is more like collection of theoretical pices of code.
+      <span style="color:#66d9ef">end</span>
+    <span style="color:#66d9ef">end</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>Usage:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Connection</span><span style="color:#f92672">.</span>new<span style="color:#f92672">.</span>loop <span style="color:#75715e"># starts infinite loop</span>
+</code></pre></div><p><strong>PS.</strong> This post is more like collection of theoretical pices of code.
 I have no time (and probably enthusiasm) to put all this together (at least right now).
 So this implementation can be broken and inaccurate in many ways.
 Feel free to point out any errors and mistakes and I will fix them.</p>
-
-<!--
-vim: ts=2:sts=2:sw=2:expandtab
--->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
             </div>
 
             

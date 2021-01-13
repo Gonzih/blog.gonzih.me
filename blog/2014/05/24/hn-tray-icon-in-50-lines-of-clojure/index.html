@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.58.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -79,65 +79,62 @@
 Result is tray app that shows stories from HN front page.
 Just in ~50 lines of Clojure code.
 Enjoy!</p>
-
 <p><a href="https://github.com/Gonzih/hn-tray.clj">Github Project.</a></p>
-
 <p>Source code is below:</p>
-
-<pre><code class="language-clojure">(ns hn.core
-  (:require [cheshire.core :as json]
-            [clojure.java.browse :refer [browse-url]]
-            [clojure.java.io :refer [resource]])
-  (:import [java.awt SystemTray TrayIcon PopupMenu MenuItem Toolkit]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>hn.core
+  (<span style="color:#e6db74">:require</span> [cheshire.core <span style="color:#e6db74">:as</span> json]
+            [clojure.java.browse <span style="color:#e6db74">:refer</span> [browse-url]]
+            [clojure.java.io <span style="color:#e6db74">:refer</span> [resource]])
+  (<span style="color:#e6db74">:import</span> [java.awt SystemTray TrayIcon PopupMenu MenuItem Toolkit]
            [java.awt.event ActionListener])
-  (:gen-class))
+  (<span style="color:#e6db74">:gen-class</span>))
 
-(defn menu-item [label callback]
-  (let [menu (MenuItem. label)
+(<span style="color:#66d9ef">defn </span>menu-item [label callback]
+  (<span style="color:#66d9ef">let </span>[menu (<span style="color:#a6e22e">MenuItem.</span> label)
         listener (proxy [ActionListener] []
-                   (actionPerformed [event] (callback)))]
-    (.addActionListener menu listener)
+                   (<span style="color:#a6e22e">actionPerformed</span> [event] (<span style="color:#a6e22e">callback</span>)))]
+    (<span style="color:#a6e22e">.addActionListener</span> menu listener)
     menu))
 
-(def hn-api-url &quot;https://api.ihackernews.com/page&quot;)
+(<span style="color:#66d9ef">def </span>hn-api-url <span style="color:#e6db74">&#34;https://api.ihackernews.com/page&#34;</span>)
 
-(defn hn-items []
+(<span style="color:#66d9ef">defn </span>hn-items []
   (-&gt; hn-api-url
       slurp
-      (json/parse-string true)
-      :items
-      (#(sort-by :points %))
+      (<span style="color:#a6e22e">json/parse-string</span> true)
+      <span style="color:#e6db74">:items</span>
+      (<span style="color:#f92672">#</span>(sort-by <span style="color:#e6db74">:points</span> %))
       reverse))
 
-(defn add-hn-to-menu! [menu]
-  (letfn [(mapfn [{:keys [title url commentCount points]}]
-            (let [full-title (format &quot;%-4s (%-4s) - %s&quot; points commentCount title)
-                  menu-item (menu-item full-title #(browse-url url))]
+(<span style="color:#66d9ef">defn </span>add-hn-to-menu! [menu]
+  (<span style="color:#a6e22e">letfn</span> [(<span style="color:#a6e22e">mapfn</span> [{<span style="color:#e6db74">:keys</span> [title url commentCount points]}]
+            (<span style="color:#66d9ef">let </span>[full-title (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;%-4s (%-4s) - %s&#34;</span> points commentCount title)
+                  menu-item (<span style="color:#a6e22e">menu-item</span> full-title <span style="color:#f92672">#</span>(<span style="color:#a6e22e">browse-url</span> url))]
               (println full-title)
-              (.add menu menu-item)))]
-  (doall (map mapfn (hn-items)))))
+              (<span style="color:#a6e22e">.add</span> menu menu-item)))]
+  (doall (map mapfn (<span style="color:#a6e22e">hn-items</span>)))))
 
-(defn exit []
-  (shutdown-agents)
-  (System/exit 0))
+(<span style="color:#66d9ef">defn </span>exit []
+  (<span style="color:#a6e22e">shutdown-agents</span>)
+  (<span style="color:#a6e22e">System/exit</span> <span style="color:#ae81ff">0</span>))
 
-(defn -main [&amp; args]
-  (let [tray (SystemTray/getSystemTray)
-        image (.getImage (Toolkit/getDefaultToolkit)
-                         (resource &quot;icon.png&quot;))
-        icon (TrayIcon. image)
-        exit (menu-item &quot;Exit&quot; exit)]
-    (.setImageAutoSize icon true)
-    (.add tray icon)
-    (loop []
-      (let [popup (PopupMenu.)]
-        (println &quot;Updating items&quot;)
-        (add-hn-to-menu! popup)
-        (.add popup exit)
-        (.setPopupMenu icon popup)
-        (Thread/sleep (* 5 60 1000))
-        (recur)))))
-</code></pre>
+(<span style="color:#66d9ef">defn </span>-main [<span style="color:#f92672">&amp;</span> args]
+  (<span style="color:#66d9ef">let </span>[tray (<span style="color:#a6e22e">SystemTray/getSystemTray</span>)
+        image (<span style="color:#a6e22e">.getImage</span> (<span style="color:#a6e22e">Toolkit/getDefaultToolkit</span>)
+                         (<span style="color:#a6e22e">resource</span> <span style="color:#e6db74">&#34;icon.png&#34;</span>))
+        icon (<span style="color:#a6e22e">TrayIcon.</span> image)
+        exit (<span style="color:#a6e22e">menu-item</span> <span style="color:#e6db74">&#34;Exit&#34;</span> exit)]
+    (<span style="color:#a6e22e">.setImageAutoSize</span> icon true)
+    (<span style="color:#a6e22e">.add</span> tray icon)
+    (<span style="color:#66d9ef">loop </span>[]
+      (<span style="color:#66d9ef">let </span>[popup (<span style="color:#a6e22e">PopupMenu.</span>)]
+        (println <span style="color:#e6db74">&#34;Updating items&#34;</span>)
+        (<span style="color:#a6e22e">add-hn-to-menu!</span> popup)
+        (<span style="color:#a6e22e">.add</span> popup exit)
+        (<span style="color:#a6e22e">.setPopupMenu</span> icon popup)
+        (<span style="color:#a6e22e">Thread/sleep</span> (* <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">60</span> <span style="color:#ae81ff">1000</span>))
+        (<span style="color:#a6e22e">recur</span>)))))
+</code></pre></div>
             </div>
 
             

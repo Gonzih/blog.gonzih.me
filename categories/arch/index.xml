@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>arch on Max Gonzih</title>
@@ -9,11 +9,7 @@
     <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
     <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
     <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 08 Sep 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://blog.gonzih.me/categories/arch/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 08 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gonzih.me/categories/arch/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>YubiKey as a portable SSH key</title>
       <link>https://blog.gonzih.me/blog/2018/09/08/yubikey-as-a-portable-ssh-key/</link>
@@ -38,10 +34,8 @@
       <pubDate>Fri, 20 Jul 2012 00:00:00 +0000</pubDate>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2012/07/20/arch-linux-migrated-to-grub2/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/ASSDN.png&#34; alt=&#34;My current GRUB2 theme&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/ASSDN.png&#34; alt=&#34;My current GRUB2 theme&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Great news everyone! Today Arch Linux officially switched to GRUB2!&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.archlinux.org/news/grub-legacy-no-longer-supported/&#34;&gt;Post on Arch News&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Grub#Generate_GRUB2_BIOS_Config_file&#34;&gt;Migration information is here&lt;/a&gt;&lt;/li&gt;
