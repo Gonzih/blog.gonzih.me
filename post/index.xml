@@ -17,8 +17,8 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/diy-dependabot-clojure/preview.png&#34; alt=&#34;preview&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Unfortunately &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support clojure.
-And as such I came with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;</description>
+&lt;p&gt;Unfortunately &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support &lt;a href=&#34;https://clojure.org/&#34;&gt;Clojure&lt;/a&gt;.
+And as such I came up with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;</description>
     </item>
     
     <item>

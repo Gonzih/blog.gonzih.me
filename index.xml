@@ -18,8 +18,8 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/diy-dependabot-clojure/preview.png&#34; alt=&#34;preview&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Unfortunately &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support clojure.
-And as such I came with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;
+&lt;p&gt;Unfortunately &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support &lt;a href=&#34;https://clojure.org/&#34;&gt;Clojure&lt;/a&gt;.
+And as such I came up with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;
 &lt;p&gt;First things first here is complete Github Actions workflow:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;Dependencies&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
