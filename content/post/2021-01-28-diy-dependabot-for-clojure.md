@@ -9,12 +9,12 @@ categories: [clojure, dependabot, dependencies]
 
 ![preview](https://d1wvxg652jdms0.cloudfront.net/diy-dependabot-clojure/preview.png)
 
-Unfortunately [dependabot](https://dependabot.com) does not support [Clojure](https://clojure.org/).
-And as such I came up with a silly idea of putting something similar together using Github Actions.
+Unfortunately, [dependabot](https://dependabot.com) does not support [Clojure](https://clojure.org/).
+And as such, I came up with a silly idea of putting something similar together using Github Actions.
 
 <!--more-->
 
-First things first here is complete Github Actions workflow:
+First things first here is the complete Github Actions workflow:
 
 ```yaml
 name: Dependencies
@@ -87,7 +87,7 @@ jobs:
 
 And now lets step by step to see what is going on here.
 
-First we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:
+First, we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:
 
 ```yaml
 on:
@@ -96,8 +96,8 @@ on:
   workflow_dispatch:
 ```
 
-After that we define our first job.
-Workflow is split in to two pieces because `peter-evans/create-pull-request@v3` has some issues running in custom containers (based on my experience).
+After that, we define our first job.
+Workflow is split into two pieces because `peter-evans/create-pull-request@v3` has some issues running in custom containers (based on my experience).
 And because of `rlwrap` issue in docker.
 If you are able to run clojure clj tool in ubuntu image directly this config can be drastically simplified.
 
@@ -131,11 +131,11 @@ To transfer those two files we are going to utilize github artifacts:
 ```
 
 And now we can proceed with creating pull request.
-It is important to tell our second job that it has to wait for a first one to complete.
-Otherwise there would be no files available for download from storage.
+It is important to tell our second job that it has to wait for the first one to complete.
+Otherwise, there would be no files available for download from storage.
 To do that we can simply say that job `needs: bump`, `bump` being the name of our first job of course.
 
-First lets download our two files from artifact storage:
+First, lets download our two files from artifact storage:
 
 ```yaml
     - uses: actions/download-artifact@v2
@@ -146,7 +146,7 @@ First lets download our two files from artifact storage:
         name: deps
 ```
 
-Once this is done we need to read output file and store it in output variable of a step.
+Once this is done we need to read the output file and store it in output variable of a step.
 To later reuse this variable we give this step id `get-pr-body`.
 
 ```yaml
