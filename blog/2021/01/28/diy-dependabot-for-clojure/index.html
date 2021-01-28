@@ -67,9 +67,9 @@
                 <h1>DIY Dependabot for Clojure</h1>
               <span class="post-date">Thu, Jan 28, 2021</span>
                   <p><img src="https://d1wvxg652jdms0.cloudfront.net/diy-dependabot-clojure/preview.png" alt="preview"></p>
-<p>Unfortunately <a href="https://dependabot.com">dependabot</a> does not support <a href="https://clojure.org/">Clojure</a>.
-And as such I came up with a silly idea of putting something similar together using Github Actions.</p>
-<p>First things first here is complete Github Actions workflow:</p>
+<p>Unfortunately, <a href="https://dependabot.com">dependabot</a> does not support <a href="https://clojure.org/">Clojure</a>.
+And as such, I came up with a silly idea of putting something similar together using Github Actions.</p>
+<p>First things first here is the complete Github Actions workflow:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>Dependencies<span style="color:#666">
 </span><span style="color:#666">
 </span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">on</span>:<span style="color:#666">
@@ -137,13 +137,13 @@ And as such I came up with a silly idea of putting something similar together us
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>deps<span style="color:#666">
 </span></code></pre></div><p>And now lets step by step to see what is going on here.</p>
-<p>First we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:</p>
+<p>First, we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">on</span>:<span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">schedule</span>:<span style="color:#666">
 </span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">cron</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#39;0 */3 * * *&#39;</span><span style="color:#666">
 </span><span style="color:#666">  </span><span style="color:#6ab825;font-weight:bold">workflow_dispatch</span>:<span style="color:#666">
-</span></code></pre></div><p>After that we define our first job.
-Workflow is split in to two pieces because <code>peter-evans/create-pull-request@v3</code> has some issues running in custom containers (based on my experience).
+</span></code></pre></div><p>After that, we define our first job.
+Workflow is split into two pieces because <code>peter-evans/create-pull-request@v3</code> has some issues running in custom containers (based on my experience).
 And because of <code>rlwrap</code> issue in docker.
 If you are able to run clojure clj tool in ubuntu image directly this config can be drastically simplified.</p>
 <p>I do run actions for this project in nixos countainers and after checkout is done I make sure that clojure cli tool is available:</p>
@@ -167,17 +167,17 @@ If you are able to run clojure clj tool in ubuntu image directly this config can
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>deps<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">path</span>:<span style="color:#666"> </span>deps.edn<span style="color:#666">
 </span></code></pre></div><p>And now we can proceed with creating pull request.
-It is important to tell our second job that it has to wait for a first one to complete.
-Otherwise there would be no files available for download from storage.
+It is important to tell our second job that it has to wait for the first one to complete.
+Otherwise, there would be no files available for download from storage.
 To do that we can simply say that job <code>needs: bump</code>, <code>bump</code> being the name of our first job of course.</p>
-<p>First lets download our two files from artifact storage:</p>
+<p>First, lets download our two files from artifact storage:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">uses</span>:<span style="color:#666"> </span>actions/download-artifact@v2<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>deps-output<span style="color:#666">
 </span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">uses</span>:<span style="color:#666"> </span>actions/download-artifact@v2<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>deps<span style="color:#666">
-</span></code></pre></div><p>Once this is done we need to read output file and store it in output variable of a step.
+</span></code></pre></div><p>Once this is done we need to read the output file and store it in output variable of a step.
 To later reuse this variable we give this step id <code>get-pr-body</code>.</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">id</span>:<span style="color:#666"> </span>get-pr-body<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">run</span>:<span style="color:#666"> </span>|<span style="color:#ed9d13">

@@ -18,9 +18,9 @@
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://d1wvxg652jdms0.cloudfront.net/diy-dependabot-clojure/preview.png&#34; alt=&#34;preview&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Unfortunately &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support &lt;a href=&#34;https://clojure.org/&#34;&gt;Clojure&lt;/a&gt;.
-And as such I came up with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;
-&lt;p&gt;First things first here is complete Github Actions workflow:&lt;/p&gt;
+&lt;p&gt;Unfortunately, &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support &lt;a href=&#34;https://clojure.org/&#34;&gt;Clojure&lt;/a&gt;.
+And as such, I came up with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;
+&lt;p&gt;First things first here is the complete Github Actions workflow:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;Dependencies&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;on&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
@@ -88,13 +88,13 @@ And as such I came up with a silly idea of putting something similar together us
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now lets step by step to see what is going on here.&lt;/p&gt;
-&lt;p&gt;First we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:&lt;/p&gt;
+&lt;p&gt;First, we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;on&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;schedule&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;cron&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;0 */3 * * *&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;workflow_dispatch&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After that we define our first job.
-Workflow is split in to two pieces because &lt;code&gt;peter-evans/create-pull-request@v3&lt;/code&gt; has some issues running in custom containers (based on my experience).
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After that, we define our first job.
+Workflow is split into two pieces because &lt;code&gt;peter-evans/create-pull-request@v3&lt;/code&gt; has some issues running in custom containers (based on my experience).
 And because of &lt;code&gt;rlwrap&lt;/code&gt; issue in docker.
 If you are able to run clojure clj tool in ubuntu image directly this config can be drastically simplified.&lt;/p&gt;
 &lt;p&gt;I do run actions for this project in nixos countainers and after checkout is done I make sure that clojure cli tool is available:&lt;/p&gt;
@@ -118,17 +118,17 @@ If you are able to run clojure clj tool in ubuntu image directly this config can
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;path&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps.edn&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now we can proceed with creating pull request.
-It is important to tell our second job that it has to wait for a first one to complete.
-Otherwise there would be no files available for download from storage.
+It is important to tell our second job that it has to wait for the first one to complete.
+Otherwise, there would be no files available for download from storage.
 To do that we can simply say that job &lt;code&gt;needs: bump&lt;/code&gt;, &lt;code&gt;bump&lt;/code&gt; being the name of our first job of course.&lt;/p&gt;
-&lt;p&gt;First lets download our two files from artifact storage:&lt;/p&gt;
+&lt;p&gt;First, lets download our two files from artifact storage:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/download-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/download-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once this is done we need to read output file and store it in output variable of a step.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once this is done we need to read the output file and store it in output variable of a step.
 To later reuse this variable we give this step id &lt;code&gt;get-pr-body&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;id&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;get-pr-body&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
