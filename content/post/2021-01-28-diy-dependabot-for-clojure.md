@@ -9,8 +9,8 @@ categories: [clojure, dependabot, dependencies]
 
 ![preview](https://d1wvxg652jdms0.cloudfront.net/diy-dependabot-clojure/preview.png)
 
-Unfortunately [dependabot](https://dependabot.com) does not support clojure.
-And as such I came with a silly idea of putting something similar together using Github Actions.
+Unfortunately [dependabot](https://dependabot.com) does not support [Clojure](https://clojure.org/).
+And as such I came up with a silly idea of putting something similar together using Github Actions.
 
 <!--more-->
 
