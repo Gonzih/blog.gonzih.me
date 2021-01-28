@@ -121,8 +121,9 @@ And as such, I came up with a silly idea of putting something similar together u
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">uses</span>:<span style="color:#666"> </span>peter-evans/create-pull-request@v3<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">token</span>:<span style="color:#666"> </span>${{ secrets.GITHUB_TOKEN }}<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">title</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Update dependencies&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">title</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;[Automated] Update dependencies&#34;</span><span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">body</span>:<span style="color:#666"> </span>${{ steps.get-pr-body.outputs.body }}<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">commit-message</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;[Automated] Update dependencies&#34;</span><span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">branch</span>:<span style="color:#666"> </span>update-dependencies<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666"> </span>|<span style="color:#ed9d13">
 </span><span style="color:#ed9d13">          </span><span style="color:#666">          </span>dependencies<span style="color:#666">
@@ -192,8 +193,9 @@ You can see how we extract body using variable inlining with <code>${{ steps.get
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">uses</span>:<span style="color:#666"> </span>peter-evans/create-pull-request@v3<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">token</span>:<span style="color:#666"> </span>${{ secrets.GITHUB_TOKEN }}<span style="color:#666">
-</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">title</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;Update dependencies&#34;</span><span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">title</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;[Automated] Update dependencies&#34;</span><span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">body</span>:<span style="color:#666"> </span>${{ steps.get-pr-body.outputs.body }}<span style="color:#666">
+</span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">commit-message</span>:<span style="color:#666"> </span><span style="color:#ed9d13">&#34;[Automated] Update dependencies&#34;</span><span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">branch</span>:<span style="color:#666"> </span>update-dependencies<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">labels</span>:<span style="color:#666"> </span>|<span style="color:#ed9d13">
 </span><span style="color:#ed9d13">          </span><span style="color:#666">          </span>dependencies<span style="color:#666">
