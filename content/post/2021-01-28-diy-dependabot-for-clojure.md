@@ -68,8 +68,9 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        title: "Update dependencies"
+        title: "[Automated] Update dependencies"
         body: ${{ steps.get-pr-body.outputs.body }}
+        commit-message: "[Automated] Update dependencies"
         branch: update-dependencies
         labels: |
           dependencies
@@ -167,8 +168,9 @@ You can see how we extract body using variable inlining with `${{ steps.get-pr-b
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        title: "Update dependencies"
+        title: "[Automated] Update dependencies"
         body: ${{ steps.get-pr-body.outputs.body }}
+        commit-message: "[Automated] Update dependencies"
         branch: update-dependencies
         labels: |
           dependencies
