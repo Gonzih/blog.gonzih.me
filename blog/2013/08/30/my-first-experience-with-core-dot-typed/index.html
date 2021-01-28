@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -90,7 +81,7 @@ Core.typed will trust you and will skip further checks.</p>
 <p>Or for example if you are expecting String as a result you can convert result to String with str before returning it.</p>
 <h3 id="non-nil-return-in-coretyped-works-only-on-methods">non-nil-return in core.typed works only on methods</h3>
 <p>And if you have static method then something like that would not work:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
 
 (<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
 (<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to []
@@ -101,7 +92,7 @@ Core.typed will trust you and will skip further checks.</p>
   Expected<span style="color:#960050;background-color:#1e0010">:</span>       (<span style="color:#a6e22e">Fn</span> [-&gt; Message$RecipientType])
   Actual<span style="color:#960050;background-color:#1e0010">:</span>         (<span style="color:#a6e22e">Fn</span> [-&gt; (<span style="color:#a6e22e">U</span> Message$RecipientType nil)]))
 </code></pre></div><p>Solution:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
 
 (<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
 (<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to
@@ -109,7 +100,7 @@ Core.typed will trust you and will skip further checks.</p>
   {<span style="color:#e6db74">:post</span> [%]}
   (<span style="color:#a6e22e">Message$RecipientType/TO</span>))
 </code></pre></div><p>Which is the same as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
 
 (<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
 (<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to []
@@ -119,7 +110,7 @@ Core.typed will trust you and will skip further checks.</p>
 </code></pre></div><p>So unless assert evaluates temp to logical true exception will be raised
 and function will always return non nil value, which makes core.typed happy.</p>
 <h3 id="defining-parameterized-alias-type">Defining Parameterized alias type</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">def-alias</span> Folder
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">def-alias</span> Folder
   (<span style="color:#a6e22e">TFn</span> [[x <span style="color:#e6db74">:variance</span> <span style="color:#e6db74">:covariant</span>]] (<span style="color:#a6e22e">Map</span> Keyword x)))
 
 (<span style="color:#a6e22e">comment</span>

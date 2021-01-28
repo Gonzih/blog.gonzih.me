@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -88,7 +79,7 @@ Those libraries allow you to emulate fully functional mouse and keyboard from yo
 <p><img src="https://d1wvxg652jdms0.cloudfront.net/hardware-cut-copy-paste/schematics1.png" alt="schematics1"></p>
 <h2 id="hardware-cutcopypaste">Hardware Cut/Copy/Paste.</h2>
 <p>So this will be our simplest solution to the my original idea. Here is Arduino sketch:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// version 0.0.1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// version 0.0.1
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">int</span> cutPin   <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
 <span style="color:#66d9ef">int</span> copyPin  <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
@@ -142,7 +133,7 @@ keys combination. If there is no combination will be found or reply from script 
 <h2 id="detecting-wm_class-from-ruby-200">Detecting WM_CLASS from Ruby (2.0.0+).</h2>
 <p>From my experience with Xmonad best method to detect unique window type is by WM_CLASS string from X properties.
 Here is Window class for the job:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Window</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Window</span>
   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">.</span><span style="color:#a6e22e">current</span>
     <span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>new(<span style="color:#e6db74">`xprop -root`</span>)
   <span style="color:#66d9ef">end</span>
@@ -179,14 +170,14 @@ Here is Window class for the job:</p>
   <span style="color:#66d9ef">end</span>
 <span style="color:#66d9ef">end</span>
 </code></pre></div><p>Usage examples:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>current<span style="color:#f92672">.</span>wm_class
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>current<span style="color:#f92672">.</span>wm_class
 <span style="color:#f92672">=&gt;</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;gvim&#34;</span>, <span style="color:#e6db74">&#34;Gvim&#34;</span><span style="color:#f92672">]</span>
 
 <span style="color:#66d9ef">Window</span><span style="color:#f92672">.</span>current<span style="color:#f92672">.</span>is_a?(<span style="color:#e6db74">&#34;gvim&#34;</span>)
 <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>
 </code></pre></div><h2 id="keys-configuration">Keys configuration.</h2>
 <p>For now lets implement simplest class for that and store all configuration in constant.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Keys</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Keys</span>
   <span style="color:#66d9ef">CONFIG</span> <span style="color:#f92672">=</span> {
     <span style="color:#e6db74">&#39;terminology&#39;</span> <span style="color:#f92672">=&gt;</span> {
       <span style="color:#e6db74">&#39;copy&#39;</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-c&#39;</span>,
@@ -206,7 +197,7 @@ Here is Window class for the job:</p>
   <span style="color:#66d9ef">end</span>
 <span style="color:#66d9ef">end</span>
 </code></pre></div><p>Usage:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Keys</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;terminology&#39;</span><span style="color:#f92672">][</span><span style="color:#e6db74">&#39;copy&#39;</span><span style="color:#f92672">]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Keys</span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;terminology&#39;</span><span style="color:#f92672">][</span><span style="color:#e6db74">&#39;copy&#39;</span><span style="color:#f92672">]</span>
 <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-c&#39;</span>
 
 <span style="color:#75715e"># When current window is terminology</span>
@@ -214,7 +205,7 @@ Here is Window class for the job:</p>
 <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;ctrl-shift-c&#39;</span>
 </code></pre></div><h2 id="communicating-with-arduino-via-serialport">Communicating with Arduino via SerialPort.</h2>
 <p>Code below uses sketch described above with redefined copy/paste/cut functions.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">String stringIn;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-cpp" data-lang="cpp">String stringIn;
 <span style="color:#75715e">// Let&#39;s assume than combination aren&#39;t longer than 4 keys
 </span><span style="color:#75715e"></span>String collectedStrings[<span style="color:#ae81ff">4</span>];
 <span style="color:#66d9ef">int</span> counter, inByte, i;
@@ -286,7 +277,7 @@ Here is Window class for the job:</p>
   }
 }
 </code></pre></div><p>More information on ruby-serialport is <a href="https://ruby-serialport.rubyforge.org/">here</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;serialport&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#39;serialport&#39;</span>
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Connection</span>
   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>(<span style="color:#e6db74">port</span>: <span style="color:#66d9ef">nil</span>)
@@ -309,7 +300,7 @@ Here is Window class for the job:</p>
   <span style="color:#66d9ef">end</span>
 <span style="color:#66d9ef">end</span>
 </code></pre></div><p>Usage:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Connection</span><span style="color:#f92672">.</span>new<span style="color:#f92672">.</span>loop <span style="color:#75715e"># starts infinite loop</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Connection</span><span style="color:#f92672">.</span>new<span style="color:#f92672">.</span>loop <span style="color:#75715e"># starts infinite loop</span>
 </code></pre></div><p><strong>PS.</strong> This post is more like collection of theoretical pices of code.
 I have no time (and probably enthusiasm) to put all this together (at least right now).
 So this implementation can be broken and inaccurate in many ways.

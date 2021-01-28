@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -87,7 +78,7 @@ Of course you can probably figure out all this yourself, but what if you are laz
 </li>
 </ul>
 <p><code>/etc/NetworkManager/dispatcher.d/vpn-up</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#!/bin/sh
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">#!/bin/sh
 
 CONN=&#34;MY-CONNECTION-NAME&#34;
 
@@ -104,13 +95,13 @@ fi
 <li>Make sure that dispatcher is running by running <code>journalctl -b -u NetworkManager</code> and looking for the line that looks like:</li>
 </ul>
 <p><code>NetworkManager</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
 </code></pre></div><ul>
 <li>If you see line about dispatcher service - enable it manually by running <code>systemctl enable NetworkManager-dispatcher.service</code>.</li>
 <li>By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:</li>
 </ul>
 <p><code>/etc/NetworkManager/system-connections/MY-CONNECTION-NAME</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">...
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">...
 [vpn]
 password-flags=0
 ...

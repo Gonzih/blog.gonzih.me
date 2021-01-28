@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body class=" ">
@@ -75,6 +66,19 @@
     <div class="content container">
         <div class="posts">
 
+            
+            <div class="post">
+                <h1 class="post-title">
+                    <a href="https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/">
+                        DIY Dependabot for Clojure
+                    </a>
+                </h1>
+
+                <span class="post-date">Thu, Jan 28, 2021 | <a href="https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/#disqus_thread">Comments</a></span>
+
+                <p>Unfortunately <a href="https://dependabot.com">dependabot</a> does not support clojure.
+And as such I came with a silly idea of putting something similar together using Github Actions.</p>
+            </div>
             
             <div class="post">
                 <h1 class="post-title">
@@ -352,7 +356,7 @@ I bet you can figure out similar packages for different distribution.</p>
 
                 <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 <p>Here is Scheme implementation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let* </span>((<span style="color:#a6e22e">yin</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let* </span>((<span style="color:#a6e22e">yin</span>
         ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">cc</span>) (display <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">\</span>@) cc) (call-with-current-continuation (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) c))))
        (<span style="color:#a6e22e">yang</span>
         ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">cc</span>) (display <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">\</span>*) cc) (call-with-current-continuation (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) c)))))
@@ -499,7 +503,7 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
                 <p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 <p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png" alt="Blue Midnight Commander color scheme"></a></p>
 <p><code>.config/mc/ini</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[Colors]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[Colors]</span>
 <span style="color:#a6e22e">base_color</span><span style="color:#f92672">=</span><span style="color:#e6db74">lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:</span>
 </code></pre></div><p>For more information take look at <a href="https://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
 Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
@@ -579,9 +583,9 @@ Why? Because it&rsquo;s just unfair. Why would you provide any information about
 
                 <p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">java: no such file or directory
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">java: no such file or directory
 </code></pre></div><p>So here is fix:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install -y libc6-armel libsfgcc1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">sudo apt-get install -y libc6-armel libsfgcc1
 </code></pre></div><p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
             </div>
             
@@ -644,7 +648,7 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
                 <span class="post-date">Fri, Feb 17, 2012 | <a href="https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/#disqus_thread">Comments</a></span>
 
                 <p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 cd ~/watch    <span style="color:#75715e"># set your watch directory here</span>
 <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ xt<span style="color:#f92672">=</span>urn:btih:<span style="color:#f92672">([</span>^&amp;/<span style="color:#f92672">]</span>+<span style="color:#f92672">)</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">||</span> exit;
@@ -675,18 +679,15 @@ echo <span style="color:#e6db74">&#34;d10:magnet-uri</span><span style="color:#e
                 <span class="post-date">Fri, Sep 30, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/#disqus_thread">Comments</a></span>
 
                 <p>You must change encoding for template1. For do that run following.</p>
-<pre><code>su - postgres
-psql
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">UPDATE</span> pg_database <span style="color:#66d9ef">SET</span> datistemplate <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span> <span style="color:#66d9ef">WHERE</span> datname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;template1&#39;</span>;
+<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">DATABASE</span> template1;
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> template1 <span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">TEMPLATE</span> <span style="color:#f92672">=</span> template0 <span style="color:#66d9ef">ENCODING</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UNICODE&#39;</span>;
+<span style="color:#66d9ef">UPDATE</span> pg_database <span style="color:#66d9ef">SET</span> datistemplate <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span> <span style="color:#66d9ef">WHERE</span> datname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;template1&#39;</span>;
 
-UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
-DROP DATABASE template1;
-CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
-UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
-
-#recomended
-\c template1
-VACUUM FREEZE;
-</code></pre><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+<span style="color:#f92672">#</span>recomended
+<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">c</span> template1
+<span style="color:#66d9ef">VACUUM</span> <span style="color:#66d9ef">FREEZE</span>;
+</code></pre></div><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
             </div>
             
             <div class="post">
@@ -699,7 +700,7 @@ VACUUM FREEZE;
                 <span class="post-date">Wed, Sep 21, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/#disqus_thread">Comments</a></span>
 
                 <p>If your get following pygments error using octopress with arch linux.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Building site: source -&gt; public
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Building site: source -&gt; public
   File &#34;&lt;string&gt;&#34;, line 1
     import sys; print sys.executable
                         ^
@@ -730,7 +731,7 @@ SyntaxError: invalid syntax
                 <span class="post-date">Thu, Sep 15, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/#disqus_thread">Comments</a></span>
 
                 <p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[[</span> $TERM <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;screen&#34;</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> rvm use default
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[[</span> $TERM <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;screen&#34;</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> rvm use default
 </code></pre></div>
             </div>
             

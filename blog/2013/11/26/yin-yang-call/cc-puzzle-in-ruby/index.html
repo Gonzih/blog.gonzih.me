@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -77,7 +68,7 @@
               <span class="post-date">Tue, Nov 26, 2013</span>
                   <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 <p>Here is Scheme implementation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let* </span>((<span style="color:#a6e22e">yin</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let* </span>((<span style="color:#a6e22e">yin</span>
         ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">cc</span>) (display <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">\</span>@) cc) (call-with-current-continuation (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) c))))
        (<span style="color:#a6e22e">yang</span>
         ((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">cc</span>) (display <span style="color:#f92672">#</span><span style="color:#960050;background-color:#1e0010">\</span>*) cc) (call-with-current-continuation (<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">c</span>) c)))))
@@ -86,7 +77,7 @@
 <p><a href="https://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/">Here</a> you can find good explanation,
 also few of explanations can be found on <a href="https://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work">StackOverflow</a>.</p>
 <p>After I understand how it works I got all that excited and implemented given puzzle in ruby:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#34;continuation&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#34;continuation&#34;</span>
 
 yin  <span style="color:#f92672">=</span> <span style="color:#f92672">-&gt;</span>(cc) { print <span style="color:#e6db74">&#34;@&#34;</span>; cc }<span style="color:#f92672">.</span>call(callcc { <span style="color:#f92672">|</span>c<span style="color:#f92672">|</span> c })
 yang <span style="color:#f92672">=</span> <span style="color:#f92672">-&gt;</span>(cc) { print <span style="color:#e6db74">&#34;*&#34;</span>; cc }<span style="color:#f92672">.</span>call(callcc { <span style="color:#f92672">|</span>c<span style="color:#f92672">|</span> c })
@@ -98,7 +89,7 @@ I will research further, but if you have any information about that feel free to
 <p>Cheers!</p>
 <p><strong>UPDATE</strong> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
 So here is his fixed version:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#34;continuation&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">require <span style="color:#e6db74">&#34;continuation&#34;</span>
 
 lambda <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>yin, yang<span style="color:#f92672">|</span>
   yin<span style="color:#f92672">.</span>call(yang)

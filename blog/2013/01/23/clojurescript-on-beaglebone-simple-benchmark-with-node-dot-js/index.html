@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -78,7 +69,7 @@
                   <p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
 <p><a href="https://github.com/Gonzih/clojurescript-small-benchmark-for-embed">Code</a> is modified to run on top of the JavaScript:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>benchmark.core)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>benchmark.core)
 
 (<span style="color:#66d9ef">defn </span>factorial [x]
   (reduce * (range <span style="color:#ae81ff">1</span> (inc x))))
@@ -110,7 +101,7 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
 
 (<span style="color:#a6e22e">set!</span> *main-cli-fn* -main)
 </code></pre></div><p>Benchmark results:</p>
-<pre><code>&gt; node --version
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-plaintext" data-lang="plaintext">&gt; node --version
 v0.6.12
 
 # simple compiler optimization
@@ -132,7 +123,7 @@ v0.6.12
 (factorial 5000) Avg: 54.775
 (fib 20)         Avg: 2.77
 (sort-seq)       Avg: 6325.71
-</code></pre><p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
+</code></pre></div><p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
 Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :)</p>
             </div>
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dependencies on Max Gonzih</title>
+    <link>https://blog.gonzih.me/categories/dependencies/</link>
+    <description>Recent content in dependencies on Max Gonzih</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>gonzih@gmail.com (Max Gonzih)</managingEditor>
+    <webMaster>gonzih@gmail.com (Max Gonzih)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 28 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gonzih.me/categories/dependencies/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DIY Dependabot for Clojure</title>
+      <link>https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/</link>
+      <pubDate>Thu, 28 Jan 2021 00:00:00 +0000</pubDate>
+      <author>gonzih@gmail.com (Max Gonzih)</author>
+      <guid>https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/</guid>
+      <description>&lt;p&gt;Unfortunately &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support clojure.
+And as such I came with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

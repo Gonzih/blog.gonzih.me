@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -77,7 +68,7 @@
               <span class="post-date">Mon, Oct 8, 2012</span>
                   <p>Recently I migarted from awesome to xmonad. I&rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.</p>
 <p>First hack was to use functional keys [F1..F12] like so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    <span style="color:#75715e">-- mod-[F1..F12]       Switch to workspace N</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#75715e">-- mod-[F1..F12]       Switch to workspace N</span>
     <span style="color:#75715e">-- mod-shift-[F1..F12] Move client to workspace N</span>
     <span style="color:#75715e">--</span>
     [((m <span style="color:#f92672">.|.</span> modm, k), windows <span style="color:#f92672">$</span> f i)
@@ -85,7 +76,7 @@
         , (f, m) <span style="color:#f92672">&lt;-</span> [(<span style="color:#66d9ef">W</span><span style="color:#f92672">.</span>greedyView, <span style="color:#ae81ff">0</span>), (<span style="color:#66d9ef">W</span><span style="color:#f92672">.</span>shift, shiftMask)]]
 
 </code></pre></div><p>But after some research I found that I can detect key symbol using xev command. Here is my latest solution:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell">    <span style="color:#75715e">-- Programmer Dvorak</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#75715e">-- Programmer Dvorak</span>
     <span style="color:#75715e">-- mod-[1..9]       Switch to workspace N</span>
     <span style="color:#75715e">-- mod-shift-[1..9] Move client to workspace N</span>
     <span style="color:#75715e">--</span>

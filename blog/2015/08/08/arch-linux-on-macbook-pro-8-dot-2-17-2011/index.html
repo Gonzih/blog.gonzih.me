@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -80,28 +71,28 @@
 <p><!-- raw HTML omitted -->Arch Wiki page<!-- raw HTML omitted --> covers installation well enough in my opinion.</p>
 <h3 id="bootloader-via-systemd-boot">Bootloader via systemd-boot</h3>
 <p>Before installing boot loader change /boot partition type to <code>EFI System</code> (<code>ef00</code>).</p>
-<pre><code>mkfs.fat -F32 /dev/sda1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-shell" data-lang="shell">mkfs.fat -F32 /dev/sda1
 pacman -S dosfstools
 mount /dev/sda1 /mnt/boot
 arch-chroot /mnt
-bootctl --path=/boot instnall
-</code></pre><h3 id="bootloader-via-grub">Bootloader via grub</h3>
+bootctl --path<span style="color:#f92672">=</span>/boot instnall
+</code></pre></div><h3 id="bootloader-via-grub">Bootloader via grub</h3>
 <p>You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be <code>ef00</code> type partition of vfta32.</p>
-<pre><code>mount /dev/sda1 /mnt/boot
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-shell" data-lang="shell">mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/boot/efi
 mount /dev/sda2 /mnt/boot/efi
 modprobe dm-mod
 arch-chroot /mnt
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
+grub-install --target<span style="color:#f92672">=</span>x86_64-efi --efi-directory<span style="color:#f92672">=</span>/boot/efi --bootloader-id<span style="color:#f92672">=</span>arch_grub --recheck --debug
 mkdir -p /boot/grub/locale
-cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+cp /usr/share/locale/en<span style="color:#ae81ff">\@</span>quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
-</code></pre><h2 id="use-broadcom-wl-wireless-module-from-aur">Use broadcom-wl wireless module from AUR</h2>
+</code></pre></div><h2 id="use-broadcom-wl-wireless-module-from-aur">Use broadcom-wl wireless module from AUR</h2>
 <p>This is proprietary broadcom driver. Works fine with BCM4331.
 Only thing that does not work - hidden SSID.</p>
 <p>OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.</p>
 <p>To make sure that correct module is used by hardwrare blacklist every other module and reboot:</p>
-<pre><code>#/etc/modprobe.d/wl.conf
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-plaintext" data-lang="plaintext">#/etc/modprobe.d/wl.conf
 blacklist b43
 blacklist b43legacy
 blacklist ssb
@@ -110,11 +101,11 @@ blacklist brcm80211
 blacklist brcmfmac
 blacklist brcmsmac
 blacklist bcma
-</code></pre><h2 id="disable-radeon-gpu-for-better-power-consumption">Disable Radeon GPU for better power consumption</h2>
+</code></pre></div><h2 id="disable-radeon-gpu-for-better-power-consumption">Disable Radeon GPU for better power consumption</h2>
 <p>This will reduce power usage dramatically but also will disable external screen support via display port.
 This laptop relies on the external gpu to work with display port.</p>
 <p>Edit <code>/etc/grub.d/00_header</code> and add outb lines in between <code>set gfxmode=${GRUB_GFXMODE}</code> and <code>load video</code>:</p>
-<pre><code>...
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-plaintext" data-lang="plaintext">...
 set gfxmode=${GRUB_GFXMODE}
 outb 0x728 1
 outb 0x710 2
@@ -122,9 +113,9 @@ outb 0x740 2
 outb 0x750 0
 load video
 ...
-</code></pre><p>Generate new grub config:</p>
-<pre><code># grub-mkconfig -o /boot/grub/grub.cfg
-</code></pre><p>PS. This post will probably grow over time.</p>
+</code></pre></div><p>Generate new grub config:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># grub-mkconfig -o /boot/grub/grub.cfg</span>
+</code></pre></div><p>PS. This post will probably grow over time.</p>
             </div>
 
             

@@ -50,9 +50,9 @@ Enjoy!&lt;/p&gt;
       <guid>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
       <description>&lt;p&gt;Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&amp;rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java: no such file or directory
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java: no such file or directory
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So here is fix:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     

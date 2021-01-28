@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.gonzih.me/categories/</loc>
+    <lastmod>2021-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/categories/clojure/</loc>
+    <lastmod>2021-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/categories/dependabot/</loc>
+    <lastmod>2021-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/categories/dependencies/</loc>
+    <lastmod>2021-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/blog/2021/01/28/diy-dependabot-for-clojure/</loc>
+    <lastmod>2021-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/</loc>
+    <lastmod>2021-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.gonzih.me/post/</loc>
+    <lastmod>2021-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.gonzih.me/categories/3d/</loc>
     <lastmod>2020-02-12T00:00:00+00:00</lastmod>
   </url>
@@ -23,27 +58,12 @@
   </url>
   
   <url>
-    <loc>https://blog.gonzih.me/categories/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.gonzih.me/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.gonzih.me/categories/modeling/</loc>
     <lastmod>2020-02-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.gonzih.me/categories/openscad/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.gonzih.me/post/</loc>
     <lastmod>2020-02-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -165,11 +185,6 @@
   <url>
     <loc>https://blog.gonzih.me/categories/macbook/</loc>
     <lastmod>2015-08-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.gonzih.me/categories/clojure/</loc>
-    <lastmod>2015-06-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>

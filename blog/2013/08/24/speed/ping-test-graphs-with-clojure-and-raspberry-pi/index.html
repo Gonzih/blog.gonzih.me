@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -83,36 +74,36 @@ So I decided to make sure it&rsquo;s my ISP fault and not just my opinion based 
 <h2 id="speedtest-data">Speedtest data</h2>
 <p>For speedtest I will be using python script that uses speedtest.net servers.
 Pi is running Pidora right now, so let&rsquo;s install script dependencies.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">yum -y install python-argparse python-lxml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">yum -y install python-argparse python-lxml
 </code></pre></div><p>Script is hosted on <a href="https://github.com/Janhouse/tespeed">github</a>.
 Let&rsquo;s get the script.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir ~/scripts
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">mkdir ~/scripts
 wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/speedtest.py
 </code></pre></div><p>You can test script running it with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">python ~/scripts/speedtest.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">python ~/scripts/speedtest.py
 </code></pre></div><p>Now let&rsquo;s wrap python script into additional shell script to store time of data collection in csv.
 I&rsquo;m not sure if I need time for now, but let&rsquo;s keep it anyway.
 We will silence stderr from the script and output results as csv.</p>
 <p><code>~/bin/speedtest.zsh</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/usr/bin/zsh
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/usr/bin/zsh
 </span><span style="color:#75715e"></span>
 echo <span style="color:#e6db74">&#34;\&#34;</span><span style="color:#66d9ef">$(</span>date -R<span style="color:#66d9ef">)</span><span style="color:#e6db74">\&#34;,</span><span style="color:#66d9ef">$(</span>python ~/scripts/tespeed.py --csv -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 </code></pre></div><p>Let&rsquo;s put script into crontab to run every 5 minutes, also let&rsquo;s redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.</p>
 <p><code>crontab</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/speedtest.zsh 2&gt;/dev/null &gt;&gt; ~/.speedtest.csv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/speedtest.zsh 2&gt;/dev/null &gt;&gt; ~/.speedtest.csv
 </code></pre></div><p>##Ping data</p>
 <p>For ping data we will be running <code>ping</code> command with 100 packets (<code>ping -c 100</code>) with google dns as target (8.8.8.8) and storing avg value with time to csv file.</p>
 <p><code>~/bin/pingtest.zsh</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/usr/bin/zsh
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/usr/bin/zsh
 </span><span style="color:#75715e"></span>
 AVG<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ping -c <span style="color:#ae81ff">100</span> 8.8.8.8 | grep rtt | sed -r <span style="color:#e6db74">&#39;s#.*\=\s.+/(.+)/.+/.+#\1#&#39;</span><span style="color:#66d9ef">)</span>
 
 echo <span style="color:#e6db74">&#34;\&#34;</span><span style="color:#66d9ef">$(</span>date -R<span style="color:#66d9ef">)</span><span style="color:#e6db74">\&#34;,</span>$AVG<span style="color:#e6db74">&#34;</span>
 </code></pre></div><p><code>crontab</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/pingtest.zsh 2&gt;/dev/null &gt;&gt; ~/.pingtest.csv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/pingtest.zsh 2&gt;/dev/null &gt;&gt; ~/.pingtest.csv
 </code></pre></div><p>##Graphs</p>
 <p>For data visualization let&rsquo;s use Clojure with Incanter. Here is clojure code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>incanter-graphs.core
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>incanter-graphs.core
   (<span style="color:#e6db74">:require</span> [incanter.core <span style="color:#e6db74">:refer</span> <span style="color:#e6db74">:all</span>]
             [incanter.stats <span style="color:#e6db74">:refer</span> <span style="color:#e6db74">:all</span>]
             [incanter.charts <span style="color:#e6db74">:refer</span> <span style="color:#e6db74">:all</span>]
@@ -145,7 +136,7 @@ echo <span style="color:#e6db74">&#34;\&#34;</span><span style="color:#66d9ef">$
   (<span style="color:#a6e22e">draw-file</span> pingfile [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">:x-label</span> <span style="color:#e6db74">&#34;Time&#34;</span> <span style="color:#e6db74">:y-label</span> <span style="color:#e6db74">&#34;Ping time&#34;</span>))
 </code></pre></div><p>Let&rsquo;s put all launch process to Makefile:</p>
 <p><code>Makefile</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">default</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">default</span><span style="color:#f92672">:</span>
 	scp raspberry-pi.local:.speedtest.csv /tmp/
 	scp raspberry-pi.local:.pingtest.csv /tmp/
 	<span style="color:#75715e">#Remove lines with only time (script failure)</span>

@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -81,7 +72,7 @@ but instead we will focus on how to achieve similar results in your ClojureScrip
 <p>In my experience simplest optimization to run in some js engine on server side is whitespace.
 It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
 So our compiler configuration should look something like that:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">{<span style="color:#e6db74">:id</span> <span style="color:#e6db74">&#34;server-side&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">{<span style="color:#e6db74">:id</span> <span style="color:#e6db74">&#34;server-side&#34;</span>
  <span style="color:#e6db74">:source-paths</span> [<span style="color:#e6db74">&#34;src&#34;</span>]
  <span style="color:#e6db74">:compiler</span> {<span style="color:#e6db74">:output-to</span> <span style="color:#e6db74">&#34;resources/public/javascripts/server-side.js&#34;</span>
             <span style="color:#e6db74">:output-dir</span> <span style="color:#e6db74">&#34;resources/public/javascripts/out-server-side&#34;</span>
@@ -90,14 +81,14 @@ So our compiler configuration should look something like that:</p>
             <span style="color:#e6db74">:warnings</span> true
             <span style="color:#e6db74">:optimizations</span> <span style="color:#e6db74">:whitespace</span>}}
 </code></pre></div><p>Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span>main-component
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span>main-component
   (<span style="color:#a6e22e">with-meta</span>
     (<span style="color:#66d9ef">fn </span>[] ...)
     {<span style="color:#e6db74">:component-did-mount</span> (comp init-my-scroll-handler!
                                 also-init-my-go-loop!)}))
 </code></pre></div><p>Next let&rsquo;s create function that will do some rendering to the string.
 I like to keep this function in a component specific ns just for convenience.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span><span style="color:#f92672">^</span><span style="color:#e6db74">:export</span> render-me-to-s [initial-state]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span><span style="color:#f92672">^</span><span style="color:#e6db74">:export</span> render-me-to-s [initial-state]
   (<span style="color:#a6e22e">reset!</span> my-main-state (<span style="color:#a6e22e">js-&gt;clj</span> initial-state))
   <span style="color:#75715e">; Render component to markup without reactid</span>
   (<span style="color:#a6e22e">reagent.core/render-to-static-markup</span> [main-component])
@@ -105,7 +96,7 @@ I like to keep this function in a component specific ns just for convenience.</p
   (<span style="color:#a6e22e">reagent.core/render-to-string</span> [main-component]))
 </code></pre></div><p>Now server side bootstrapping, most of this code was taken from <a href="https://github.com/reactjs/react-rails">react-rails plugin</a>.</p>
 <p>First of all react expects to have global or window objects in your js engine (setup.js):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>;
 <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">self</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">self</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>;
 <span style="color:#66d9ef">var</span> window <span style="color:#f92672">=</span> window <span style="color:#f92672">||</span> <span style="color:#66d9ef">this</span>;
 <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">console</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">console</span> <span style="color:#f92672">||</span> {};
@@ -115,7 +106,7 @@ I like to keep this function in a component specific ns just for convenience.</p
   }
 });
 </code></pre></div><p>Now let&rsquo;s try and use all this in our code (for now in Ruby):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">cxt <span style="color:#f92672">=</span> <span style="color:#66d9ef">V8</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Context</span><span style="color:#f92672">.</span>new
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">cxt <span style="color:#f92672">=</span> <span style="color:#66d9ef">V8</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Context</span><span style="color:#f92672">.</span>new
 cxt<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;setup.js&#39;</span>)
 cxt<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;resources/public/javascripts/server-side.js&#39;</span>)
 html <span style="color:#f92672">=</span> cxt<span style="color:#f92672">.</span>eval(<span style="color:#e6db74">&#34;my.amazing_component.ns.render_me_to_s(</span><span style="color:#e6db74">#{</span>init_state<span style="color:#f92672">.</span>to_json<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>)
@@ -125,24 +116,24 @@ escape your data for usage inside json, but most of the time you should be alrig
 <p>If you have issues with core.async there are 2 ways to solve it.
 I personally prefer to move core.async initialization into some lifecycle method.
 Another solution is to implement setTimeout function like that in your <code>setup.js</code> snippet:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">goog</span>.<span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">setTimeout</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">cb</span>, <span style="color:#a6e22e">t</span>) {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">goog</span>.<span style="color:#a6e22e">global</span>.<span style="color:#a6e22e">setTimeout</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">cb</span>, <span style="color:#a6e22e">t</span>) {
     <span style="color:#a6e22e">cb</span>();
 }
 </code></pre></div><p>Now frontend part. First let&rsquo;s in-line generated html in to the container:</p>
-<pre><code class="language-erb" data-lang="erb">&lt;div id=&quot;content&quot;&gt;&lt;%= html %&gt;&lt;/div&gt;
-</code></pre><p>Then let&rsquo;s write function that will render our component on frontend:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span><span style="color:#f92672">^</span><span style="color:#e6db74">:export</span> mount-me [initial-state]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;content&#34;</span>&gt;<span style="color:#960050;background-color:#1e0010">&lt;</span>%= html %&gt;&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><p>Then let&rsquo;s write function that will render our component on frontend:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">def </span><span style="color:#f92672">^</span><span style="color:#e6db74">:export</span> mount-me [initial-state]
   (<span style="color:#a6e22e">reset!</span> my-main-state (<span style="color:#a6e22e">js-&gt;clj</span> initial-state))
   (<span style="color:#a6e22e">reagent.core/render</span> [main-component]
                        (<span style="color:#a6e22e">js/document.getElementById</span> <span style="color:#e6db74">&#34;content&#34;</span>)))
 </code></pre></div><p>As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
 Am I wrong on this one? Don&rsquo;t know yet.</p>
 <p>Inline javascript that you should use on frontend looks like that:</p>
-<pre><code class="language-erb" data-lang="erb">&lt;script&gt;
-my.amazing_component.ns.mount_me(&lt;%= init_state.to_json %&gt;)
-&lt;/script&gt;
-</code></pre><h3 id="nashorn-example-result-of-my-experiments-in-the-repl">Nashorn example (result of my experiments in the REPL)</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(import <span style="color:#f92672">&#39;</span>[javax.script ScriptEngineManager])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">script</span>&gt;
+<span style="color:#a6e22e">my</span>.<span style="color:#a6e22e">amazing_component</span>.<span style="color:#a6e22e">ns</span>.<span style="color:#a6e22e">mount_me</span>(<span style="color:#f92672">&lt;%=</span> <span style="color:#a6e22e">init_state</span>.<span style="color:#a6e22e">to_json</span> <span style="color:#f92672">%&gt;</span>)
+&lt;/<span style="color:#f92672">script</span>&gt;
+</code></pre></div><h3 id="nashorn-example-result-of-my-experiments-in-the-repl">Nashorn example (result of my experiments in the REPL)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(import <span style="color:#f92672">&#39;</span>[javax.script ScriptEngineManager])
 (<span style="color:#66d9ef">def </span>nashorn (<span style="color:#a6e22e">.getEngineByName</span> (<span style="color:#a6e22e">ScriptEngineManager.</span>) <span style="color:#e6db74">&#34;nashorn&#34;</span>))
 
 <span style="color:#75715e">; Same as in ruby version</span>

@@ -1,0 +1,234 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.79.0" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>DIY Dependabot for Clojure &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+        <div class="content container">
+            <div class="post">
+                <h1>DIY Dependabot for Clojure</h1>
+              <span class="post-date">Thu, Jan 28, 2021</span>
+                  <p>Unfortunately <a href="https://dependabot.com">dependabot</a> does not support clojure.
+And as such I came with a silly idea of putting something similar together using Github Actions.</p>
+<p>First things first here is complete Github Actions workflow:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Dependencies</span>
+
+<span style="color:#f92672">on</span>:
+  <span style="color:#f92672">schedule</span>:
+    - <span style="color:#f92672">cron</span>: <span style="color:#e6db74">&#39;0 */3 * * *&#39;</span>
+  <span style="color:#f92672">workflow_dispatch</span>:
+
+<span style="color:#f92672">jobs</span>:
+  <span style="color:#f92672">bump</span>:
+    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+    <span style="color:#f92672">container</span>:
+      <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nixos/nix</span>
+    <span style="color:#f92672">steps</span>:
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">fetch-depth</span>: <span style="color:#ae81ff">0</span>
+    - <span style="color:#f92672">run</span>: <span style="color:#ae81ff">nix-env -i clojure</span>
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">run depot</span>
+      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        </span>        <span style="color:#ae81ff">clojure -Sdeps &#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &#34;2.1.0&#34;}}}}}&#39; -M:outdated -m depot.outdated.main --every --write &gt; deps-output.txt</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps-output</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">deps-output.txt</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">deps.edn</span>
+
+  <span style="color:#f92672">open-pr</span>:
+    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+    <span style="color:#f92672">needs</span>: <span style="color:#ae81ff">bump</span>
+    <span style="color:#f92672">steps</span>:
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">fetch-depth</span>: <span style="color:#ae81ff">0</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/download-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps-output</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/download-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps</span>
+    - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">get-pr-body</span>
+      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        body=$(cat deps-output.txt)
+</span><span style="color:#e6db74">        echo ::set-output name=body::$body</span>        
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">create PR</span>
+      <span style="color:#f92672">id</span>: <span style="color:#ae81ff">cpr</span>
+      <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">peter-evans/create-pull-request@v3</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">token</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
+        <span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Update dependencies&#34;</span>
+        <span style="color:#f92672">body</span>: <span style="color:#ae81ff">${{ steps.get-pr-body.outputs.body }}</span>
+        <span style="color:#f92672">branch</span>: <span style="color:#ae81ff">update-dependencies</span>
+        <span style="color:#f92672">labels</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">          </span>          <span style="color:#ae81ff">dependencies</span>
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">check outputs</span>
+      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        echo &#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&#34;
+</span><span style="color:#e6db74">        echo &#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&#34;</span>        
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">geekyeggo/delete-artifact@v1</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps-output</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">geekyeggo/delete-artifact@v1</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps</span>
+</code></pre></div><p>And now lets step by step to see what is going on here.</p>
+<p>First we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">on</span>:
+  <span style="color:#f92672">schedule</span>:
+    - <span style="color:#f92672">cron</span>: <span style="color:#e6db74">&#39;0 */3 * * *&#39;</span>
+  <span style="color:#f92672">workflow_dispatch</span>:
+</code></pre></div><p>After that we define our first job.
+Workflow is split in to two pieces because <code>peter-evans/create-pull-request@v3</code> has some issues running in custom containers (based on my experience).
+And because of <code>rlwrap</code> issue in docker.
+If you are able to run clojure clj tool in ubuntu image directly this config can be drastically simplified.</p>
+<p>I do run actions for this project in nixos countainers and after checkout is done I make sure that clojure cli tool is available:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">run</span>: <span style="color:#ae81ff">nix-env -i clojure</span>
+</code></pre></div><p>To run depot in this example I just use example command from depot <a href="https://github.com/Olical/depot#usage">README.md</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">run depot</span>
+      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        </span>        <span style="color:#ae81ff">clojure -Sdeps &#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &#34;2.1.0&#34;}}}}}&#39; -M:outdated -m depot.outdated.main --every --write &gt; deps-output.txt</span>
+</code></pre></div><p>After this is done we get two files that we care about:</p>
+<ul>
+<li><code>deps.edn</code> - dependencies file that was modified by depot</li>
+<li><code>deps-output.txt</code> - depot stdout that we can use as a body for a pull request</li>
+</ul>
+<p>To transfer those two files we are going to utilize github artifacts:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps-output</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">deps-output.txt</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/upload-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps</span>
+        <span style="color:#f92672">path</span>: <span style="color:#ae81ff">deps.edn</span>
+</code></pre></div><p>And now we can proceed with creating pull request.
+It is important to tell our second job that it has to wait for a first one to complete.
+Otherwise there would be no files available for download from storage.
+To do that we can simply say that job <code>needs: bump</code>, <code>bump</code> being the name of our first job of course.</p>
+<p>First lets download our two files from artifact storage:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/download-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps-output</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/download-artifact@v2</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps</span>
+</code></pre></div><p>Once this is done we need to read output file and store it in output variable of a step.
+To later reuse this variable we give this step id <code>get-pr-body</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">id</span>: <span style="color:#ae81ff">get-pr-body</span>
+      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        body=$(cat deps-output.txt)
+</span><span style="color:#e6db74">        echo ::set-output name=body::$body</span>        
+</code></pre></div><p>And now lets create our pull request.
+To allow this action to access our repository we will need to give it a token.
+I used <a href="https://github.com/settings/tokens">Personal Access Token</a> with <code>repo</code> scope fully enabled.
+You can see how we extract body using variable inlining with <code>${{ steps.get-pr-body.outputs.body }}</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">create PR</span>
+      <span style="color:#f92672">id</span>: <span style="color:#ae81ff">cpr</span>
+      <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">peter-evans/create-pull-request@v3</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">token</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
+        <span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Update dependencies&#34;</span>
+        <span style="color:#f92672">body</span>: <span style="color:#ae81ff">${{ steps.get-pr-body.outputs.body }}</span>
+        <span style="color:#f92672">branch</span>: <span style="color:#ae81ff">update-dependencies</span>
+        <span style="color:#f92672">labels</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">          </span>          <span style="color:#ae81ff">dependencies</span>
+</code></pre></div><p>Once this step succeeded we can print pull request information (mostly for debugging purposes)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">check outputs</span>
+      <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        echo &#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&#34;
+</span><span style="color:#e6db74">        echo &#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&#34;</span>        
+</code></pre></div><p>And of course lets not forget to cleanup after ourselves!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml">    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">geekyeggo/delete-artifact@v1</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps-output</span>
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">geekyeggo/delete-artifact@v1</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">deps</span>
+</code></pre></div><p>And that&rsquo;s it! One day there might be a better tool or approach to solve this, but for now our small workflow should do just fine :)</p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+
+  </body>
+</html>

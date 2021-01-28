@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -87,7 +78,7 @@ this solution should be your new starting point.</p>
 Open terminal using <code>:terminal</code> command.</p>
 <p>Here are some keybindings that will help you to send code from
 your clojure buffer to the terminal buffer.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#34;nvim&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#34;nvim&#34;</span>)<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">  &#34; Open terminal and run lein figwheel</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#a6e22e">nmap</span> &lt;<span style="color:#a6e22e">Leader</span>&gt;<span style="color:#a6e22e">term</span> &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">w</span>&gt;<span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">terminal</span>&lt;<span style="color:#a6e22e">CR</span>&gt;<span style="color:#a6e22e">lein</span> <span style="color:#a6e22e">figwheel</span>&lt;<span style="color:#a6e22e">CR</span>&gt;&lt;<span style="color:#a6e22e">C</span>-\&gt;&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">n</span>&gt;&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">w</span>&gt;<span style="color:#a6e22e">p</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">  &#34; Evaluate anything from the visual mode in the next window</span><span style="color:#960050;background-color:#1e0010">

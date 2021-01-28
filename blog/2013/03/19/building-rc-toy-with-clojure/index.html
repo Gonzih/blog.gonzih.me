@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -158,7 +149,7 @@ I just replaced overtone related events handling with my own code based on Clodi
 <h2 id="fixed-issues">Fixed Issues</h2>
 <h3 id="native-dependencies-issue">Native dependencies issue</h3>
 <p>Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#INFO: Failed to load library: no jinput-linux64 in java.library.path</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#INFO: Failed to load library: no jinput-linux64 in java.library.path</span>
 sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so<span style="color:#e6db74">`</span>
 </code></pre></div><h3 id="gamepad-configuration">Gamepad configuration</h3>
 <p>Add <code>joydev</code> to <code>/etc/modules</code> to see gamepad in <code>/etc/input</code>.
@@ -168,7 +159,7 @@ Also you need to switch gamepad to direct input mode (X -&gt; D switch on the ba
 <p>To scan for devices from command line use <code>hcitool scan</code>.</p>
 <p>To bind bluetooth to serial port on startup use following code (untested yet):</p>
 <p><code>/etc/bluetooth/rfcomm.conf</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">rfcomm0 {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">rfcomm0 {
         bind yes;
         device mac-adress-of-bluetooth-on-arduino;
         channel 1;
@@ -176,8 +167,8 @@ Also you need to switch gamepad to direct input mode (X -&gt; D switch on the ba
 }
 </code></pre></div><h3 id="jinput-permissions">JInput permissions</h3>
 <p>For now I have no idea how to fix that issue. Looks like something is wrong with permissions.</p>
-<pre><code>Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
-</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
+</code></pre></div>
             </div>
 
             

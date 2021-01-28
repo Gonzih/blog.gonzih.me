@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -76,7 +67,7 @@
                 <h1>How To Fix Octopress Pygments Error on Arch Linux</h1>
               <span class="post-date">Wed, Sep 21, 2011</span>
                   <p>If your get following pygments error using octopress with arch linux.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Building site: source -&gt; public
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Building site: source -&gt; public
   File &#34;&lt;string&gt;&#34;, line 1
     import sys; print sys.executable
                         ^
@@ -84,15 +75,15 @@ SyntaxError: invalid syntax
 </code></pre></div><p>It&rsquo;s happens because RubyPython use Python version 2 by calling &ldquo;python&rdquo; command. By default python equal to python3 in Arch Linux.</p>
 <p>For fix simple add ruby file to plugins directory with following code.</p>
 <p><code>ruby_python_arch_linux_fix.rb</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">RubyPython</span><span style="color:#f92672">.</span>configure <span style="color:#e6db74">:python_exe</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;python2.7&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">RubyPython</span><span style="color:#f92672">.</span>configure <span style="color:#e6db74">:python_exe</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;python2.7&#39;</span>
 </code></pre></div><p>Also if you get following lib.so related error:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
 </code></pre></div><p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
 <p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
 <h3 id="update">Update</h3>
 <p>Another Workaround:
 edit &ldquo;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&rdquo; file (path might be different for you)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">--</span> <span style="color:#ae81ff">31</span> @library <span style="color:#f92672">=</span> find_python_lib
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">--</span> <span style="color:#ae81ff">31</span> @library <span style="color:#f92672">=</span> find_python_lib
 <span style="color:#f92672">++</span> <span style="color:#ae81ff">31</span> @library <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/usr/lib/libpython2.7.so&#34;</span>
 
 <span style="color:#f92672">--</span> <span style="color:#ae81ff">126</span> <span style="color:#e6db74">%x(</span><span style="color:#e6db74">#{</span>@python<span style="color:#e6db74">}</span><span style="color:#e6db74"> -c &#34;</span><span style="color:#e6db74">#{</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;)</span><span style="color:#f92672">.</span>chomp <span style="color:#66d9ef">if</span> @python

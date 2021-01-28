@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -76,18 +67,15 @@
                 <h1>Set New PostgreSQL Databases Encoding to Unicode</h1>
               <span class="post-date">Fri, Sep 30, 2011</span>
                   <p>You must change encoding for template1. For do that run following.</p>
-<pre><code>su - postgres
-psql
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">UPDATE</span> pg_database <span style="color:#66d9ef">SET</span> datistemplate <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span> <span style="color:#66d9ef">WHERE</span> datname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;template1&#39;</span>;
+<span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">DATABASE</span> template1;
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> template1 <span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">TEMPLATE</span> <span style="color:#f92672">=</span> template0 <span style="color:#66d9ef">ENCODING</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UNICODE&#39;</span>;
+<span style="color:#66d9ef">UPDATE</span> pg_database <span style="color:#66d9ef">SET</span> datistemplate <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span> <span style="color:#66d9ef">WHERE</span> datname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;template1&#39;</span>;
 
-UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
-DROP DATABASE template1;
-CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
-UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
-
-#recomended
-\c template1
-VACUUM FREEZE;
-</code></pre><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+<span style="color:#f92672">#</span>recomended
+<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">c</span> template1
+<span style="color:#66d9ef">VACUUM</span> <span style="color:#66d9ef">FREEZE</span>;
+</code></pre></div><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
             </div>
 
             

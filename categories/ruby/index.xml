@@ -43,7 +43,7 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;<
       <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;let* &lt;/span&gt;((&lt;span style=&#34;color:#a6e22e&#34;&gt;yin&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;let* &lt;/span&gt;((&lt;span style=&#34;color:#a6e22e&#34;&gt;yin&lt;/span&gt;
         ((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;cc&lt;/span&gt;) (display &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;@) cc) (call-with-current-continuation (&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;) c))))
        (&lt;span style=&#34;color:#a6e22e&#34;&gt;yang&lt;/span&gt;
         ((&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;cc&lt;/span&gt;) (display &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;\&lt;/span&gt;*) cc) (call-with-current-continuation (&lt;span style=&#34;color:#66d9ef&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;c&lt;/span&gt;) c)))))
@@ -71,7 +71,7 @@ All I wanted was simple to use news reader.&lt;/p&gt;</description>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
       <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Building site: source -&amp;gt; public
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Building site: source -&amp;gt; public
   File &amp;#34;&amp;lt;string&amp;gt;&amp;#34;, line 1
     import sys; print sys.executable
                         ^
@@ -87,7 +87,7 @@ SyntaxError: invalid syntax
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</guid>
       <description>&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt; $TERM &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;screen&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rvm use default
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[[&lt;/span&gt; $TERM &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;screen&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; rvm use default
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     

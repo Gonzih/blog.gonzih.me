@@ -14,7 +14,6 @@
 
   
   <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
-  <link rel="stylesheet" href="https://blog.gonzih.me/css/syntax.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
   <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
@@ -30,14 +29,6 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/clojure.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/vim.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/arduino.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/scheme.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
     <body class=" ">
@@ -81,7 +72,7 @@ You will need three things for that.</p>
 <p>Second is <a href="https://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it&rsquo;s awesome and how to use it.</p>
 <p>Third is <a href="https://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides mechanism for form validation based on input classes.</p>
 <p>So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="https://coffeescript.org/">CoffeeScript</a> snippet:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-coffeescript" data-lang="coffeescript"><span style="color:#75715e"># initialize plugin on page ready
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-coffeescript" data-lang="coffeescript"><span style="color:#75715e"># initialize plugin on page ready
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$</span> <span style="color:#a6e22e">-&gt;</span>
   <span style="color:#66d9ef">unless</span> (<span style="color:#a6e22e">Modernizr</span>.<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">required</span>)
     <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;form&#39;</span>).<span style="color:#a6e22e">find</span>(<span style="color:#e6db74">&#39;input[required]&#39;</span>).<span style="color:#a6e22e">each</span> <span style="color:#a6e22e">-&gt;</span>
