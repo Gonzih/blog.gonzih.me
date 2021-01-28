@@ -68,22 +68,22 @@
               <span class="post-date">Mon, Oct 8, 2012</span>
                   <p>Recently I migarted from awesome to xmonad. I&rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.</p>
 <p>First hack was to use functional keys [F1..F12] like so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#75715e">-- mod-[F1..F12]       Switch to workspace N</span>
-    <span style="color:#75715e">-- mod-shift-[F1..F12] Move client to workspace N</span>
-    <span style="color:#75715e">--</span>
-    [((m <span style="color:#f92672">.|.</span> modm, k), windows <span style="color:#f92672">$</span> f i)
-        <span style="color:#f92672">|</span> (i, k) <span style="color:#f92672">&lt;-</span> zip (<span style="color:#66d9ef">XMonad</span><span style="color:#f92672">.</span>workspaces conf) [xK_F1 <span style="color:#f92672">..</span> xK_F12]
-        , (f, m) <span style="color:#f92672">&lt;-</span> [(<span style="color:#66d9ef">W</span><span style="color:#f92672">.</span>greedyView, <span style="color:#ae81ff">0</span>), (<span style="color:#66d9ef">W</span><span style="color:#f92672">.</span>shift, shiftMask)]]
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#999;font-style:italic">-- mod-[F1..F12]       Switch to workspace N</span>
+    <span style="color:#999;font-style:italic">-- mod-shift-[F1..F12] Move client to workspace N</span>
+    <span style="color:#999;font-style:italic">--</span>
+    [((m .|. modm, k), windows $ f i)
+        | (i, k) <span style="color:#6ab825;font-weight:bold">&lt;-</span> zip (<span style="color:#6ab825;font-weight:bold">XMonad</span>.workspaces conf) [xK_F1 .. xK_F12]
+        , (f, m) <span style="color:#6ab825;font-weight:bold">&lt;-</span> [(<span style="color:#6ab825;font-weight:bold">W</span>.greedyView, <span style="color:#3677a9">0</span>), (<span style="color:#6ab825;font-weight:bold">W</span>.shift, shiftMask)]]
 
 </code></pre></div><p>But after some research I found that I can detect key symbol using xev command. Here is my latest solution:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#75715e">-- Programmer Dvorak</span>
-    <span style="color:#75715e">-- mod-[1..9]       Switch to workspace N</span>
-    <span style="color:#75715e">-- mod-shift-[1..9] Move client to workspace N</span>
-    <span style="color:#75715e">--</span>
-    [((m <span style="color:#f92672">.|.</span> modm, k), windows <span style="color:#f92672">$</span> f i)
-        <span style="color:#f92672">|</span> (i, k) <span style="color:#f92672">&lt;-</span> zip (<span style="color:#66d9ef">XMonad</span><span style="color:#f92672">.</span>workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright, xK_parenleft
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#999;font-style:italic">-- Programmer Dvorak</span>
+    <span style="color:#999;font-style:italic">-- mod-[1..9]       Switch to workspace N</span>
+    <span style="color:#999;font-style:italic">-- mod-shift-[1..9] Move client to workspace N</span>
+    <span style="color:#999;font-style:italic">--</span>
+    [((m .|. modm, k), windows $ f i)
+        | (i, k) <span style="color:#6ab825;font-weight:bold">&lt;-</span> zip (<span style="color:#6ab825;font-weight:bold">XMonad</span>.workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright, xK_parenleft
                                                  ,xK_equal, xK_asterisk, xK_parenright, xK_plus, xK_bracketright, xK_exclam]
-        , (f, m) <span style="color:#f92672">&lt;-</span> [(<span style="color:#66d9ef">W</span><span style="color:#f92672">.</span>greedyView, <span style="color:#ae81ff">0</span>), (<span style="color:#66d9ef">W</span><span style="color:#f92672">.</span>shift, shiftMask)]]
+        , (f, m) <span style="color:#6ab825;font-weight:bold">&lt;-</span> [(<span style="color:#6ab825;font-weight:bold">W</span>.greedyView, <span style="color:#3677a9">0</span>), (<span style="color:#6ab825;font-weight:bold">W</span>.shift, shiftMask)]]
 
 </code></pre></div><p>Hooray! It works!</p>
             </div>

@@ -69,39 +69,39 @@
                   <p>Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&rsquo;s all about core.async.
 Also provides ability to apply transformation using transducers.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">
-(<span style="color:#66d9ef">defonce </span>form (<span style="color:#a6e22e">atom</span> {}))
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">
+(<span style="color:#6ab825;font-weight:bold">defonce </span><span style="color:#40ffff">form</span> (<span style="color:#447fcf">atom</span> {}))
 
-(<span style="color:#66d9ef">defn </span>bind-input
-  <span style="color:#e6db74">&#34;Generat on-change callback,
-</span><span style="color:#e6db74">   bind value to form-key of form-atom.
-</span><span style="color:#e6db74">   Provides ability to implement transformation using transducers.&#34;</span>
-  [form-atom form-key xform]
-  (<span style="color:#66d9ef">let </span>[local-chan (<span style="color:#a6e22e">chan</span> <span style="color:#ae81ff">1</span> xform)]
-    (<span style="color:#a6e22e">go-loop</span> []
-      (<span style="color:#a6e22e">swap!</span> form-atom assoc form-key (<span style="color:#a6e22e">&lt;!</span> local-chan))
-      (<span style="color:#a6e22e">recur</span>))
-    (<span style="color:#66d9ef">fn </span>[event]
-      (<span style="color:#a6e22e">put!</span> local-chan
-            (<span style="color:#a6e22e">.-value</span> (<span style="color:#a6e22e">.-target</span> event))))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">bind-input</span>
+  <span style="color:#ed9d13">&#34;Generat on-change callback,
+</span><span style="color:#ed9d13">   bind value to form-key of form-atom.
+</span><span style="color:#ed9d13">   Provides ability to implement transformation using transducers.&#34;</span>
+  [<span style="color:#40ffff">form-atom</span> <span style="color:#40ffff">form-key</span> <span style="color:#40ffff">xform</span>]
+  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">local-chan</span> (<span style="color:#447fcf">chan</span> <span style="color:#3677a9">1</span> <span style="color:#40ffff">xform</span>)]
+    (<span style="color:#447fcf">go-loop</span> []
+      (<span style="color:#447fcf">swap!</span> <span style="color:#40ffff">form-atom</span> <span style="color:#24909d">assoc </span><span style="color:#40ffff">form-key</span> (<span style="color:#447fcf">&lt;!</span> <span style="color:#40ffff">local-chan</span>))
+      (<span style="color:#447fcf">recur</span>))
+    (<span style="color:#6ab825;font-weight:bold">fn </span>[<span style="color:#40ffff">event</span>]
+      (<span style="color:#447fcf">put!</span> <span style="color:#40ffff">local-chan</span>
+            (<span style="color:#447fcf">.-value</span> (<span style="color:#447fcf">.-target</span> <span style="color:#40ffff">event</span>))))))
 
-(<span style="color:#66d9ef">defn </span>bound-input
-  <span style="color:#e6db74">&#34;Generate input,
-</span><span style="color:#e6db74">   create two way data binding
-</span><span style="color:#e6db74">   between input value and value under form-key in form-atom.
-</span><span style="color:#e6db74">   Provides ability to implement transformation using transducers.&#34;</span>
-  [attrs form-atom form-key xform]
-  [<span style="color:#e6db74">:input</span> (merge attrs
-                 {<span style="color:#e6db74">:value</span> (<span style="color:#a6e22e">form-key</span> <span style="color:#f92672">@</span>form-atom)
-                  <span style="color:#e6db74">:on-change</span> (<span style="color:#a6e22e">bind-input</span> form-atom form-key xform)})])
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">bound-input</span>
+  <span style="color:#ed9d13">&#34;Generate input,
+</span><span style="color:#ed9d13">   create two way data binding
+</span><span style="color:#ed9d13">   between input value and value under form-key in form-atom.
+</span><span style="color:#ed9d13">   Provides ability to implement transformation using transducers.&#34;</span>
+  [<span style="color:#40ffff">attrs</span> <span style="color:#40ffff">form-atom</span> <span style="color:#40ffff">form-key</span> <span style="color:#40ffff">xform</span>]
+  [<span style="color:#ed9d13">:input</span> (<span style="color:#24909d">merge </span><span style="color:#40ffff">attrs</span>
+                 {<span style="color:#ed9d13">:value</span> (<span style="color:#447fcf">form-key</span> @<span style="color:#40ffff">form-atom</span>)
+                  <span style="color:#ed9d13">:on-change</span> (<span style="color:#447fcf">bind-input</span> <span style="color:#40ffff">form-atom</span> <span style="color:#40ffff">form-key</span> <span style="color:#40ffff">xform</span>)})])
 
-(<span style="color:#66d9ef">defn </span>main-component []
-  [<span style="color:#e6db74">:div</span>
-   [<span style="color:#e6db74">:h3</span> (<span style="color:#e6db74">:name</span> <span style="color:#f92672">@</span>form) <span style="color:#e6db74">&#34; value&#34;</span>]
-   [bound-input {<span style="color:#e6db74">:type</span> <span style="color:#e6db74">:text</span>} form <span style="color:#e6db74">:name</span> (filter <span style="color:#f92672">#</span>(&gt; <span style="color:#ae81ff">15</span> (count %)))]])
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">main-component</span> []
+  [<span style="color:#ed9d13">:div</span>
+   [<span style="color:#ed9d13">:h3</span> (<span style="color:#ed9d13">:name</span> @<span style="color:#40ffff">form</span>) <span style="color:#ed9d13">&#34; value&#34;</span>]
+   [<span style="color:#40ffff">bound-input</span> {<span style="color:#ed9d13">:type</span> <span style="color:#ed9d13">:text</span>} <span style="color:#40ffff">form</span> <span style="color:#ed9d13">:name</span> (<span style="color:#24909d">filter </span>#(<span style="color:#24909d">&gt; </span><span style="color:#3677a9">15</span> (<span style="color:#24909d">count </span><span style="color:#40ffff">%</span>)))]])
 
-(<span style="color:#a6e22e">reagent/render-component</span> [main-component]
-                          (<span style="color:#a6e22e">js/document.getElementById</span> <span style="color:#e6db74">&#34;content&#34;</span>))
+(<span style="color:#447fcf">reagent/render-component</span> [<span style="color:#40ffff">main-component</span>]
+                          (<span style="color:#447fcf">js/document.getElementById</span> <span style="color:#ed9d13">&#34;content&#34;</span>))
 </code></pre></div>
             </div>
 

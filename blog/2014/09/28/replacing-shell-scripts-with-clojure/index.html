@@ -75,22 +75,22 @@ But sometimes it&rsquo;s impossible to add some external dependencies to the sys
 What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?</p>
 <h1 id="basic-setup">Basic setup</h1>
 <p>First what we will need is to get clojure jar file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">wget -O /opt/clojure.jar <span style="color:#e6db74">&#39;https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">wget -O /opt/clojure.jar <span style="color:#ed9d13">&#39;https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&#39;</span>
 </code></pre></div><p>Next lets create executable <code>/usr/bin/clojure</code> that will live in <code>/usr/bin</code> (or <code>/opt/bin</code> or <code>/home/youruser/bin</code>):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
-</span><span style="color:#75715e"></span>
-exec java -jar /opt/clojure.jar <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#cd2828;font-weight:bold">#!/bin/sh
+</span><span style="color:#cd2828;font-weight:bold"></span>
+<span style="color:#24909d">exec</span> java -jar /opt/clojure.jar <span style="color:#ed9d13">&#34;</span><span style="color:#40ffff">$@</span><span style="color:#ed9d13">&#34;</span>
 </code></pre></div><p>And now it&rsquo;s time for our hello world script <code> /opt/test.clj</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure"><span style="color:#f92672">#</span>!/usr/bin/clojure
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">#<span style="color:#40ffff">!/usr/bin/clojure</span>
 
-(println <span style="color:#e6db74">&#34;hello world&#34;</span>)
+(<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;hello world&#34;</span>)
 </code></pre></div><p>Make it executable:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">chmod +x /opt/test.clj
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">chmod +x /opt/test.clj
 </code></pre></div><p>And run it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ /opt/test.clj
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ /opt/test.clj
 hello world
 </code></pre></div><p>Yay! But it feels kind of slow:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">time /opt/test.clj
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#24909d">time</span> /opt/test.clj
 hello world
 
 real  0m2.684s
@@ -102,30 +102,30 @@ Can we improve that? What if there would be JVM with fast startup and low memory
 <p><em>&ldquo;But&hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&quot;</em></p>
 <p>I lied, sorry.</p>
 <p>Compiling JamVM with OpenJDK support:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Fetching required dependencies and source</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#999;font-style:italic"># Fetching required dependencies and source</span>
 apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
-cd /opt
-wget -O jamvm-2.0.0.tar.gz <span style="color:#e6db74">&#39;https://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;</span>
+<span style="color:#24909d">cd</span> /opt
+wget -O jamvm-2.0.0.tar.gz <span style="color:#ed9d13">&#39;https://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&#39;</span>
 tar -xvzf jamvm-2.0.0.tar.gz
 
-<span style="color:#75715e"># Building</span>
-cd /opt/jamvm-2.0.0
-./configure --with-java-runtime-library<span style="color:#f92672">=</span>openjdk7 <span style="color:#f92672">&amp;&amp;</span> make check <span style="color:#f92672">&amp;&amp;</span> make <span style="color:#f92672">&amp;&amp;</span> make install
+<span style="color:#999;font-style:italic"># Building</span>
+<span style="color:#24909d">cd</span> /opt/jamvm-2.0.0
+./configure --with-java-runtime-library=openjdk7 &amp;&amp; make check &amp;&amp; make &amp;&amp; make install
 
-<span style="color:#75715e"># Installing in to the openjdk installation</span>
+<span style="color:#999;font-style:italic"># Installing in to the openjdk installation</span>
 mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
 cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
 
-<span style="color:#75715e"># Trying it out</span>
+<span style="color:#999;font-style:italic"># Trying it out</span>
 java -jamvm -version
 </code></pre></div><p>JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
 You will need to use -jamvm option to java command to run it with small overhead vm.</p>
 <p>Let&rsquo;s update our clojure executable <code>/usr/bin/clojure</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
-</span><span style="color:#75715e"></span>
-exec java -jamvm -jar /opt/clojure.jar <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#cd2828;font-weight:bold">#!/bin/sh
+</span><span style="color:#cd2828;font-weight:bold"></span>
+<span style="color:#24909d">exec</span> java -jamvm -jar /opt/clojure.jar <span style="color:#ed9d13">&#34;</span><span style="color:#40ffff">$@</span><span style="color:#ed9d13">&#34;</span>
 </code></pre></div><p>Let&rsquo;s try it out:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">time /opt/test.clj
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#24909d">time</span> /opt/test.clj
 hello world
 
 real  0m0.866s
@@ -133,7 +133,7 @@ user  0m0.764s
 sys   0m0.076s
 </code></pre></div><p>Better, right?</p>
 <h2 id="how-slow-is-jamvm-some-benchmarks">How slow is JamVM? Some benchmarks:</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Clojure 1.6
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Clojure 1.6
 
 JamVM:
 

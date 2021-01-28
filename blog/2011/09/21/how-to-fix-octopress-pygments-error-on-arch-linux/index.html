@@ -67,7 +67,7 @@
                 <h1>How To Fix Octopress Pygments Error on Arch Linux</h1>
               <span class="post-date">Wed, Sep 21, 2011</span>
                   <p>If your get following pygments error using octopress with arch linux.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Building site: source -&gt; public
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Building site: source -&gt; public
   File &#34;&lt;string&gt;&#34;, line 1
     import sys; print sys.executable
                         ^
@@ -75,19 +75,19 @@ SyntaxError: invalid syntax
 </code></pre></div><p>It&rsquo;s happens because RubyPython use Python version 2 by calling &ldquo;python&rdquo; command. By default python equal to python3 in Arch Linux.</p>
 <p>For fix simple add ruby file to plugins directory with following code.</p>
 <p><code>ruby_python_arch_linux_fix.rb</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">RubyPython</span><span style="color:#f92672">.</span>configure <span style="color:#e6db74">:python_exe</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;python2.7&#39;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#40ffff">RubyPython</span>.configure <span style="color:#ed9d13">:python_exe</span> =&gt; <span style="color:#ed9d13">&#39;python2.7&#39;</span>
 </code></pre></div><p>Also if you get following lib.so related error:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">LoadError: Could not open library &#39;lib.so&#39;: lib.so: cannot open shared object file: No such file or directory
 </code></pre></div><p>You can find solution <a href="https://github.com/tmm1/pygments.rb/issues/10">here</a>.</p>
 <p><a href="https://github.com/tmm1/pygments.rb/issues/7#issuecomment-2154024">via</a></p>
 <h3 id="update">Update</h3>
 <p>Another Workaround:
 edit &ldquo;vendor/bundle/ruby/1.9.1/gems/rubypython-0.5.3/lib/rubypython/pythonexec.rb&rdquo; file (path might be different for you)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#f92672">--</span> <span style="color:#ae81ff">31</span> @library <span style="color:#f92672">=</span> find_python_lib
-<span style="color:#f92672">++</span> <span style="color:#ae81ff">31</span> @library <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/usr/lib/libpython2.7.so&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">-- <span style="color:#3677a9">31</span> @library = find_python_lib
+++ <span style="color:#3677a9">31</span> @library = <span style="color:#ed9d13">&#34;/usr/lib/libpython2.7.so&#34;</span>
 
-<span style="color:#f92672">--</span> <span style="color:#ae81ff">126</span> <span style="color:#e6db74">%x(</span><span style="color:#e6db74">#{</span>@python<span style="color:#e6db74">}</span><span style="color:#e6db74"> -c &#34;</span><span style="color:#e6db74">#{</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;)</span><span style="color:#f92672">.</span>chomp <span style="color:#66d9ef">if</span> @python
-<span style="color:#f92672">++</span> <span style="color:#ae81ff">126</span> <span style="color:#e6db74">%x(&#34;</span><span style="color:#e6db74">#{</span>@python<span style="color:#e6db74">}</span><span style="color:#e6db74"> -c </span><span style="color:#e6db74">#{</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;)</span><span style="color:#f92672">.</span>chomp <span style="color:#66d9ef">if</span> @python
+-- <span style="color:#3677a9">126</span> <span style="color:#ffa500">%x(</span><span style="color:#ed9d13">#{</span>@python<span style="color:#ed9d13">}</span><span style="color:#ffa500"> -c &#34;</span><span style="color:#ed9d13">#{</span>command<span style="color:#ed9d13">}</span><span style="color:#ffa500">&#34;)</span>.chomp <span style="color:#6ab825;font-weight:bold">if</span> @python
+++ <span style="color:#3677a9">126</span> <span style="color:#ffa500">%x(&#34;</span><span style="color:#ed9d13">#{</span>@python<span style="color:#ed9d13">}</span><span style="color:#ffa500"> -c </span><span style="color:#ed9d13">#{</span>command<span style="color:#ed9d13">}</span><span style="color:#ffa500">&#34;)</span>.chomp <span style="color:#6ab825;font-weight:bold">if</span> @python
 </code></pre></div>
             </div>
 

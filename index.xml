@@ -20,146 +20,146 @@
       <description>&lt;p&gt;Unfortunately &lt;a href=&#34;https://dependabot.com&#34;&gt;dependabot&lt;/a&gt; does not support clojure.
 And as such I came with a silly idea of putting something similar together using Github Actions.&lt;/p&gt;
 &lt;p&gt;First things first here is complete Github Actions workflow:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Dependencies&lt;/span&gt;
-
-&lt;span style=&#34;color:#f92672&#34;&gt;on&lt;/span&gt;:
-  &lt;span style=&#34;color:#f92672&#34;&gt;schedule&lt;/span&gt;:
-    - &lt;span style=&#34;color:#f92672&#34;&gt;cron&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0 */3 * * *&amp;#39;&lt;/span&gt;
-  &lt;span style=&#34;color:#f92672&#34;&gt;workflow_dispatch&lt;/span&gt;:
-
-&lt;span style=&#34;color:#f92672&#34;&gt;jobs&lt;/span&gt;:
-  &lt;span style=&#34;color:#f92672&#34;&gt;bump&lt;/span&gt;:
-    &lt;span style=&#34;color:#f92672&#34;&gt;runs-on&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span style=&#34;color:#f92672&#34;&gt;container&lt;/span&gt;:
-      &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nixos/nix&lt;/span&gt;
-    &lt;span style=&#34;color:#f92672&#34;&gt;steps&lt;/span&gt;:
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/checkout@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;fetch-depth&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nix-env -i clojure&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;run depot&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &lt;/span&gt;        &lt;span style=&#34;color:#ae81ff&#34;&gt;clojure -Sdeps &amp;#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &amp;#34;2.1.0&amp;#34;}}}}}&amp;#39; -M:outdated -m depot.outdated.main --every --write &amp;gt; deps-output.txt&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/upload-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output.txt&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/upload-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps.edn&lt;/span&gt;
-
-  &lt;span style=&#34;color:#f92672&#34;&gt;open-pr&lt;/span&gt;:
-    &lt;span style=&#34;color:#f92672&#34;&gt;runs-on&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span style=&#34;color:#f92672&#34;&gt;needs&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;bump&lt;/span&gt;
-    &lt;span style=&#34;color:#f92672&#34;&gt;steps&lt;/span&gt;:
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/checkout@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;fetch-depth&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/download-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/download-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;get-pr-body&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        body=$(cat deps-output.txt)
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        echo ::set-output name=body::$body&lt;/span&gt;        
-    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;create PR&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;cpr&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;peter-evans/create-pull-request@v3&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;token&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;${{ secrets.GITHUB_TOKEN }}&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Update dependencies&amp;#34;&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;${{ steps.get-pr-body.outputs.body }}&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;branch&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;update-dependencies&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;labels&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;          &lt;/span&gt;          &lt;span style=&#34;color:#ae81ff&#34;&gt;dependencies&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;check outputs&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        echo &amp;#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&amp;#34;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        echo &amp;#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&amp;#34;&lt;/span&gt;        
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;geekyeggo/delete-artifact@v1&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;geekyeggo/delete-artifact@v1&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now lets step by step to see what is going on here.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;Dependencies&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;on&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;schedule&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;cron&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;0 */3 * * *&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;workflow_dispatch&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;jobs&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;bump&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;runs-on&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;ubuntu-latest&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;container&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;image&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;nixos/nix&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;steps&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/checkout@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;fetch-depth&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;nix-env -i clojure&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;run depot&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;clojure -Sdeps &amp;#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &amp;#34;2.1.0&amp;#34;}}}}}&amp;#39; -M:outdated -m depot.outdated.main --every --write &amp;gt; deps-output.txt&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/upload-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;path&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output.txt&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/upload-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;path&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps.edn&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;open-pr&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;runs-on&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;ubuntu-latest&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;needs&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;bump&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;steps&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/checkout@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;fetch-depth&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/download-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/download-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;id&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;get-pr-body&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        body=$(cat deps-output.txt)
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo ::set-output name=body::$body&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;create PR&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;id&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;cpr&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;peter-evans/create-pull-request@v3&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;token&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;${{ secrets.GITHUB_TOKEN }}&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;title&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Update dependencies&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;body&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;${{ steps.get-pr-body.outputs.body }}&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;branch&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;update-dependencies&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;labels&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;          &lt;/span&gt;dependencies&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;check outputs&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo &amp;#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo &amp;#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;geekyeggo/delete-artifact@v1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;geekyeggo/delete-artifact@v1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now lets step by step to see what is going on here.&lt;/p&gt;
 &lt;p&gt;First we allow workflow to be scheduled manually for testing purposes and via cron schedule every 3 hours:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;on&lt;/span&gt;:
-  &lt;span style=&#34;color:#f92672&#34;&gt;schedule&lt;/span&gt;:
-    - &lt;span style=&#34;color:#f92672&#34;&gt;cron&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0 */3 * * *&amp;#39;&lt;/span&gt;
-  &lt;span style=&#34;color:#f92672&#34;&gt;workflow_dispatch&lt;/span&gt;:
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After that we define our first job.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;on&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;schedule&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;cron&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;0 */3 * * *&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;workflow_dispatch&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After that we define our first job.
 Workflow is split in to two pieces because &lt;code&gt;peter-evans/create-pull-request@v3&lt;/code&gt; has some issues running in custom containers (based on my experience).
 And because of &lt;code&gt;rlwrap&lt;/code&gt; issue in docker.
 If you are able to run clojure clj tool in ubuntu image directly this config can be drastically simplified.&lt;/p&gt;
 &lt;p&gt;I do run actions for this project in nixos countainers and after checkout is done I make sure that clojure cli tool is available:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nix-env -i clojure&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To run depot in this example I just use example command from depot &lt;a href=&#34;https://github.com/Olical/depot#usage&#34;&gt;README.md&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;run depot&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &lt;/span&gt;        &lt;span style=&#34;color:#ae81ff&#34;&gt;clojure -Sdeps &amp;#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &amp;#34;2.1.0&amp;#34;}}}}}&amp;#39; -M:outdated -m depot.outdated.main --every --write &amp;gt; deps-output.txt&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After this is done we get two files that we care about:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;nix-env -i clojure&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To run depot in this example I just use example command from depot &lt;a href=&#34;https://github.com/Olical/depot#usage&#34;&gt;README.md&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;run depot&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;clojure -Sdeps &amp;#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &amp;#34;2.1.0&amp;#34;}}}}}&amp;#39; -M:outdated -m depot.outdated.main --every --write &amp;gt; deps-output.txt&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After this is done we get two files that we care about:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;deps.edn&lt;/code&gt; - dependencies file that was modified by depot&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;deps-output.txt&lt;/code&gt; - depot stdout that we can use as a body for a pull request&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;To transfer those two files we are going to utilize github artifacts:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/upload-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output.txt&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/upload-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;path&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps.edn&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now we can proceed with creating pull request.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/upload-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;path&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output.txt&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/upload-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;path&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps.edn&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now we can proceed with creating pull request.
 It is important to tell our second job that it has to wait for a first one to complete.
 Otherwise there would be no files available for download from storage.
 To do that we can simply say that job &lt;code&gt;needs: bump&lt;/code&gt;, &lt;code&gt;bump&lt;/code&gt; being the name of our first job of course.&lt;/p&gt;
 &lt;p&gt;First lets download our two files from artifact storage:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/download-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;actions/download-artifact@v2&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once this is done we need to read output file and store it in output variable of a step.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/download-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/download-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once this is done we need to read output file and store it in output variable of a step.
 To later reuse this variable we give this step id &lt;code&gt;get-pr-body&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;get-pr-body&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        body=$(cat deps-output.txt)
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        echo ::set-output name=body::$body&lt;/span&gt;        
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now lets create our pull request.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;id&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;get-pr-body&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        body=$(cat deps-output.txt)
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo ::set-output name=body::$body&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now lets create our pull request.
 To allow this action to access our repository we will need to give it a token.
 I used &lt;a href=&#34;https://github.com/settings/tokens&#34;&gt;Personal Access Token&lt;/a&gt; with &lt;code&gt;repo&lt;/code&gt; scope fully enabled.
 You can see how we extract body using variable inlining with &lt;code&gt;${{ steps.get-pr-body.outputs.body }}&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;create PR&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;id&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;cpr&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;peter-evans/create-pull-request@v3&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;token&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;${{ secrets.GITHUB_TOKEN }}&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Update dependencies&amp;#34;&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;${{ steps.get-pr-body.outputs.body }}&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;branch&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;update-dependencies&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;labels&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;          &lt;/span&gt;          &lt;span style=&#34;color:#ae81ff&#34;&gt;dependencies&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once this step succeeded we can print pull request information (mostly for debugging purposes)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;check outputs&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;run&lt;/span&gt;: |&lt;span style=&#34;color:#e6db74&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        echo &amp;#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&amp;#34;
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        echo &amp;#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&amp;#34;&lt;/span&gt;        
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And of course lets not forget to cleanup after ourselves!&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;geekyeggo/delete-artifact@v1&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps-output&lt;/span&gt;
-    - &lt;span style=&#34;color:#f92672&#34;&gt;uses&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;geekyeggo/delete-artifact@v1&lt;/span&gt;
-      &lt;span style=&#34;color:#f92672&#34;&gt;with&lt;/span&gt;:
-        &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;deps&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And that&amp;rsquo;s it! One day there might be a better tool or approach to solve this, but for now our small workflow should do just fine :)&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;create PR&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;id&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;cpr&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;peter-evans/create-pull-request@v3&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;token&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;${{ secrets.GITHUB_TOKEN }}&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;title&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Update dependencies&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;body&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;${{ steps.get-pr-body.outputs.body }}&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;branch&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;update-dependencies&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;labels&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;          &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;          &lt;/span&gt;dependencies&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once this step succeeded we can print pull request information (mostly for debugging purposes)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;check outputs&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo &amp;#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&amp;#34;
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo &amp;#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And of course lets not forget to cleanup after ourselves!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;geekyeggo/delete-artifact@v1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;geekyeggo/delete-artifact@v1&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps&lt;span style=&#34;color:#666&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And that&amp;rsquo;s it! One day there might be a better tool or approach to solve this, but for now our small workflow should do just fine :)&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -191,45 +191,45 @@ which can be used to customize this design.&lt;/p&gt;
 to utilize &lt;a href=&#34;https://github.com/erning/gorun&#34;&gt;gorun&lt;/a&gt; and &lt;code&gt;binfmt_misc&lt;/code&gt; to use go files for scripting.&lt;/p&gt;
 &lt;p&gt;First lets install &lt;code&gt;gorun&lt;/code&gt; as a system package on NixOS.&lt;/p&gt;
 &lt;p&gt;Lets create &lt;code&gt;gorun.nix&lt;/code&gt; file first:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-nix&#34; data-lang=&#34;nix&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;lt;nixpkgs&amp;gt;&lt;/span&gt; {};
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-nix&#34; data-lang=&#34;nix&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;lt;nixpkgs&amp;gt;&lt;/span&gt; {};
 
-buildGoPackage &lt;span style=&#34;color:#66d9ef&#34;&gt;rec&lt;/span&gt; {
-  name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gorun-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;${&lt;/span&gt;version&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;;
-  version &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;master-85cd5f5e084af0863ed0c3f18c00e64526d1b899&amp;#34;&lt;/span&gt;;
-  goPackagePath &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;github.com/erning/gorun&amp;#34;&lt;/span&gt;;
+buildGoPackage &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;rec&lt;/span&gt; {
+  name = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;gorun-&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;${&lt;/span&gt;version&lt;span style=&#34;color:#ed9d13&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;;
+  version = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;master-85cd5f5e084af0863ed0c3f18c00e64526d1b899&amp;#34;&lt;/span&gt;;
+  goPackagePath = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;github.com/erning/gorun&amp;#34;&lt;/span&gt;;
 
-  src &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fetchFromGitHub {
-    owner &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;erning&amp;#34;&lt;/span&gt;;
-    repo &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gorun&amp;#34;&lt;/span&gt;;
-    rev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;85cd5f5e084af0863ed0c3f18c00e64526d1b899&amp;#34;&lt;/span&gt;;
-    sha256 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;sha256:1hdqimfzpynnpqc7p8m8hkcv9dlfbd8kl22979i6626nq57dvln8&amp;#34;&lt;/span&gt;;
+  src = fetchFromGitHub {
+    owner = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;erning&amp;#34;&lt;/span&gt;;
+    repo = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;gorun&amp;#34;&lt;/span&gt;;
+    rev = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;85cd5f5e084af0863ed0c3f18c00e64526d1b899&amp;#34;&lt;/span&gt;;
+    sha256 = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;sha256:1hdqimfzpynnpqc7p8m8hkcv9dlfbd8kl22979i6626nq57dvln8&amp;#34;&lt;/span&gt;;
   };
 
-  meta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; stdenv&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lib; {
-    description &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gorun is a tool enabling one to put a &lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;bang line&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; in the source code of a Go program to run it&amp;#34;&lt;/span&gt;;
-    homepage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;https://github.com/erning/gorun&lt;/span&gt;;
-    license &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; licenses&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mit;
-    maintainers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; maintainers; [ Gonzih ];
-    platforms &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; platforms&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;linux &lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt; platforms&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;darwin;
+  meta = &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt; stdenv.lib; {
+    description = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;gorun is a tool enabling one to put a &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;bang line&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;\&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt; in the source code of a Go program to run it&amp;#34;&lt;/span&gt;;
+    homepage = &lt;span style=&#34;color:#ed9d13&#34;&gt;https://github.com/erning/gorun&lt;/span&gt;;
+    license = licenses.mit;
+    maintainers = &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt; maintainers; [ Gonzih ];
+    platforms = platforms.linux ++ platforms.darwin;
   };
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next lets add this package to &lt;code&gt;systemPackages&lt;/code&gt; list:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-nix&#34; data-lang=&#34;nix&#34;&gt;environment&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;systemPackages &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; pkgs; [
-  &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
-  (&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;./gorun.nix&lt;/span&gt;)
-  &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-nix&#34; data-lang=&#34;nix&#34;&gt;environment.systemPackages &lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt; pkgs; [
+  ...
+  (&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;./gorun.nix&lt;/span&gt;)
+  ...
 ];
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next step would be to utilize &lt;code&gt;boot.binfmtMiscRegistrations&lt;/code&gt; to register our &lt;code&gt;gorun&lt;/code&gt; in &lt;code&gt;binfmt_misc&lt;/code&gt; module which is
 responsible for parsing shebang scripts and binary files. Drop the following lines in to your &lt;code&gt;configuration.nix&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-nix&#34; data-lang=&#34;nix&#34;&gt;boot&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;binfmtMiscRegistrations &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;=&lt;/span&gt; {
-  go &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
-    recognitionType &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;extension&amp;#34;&lt;/span&gt;;
-    magicOrExtension &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;go&amp;#34;&lt;/span&gt;;
-    interpreter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/run/current-system/sw/bin/gorun&amp;#34;&lt;/span&gt;;
-    preserveArgvZero &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
-    openBinary &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
-    matchCredentials &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
-    fixBinary &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-nix&#34; data-lang=&#34;nix&#34;&gt;boot.binfmtMiscRegistrations &lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;=&lt;/span&gt; {
+  go = {
+    recognitionType = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;extension&amp;#34;&lt;/span&gt;;
+    magicOrExtension = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;go&amp;#34;&lt;/span&gt;;
+    interpreter = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;/run/current-system/sw/bin/gorun&amp;#34;&lt;/span&gt;;
+    preserveArgvZero = &lt;span style=&#34;color:#40ffff&#34;&gt;false&lt;/span&gt;;
+    openBinary = &lt;span style=&#34;color:#40ffff&#34;&gt;true&lt;/span&gt;;
+    matchCredentials = &lt;span style=&#34;color:#40ffff&#34;&gt;true&lt;/span&gt;;
+    fixBinary = &lt;span style=&#34;color:#40ffff&#34;&gt;false&lt;/span&gt;;
   };
 };
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;What does this configuration do? &lt;code&gt;recognitionType&lt;/code&gt; tells &lt;code&gt;binfmt&lt;/code&gt; to make a decision based on file extension,
@@ -238,16 +238,16 @@ responsible for parsing shebang scripts and binary files. Drop the following lin
 interpreter with permissions set on original script. For more information on &lt;code&gt;binfmt&lt;/code&gt; please do check out &lt;a href=&#34;https://www.kernel.org/doc/html/v4.14/admin-guide/binfmt-misc.html&#34;&gt;these amazing kernel docs&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Now lets simply run &lt;code&gt;sudo nixos-rebuild --switch&lt;/code&gt; and after everything is done lets give it a try.&lt;/p&gt;
 &lt;p&gt;First lets create a simple hello world script:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;package&lt;/span&gt; main
 
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello World!&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;main&lt;/span&gt;() {
+	fmt.&lt;span style=&#34;color:#447fcf&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Hello World!&amp;#34;&lt;/span&gt;)
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Lets make it executable with &lt;code&gt;chmod +x hello.go&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;And now lets run it:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;$ ./hello.go
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;$ ./hello.go
 Hello World!
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Yay! It works!&lt;/p&gt;
 &lt;p&gt;Hope that helps somewhat.&lt;/p&gt;</description>
@@ -265,38 +265,38 @@ I got interested in how to handle routing in cloud functions in go, so after cou
 &lt;p&gt;One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as the source repository for your newly defined cloud function.&lt;/p&gt;
 &lt;p&gt;It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.&lt;/p&gt;
 &lt;p&gt;Ultimately we can simply define our own router using &lt;code&gt;NewServeMux&lt;/code&gt; like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;function&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;package&lt;/span&gt; function
 
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
-	&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;import&lt;/span&gt; (
+	&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;
 )
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mux&lt;/span&gt; = &lt;span style=&#34;color:#a6e22e&#34;&gt;newMux&lt;/span&gt;()
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;var&lt;/span&gt; mux = &lt;span style=&#34;color:#447fcf&#34;&gt;newMux&lt;/span&gt;()
 
-&lt;span style=&#34;color:#75715e&#34;&gt;//F represents cloud function entry point
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;F&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;) {
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;mux&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ServeHTTP&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt;)
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;//F represents cloud function entry point
+&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;F&lt;/span&gt;(w http.ResponseWriter, r *http.Request) {
+	mux.&lt;span style=&#34;color:#447fcf&#34;&gt;ServeHTTP&lt;/span&gt;(w, r)
 }
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;newMux&lt;/span&gt;() &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ServeMux&lt;/span&gt; {
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;mux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;NewServeMux&lt;/span&gt;()
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;mux&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/one&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;one&lt;/span&gt;)
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;mux&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/two&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;two&lt;/span&gt;)
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;mux&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/subroute/three&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;three&lt;/span&gt;)
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;newMux&lt;/span&gt;() *http.ServeMux {
+	mux := http.&lt;span style=&#34;color:#447fcf&#34;&gt;NewServeMux&lt;/span&gt;()
+	mux.&lt;span style=&#34;color:#447fcf&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;/one&amp;#34;&lt;/span&gt;, one)
+	mux.&lt;span style=&#34;color:#447fcf&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;/two&amp;#34;&lt;/span&gt;, two)
+	mux.&lt;span style=&#34;color:#447fcf&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;/subroute/three&amp;#34;&lt;/span&gt;, three)
 
-	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mux&lt;/span&gt;
+	&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;return&lt;/span&gt; mux
 }
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;one&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;) {
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Write&lt;/span&gt;([]byte(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello from one&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;one&lt;/span&gt;(w http.ResponseWriter, r *http.Request) {
+	w.&lt;span style=&#34;color:#447fcf&#34;&gt;Write&lt;/span&gt;([]&lt;span style=&#34;color:#24909d&#34;&gt;byte&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;hello from one&amp;#34;&lt;/span&gt;))
 }
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;two&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;) {
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Write&lt;/span&gt;([]byte(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello from two&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;two&lt;/span&gt;(w http.ResponseWriter, r *http.Request) {
+	w.&lt;span style=&#34;color:#447fcf&#34;&gt;Write&lt;/span&gt;([]&lt;span style=&#34;color:#24909d&#34;&gt;byte&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;hello from two&amp;#34;&lt;/span&gt;))
 }
 
-&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;three&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;) {
-	&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Write&lt;/span&gt;([]byte(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello from three&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#447fcf&#34;&gt;three&lt;/span&gt;(w http.ResponseWriter, r *http.Request) {
+	w.&lt;span style=&#34;color:#447fcf&#34;&gt;Write&lt;/span&gt;([]&lt;span style=&#34;color:#24909d&#34;&gt;byte&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;hello from three&amp;#34;&lt;/span&gt;))
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now you can access your handlers by appending &lt;code&gt;/one&lt;/code&gt;, &lt;code&gt;/two&lt;/code&gt; or &lt;code&gt;/subroute/three&lt;/code&gt; to URL that cloud functions will have in triggers section of the UI like this: &lt;code&gt;https://us-central1-my-test-project-123456.cloudfunctions.net/my-function-1/one&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This works because your cloud function receives request with prefix stripped away from the URL. This is very handy since allows one to port existing http server in to cloud function without changing it too much.&lt;/p&gt;
@@ -314,12 +314,12 @@ I got interested in how to handle routing in cloud functions in go, so after cou
 &lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
 &lt;p&gt;So first things first, we will have to enable CCID (smartcard interface) on YubiKey:&lt;/p&gt;
 &lt;p&gt;For YubiKey Neo or YubiKey 4 run following:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykpersonalize -m82
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykpersonalize -m82
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For YubiKey 5:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykman config usb --enable-all &lt;span style=&#34;color:#75715e&#34;&gt;# For USB&lt;/span&gt;
-$ ykman config nfc --enable-all &lt;span style=&#34;color:#75715e&#34;&gt;# For NFC&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykman config usb --enable-all &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# For USB&lt;/span&gt;
+$ ykman config nfc --enable-all &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# For NFC&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next step would be to change default PINs on YubiKey:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --card-edit
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --card-edit
 
 gpg/card&amp;gt; admin
 Admin commands are allowed
@@ -327,37 +327,37 @@ Admin commands are allowed
 gpg/card&amp;gt; passwd
 gpg: OpenPGP card no. _____ detected
 
-&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; - change PIN
-&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; - unblock PIN
-&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; - change Admin PIN
-&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; - set the Reset Code
+&lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt; - change PIN
+&lt;span style=&#34;color:#3677a9&#34;&gt;2&lt;/span&gt; - unblock PIN
+&lt;span style=&#34;color:#3677a9&#34;&gt;3&lt;/span&gt; - change Admin PIN
+&lt;span style=&#34;color:#3677a9&#34;&gt;4&lt;/span&gt; - &lt;span style=&#34;color:#24909d&#34;&gt;set&lt;/span&gt; the Reset Code
 Q - quit
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# default password here is 123456&lt;/span&gt;
-Your selection? &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# default password here is 123456&lt;/span&gt;
+Your selection? &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt;
 
 ...
 
 gpg: OpenPGP card no. _____ detected
 
-&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; - change PIN
-&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; - unblock PIN
-&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; - change Admin PIN
-&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; - set the Reset Code
+&lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt; - change PIN
+&lt;span style=&#34;color:#3677a9&#34;&gt;2&lt;/span&gt; - unblock PIN
+&lt;span style=&#34;color:#3677a9&#34;&gt;3&lt;/span&gt; - change Admin PIN
+&lt;span style=&#34;color:#3677a9&#34;&gt;4&lt;/span&gt; - &lt;span style=&#34;color:#24909d&#34;&gt;set&lt;/span&gt; the Reset Code
 Q - quit
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# default password here is 12345678&lt;/span&gt;
-Your selection? &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# default password here is 12345678&lt;/span&gt;
+Your selection? &lt;span style=&#34;color:#3677a9&#34;&gt;3&lt;/span&gt;
 
 ...
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you mess anything up (forgot your PIN for example), you can always nuke OpenPGP configuration on your YubiKey:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykman openpgp reset
-WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;y/N&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: y
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykman openpgp reset
+WARNING! This will delete all stored OpenPGP keys and data and restore factory settings? [y/N]: y
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;There are two ways to use your YubiKey as a ssh key:&lt;/p&gt;
 &lt;h2 id=&#34;method-1-generating-keys-on-yubikey-itself&#34;&gt;Method #1: Generating keys on YubiKey itself&lt;/h2&gt;
 &lt;p&gt;Simply run the following commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gpg --card-edit
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;gpg --card-edit
 
 gpg/card&amp;gt; generate
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Benefit of this method is that your keys and YubiKey are self contained, this is also a downside of this method.
@@ -367,87 +367,87 @@ I did not really test this method extensively, but still felt like mentioning th
 &lt;h2 id=&#34;method-2-generating-a-subkey-for-your-own-private-key&#34;&gt;Method #2: Generating a subkey for your own private key&lt;/h2&gt;
 &lt;p&gt;So lets say you generated your own private key with id &lt;code&gt;ABCDEFG&lt;/code&gt;, now we can generate 2 subkeys and store them on our YubiKey.
 The advantage of this approach is in the fact that subkeys can be revoked by using your private key.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --edi-key ABCDEFG
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --edi-key ABCDEFG
 
 gpg&amp;gt; addcardkey
 
-Signature key ....: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
-Encryption key....: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
-Authentication key: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+Signature key ....: [none]
+Encryption key....: [none]
+Authentication key: [none]
 
-Please &lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; the type of key to generate:
-   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; Signature key
-   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; Encryption key
-   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; Authentication key
-Your selection? &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+Please &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;select&lt;/span&gt; the &lt;span style=&#34;color:#24909d&#34;&gt;type&lt;/span&gt; of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? &lt;span style=&#34;color:#3677a9&#34;&gt;3&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Now answer bunch of questions and enter PIN couple of times to make gpg happy&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# After that we can do the same for the Signature key&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Now answer bunch of questions and enter PIN couple of times to make gpg happy&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# After that we can do the same for the Signature key&lt;/span&gt;
 
 ...
 
 gpg&amp;gt; addcardkey
 
-Signature key ....: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
-Encryption key....: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+Signature key ....: [none]
+Encryption key....: [none]
 Authentication key: OUR NEW KEY ID
 
-Please &lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; the type of key to generate:
-   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; Signature key
-   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; Encryption key
-   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; Authentication key
-Your selection? &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+Please &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;select&lt;/span&gt; the &lt;span style=&#34;color:#24909d&#34;&gt;type&lt;/span&gt; of key to generate:
+   (1) Signature key
+   (2) Encryption key
+   (3) Authentication key
+Your selection? &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Now lets use toggle to switch in to private key listing mode&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Now lets use toggle to switch in to private key listing mode&lt;/span&gt;
 &amp;gt; toggle
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# And now lets select our main private key&lt;/span&gt;
-&amp;gt; key &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# And now lets select our main private key&lt;/span&gt;
+&amp;gt; key &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Time to upload card keys to our YubiKey in to encryption slot&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Time to upload card keys to our YubiKey in to encryption slot&lt;/span&gt;
 &amp;gt; keytocard
 
 Signature key ....: ANOTHER ID
-Encryption key....: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;none&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+Encryption key....: [none]
 Authentication key: OUR NEW KEY ID
 
-Please &lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; where to store the key:
-   &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; Encryption key
-Your selection? &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+Please &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;select&lt;/span&gt; where to store the key:
+   (2) Encryption key
+Your selection? &lt;span style=&#34;color:#3677a9&#34;&gt;2&lt;/span&gt;
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# And we are done here&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# And we are done here&lt;/span&gt;
 gpg&amp;gt; save
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Don&amp;rsquo;t forget to distribute your private key if needed:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --keyserver hkps://keys.gnupg.net --send-key ABCDEFG
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --keyserver hkps://keys.gnupg.net --send-key ABCDEFG
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;final-steps&#34;&gt;Final steps&lt;/h2&gt;
 &lt;p&gt;Generating ssh key out of our gpg key is pretty straightforward:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --export-ssh-key ABCDEFG
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --export-ssh-key ABCDEFG
 ssh-rsa BLABLABLA openpgp:someid
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now its time to start &lt;code&gt;gpg-agent&lt;/code&gt; with ssh support on:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg-agent --daemon --enable-ssh-support
-&lt;span style=&#34;color:#75715e&#34;&gt;# or on older gpg versions you can generate env file that you can source in your .bashrc directly&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg-agent --daemon --enable-ssh-support
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# or on older gpg versions you can generate env file that you can source in your .bashrc directly&lt;/span&gt;
 $ gpg-agent --daemon --enable-ssh-support --write-env-file ~/.gpg-agent-env
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or if you are on systemd based system there is a chance that your user already has a bunch of systemd sockets enabled for this purpose.
 One socket that you should be interested in is &lt;code&gt;gpg-agent-ssh.socket&lt;/code&gt;, you can see if its running by running &lt;code&gt;systemctl --user status gpg-agent-ssh.socket&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Add this to your &lt;code&gt;.bashrc&lt;/code&gt; to initialize env var properly:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;export SSH_AUTH_SOCK&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;gpgconf --list-dirs agent-ssh-socket&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;SSH_AUTH_SOCK&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;$(&lt;/span&gt;gpgconf --list-dirs agent-ssh-socket&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Last improvement that can be made to this setup is forcing gpg-agent to use pcscd instead of ccid.
 This should solve some issues with a card being unavailable when some other application is accessing it.
 Just add following to the &lt;code&gt;~/.gnupg/scdaemon.conf&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;pcsc-driver /usr/lib/libpcsclite.so
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;pcsc-driver /usr/lib/libpcsclite.so
 card-timeout 5
 disable-ccid
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;setting-up-key-on-a-new-machine&#34;&gt;Setting up key on a new machine&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Pull key info from a keyserver&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Pull key info from a keyserver&lt;/span&gt;
 $ gpg --keyserver hkps://pgp.mit.edu --recv-key ABCDEFG
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Initialize smart card data in gpg db&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Initialize smart card data in gpg db&lt;/span&gt;
 $ gpg --card-status
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And if gpg-agent is setup properly you should be ready to go. Just plug in your YubiKey and try to ssh to some host, you should see PIN prompt which means everything works as expected.&lt;/p&gt;
 &lt;h2 id=&#34;caching-pin-on-a-key-itself&#34;&gt;Caching PIN on a key itself&lt;/h2&gt;
 &lt;p&gt;It might be annoying to type in PIN on every action every time, there is an option to cache PIN on YubiKey itself, so you will have to input PIN only once after you plugged your key (will have to do that every time you unplug/plug your key) for every action (separate key cache for signing/authenticating using the key).
 To do that you should enable &lt;code&gt;forcesig&lt;/code&gt; in &lt;code&gt;gpg&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --card-edit
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ gpg --card-edit
 
 gpg/card&amp;gt; admin
 Admin commands are allowed
@@ -455,13 +455,13 @@ Admin commands are allowed
 gpg/card&amp;gt; forcesig
 gpg/card&amp;gt; save
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To add extra layer of security, you can enable &lt;a href=&#34;https://developers.yubico.com/PGP/Card_edit.html&#34;&gt;YubiKey 4 Touch&lt;/a&gt; feature (every action will have to be confirmed with a touch), this can be enabled using &lt;code&gt;yubikey-manager&lt;/code&gt; cli:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykman openpgp touch aut on
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;$ ykman openpgp touch aut on
 $ ykman openpgp touch sig on
 $ ykman openpgp touch enc on
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;ps&#34;&gt;P.S.&lt;/h3&gt;
 &lt;p&gt;GPG agent for NixOS:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;programs.ssh.startAgent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;
-programs.gnupg.agent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt; enable &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true; enableSSHSupport &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true; &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;programs.ssh.startAgent = false;
+programs.gnupg.agent = { &lt;span style=&#34;color:#24909d&#34;&gt;enable&lt;/span&gt; = true; &lt;span style=&#34;color:#40ffff&#34;&gt;enableSSHSupport&lt;/span&gt; = true; };
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
@@ -544,28 +544,28 @@ And now restart pulse by running &lt;code&gt;pulseaudio --kill&lt;/code&gt; and 
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;Arch Wiki page&lt;!-- raw HTML omitted --&gt; covers installation well enough in my opinion.&lt;/p&gt;
 &lt;h3 id=&#34;bootloader-via-systemd-boot&#34;&gt;Bootloader via systemd-boot&lt;/h3&gt;
 &lt;p&gt;Before installing boot loader change /boot partition type to &lt;code&gt;EFI System&lt;/code&gt; (&lt;code&gt;ef00&lt;/code&gt;).&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mkfs.fat -F32 /dev/sda1
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mkfs.fat -F32 /dev/sda1
 pacman -S dosfstools
 mount /dev/sda1 /mnt/boot
 arch-chroot /mnt
-bootctl --path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/boot instnall
+bootctl --path=/boot instnall
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;bootloader-via-grub&#34;&gt;Bootloader via grub&lt;/h3&gt;
 &lt;p&gt;You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be &lt;code&gt;ef00&lt;/code&gt; type partition of vfta32.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mount /dev/sda1 /mnt/boot
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/boot/efi
 mount /dev/sda2 /mnt/boot/efi
 modprobe dm-mod
 arch-chroot /mnt
-grub-install --target&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;x86_64-efi --efi-directory&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/boot/efi --bootloader-id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;arch_grub --recheck --debug
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck --debug
 mkdir -p /boot/grub/locale
-cp /usr/share/locale/en&lt;span style=&#34;color:#ae81ff&#34;&gt;\@&lt;/span&gt;quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+cp /usr/share/locale/en&lt;span style=&#34;color:#ed9d13&#34;&gt;\@&lt;/span&gt;quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 grub-mkconfig -o /boot/grub/grub.cfg
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;use-broadcom-wl-wireless-module-from-aur&#34;&gt;Use broadcom-wl wireless module from AUR&lt;/h2&gt;
 &lt;p&gt;This is proprietary broadcom driver. Works fine with BCM4331.
 Only thing that does not work - hidden SSID.&lt;/p&gt;
 &lt;p&gt;OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43) are too unstable in my experience.&lt;/p&gt;
 &lt;p&gt;To make sure that correct module is used by hardwrare blacklist every other module and reboot:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;#/etc/modprobe.d/wl.conf
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;#/etc/modprobe.d/wl.conf
 blacklist b43
 blacklist b43legacy
 blacklist ssb
@@ -578,7 +578,7 @@ blacklist bcma
 &lt;p&gt;This will reduce power usage dramatically but also will disable external screen support via display port.
 This laptop relies on the external gpu to work with display port.&lt;/p&gt;
 &lt;p&gt;Edit &lt;code&gt;/etc/grub.d/00_header&lt;/code&gt; and add outb lines in between &lt;code&gt;set gfxmode=${GRUB_GFXMODE}&lt;/code&gt; and &lt;code&gt;load video&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;...
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-plaintext&#34; data-lang=&#34;plaintext&#34;&gt;...
 set gfxmode=${GRUB_GFXMODE}
 outb 0x728 1
 outb 0x710 2
@@ -587,7 +587,7 @@ outb 0x750 0
 load video
 ...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Generate new grub config:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# grub-mkconfig -o /boot/grub/grub.cfg&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# grub-mkconfig -o /boot/grub/grub.cfg&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;PS. This post will probably grow over time.&lt;/p&gt;</description>
     </item>
     
@@ -609,16 +609,16 @@ this solution should be your new starting point.&lt;/p&gt;
 Open terminal using &lt;code&gt;:terminal&lt;/code&gt; command.&lt;/p&gt;
 &lt;p&gt;Here are some keybindings that will help you to send code from
 your clojure buffer to the terminal buffer.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;has&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;  &amp;#34; Open terminal and run lein figwheel&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;nmap&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Leader&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;term&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;:&lt;span style=&#34;color:#a6e22e&#34;&gt;terminal&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CR&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lein&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;figwheel&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CR&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-\&amp;gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-&lt;span style=&#34;color:#a6e22e&#34;&gt;n&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;  &amp;#34; Evaluate anything from the visual mode in the next window&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;vmap&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;buffer&lt;/span&gt;&amp;gt; ,&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;y&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;wpi&lt;/span&gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CR&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-\&amp;gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-&lt;span style=&#34;color:#a6e22e&#34;&gt;n&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt;-&lt;span style=&#34;color:#a6e22e&#34;&gt;w&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;  &amp;#34; Evaluate outer most form&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;nmap&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;buffer&lt;/span&gt;&amp;gt; ,&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt; ^&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;%,&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;  &amp;#34; Evaluate buffer&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;nmap&lt;/span&gt; &amp;lt;&lt;span style=&#34;color:#a6e22e&#34;&gt;buffer&lt;/span&gt;&amp;gt; ,&lt;span style=&#34;color:#a6e22e&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ggVG&lt;/span&gt;,&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;endif&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;if&lt;/span&gt; has(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;nvim&amp;#34;&lt;/span&gt;)&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;  &amp;#34; Open terminal and run lein figwheel&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;  nmap &amp;lt;Leader&amp;gt;term &amp;lt;C-w&amp;gt;v:terminal&amp;lt;CR&amp;gt;lein figwheel&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;  &amp;#34; Evaluate anything from the visual mode in the next window&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;  vmap &amp;lt;buffer&amp;gt; ,e y&amp;lt;C-w&amp;gt;wpi&amp;lt;CR&amp;gt;&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;&amp;lt;C-w&amp;gt;p&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;  &amp;#34; Evaluate outer most form&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;  nmap &amp;lt;buffer&amp;gt; ,e ^v%,e&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;  &amp;#34; Evaluate buffer&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;  nmap &amp;lt;buffer&amp;gt; ,b ggVG,e&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;endif&lt;/span&gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hey! Now you can finally stop looking at the emacs land!&lt;/p&gt;</description>
     </item>
     
@@ -634,78 +634,78 @@ but instead we will focus on how to achieve similar results in your ClojureScrip
 &lt;p&gt;In my experience simplest optimization to run in some js engine on server side is whitespace.
 It does not do any renaming/restructuring of your code but eliminates need to take care of dependencies loading.
 So our compiler configuration should look something like that:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;:id&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;server-side&amp;#34;&lt;/span&gt;
- &lt;span style=&#34;color:#e6db74&#34;&gt;:source-paths&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;src&amp;#34;&lt;/span&gt;]
- &lt;span style=&#34;color:#e6db74&#34;&gt;:compiler&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;:output-to&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;resources/public/javascripts/server-side.js&amp;#34;&lt;/span&gt;
-            &lt;span style=&#34;color:#e6db74&#34;&gt;:output-dir&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;resources/public/javascripts/out-server-side&amp;#34;&lt;/span&gt;
-            &lt;span style=&#34;color:#e6db74&#34;&gt;:preamble&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&amp;#34;&lt;/span&gt;]
-            &lt;span style=&#34;color:#e6db74&#34;&gt;:pretty-print&lt;/span&gt; false
-            &lt;span style=&#34;color:#e6db74&#34;&gt;:warnings&lt;/span&gt; true
-            &lt;span style=&#34;color:#e6db74&#34;&gt;:optimizations&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;:whitespace&lt;/span&gt;}}
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;{&lt;span style=&#34;color:#ed9d13&#34;&gt;:id&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;server-side&amp;#34;&lt;/span&gt;
+ &lt;span style=&#34;color:#ed9d13&#34;&gt;:source-paths&lt;/span&gt; [&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;src&amp;#34;&lt;/span&gt;]
+ &lt;span style=&#34;color:#ed9d13&#34;&gt;:compiler&lt;/span&gt; {&lt;span style=&#34;color:#ed9d13&#34;&gt;:output-to&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;resources/public/javascripts/server-side.js&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#ed9d13&#34;&gt;:output-dir&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;resources/public/javascripts/out-server-side&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#ed9d13&#34;&gt;:preamble&lt;/span&gt; [&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;meta-inf/resources/webjars/react/0.12.1/react-with-addons.min.js&amp;#34;&lt;/span&gt;]
+            &lt;span style=&#34;color:#ed9d13&#34;&gt;:pretty-print&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;false&lt;/span&gt;
+            &lt;span style=&#34;color:#ed9d13&#34;&gt;:warnings&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;true&lt;/span&gt;
+            &lt;span style=&#34;color:#ed9d13&#34;&gt;:optimizations&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;:whitespace&lt;/span&gt;}}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next step is to make sure that all functions that use browser specific stuff like document/window are moved in to react lifecycle methods:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;def &lt;/span&gt;main-component
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;with-meta&lt;/span&gt;
-    (&lt;span style=&#34;color:#66d9ef&#34;&gt;fn &lt;/span&gt;[] ...)
-    {&lt;span style=&#34;color:#e6db74&#34;&gt;:component-did-mount&lt;/span&gt; (comp init-my-scroll-handler!
-                                also-init-my-go-loop!)}))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;main-component&lt;/span&gt;
+  (&lt;span style=&#34;color:#447fcf&#34;&gt;with-meta&lt;/span&gt;
+    (&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;fn &lt;/span&gt;[] &lt;span style=&#34;color:#40ffff&#34;&gt;...&lt;/span&gt;)
+    {&lt;span style=&#34;color:#ed9d13&#34;&gt;:component-did-mount&lt;/span&gt; (&lt;span style=&#34;color:#24909d&#34;&gt;comp &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;init-my-scroll-handler!&lt;/span&gt;
+                                &lt;span style=&#34;color:#40ffff&#34;&gt;also-init-my-go-loop!&lt;/span&gt;)}))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next let&amp;rsquo;s create function that will do some rendering to the string.
 I like to keep this function in a component specific ns just for convenience.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:export&lt;/span&gt; render-me-to-s [initial-state]
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;reset!&lt;/span&gt; my-main-state (&lt;span style=&#34;color:#a6e22e&#34;&gt;js-&amp;gt;clj&lt;/span&gt; initial-state))
-  &lt;span style=&#34;color:#75715e&#34;&gt;; Render component to markup without reactid&lt;/span&gt;
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;reagent.core/render-to-static-markup&lt;/span&gt; [main-component])
-  &lt;span style=&#34;color:#75715e&#34;&gt;; Or render component to ready to-go react markup&lt;/span&gt;
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;reagent.core/render-to-string&lt;/span&gt; [main-component]))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;def &lt;/span&gt;^&lt;span style=&#34;color:#ed9d13&#34;&gt;:export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;render-me-to-s&lt;/span&gt; [&lt;span style=&#34;color:#40ffff&#34;&gt;initial-state&lt;/span&gt;]
+  (&lt;span style=&#34;color:#447fcf&#34;&gt;reset!&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;my-main-state&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;js-&amp;gt;clj&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;initial-state&lt;/span&gt;))
+  &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;; Render component to markup without reactid&lt;/span&gt;
+  (&lt;span style=&#34;color:#447fcf&#34;&gt;reagent.core/render-to-static-markup&lt;/span&gt; [&lt;span style=&#34;color:#40ffff&#34;&gt;main-component&lt;/span&gt;])
+  &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;; Or render component to ready to-go react markup&lt;/span&gt;
+  (&lt;span style=&#34;color:#447fcf&#34;&gt;reagent.core/render-to-string&lt;/span&gt; [&lt;span style=&#34;color:#40ffff&#34;&gt;main-component&lt;/span&gt;]))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now server side bootstrapping, most of this code was taken from &lt;a href=&#34;https://github.com/reactjs/react-rails&#34;&gt;react-rails plugin&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;First of all react expects to have global or window objects in your js engine (setup.js):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;global&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;global&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;self&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;self&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; window &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; window &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;;
-&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;console&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;global&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;console&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; {};
-[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;error&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;log&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;info&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;warn&amp;#39;&lt;/span&gt;].&lt;span style=&#34;color:#a6e22e&#34;&gt;forEach&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;fn&lt;/span&gt;) {
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;console&lt;/span&gt;)) {
-    &lt;span style=&#34;color:#a6e22e&#34;&gt;console&lt;/span&gt;[&lt;span style=&#34;color:#a6e22e&#34;&gt;fn&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; () {};
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;var&lt;/span&gt; global = global || &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;this&lt;/span&gt;;
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;var&lt;/span&gt; self = self || &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;this&lt;/span&gt;;
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#24909d&#34;&gt;window&lt;/span&gt; = &lt;span style=&#34;color:#24909d&#34;&gt;window&lt;/span&gt; || &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;this&lt;/span&gt;;
+&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;var&lt;/span&gt; console = global.console || {};
+[&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;error&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;log&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;info&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;warn&amp;#39;&lt;/span&gt;].forEach(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;function&lt;/span&gt; (fn) {
+  &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;if&lt;/span&gt; (!(fn &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;in&lt;/span&gt; console)) {
+    console[fn] = &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;function&lt;/span&gt; () {};
   }
 });
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now let&amp;rsquo;s try and use all this in our code (for now in Ruby):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;cxt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;V8&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;Context&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;new
-cxt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;load(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;setup.js&amp;#39;&lt;/span&gt;)
-cxt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;load(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;resources/public/javascripts/server-side.js&amp;#39;&lt;/span&gt;)
-html &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cxt&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;eval(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;my.amazing_component.ns.render_me_to_s(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;#{&lt;/span&gt;init_state&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;to_json&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;)&amp;#34;&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;cxt = &lt;span style=&#34;color:#40ffff&#34;&gt;V8&lt;/span&gt;::&lt;span style=&#34;color:#40ffff&#34;&gt;Context&lt;/span&gt;.new
+cxt.load(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;setup.js&amp;#39;&lt;/span&gt;)
+cxt.load(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;resources/public/javascripts/server-side.js&amp;#39;&lt;/span&gt;)
+html = cxt.eval(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;my.amazing_component.ns.render_me_to_s(&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;#{&lt;/span&gt;init_state.to_json&lt;span style=&#34;color:#ed9d13&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;)&amp;#34;&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And that&amp;rsquo;s it. As a way to pass data from ruby to clojurescript json works fine.
 Sometimes you might want to use &lt;code&gt;ActionController::Base.helpers.j&lt;/code&gt; helper that will
 escape your data for usage inside json, but most of the time you should be alright without it.&lt;/p&gt;
 &lt;p&gt;If you have issues with core.async there are 2 ways to solve it.
 I personally prefer to move core.async initialization into some lifecycle method.
 Another solution is to implement setTimeout function like that in your &lt;code&gt;setup.js&lt;/code&gt; snippet:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;goog&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;global&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;setTimeout&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;cb&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;t&lt;/span&gt;) {
-    &lt;span style=&#34;color:#a6e22e&#34;&gt;cb&lt;/span&gt;();
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;goog.global.setTimeout = &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;function&lt;/span&gt;(cb, t) {
+    cb();
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now frontend part. First let&amp;rsquo;s in-line generated html in to the container:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;id&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;&lt;/span&gt;%= html %&amp;gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;div&lt;/span&gt;&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#bbb&#34;&gt;id&lt;/span&gt;=&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;&amp;gt;&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;&amp;lt;&lt;/span&gt;%= html %&amp;gt;&amp;lt;/&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;div&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then let&amp;rsquo;s write function that will render our component on frontend:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:export&lt;/span&gt; mount-me [initial-state]
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;reset!&lt;/span&gt; my-main-state (&lt;span style=&#34;color:#a6e22e&#34;&gt;js-&amp;gt;clj&lt;/span&gt; initial-state))
-  (&lt;span style=&#34;color:#a6e22e&#34;&gt;reagent.core/render&lt;/span&gt; [main-component]
-                       (&lt;span style=&#34;color:#a6e22e&#34;&gt;js/document.getElementById&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;)))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;def &lt;/span&gt;^&lt;span style=&#34;color:#ed9d13&#34;&gt;:export&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;mount-me&lt;/span&gt; [&lt;span style=&#34;color:#40ffff&#34;&gt;initial-state&lt;/span&gt;]
+  (&lt;span style=&#34;color:#447fcf&#34;&gt;reset!&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;my-main-state&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;js-&amp;gt;clj&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;initial-state&lt;/span&gt;))
+  (&lt;span style=&#34;color:#447fcf&#34;&gt;reagent.core/render&lt;/span&gt; [&lt;span style=&#34;color:#40ffff&#34;&gt;main-component&lt;/span&gt;]
+                       (&lt;span style=&#34;color:#447fcf&#34;&gt;js/document.getElementById&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;)))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As far as I understand react should reuse your markup on frontend and just attach new handlers to it.
 Am I wrong on this one? Don&amp;rsquo;t know yet.&lt;/p&gt;
 &lt;p&gt;Inline javascript that you should use on frontend looks like that:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;script&lt;/span&gt;&amp;gt;
-&lt;span style=&#34;color:#a6e22e&#34;&gt;my&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;amazing_component&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ns&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;mount_me&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;%=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;init_state&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;to_json&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&amp;gt;&lt;/span&gt;)
-&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;script&lt;/span&gt;&amp;gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
+my.amazing_component.ns.mount_me(&amp;lt;%= init_state.to_json %&amp;gt;)
+&amp;lt;/&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;script&lt;/span&gt;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;nashorn-example-result-of-my-experiments-in-the-repl&#34;&gt;Nashorn example (result of my experiments in the REPL)&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(import &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;[javax.script ScriptEngineManager])
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;def &lt;/span&gt;nashorn (&lt;span style=&#34;color:#a6e22e&#34;&gt;.getEngineByName&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;ScriptEngineManager.&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;nashorn&amp;#34;&lt;/span&gt;))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;(&lt;span style=&#34;color:#24909d&#34;&gt;import &lt;/span&gt;&amp;#39;[&lt;span style=&#34;color:#40ffff&#34;&gt;javax.script&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;ScriptEngineManager&lt;/span&gt;])
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;nashorn&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;.getEngineByName&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;ScriptEngineManager.&lt;/span&gt;) &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;nashorn&amp;#34;&lt;/span&gt;))
 
-&lt;span style=&#34;color:#75715e&#34;&gt;; Same as in ruby version&lt;/span&gt;
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;def &lt;/span&gt;setup-script (slurp &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;setup.js&amp;#34;&lt;/span&gt;))
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;def &lt;/span&gt;ss-script (slurp &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;resources/public/javascripts/server-side.js&amp;#34;&lt;/span&gt;))
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;def &lt;/span&gt;render-script (str &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;my.amazing_component.ns.render_me_to_s(&amp;#34;&lt;/span&gt; my-state-json-string &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;);&amp;#34;&lt;/span&gt;))
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;; Same as in ruby version&lt;/span&gt;
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;setup-script&lt;/span&gt; (&lt;span style=&#34;color:#24909d&#34;&gt;slurp &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;setup.js&amp;#34;&lt;/span&gt;))
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;ss-script&lt;/span&gt; (&lt;span style=&#34;color:#24909d&#34;&gt;slurp &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;resources/public/javascripts/server-side.js&amp;#34;&lt;/span&gt;))
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;def &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;render-script&lt;/span&gt; (&lt;span style=&#34;color:#24909d&#34;&gt;str &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;my.amazing_component.ns.render_me_to_s(&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;my-state-json-string&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;);&amp;#34;&lt;/span&gt;))
 
-(&lt;span style=&#34;color:#a6e22e&#34;&gt;.eval&lt;/span&gt; nashorn setup-script)
-(&lt;span style=&#34;color:#a6e22e&#34;&gt;.eval&lt;/span&gt; nashorn ss-script)
-(&lt;span style=&#34;color:#a6e22e&#34;&gt;.eval&lt;/span&gt; nashorn render-script) &lt;span style=&#34;color:#75715e&#34;&gt;; our html markup&lt;/span&gt;
+(&lt;span style=&#34;color:#447fcf&#34;&gt;.eval&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;nashorn&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;setup-script&lt;/span&gt;)
+(&lt;span style=&#34;color:#447fcf&#34;&gt;.eval&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;nashorn&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;ss-script&lt;/span&gt;)
+(&lt;span style=&#34;color:#447fcf&#34;&gt;.eval&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;nashorn&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;render-script&lt;/span&gt;) &lt;span style=&#34;color:#999;font-style:italic&#34;&gt;; our html markup&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I must admit that this code works on small reagent example.
 I&amp;rsquo;m unable to load production code from my current project in to Nashorn.&lt;/p&gt;
 &lt;p&gt;Also it helps a lot if you started developing your project with server side rendering in mind.&lt;/p&gt;
@@ -826,39 +826,39 @@ there are pre-build binaries on the &lt;a href=&#34;https://leiningen.org/grench
       <description>&lt;p&gt;Small code snippet showing ability to generate 2 way data bindings in Reagent.
 Underneath it&amp;rsquo;s all about core.async.
 Also provides ability to apply transformation using transducers.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;defonce &lt;/span&gt;form (&lt;span style=&#34;color:#a6e22e&#34;&gt;atom&lt;/span&gt; {}))
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;defonce &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;form&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;atom&lt;/span&gt; {}))
 
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;defn &lt;/span&gt;bind-input
-  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Generat on-change callback,
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   bind value to form-key of form-atom.
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   Provides ability to implement transformation using transducers.&amp;#34;&lt;/span&gt;
-  [form-atom form-key xform]
-  (&lt;span style=&#34;color:#66d9ef&#34;&gt;let &lt;/span&gt;[local-chan (&lt;span style=&#34;color:#a6e22e&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; xform)]
-    (&lt;span style=&#34;color:#a6e22e&#34;&gt;go-loop&lt;/span&gt; []
-      (&lt;span style=&#34;color:#a6e22e&#34;&gt;swap!&lt;/span&gt; form-atom assoc form-key (&lt;span style=&#34;color:#a6e22e&#34;&gt;&amp;lt;!&lt;/span&gt; local-chan))
-      (&lt;span style=&#34;color:#a6e22e&#34;&gt;recur&lt;/span&gt;))
-    (&lt;span style=&#34;color:#66d9ef&#34;&gt;fn &lt;/span&gt;[event]
-      (&lt;span style=&#34;color:#a6e22e&#34;&gt;put!&lt;/span&gt; local-chan
-            (&lt;span style=&#34;color:#a6e22e&#34;&gt;.-value&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;.-target&lt;/span&gt; event))))))
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;bind-input&lt;/span&gt;
+  &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Generat on-change callback,
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;   bind value to form-key of form-atom.
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;   Provides ability to implement transformation using transducers.&amp;#34;&lt;/span&gt;
+  [&lt;span style=&#34;color:#40ffff&#34;&gt;form-atom&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;form-key&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;xform&lt;/span&gt;]
+  (&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;let &lt;/span&gt;[&lt;span style=&#34;color:#40ffff&#34;&gt;local-chan&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color:#3677a9&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;xform&lt;/span&gt;)]
+    (&lt;span style=&#34;color:#447fcf&#34;&gt;go-loop&lt;/span&gt; []
+      (&lt;span style=&#34;color:#447fcf&#34;&gt;swap!&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;form-atom&lt;/span&gt; &lt;span style=&#34;color:#24909d&#34;&gt;assoc &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;form-key&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;&amp;lt;!&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;local-chan&lt;/span&gt;))
+      (&lt;span style=&#34;color:#447fcf&#34;&gt;recur&lt;/span&gt;))
+    (&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;fn &lt;/span&gt;[&lt;span style=&#34;color:#40ffff&#34;&gt;event&lt;/span&gt;]
+      (&lt;span style=&#34;color:#447fcf&#34;&gt;put!&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;local-chan&lt;/span&gt;
+            (&lt;span style=&#34;color:#447fcf&#34;&gt;.-value&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;.-target&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;event&lt;/span&gt;))))))
 
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;defn &lt;/span&gt;bound-input
-  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Generate input,
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   create two way data binding
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   between input value and value under form-key in form-atom.
-&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;   Provides ability to implement transformation using transducers.&amp;#34;&lt;/span&gt;
-  [attrs form-atom form-key xform]
-  [&lt;span style=&#34;color:#e6db74&#34;&gt;:input&lt;/span&gt; (merge attrs
-                 {&lt;span style=&#34;color:#e6db74&#34;&gt;:value&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;form-key&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;form-atom)
-                  &lt;span style=&#34;color:#e6db74&#34;&gt;:on-change&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;bind-input&lt;/span&gt; form-atom form-key xform)})])
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;bound-input&lt;/span&gt;
+  &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;Generate input,
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;   create two way data binding
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;   between input value and value under form-key in form-atom.
+&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;   Provides ability to implement transformation using transducers.&amp;#34;&lt;/span&gt;
+  [&lt;span style=&#34;color:#40ffff&#34;&gt;attrs&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;form-atom&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;form-key&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;xform&lt;/span&gt;]
+  [&lt;span style=&#34;color:#ed9d13&#34;&gt;:input&lt;/span&gt; (&lt;span style=&#34;color:#24909d&#34;&gt;merge &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;attrs&lt;/span&gt;
+                 {&lt;span style=&#34;color:#ed9d13&#34;&gt;:value&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;form-key&lt;/span&gt; @&lt;span style=&#34;color:#40ffff&#34;&gt;form-atom&lt;/span&gt;)
+                  &lt;span style=&#34;color:#ed9d13&#34;&gt;:on-change&lt;/span&gt; (&lt;span style=&#34;color:#447fcf&#34;&gt;bind-input&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;form-atom&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;form-key&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;xform&lt;/span&gt;)})])
 
-(&lt;span style=&#34;color:#66d9ef&#34;&gt;defn &lt;/span&gt;main-component []
-  [&lt;span style=&#34;color:#e6db74&#34;&gt;:div&lt;/span&gt;
-   [&lt;span style=&#34;color:#e6db74&#34;&gt;:h3&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;:name&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;form) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; value&amp;#34;&lt;/span&gt;]
-   [bound-input {&lt;span style=&#34;color:#e6db74&#34;&gt;:type&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;:text&lt;/span&gt;} form &lt;span style=&#34;color:#e6db74&#34;&gt;:name&lt;/span&gt; (filter &lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;(&amp;gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt; (count %)))]])
+(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;defn &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;main-component&lt;/span&gt; []
+  [&lt;span style=&#34;color:#ed9d13&#34;&gt;:div&lt;/span&gt;
+   [&lt;span style=&#34;color:#ed9d13&#34;&gt;:h3&lt;/span&gt; (&lt;span style=&#34;color:#ed9d13&#34;&gt;:name&lt;/span&gt; @&lt;span style=&#34;color:#40ffff&#34;&gt;form&lt;/span&gt;) &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34; value&amp;#34;&lt;/span&gt;]
+   [&lt;span style=&#34;color:#40ffff&#34;&gt;bound-input&lt;/span&gt; {&lt;span style=&#34;color:#ed9d13&#34;&gt;:type&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;:text&lt;/span&gt;} &lt;span style=&#34;color:#40ffff&#34;&gt;form&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;:name&lt;/span&gt; (&lt;span style=&#34;color:#24909d&#34;&gt;filter &lt;/span&gt;#(&lt;span style=&#34;color:#24909d&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span style=&#34;color:#3677a9&#34;&gt;15&lt;/span&gt; (&lt;span style=&#34;color:#24909d&#34;&gt;count &lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;%&lt;/span&gt;)))]])
 
-(&lt;span style=&#34;color:#a6e22e&#34;&gt;reagent/render-component&lt;/span&gt; [main-component]
-                          (&lt;span style=&#34;color:#a6e22e&#34;&gt;js/document.getElementById&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;))
+(&lt;span style=&#34;color:#447fcf&#34;&gt;reagent/render-component&lt;/span&gt; [&lt;span style=&#34;color:#40ffff&#34;&gt;main-component&lt;/span&gt;]
+                          (&lt;span style=&#34;color:#447fcf&#34;&gt;js/document.getElementById&lt;/span&gt; &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
@@ -877,22 +877,22 @@ But sometimes it&amp;rsquo;s impossible to add some external dependencies to the
 What if you have only JVM to your disposal, will you be able to pull it off only with JVM and clojure.jar?&lt;/p&gt;
 &lt;h1 id=&#34;basic-setup&#34;&gt;Basic setup&lt;/h1&gt;
 &lt;p&gt;First what we will need is to get clojure jar file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;wget -O /opt/clojure.jar &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;wget -O /opt/clojure.jar &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next lets create executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt; that will live in &lt;code&gt;/usr/bin&lt;/code&gt; (or &lt;code&gt;/opt/bin&lt;/code&gt; or &lt;code&gt;/home/youruser/bin&lt;/code&gt;):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/sh
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-exec java -jar /opt/clojure.jar &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#cd2828;font-weight:bold&#34;&gt;#!/bin/sh
+&lt;/span&gt;&lt;span style=&#34;color:#cd2828;font-weight:bold&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#24909d&#34;&gt;exec&lt;/span&gt; java -jar /opt/clojure.jar &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;$@&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now it&amp;rsquo;s time for our hello world script &lt;code&gt; /opt/test.clj&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt;!/usr/bin/clojure
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-clojure&#34; data-lang=&#34;clojure&#34;&gt;#&lt;span style=&#34;color:#40ffff&#34;&gt;!/usr/bin/clojure&lt;/span&gt;
 
-(println &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hello world&amp;#34;&lt;/span&gt;)
+(&lt;span style=&#34;color:#24909d&#34;&gt;println &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;hello world&amp;#34;&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Make it executable:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;chmod +x /opt/test.clj
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;chmod +x /opt/test.clj
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And run it:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ /opt/test.clj
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ /opt/test.clj
 hello world
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Yay! But it feels kind of slow:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;time /opt/test.clj
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;time&lt;/span&gt; /opt/test.clj
 hello world
 
 real  0m2.684s
@@ -904,30 +904,30 @@ Can we improve that? What if there would be JVM with fast startup and low memory
 &lt;p&gt;&lt;em&gt;&amp;ldquo;But&amp;hellip; but you told us that there is only JVM available on production system without ability to add external dependencies.&amp;quot;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;I lied, sorry.&lt;/p&gt;
 &lt;p&gt;Compiling JamVM with OpenJDK support:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Fetching required dependencies and source&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Fetching required dependencies and source&lt;/span&gt;
 apt-get -y install openjdk-7-jdk openjdk-7-jre build-essential zlib1g-dev
-cd /opt
-wget -O jamvm-2.0.0.tar.gz &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#24909d&#34;&gt;cd&lt;/span&gt; /opt
+wget -O jamvm-2.0.0.tar.gz &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#39;https://downloads.sourceforge.net/project/jamvm/jamvm/JamVM%202.0.0/jamvm-2.0.0.tar.gz&amp;#39;&lt;/span&gt;
 tar -xvzf jamvm-2.0.0.tar.gz
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Building&lt;/span&gt;
-cd /opt/jamvm-2.0.0
-./configure --with-java-runtime-library&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;openjdk7 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make check &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; make install
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Building&lt;/span&gt;
+&lt;span style=&#34;color:#24909d&#34;&gt;cd&lt;/span&gt; /opt/jamvm-2.0.0
+./configure --with-java-runtime-library=openjdk7 &amp;amp;&amp;amp; make check &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Installing in to the openjdk installation&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Installing in to the openjdk installation&lt;/span&gt;
 mkdir /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm
 cp /usr/local/jamvm/lib/libjvm.so /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jamvm/libjvm.so
 
-&lt;span style=&#34;color:#75715e&#34;&gt;# Trying it out&lt;/span&gt;
+&lt;span style=&#34;color:#999;font-style:italic&#34;&gt;# Trying it out&lt;/span&gt;
 java -jamvm -version
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;JamVM will be installed as separate vm in openjdk, so it will not mess with existing installation.
 You will need to use -jamvm option to java command to run it with small overhead vm.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s update our clojure executable &lt;code&gt;/usr/bin/clojure&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/sh
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
-exec java -jamvm -jar /opt/clojure.jar &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$@&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#cd2828;font-weight:bold&#34;&gt;#!/bin/sh
+&lt;/span&gt;&lt;span style=&#34;color:#cd2828;font-weight:bold&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#24909d&#34;&gt;exec&lt;/span&gt; java -jamvm -jar /opt/clojure.jar &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;$@&lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Let&amp;rsquo;s try it out:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;time /opt/test.clj
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#24909d&#34;&gt;time&lt;/span&gt; /opt/test.clj
 hello world
 
 real  0m0.866s
@@ -935,7 +935,7 @@ user  0m0.764s
 sys   0m0.076s
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Better, right?&lt;/p&gt;
 &lt;h2 id=&#34;how-slow-is-jamvm-some-benchmarks&#34;&gt;How slow is JamVM? Some benchmarks:&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Clojure 1.6
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Clojure 1.6
 
 JamVM:
 

@@ -69,39 +69,39 @@
                   <p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
 <p><a href="https://github.com/Gonzih/clojurescript-small-benchmark-for-embed">Code</a> is modified to run on top of the JavaScript:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>benchmark.core)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">benchmark.core</span>)
 
-(<span style="color:#66d9ef">defn </span>factorial [x]
-  (reduce * (range <span style="color:#ae81ff">1</span> (inc x))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">factorial</span> [<span style="color:#40ffff">x</span>]
+  (<span style="color:#24909d">reduce * </span>(<span style="color:#24909d">range </span><span style="color:#3677a9">1</span> (<span style="color:#24909d">inc </span><span style="color:#40ffff">x</span>))))
 
-(<span style="color:#66d9ef">defn </span>fib [n]
-  (<span style="color:#66d9ef">if </span>(&lt;= n <span style="color:#ae81ff">1</span>)
-    <span style="color:#ae81ff">1</span>
-    (+ (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">1</span>)) (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">2</span>)))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">fib</span> [<span style="color:#40ffff">n</span>]
+  (<span style="color:#6ab825;font-weight:bold">if </span>(<span style="color:#24909d">&lt;= </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)
+    <span style="color:#3677a9">1</span>
+    (<span style="color:#24909d">+ </span>(<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)) (<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">2</span>)))))
 
-(<span style="color:#66d9ef">defn </span>sort-seq []
-  (sort (repeat <span style="color:#ae81ff">100000</span> (rand-int <span style="color:#ae81ff">2000000</span>))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">sort-seq</span> []
+  (<span style="color:#24909d">sort </span>(<span style="color:#24909d">repeat </span><span style="color:#3677a9">100000</span> (<span style="color:#24909d">rand-int </span><span style="color:#3677a9">2000000</span>))))
 
-(<span style="color:#66d9ef">defn </span>time-fun [fun]
-  (<span style="color:#66d9ef">let </span>[start  (<span style="color:#a6e22e">.getTime</span> (<span style="color:#a6e22e">js/Date.</span>))
-        _      (<span style="color:#a6e22e">fun</span>)
-        end    (<span style="color:#a6e22e">.getTime</span> (<span style="color:#a6e22e">js/Date.</span>))
-        result (- end start)]
-    result))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-fun</span> [<span style="color:#40ffff">fun</span>]
+  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">start</span>  (<span style="color:#447fcf">.getTime</span> (<span style="color:#447fcf">js/Date.</span>))
+        <span style="color:#40ffff">_</span>      (<span style="color:#447fcf">fun</span>)
+        <span style="color:#40ffff">end</span>    (<span style="color:#447fcf">.getTime</span> (<span style="color:#447fcf">js/Date.</span>))
+        <span style="color:#40ffff">result</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">end</span> <span style="color:#40ffff">start</span>)]
+    <span style="color:#40ffff">result</span>))
 
-(<span style="color:#66d9ef">defn </span>time-it [fun]
-  (<span style="color:#66d9ef">let </span>[values  (for [i (range <span style="color:#ae81ff">200</span>)] (<span style="color:#a6e22e">time-fun</span> fun))]
-    (/ (apply + values)
-       (count values))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-it</span> [<span style="color:#40ffff">fun</span>]
+  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">values</span>  (<span style="color:#24909d">for </span>[<span style="color:#40ffff">i</span> (<span style="color:#24909d">range </span><span style="color:#3677a9">200</span>)] (<span style="color:#447fcf">time-fun</span> <span style="color:#40ffff">fun</span>))]
+    (<span style="color:#24909d">/ </span>(<span style="color:#24909d">apply + </span><span style="color:#40ffff">values</span>)
+       (<span style="color:#24909d">count </span><span style="color:#40ffff">values</span>))))
 
-(<span style="color:#66d9ef">defn </span>-main []
-  (println <span style="color:#e6db74">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">factorial</span> <span style="color:#ae81ff">5000</span>)))
-  (println <span style="color:#e6db74">&#34;(fib 20) \t Avg: &#34;</span>         (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">fib</span> <span style="color:#ae81ff">20</span>)))
-  (println <span style="color:#e6db74">&#34;(sort-seq) \t Avg: &#34;</span>       (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">sort-seq</span>))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> []
+  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">factorial</span> <span style="color:#3677a9">5000</span>)))
+  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(fib 20) \t Avg: &#34;</span>         (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">fib</span> <span style="color:#3677a9">20</span>)))
+  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(sort-seq) \t Avg: &#34;</span>       (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">sort-seq</span>))))
 
-(<span style="color:#a6e22e">set!</span> *main-cli-fn* -main)
+(<span style="color:#447fcf">set!</span> <span style="color:#40ffff">*main-cli-fn*</span> <span style="color:#40ffff">-main</span>)
 </code></pre></div><p>Benchmark results:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-plaintext" data-lang="plaintext">&gt; node --version
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-plaintext" data-lang="plaintext">&gt; node --version
 v0.6.12
 
 # simple compiler optimization

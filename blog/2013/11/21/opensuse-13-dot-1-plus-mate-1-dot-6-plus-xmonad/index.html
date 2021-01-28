@@ -72,14 +72,14 @@ How to restore sanity to your desktop? Mate it! Here is quick how to.</p>
 <p><a href="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/1.png"><img src="https://d1wvxg652jdms0.cloudfront.net/suse-mate-xmonad/re_1.png" alt="preview"></a></p>
 <p>Patterns for installing mate in OpenSUSE can be found here <a href="https://en.opensuse.org/Portal:MATE">https://en.opensuse.org/Portal:MATE</a></p>
 <p>Xmonad can be installed using cabal install or using packages from OBS.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">sudo zypper -n in xorg-x11-devel
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">sudo zypper -n in xorg-x11-devel
 
-cabal install xmonad         --flags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;with_utf8 with_xft&#34;</span>
-cabal install xmonad-contrib --flags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;with_utf8 with_xft&#34;</span>
-cabal install xmobar         --flags<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;with_utf8 with_xft&#34;</span>
+cabal install xmonad         --flags=<span style="color:#ed9d13">&#34;with_utf8 with_xft&#34;</span>
+cabal install xmonad-contrib --flags=<span style="color:#ed9d13">&#34;with_utf8 with_xft&#34;</span>
+cabal install xmobar         --flags=<span style="color:#ed9d13">&#34;with_utf8 with_xft&#34;</span>
 </code></pre></div><p>Create following file:</p>
 <p><code>/usr/share/applications/xmonad.desktop</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">[Desktop Entry]
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">[Desktop Entry]
 Type=Application
 Name=Xmonad
 # Replace it with your xmonad launcher
@@ -89,11 +89,11 @@ Terminal=false
 StartupNotify=false
 Categories=
 </code></pre></div><p>Set xmonad as window manager for Mate:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Mate 1.4</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#999;font-style:italic"># Mate 1.4</span>
 mateconftool-2 -s /desktop/mate/session/required_components/windowmanager xmonad --type string
 
-<span style="color:#75715e"># Mate 1.6</span>
-gsettings set org.mate.session.required-components windowmanager xmonad
+<span style="color:#999;font-style:italic"># Mate 1.6</span>
+gsettings <span style="color:#24909d">set</span> org.mate.session.required-components windowmanager xmonad
 </code></pre></div><p>If you have Gnome 3 installed make sure that gnome-settings daemon is not running in mate (can cause gsettings error).</p>
 <p>Enjoy!</p>
 <p>By the way I have some weird issues with gnome 3 apps rendering, no idea how to fix this for now.
@@ -104,7 +104,7 @@ You can kill caja and mate will restore it (temporary fix).</p>
 Removed it for now (probably will cause issues with some Java(AWT) applications).</p>
 <p><strong>UPDATE 1</strong> If you want to disable desktop add following file:</p>
 <p><code>/usr/share/applications/caja-no-desktop.desktop</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">[Desktop Entry]
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">[Desktop Entry]
 Name=Caja
 Exec=caja -n --no-desktop
 Icon=system-file-manager
@@ -122,8 +122,8 @@ X-MATE-Autostart-Notify=true
 X-MATE-AutoRestart=true
 X-MATE-Provides=filemanager
 </code></pre></div><p>And now set it as default file manager for mate:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Mate 1.6</span>
-gsettings set org.mate.session.required-components filemanager <span style="color:#e6db74">&#34;caja-no-desktop&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#999;font-style:italic"># Mate 1.6</span>
+gsettings <span style="color:#24909d">set</span> org.mate.session.required-components filemanager <span style="color:#ed9d13">&#34;caja-no-desktop&#34;</span>
 </code></pre></div><p>Also you can store all <code>*.desktop</code> files in <code>$HOME/.local/share/applications</code>.</p>
             </div>
 

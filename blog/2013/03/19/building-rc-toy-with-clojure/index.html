@@ -149,8 +149,8 @@ I just replaced overtone related events handling with my own code based on Clodi
 <h2 id="fixed-issues">Fixed Issues</h2>
 <h3 id="native-dependencies-issue">Native dependencies issue</h3>
 <p>Seems like jvm tries to load linux64 native dependencies for Raspberry Pi. Fix:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#INFO: Failed to load library: no jinput-linux64 in java.library.path</span>
-sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so<span style="color:#e6db74">`</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#999;font-style:italic">#INFO: Failed to load library: no jinput-linux64 in java.library.path</span>
+sudo ln -s /usr/lib/jni/libjinput.so /usr/lib/jni/libjinput-linux64.so<span style="color:#ed9d13">`</span>
 </code></pre></div><h3 id="gamepad-configuration">Gamepad configuration</h3>
 <p>Add <code>joydev</code> to <code>/etc/modules</code> to see gamepad in <code>/etc/input</code>.
 Also you need to switch gamepad to direct input mode (X -&gt; D switch on the back of gamepad).</p>
@@ -159,7 +159,7 @@ Also you need to switch gamepad to direct input mode (X -&gt; D switch on the ba
 <p>To scan for devices from command line use <code>hcitool scan</code>.</p>
 <p>To bind bluetooth to serial port on startup use following code (untested yet):</p>
 <p><code>/etc/bluetooth/rfcomm.conf</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">rfcomm0 {
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">rfcomm0 {
         bind yes;
         device mac-adress-of-bluetooth-on-arduino;
         channel 1;
@@ -167,7 +167,7 @@ Also you need to switch gamepad to direct input mode (X -&gt; D switch on the ba
 }
 </code></pre></div><h3 id="jinput-permissions">JInput permissions</h3>
 <p>For now I have no idea how to fix that issue. Looks like something is wrong with permissions.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
 </code></pre></div>
             </div>
 

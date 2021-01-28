@@ -81,41 +81,41 @@ Core.typed will trust you and will skip further checks.</p>
 <p>Or for example if you are expecting String as a result you can convert result to String with str before returning it.</p>
 <h3 id="non-nil-return-in-coretyped-works-only-on-methods">non-nil-return in core.typed works only on methods</h3>
 <p>And if you have static method then something like that would not work:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#447fcf">non-nil-return</span> <span style="color:#40ffff">javax.mail.Message$RecipientType/TO</span> <span style="color:#ed9d13">:all</span>)
 
-(<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
-(<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to []
-  (<span style="color:#a6e22e">Message$RecipientType/TO</span>))
+(<span style="color:#447fcf">ann</span> <span style="color:#40ffff">recipient-type-to</span> [<span style="color:#24909d">-&gt; </span><span style="color:#40ffff">Message$RecipientType</span>])
+(<span style="color:#6ab825;font-weight:bold">defn </span>^<span style="color:#40ffff">Message$RecipientType</span> <span style="color:#40ffff">recipient-type-to</span> []
+  (<span style="color:#447fcf">Message$RecipientType/TO</span>))
 
-(<span style="color:#a6e22e">comment</span>
-  Type mismatch<span style="color:#960050;background-color:#1e0010">:</span>
-  Expected<span style="color:#960050;background-color:#1e0010">:</span>       (<span style="color:#a6e22e">Fn</span> [-&gt; Message$RecipientType])
-  Actual<span style="color:#960050;background-color:#1e0010">:</span>         (<span style="color:#a6e22e">Fn</span> [-&gt; (<span style="color:#a6e22e">U</span> Message$RecipientType nil)]))
+(<span style="color:#447fcf">comment</span>
+  <span style="color:#40ffff">Type</span> <span style="color:#40ffff">mismatch</span><span style="color:#a61717;background-color:#e3d2d2">:</span>
+  <span style="color:#40ffff">Expected</span><span style="color:#a61717;background-color:#e3d2d2">:</span>       (<span style="color:#447fcf">Fn</span> [<span style="color:#24909d">-&gt; </span><span style="color:#40ffff">Message$RecipientType</span>])
+  <span style="color:#40ffff">Actual</span><span style="color:#a61717;background-color:#e3d2d2">:</span>         (<span style="color:#447fcf">Fn</span> [<span style="color:#24909d">-&gt; </span>(<span style="color:#447fcf">U</span> <span style="color:#40ffff">Message$RecipientType</span> <span style="color:#40ffff">nil</span>)]))
 </code></pre></div><p>Solution:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#447fcf">non-nil-return</span> <span style="color:#40ffff">javax.mail.Message$RecipientType/TO</span> <span style="color:#ed9d13">:all</span>)
 
-(<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
-(<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to
+(<span style="color:#447fcf">ann</span> <span style="color:#40ffff">recipient-type-to</span> [<span style="color:#24909d">-&gt; </span><span style="color:#40ffff">Message$RecipientType</span>])
+(<span style="color:#6ab825;font-weight:bold">defn </span>^<span style="color:#40ffff">Message$RecipientType</span> <span style="color:#40ffff">recipient-type-to</span>
   []
-  {<span style="color:#e6db74">:post</span> [%]}
-  (<span style="color:#a6e22e">Message$RecipientType/TO</span>))
+  {<span style="color:#ed9d13">:post</span> [<span style="color:#40ffff">%</span>]}
+  (<span style="color:#447fcf">Message$RecipientType/TO</span>))
 </code></pre></div><p>Which is the same as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">non-nil-return</span> javax.mail.Message$RecipientType/TO <span style="color:#e6db74">:all</span>)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#447fcf">non-nil-return</span> <span style="color:#40ffff">javax.mail.Message$RecipientType/TO</span> <span style="color:#ed9d13">:all</span>)
 
-(<span style="color:#a6e22e">ann</span> recipient-type-to [-&gt; Message$RecipientType])
-(<span style="color:#66d9ef">defn </span><span style="color:#f92672">^</span>Message$RecipientType recipient-type-to []
-  (<span style="color:#66d9ef">let </span>[temp (<span style="color:#a6e22e">Message$RecipientType/TO</span>)]
-    (assert temp)
-    temp)
+(<span style="color:#447fcf">ann</span> <span style="color:#40ffff">recipient-type-to</span> [<span style="color:#24909d">-&gt; </span><span style="color:#40ffff">Message$RecipientType</span>])
+(<span style="color:#6ab825;font-weight:bold">defn </span>^<span style="color:#40ffff">Message$RecipientType</span> <span style="color:#40ffff">recipient-type-to</span> []
+  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">temp</span> (<span style="color:#447fcf">Message$RecipientType/TO</span>)]
+    (<span style="color:#24909d">assert </span><span style="color:#40ffff">temp</span>)
+    <span style="color:#40ffff">temp</span>)
 </code></pre></div><p>So unless assert evaluates temp to logical true exception will be raised
 and function will always return non nil value, which makes core.typed happy.</p>
 <h3 id="defining-parameterized-alias-type">Defining Parameterized alias type</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#a6e22e">def-alias</span> Folder
-  (<span style="color:#a6e22e">TFn</span> [[x <span style="color:#e6db74">:variance</span> <span style="color:#e6db74">:covariant</span>]] (<span style="color:#a6e22e">Map</span> Keyword x)))
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#447fcf">def-alias</span> <span style="color:#40ffff">Folder</span>
+  (<span style="color:#447fcf">TFn</span> [[<span style="color:#40ffff">x</span> <span style="color:#ed9d13">:variance</span> <span style="color:#ed9d13">:covariant</span>]] (<span style="color:#447fcf">Map</span> <span style="color:#40ffff">Keyword</span> <span style="color:#40ffff">x</span>)))
 
-(<span style="color:#a6e22e">comment</span>
-  (<span style="color:#a6e22e">Folder</span> Items)
-  (<span style="color:#a6e22e">Folder</span> Urls))
+(<span style="color:#447fcf">comment</span>
+  (<span style="color:#447fcf">Folder</span> <span style="color:#40ffff">Items</span>)
+  (<span style="color:#447fcf">Folder</span> <span style="color:#40ffff">Urls</span>))
 </code></pre></div><p><a href="https://github.com/Gonzih/feeds2imap.clj/commit/1c41d814bdb054d57e644013c85275ec9a45a114">Here is</a> commit with changes related to core.typed.
 I must say writing type annotations for code that you wrote few months ago is tricky.
 But still I enjoyed process and results and I&rsquo;m still a little bit amazed about all core.typed thing.

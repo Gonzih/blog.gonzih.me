@@ -74,74 +74,74 @@ So I decided to make sure it&rsquo;s my ISP fault and not just my opinion based 
 <h2 id="speedtest-data">Speedtest data</h2>
 <p>For speedtest I will be using python script that uses speedtest.net servers.
 Pi is running Pidora right now, so let&rsquo;s install script dependencies.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">yum -y install python-argparse python-lxml
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">yum -y install python-argparse python-lxml
 </code></pre></div><p>Script is hosted on <a href="https://github.com/Janhouse/tespeed">github</a>.
 Let&rsquo;s get the script.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">mkdir ~/scripts
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">mkdir ~/scripts
 wget https://raw.github.com/Janhouse/tespeed/master/tespeed.py -O ~/scripts/speedtest.py
 </code></pre></div><p>You can test script running it with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">python ~/scripts/speedtest.py
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">python ~/scripts/speedtest.py
 </code></pre></div><p>Now let&rsquo;s wrap python script into additional shell script to store time of data collection in csv.
 I&rsquo;m not sure if I need time for now, but let&rsquo;s keep it anyway.
 We will silence stderr from the script and output results as csv.</p>
 <p><code>~/bin/speedtest.zsh</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/usr/bin/zsh
-</span><span style="color:#75715e"></span>
-echo <span style="color:#e6db74">&#34;\&#34;</span><span style="color:#66d9ef">$(</span>date -R<span style="color:#66d9ef">)</span><span style="color:#e6db74">\&#34;,</span><span style="color:#66d9ef">$(</span>python ~/scripts/tespeed.py --csv -s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#cd2828;font-weight:bold">#!/usr/bin/zsh
+</span><span style="color:#cd2828;font-weight:bold"></span>
+<span style="color:#24909d">echo</span> <span style="color:#ed9d13">&#34;\&#34;</span><span style="color:#6ab825;font-weight:bold">$(</span>date -R<span style="color:#6ab825;font-weight:bold">)</span><span style="color:#ed9d13">\&#34;,</span><span style="color:#6ab825;font-weight:bold">$(</span>python ~/scripts/tespeed.py --csv -s<span style="color:#6ab825;font-weight:bold">)</span><span style="color:#ed9d13">&#34;</span>
 </code></pre></div><p>Let&rsquo;s put script into crontab to run every 5 minutes, also let&rsquo;s redirect stderr to /dev/null in case of Ethernet unavailability or some other issues.</p>
 <p><code>crontab</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/speedtest.zsh 2&gt;/dev/null &gt;&gt; ~/.speedtest.csv
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/speedtest.zsh 2&gt;/dev/null &gt;&gt; ~/.speedtest.csv
 </code></pre></div><p>##Ping data</p>
 <p>For ping data we will be running <code>ping</code> command with 100 packets (<code>ping -c 100</code>) with google dns as target (8.8.8.8) and storing avg value with time to csv file.</p>
 <p><code>~/bin/pingtest.zsh</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/usr/bin/zsh
-</span><span style="color:#75715e"></span>
-AVG<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ping -c <span style="color:#ae81ff">100</span> 8.8.8.8 | grep rtt | sed -r <span style="color:#e6db74">&#39;s#.*\=\s.+/(.+)/.+/.+#\1#&#39;</span><span style="color:#66d9ef">)</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh"><span style="color:#cd2828;font-weight:bold">#!/usr/bin/zsh
+</span><span style="color:#cd2828;font-weight:bold"></span>
+<span style="color:#40ffff">AVG</span>=<span style="color:#6ab825;font-weight:bold">$(</span>ping -c <span style="color:#3677a9">100</span> 8.8.8.8 | grep rtt | sed -r <span style="color:#ed9d13">&#39;s#.*\=\s.+/(.+)/.+/.+#\1#&#39;</span><span style="color:#6ab825;font-weight:bold">)</span>
 
-echo <span style="color:#e6db74">&#34;\&#34;</span><span style="color:#66d9ef">$(</span>date -R<span style="color:#66d9ef">)</span><span style="color:#e6db74">\&#34;,</span>$AVG<span style="color:#e6db74">&#34;</span>
+<span style="color:#24909d">echo</span> <span style="color:#ed9d13">&#34;\&#34;</span><span style="color:#6ab825;font-weight:bold">$(</span>date -R<span style="color:#6ab825;font-weight:bold">)</span><span style="color:#ed9d13">\&#34;,</span><span style="color:#40ffff">$AVG</span><span style="color:#ed9d13">&#34;</span>
 </code></pre></div><p><code>crontab</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/pingtest.zsh 2&gt;/dev/null &gt;&gt; ~/.pingtest.csv
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">*/5 * * * * ~/bin/pingtest.zsh 2&gt;/dev/null &gt;&gt; ~/.pingtest.csv
 </code></pre></div><p>##Graphs</p>
 <p>For data visualization let&rsquo;s use Clojure with Incanter. Here is clojure code:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>incanter-graphs.core
-  (<span style="color:#e6db74">:require</span> [incanter.core <span style="color:#e6db74">:refer</span> <span style="color:#e6db74">:all</span>]
-            [incanter.stats <span style="color:#e6db74">:refer</span> <span style="color:#e6db74">:all</span>]
-            [incanter.charts <span style="color:#e6db74">:refer</span> <span style="color:#e6db74">:all</span>]
-            [clojure-csv.core <span style="color:#e6db74">:refer</span> <span style="color:#e6db74">:all</span>])
-  (<span style="color:#e6db74">:gen-class</span>))
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">incanter-graphs.core</span>
+  (<span style="color:#ed9d13">:require</span> [<span style="color:#40ffff">incanter.core</span> <span style="color:#ed9d13">:refer</span> <span style="color:#ed9d13">:all</span>]
+            [<span style="color:#40ffff">incanter.stats</span> <span style="color:#ed9d13">:refer</span> <span style="color:#ed9d13">:all</span>]
+            [<span style="color:#40ffff">incanter.charts</span> <span style="color:#ed9d13">:refer</span> <span style="color:#ed9d13">:all</span>]
+            [<span style="color:#40ffff">clojure-csv.core</span> <span style="color:#ed9d13">:refer</span> <span style="color:#ed9d13">:all</span>])
+  (<span style="color:#ed9d13">:gen-class</span>))
 
-(<span style="color:#66d9ef">defn </span>to-f [is] (<span style="color:#a6e22e">Float/parseFloat</span> is))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">to-f</span> [<span style="color:#40ffff">is</span>] (<span style="color:#447fcf">Float/parseFloat</span> <span style="color:#40ffff">is</span>))
 
-(<span style="color:#66d9ef">defn </span>get-f-col [data col]
-  (map to-f (<span style="color:#a6e22e">sel</span> data <span style="color:#e6db74">:cols</span> col)))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">get-f-col</span> [<span style="color:#40ffff">data</span> <span style="color:#40ffff">col</span>]
+  (<span style="color:#24909d">map </span><span style="color:#40ffff">to-f</span> (<span style="color:#447fcf">sel</span> <span style="color:#40ffff">data</span> <span style="color:#ed9d13">:cols</span> <span style="color:#40ffff">col</span>)))
 
-(<span style="color:#66d9ef">defn </span>init-chart [data rng {<span style="color:#e6db74">:keys</span> [x-label y-label]}]
-  (<span style="color:#a6e22e">line-chart</span> rng data <span style="color:#e6db74">:x-label</span> x-label
-                       <span style="color:#e6db74">:y-label</span> y-label))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">init-chart</span> [<span style="color:#40ffff">data</span> <span style="color:#40ffff">rng</span> {<span style="color:#ed9d13">:keys</span> [<span style="color:#40ffff">x-label</span> <span style="color:#40ffff">y-label</span>]}]
+  (<span style="color:#447fcf">line-chart</span> <span style="color:#40ffff">rng</span> <span style="color:#40ffff">data</span> <span style="color:#ed9d13">:x-label</span> <span style="color:#40ffff">x-label</span>
+                       <span style="color:#ed9d13">:y-label</span> <span style="color:#40ffff">y-label</span>))
 
-(<span style="color:#66d9ef">defn </span>add-to-chart [chart data rng]
-  (reduce <span style="color:#f92672">#</span>(<span style="color:#a6e22e">add-categories</span> %1 rng %2) chart data))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">add-to-chart</span> [<span style="color:#40ffff">chart</span> <span style="color:#40ffff">data</span> <span style="color:#40ffff">rng</span>]
+  (<span style="color:#24909d">reduce </span>#(<span style="color:#447fcf">add-categories</span> <span style="color:#40ffff">%1</span> <span style="color:#40ffff">rng</span> <span style="color:#40ffff">%2</span>) <span style="color:#40ffff">chart</span> <span style="color:#40ffff">data</span>))
 
-(<span style="color:#66d9ef">defn </span>draw-file [filename cols <span style="color:#f92672">&amp;</span> {<span style="color:#e6db74">:as</span> opts}]
-  (<span style="color:#66d9ef">let </span>[data (slurp filename)
-        csv (<span style="color:#a6e22e">parse-csv</span> data <span style="color:#e6db74">:delimiter</span> <span style="color:#e6db74">\,</span>)
-        rng (range <span style="color:#ae81ff">0</span> (count csv))
-        data (map (partial get-f-col csv) cols)
-        chart (<span style="color:#a6e22e">init-chart</span> (first data) rng opts)
-        chart-to-show (<span style="color:#a6e22e">add-to-chart</span> chart (rest data) rng)]
-    (<span style="color:#a6e22e">view</span> chart-to-show)))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">draw-file</span> [<span style="color:#40ffff">filename</span> <span style="color:#40ffff">cols</span> &amp; {<span style="color:#ed9d13">:as</span> <span style="color:#40ffff">opts</span>}]
+  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">data</span> (<span style="color:#24909d">slurp </span><span style="color:#40ffff">filename</span>)
+        <span style="color:#40ffff">csv</span> (<span style="color:#447fcf">parse-csv</span> <span style="color:#40ffff">data</span> <span style="color:#ed9d13">:delimiter</span> <span style="color:#ed9d13">\,</span>)
+        <span style="color:#40ffff">rng</span> (<span style="color:#24909d">range </span><span style="color:#3677a9">0</span> (<span style="color:#24909d">count </span><span style="color:#40ffff">csv</span>))
+        <span style="color:#40ffff">data</span> (<span style="color:#24909d">map </span>(<span style="color:#24909d">partial </span><span style="color:#40ffff">get-f-col</span> <span style="color:#40ffff">csv</span>) <span style="color:#40ffff">cols</span>)
+        <span style="color:#40ffff">chart</span> (<span style="color:#447fcf">init-chart</span> (<span style="color:#24909d">first </span><span style="color:#40ffff">data</span>) <span style="color:#40ffff">rng</span> <span style="color:#40ffff">opts</span>)
+        <span style="color:#40ffff">chart-to-show</span> (<span style="color:#447fcf">add-to-chart</span> <span style="color:#40ffff">chart</span> (<span style="color:#24909d">rest </span><span style="color:#40ffff">data</span>) <span style="color:#40ffff">rng</span>)]
+    (<span style="color:#447fcf">view</span> <span style="color:#40ffff">chart-to-show</span>)))
 
-(<span style="color:#66d9ef">defn </span>-main [speedfile pingfile <span style="color:#f92672">&amp;</span> args]
-  (<span style="color:#a6e22e">draw-file</span> speedfile [<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span>] <span style="color:#e6db74">:x-label</span> <span style="color:#e6db74">&#34;Time&#34;</span> <span style="color:#e6db74">:y-label</span> <span style="color:#e6db74">&#34;Speed&#34;</span>)
-  (<span style="color:#a6e22e">draw-file</span> pingfile [<span style="color:#ae81ff">1</span>] <span style="color:#e6db74">:x-label</span> <span style="color:#e6db74">&#34;Time&#34;</span> <span style="color:#e6db74">:y-label</span> <span style="color:#e6db74">&#34;Ping time&#34;</span>))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> [<span style="color:#40ffff">speedfile</span> <span style="color:#40ffff">pingfile</span> &amp; <span style="color:#40ffff">args</span>]
+  (<span style="color:#447fcf">draw-file</span> <span style="color:#40ffff">speedfile</span> [<span style="color:#3677a9">1</span> <span style="color:#3677a9">2</span>] <span style="color:#ed9d13">:x-label</span> <span style="color:#ed9d13">&#34;Time&#34;</span> <span style="color:#ed9d13">:y-label</span> <span style="color:#ed9d13">&#34;Speed&#34;</span>)
+  (<span style="color:#447fcf">draw-file</span> <span style="color:#40ffff">pingfile</span> [<span style="color:#3677a9">1</span>] <span style="color:#ed9d13">:x-label</span> <span style="color:#ed9d13">&#34;Time&#34;</span> <span style="color:#ed9d13">:y-label</span> <span style="color:#ed9d13">&#34;Ping time&#34;</span>))
 </code></pre></div><p>Let&rsquo;s put all launch process to Makefile:</p>
 <p><code>Makefile</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">default</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-makefile" data-lang="makefile"><span style="color:#447fcf">default</span>:
 	scp raspberry-pi.local:.speedtest.csv /tmp/
 	scp raspberry-pi.local:.pingtest.csv /tmp/
-	<span style="color:#75715e">#Remove lines with only time (script failure)</span>
-	grep <span style="color:#e6db74">&#34;[^,]</span>$$<span style="color:#e6db74">&#34;</span> /tmp/.speedtest.csv &gt; /tmp/.speedtest-fixed.csv
-	grep <span style="color:#e6db74">&#34;[^,]</span>$$<span style="color:#e6db74">&#34;</span> /tmp/.pingtest.csv &gt; /tmp/.pingtest-fixed.csv
+	<span style="color:#999;font-style:italic">#Remove lines with only time (script failure)</span>
+	grep <span style="color:#ed9d13">&#34;[^,]</span><span style="color:#40ffff">$$</span><span style="color:#ed9d13">&#34;</span> /tmp/.speedtest.csv &gt; /tmp/.speedtest-fixed.csv
+	grep <span style="color:#ed9d13">&#34;[^,]</span><span style="color:#40ffff">$$</span><span style="color:#ed9d13">&#34;</span> /tmp/.pingtest.csv &gt; /tmp/.pingtest-fixed.csv
 	lein run /tmp/.speedtest-fixed.csv /tmp/.pingtest-fixed.csv
 </code></pre></div><p>I adjusted my router, so QoS daemon will give maximum priority to traffic from my Raspberry Pi, so data will be cleaner.
 And now we can see some visualization.</p>

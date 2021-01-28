@@ -67,11 +67,11 @@
                 <h1>How to use Magnet Links with RTorrent</h1>
               <span class="post-date">Fri, Feb 17, 2012</span>
                   <p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>
-cd ~/watch    <span style="color:#75715e"># set your watch directory here</span>
-<span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ xt<span style="color:#f92672">=</span>urn:btih:<span style="color:#f92672">([</span>^&amp;/<span style="color:#f92672">]</span>+<span style="color:#f92672">)</span> <span style="color:#f92672">]]</span> <span style="color:#f92672">||</span> exit;
-echo <span style="color:#e6db74">&#34;d10:magnet-uri</span><span style="color:#e6db74">${#</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">e&#34;</span> &gt; <span style="color:#e6db74">&#34;meta-</span><span style="color:#e6db74">${</span>BASH_REMATCH[1]<span style="color:#e6db74">}</span><span style="color:#e6db74">.torrent&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#cd2828;font-weight:bold">#!/bin/bash
+</span><span style="color:#cd2828;font-weight:bold"></span>
+<span style="color:#24909d">cd</span> ~/watch    <span style="color:#999;font-style:italic"># set your watch directory here</span>
+[[ <span style="color:#ed9d13">&#34;</span><span style="color:#40ffff">$1</span><span style="color:#ed9d13">&#34;</span> =~ <span style="color:#40ffff">xt</span>=urn:btih:([^&amp;/]+) ]] || exit;
+<span style="color:#24909d">echo</span> <span style="color:#ed9d13">&#34;d10:magnet-uri</span><span style="color:#ed9d13">${#</span><span style="color:#40ffff">1</span><span style="color:#ed9d13">}</span><span style="color:#ed9d13">:</span><span style="color:#ed9d13">${</span><span style="color:#40ffff">1</span><span style="color:#ed9d13">}</span><span style="color:#ed9d13">e&#34;</span> &gt; <span style="color:#ed9d13">&#34;meta-</span><span style="color:#ed9d13">${</span><span style="color:#40ffff">BASH_REMATCH</span>[1]<span style="color:#ed9d13">}</span><span style="color:#ed9d13">.torrent&#34;</span>
 </code></pre></div><p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
             </div>
 

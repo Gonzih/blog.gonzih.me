@@ -69,11 +69,11 @@
                   <ul>
 <li>Add initializer that disable sending data in namespaces in json.</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">ActiveRecord</span><span style="color:#f92672">::</span><span style="color:#66d9ef">Base</span><span style="color:#f92672">.</span>include_root_in_json <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#40ffff">ActiveRecord</span>::<span style="color:#40ffff">Base</span>.include_root_in_json = <span style="color:#6ab825">false</span>
 
-<span style="color:#75715e"># {&#34;post&#34;: {&#34;title&#34;: &#34;some title&#34;, &#34;content&#34;: &#34;some content&#34;}}</span>
-<span style="color:#75715e"># will be</span>
-<span style="color:#75715e"># {&#34;title&#34;: &#34;some title&#34;, &#34;content&#34;: &#34;some content}</span>
+<span style="color:#999;font-style:italic"># {&#34;post&#34;: {&#34;title&#34;: &#34;some title&#34;, &#34;content&#34;: &#34;some content&#34;}}</span>
+<span style="color:#999;font-style:italic"># will be</span>
+<span style="color:#999;font-style:italic"># {&#34;title&#34;: &#34;some title&#34;, &#34;content&#34;: &#34;some content}</span>
 </code></pre></div><ul>
 <li>Use attr_accessible for filtering attributes in mass assigments from backbone. In rails &gt; 3.1 you can use attr_accessible with :as =&gt; role.</li>
 <li>Use <a href="https://github.com/josevalim/inherited_resources">inherited resources</a> for faster development.</li>

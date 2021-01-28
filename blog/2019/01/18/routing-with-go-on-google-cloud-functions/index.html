@@ -72,38 +72,38 @@ I got interested in how to handle routing in cloud functions in go, so after cou
 <p>One of many neat things about cloud functions is that they can be built from existing Github repository. You simply have to define Google source repository that mirrors one on Github and use this repository as the source repository for your newly defined cloud function.</p>
 <p>It feels like go code you upload to cloud function gets loaded by some generated code as a dependency.</p>
 <p>Ultimately we can simply define our own router using <code>NewServeMux</code> like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">function</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">package</span> function
 
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;net/http&#34;</span>
+<span style="color:#6ab825;font-weight:bold">import</span> (
+	<span style="color:#ed9d13">&#34;net/http&#34;</span>
 )
 
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">mux</span> = <span style="color:#a6e22e">newMux</span>()
+<span style="color:#6ab825;font-weight:bold">var</span> mux = <span style="color:#447fcf">newMux</span>()
 
-<span style="color:#75715e">//F represents cloud function entry point
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">F</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>)
+<span style="color:#999;font-style:italic">//F represents cloud function entry point
+</span><span style="color:#999;font-style:italic"></span><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">F</span>(w http.ResponseWriter, r *http.Request) {
+	mux.<span style="color:#447fcf">ServeHTTP</span>(w, r)
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">newMux</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ServeMux</span> {
-	<span style="color:#a6e22e">mux</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">NewServeMux</span>()
-	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/one&#34;</span>, <span style="color:#a6e22e">one</span>)
-	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/two&#34;</span>, <span style="color:#a6e22e">two</span>)
-	<span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/subroute/three&#34;</span>, <span style="color:#a6e22e">three</span>)
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">newMux</span>() *http.ServeMux {
+	mux := http.<span style="color:#447fcf">NewServeMux</span>()
+	mux.<span style="color:#447fcf">HandleFunc</span>(<span style="color:#ed9d13">&#34;/one&#34;</span>, one)
+	mux.<span style="color:#447fcf">HandleFunc</span>(<span style="color:#ed9d13">&#34;/two&#34;</span>, two)
+	mux.<span style="color:#447fcf">HandleFunc</span>(<span style="color:#ed9d13">&#34;/subroute/three&#34;</span>, three)
 
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">mux</span>
+	<span style="color:#6ab825;font-weight:bold">return</span> mux
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">one</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;hello from one&#34;</span>))
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">one</span>(w http.ResponseWriter, r *http.Request) {
+	w.<span style="color:#447fcf">Write</span>([]<span style="color:#24909d">byte</span>(<span style="color:#ed9d13">&#34;hello from one&#34;</span>))
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">two</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;hello from two&#34;</span>))
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">two</span>(w http.ResponseWriter, r *http.Request) {
+	w.<span style="color:#447fcf">Write</span>([]<span style="color:#24909d">byte</span>(<span style="color:#ed9d13">&#34;hello from two&#34;</span>))
 }
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">three</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>([]byte(<span style="color:#e6db74">&#34;hello from three&#34;</span>))
+<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">three</span>(w http.ResponseWriter, r *http.Request) {
+	w.<span style="color:#447fcf">Write</span>([]<span style="color:#24909d">byte</span>(<span style="color:#ed9d13">&#34;hello from three&#34;</span>))
 }
 </code></pre></div><p>Now you can access your handlers by appending <code>/one</code>, <code>/two</code> or <code>/subroute/three</code> to URL that cloud functions will have in triggers section of the UI like this: <code>https://us-central1-my-test-project-123456.cloudfunctions.net/my-function-1/one</code>.</p>
 <p>This works because your cloud function receives request with prefix stripped away from the URL. This is very handy since allows one to port existing http server in to cloud function without changing it too much.</p>

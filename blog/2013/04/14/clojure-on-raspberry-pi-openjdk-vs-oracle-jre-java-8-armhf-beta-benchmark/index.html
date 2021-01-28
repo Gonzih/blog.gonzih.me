@@ -68,43 +68,43 @@
               <span class="post-date">Sun, Apr 14, 2013</span>
                   <p><a href="https://jdk8.java.net/fxarmpreview/">Here</a> you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!</p>
 <p>Pi is running Raspbian.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">&gt; cat /etc/*-release
-PRETTY_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Debian GNU/Linux 7.0 (wheezy)&#34;</span>
-NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Debian GNU/Linux&#34;</span>
-VERSION_ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;7.0&#34;</span>
-VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;7.0 (wheezy)&#34;</span>
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">&gt; cat /etc/*-release
+<span style="color:#40ffff">PRETTY_NAME</span>=<span style="color:#ed9d13">&#34;Debian GNU/Linux 7.0 (wheezy)&#34;</span>
+<span style="color:#40ffff">NAME</span>=<span style="color:#ed9d13">&#34;Debian GNU/Linux&#34;</span>
+<span style="color:#40ffff">VERSION_ID</span>=<span style="color:#ed9d13">&#34;7.0&#34;</span>
+<span style="color:#40ffff">VERSION</span>=<span style="color:#ed9d13">&#34;7.0 (wheezy)&#34;</span>
 </code></pre></div><p>Pi CPU is running on 700Mhz.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">&gt; cpufreq-info | grep <span style="color:#e6db74">&#39;current CPU&#39;</span>
-current CPU frequency is <span style="color:#ae81ff">700</span> MHz.
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">&gt; cpufreq-info | grep <span style="color:#ed9d13">&#39;current CPU&#39;</span>
+current CPU frequency is <span style="color:#3677a9">700</span> MHz.
 </code></pre></div><p>Clojure version is 1.5.1.</p>
 <p>Benchmark code is from <a href="https://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya&rsquo;s post</a>, also used for my BeagleBone Clojure/ClojureScript benchmarks:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#66d9ef">ns </span>benchmark.core)
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">benchmark.core</span>)
 
-(<span style="color:#66d9ef">defn </span>factorial [x]
-  (reduce * (range <span style="color:#ae81ff">1</span>N (inc x))))
-<span style="color:#75715e">;                   ^ integerOverflow fix</span>
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">factorial</span> [<span style="color:#40ffff">x</span>]
+  (<span style="color:#24909d">reduce * </span>(<span style="color:#24909d">range </span><span style="color:#3677a9">1</span><span style="color:#40ffff">N</span> (<span style="color:#24909d">inc </span><span style="color:#40ffff">x</span>))))
+<span style="color:#999;font-style:italic">;                   ^ integerOverflow fix</span>
 
-(<span style="color:#66d9ef">defn </span>fib [n]
-  (<span style="color:#66d9ef">if </span>(&lt;= n <span style="color:#ae81ff">1</span>)
-    <span style="color:#ae81ff">1</span>
-    (+ (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">1</span>)) (<span style="color:#a6e22e">fib</span> (- n <span style="color:#ae81ff">2</span>)))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">fib</span> [<span style="color:#40ffff">n</span>]
+  (<span style="color:#6ab825;font-weight:bold">if </span>(<span style="color:#24909d">&lt;= </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)
+    <span style="color:#3677a9">1</span>
+    (<span style="color:#24909d">+ </span>(<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)) (<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">2</span>)))))
 
-(<span style="color:#66d9ef">defn </span>sort-seq []
-  (sort (repeat <span style="color:#ae81ff">100000</span> (rand-int <span style="color:#ae81ff">2000000</span>))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">sort-seq</span> []
+  (<span style="color:#24909d">sort </span>(<span style="color:#24909d">repeat </span><span style="color:#3677a9">100000</span> (<span style="color:#24909d">rand-int </span><span style="color:#3677a9">2000000</span>))))
 
-(<span style="color:#66d9ef">defn </span>time-it [fn]
-  (<span style="color:#66d9ef">let </span>[values  (for [i (range <span style="color:#ae81ff">200</span>)] (with-out-str (time (<span style="color:#a6e22e">fn</span>))))
-        doubles (map <span style="color:#f92672">#</span>(<span style="color:#a6e22e">Double.</span> (nth (<span style="color:#a6e22e">.split</span> % <span style="color:#e6db74">&#34; &#34;</span>) <span style="color:#ae81ff">2</span>)) values)]
-    (/ (apply + doubles) (count doubles))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-it</span> [<span style="color:#40ffff">fn</span>]
+  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">values</span>  (<span style="color:#24909d">for </span>[<span style="color:#40ffff">i</span> (<span style="color:#24909d">range </span><span style="color:#3677a9">200</span>)] (<span style="color:#24909d">with-out-str </span>(<span style="color:#24909d">time </span>(<span style="color:#447fcf">fn</span>))))
+        <span style="color:#40ffff">doubles</span> (<span style="color:#24909d">map </span>#(<span style="color:#447fcf">Double.</span> (<span style="color:#24909d">nth </span>(<span style="color:#447fcf">.split</span> <span style="color:#40ffff">%</span> <span style="color:#ed9d13">&#34; &#34;</span>) <span style="color:#3677a9">2</span>)) <span style="color:#40ffff">values</span>)]
+    (<span style="color:#24909d">/ </span>(<span style="color:#24909d">apply + </span><span style="color:#40ffff">doubles</span>) (<span style="color:#24909d">count </span><span style="color:#40ffff">doubles</span>))))
 
-(<span style="color:#66d9ef">defn </span>-main []
-  (println <span style="color:#e6db74">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">factorial</span> <span style="color:#ae81ff">5000</span>)))
-  (println <span style="color:#e6db74">&#34;(fib 20) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">fib</span> <span style="color:#ae81ff">20</span>)))
-  (println <span style="color:#e6db74">&#34;(sort-seq) \t Avg: &#34;</span> (<span style="color:#a6e22e">time-it</span> <span style="color:#f92672">#</span>(<span style="color:#a6e22e">sort-seq</span>))))
+(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> []
+  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">factorial</span> <span style="color:#3677a9">5000</span>)))
+  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(fib 20) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">fib</span> <span style="color:#3677a9">20</span>)))
+  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(sort-seq) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">sort-seq</span>))))
 </code></pre></div><p>This time I was a little bit smarter to run all code with <code>lein trampoline run</code> to eliminate overhead.</p>
 <p>Numbers:</p>
 <p>OpenJDK:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; sudo apt-get install openjdk-7-jre-headless
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; sudo apt-get install openjdk-7-jre-headless
 
 &gt; java -version
 java version &#34;1.7.0_07&#34;
@@ -120,7 +120,7 @@ OpenJDK Zero VM (build 22.0-b10, mixed mode)
 (fib 20)         Avg: 713.6807171
 (sort-seq)       Avg: 9633.873322030007
 </code></pre></div><p>Oracle JRE:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; java -version
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; java -version
 java version &#34;1.8.0-ea&#34;
 Java(TM) SE Runtime Environment (build 1.8.0-ea-b36e)
 Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
@@ -134,7 +134,7 @@ Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
 (fib 20)         Avg: 29.505588125000017
 (sort-seq)       Avg: 1137.3281607850001
 </code></pre></div><p>Startup time for &ldquo;Hello, World!&quot;:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text"># OpenJDK
+<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text"># OpenJDK
 &gt; time lein run
 Hello, World!
 lein run  56.51s user 1.58s system 87% cpu 1:06.16 total
