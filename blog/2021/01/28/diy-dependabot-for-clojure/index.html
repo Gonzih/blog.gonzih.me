@@ -157,7 +157,7 @@ If you are able to run clojure clj tool in ubuntu image directly this config can
 <li><code>deps.edn</code> - dependencies file that was modified by depot</li>
 <li><code>deps-output.txt</code> - depot stdout that we can use as a body for a pull request</li>
 </ul>
-<p>To transfer those two files we are going to utilize github artifacts:</p>
+<p>To transfer those two files we are going to utilize Github artifacts:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">uses</span>:<span style="color:#666"> </span>actions/upload-artifact@v2<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>deps-output<span style="color:#666">
@@ -183,7 +183,7 @@ To later reuse this variable we give this step id <code>get-pr-body</code>.</p>
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">run</span>:<span style="color:#666"> </span>|<span style="color:#ed9d13">
 </span><span style="color:#ed9d13">        body=$(cat deps-output.txt)
 </span><span style="color:#ed9d13">        echo ::set-output name=body::$body</span><span style="color:#666">        
-</span></code></pre></div><p>And now lets create our pull request.
+</span></code></pre></div><p>And now let&rsquo;s create our pull request.
 To allow this action to access our repository we will need to give it a token.
 I used <a href="https://github.com/settings/tokens">Personal Access Token</a> with <code>repo</code> scope fully enabled.
 You can see how we extract body using variable inlining with <code>${{ steps.get-pr-body.outputs.body }}</code>.</p>
@@ -202,7 +202,7 @@ You can see how we extract body using variable inlining with <code>${{ steps.get
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">run</span>:<span style="color:#666"> </span>|<span style="color:#ed9d13">
 </span><span style="color:#ed9d13">        echo &#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&#34;
 </span><span style="color:#ed9d13">        echo &#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&#34;</span><span style="color:#666">        
-</span></code></pre></div><p>And of course lets not forget to cleanup after ourselves!</p>
+</span></code></pre></div><p>And of course lets not forget to clean up after ourselves!</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">uses</span>:<span style="color:#666"> </span>geekyeggo/delete-artifact@v1<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>deps-output<span style="color:#666">

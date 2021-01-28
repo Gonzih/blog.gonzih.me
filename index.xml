@@ -108,7 +108,7 @@ If you are able to run clojure clj tool in ubuntu image directly this config can
 &lt;li&gt;&lt;code&gt;deps.edn&lt;/code&gt; - dependencies file that was modified by depot&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;deps-output.txt&lt;/code&gt; - depot stdout that we can use as a body for a pull request&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;To transfer those two files we are going to utilize github artifacts:&lt;/p&gt;
+&lt;p&gt;To transfer those two files we are going to utilize Github artifacts:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;actions/upload-artifact@v2&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
@@ -134,7 +134,7 @@ To later reuse this variable we give this step id &lt;code&gt;get-pr-body&lt;/co
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        body=$(cat deps-output.txt)
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo ::set-output name=body::$body&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now lets create our pull request.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And now let&amp;rsquo;s create our pull request.
 To allow this action to access our repository we will need to give it a token.
 I used &lt;a href=&#34;https://github.com/settings/tokens&#34;&gt;Personal Access Token&lt;/a&gt; with &lt;code&gt;repo&lt;/code&gt; scope fully enabled.
 You can see how we extract body using variable inlining with &lt;code&gt;${{ steps.get-pr-body.outputs.body }}&lt;/code&gt;.&lt;/p&gt;
@@ -153,7 +153,7 @@ You can see how we extract body using variable inlining with &lt;code&gt;${{ ste
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;run&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;|&lt;span style=&#34;color:#ed9d13&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo &amp;#34;Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}&amp;#34;
 &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;        echo &amp;#34;Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And of course lets not forget to cleanup after ourselves!&lt;/p&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And of course lets not forget to clean up after ourselves!&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;uses&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;geekyeggo/delete-artifact@v1&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;with&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;name&lt;/span&gt;:&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;deps-output&lt;span style=&#34;color:#666&#34;&gt;
