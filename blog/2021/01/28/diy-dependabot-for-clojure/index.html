@@ -66,7 +66,8 @@
             <div class="post">
                 <h1>DIY Dependabot for Clojure</h1>
               <span class="post-date">Thu, Jan 28, 2021</span>
-                  <p>Unfortunately <a href="https://dependabot.com">dependabot</a> does not support clojure.
+                  <p><img src="https://d1wvxg652jdms0.cloudfront.net/diy-dependabot-clojure/preview.png" alt="preview"></p>
+<p>Unfortunately <a href="https://dependabot.com">dependabot</a> does not support clojure.
 And as such I came with a silly idea of putting something similar together using Github Actions.</p>
 <p>First things first here is complete Github Actions workflow:</p>
 <div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yaml" data-lang="yaml"><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>Dependencies<span style="color:#666">
@@ -88,7 +89,7 @@ And as such I came with a silly idea of putting something similar together using
 </span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">run</span>:<span style="color:#666"> </span>nix-env -i clojure<span style="color:#666">
 </span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>run depot<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">run</span>:<span style="color:#666"> </span>|<span style="color:#ed9d13">
-</span><span style="color:#ed9d13">        </span><span style="color:#666">        </span>clojure -Sdeps &#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &#34;2.1.0&#34;}}}}}&#39; -M:outdated -m depot.outdated.main --every --write &gt; deps-output.txt<span style="color:#666">
+</span><span style="color:#ed9d13">      </span><span style="color:#666">      </span>clojure -Sdeps &#39;{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version &#34;2.1.0&#34;}}}}}&#39; -M:outdated -m depot.outdated.main --every --write &gt; deps-output.txt<span style="color:#666">
 </span><span style="color:#666">    </span>- <span style="color:#6ab825;font-weight:bold">uses</span>:<span style="color:#666"> </span>actions/upload-artifact@v2<span style="color:#666">
 </span><span style="color:#666">      </span><span style="color:#6ab825;font-weight:bold">with</span>:<span style="color:#666">
 </span><span style="color:#666">        </span><span style="color:#6ab825;font-weight:bold">name</span>:<span style="color:#666"> </span>deps-output<span style="color:#666">
