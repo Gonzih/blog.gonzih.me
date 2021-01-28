@@ -58,5 +58,5 @@ markup:
     lineNos: false
     lineNumbersInTable: true
     noClasses: true
-    style: monokai
+    style: native
     tabWidth: 2
