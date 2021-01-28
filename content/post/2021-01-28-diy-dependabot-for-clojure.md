@@ -117,7 +117,7 @@ After this is done we get two files that we care about:
 * `deps.edn` - dependencies file that was modified by depot
 * `deps-output.txt` - depot stdout that we can use as a body for a pull request
 
-To transfer those two files we are going to utilize github artifacts:
+To transfer those two files we are going to utilize Github artifacts:
 
 ```yaml
     - uses: actions/upload-artifact@v2
@@ -156,7 +156,7 @@ To later reuse this variable we give this step id `get-pr-body`.
         echo ::set-output name=body::$body
 ```
 
-And now lets create our pull request.
+And now let's create our pull request.
 To allow this action to access our repository we will need to give it a token.
 I used [Personal Access Token](https://github.com/settings/tokens) with `repo` scope fully enabled.
 You can see how we extract body using variable inlining with `${{ steps.get-pr-body.outputs.body }}`.
@@ -182,7 +182,7 @@ Once this step succeeded we can print pull request information (mostly for debug
         echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
 ```
 
-And of course lets not forget to cleanup after ourselves!
+And of course lets not forget to clean up after ourselves!
 
 ```yaml
     - uses: geekyeggo/delete-artifact@v1
