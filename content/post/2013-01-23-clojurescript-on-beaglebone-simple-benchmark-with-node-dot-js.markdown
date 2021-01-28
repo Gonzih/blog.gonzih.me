@@ -11,6 +11,7 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
 <!--more-->
 
 [Code](https://github.com/Gonzih/clojurescript-small-benchmark-for-embed) is modified to run on top of the JavaScript:
+
 ```clojure
 (ns benchmark.core)
 
@@ -47,7 +48,7 @@ Node version is 0.6.12. ClojureScript is compiled with advanced and simple optim
 
 Benchmark results:
 
-```
+```plaintext
 > node --version
 v0.6.12
 

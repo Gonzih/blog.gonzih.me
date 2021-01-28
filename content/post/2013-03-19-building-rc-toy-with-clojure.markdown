@@ -143,6 +143,6 @@ rfcomm0 {
 
 ### JInput permissions
 For now I have no idea how to fix that issue. Looks like something is wrong with permissions.
-```
+```text
 Failed to open device (/dev/input/js0): Failed to open device /dev/input/js0
 ```

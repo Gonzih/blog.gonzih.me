@@ -9,7 +9,7 @@ After installing Embedded JRE on BeagleBone I decided to benchmark it against Op
 <!--more-->
 
 BeagleBone is running Ubuntu 12.04.
-```
+```text
 > cat /etc/*-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=12.04
@@ -18,7 +18,7 @@ DISTRIB_DESCRIPTION="Ubuntu 12.04 LTS"
 ```
 
 BeagleBone CPU is running on 500Mhz.
-```
+```text
 > cpufreq-info | grep 'current CPU'
 current CPU frequency is 500 MHz.
 ```
@@ -55,7 +55,7 @@ Benchmark code is from [nakkaya's post](https://nakkaya.com/2011/03/15/clojure-o
 So here the numbers:
 
 OpenJDK:
-```
+```text
 > sudo apt-get install openjdk-7-jre-headless
 
 > java -version
@@ -74,7 +74,7 @@ OpenJDK Zero VM (build 22.0-b10, mixed mode)
 ```
 
 Embedded JRE:
-```
+```text
 > java -version
 java version "1.7.0_06"
 Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)

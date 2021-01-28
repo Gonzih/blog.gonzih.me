@@ -19,7 +19,7 @@ Couple of tips from my experience of running Arch on Macbook 8.2.
 
 Before installing boot loader change /boot partition type to `EFI System` (`ef00`).
 
-```
+```shell
 mkfs.fat -F32 /dev/sda1
 pacman -S dosfstools
 mount /dev/sda1 /mnt/boot
@@ -31,7 +31,7 @@ bootctl --path=/boot instnall
 
 You need to have 2 partitions. /boot should be linux partition ext2. /boot/efi should be `ef00` type partition of vfta32.
 
-```
+```shell
 mount /dev/sda1 /mnt/boot
 mkdir -p /mnt/boot/efi
 mount /dev/sda2 /mnt/boot/efi
@@ -52,7 +52,7 @@ OpenSource driver (that is part of the kernel) and reverse engeneered ones (b43)
 
 To make sure that correct module is used by hardwrare blacklist every other module and reboot:
 
-```
+```plaintext
 #/etc/modprobe.d/wl.conf
 blacklist b43
 blacklist b43legacy
@@ -71,7 +71,7 @@ This laptop relies on the external gpu to work with display port.
 
 Edit `/etc/grub.d/00_header` and add outb lines in between `set gfxmode=${GRUB_GFXMODE}` and `load video`:
 
-```
+```plaintext
 ...
 set gfxmode=${GRUB_GFXMODE}
 outb 0x728 1
@@ -84,7 +84,7 @@ load video
 
 Generate new grub config:
 
-```
+```shell
 # grub-mkconfig -o /boot/grub/grub.cfg
 ```
 

@@ -15,7 +15,7 @@ First lets install `gorun` as a system package on NixOS.
 
 Lets create `gorun.nix` file first:
 
-```
+```nix
 with import <nixpkgs> {};
 
 buildGoPackage rec {
@@ -42,7 +42,7 @@ buildGoPackage rec {
 
 Next lets add this package to `systemPackages` list:
 
-```
+```nix
 environment.systemPackages = with pkgs; [
   ...
   (import ./gorun.nix)
@@ -53,7 +53,7 @@ environment.systemPackages = with pkgs; [
 Next step would be to utilize `boot.binfmtMiscRegistrations` to register our `gorun` in `binfmt_misc` module which is
 responsible for parsing shebang scripts and binary files. Drop the following lines in to your `configuration.nix`:
 
-```
+```nix
 boot.binfmtMiscRegistrations = {
   go = {
     recognitionType = "extension";
@@ -90,7 +90,7 @@ Lets make it executable with `chmod +x hello.go`.
 
 And now lets run it:
 
-```
+```sh
 $ ./hello.go
 Hello World!
 ```

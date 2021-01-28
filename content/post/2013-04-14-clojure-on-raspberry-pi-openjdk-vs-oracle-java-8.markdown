@@ -8,7 +8,7 @@ categories: [clojure, java, jre, raspberry pi, openjdk, java 8, armhf]
 [Here](https://jdk8.java.net/fxarmpreview/) you can download latest Java 8 preview for armhf. Lets benchmark it on Raspberry Pi!
 <!--more-->
 Pi is running Raspbian.
-```
+```sh
 > cat /etc/*-release
 PRETTY_NAME="Debian GNU/Linux 7.0 (wheezy)"
 NAME="Debian GNU/Linux"
@@ -17,7 +17,7 @@ VERSION="7.0 (wheezy)"
 ```
 
 Pi CPU is running on 700Mhz.
-```
+```sh
 > cpufreq-info | grep 'current CPU'
 current CPU frequency is 700 MHz.
 ```
@@ -56,7 +56,7 @@ This time I was a little bit smarter to run all code with `lein trampoline run` 
 Numbers:
 
 OpenJDK:
-```
+```text
 > sudo apt-get install openjdk-7-jre-headless
 
 > java -version
@@ -75,7 +75,7 @@ OpenJDK Zero VM (build 22.0-b10, mixed mode)
 ```
 
 Oracle JRE:
-```
+```text
 > java -version
 java version "1.8.0-ea"
 Java(TM) SE Runtime Environment (build 1.8.0-ea-b36e)
@@ -92,7 +92,7 @@ Java HotSpot(TM) Client VM (build 25.0-b04, mixed mode)
 ```
 
 Startup time for "Hello, World!":
-```
+```text
 # OpenJDK
 > time lein run
 Hello, World!

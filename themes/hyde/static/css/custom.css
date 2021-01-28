@@ -1,3 +1,21 @@
 .cc-logo img {
-        display: inline;
+  display: inline;
+}
+
+body {
+  background-color: #161819;
+}
+
+.content {
+  background-color: #161819;
+  color: #e8e6e3;
+}
+
+div.highlight {
+  background-color: #282828;
+}
+
+code {
+  color: #66d9ef;
+  background-color: rgb(18, 19, 20);
 }

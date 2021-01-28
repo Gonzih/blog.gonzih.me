@@ -90,7 +90,7 @@ goog.global.setTimeout = function(cb, t) {
 
 Now frontend part. First let's in-line generated html in to the container:
 
-```erb
+```html
 <div id="content"><%= html %></div>
 ```
 
@@ -108,7 +108,7 @@ Am I wrong on this one? Don't know yet.
 
 Inline javascript that you should use on frontend looks like that:
 
-```erb
+```html
 <script>
 my.amazing_component.ns.mount_me(<%= init_state.to_json %>)
 </script>

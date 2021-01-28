@@ -228,7 +228,7 @@ $ ykman openpgp touch enc on
 
 GPG agent for NixOS:
 
-```
+```sh
 programs.ssh.startAgent = false;
 programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 ```

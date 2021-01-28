@@ -48,12 +48,12 @@ sudo iptables -t nat -A POSTROUTING -o <you-main-ethernet-device-here> -j MASQUE
 ```
 
 Save iptables (as superuser):
-```
+```sh
 iptables-save > /etc/iptables/iptables.rules
 ```
 
 Enable ip_forward:
-```
+```sh
 sudo sysctl net.ipv4.ip_forward=1
 ```
 Or to save forwarding persisent add following line:

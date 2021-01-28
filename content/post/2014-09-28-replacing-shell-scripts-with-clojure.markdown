@@ -20,7 +20,7 @@ What if you have only JVM to your disposal, will you be able to pull it off only
 
 First what we will need is to get clojure jar file:
 
-```
+```bash
 wget -O /opt/clojure.jar 'https://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar'
 ```
 
