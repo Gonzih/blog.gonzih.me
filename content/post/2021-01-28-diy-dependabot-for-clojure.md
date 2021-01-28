@@ -34,7 +34,7 @@ jobs:
     - run: nix-env -i clojure
     - name: run depot
       run: |
-        clojure -Sdeps '{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version "2.1.0"}}}}}' -M:outdated -m depot.outdated.main --every --write > deps-output.txt
+      clojure -Sdeps '{:aliases {:outdated {:replace-deps {olical/depot {:mvn/version "2.1.0"}}}}}' -M:outdated -m depot.outdated.main --every --write > deps-output.txt
     - uses: actions/upload-artifact@v2
       with:
         name: deps-output
