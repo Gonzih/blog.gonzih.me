@@ -29,11 +29,25 @@
   
       <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
   
+
+    <script>
+        function toggle_sidebar() {
+            document.body.classList.toggle("sidebar-closed");
+        };
+    </script>
 </head>
 
     <body class=" ">
         <div class="sidebar">
   <div class="container sidebar-sticky">
+      <a class="sidebar-close" href="#" onclick="toggle_sidebar();">
+          <span class="close">
+          &laquo;
+          </span>
+          <span class="open">
+          &raquo;
+          </span>
+      </a>
     <div class="sidebar-about">
       <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
       <p class="lead">

@@ -1,37 +1,6 @@
-/*
- *  __                  __
- * /\ \                /\ \
- * \ \ \___   __  __   \_\ \     __
- *  \ \  _ `\/\ \/\ \  /'_` \  /'__`\
- *   \ \ \ \ \ \ \_\ \/\ \_\ \/\  __/
- *    \ \_\ \_\/`____ \ \___,_\ \____\
- *     \/_/\/_/`/___/> \/__,_ /\/____/
- *                /\___/
- *                \/__/
- *
- * Designed, built, and released under MIT license by @mdo. Learn more at
- * https://github.com/poole/hyde.
- */
-
-
-/*
- * Contents
- *
- * Global resets
- * Sidebar
- * Container
- * Reverse layout
- * Themes
- */
-
-
-/*
- * Global resets
- *
- * Update the foundational and global aspects of the page.
- */
-
-
+:root {
+  --transition-duration: 0.5s;
+}
 
 html {
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
@@ -61,14 +30,50 @@ html {
   color: rgba(255,255,255,.5);
   background-color: #181a1b;
 }
+.sidebar .sidebar-close {
+  display: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.sidebar .sidebar-close:hover {
+  text-decoration: none;
+}
+
 @media (min-width: 48em) {
   .sidebar {
+    transition: margin-left var(--transition-duration);
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     width: 18rem;
     text-align: left;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .sidebar .sidebar-close {
+    transition: left var(--transition-duration);
+    display: block;
+    position: fixed;
+    top: -0.6rem;
+    left: 16rem;
+  }
+  body.sidebar-closed .sidebar {
+    margin-left: -16rem;
+  }
+  body.sidebar-closed .sidebar .sidebar-close {
+    left: 0.2rem;
+  }
+  .sidebar .sidebar-close .close {
+    display: inline-block;
+  }
+  .sidebar .sidebar-close .open {
+    display: none;
+  }
+  body.sidebar-closed .sidebar .sidebar-close .close {
+    display: none;
+  }
+  body.sidebar-closed .sidebar .sidebar-close .open {
+    display: inline-block;
   }
 }
 
@@ -126,6 +131,8 @@ a.sidebar-nav-item:focus {
 .content {
   padding-top:    4rem;
   padding-bottom: 4rem;
+  transition:  margin-left var(--transition-duration);
+  transition:  margin-right var(--transition-duration);
 }
 
 @media (min-width: 48em) {
@@ -133,6 +140,11 @@ a.sidebar-nav-item:focus {
     max-width: 38rem;
     margin-left: 20rem;
     margin-right: 2rem;
+  }
+  body.sidebar-closed .content {
+    max-width: 100%;
+    margin-left: 2rem;
+    margin-right: 0;
   }
 }
 
@@ -144,6 +156,10 @@ a.sidebar-nav-item:focus {
   }
   .wrap {
     margin-left: 18rem;
+    transition:  margin-left var(--transition-duration);
+  }
+  body.sidebar-closed .wrap {
+    margin-left: 2rem;
   }
 }
 
