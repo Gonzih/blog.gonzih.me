@@ -2,6 +2,7 @@
     <body class="{{ .Site.Params.themeColor }} {{if .Site.Params.layoutReverse}}layout-reverse{{end}}">
         {{ partial "sidebar.html" . }}
 
+      <div class="wrap">
         <div class="content container">
             <div class="post">
                 <h1>{{ .Title }}</h1>
@@ -14,6 +15,7 @@
                 {{ partial "disqus" . }}
             {{ end }}
         </div>
+      </div>
 
   </body>
 </html>
