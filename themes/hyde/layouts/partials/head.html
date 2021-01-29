@@ -31,4 +31,10 @@
   {{ if .Site.Params.disqusShortname}}
       <script id="dsq-count-scr" src="//{{ .Site.Params.disqusShortname}}.disqus.com/count.js" async></script>
   {{ end }}
+
+    <script>
+        function toggle_sidebar() {
+            document.body.classList.toggle("sidebar-closed");
+        };
+    </script>
 </head>
