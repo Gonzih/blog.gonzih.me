@@ -19,7 +19,7 @@
       <guid>https://blog.gonzih.me/blog/2023/01/05/blinky-on-arduino-uno-with-zig/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s give Zig a try on Arduino UNO with &lt;a href=&#34;https://github.com/ZigEmbeddedGroup/microzig&#34;&gt;microzig&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Lets create and setup our project first:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir blink
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir blink &amp;amp;&amp;amp; cd blink
 zig init-exe
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now we can add &lt;a href=&#34;https://github.com/ZigEmbeddedGroup/microzig&#34;&gt;microzig&lt;/a&gt; as a dependency, for now lets do this in a simple manner, no package managers, just git:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir deps
