@@ -14,7 +14,7 @@ Let's give Zig a try on Arduino UNO with [microzig](https://github.com/ZigEmbedd
 Lets create and setup our project first:
 
 ```
-mkdir blink
+mkdir blink && cd blink
 zig init-exe
 ```
 
