@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -87,60 +87,60 @@ Just in ~50 lines of Clojure code.
 Enjoy!</p>
 <p><a href="https://github.com/Gonzih/hn-tray.clj">Github Project.</a></p>
 <p>Source code is below:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">hn.core</span>
-  (<span style="color:#ed9d13">:require</span> [<span style="color:#40ffff">cheshire.core</span> <span style="color:#ed9d13">:as</span> <span style="color:#40ffff">json</span>]
-            [<span style="color:#40ffff">clojure.java.browse</span> <span style="color:#ed9d13">:refer</span> [<span style="color:#40ffff">browse-url</span>]]
-            [<span style="color:#40ffff">clojure.java.io</span> <span style="color:#ed9d13">:refer</span> [<span style="color:#40ffff">resource</span>]])
-  (<span style="color:#ed9d13">:import</span> [<span style="color:#40ffff">java.awt</span> <span style="color:#40ffff">SystemTray</span> <span style="color:#40ffff">TrayIcon</span> <span style="color:#40ffff">PopupMenu</span> <span style="color:#40ffff">MenuItem</span> <span style="color:#40ffff">Toolkit</span>]
-           [<span style="color:#40ffff">java.awt.event</span> <span style="color:#40ffff">ActionListener</span>])
-  (<span style="color:#ed9d13">:gen-class</span>))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">menu-item</span> [<span style="color:#40ffff">label</span> <span style="color:#40ffff">callback</span>]
-  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">menu</span> (<span style="color:#447fcf">MenuItem.</span> <span style="color:#40ffff">label</span>)
-        <span style="color:#40ffff">listener</span> (<span style="color:#24909d">proxy </span>[<span style="color:#40ffff">ActionListener</span>] []
-                   (<span style="color:#447fcf">actionPerformed</span> [<span style="color:#40ffff">event</span>] (<span style="color:#447fcf">callback</span>)))]
-    (<span style="color:#447fcf">.addActionListener</span> <span style="color:#40ffff">menu</span> <span style="color:#40ffff">listener</span>)
-    <span style="color:#40ffff">menu</span>))
-
-(<span style="color:#6ab825;font-weight:bold">def </span><span style="color:#40ffff">hn-api-url</span> <span style="color:#ed9d13">&#34;https://api.ihackernews.com/page&#34;</span>)
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">hn-items</span> []
-  (<span style="color:#24909d">-&gt; </span><span style="color:#40ffff">hn-api-url</span>
-      <span style="color:#40ffff">slurp</span>
-      (<span style="color:#447fcf">json/parse-string</span> <span style="color:#40ffff">true</span>)
-      <span style="color:#ed9d13">:items</span>
-      (#(<span style="color:#24909d">sort-by </span><span style="color:#ed9d13">:points</span> <span style="color:#40ffff">%</span>))
-      <span style="color:#40ffff">reverse</span>))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">add-hn-to-menu!</span> [<span style="color:#40ffff">menu</span>]
-  (<span style="color:#447fcf">letfn</span> [(<span style="color:#447fcf">mapfn</span> [{<span style="color:#ed9d13">:keys</span> [<span style="color:#40ffff">title</span> <span style="color:#40ffff">url</span> <span style="color:#40ffff">commentCount</span> <span style="color:#40ffff">points</span>]}]
-            (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">full-title</span> (<span style="color:#447fcf">format</span> <span style="color:#ed9d13">&#34;%-4s (%-4s) - %s&#34;</span> <span style="color:#40ffff">points</span> <span style="color:#40ffff">commentCount</span> <span style="color:#40ffff">title</span>)
-                  <span style="color:#40ffff">menu-item</span> (<span style="color:#447fcf">menu-item</span> <span style="color:#40ffff">full-title</span> #(<span style="color:#447fcf">browse-url</span> <span style="color:#40ffff">url</span>))]
-              (<span style="color:#24909d">println </span><span style="color:#40ffff">full-title</span>)
-              (<span style="color:#447fcf">.add</span> <span style="color:#40ffff">menu</span> <span style="color:#40ffff">menu-item</span>)))]
-  (<span style="color:#24909d">doall </span>(<span style="color:#24909d">map </span><span style="color:#40ffff">mapfn</span> (<span style="color:#447fcf">hn-items</span>)))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">exit</span> []
-  (<span style="color:#447fcf">shutdown-agents</span>)
-  (<span style="color:#447fcf">System/exit</span> <span style="color:#3677a9">0</span>))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> [&amp; <span style="color:#40ffff">args</span>]
-  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">tray</span> (<span style="color:#447fcf">SystemTray/getSystemTray</span>)
-        <span style="color:#40ffff">image</span> (<span style="color:#447fcf">.getImage</span> (<span style="color:#447fcf">Toolkit/getDefaultToolkit</span>)
-                         (<span style="color:#447fcf">resource</span> <span style="color:#ed9d13">&#34;icon.png&#34;</span>))
-        <span style="color:#40ffff">icon</span> (<span style="color:#447fcf">TrayIcon.</span> <span style="color:#40ffff">image</span>)
-        <span style="color:#40ffff">exit</span> (<span style="color:#447fcf">menu-item</span> <span style="color:#ed9d13">&#34;Exit&#34;</span> <span style="color:#40ffff">exit</span>)]
-    (<span style="color:#447fcf">.setImageAutoSize</span> <span style="color:#40ffff">icon</span> <span style="color:#40ffff">true</span>)
-    (<span style="color:#447fcf">.add</span> <span style="color:#40ffff">tray</span> <span style="color:#40ffff">icon</span>)
-    (<span style="color:#6ab825;font-weight:bold">loop </span>[]
-      (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">popup</span> (<span style="color:#447fcf">PopupMenu.</span>)]
-        (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;Updating items&#34;</span>)
-        (<span style="color:#447fcf">add-hn-to-menu!</span> <span style="color:#40ffff">popup</span>)
-        (<span style="color:#447fcf">.add</span> <span style="color:#40ffff">popup</span> <span style="color:#40ffff">exit</span>)
-        (<span style="color:#447fcf">.setPopupMenu</span> <span style="color:#40ffff">icon</span> <span style="color:#40ffff">popup</span>)
-        (<span style="color:#447fcf">Thread/sleep</span> (<span style="color:#24909d">* </span><span style="color:#3677a9">5</span> <span style="color:#3677a9">60</span> <span style="color:#3677a9">1000</span>))
-        (<span style="color:#447fcf">recur</span>)))))
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">hn.core</span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#ed9d13">:require</span> [<span style="color:#40ffff">cheshire.core</span> <span style="color:#ed9d13">:as</span> <span style="color:#40ffff">json</span>]
+</span></span><span style="display:flex;"><span>            [<span style="color:#40ffff">clojure.java.browse</span> <span style="color:#ed9d13">:refer</span> [<span style="color:#40ffff">browse-url</span>]]
+</span></span><span style="display:flex;"><span>            [<span style="color:#40ffff">clojure.java.io</span> <span style="color:#ed9d13">:refer</span> [<span style="color:#40ffff">resource</span>]])
+</span></span><span style="display:flex;"><span>  (<span style="color:#ed9d13">:import</span> [<span style="color:#40ffff">java.awt</span> <span style="color:#40ffff">SystemTray</span> <span style="color:#40ffff">TrayIcon</span> <span style="color:#40ffff">PopupMenu</span> <span style="color:#40ffff">MenuItem</span> <span style="color:#40ffff">Toolkit</span>]
+</span></span><span style="display:flex;"><span>           [<span style="color:#40ffff">java.awt.event</span> <span style="color:#40ffff">ActionListener</span>])
+</span></span><span style="display:flex;"><span>  (<span style="color:#ed9d13">:gen-class</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">menu-item</span> [<span style="color:#40ffff">label</span> <span style="color:#40ffff">callback</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">menu</span> (<span style="color:#447fcf">MenuItem.</span> <span style="color:#40ffff">label</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">listener</span> (<span style="color:#24909d">proxy </span>[<span style="color:#40ffff">ActionListener</span>] []
+</span></span><span style="display:flex;"><span>                   (<span style="color:#447fcf">actionPerformed</span> [<span style="color:#40ffff">event</span>] (<span style="color:#447fcf">callback</span>)))]
+</span></span><span style="display:flex;"><span>    (<span style="color:#447fcf">.addActionListener</span> <span style="color:#40ffff">menu</span> <span style="color:#40ffff">listener</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#40ffff">menu</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">def </span><span style="color:#40ffff">hn-api-url</span> <span style="color:#ed9d13">&#34;https://api.ihackernews.com/page&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">hn-items</span> []
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">-&gt; </span><span style="color:#40ffff">hn-api-url</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#40ffff">slurp</span>
+</span></span><span style="display:flex;"><span>      (<span style="color:#447fcf">json/parse-string</span> <span style="color:#40ffff">true</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#ed9d13">:items</span>
+</span></span><span style="display:flex;"><span>      (#(<span style="color:#24909d">sort-by </span><span style="color:#ed9d13">:points</span> <span style="color:#40ffff">%</span>))
+</span></span><span style="display:flex;"><span>      <span style="color:#40ffff">reverse</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">add-hn-to-menu!</span> [<span style="color:#40ffff">menu</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#447fcf">letfn</span> [(<span style="color:#447fcf">mapfn</span> [{<span style="color:#ed9d13">:keys</span> [<span style="color:#40ffff">title</span> <span style="color:#40ffff">url</span> <span style="color:#40ffff">commentCount</span> <span style="color:#40ffff">points</span>]}]
+</span></span><span style="display:flex;"><span>            (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">full-title</span> (<span style="color:#447fcf">format</span> <span style="color:#ed9d13">&#34;%-4s (%-4s) - %s&#34;</span> <span style="color:#40ffff">points</span> <span style="color:#40ffff">commentCount</span> <span style="color:#40ffff">title</span>)
+</span></span><span style="display:flex;"><span>                  <span style="color:#40ffff">menu-item</span> (<span style="color:#447fcf">menu-item</span> <span style="color:#40ffff">full-title</span> #(<span style="color:#447fcf">browse-url</span> <span style="color:#40ffff">url</span>))]
+</span></span><span style="display:flex;"><span>              (<span style="color:#24909d">println </span><span style="color:#40ffff">full-title</span>)
+</span></span><span style="display:flex;"><span>              (<span style="color:#447fcf">.add</span> <span style="color:#40ffff">menu</span> <span style="color:#40ffff">menu-item</span>)))]
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">doall </span>(<span style="color:#24909d">map </span><span style="color:#40ffff">mapfn</span> (<span style="color:#447fcf">hn-items</span>)))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">exit</span> []
+</span></span><span style="display:flex;"><span>  (<span style="color:#447fcf">shutdown-agents</span>)
+</span></span><span style="display:flex;"><span>  (<span style="color:#447fcf">System/exit</span> <span style="color:#3677a9">0</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> [&amp; <span style="color:#40ffff">args</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">tray</span> (<span style="color:#447fcf">SystemTray/getSystemTray</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">image</span> (<span style="color:#447fcf">.getImage</span> (<span style="color:#447fcf">Toolkit/getDefaultToolkit</span>)
+</span></span><span style="display:flex;"><span>                         (<span style="color:#447fcf">resource</span> <span style="color:#ed9d13">&#34;icon.png&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">icon</span> (<span style="color:#447fcf">TrayIcon.</span> <span style="color:#40ffff">image</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">exit</span> (<span style="color:#447fcf">menu-item</span> <span style="color:#ed9d13">&#34;Exit&#34;</span> <span style="color:#40ffff">exit</span>)]
+</span></span><span style="display:flex;"><span>    (<span style="color:#447fcf">.setImageAutoSize</span> <span style="color:#40ffff">icon</span> <span style="color:#40ffff">true</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#447fcf">.add</span> <span style="color:#40ffff">tray</span> <span style="color:#40ffff">icon</span>)
+</span></span><span style="display:flex;"><span>    (<span style="color:#6ab825;font-weight:bold">loop </span>[]
+</span></span><span style="display:flex;"><span>      (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">popup</span> (<span style="color:#447fcf">PopupMenu.</span>)]
+</span></span><span style="display:flex;"><span>        (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;Updating items&#34;</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#447fcf">add-hn-to-menu!</span> <span style="color:#40ffff">popup</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#447fcf">.add</span> <span style="color:#40ffff">popup</span> <span style="color:#40ffff">exit</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#447fcf">.setPopupMenu</span> <span style="color:#40ffff">icon</span> <span style="color:#40ffff">popup</span>)
+</span></span><span style="display:flex;"><span>        (<span style="color:#447fcf">Thread/sleep</span> (<span style="color:#24909d">* </span><span style="color:#3677a9">5</span> <span style="color:#3677a9">60</span> <span style="color:#3677a9">1000</span>))
+</span></span><span style="display:flex;"><span>        (<span style="color:#447fcf">recur</span>)))))
+</span></span></code></pre></div>
             </div>
 
             

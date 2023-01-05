@@ -43,12 +43,12 @@ I bet you can figure out similar packages for different distribution.&lt;/p&gt;<
       <guid>https://blog.gonzih.me/blog/2013/11/26/yin-yang-call/cc-puzzle-in-ruby/</guid>
       <description>&lt;p&gt;Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.&lt;/p&gt;
 &lt;p&gt;Here is Scheme implementation:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;let* &lt;/span&gt;((&lt;span style=&#34;color:#447fcf&#34;&gt;yin&lt;/span&gt;
-        ((&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;display &lt;/span&gt;#&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;@&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;call-with-current-continuation &lt;/span&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;c&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;c&lt;/span&gt;))))
-       (&lt;span style=&#34;color:#447fcf&#34;&gt;yang&lt;/span&gt;
-        ((&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;display &lt;/span&gt;#&lt;span style=&#34;color:#a61717;background-color:#e3d2d2&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color:#40ffff&#34;&gt;*&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;call-with-current-continuation &lt;/span&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;c&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;c&lt;/span&gt;)))))
-(&lt;span style=&#34;color:#447fcf&#34;&gt;yin&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;yang&lt;/span&gt;))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-scheme&#34; data-lang=&#34;scheme&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;let* &lt;/span&gt;((&lt;span style=&#34;color:#447fcf&#34;&gt;yin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ((&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;display &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;#\@&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;call-with-current-continuation &lt;/span&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;c&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;c&lt;/span&gt;))))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       (&lt;span style=&#34;color:#447fcf&#34;&gt;yang&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ((&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;display &lt;/span&gt;&lt;span style=&#34;color:#ed9d13&#34;&gt;#\*&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;cc&lt;/span&gt;) (&lt;span style=&#34;color:#24909d&#34;&gt;call-with-current-continuation &lt;/span&gt;(&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;lambda &lt;/span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;c&lt;/span&gt;) &lt;span style=&#34;color:#40ffff&#34;&gt;c&lt;/span&gt;)))))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#447fcf&#34;&gt;yin&lt;/span&gt; &lt;span style=&#34;color:#40ffff&#34;&gt;yang&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It will print &lt;code&gt;@*@**@***@****@*****@******@...&lt;/code&gt; forever.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -71,12 +71,12 @@ All I wanted was simple to use news reader.&lt;/p&gt;</description>
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
       <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Building site: source -&amp;gt; public
-  File &amp;#34;&amp;lt;string&amp;gt;&amp;#34;, line 1
-    import sys; print sys.executable
-                        ^
-SyntaxError: invalid syntax
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Building site: source -&amp;gt; public
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  File &amp;#34;&amp;lt;string&amp;gt;&amp;#34;, line 1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    import sys; print sys.executable
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        ^
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SyntaxError: invalid syntax
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
 &lt;p&gt;For fix simple add ruby file to plugins directory with following code.&lt;/p&gt;</description>
     </item>
     
@@ -87,8 +87,8 @@ SyntaxError: invalid syntax
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/</guid>
       <description>&lt;p&gt;If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[[ &lt;span style=&#34;color:#40ffff&#34;&gt;$TERM&lt;/span&gt; = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;screen&amp;#34;&lt;/span&gt; ]] &amp;amp;&amp;amp; rvm use default
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[[ &lt;span style=&#34;color:#40ffff&#34;&gt;$TERM&lt;/span&gt; = &lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;screen&amp;#34;&lt;/span&gt; ]] &amp;amp;&amp;amp; rvm use default
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

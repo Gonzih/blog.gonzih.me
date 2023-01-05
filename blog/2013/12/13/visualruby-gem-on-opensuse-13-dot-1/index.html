@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -85,11 +85,11 @@
 <p>I found out about ruby gem called <a href="https://visualruby.net/">visualruby</a> and decided to give it a try. Unfortunately it has a lot of dependencies that were missing on my system.
 So to save my (or maybe your&rsquo;s if you are reading this now) time in the future here are required dependencies for OpenSUSE 13.1.
 I bet you can figure out similar packages for different distribution.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">sudo zypper -n in <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>glib2 glib2-branding-openSUSE glib2-devel <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>atk-devel cairo-devel pango-devel gdk-pixbuf-devel <span style="color:#ed9d13">\
-</span><span style="color:#ed9d13"></span>gtk2-devel gtksourceview2-devel glade
-</code></pre></div><p>Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo zypper -n in <span style="color:#ed9d13">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ed9d13"></span>glib2 glib2-branding-openSUSE glib2-devel <span style="color:#ed9d13">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ed9d13"></span>atk-devel cairo-devel pango-devel gdk-pixbuf-devel <span style="color:#ed9d13">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ed9d13"></span>gtk2-devel gtksourceview2-devel glade
+</span></span></code></pre></div><p>Adjust glade command in settings to glade from glade-gtk2. And now you can run it! :)
 It&rsquo;s not working very well (at least in examples) since most of stuff in suse 13.1 is based on gtk3+.
 But I&rsquo;m still in process of figuring things out.</p>
             </div>

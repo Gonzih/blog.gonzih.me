@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -83,34 +83,34 @@
               <span class="post-date">Tue, Nov 26, 2013</span>
                   <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 <p>Here is Scheme implementation:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-scheme" data-lang="scheme">(<span style="color:#6ab825;font-weight:bold">let* </span>((<span style="color:#447fcf">yin</span>
-        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span>#<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#40ffff">@</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>))))
-       (<span style="color:#447fcf">yang</span>
-        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span>#<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#40ffff">*</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>)))))
-(<span style="color:#447fcf">yin</span> <span style="color:#40ffff">yang</span>))
-</code></pre></div><p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">let* </span>((<span style="color:#447fcf">yin</span>
+</span></span><span style="display:flex;"><span>        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span><span style="color:#ed9d13">#\@</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>))))
+</span></span><span style="display:flex;"><span>       (<span style="color:#447fcf">yang</span>
+</span></span><span style="display:flex;"><span>        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span><span style="color:#ed9d13">#\*</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>)))))
+</span></span><span style="display:flex;"><span>(<span style="color:#447fcf">yin</span> <span style="color:#40ffff">yang</span>))
+</span></span></code></pre></div><p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
 <p><a href="https://yinwang0.wordpress.com/2012/07/27/yin-yang-puzzle/">Here</a> you can find good explanation,
 also few of explanations can be found on <a href="https://stackoverflow.com/questions/2694679/how-does-the-yin-yang-puzzle-work">StackOverflow</a>.</p>
 <p>After I understand how it works I got all that excited and implemented given puzzle in ruby:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#24909d">require</span> <span style="color:#ed9d13">&#34;continuation&#34;</span>
-
-yin  = -&gt;(cc) { <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;@&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c })
-yang = -&gt;(cc) { <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;*&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c })
-
-yin.call(yang)
-</code></pre></div><p>And it doesn&rsquo;t work. It prints <code>@*@*********...</code> forever.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#24909d">require</span> <span style="color:#ed9d13">&#34;continuation&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>yin  = -&gt;(cc) { <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;@&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c })
+</span></span><span style="display:flex;"><span>yang = -&gt;(cc) { <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;*&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>yin.call(yang)
+</span></span></code></pre></div><p>And it doesn&rsquo;t work. It prints <code>@*@*********...</code> forever.</p>
 <p>No idea why. Maybe there are some limitations of <a href="https://www.ruby-doc.org/core-2.0.0/Continuation.html">ruby&rsquo;s call/cc</a>.
 I will research further, but if you have any information about that feel free to comment or email me.</p>
 <p>Cheers!</p>
 <p><strong>UPDATE</strong> Abinoam Praxedes Marques Junio <a href="https://www.ruby-forum.com/topic/4418860#1129811">figured</a> out that let (which is basically lambda application underneath) is crucial here.
 So here is his fixed version:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#24909d">require</span> <span style="color:#ed9d13">&#34;continuation&#34;</span>
-
-<span style="color:#24909d">lambda</span> <span style="color:#6ab825;font-weight:bold">do</span> |yin, yang|
-  yin.call(yang)
-<span style="color:#6ab825;font-weight:bold">end</span>.call(<span style="color:#24909d">lambda</span> { |cc| <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;@&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c }),
-         <span style="color:#24909d">lambda</span> { |cc| <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;*&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c }))
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#24909d">require</span> <span style="color:#ed9d13">&#34;continuation&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#24909d">lambda</span> <span style="color:#6ab825;font-weight:bold">do</span> |yin, yang|
+</span></span><span style="display:flex;"><span>  yin.call(yang)
+</span></span><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">end</span>.call(<span style="color:#24909d">lambda</span> { |cc| <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;@&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c }),
+</span></span><span style="display:flex;"><span>         <span style="color:#24909d">lambda</span> { |cc| <span style="color:#24909d">print</span> <span style="color:#ed9d13">&#34;*&#34;</span>; cc }.call(<span style="color:#24909d">callcc</span> { |c| c }))
+</span></span></code></pre></div>
             </div>
 
             

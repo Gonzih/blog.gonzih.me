@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -83,24 +83,22 @@
               <span class="post-date">Mon, Oct 8, 2012</span>
                   <p>Recently I migarted from awesome to xmonad. I&rsquo;m Programmer Dvorak freak, so I stuck with controlling current workspace from numbers row.</p>
 <p>First hack was to use functional keys [F1..F12] like so:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#999;font-style:italic">-- mod-[F1..F12]       Switch to workspace N</span>
-    <span style="color:#999;font-style:italic">-- mod-shift-[F1..F12] Move client to workspace N</span>
-    <span style="color:#999;font-style:italic">--</span>
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <span style="color:#6ab825;font-weight:bold">&lt;-</span> zip (<span style="color:#6ab825;font-weight:bold">XMonad</span>.workspaces conf) [xK_F1 .. xK_F12]
-        , (f, m) <span style="color:#6ab825;font-weight:bold">&lt;-</span> [(<span style="color:#6ab825;font-weight:bold">W</span>.greedyView, <span style="color:#3677a9">0</span>), (<span style="color:#6ab825;font-weight:bold">W</span>.shift, shiftMask)]]
-
-</code></pre></div><p>But after some research I found that I can detect key symbol using xev command. Here is my latest solution:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-haskell" data-lang="haskell">    <span style="color:#999;font-style:italic">-- Programmer Dvorak</span>
-    <span style="color:#999;font-style:italic">-- mod-[1..9]       Switch to workspace N</span>
-    <span style="color:#999;font-style:italic">-- mod-shift-[1..9] Move client to workspace N</span>
-    <span style="color:#999;font-style:italic">--</span>
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <span style="color:#6ab825;font-weight:bold">&lt;-</span> zip (<span style="color:#6ab825;font-weight:bold">XMonad</span>.workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright, xK_parenleft
-                                                 ,xK_equal, xK_asterisk, xK_parenright, xK_plus, xK_bracketright, xK_exclam]
-        , (f, m) <span style="color:#6ab825;font-weight:bold">&lt;-</span> [(<span style="color:#6ab825;font-weight:bold">W</span>.greedyView, <span style="color:#3677a9">0</span>), (<span style="color:#6ab825;font-weight:bold">W</span>.shift, shiftMask)]]
-
-</code></pre></div><p>Hooray! It works!</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-haskell" data-lang="haskell"><span style="display:flex;"><span>    <span style="color:#999;font-style:italic">-- mod-[F1..F12]       Switch to workspace N</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#999;font-style:italic">-- mod-shift-[F1..F12] Move client to workspace N</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#999;font-style:italic">--</span>
+</span></span><span style="display:flex;"><span>    [((m .|. modm, k), windows $ f i)
+</span></span><span style="display:flex;"><span>        | (i, k) <span style="color:#6ab825;font-weight:bold">&lt;-</span> zip (<span style="color:#6ab825;font-weight:bold">XMonad</span>.workspaces conf) [xK_F1 .. xK_F12]
+</span></span><span style="display:flex;"><span>        , (f, m) <span style="color:#6ab825;font-weight:bold">&lt;-</span> [(<span style="color:#6ab825;font-weight:bold">W</span>.greedyView, <span style="color:#3677a9">0</span>), (<span style="color:#6ab825;font-weight:bold">W</span>.shift, shiftMask)]]
+</span></span></code></pre></div><p>But after some research I found that I can detect key symbol using xev command. Here is my latest solution:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-haskell" data-lang="haskell"><span style="display:flex;"><span>    <span style="color:#999;font-style:italic">-- Programmer Dvorak</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#999;font-style:italic">-- mod-[1..9]       Switch to workspace N</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#999;font-style:italic">-- mod-shift-[1..9] Move client to workspace N</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#999;font-style:italic">--</span>
+</span></span><span style="display:flex;"><span>    [((m .|. modm, k), windows $ f i)
+</span></span><span style="display:flex;"><span>        | (i, k) <span style="color:#6ab825;font-weight:bold">&lt;-</span> zip (<span style="color:#6ab825;font-weight:bold">XMonad</span>.workspaces conf) [xK_ampersand, xK_bracketleft, xK_braceleft, xK_braceright, xK_parenleft
+</span></span><span style="display:flex;"><span>                                                 ,xK_equal, xK_asterisk, xK_parenright, xK_plus, xK_bracketright, xK_exclam]
+</span></span><span style="display:flex;"><span>        , (f, m) <span style="color:#6ab825;font-weight:bold">&lt;-</span> [(<span style="color:#6ab825;font-weight:bold">W</span>.greedyView, <span style="color:#3677a9">0</span>), (<span style="color:#6ab825;font-weight:bold">W</span>.shift, shiftMask)]]
+</span></span></code></pre></div><p>Hooray! It works!</p>
             </div>
 
             

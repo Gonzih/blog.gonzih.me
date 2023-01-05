@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -82,15 +82,15 @@
                 <h1>Set New PostgreSQL Databases Encoding to Unicode</h1>
               <span class="post-date">Fri, Sep 30, 2011</span>
                   <p>You must change encoding for template1. For do that run following.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sql" data-lang="sql"><span style="color:#6ab825;font-weight:bold">UPDATE</span> pg_database <span style="color:#6ab825;font-weight:bold">SET</span> datistemplate = <span style="color:#6ab825;font-weight:bold">FALSE</span> <span style="color:#6ab825;font-weight:bold">WHERE</span> datname = <span style="color:#ed9d13">&#39;template1&#39;</span>;
-<span style="color:#6ab825;font-weight:bold">DROP</span> <span style="color:#6ab825;font-weight:bold">DATABASE</span> template1;
-<span style="color:#6ab825;font-weight:bold">CREATE</span> <span style="color:#6ab825;font-weight:bold">DATABASE</span> template1 <span style="color:#6ab825;font-weight:bold">WITH</span> <span style="color:#6ab825;font-weight:bold">TEMPLATE</span> = template0 <span style="color:#6ab825;font-weight:bold">ENCODING</span> = <span style="color:#ed9d13">&#39;UNICODE&#39;</span>;
-<span style="color:#6ab825;font-weight:bold">UPDATE</span> pg_database <span style="color:#6ab825;font-weight:bold">SET</span> datistemplate = <span style="color:#6ab825;font-weight:bold">TRUE</span> <span style="color:#6ab825;font-weight:bold">WHERE</span> datname = <span style="color:#ed9d13">&#39;template1&#39;</span>;
-
-#recomended
-<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#6ab825;font-weight:bold">c</span> template1
-<span style="color:#6ab825;font-weight:bold">VACUUM</span> <span style="color:#6ab825;font-weight:bold">FREEZE</span>;
-</code></pre></div><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">UPDATE</span><span style="color:#666"> </span>pg_database<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">SET</span><span style="color:#666"> </span>datistemplate<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">FALSE</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">WHERE</span><span style="color:#666"> </span>datname<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#ed9d13">&#39;template1&#39;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">DROP</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">DATABASE</span><span style="color:#666"> </span>template1;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">CREATE</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">DATABASE</span><span style="color:#666"> </span>template1<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">WITH</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">TEMPLATE</span><span style="color:#666"> </span>=<span style="color:#666"> </span>template0<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">ENCODING</span><span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#ed9d13">&#39;UNICODE&#39;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">UPDATE</span><span style="color:#666"> </span>pg_database<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">SET</span><span style="color:#666"> </span>datistemplate<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">TRUE</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">WHERE</span><span style="color:#666"> </span>datname<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#ed9d13">&#39;template1&#39;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span>#recomended<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#6ab825;font-weight:bold">c</span><span style="color:#666"> </span>template1<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">VACUUM</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">FREEZE</span>;<span style="color:#666">
+</span></span></span></code></pre></div><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
             </div>
 
             

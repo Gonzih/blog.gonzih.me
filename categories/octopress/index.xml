@@ -28,12 +28,12 @@ To fix that go to admin ui in disqus and use domain migration tool.&lt;/p&gt;</d
       <author>gonzih@gmail.com (Max Gonzih)</author>
       <guid>https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/</guid>
       <description>&lt;p&gt;If your get following pygments error using octopress with arch linux.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;Building site: source -&amp;gt; public
-  File &amp;#34;&amp;lt;string&amp;gt;&amp;#34;, line 1
-    import sys; print sys.executable
-                        ^
-SyntaxError: invalid syntax
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Building site: source -&amp;gt; public
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  File &amp;#34;&amp;lt;string&amp;gt;&amp;#34;, line 1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    import sys; print sys.executable
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        ^
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SyntaxError: invalid syntax
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It&amp;rsquo;s happens because RubyPython use Python version 2 by calling &amp;ldquo;python&amp;rdquo; command. By default python equal to python3 in Arch Linux.&lt;/p&gt;
 &lt;p&gt;For fix simple add ruby file to plugins directory with following code.&lt;/p&gt;</description>
     </item>
     

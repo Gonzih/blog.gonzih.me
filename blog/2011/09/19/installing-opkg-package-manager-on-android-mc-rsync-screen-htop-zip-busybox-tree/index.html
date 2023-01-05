@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -83,37 +83,37 @@
               <span class="post-date">Mon, Sep 19, 2011</span>
                   <h2 id="install-adb">Install adb</h2>
 <h3 id="installing-adb-on-arch-linux">Installing adb on arch linux</h3>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">yaourt -S adb
-</code></pre></div><h2 id="running-adb">Running adb</h2>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">adb kill-server
-sudo adb start-server
-adb shell
-</code></pre></div><h2 id="installing-opkg">Installing opkg</h2>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yaourt -S adb
+</span></span></code></pre></div><h2 id="running-adb">Running adb</h2>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>adb kill-server
+</span></span><span style="display:flex;"><span>sudo adb start-server
+</span></span><span style="display:flex;"><span>adb shell
+</span></span></code></pre></div><h2 id="installing-opkg">Installing opkg</h2>
 <p>Now run in adb shell following:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#24909d">cd</span> /sdcard
-wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg-bootstrap-v2.tar.bz2
-<span style="color:#24909d">cd</span> /
-tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
-<span style="color:#999;font-style:italic"># for non cyanogen users</span>
-wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg.conf -O /data/local/opkg.conf
-<span style="color:#999;font-style:italic"># for cyanogen users</span>
-wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
-<span style="color:#999;font-style:italic"># add /data/xbin to your path</span>
-<span style="color:#24909d">export</span> <span style="color:#40ffff">PATH</span>=<span style="color:#ed9d13">&#34;/data/xbin:</span><span style="color:#40ffff">$PATH</span><span style="color:#ed9d13">&#34;</span>
-<span style="color:#999;font-style:italic"># make /system writable</span>
-mount -o remount,rw /system
-opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
-opkg -f /data/local/opkg.conf update
-opkg install opkg
-mount -o remount,ro /system
-</code></pre></div><h2 id="opkg-usage">Opkg usage</h2>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">opkg install rsync
-opkg remove rsync
-<span style="color:#999;font-style:italic"># list installed packages</span>
-opkg list_installed
-<span style="color:#999;font-style:italic"># list files belonging to package</span>
-opkg files rsync
-</code></pre></div><h2 id="available-packages">Available packages</h2>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#24909d">cd</span> /sdcard
+</span></span><span style="display:flex;"><span>wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg-bootstrap-v2.tar.bz2
+</span></span><span style="display:flex;"><span><span style="color:#24909d">cd</span> /
+</span></span><span style="display:flex;"><span>tar xjf /sdcard/opkg-bootstrap-v2.tar.bz2
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"># for non cyanogen users</span>
+</span></span><span style="display:flex;"><span>wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg.conf -O /data/local/opkg.conf
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"># for cyanogen users</span>
+</span></span><span style="display:flex;"><span>wget https://d1wvxg652jdms0.cloudfront.net/soft/android/opkg_cyanogen.conf -O /data/local/opkg.conf
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"># add /data/xbin to your path</span>
+</span></span><span style="display:flex;"><span><span style="color:#24909d">export</span> <span style="color:#40ffff">PATH</span>=<span style="color:#ed9d13">&#34;/data/xbin:</span><span style="color:#40ffff">$PATH</span><span style="color:#ed9d13">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"># make /system writable</span>
+</span></span><span style="display:flex;"><span>mount -o remount,rw /system
+</span></span><span style="display:flex;"><span>opkg install /sdcard/opkg_0.1.7+svn519-2_arm.ipk
+</span></span><span style="display:flex;"><span>opkg -f /data/local/opkg.conf update
+</span></span><span style="display:flex;"><span>opkg install opkg
+</span></span><span style="display:flex;"><span>mount -o remount,ro /system
+</span></span></code></pre></div><h2 id="opkg-usage">Opkg usage</h2>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>opkg install rsync
+</span></span><span style="display:flex;"><span>opkg remove rsync
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"># list installed packages</span>
+</span></span><span style="display:flex;"><span>opkg list_installed
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"># list files belonging to package</span>
+</span></span><span style="display:flex;"><span>opkg files rsync
+</span></span></code></pre></div><h2 id="available-packages">Available packages</h2>
 <ul>
 <li>rsync - Lightweight package management system.</li>
 <li>htop - Interactive processes viewer.</li>

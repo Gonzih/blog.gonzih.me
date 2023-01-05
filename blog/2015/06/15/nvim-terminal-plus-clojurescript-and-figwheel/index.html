@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -93,17 +93,17 @@ this solution should be your new starting point.</p>
 Open terminal using <code>:terminal</code> command.</p>
 <p>Here are some keybindings that will help you to send code from
 your clojure buffer to the terminal buffer.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-vim" data-lang="vim"><span style="color:#6ab825;font-weight:bold">if</span> has(<span style="color:#ed9d13">&#34;nvim&#34;</span>)<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Open terminal and run lein figwheel</span><span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  nmap &lt;Leader&gt;term &lt;C-w&gt;v:terminal&lt;CR&gt;lein figwheel&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Evaluate anything from the visual mode in the next window</span><span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  vmap &lt;buffer&gt; ,e y&lt;C-w&gt;wpi&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Evaluate outer most form</span><span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  nmap &lt;buffer&gt; ,e ^v%,e<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Evaluate buffer&#34;</span><span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  nmap &lt;buffer&gt; ,b ggVG,e<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">endif</span><span style="color:#a61717;background-color:#e3d2d2">
-</span></code></pre></div><p>Hey! Now you can finally stop looking at the emacs land!</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">if</span> has(<span style="color:#ed9d13">&#34;nvim&#34;</span>)<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Open terminal and run lein figwheel</span><span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  nmap &lt;Leader&gt;term &lt;C-w&gt;v:terminal&lt;CR&gt;lein figwheel&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Evaluate anything from the visual mode in the next window</span><span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  vmap &lt;buffer&gt; ,e y&lt;C-w&gt;wpi&lt;CR&gt;&lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;p<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Evaluate outer most form</span><span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  nmap &lt;buffer&gt; ,e ^v%,e<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#999;font-style:italic">  &#34; Evaluate buffer&#34;</span><span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  nmap &lt;buffer&gt; ,b ggVG,e<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#6ab825;font-weight:bold">endif</span><span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span></code></pre></div><p>Hey! Now you can finally stop looking at the emacs land!</p>
             </div>
 
             

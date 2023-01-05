@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -93,37 +93,35 @@ Of course you can probably figure out all this yourself, but what if you are laz
 </li>
 </ul>
 <p><code>/etc/NetworkManager/dispatcher.d/vpn-up</code>:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">#!/bin/sh
-
-CONN=&#34;MY-CONNECTION-NAME&#34;
-
-nmcli con status id $CONN &gt; /dev/null
-
-rc=$?
-if [[ $rc != 0 ]] ; then
-    nmcli con up id $CONN
-    sleep 5 # optional wait time
-fi
-
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>#!/bin/sh
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CONN=&#34;MY-CONNECTION-NAME&#34;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nmcli con status id $CONN &gt; /dev/null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rc=$?
+</span></span><span style="display:flex;"><span>if [[ $rc != 0 ]] ; then
+</span></span><span style="display:flex;"><span>    nmcli con up id $CONN
+</span></span><span style="display:flex;"><span>    sleep 5 # optional wait time
+</span></span><span style="display:flex;"><span>fi
+</span></span></code></pre></div><ul>
 <li>Make file executable <code>chmod +x /etc/NetworkManager/dispatcher.d/vpn-up</code></li>
 <li>Make sure that dispatcher is running by running <code>journalctl -b -u NetworkManager</code> and looking for the line that looks like:</li>
 </ul>
 <p><code>NetworkManager</code>:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&lt;warn&gt; Dispatcher failed: (32) Unit dbus-org.freedesktop.nm-dispatcher.service failed to load: No such file or directory.
+</span></span></code></pre></div><ul>
 <li>If you see line about dispatcher service - enable it manually by running <code>systemctl enable NetworkManager-dispatcher.service</code>.</li>
 <li>By default NetworkManager will store VPN password in keyring, to start VPN without keyring dependencies update VPN connection configuration with following changes:</li>
 </ul>
 <p><code>/etc/NetworkManager/system-connections/MY-CONNECTION-NAME</code>:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">...
-[vpn]
-password-flags=0
-...
-[vpn-secrets]
-password=MY-VPN-PASSWORD
-
-</code></pre></div><p>And now everything should work like a charm!</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>[vpn]
+</span></span><span style="display:flex;"><span>password-flags=0
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>[vpn-secrets]
+</span></span><span style="display:flex;"><span>password=MY-VPN-PASSWORD
+</span></span></code></pre></div><p>And now everything should work like a charm!</p>
             </div>
 
             

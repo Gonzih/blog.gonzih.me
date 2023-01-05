@@ -1,0 +1,167 @@
+    <!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.99.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  
+  <title>Blinky on Arduino UNO with Zig &middot; Max Gonzih</title>
+  
+
+  
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/poole.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.gonzih.me/css/custom.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Max Gonzih" />
+
+  
+  
+      <script id="dsq-count-scr" src="//gonzihsblog.disqus.com/count.js" async></script>
+  
+
+    <script>
+        function toggle_sidebar() {
+            document.body.classList.toggle("sidebar-closed");
+        };
+    </script>
+</head>
+
+    <body class=" ">
+        <div class="sidebar">
+  <div class="container sidebar-sticky">
+      <a class="sidebar-close" href="#" onclick="toggle_sidebar();">
+          <span class="close">
+          &laquo;
+          </span>
+          <span class="open">
+          &raquo;
+          </span>
+      </a>
+    <div class="sidebar-about">
+      <a href="https://blog.gonzih.me/"><h1>Max Gonzih</h1></a>
+      <p class="lead">
+       KEEP CALM and CODE ON 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="mailto:gonzih@gmail.com"> Email </a></li>
+      
+        <li><a href="https://github.com/Gonzih"> Github </a></li>
+      
+        <li><a href="https://blog.gonzih.me/index.xml"> RSS feed </a></li>
+      
+        <li><a href="https://gonzih.me"> Homepage </a></li>
+      
+        <li><a href="/post/"> Archives </a></li>
+      
+    </ul>
+
+    <p>This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
+    <p class="cc-logo"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></p>
+  </div>
+</div>
+
+
+      <div class="wrap">
+        <div class="content container">
+            <div class="post">
+                <h1>Blinky on Arduino UNO with Zig</h1>
+              <span class="post-date">Thu, Jan 5, 2023</span>
+                  <p>Let&rsquo;s give Zig a try on Arduino UNO with <a href="https://github.com/ZigEmbeddedGroup/microzig">microzig</a></p>
+<p>Lets create and setup our project first:</p>
+<pre tabindex="0"><code>mkdir blink
+zig init-exe
+</code></pre><p>Now we can add <a href="https://github.com/ZigEmbeddedGroup/microzig">microzig</a> as a dependency, for now lets do this in a simple manner, no package managers, just git:</p>
+<pre tabindex="0"><code>mkdir deps
+git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
+</code></pre><p>Lets now setup <code>build.zig</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>std<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">@import</span>(<span style="color:#ed9d13">&#34;std&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>microzig<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">@import</span>(<span style="color:#ed9d13">&#34;deps/microzig/src/main.zig&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">pub</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">fn</span><span style="color:#666"> </span>build(b:<span style="color:#666"> </span>*std.build.Builder)<span style="color:#666"> </span>!<span style="color:#6ab825;font-weight:bold">void</span><span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>backing<span style="color:#666"> </span>=<span style="color:#666"> </span>.{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>.board<span style="color:#666"> </span>=<span style="color:#666"> </span>microzig.boards.arduino_uno,<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>};<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">var</span><span style="color:#666"> </span>exe<span style="color:#666"> </span>=<span style="color:#666"> </span>microzig.addEmbeddedExecutable(<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>b,<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span><span style="color:#ed9d13">&#34;blink&#34;</span>,<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span><span style="color:#ed9d13">&#34;src/main.zig&#34;</span>,<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>backing,<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>.{},<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>exe.setBuildMode(.ReleaseSmall);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>exe.install();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span></code></pre></div><p>And now it&rsquo;s time to write actual blink code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>micro<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">@import</span>(<span style="color:#ed9d13">&#34;microzig&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>led_pin<span style="color:#666"> </span>=<span style="color:#666"> </span>micro.Pin(<span style="color:#ed9d13">&#34;D13&#34;</span>);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">pub</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">fn</span><span style="color:#666"> </span>main()<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">void</span><span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>led<span style="color:#666"> </span>=<span style="color:#666"> </span>micro.Gpio(led_pin,<span style="color:#666"> </span>.{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>.mode<span style="color:#666"> </span>=<span style="color:#666"> </span>.output,<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>.initial_state<span style="color:#666"> </span>=<span style="color:#666"> </span>.low,<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>});<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>led.init();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">while</span><span style="color:#666"> </span>(<span style="color:#6ab825;font-weight:bold">true</span>)<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>busyloop();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span>led.toggle();<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">fn</span><span style="color:#666"> </span>busyloop()<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">void</span><span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>limit<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#3677a9">100_000</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">var</span><span style="color:#666"> </span>i:<span style="color:#666"> </span>u24<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#3677a9">0</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span><span style="color:#6ab825;font-weight:bold">while</span><span style="color:#666"> </span>(i<span style="color:#666"> </span>&lt;<span style="color:#666"> </span>limit)<span style="color:#666"> </span>:<span style="color:#666"> </span>(i<span style="color:#666"> </span>+=<span style="color:#666"> </span><span style="color:#3677a9">1</span>)<span style="color:#666"> </span>{<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">        </span><span style="color:#24909d">@import</span>(<span style="color:#ed9d13">&#34;std&#34;</span>).mem.doNotOptimizeAway(i);<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>}<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span>}<span style="color:#666">
+</span></span></span></code></pre></div><p>After that we should be able to build this:</p>
+<pre tabindex="0"><code>zig build
+ls zig-out/bin
+</code></pre><p>And we can now use <code>avrdude</code> to upload this to our Arduino UNO.</p>
+<pre tabindex="0"><code>avrdude -carduino -patmega328p -D -P /dev/ttyACM0 -Uflash:w:./zig-out/bin/blink:e
+</code></pre><p>Double check what your device is on your OS, on apple silicon macbook for me device was <code>/dev/cu.usbmodem11101</code>.</p>
+<p>Thats it, it should be blinkin!</p>
+            </div>
+
+            
+                <h2>Comments</h2>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+     
+    var disqus_shortname = 'gonzihsblog'; 
+
+     
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        </div>
+      </div>
+
+  </body>
+</html>

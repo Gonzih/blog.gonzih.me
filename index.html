@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -81,6 +81,18 @@
         <div class="content container">
             <div class="posts">
 
+                
+                <div class="post">
+                    <h1 class="post-title">
+                        <a href="https://blog.gonzih.me/blog/2023/01/05/blinky-on-arduino-uno-with-zig/">
+                            Blinky on Arduino UNO with Zig
+                        </a>
+                    </h1>
+
+                    <span class="post-date">Thu, Jan 5, 2023 | <a href="https://blog.gonzih.me/blog/2023/01/05/blinky-on-arduino-uno-with-zig/#disqus_thread">Comments</a></span>
+
+                    <p>Let&rsquo;s give Zig a try on Arduino UNO with <a href="https://github.com/ZigEmbeddedGroup/microzig">microzig</a></p>
+                </div>
                 
                 <div class="post">
                     <h1 class="post-title">
@@ -372,12 +384,12 @@ I bet you can figure out similar packages for different distribution.</p>
 
                     <p>Digging deeper in to the call/cc land I found interesting puzzle called yin-yang.</p>
 <p>Here is Scheme implementation:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-scheme" data-lang="scheme">(<span style="color:#6ab825;font-weight:bold">let* </span>((<span style="color:#447fcf">yin</span>
-        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span>#<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#40ffff">@</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>))))
-       (<span style="color:#447fcf">yang</span>
-        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span>#<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#40ffff">*</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>)))))
-(<span style="color:#447fcf">yin</span> <span style="color:#40ffff">yang</span>))
-</code></pre></div><p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">let* </span>((<span style="color:#447fcf">yin</span>
+</span></span><span style="display:flex;"><span>        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span><span style="color:#ed9d13">#\@</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>))))
+</span></span><span style="display:flex;"><span>       (<span style="color:#447fcf">yang</span>
+</span></span><span style="display:flex;"><span>        ((<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">cc</span>) (<span style="color:#24909d">display </span><span style="color:#ed9d13">#\*</span>) <span style="color:#40ffff">cc</span>) (<span style="color:#24909d">call-with-current-continuation </span>(<span style="color:#6ab825;font-weight:bold">lambda </span>(<span style="color:#447fcf">c</span>) <span style="color:#40ffff">c</span>)))))
+</span></span><span style="display:flex;"><span>(<span style="color:#447fcf">yin</span> <span style="color:#40ffff">yang</span>))
+</span></span></code></pre></div><p>It will print <code>@*@**@***@****@*****@******@...</code> forever.</p>
                 </div>
                 
                 <div class="post">
@@ -519,9 +531,9 @@ Lets build RC Toy. Hm, and lets use Clojure (because clojure is pure fun to use)
                     <p>I spend today few hours reading mc documentation about color scheme configuration. Came up with following color scheme. Enjoy :)</p>
 <p><a href="https://raw.github.com/Gonzih/dotfiles/a43c06d7cd12f3e1e06f3efe655e082e4dc78012/.config/mc/theme.png"><img src="https://d1wvxg652jdms0.cloudfront.net/midnight-commander-theme/theme.png" alt="Blue Midnight Commander color scheme"></a></p>
 <p><code>.config/mc/ini</code>:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ini" data-lang="ini"><span style="color:#6ab825;font-weight:bold">[Colors]</span>
-<span style="color:#bbb">base_color</span>=<span style="color:#ed9d13">lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:</span>
-</code></pre></div><p>For more information take look at <a href="https://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">[Colors]</span>
+</span></span><span style="display:flex;"><span><span style="color:#bbb">base_color</span>=<span style="color:#ed9d13">lightgray,blue:normal=blue,default:reverse=green,default:gauge=gray,lightgray:selected=white,blue:marked=yellow,default:markselect=yellow,default:directory=brightblue,default:executable=brightgreen,default:link=cyan,default:device=brightmagenta,default:core=red,default:special=lightgray,default:dnormal=lightgray,blue:dfocus=lightgray,black:dhotnormal=yellow,blue:dhotfocus=yellow,black:menunormal=lightgray,blue:menuhot=yellow,blue:menusel=lightgray,black:menuhotsel=yellow,black:menuinactive=lightgray,gray:errors=lightgray,red:errdhotnormal=yellow,red:errdhotfocus=yellow,lightgray:input=lightblue,gray:inputunchanged=blue,gray:inputmark=white,blue:bbarhotkey=white,black:bbarbutton=lightgray,blue:viewbold=lightgray,default:viewunderline=lightblue,default:viewselected=lightgray,grey:helpnormal=lightgray,default:helpitalic=lightblue,default:helpbold=lightgray,default:helplink=green,default:helpslink=lighgreen,defalt:</span>
+</span></span></code></pre></div><p>For more information take look at <a href="https://www.midnight-commander.org/wiki/doc/common/skins">mc wiki</a> and run <code>mc --help-color</code> to see available color variables in your mc version.
 Format of color configuration is <code>what=foreground,background:</code>. All configuration shoud be in one line (ofcourse you can write it in multiple lines and then use vim (or other cool editor) magic).</p>
                 </div>
                 
@@ -599,10 +611,10 @@ Why? Because it&rsquo;s just unfair. Why would you provide any information about
 
                     <p>Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">java: no such file or directory
-</code></pre></div><p>So here is fix:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">sudo apt-get install -y libc6-armel libsfgcc1
-</code></pre></div><p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>java: no such file or directory
+</span></span></code></pre></div><p>So here is fix:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo apt-get install -y libc6-armel libsfgcc1
+</span></span></code></pre></div><p><a href="https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA">via</a></p>
                 </div>
                 
                 <div class="post">
@@ -664,12 +676,12 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
                     <span class="post-date">Fri, Feb 17, 2012 | <a href="https://blog.gonzih.me/blog/2012/02/17/how-to-use-magnet-links-with-rtorrent/#disqus_thread">Comments</a></span>
 
                     <p>Here simple script that will add magnet link as torrent file to your watch directory. You can use it from command line or set it in your browser to handle magnet links.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#cd2828;font-weight:bold">#!/bin/bash
-</span><span style="color:#cd2828;font-weight:bold"></span>
-<span style="color:#24909d">cd</span> ~/watch    <span style="color:#999;font-style:italic"># set your watch directory here</span>
-[[ <span style="color:#ed9d13">&#34;</span><span style="color:#40ffff">$1</span><span style="color:#ed9d13">&#34;</span> =~ <span style="color:#40ffff">xt</span>=urn:btih:([^&amp;/]+) ]] || exit;
-<span style="color:#24909d">echo</span> <span style="color:#ed9d13">&#34;d10:magnet-uri</span><span style="color:#ed9d13">${#</span><span style="color:#40ffff">1</span><span style="color:#ed9d13">}</span><span style="color:#ed9d13">:</span><span style="color:#ed9d13">${</span><span style="color:#40ffff">1</span><span style="color:#ed9d13">}</span><span style="color:#ed9d13">e&#34;</span> &gt; <span style="color:#ed9d13">&#34;meta-</span><span style="color:#ed9d13">${</span><span style="color:#40ffff">BASH_REMATCH</span>[1]<span style="color:#ed9d13">}</span><span style="color:#ed9d13">.torrent&#34;</span>
-</code></pre></div><p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#cd2828;font-weight:bold">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#cd2828;font-weight:bold"></span>
+</span></span><span style="display:flex;"><span><span style="color:#24909d">cd</span> ~/watch    <span style="color:#999;font-style:italic"># set your watch directory here</span>
+</span></span><span style="display:flex;"><span>[[ <span style="color:#ed9d13">&#34;</span><span style="color:#40ffff">$1</span><span style="color:#ed9d13">&#34;</span> =~ <span style="color:#40ffff">xt</span>=urn:btih:([^&amp;/]+) ]] || exit;
+</span></span><span style="display:flex;"><span><span style="color:#24909d">echo</span> <span style="color:#ed9d13">&#34;d10:magnet-uri</span><span style="color:#ed9d13">${#</span><span style="color:#40ffff">1</span><span style="color:#ed9d13">}</span><span style="color:#ed9d13">:</span><span style="color:#ed9d13">${</span><span style="color:#40ffff">1</span><span style="color:#ed9d13">}</span><span style="color:#ed9d13">e&#34;</span> &gt; <span style="color:#ed9d13">&#34;meta-</span><span style="color:#ed9d13">${</span><span style="color:#40ffff">BASH_REMATCH</span>[1]<span style="color:#ed9d13">}</span><span style="color:#ed9d13">.torrent&#34;</span>
+</span></span></code></pre></div><p><a href="https://libtorrent.rakshasa.no/ticket/2100">via</a></p>
                 </div>
                 
                 <div class="post">
@@ -695,15 +707,15 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
                     <span class="post-date">Fri, Sep 30, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/30/set-new-postgresql-databases-encoding-to-unicode/#disqus_thread">Comments</a></span>
 
                     <p>You must change encoding for template1. For do that run following.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sql" data-lang="sql"><span style="color:#6ab825;font-weight:bold">UPDATE</span> pg_database <span style="color:#6ab825;font-weight:bold">SET</span> datistemplate = <span style="color:#6ab825;font-weight:bold">FALSE</span> <span style="color:#6ab825;font-weight:bold">WHERE</span> datname = <span style="color:#ed9d13">&#39;template1&#39;</span>;
-<span style="color:#6ab825;font-weight:bold">DROP</span> <span style="color:#6ab825;font-weight:bold">DATABASE</span> template1;
-<span style="color:#6ab825;font-weight:bold">CREATE</span> <span style="color:#6ab825;font-weight:bold">DATABASE</span> template1 <span style="color:#6ab825;font-weight:bold">WITH</span> <span style="color:#6ab825;font-weight:bold">TEMPLATE</span> = template0 <span style="color:#6ab825;font-weight:bold">ENCODING</span> = <span style="color:#ed9d13">&#39;UNICODE&#39;</span>;
-<span style="color:#6ab825;font-weight:bold">UPDATE</span> pg_database <span style="color:#6ab825;font-weight:bold">SET</span> datistemplate = <span style="color:#6ab825;font-weight:bold">TRUE</span> <span style="color:#6ab825;font-weight:bold">WHERE</span> datname = <span style="color:#ed9d13">&#39;template1&#39;</span>;
-
-#recomended
-<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#6ab825;font-weight:bold">c</span> template1
-<span style="color:#6ab825;font-weight:bold">VACUUM</span> <span style="color:#6ab825;font-weight:bold">FREEZE</span>;
-</code></pre></div><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">UPDATE</span><span style="color:#666"> </span>pg_database<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">SET</span><span style="color:#666"> </span>datistemplate<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">FALSE</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">WHERE</span><span style="color:#666"> </span>datname<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#ed9d13">&#39;template1&#39;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">DROP</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">DATABASE</span><span style="color:#666"> </span>template1;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">CREATE</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">DATABASE</span><span style="color:#666"> </span>template1<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">WITH</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">TEMPLATE</span><span style="color:#666"> </span>=<span style="color:#666"> </span>template0<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">ENCODING</span><span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#ed9d13">&#39;UNICODE&#39;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">UPDATE</span><span style="color:#666"> </span>pg_database<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">SET</span><span style="color:#666"> </span>datistemplate<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">TRUE</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">WHERE</span><span style="color:#666"> </span>datname<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#ed9d13">&#39;template1&#39;</span>;<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span>#recomended<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#6ab825;font-weight:bold">c</span><span style="color:#666"> </span>template1<span style="color:#666">
+</span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">VACUUM</span><span style="color:#666"> </span><span style="color:#6ab825;font-weight:bold">FREEZE</span>;<span style="color:#666">
+</span></span></span></code></pre></div><p><a href="https://journal.tianhao.info/2010/12/postgresql-change-default-encoding-of-new-databases-to-utf-8-optional/">via</a></p>
                 </div>
                 
                 <div class="post">
@@ -716,12 +728,12 @@ To fix that go to admin ui in disqus and use domain migration tool.</p>
                     <span class="post-date">Wed, Sep 21, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/21/how-to-fix-octopress-pygments-error-on-arch-linux/#disqus_thread">Comments</a></span>
 
                     <p>If your get following pygments error using octopress with arch linux.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">Building site: source -&gt; public
-  File &#34;&lt;string&gt;&#34;, line 1
-    import sys; print sys.executable
-                        ^
-SyntaxError: invalid syntax
-</code></pre></div><p>It&rsquo;s happens because RubyPython use Python version 2 by calling &ldquo;python&rdquo; command. By default python equal to python3 in Arch Linux.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Building site: source -&gt; public
+</span></span><span style="display:flex;"><span>  File &#34;&lt;string&gt;&#34;, line 1
+</span></span><span style="display:flex;"><span>    import sys; print sys.executable
+</span></span><span style="display:flex;"><span>                        ^
+</span></span><span style="display:flex;"><span>SyntaxError: invalid syntax
+</span></span></code></pre></div><p>It&rsquo;s happens because RubyPython use Python version 2 by calling &ldquo;python&rdquo; command. By default python equal to python3 in Arch Linux.</p>
 <p>For fix simple add ruby file to plugins directory with following code.</p>
                 </div>
                 
@@ -747,8 +759,8 @@ SyntaxError: invalid syntax
                     <span class="post-date">Thu, Sep 15, 2011 | <a href="https://blog.gonzih.me/blog/2011/09/15/tmux---rvm---zsh-fix/#disqus_thread">Comments</a></span>
 
                     <p>If you have throuble with tmux and rvm default simple add following to end of your .zshrc file.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">[[ <span style="color:#40ffff">$TERM</span> = <span style="color:#ed9d13">&#34;screen&#34;</span> ]] &amp;&amp; rvm use default
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>[[ <span style="color:#40ffff">$TERM</span> = <span style="color:#ed9d13">&#34;screen&#34;</span> ]] &amp;&amp; rvm use default
+</span></span></code></pre></div>
                 </div>
                 
                 <div class="post">

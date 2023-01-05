@@ -18,10 +18,10 @@
       <guid>https://blog.gonzih.me/blog/2012/09/03/installing-oracle-embedded-java-on-beaglebone-and-ubuntu-issue/</guid>
       <description>&lt;p&gt;Recently I was playing with Clojure on Beaglebone and decided to give a try to Oracle&amp;rsquo;s new Embedded JRE.
 But after downloading JRE from Oracle website (with filling useless stupid forms) I received following error:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java: no such file or directory
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So here is fix:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;sudo apt-get install -y libc6-armel libsfgcc1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;java: no such file or directory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;So here is fix:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo apt-get install -y libc6-armel libsfgcc1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://groups.google.com/forum/?fromgroups=#!topic/pandaboard/bb53tEV5GKA&#34;&gt;via&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

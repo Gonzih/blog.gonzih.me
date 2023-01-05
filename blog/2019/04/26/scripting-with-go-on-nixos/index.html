@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -85,65 +85,65 @@
 to utilize <a href="https://github.com/erning/gorun">gorun</a> and <code>binfmt_misc</code> to use go files for scripting.</p>
 <p>First lets install <code>gorun</code> as a system package on NixOS.</p>
 <p>Lets create <code>gorun.nix</code> file first:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-nix" data-lang="nix"><span style="color:#6ab825;font-weight:bold">with</span> <span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#ed9d13">&lt;nixpkgs&gt;</span> {};
-
-buildGoPackage <span style="color:#6ab825;font-weight:bold">rec</span> {
-  name = <span style="color:#ed9d13">&#34;gorun-</span><span style="color:#ed9d13">${</span>version<span style="color:#ed9d13">}</span><span style="color:#ed9d13">&#34;</span>;
-  version = <span style="color:#ed9d13">&#34;master-85cd5f5e084af0863ed0c3f18c00e64526d1b899&#34;</span>;
-  goPackagePath = <span style="color:#ed9d13">&#34;github.com/erning/gorun&#34;</span>;
-
-  src = fetchFromGitHub {
-    owner = <span style="color:#ed9d13">&#34;erning&#34;</span>;
-    repo = <span style="color:#ed9d13">&#34;gorun&#34;</span>;
-    rev = <span style="color:#ed9d13">&#34;85cd5f5e084af0863ed0c3f18c00e64526d1b899&#34;</span>;
-    sha256 = <span style="color:#ed9d13">&#34;sha256:1hdqimfzpynnpqc7p8m8hkcv9dlfbd8kl22979i6626nq57dvln8&#34;</span>;
-  };
-
-  meta = <span style="color:#6ab825;font-weight:bold">with</span> stdenv.lib; {
-    description = <span style="color:#ed9d13">&#34;gorun is a tool enabling one to put a </span><span style="color:#ed9d13">\&#34;</span><span style="color:#ed9d13">bang line</span><span style="color:#ed9d13">\&#34;</span><span style="color:#ed9d13"> in the source code of a Go program to run it&#34;</span>;
-    homepage = <span style="color:#ed9d13">https://github.com/erning/gorun</span>;
-    license = licenses.mit;
-    maintainers = <span style="color:#6ab825;font-weight:bold">with</span> maintainers; [ Gonzih ];
-    platforms = platforms.linux ++ platforms.darwin;
-  };
-}
-</code></pre></div><p>Next lets add this package to <code>systemPackages</code> list:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-nix" data-lang="nix">environment.systemPackages <span style="color:#a61717;background-color:#e3d2d2">=</span> <span style="color:#6ab825;font-weight:bold">with</span> pkgs; [
-  ...
-  (<span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#ed9d13">./gorun.nix</span>)
-  ...
-];
-</code></pre></div><p>Next step would be to utilize <code>boot.binfmtMiscRegistrations</code> to register our <code>gorun</code> in <code>binfmt_misc</code> module which is
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">with</span> <span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#ed9d13">&lt;nixpkgs&gt;</span> {};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>buildGoPackage <span style="color:#6ab825;font-weight:bold">rec</span> {
+</span></span><span style="display:flex;"><span>  name = <span style="color:#ed9d13">&#34;gorun-</span><span style="color:#ed9d13">${</span>version<span style="color:#ed9d13">}</span><span style="color:#ed9d13">&#34;</span>;
+</span></span><span style="display:flex;"><span>  version = <span style="color:#ed9d13">&#34;master-85cd5f5e084af0863ed0c3f18c00e64526d1b899&#34;</span>;
+</span></span><span style="display:flex;"><span>  goPackagePath = <span style="color:#ed9d13">&#34;github.com/erning/gorun&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  src = fetchFromGitHub {
+</span></span><span style="display:flex;"><span>    owner = <span style="color:#ed9d13">&#34;erning&#34;</span>;
+</span></span><span style="display:flex;"><span>    repo = <span style="color:#ed9d13">&#34;gorun&#34;</span>;
+</span></span><span style="display:flex;"><span>    rev = <span style="color:#ed9d13">&#34;85cd5f5e084af0863ed0c3f18c00e64526d1b899&#34;</span>;
+</span></span><span style="display:flex;"><span>    sha256 = <span style="color:#ed9d13">&#34;sha256:1hdqimfzpynnpqc7p8m8hkcv9dlfbd8kl22979i6626nq57dvln8&#34;</span>;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  meta = <span style="color:#6ab825;font-weight:bold">with</span> stdenv.lib; {
+</span></span><span style="display:flex;"><span>    description = <span style="color:#ed9d13">&#34;gorun is a tool enabling one to put a </span><span style="color:#ed9d13">\&#34;</span><span style="color:#ed9d13">bang line</span><span style="color:#ed9d13">\&#34;</span><span style="color:#ed9d13"> in the source code of a Go program to run it&#34;</span>;
+</span></span><span style="display:flex;"><span>    homepage = <span style="color:#ed9d13">https://github.com/erning/gorun</span>;
+</span></span><span style="display:flex;"><span>    license = licenses.mit;
+</span></span><span style="display:flex;"><span>    maintainers = <span style="color:#6ab825;font-weight:bold">with</span> maintainers; [ Gonzih ];
+</span></span><span style="display:flex;"><span>    platforms = platforms.linux ++ platforms.darwin;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Next lets add this package to <code>systemPackages</code> list:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>environment.systemPackages <span style="color:#a61717;background-color:#e3d2d2">=</span> <span style="color:#6ab825;font-weight:bold">with</span> pkgs; [
+</span></span><span style="display:flex;"><span>  ...
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#ed9d13">./gorun.nix</span>)
+</span></span><span style="display:flex;"><span>  ...
+</span></span><span style="display:flex;"><span>];
+</span></span></code></pre></div><p>Next step would be to utilize <code>boot.binfmtMiscRegistrations</code> to register our <code>gorun</code> in <code>binfmt_misc</code> module which is
 responsible for parsing shebang scripts and binary files. Drop the following lines in to your <code>configuration.nix</code>:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-nix" data-lang="nix">boot.binfmtMiscRegistrations <span style="color:#a61717;background-color:#e3d2d2">=</span> {
-  go = {
-    recognitionType = <span style="color:#ed9d13">&#34;extension&#34;</span>;
-    magicOrExtension = <span style="color:#ed9d13">&#34;go&#34;</span>;
-    interpreter = <span style="color:#ed9d13">&#34;/run/current-system/sw/bin/gorun&#34;</span>;
-    preserveArgvZero = <span style="color:#40ffff">false</span>;
-    openBinary = <span style="color:#40ffff">true</span>;
-    matchCredentials = <span style="color:#40ffff">true</span>;
-    fixBinary = <span style="color:#40ffff">false</span>;
-  };
-};
-</code></pre></div><p>What does this configuration do? <code>recognitionType</code> tells <code>binfmt</code> to make a decision based on file extension,
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>boot.binfmtMiscRegistrations <span style="color:#a61717;background-color:#e3d2d2">=</span> {
+</span></span><span style="display:flex;"><span>  go = {
+</span></span><span style="display:flex;"><span>    recognitionType = <span style="color:#ed9d13">&#34;extension&#34;</span>;
+</span></span><span style="display:flex;"><span>    magicOrExtension = <span style="color:#ed9d13">&#34;go&#34;</span>;
+</span></span><span style="display:flex;"><span>    interpreter = <span style="color:#ed9d13">&#34;/run/current-system/sw/bin/gorun&#34;</span>;
+</span></span><span style="display:flex;"><span>    preserveArgvZero = <span style="color:#40ffff">false</span>;
+</span></span><span style="display:flex;"><span>    openBinary = <span style="color:#40ffff">true</span>;
+</span></span><span style="display:flex;"><span>    matchCredentials = <span style="color:#40ffff">true</span>;
+</span></span><span style="display:flex;"><span>    fixBinary = <span style="color:#40ffff">false</span>;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>What does this configuration do? <code>recognitionType</code> tells <code>binfmt</code> to make a decision based on file extension,
 <code>magicOrExtension</code> tells it to look for <code>.go</code> extension, <code>interpreter</code> specifies which binary to invoke,
 <code>openBinary</code> corresponds to <code>O</code> flag of <code>binfmt</code> (which I dont fully understand tbh), <code>matchCredentials</code> tells kernel to run
 interpreter with permissions set on original script. For more information on <code>binfmt</code> please do check out <a href="https://www.kernel.org/doc/html/v4.14/admin-guide/binfmt-misc.html">these amazing kernel docs</a>.</p>
 <p>Now lets simply run <code>sudo nixos-rebuild --switch</code> and after everything is done lets give it a try.</p>
 <p>First lets create a simple hello world script:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-go" data-lang="go"><span style="color:#6ab825;font-weight:bold">package</span> main
-
-<span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#ed9d13">&#34;fmt&#34;</span>
-
-<span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">main</span>() {
-	fmt.<span style="color:#447fcf">Println</span>(<span style="color:#ed9d13">&#34;Hello World!&#34;</span>)
-}
-</code></pre></div><p>Lets make it executable with <code>chmod +x hello.go</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">import</span> <span style="color:#ed9d13">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">func</span> <span style="color:#447fcf">main</span>() {
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#447fcf">Println</span>(<span style="color:#ed9d13">&#34;Hello World!&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Lets make it executable with <code>chmod +x hello.go</code>.</p>
 <p>And now lets run it:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-sh" data-lang="sh">$ ./hello.go
-Hello World!
-</code></pre></div><p>Yay! It works!</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ./hello.go
+</span></span><span style="display:flex;"><span>Hello World!
+</span></span></code></pre></div><p>Yay! It works!</p>
 <p>Hope that helps somewhat.</p>
             </div>
 

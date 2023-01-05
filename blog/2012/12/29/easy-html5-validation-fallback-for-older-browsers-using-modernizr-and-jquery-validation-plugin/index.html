@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -87,18 +87,18 @@ You will need three things for that.</p>
 <p>Second is <a href="https://jquery.com/">JQuery</a>. I think you are already familiar with it, so there is no need to tell you why it&rsquo;s awesome and how to use it.</p>
 <p>Third is <a href="https://docs.jquery.com/Plugins/Validation">JQuery Validation Plugin</a>. It provides mechanism for form validation based on input classes.</p>
 <p>So now only things you need to do is to convert html5 validation attributes to html classes and run validation plugin. Here is small <a href="https://coffeescript.org/">CoffeeScript</a> snippet:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-coffeescript" data-lang="coffeescript"><span style="color:#999;font-style:italic"># initialize plugin on page ready
-</span><span style="color:#999;font-style:italic"></span>$ <span style="color:#447fcf">-&gt;</span>
-  <span style="color:#6ab825;font-weight:bold">unless</span> (Modernizr.input.required)
-    $(<span style="color:#ed9d13">&#39;form&#39;</span>).find(<span style="color:#ed9d13">&#39;input[required]&#39;</span>).each <span style="color:#447fcf">-&gt;</span>
-      $(<span style="color:#6ab825;font-weight:bold">this</span>).attr(<span style="color:#ed9d13">&#39;class&#39;</span>, <span style="color:#ed9d13">&#39;required &#39;</span> + <span style="color:#6ab825;font-weight:bold">this</span>.getAttribute(<span style="color:#ed9d13">&#39;type&#39;</span>)).removeAttr(<span style="color:#ed9d13">&#39;required&#39;</span>)
-
-    $(<span style="color:#ed9d13">&#39;form&#39;</span>).each <span style="color:#447fcf">-&gt;</span>
-      $(<span style="color:#6ab825;font-weight:bold">this</span>).validate()
-
-<span style="color:#999;font-style:italic"># check if form is valid by hand
-</span><span style="color:#999;font-style:italic"></span>$(<span style="color:#ed9d13">&#39;form&#39;</span>).valid()
-</code></pre></div><p>And as always, Have a nice day! :)</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-coffeescript" data-lang="coffeescript"><span style="display:flex;"><span><span style="color:#999;font-style:italic"># initialize plugin on page ready
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"></span>$ <span style="color:#447fcf">-&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6ab825;font-weight:bold">unless</span> (Modernizr.input.required)
+</span></span><span style="display:flex;"><span>    $(<span style="color:#ed9d13">&#39;form&#39;</span>).find(<span style="color:#ed9d13">&#39;input[required]&#39;</span>).each <span style="color:#447fcf">-&gt;</span>
+</span></span><span style="display:flex;"><span>      $(<span style="color:#6ab825;font-weight:bold">this</span>).attr(<span style="color:#ed9d13">&#39;class&#39;</span>, <span style="color:#ed9d13">&#39;required &#39;</span> + <span style="color:#6ab825;font-weight:bold">this</span>.getAttribute(<span style="color:#ed9d13">&#39;type&#39;</span>)).removeAttr(<span style="color:#ed9d13">&#39;required&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $(<span style="color:#ed9d13">&#39;form&#39;</span>).each <span style="color:#447fcf">-&gt;</span>
+</span></span><span style="display:flex;"><span>      $(<span style="color:#6ab825;font-weight:bold">this</span>).validate()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"># check if form is valid by hand
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic"></span>$(<span style="color:#ed9d13">&#39;form&#39;</span>).valid()
+</span></span></code></pre></div><p>And as always, Have a nice day! :)</p>
             </div>
 
             

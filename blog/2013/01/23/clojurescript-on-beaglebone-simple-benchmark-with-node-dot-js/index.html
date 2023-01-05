@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -84,61 +84,61 @@
                   <p>Benchmark is based on my <a href="/blog/2012/09/07/clojure-on-beaglebone-openjdk-vs-oracle-embedded-jre-benchmark/">previous experiments</a> with BeagleBone and Clojure. Setup is the same. BeagleBone is running Ubuntu 12.04. Cpu is running on 500 Mhz.
 Node version is 0.6.12. ClojureScript is compiled with advanced and simple optimizations.</p>
 <p><a href="https://github.com/Gonzih/clojurescript-small-benchmark-for-embed">Code</a> is modified to run on top of the JavaScript:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">benchmark.core</span>)
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">factorial</span> [<span style="color:#40ffff">x</span>]
-  (<span style="color:#24909d">reduce * </span>(<span style="color:#24909d">range </span><span style="color:#3677a9">1</span> (<span style="color:#24909d">inc </span><span style="color:#40ffff">x</span>))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">fib</span> [<span style="color:#40ffff">n</span>]
-  (<span style="color:#6ab825;font-weight:bold">if </span>(<span style="color:#24909d">&lt;= </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)
-    <span style="color:#3677a9">1</span>
-    (<span style="color:#24909d">+ </span>(<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)) (<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">2</span>)))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">sort-seq</span> []
-  (<span style="color:#24909d">sort </span>(<span style="color:#24909d">repeat </span><span style="color:#3677a9">100000</span> (<span style="color:#24909d">rand-int </span><span style="color:#3677a9">2000000</span>))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-fun</span> [<span style="color:#40ffff">fun</span>]
-  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">start</span>  (<span style="color:#447fcf">.getTime</span> (<span style="color:#447fcf">js/Date.</span>))
-        <span style="color:#40ffff">_</span>      (<span style="color:#447fcf">fun</span>)
-        <span style="color:#40ffff">end</span>    (<span style="color:#447fcf">.getTime</span> (<span style="color:#447fcf">js/Date.</span>))
-        <span style="color:#40ffff">result</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">end</span> <span style="color:#40ffff">start</span>)]
-    <span style="color:#40ffff">result</span>))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-it</span> [<span style="color:#40ffff">fun</span>]
-  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">values</span>  (<span style="color:#24909d">for </span>[<span style="color:#40ffff">i</span> (<span style="color:#24909d">range </span><span style="color:#3677a9">200</span>)] (<span style="color:#447fcf">time-fun</span> <span style="color:#40ffff">fun</span>))]
-    (<span style="color:#24909d">/ </span>(<span style="color:#24909d">apply + </span><span style="color:#40ffff">values</span>)
-       (<span style="color:#24909d">count </span><span style="color:#40ffff">values</span>))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> []
-  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">factorial</span> <span style="color:#3677a9">5000</span>)))
-  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(fib 20) \t Avg: &#34;</span>         (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">fib</span> <span style="color:#3677a9">20</span>)))
-  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(sort-seq) \t Avg: &#34;</span>       (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">sort-seq</span>))))
-
-(<span style="color:#447fcf">set!</span> <span style="color:#40ffff">*main-cli-fn*</span> <span style="color:#40ffff">-main</span>)
-</code></pre></div><p>Benchmark results:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-plaintext" data-lang="plaintext">&gt; node --version
-v0.6.12
-
-# simple compiler optimization
-&gt; ps eu
-%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-91.4 20.3 90816  51292 pts/1  Rl+  08:46  0:54 node clojurescript-benchmark-optimization-simple.js
-
-&gt; node clojurescript-benchmark-optimization-simple.js
-(factorial 5000) Avg: 64.345
-(fib 20)         Avg: 5.575
-(sort-seq)       Avg: 7281.975
-
-# advanced compiler optimization
-&gt; ps eu
-%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js
-
-&gt; node clojurescript-benchmark-optimization-advanced.js
-(factorial 5000) Avg: 54.775
-(fib 20)         Avg: 2.77
-(sort-seq)       Avg: 6325.71
-</code></pre></div><p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">benchmark.core</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">factorial</span> [<span style="color:#40ffff">x</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">reduce * </span>(<span style="color:#24909d">range </span><span style="color:#3677a9">1</span> (<span style="color:#24909d">inc </span><span style="color:#40ffff">x</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">fib</span> [<span style="color:#40ffff">n</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">if </span>(<span style="color:#24909d">&lt;= </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#3677a9">1</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#24909d">+ </span>(<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)) (<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">2</span>)))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">sort-seq</span> []
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">sort </span>(<span style="color:#24909d">repeat </span><span style="color:#3677a9">100000</span> (<span style="color:#24909d">rand-int </span><span style="color:#3677a9">2000000</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-fun</span> [<span style="color:#40ffff">fun</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">start</span>  (<span style="color:#447fcf">.getTime</span> (<span style="color:#447fcf">js/Date.</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">_</span>      (<span style="color:#447fcf">fun</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">end</span>    (<span style="color:#447fcf">.getTime</span> (<span style="color:#447fcf">js/Date.</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">result</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">end</span> <span style="color:#40ffff">start</span>)]
+</span></span><span style="display:flex;"><span>    <span style="color:#40ffff">result</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-it</span> [<span style="color:#40ffff">fun</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">values</span>  (<span style="color:#24909d">for </span>[<span style="color:#40ffff">i</span> (<span style="color:#24909d">range </span><span style="color:#3677a9">200</span>)] (<span style="color:#447fcf">time-fun</span> <span style="color:#40ffff">fun</span>))]
+</span></span><span style="display:flex;"><span>    (<span style="color:#24909d">/ </span>(<span style="color:#24909d">apply + </span><span style="color:#40ffff">values</span>)
+</span></span><span style="display:flex;"><span>       (<span style="color:#24909d">count </span><span style="color:#40ffff">values</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> []
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">factorial</span> <span style="color:#3677a9">5000</span>)))
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(fib 20) \t Avg: &#34;</span>         (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">fib</span> <span style="color:#3677a9">20</span>)))
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(sort-seq) \t Avg: &#34;</span>       (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">sort-seq</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#447fcf">set!</span> <span style="color:#40ffff">*main-cli-fn*</span> <span style="color:#40ffff">-main</span>)
+</span></span></code></pre></div><p>Benchmark results:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>&gt; node --version
+</span></span><span style="display:flex;"><span>v0.6.12
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># simple compiler optimization
+</span></span><span style="display:flex;"><span>&gt; ps eu
+</span></span><span style="display:flex;"><span>%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+</span></span><span style="display:flex;"><span>91.4 20.3 90816  51292 pts/1  Rl+  08:46  0:54 node clojurescript-benchmark-optimization-simple.js
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; node clojurescript-benchmark-optimization-simple.js
+</span></span><span style="display:flex;"><span>(factorial 5000) Avg: 64.345
+</span></span><span style="display:flex;"><span>(fib 20)         Avg: 5.575
+</span></span><span style="display:flex;"><span>(sort-seq)       Avg: 7281.975
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># advanced compiler optimization
+</span></span><span style="display:flex;"><span>&gt; ps eu
+</span></span><span style="display:flex;"><span>%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+</span></span><span style="display:flex;"><span>99.0 20.9 92200  52776 pts/0  Rl+  07:14  0:44 node clojurescript-benchmark-optimization-advanced.js
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; node clojurescript-benchmark-optimization-advanced.js
+</span></span><span style="display:flex;"><span>(factorial 5000) Avg: 54.775
+</span></span><span style="display:flex;"><span>(fib 20)         Avg: 2.77
+</span></span><span style="display:flex;"><span>(sort-seq)       Avg: 6325.71
+</span></span></code></pre></div><p>So as you can see from output above - ClojureScript can be well suitable for development and scripting on small boards like BeagleBone or Raspberry Pi.
 Good speed and better semantics at low prices, I ♥ Clojure and ClojureScript :)</p>
             </div>
 

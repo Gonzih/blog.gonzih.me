@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.99.1" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -83,71 +83,71 @@
               <span class="post-date">Fri, Sep 7, 2012</span>
                   <p>After installing Embedded JRE on BeagleBone I decided to benchmark it against OpenJDK.</p>
 <p>BeagleBone is running Ubuntu 12.04.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; cat /etc/*-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=12.04
-DISTRIB_CODENAME=precise
-DISTRIB_DESCRIPTION=&#34;Ubuntu 12.04 LTS&#34;
-</code></pre></div><p>BeagleBone CPU is running on 500Mhz.</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; cpufreq-info | grep &#39;current CPU&#39;
-current CPU frequency is 500 MHz.
-</code></pre></div><p>Clojure version is 1.4.0.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; cat /etc/*-release
+</span></span><span style="display:flex;"><span>DISTRIB_ID=Ubuntu
+</span></span><span style="display:flex;"><span>DISTRIB_RELEASE=12.04
+</span></span><span style="display:flex;"><span>DISTRIB_CODENAME=precise
+</span></span><span style="display:flex;"><span>DISTRIB_DESCRIPTION=&#34;Ubuntu 12.04 LTS&#34;
+</span></span></code></pre></div><p>BeagleBone CPU is running on 500Mhz.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; cpufreq-info | grep &#39;current CPU&#39;
+</span></span><span style="display:flex;"><span>current CPU frequency is 500 MHz.
+</span></span></code></pre></div><p>Clojure version is 1.4.0.</p>
 <p>Benchmark code is from <a href="https://nakkaya.com/2011/03/15/clojure-on-the-beagleboard/">nakkaya&rsquo;s post</a>:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-clojure" data-lang="clojure">(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">benchmark.core</span>)
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">factorial</span> [<span style="color:#40ffff">x</span>]
-  (<span style="color:#24909d">reduce * </span>(<span style="color:#24909d">range </span><span style="color:#3677a9">1</span><span style="color:#40ffff">N</span> (<span style="color:#24909d">inc </span><span style="color:#40ffff">x</span>))))
-<span style="color:#999;font-style:italic">;                   ^ integerOverflow fix</span>
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">fib</span> [<span style="color:#40ffff">n</span>]
-  (<span style="color:#6ab825;font-weight:bold">if </span>(<span style="color:#24909d">&lt;= </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)
-    <span style="color:#3677a9">1</span>
-    (<span style="color:#24909d">+ </span>(<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)) (<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">2</span>)))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">sort-seq</span> []
-  (<span style="color:#24909d">sort </span>(<span style="color:#24909d">repeat </span><span style="color:#3677a9">100000</span> (<span style="color:#24909d">rand-int </span><span style="color:#3677a9">2000000</span>))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-it</span> [<span style="color:#40ffff">fn</span>]
-  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">values</span>  (<span style="color:#24909d">for </span>[<span style="color:#40ffff">i</span> (<span style="color:#24909d">range </span><span style="color:#3677a9">200</span>)] (<span style="color:#24909d">with-out-str </span>(<span style="color:#24909d">time </span>(<span style="color:#447fcf">fn</span>))))
-        <span style="color:#40ffff">doubles</span> (<span style="color:#24909d">map </span>#(<span style="color:#447fcf">Double.</span> (<span style="color:#24909d">nth </span>(<span style="color:#447fcf">.split</span> <span style="color:#40ffff">%</span> <span style="color:#ed9d13">&#34; &#34;</span>) <span style="color:#3677a9">2</span>)) <span style="color:#40ffff">values</span>)]
-    (<span style="color:#24909d">/ </span>(<span style="color:#24909d">apply + </span><span style="color:#40ffff">doubles</span>) (<span style="color:#24909d">count </span><span style="color:#40ffff">doubles</span>))))
-
-(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> []
-  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">factorial</span> <span style="color:#3677a9">5000</span>)))
-  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(fib 20) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">fib</span> <span style="color:#3677a9">20</span>)))
-  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(sort-seq) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">sort-seq</span>))))
-</code></pre></div><p>So here the numbers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">ns </span><span style="color:#40ffff">benchmark.core</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">factorial</span> [<span style="color:#40ffff">x</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">reduce * </span>(<span style="color:#24909d">range </span><span style="color:#3677a9">1</span><span style="color:#40ffff">N</span> (<span style="color:#24909d">inc </span><span style="color:#40ffff">x</span>))))
+</span></span><span style="display:flex;"><span><span style="color:#999;font-style:italic">;                   ^ integerOverflow fix</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">fib</span> [<span style="color:#40ffff">n</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">if </span>(<span style="color:#24909d">&lt;= </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#3677a9">1</span>
+</span></span><span style="display:flex;"><span>    (<span style="color:#24909d">+ </span>(<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">1</span>)) (<span style="color:#447fcf">fib</span> (<span style="color:#24909d">- </span><span style="color:#40ffff">n</span> <span style="color:#3677a9">2</span>)))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">sort-seq</span> []
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">sort </span>(<span style="color:#24909d">repeat </span><span style="color:#3677a9">100000</span> (<span style="color:#24909d">rand-int </span><span style="color:#3677a9">2000000</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">time-it</span> [<span style="color:#40ffff">fn</span>]
+</span></span><span style="display:flex;"><span>  (<span style="color:#6ab825;font-weight:bold">let </span>[<span style="color:#40ffff">values</span>  (<span style="color:#24909d">for </span>[<span style="color:#40ffff">i</span> (<span style="color:#24909d">range </span><span style="color:#3677a9">200</span>)] (<span style="color:#24909d">with-out-str </span>(<span style="color:#24909d">time </span>(<span style="color:#447fcf">fn</span>))))
+</span></span><span style="display:flex;"><span>        <span style="color:#40ffff">doubles</span> (<span style="color:#24909d">map </span>#(<span style="color:#447fcf">Double.</span> (<span style="color:#24909d">nth </span>(<span style="color:#447fcf">.split</span> <span style="color:#40ffff">%</span> <span style="color:#ed9d13">&#34; &#34;</span>) <span style="color:#3677a9">2</span>)) <span style="color:#40ffff">values</span>)]
+</span></span><span style="display:flex;"><span>    (<span style="color:#24909d">/ </span>(<span style="color:#24909d">apply + </span><span style="color:#40ffff">doubles</span>) (<span style="color:#24909d">count </span><span style="color:#40ffff">doubles</span>))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#6ab825;font-weight:bold">defn </span><span style="color:#40ffff">-main</span> []
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(factorial 5000) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">factorial</span> <span style="color:#3677a9">5000</span>)))
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(fib 20) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">fib</span> <span style="color:#3677a9">20</span>)))
+</span></span><span style="display:flex;"><span>  (<span style="color:#24909d">println </span><span style="color:#ed9d13">&#34;(sort-seq) \t Avg: &#34;</span> (<span style="color:#447fcf">time-it</span> #(<span style="color:#447fcf">sort-seq</span>))))
+</span></span></code></pre></div><p>So here the numbers:</p>
 <p>OpenJDK:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; sudo apt-get install openjdk-7-jre-headless
-
-&gt; java -version
-java version &#34;1.7.0_03&#34;
-OpenJDK Runtime Environment (IcedTea7 2.1.1pre) (7~u3-2.1.1~pre1-1ubuntu3)
-OpenJDK Zero VM (build 22.0-b10, mixed mode)
-
-&gt; ps eu
-%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-96.9 16.3 267932 41172 pts/1  Sl+  09:07  9:28 java
-
-&gt; lein run
-(factorial 5000) Avg:  1681.9940255249999
-(fib 20)         Avg:  490.16940197000025
-(sort-seq)       Avg:  7129.159457125003
-</code></pre></div><p>Embedded JRE:</p>
-<div class="highlight"><pre style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-text" data-lang="text">&gt; java -version
-java version &#34;1.7.0_06&#34;
-Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)
-Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)
-
-&gt; ps eu
-%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
-91.2 16.4 221740 41372 pts/1  Sl+  08:28  5:16 java
-
-&gt; lein run
-(factorial 5000) Avg:  1061.0568413899998
-(fib 20)         Avg:  30.877820054999983
-(sort-seq)       Avg:  1729.9035516600002
-</code></pre></div><p>Here you are. Better performance and slightly better memory usage.
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; sudo apt-get install openjdk-7-jre-headless
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; java -version
+</span></span><span style="display:flex;"><span>java version &#34;1.7.0_03&#34;
+</span></span><span style="display:flex;"><span>OpenJDK Runtime Environment (IcedTea7 2.1.1pre) (7~u3-2.1.1~pre1-1ubuntu3)
+</span></span><span style="display:flex;"><span>OpenJDK Zero VM (build 22.0-b10, mixed mode)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; ps eu
+</span></span><span style="display:flex;"><span>%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+</span></span><span style="display:flex;"><span>96.9 16.3 267932 41172 pts/1  Sl+  09:07  9:28 java
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; lein run
+</span></span><span style="display:flex;"><span>(factorial 5000) Avg:  1681.9940255249999
+</span></span><span style="display:flex;"><span>(fib 20)         Avg:  490.16940197000025
+</span></span><span style="display:flex;"><span>(sort-seq)       Avg:  7129.159457125003
+</span></span></code></pre></div><p>Embedded JRE:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&gt; java -version
+</span></span><span style="display:flex;"><span>java version &#34;1.7.0_06&#34;
+</span></span><span style="display:flex;"><span>Java(TM) SE Embedded Runtime Environment (build 1.7.0_06-b24, headless)
+</span></span><span style="display:flex;"><span>Java HotSpot(TM) Embedded Client VM (build 23.2-b09, mixed mode)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; ps eu
+</span></span><span style="display:flex;"><span>%CPU %MEM VSZ    RSS   TTY    STAT START  TIME COMMAND
+</span></span><span style="display:flex;"><span>91.2 16.4 221740 41372 pts/1  Sl+  08:28  5:16 java
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; lein run
+</span></span><span style="display:flex;"><span>(factorial 5000) Avg:  1061.0568413899998
+</span></span><span style="display:flex;"><span>(fib 20)         Avg:  30.877820054999983
+</span></span><span style="display:flex;"><span>(sort-seq)       Avg:  1729.9035516600002
+</span></span></code></pre></div><p>Here you are. Better performance and slightly better memory usage.
 Good Job, Embedded Java Team :)
 Looking forward for hardfloat ABI version to test it on Raspberry Pi.</p>
             </div>
