@@ -19,12 +19,12 @@
       <guid>https://blog.gonzih.me/blog/2023/01/05/blinky-on-arduino-uno-with-zig/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s give Zig a try on Arduino UNO with &lt;a href=&#34;https://github.com/ZigEmbeddedGroup/microzig&#34;&gt;microzig&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Lets create and setup our project first:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir blink &amp;amp;&amp;amp; cd blink
-zig init-exe
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now we can add &lt;a href=&#34;https://github.com/ZigEmbeddedGroup/microzig&#34;&gt;microzig&lt;/a&gt; as a dependency, for now lets do this in a simple manner, no package managers, just git:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir deps
-git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Lets now setup &lt;code&gt;build.zig&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir blink &amp;amp;&amp;amp; &lt;span style=&#34;color:#24909d&#34;&gt;cd&lt;/span&gt; blink
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;zig init-exe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now we can add &lt;a href=&#34;https://github.com/ZigEmbeddedGroup/microzig&#34;&gt;microzig&lt;/a&gt; as a dependency, for now lets do this in a simple manner, no package managers, just git:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir deps
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Lets now setup &lt;code&gt;build.zig&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;std&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#24909d&#34;&gt;@import&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;std&amp;#34;&lt;/span&gt;);&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6ab825;font-weight:bold&#34;&gt;const&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;microzig&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;=&lt;span style=&#34;color:#666&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#24909d&#34;&gt;@import&lt;/span&gt;(&lt;span style=&#34;color:#ed9d13&#34;&gt;&amp;#34;deps/microzig/src/main.zig&amp;#34;&lt;/span&gt;);&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;
@@ -71,11 +71,11 @@ git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#666&#34;&gt;&lt;/span&gt;}&lt;span style=&#34;color:#666&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After that we should be able to build this:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;zig build
-ls zig-out/bin
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And we can now use &lt;code&gt;avrdude&lt;/code&gt; to upload this to our Arduino UNO.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;avrdude -carduino -patmega328p -D -P /dev/ttyACM0 -Uflash:w:./zig-out/bin/blink:e
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Double check what your device is on your OS, on apple silicon macbook for me device was &lt;code&gt;/dev/cu.usbmodem11101&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;zig build
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ls zig-out/bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And we can now use &lt;code&gt;avrdude&lt;/code&gt; to upload this to our Arduino UNO.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;avrdude -carduino -patmega328p -D -P /dev/ttyACM0 -Uflash:w:./zig-out/bin/blink:e
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Double check what your device is on your OS, on apple silicon macbook for me device was &lt;code&gt;/dev/cu.usbmodem11101&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Thats it, it should be blinkin!&lt;/p&gt;</description>
     </item>
     

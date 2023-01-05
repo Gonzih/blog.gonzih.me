@@ -83,12 +83,12 @@
               <span class="post-date">Thu, Jan 5, 2023</span>
                   <p>Let&rsquo;s give Zig a try on Arduino UNO with <a href="https://github.com/ZigEmbeddedGroup/microzig">microzig</a></p>
 <p>Lets create and setup our project first:</p>
-<pre tabindex="0"><code>mkdir blink &amp;&amp; cd blink
-zig init-exe
-</code></pre><p>Now we can add <a href="https://github.com/ZigEmbeddedGroup/microzig">microzig</a> as a dependency, for now lets do this in a simple manner, no package managers, just git:</p>
-<pre tabindex="0"><code>mkdir deps
-git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
-</code></pre><p>Lets now setup <code>build.zig</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir blink &amp;&amp; <span style="color:#24909d">cd</span> blink
+</span></span><span style="display:flex;"><span>zig init-exe
+</span></span></code></pre></div><p>Now we can add <a href="https://github.com/ZigEmbeddedGroup/microzig">microzig</a> as a dependency, for now lets do this in a simple manner, no package managers, just git:</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir deps
+</span></span><span style="display:flex;"><span>git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
+</span></span></code></pre></div><p>Lets now setup <code>build.zig</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>std<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">@import</span>(<span style="color:#ed9d13">&#34;std&#34;</span>);<span style="color:#666">
 </span></span></span><span style="display:flex;"><span><span style="color:#666"></span><span style="color:#6ab825;font-weight:bold">const</span><span style="color:#666"> </span>microzig<span style="color:#666"> </span>=<span style="color:#666"> </span><span style="color:#24909d">@import</span>(<span style="color:#ed9d13">&#34;deps/microzig/src/main.zig&#34;</span>);<span style="color:#666">
 </span></span></span><span style="display:flex;"><span><span style="color:#666">
@@ -135,11 +135,11 @@ git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
 </span></span></span><span style="display:flex;"><span><span style="color:#666">    </span>}<span style="color:#666">
 </span></span></span><span style="display:flex;"><span><span style="color:#666"></span>}<span style="color:#666">
 </span></span></span></code></pre></div><p>After that we should be able to build this:</p>
-<pre tabindex="0"><code>zig build
-ls zig-out/bin
-</code></pre><p>And we can now use <code>avrdude</code> to upload this to our Arduino UNO.</p>
-<pre tabindex="0"><code>avrdude -carduino -patmega328p -D -P /dev/ttyACM0 -Uflash:w:./zig-out/bin/blink:e
-</code></pre><p>Double check what your device is on your OS, on apple silicon macbook for me device was <code>/dev/cu.usbmodem11101</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>zig build
+</span></span><span style="display:flex;"><span>ls zig-out/bin
+</span></span></code></pre></div><p>And we can now use <code>avrdude</code> to upload this to our Arduino UNO.</p>
+<div class="highlight"><pre tabindex="0" style="color:#d0d0d0;background-color:#202020;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>avrdude -carduino -patmega328p -D -P /dev/ttyACM0 -Uflash:w:./zig-out/bin/blink:e
+</span></span></code></pre></div><p>Double check what your device is on your OS, on apple silicon macbook for me device was <code>/dev/cu.usbmodem11101</code>.</p>
 <p>Thats it, it should be blinkin!</p>
             </div>
 
