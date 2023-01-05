@@ -17,5 +17,6 @@ jobs:
       run: make setup-git public deploy-using-docker
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_USER: ${{ secrets.GH_USER }}
         GIT_NAME: Max Gonzih via GH Actions
         GIT_EMAIL: gonzih@gmail.com
