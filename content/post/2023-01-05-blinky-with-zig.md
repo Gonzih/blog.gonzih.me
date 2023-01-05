@@ -13,7 +13,7 @@ Let's give Zig a try on Arduino UNO with [microzig](https://github.com/ZigEmbedd
 
 Lets create and setup our project first:
 
-```
+```sh
 mkdir blink && cd blink
 zig init-exe
 ```
@@ -21,7 +21,7 @@ zig init-exe
 Now we can add [microzig](https://github.com/ZigEmbeddedGroup/microzig) as a dependency, for now lets do this in a simple manner, no package managers, just git:
 
 
-```
+```sh
 mkdir deps
 git clone https://github.com/ZigEmbeddedGroup/microzig.git deps/microzig
 ```
@@ -84,14 +84,14 @@ fn busyloop() void {
 
 After that we should be able to build this:
 
-```
+```sh
 zig build
 ls zig-out/bin
 ```
 
 And we can now use `avrdude` to upload this to our Arduino UNO.
 
-```
+```sh
 avrdude -carduino -patmega328p -D -P /dev/ttyACM0 -Uflash:w:./zig-out/bin/blink:e
 ```
 
