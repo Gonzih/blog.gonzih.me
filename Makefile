@@ -12,7 +12,7 @@ preview:
 
 TS := $(date)
 ifdef GH_TOKEN
-PUBLIC_URL = https://$(GH_TOKEN)@github.com/Gonzih/blog.gonzih.me.git
+PUBLIC_URL = https://$(GH_USER):$(GH_TOKEN)@github.com/Gonzih/blog.gonzih.me.git
 else
 PUBLIC_URL = git@github.com:Gonzih/blog.gonzih.me.git
 endif
